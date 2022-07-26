@@ -1,0 +1,128 @@
+
+;;; Hey, emacs (1), this is -*- mode:tdl; Coding: utf-8; -*-
+;;;
+;;;  Montserrat Marimon  
+;;;  IULA - UPF 
+;;;
+;;; roots.tdl: root nodes for the SRG
+
+
+;;; a sample start symbol: accept fully-saturated verbal projections only; if
+;;; a grammar makes use of the head -- subject and head -- complement types as
+;;; provided by the Matrix, this should be a good starting point.  Note that it
+;;; is legal to have multiple start symbols, but they all need to be listed as
+;;; the value of `*start-symbol' (see `lkb/user-fns.lsp').
+;;;
+;;; The head type verb isn't defined by the matrix.  To use this start
+;;; symbol, define verb and uncomment it.  Alternatively, define some
+;;; other appropriate type and use it place of verb here.
+
+root_vp_inf := phrase-or-lexrule &
+ [ SYNSEM [ LOCAL [ COORD-REL.PRED non_implicit_coord_rel,
+                    CAT [ HEAD verb & [ VFORM inf ],
+                          VAL [ SUBJ < [ ] >,
+                                COMPS < >,
+                                CLTS < > ] ] ],
+            NON-LOCAL [ REL 0-dlist,
+                        SLASH 0-dlist ] ] ].
+
+root_s := phrase-or-lexrule &
+ [ SYNSEM [ LOCAL [ COORD-REL.PRED non_implicit_coord_rel,
+                    CAT [ HEAD +vc, 
+                          VAL [ SUBJ < >,
+                                COMPS < >,
+;                               SPR < >,
+                                CLTS < > ] ] ],
+            NON-LOCAL [ REL 0-dlist,
+                        SLASH 0-dlist & [ LIST < > ] ] ] ].
+
+root_vpnom := phrase &
+ [ SYNSEM [ LOCAL [ CAT [ HEAD noun & [ KEYS.KEY nominalization_rel ], 
+                          VAL [ SPR < >,
+                                COMPS < >,
+                                CLTS < >,
+                                SPEC < > ] ] ],
+            NON-LOCAL [ REL 0-dlist,
+                        SLASH 0-dlist ] ] ].
+#|
+root_pname := phrase-or-lexrule &
+ [ SYNSEM [ LOCAL [ COORD-REL.PRED non_implicit_coord_rel,
+                    CAT [ HEAD noun & [ KEYS.KEY named_rel ], 
+                          VAL [ SPR < >,
+                                SUBJ < >,
+                                COMPS < >,
+                                CLTS < > ] ] ],
+            NON-LOCAL [ REL 0-dlist,
+                        SLASH 0-dlist ] ] ].
+|#
+
+root_np := phrase-or-lexrule &
+ [ SYNSEM [ LOCAL [ COORD-REL.PRED non_implicit_coord_rel,
+                    AGR.DIVISIBLE +,
+                    CAT [ HEAD noun & [ KEYS.KEY nom_rel ], 
+                          VAL [ SPR < >,
+                                SUBJ < >,
+                                COMPS < >,
+                                CLTS < > ] ] ],
+            NON-LOCAL [ REL 0-dlist,
+                        SLASH 0-dlist ] ] ].
+
+root_nbar := phrase-or-lexrule &
+ [ SYNSEM [ LOCAL [ COORD-REL.PRED non_implicit_coord_rel,
+                    AGR.DIVISIBLE -,
+                    CAT [ HEAD noun & [ KEYS.KEY nom_rel ], 
+                          VAL [ SUBJ < >,
+                                COMPS < >,
+                                CLTS < > ] ] ],
+            NON-LOCAL [ REL 0-dlist,
+                        SLASH 0-dlist ] ] ].
+
+root_pp := phrase &
+ [ SYNSEM [ LOCAL [ COORD-REL.PRED non_implicit_coord_rel,
+                    CAT [ HEAD adp & 
+                               [ KEYS.KEY independent_rel,
+                                 MOD < [ LOCAL.CAT.HEAD verb ] > ],
+                          VAL [ SUBJ < >,
+                                COMPS < >,
+                                CLTS < > ] ] ],
+            NON-LOCAL [ REL 0-dlist,
+                        SLASH 0-dlist,
+                        QUE 0-dlist ] ] ].
+
+root_ap := phrase-or-lexrule &
+ [ SYNSEM [ LOCAL [ COORD-REL.PRED non_implicit_coord_rel,
+                    CAT [ HEAD adj,
+                          VAL [ SUBJ < >,
+                                COMPS < >,
+                                CLTS < > ] ] ],
+            NON-LOCAL [ REL 0-dlist,
+                        SLASH 0-dlist ] ] ].
+
+root_rp := phrase-or-lexrule &
+ [ SYNSEM [ LOCAL [ COORD-REL.PRED non_implicit_coord_rel,
+                    CAT [ HEAD adv, 
+                          VAL [ SUBJ < >,
+                                COMPS < >,
+                                CLTS < > ] ] ],
+            NON-LOCAL [ REL 0-dlist,
+                        SLASH 0-dlist & [ LIST < > ] ] ] ].
+
+root_c := phrase-or-lexrule &
+ [ SYNSEM [ LOCAL [ COORD-REL.PRED non_implicit_coord_rel,
+                    CAT [ HEAD conj, 
+                          VAL [ SPR < >,
+                                SUBJ < >,
+                                COMPS < >,
+                                CLTS < > ] ] ],
+            NON-LOCAL [ REL 0-dlist,
+                        SLASH 0-dlist & [ LIST < > ] ] ] ].
+
+root_i := phrase-or-lexrule & 
+ [ SYNSEM [ LIGHT -, 
+            LOCAL [ COORD-REL.PRED non_implicit_coord_rel,
+                    CAT.HEAD interj ] ] ].
+
+
+
+
+

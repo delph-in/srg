@@ -1,0 +1,98 @@
+
+;;; Hey, emacs (1), this is -*- mode:tdl; Coding: utf-8; -*-
+;;;
+;;; Montserrat Marimon
+;;; 
+;;; lrules.tdl: (non-inflectional) lexical rules for the SRG
+
+v_-_sbj-pl-sym_dlr := v_-_subj-plur-sym_dlr.
+v_pp_e-cp-p-sbj-pl-sym_dlr := v_pp_e-cp-p-subj-plur-sym_dlr.
+v_cp_p-sbj-pl-sym_dlr := v_cp_p-subj-plur-sym_dlr.
+v_np_sbj-pl-sym_dlr := v_np_subj-plur-sym_dlr.
+v_np_pl-sym_dlr := v_np_plur-sym_dlr.
+v_ppa*_sbj-vp-inf-oc_dlr := v_subj_cp_prop_inf_or_fin_io*_dlr.
+v_ppa_sbj-vp-inf-oc_dlr := v_subj_cp_prop_inf_or_fin_sub_io_dlr.
+v_pp_e-sbj-vp-inf_dlr := v_subj_cp_prop_inf_or_fin_intr_mrkd_np_dlr.
+v_ppa*-pp_e-sbj-vp-inf-oc_dlr := v_subj_cp_prop_inf_or_fin_intr_io*_mrkd_np_dlr.
+v_np_sbj-vp-inf_dlr := v_subj_cp_prop_inf_or_fin_trans_np_dlr.
+v_np-pp_e-sbj-vp-inf-oc_dlr := v_subj_cp_prop_inf_or_fin_trans_np_mrkd_np_dlr.
+v_np-ppa*_sbj-vp-inf-oc_dlr := v_subj_cp_prop_inf_or_fin_ditrans_dlr.
+v_cp_p-sbj-vp-inf_dlr := v_subj_cp_prop_inf_or_fin_trans_cp_prop_dlr.
+v_ppa*-cp_p-sbj-vp-inf-oc_dlr := v_subj_cp_prop_inf_or_fin_ditrans_cp_prop_dlr.
+v_pp_e-vp_inf-sc_dlr := v_mrkd_cp_prop-or-ques_dlr.
+v_pp_e-vp_inf-prn-sc_dlr := v_pron_mrkd_cp_prop-or-ques_dlr.
+v_vp_inf-sc_dlr := v_trans_cp_prop-or-ques_dlr.
+v_ppa*-vp_inf-sc_dlr := v_ditrans_cp_prop-or-ques_sc_dlr.
+v_ppa*-vp_inf-oc_dlr := v_ditrans_cp_prop-or-ques_oc_dlr.
+v_np*-pp_e-vp-inf-sc_dlr := v_trans_np_mrkd_cp_prop_sc_dlr.
+v_np-pp_e-vp-inf-2oc_dlr := v_trans_np_mrkd_cp_prop_2oc_dlr.
+v_pp-vp_e-vp-inf-sc-sym_dlr := v_sym_trans_cp_prop_mrkd_np_dlr.
+v_pp-pp_e-e-vp-inf-sc-sym_dlr := v_sym_intr_mrkd_np_mrkd_cp_prop_dlr.
+
+aj_vp_inf_dlr := a_mrkd_prop-or-ques_dlr.
+n_vp_inf_dlr := n_cp_inf_dlr.
+n_pp-vp_inf_dlr := n_pp-vp_dlr.
+
+n_-_npart_dlr := n_part-noun_dlr.
+n_-_npart-pr_dlr := n_part-pron_dlr.
+n_-_npart-pr-spd_dlr := n_part-pron-spec_dlr.
+
+aj_-_idf-otr_dlr := a_indef-otro_dlr.
+aj_-_idf-much_dlr := a_indef-mucho_dlr.
+aj_-_idf-poc_dlr := a_indef-poco_dlr.
+aj_-_idf-undf-q_dlr := a_indef-undf-q_dlr.
+aj_-_idf-card_dlr := a_indef-nu-card_dlr.
+
+d_-_pstn-dem_dlr := d_pstn-demons_dlr.
+d_-_pstn-alg_dlr := d_pstn-idf-algun_dlr.
+d_-_pstn-ning_dlr := d_pstn-idf-ningun_dlr.
+
+v_ppart-t_dlr := v_pastpart-trans_dlr.
+v_ppart-unacc_dlr := v_pastpart-unacc_dlr.
+v_ppart-prn_dlr := v_pastpart-pron_dlr.
+;v_ppart-attr_dlr := v_pastpart-attr_dlr.
+;v_ppart-attr-intr_dlr := v_pastpart-attr-intr_dlr.
+
+v_psv-se-or-caus-alt_dlr := v_np_passive-se_dlr.
+v_psv-se-sbj-cp_dlr := v_cp_passive-se_dlr.
+v_ppa_psv-se-sbj-cp_dlr := v_ppa-cp_passive-se_dlr.
+
+v_impers-cl_dlr := v_impers-se_dlr.
+v_rcp_dlr := v_recip_dlr.
+v_rfx_dlr := v_reflex_dlr.
+v_rfx-vprd_dlr := v_reflex-vprd_dlr.
+
+v_acc-vprd_dlr := v_acc-cmp-clt-vprd_dlr.
+v_acc_dlr := v_acc-cmp-clt_dlr.
+;v_acc-inf_dlr := v_acc-cmp-clt-inf_dlr.
+;v_acc-n1p_dlr := v_acc-cmp-clt-n1p_dlr.
+;v_acc-n2p_dlr := v_acc-cmp-clt-n2p_dlr.
+;v_acc-n3p_dlr := v_acc-cmp-clt-n3p_dlr.
+;v_acc-lo_dlr := v_acc-cmp-clt-lo_dlr.
+;v_acc-le_dlr := v_acc-cmp-clt-le_dlr.
+v_dcc_dlr := v_dat-cmp-clt_dlr.
+v_dcc-1st_dlr := v_dat-1st-cmp-clt_dlr.
+v_dcc-2nd_dlr := v_dat-2nd-cmp-clt_dlr.
+v_mcc_dlr := v_mult-cmp-clt_dlr.
+v_dcc-prn_dlr := v_mult-cmp-clt-prn_dlr.
+v_dcc-ic_dlr := v_mult-cmp-clt-imp_dlr.
+v_mcc-cc_dlr := v_mult-cmp-clt-cc_dlr.
+;v_dcc-nclt_dlr := v_dat-enclt_dlr.
+v_mcc-nclt_dlr := v_mult-cmp-enclt_dlr.
+v_dcc-prn-nclt_dlr := v_mult-cmp-enclt-prn_dlr.
+v_dcc-ic-nclt_dlr := v_mult-cmp-enclt-imp_dlr.
+v_acd_dlr := v_acc-clt-doubl_dlr.
+v_dcd_dlr := v_dat-clt-doubl_dlr.
+;v_dcd-1st_dlr := v_dat-1st-clt-doubl_dlr.
+v_dcd-2nd_dlr := v_dat-2nd-clt-doubl_dlr.
+v_mcc-dcd_dlr := v_mult-clt-doubl_dlr.
+v_dcd-prn_dlr := v_mult-clt-doubl-prn_dlr.
+v_dcd-ic_dlr := v_mult-clt-doubl-imp_dlr.
+v_dcd-2nd-ic_dlr := v_2nd-mult-clt-doubl-imp_dlr.
+v_mcc-dcd-nclt_dlr := v_mult-enclt-doubl_dlr.
+v_dcd-prn-nclt_dlr := v_mult-enclt-doubl-prn_dlr.
+
+
+
+
+

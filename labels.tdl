@@ -1,0 +1,143 @@
+
+;;; Hey, emacs (1), this is -*- mode:tdl; Coding: utf-8; -*-
+;;;
+;;;  Montserrat Marimon
+;;;   IULA - UPF (2004-2008)
+;;;   UB (2009)
+;;;	
+;;;  labels.tdl: node labels for the SRG
+
+slash-label := meta &
+  [ SYNSEM.NON-LOCAL.SLASH 1-dlist,
+    META-PREFIX "/",
+    META-SUFFIX "" ].
+
+s2-label := label &
+  [ SYNSEM [ LIGHT -,
+             LOCAL.CAT [ HEAD verb,
+	  	         VAL [ COMPS < [ ],... >,
+		  	       SUBJ < > ] ] ],
+    LABEL-NAME "S/CMP"].
+
+v-label := label & 
+  [ SYNSEM.LOCAL.CAT [ HEAD verb,
+		       VAL.COMPS < [ ], ... > ],
+    LABEL-NAME "V" ].
+
+v2-label := label & 
+  [ SYNSEM [ LIGHT +,
+             LOCAL.CAT [ HEAD verb,
+			 VAL [ COMPS < >,
+			       SUBJ < [ ] > ] ] ],
+    LABEL-NAME "V" ].
+
+vp-label := label & 
+ [ SYNSEM [ LIGHT -,
+            LOCAL.CAT [ HEAD verb,
+	      	        VAL [ COMPS < >,
+			      SUBJ < [ ] > ] ] ],
+   LABEL-NAME "VP" ].
+
+rc-label := label &
+  [ SYNSEM.LOCAL.CAT [ HEAD verb & [ MOD < [ LOCAL.CAT.HEAD noun ] > ],
+		       VAL [ COMPS < >,
+			     SUBJ < > ] ],
+    LABEL-NAME "RC"].
+
+s-label := label &
+  [ SYNSEM.LOCAL.CAT [ HEAD verb,
+		       VAL [ COMPS < >,
+			     SUBJ < > ] ],
+    LABEL-NAME "S"].
+
+comp-label := label &
+  [ SYNSEM.LOCAL.CAT [ HEAD comp & [ MOD < > ],
+		       VAL.COMPS < [ ], ... > ],
+    LABEL-NAME "COMP" ].
+
+cs1-label := label &
+  [ SYNSEM.LOCAL.CAT [ HEAD comp & [ MOD < > ],
+  		       VAL.COMPS < > ],
+    LABEL-NAME "SC"].
+
+n-label := label & 
+  [ SYNSEM.LOCAL.CAT [ HEAD noun,
+		       VAL.SPR < [ ] > ],
+    LABEL-NAME "N" ].
+
+np-label := label & 
+  [ SYNSEM.LOCAL.CAT [ HEAD noun,
+ 		       VAL.SPR < > ],
+    LABEL-NAME "NP" ].
+
+cs-label := label & 
+  [ SYNSEM.LOCAL.CAT [ HEAD adp & [ KEYS.KEY subord_rel ],
+         	       VAL.COMPS < [ ] > ],
+    LABEL-NAME "CS" ].
+
+p-label := label & 
+  [ SYNSEM.LOCAL.CAT [ HEAD adp,
+         	       VAL.COMPS < [ ], ... > ],
+    LABEL-NAME "P" ].
+
+ap-label := label & 
+  [ SYNSEM.LOCAL.CAT [ HEAD adj,
+                       VAL.COMPS < > ],
+    LABEL-NAME "AP" ].
+
+adj-label := label & 
+  [ SYNSEM.LOCAL.CAT [ HEAD adj,
+                       VAL.COMPS < [ ], ... > ],
+    LABEL-NAME "A" ].
+
+advp-label := label & 
+  [ SYNSEM.LOCAL.CAT [ HEAD adv,
+                       VAL [ COMPS < >, 
+                             SPR < [ ] > ] ],
+    LABEL-NAME "ADVP" ].
+
+adv-label := label & 
+  [ SYNSEM.LOCAL.CAT [ HEAD adv,
+                       VAL.SPR < [ ] > ],
+    LABEL-NAME "ADV" ].
+
+adv2-label := label & 
+  [ SYNSEM.LOCAL.CAT [ HEAD modnp,
+		       VAL.COMPS < > ],
+    LABEL-NAME "ADV" ].
+
+pp-label := label & 
+  [ SYNSEM.LOCAL.CAT [ HEAD adp & [ KEYS.KEY independent_rel ],
+		       VAL.COMPS < > ],
+    LABEL-NAME "PP" ].
+
+pp2-label := label & 
+  [ SYNSEM.LOCAL.CAT [ HEAD adp & [ KEYS.KEY selected_prep_rel ],
+		       VAL.COMPS < > ],
+    LABEL-NAME "PP" ].
+
+d-label := label &
+  [ SYNSEM.LOCAL.CAT.HEAD det,
+    LABEL-NAME "D"].
+
+conj-label := label & 
+  [ SYNSEM.LOCAL.CAT.HEAD conj,
+    LABEL-NAME "CONJ" ].
+
+pt-label := label & 
+  [ SYNSEM.LOCAL.CAT.HEAD head-punct,
+    LABEL-NAME "PT" ].
+
+i-label := label & 
+  [ SYNSEM [ LIGHT +,
+             LOCAL.CAT.HEAD interj ],
+    LABEL-NAME "I" ].
+
+is-label := label & 
+  [ SYNSEM [ LIGHT -,
+             LOCAL.CAT.HEAD interj ],
+    LABEL-NAME "S" ].
+
+
+
+

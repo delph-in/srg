@@ -1,0 +1,14 @@
+id	name		sym
+orth	orth		str-rawlst
+unifs	type	nil	sym
+unifs	orth	(stem)	str-lst
+unifs	sort0	(synsem lkeys keyrel arg0 sort)	sym
+unifs	sort1	(synsem lkeys keyrel arg1 sort)	sym
+unifs	sort2	(synsem lkeys keyrel arg2 sort)	sym
+unifs	sort3	(synsem lkeys keyrel arg3 sort)	sym
+unifs	pred	(synsem lkeys keyrel pred)	mixed
+unifs	altkey	(synsem lkeys altkeyrel pred)	mixed
+unifs	alt2key	(synsem lkeys alt2keyrel pred)	mixed
+unifs	ckey	(synsem lkeys --compkey)	mixed
+unifs	ockey	(synsem lkeys --ocompkey)	mixed
+unifs	oc2key	(synsem lkeys --ocomp2key)	mixed

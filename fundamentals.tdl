@@ -1,0 +1,1918 @@
+
+;;; Hey, emacs (1), this is -*- mode:tdl; Coding: utf-8; -*-
+;;;
+;;;  Montserrat Marimon
+;;;  IULA - UPF
+;;;	
+;;;  fundamentals.tdl: Top-level feature geometry based of the Grammar Matrix
+
+
+sort := *top*.
+predsort := sort.
+atom := predsort.
+integer := atom.
+; strings should be enclosed in double quotes, e.g. PRED "named_rel"
+string := atom.
+
+avm := *top*.
+
+
+; --- Three-valued sort evoking Polish logician Jan Lukasiewicz
+
+luk := sort.
+
+; These types allow the statement of constraints (e.g., in 
+; subcategorization) of the form:  If you care, you must have the 
+; value + (-), but you don't have to care.  Useful for keeping
+; down the number of constructions and subcategorization types.
+
+na-or-+ := luk.
+na-or-- := luk.
++-or-- := luk.
+na := na-or-+ & na-or--.
+bool := luk.
++ := bool & na-or-+ & +-or--.
+- := bool & na-or-- & +-or--.
+
+
+; --- list
+
+list := avm.
+
+cons := list &
+  [ FIRST *top*,
+    REST *top* ].
+
+0-1-list := list.
+
+1-list := 0-1-list & cons &
+  [ REST null ].
+
+null := 0-1-list.
+
+1-plus-list := cons &
+  [ REST cons ].
+
+
+; --- diff list
+
+diff-list := avm &
+  [ LIST list,
+    LAST list ].
+
+0-1-dlist := diff-list &
+  [ LIST 0-1-list ].
+
+0-dlist := 0-1-dlist &
+  [ LIST #list,
+    LAST #list ].
+
+; ADD DOC -- don't use for lists which are constructive.
+; might be good now -- circular structure check?
+; dpf will look into it. -- remove null?
+1-dlist := 0-1-dlist &
+  [ LIST 1-list &
+         [ REST #rest ],
+    LAST #rest ].
+
+; This type shows the basic form for diff-list appends.
+; It is not meant to be used as a supertype.  Actual instances
+; of diff-list append will involve different features in different
+; relationships to each other & the feature geometry.
+dl-append := avm & [ APPARG1 [ LIST #first,       
+                               LAST #between],
+                     APPARG2 [ LIST #between,
+                               LAST #last],
+                     RESULT  [ LIST #first,
+                               LAST #last]].
+
+
+
+; --- Some useful kinds of lists
+
+; A list of optional arguments.
+
+olist := list.
+
+ocons := olist & cons &
+  [ FIRST unexpressed & [ OPT + ],
+    REST  olist ].
+
+onull := olist & null.
+
+; The LinGO grammar also makes use of a prolist -- or list
+; of synsems of type pro-ss. 
+
+
+
+; --- Types for Sign, Word, Phrase, and Lex-Entry
+
+sign-min := avm &
+  [ STEM list ].
+
+basic-sign := sign-min &
+  [ KEY-ARG bool ].
+
+sign := basic-sign &
+  [ SYNSEM synsem,
+    ARGS list,
+    INFLECTED bool ].
+
+; C-CONT encodes the semantic contribution of the rule (phrasal or lexical).
+;  [ SYNSEM canonical-synsem &
+
+phrase-or-lexrule := sign &
+  [ SYNSEM synsem &
+           [ LOCAL.CONT.HOOK #hook ], 
+    C-CONT mrs-min & [ HOOK #hook ] ].
+
+word-or-lexrule-min := sign-min.
+
+; ALTS allow lexical entries to block lexical rule application
+; ARG-ST is the argument structure list. It appears only on
+; lexical items (words or lexical rules), not on phrases.
+
+word-or-lexrule := word-or-lexrule-min & sign &
+  [ ALTS alts-min,
+    ARG-ST list ].
+
+#|
+word-or-lexrule :+
+  [ TOKENS [ +LIST < [  ] > ] ].
+|#
+
+alts-min := avm.
+
+alts := alts-min &
+  [ PASS bool,
+    RCP bool,
+    RFX bool,
+    IMPERS bool,
+    CAUS bool,
+    VCALT bool ].
+
+no-alts := alts-min.
+
+; Not all words have lex-synsem - e.g. lexical PPs like "tomorrow" 
+; are phr-synsem since they can be post-nominal modifiers.
+
+word := word-or-lexrule.
+
+lex-item := word-or-lexrule.
+
+punctuation_mark := lex-item.
+
+; Not all phrases have SYNSEM phr-synsem, since we need to allow the
+; head-comp rules to build signs which are still [SYNSEM lex-synsem]
+; for constructions like "twenty-two" and "five fifteen p.m.". So
+; most phrases will assign the type phr-synsem to the value of
+; SYNSEM, but not all.
+
+phrase := phrase-or-lexrule.
+
+; Affixation
+
+non-affix-bearing := word-or-lexrule &
+  [ INFLECTED +,
+    SYNSEM.LKEYS.KEYREL.WLINK cons ].
+
+; Rule
+
+rule := sign &
+  [ RNAME string ].
+
+; LABEL-NAME and META used for labeling nodes in parse trees
+
+tree-node-label := *top* &
+  [ NODE sign ].
+
+label := sign &
+  [ LABEL-NAME string ].
+
+; For complex node labels, like S/NP
+meta := sign &
+  [ META-PREFIX string,
+    META-SUFFIX string ]. 
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; SYNSEM values
+
+; DEF-OPT and OPT are used in the analysis of optional complements 
+; (null instantiation). DEF-OPT allows words to lexically specify 
+; how their arguments will be interpreted in case of null 
+; instantiation. This solution may be superceded by a Sem-I based 
+; alternative.
+
+synsem-min := avm &
+  [ OPT bool,
+    SLSHD bool,
+    CLTCZD bool,
+    DEF-OPT bool,
+    PUNCT punctuation,
+    LOCAL mod-local,
+    NON-LOCAL non-local-min ].
+
+; The feature LIGHT is used to model phenomena which distinguish
+; shorter words from longer ones, or constituents which are lexical
+; or nearly so from larger phrases.  It is inspired by the work 
+; of Abeille and Godard (e.g., 2003).
+
+lex-or-phrase-synsem := synsem-min &
+  [ LIGHT luk ].
+
+synsem := synsem-min.
+
+expressed-synsem := synsem.
+
+canonical-synsem := expressed-synsem &
+  [ MODIFIED xmod ].
+
+; Three-valued sort for distinguishing unmodified signs from both
+; left-modified and right-modified signs PERIPH indicates whether this
+; modifier is left- or right-peripheral in its phrase - e.g., "the IBM
+; temporary employees" but "*the IBM five employees"
+
+xmod := sort &
+  [ PERIPH luk ].
+notmod-or-rmod := xmod.
+notmod-or-lmod := xmod.
+notmod := notmod-or-rmod & notmod-or-lmod.
+hasmod := xmod.
+lmod := hasmod & notmod-or-lmod.
+rmod := hasmod & notmod-or-rmod.
+
+lex-synsem := canonical-synsem & lex-or-phrase-synsem &
+  [ LOCAL local-min,
+    LIGHT +,
+    LKEYS lexkeys ].
+
+; LKEYS attributes, providing pointers to semantic relations and 
+; complement predsorts in lexical types:
+; KEYREL relation      ; Pointer to main relation in RELS
+; ALTKEYREL relation   ; Pointer to an alternate relation in RELS
+; ALT2KEYREL relation  ; Pointer to a second alternate relation in RELS
+; --COMPKEY predsort   ; Pointer to the first compl's KEY predsort
+; --OCOMPKEY predsort  ; Pointer to the oblique compl's KEY predsort
+; --OCOMP2KEY predsort  ; Pointer to the second oblique compl's KEY predsort
+
+lexkeys := avm &
+  [ KEYREL relation ].
+
+lexkeys_norm := lexkeys &
+  [ ALTKEYREL relation ].
+
+lexkeys_full := lexkeys_norm &
+  [ ALT2KEYREL relation,
+    --COMPKEY predsort,
+    --OCOMPKEY predsort ].
+
+lexkeys_compl := lexkeys_full &
+  [ --OCOMP2KEY predsort ].
+
+phr-synsem := canonical-synsem & lex-or-phrase-synsem &
+  [ LOCAL local-min,
+    LIGHT - ].
+
+non-canonical := synsem &
+  [ LOCAL.CONT.HOOK.INDEX event-or-ref-index ].
+
+expressed-non-canonical := non-canonical & expressed-synsem.
+
+gap := expressed-non-canonical &
+  [ LOCAL #local,
+    NON-LOCAL [ QUE 0-dlist,
+                SLASH 1-dlist &
+                      [ LIST < #local > ] ] ].
+
+unexpressed := synsem-min &
+  [ NON-LOCAL [ SLASH 0-dlist,
+                REL 0-dlist,
+                QUE 0-dlist ] ].
+
+unexpressed-reg := unexpressed & non-canonical.
+
+anti-synsem := unexpressed.
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; NON-LOCAL values
+;
+; SLASH is for `topicalization' style long distance dependencies. REL 
+; and QUE are used in the analysis of pied piping in relative clauses 
+; and questions respectively, and also to signal the presence of a 
+; question element in in-situ questions so that clausal constructions 
+; with question semantics can require the presence of a question word
+
+non-local-min := avm.
+
+non-local := non-local-min &
+  [ SLASH 0-1-dlist, 
+    QUE 0-1-dlist,
+    REL 0-1-dlist ].
+
+non-local-none := non-local &
+  [ SLASH 0-dlist & [ LIST < > ],
+    QUE 0-dlist,
+    REL 0-dlist ].
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; LOCAL values
+
+mod-local := avm.
+
+local-min := mod-local &
+  [ AGR individual,
+    STR str,
+    CAT cat-min,
+    CONT mrs-min,
+    COORD bool,
+    COORD-REL coordination-relation,
+    COORD-STRAT coord-strat ].
+
+str := avm &
+  [ HEADING heading,
+    HEADED heading ].
+
+heading := sort.
+solely := heading.
+left := heading.
+right := heading.
+no := heading.
+right_or_no := right & no.
+left_or_no := left & no.
+left_or_right := left & right.
+not_left := solely & right_or_no.
+not_right := solely & left_or_no.
+only_solely := solely.
+
+coord-strat := sort.
+two := coord-strat.
+zero_or_one := coord-strat.
+zero := zero_or_one.
+one := zero_or_one.
+
+local := local-min &
+  [ CTXT ctxt-min ].
+
+; Types for distinguishing scopal v. intersective modifiers.
+; (These types are used in the MOD value of modifiers, and 
+; referenced by the scopal/intersective head-adjunct rules.)
+
+scopal-mod := local.
+intersective-mod := local.
+
+; --- CTXT values 
+
+ctxt-min := avm.
+
+ctxt := ctxt-min &
+  [ ACTIVATED bool,
+    PRESUP diff-list ].
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;  CAT values
+
+; MC stands for 'Main clause', and is used to distinguish phenomena
+; which can only occur in main (+) or subordinate clauses (-). The
+; value of MC is luk, allowing for a third possibility of na, for
+; not applicable.
+; HC-LIGHT indicates whether a head-comp phrase projected from a head 
+; is treated as light or heavy. That is, whether or not a phrase 
+; consisting of heads and complements is light or heavy is taken to 
+; be a lexical property of the head.
+; POSTHEAD attr, stipulates the relative position of the modifier with
+; respect to the head, it should stay with MOD, since only relevant 
+; when MOD is non-empty.
+
+cat-min := avm.
+
+cat := cat-min &
+  [ MC luk,
+    HC-LIGHT luk,
+    HS-LIGHT luk,
+    POSTHEAD bool,
+    LASTNMOD bool,
+    HEAD head-min,
+    VAL valence-min ].
+
+; HEAD values
+
+head-min := avm.
+
+head-punct := head-min &
+  [ PUNCT-MK basic_punct_mark ].
+ 
+head := head-min &
+  [ MOD list,
+    PRD predicative,
+    TAM tam, 
+    KEYS keys_min ].
+
+; - for integrated tags which have no entry
+no-head := head.
+
+predicative :< sort.
+non-prd :< predicative.
+prd := predicative &
+  [ COPV copv ].
+
+copv :< sort.
+ser := copv.
+estar := copv. 
+
+
+keys_min := avm.
+
+keys := keys_min &
+  [ KEY predsort ].
+
+keys_norm := keys &
+  [ ALTKEY predsort ].
+
+keys_full := keys_norm &
+  [ ALT2KEY predsort ].
+
+; (ERB 2004-08-19) We had previously shied away from defining head
+; types because even head types that are expected to occur across
+; all languages are probably grouped differently in the head 
+; subhierarchy for different languages. There are plenty of things 
+; which we think will be the same across languages, however. Thus 
+; the current strategy is to allow for all possible groupings of 
+; head types, and expect most of the disjunctive types to be 
+; ignored in most languages. Perhaps one day the LKB will be 
+; modified so that users can declare certain types to suppress in 
+; the hierarchy displays.
+
+; One recent LKB addition which will be helpful here is the
+; type addendum statements (':+').  Head types often bear
+; features, but none are declared for any of these Matrix head
+; types, since we don't yet know of any universal ones.  With
+; the new ':+' notation, you can add constraints (including feature
+; declarations) to existing types.  We encourage you to use this
+; when adding information to Matrix types, but not to types defined
+; solely within your grammar.  For example: CASE on nouns, 
+; VFORM on verbs and complementizers. 
+
+; We expect that particular grammars will need to add new head
+; types, and may find that the new types should inherit from
+; existing disjunctions.  If you do this, we encourage you to 
+; make use of type addendum statements (':+') to add a comment
+; to the existing disjunction, e.g.:
+
+; co-verb := +jv.
+; +jv :+
+; "Adjectives, verbs, and co-verbs.".
+
+; Anticipated future developments include Lisp commands for
+; generating the appropriate type addenda and/or additional
+; types when you want to add a new head type.
+
+; Our basic inventory of head types will consist of verb (v), 
+; noun (n), adjective (j), adverb (r), adposition (p), 
+; complementizer (c), determiner (d), number-name (m), and 
+; conjunction (o). The letters in parentheses indicate the 
+; abbreviation for each part of speech used in the disjunctive
+; types. Each disjunctive type is also associated with a 
+; documentation string explaining the disjuncts.  
+
+; With all the disjuntive types, we need 510 types to encode this.
+; The parent types are in a separate file called head-types.tdl, 
+; with just the leaves here.
+
+interj := head.
+conj := +mo & +do & +co & +po & +ro & +jo & +vo & +no.
+num := +mo & +dm & +cm & +pm & +rm & +jm & +vm & +nm.
+det := +do & +dm & +cd & +pd & +rd & +jd & +vd & +nd.
+verb := +vo & +vm & +vd & +vc & +vr & +nv & +vj.
+comp := +co & +cm & +cd & +pc & +rc & +jc & +vc & +nc.
+noun := +no & +nm & +nd & +nc & +np & +nr & +nj & +nv.
+adj := +jo & +jm & +jd & +jc & +jr & +nj & +vj & +jp.
+adv := +ro & +rm & +rd & +rc & +rp & +jr & +vr & +nr.
+adp := +po & +pm & +pd & +pc & +rp & +vjp & +jp & +np & prep_or_modnp.
+
++jp := +jpo & +jpm & +jpd & +jpc & +jrp & +njp.
++vp := +vpo & +vpm & +vpd & +vpc & +vrp & +vjp.
++vjp := +vjpo & +vjpm & +vjpd & +vjpc & +vjrp.
+
++np := +npo & +npm & +npd & +npc & +nrp & +njp & +nvp.
++np :+
+  [ CASE case ].
+
+prep_or_modnp := head.
+;modnp := +np & prep_or_modnp & adv.
+modnp := +np & prep_or_modnp & +vjrd.
+modnp_adv := modnp & adv.
+
++vc := +vco & +vcm & +vcd & +vpc & +vrc & +vjc & +nvc.
++vpc := +vpco & +vpcm & +vpcd & +vrpc & +vjpc & +nvpc.
++vpc :+
+  [ INV bool,
+    AUX bool,
+    IMP bool,
+    VOICE voice,
+    VFORM vform ].
+    
+vform := sort.
+  nonfin := vform.
+  non-inf := vform.
+  fin_or_inf := vform.
+  fin_or_part := non-inf.
+  part := fin_or_part.
+  fin := fin_or_inf & fin_or_part.
+  inf := fin_or_inf & inf_or_ger. 
+  inf_or_ger := vform.
+  ger := nonfin & inf_or_ger. 
+
+tam := avm &
+  [ TENSE basic_tense,
+    ASPECT aspect,
+    MOOD mood ]. 
+
+basic_tense := sort.
+untensed := basic_tense.
+nontense := untensed.
+tense := basic_tense.
+pres_or_ppast := tense.
+pres := pres_or_ppast.
+ppast := pres_or_ppast.
+ipast := tense.
+fut := tense.
+cond := tense.
+
+mood := sort.
+ind_or_sub_mood := mood.
+ind := ind_or_sub_mood.
+sub := ind_or_sub_mood.
+imp := mood.
+
+aspect := sort.
+perf := aspect.
+imperf := aspect.
+no-aspect := aspect.
+
+verb :+
+  [ CLIT case,
+    LSYNSEM synsem-min,
+    LPRED predsort ]. 
+
+voice :< sort.
+active :< voice.
+passive :< voice.
+
+partn := noun.
+
+case := sort.
+  ethic_dat := case. 
+  real_case := case. 
+  none :=  not-nom.
+  not-nom := case.
+  rflx := real_case.
+  rcp := real_case.
+  dat := real_case & not-nom.
+  nom_or_obl := real_case.
+  acc_or_obl := real_case.
+  acc_or_dat := real_case.
+  nom := nom_or_obl. 
+  obl := nom_or_obl & acc_or_obl & not-nom. 
+  acc := acc_or_obl & acc_or_dat & not-nom.
+  acc_or_rflx_or_dat := acc_or_dat & dat & rflx.
+  acc_or_rflx_or_rcp_or_dat := acc_or_rflx_or_dat & rcp. 
+  rflx_or_rcp_or_dat := dat & rflx & rcp.
+  only_dat := real_case.
+  le := only_dat & dat & acc_or_dat.
+;  se := rflx & none.
+  
+
++pc := +pco & +pcm & +pcd & +rpc & +jpc & +vpc & +npc.
+
+interjection_hd := head-min.
+
+conj :+
+  [ LEFT list,
+    CSYNSEM synsem-min ].
+
+
+; -- punctuation marks
+;sg_punct_hd := punct_hd.
+;fc_punct_hd := sg_punct_hd.
+;punct_pair_hd := func.
+;quote_punct_hd := punct_pair_hd.
+;dq_punct_hd := quote_punct_hd.
+;sq_punct_hd := quote_punct_hd.
+;lq_punct_hd := sq_punct_hd.
+;lp_punct_hd := punct_pair_hd.
+;rp_punct_hd := punct_pair_hd.
+
+;affix := head.
+
+; --- VAL values
+
+valence-min := avm.
+
+valence := valence-min &
+  [ SUBJ list,
+    COMPS list,
+    SPR list,
+    SPEC list,
+    CLTS list,
+    --KEYCOMP avm ].
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; CONT values
+;
+;   HOOK                    : Externally visible attributes of a sign
+;   RELS  diff-list         ; List of semantic relations
+;   HCONS diff-list         ; Scope constraints: list of qeq's
+
+mrs-min := avm.
+
+mrs := mrs-min &
+  [ HOOK hook,
+    RELS diff-list,
+    HCONS diff-list ].
+
+; HOOK values include
+;   LTOP           ; Local top handle
+;   INDEX          ; The salient nominal instance or event
+;   XARG           ; The external (controlled) argument of a phrase
+
+hook := avm &
+  [ LTOP handle,
+    INDEX semarg,
+    XARG *top* ].
+
+; MRSs are divided into psoas (with a distinguished event) and
+; nom-objs (with a distinguished index).  We use a polymorphic
+; attribute name INDEX for both of these, to simplify manipulation of
+; these objects; for example, modifying PPs assign as their ARG's
+; value the INDEX of the phrase they modify, whether it's an N-bar
+; (with a ref-ind value) or a VP (with an event value).  Similarly
+; useful for coordination.
+
+psoa := mrs &
+  [ HOOK.INDEX event ].
+
+nom-obj := mrs &
+  [ HOOK.INDEX index ].
+        
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; qeq 
+
+; Constrains handle of scopable argument HARG relative to one 
+; outscoped LARG handle (the "H" is mnemonic for either "higher" or
+; "hole" argument, while the "L" is mnemonic for either "lower" or 
+; "label" argument.
+
+qeq := avm &
+  [ HARG handle,
+    LARG handle ]. 
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; basic_message types
+
+; The message represents the semantic type of a clause (cf. 
+; Ginzburg & Sag 2000). All clauses have messages. Elements that 
+; take clauses as semantic arguments should end up with the LBL of 
+; the clause as the value of ARGn, L/R-HNDL, etc. The MARG (message 
+; argument) of a message is a handle that qeqs the LBL of the main 
+; verb in the clause. This leaves room for quantifiers to scope at 
+; each clause without allowing scope ambiguity between quanitifers 
+; and messages, as it is not clear what that would mean.
+
+
+; ERG: Values in the feature QUE and in PARAMS, used to distinguish ordinary
+; WH-questions from in-situ WH.
+param :< sort.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; semarg types    
+
+semarg := avm &
+  [ SORT semsort,
+    INSTLOC string ].
+
+handle := semarg.
+individual := semarg.
+
+; One of a grammatically salient inventory of semantic sorts, such as
+; 'animate' or 'time' 
+semsort := sort.
+ 
+; The INDEX value of a nom-obj is an index (expletive or referential).
+; ERB 2004-05-10 Add a feature DEF which encodes definiteness
+; for (in)definite null instantiation, and possibly other uses.
+; The null instantiation use might get superceded by a Sem-I based
+; solution. Moved to event-or-ref-index
+
+index := individual &
+  [ PNG png,
+    PRONTYPE prontype,
+    DEF bool ].
+
+prontype :< sort.
+real_pron :< prontype.
+demon :< real_pron.
+std_pron :< real_pron.
+recip :< real_pron.
+refl :< real_pron.
+std_or_refl_pron := std_pron & refl.
+std_or_recip_or_refl_pron := std_or_refl_pron & recip.
+impers :< real_pron.
+zero_pron :< real_pron.
+not_pron :< prontype.
+
+; This is the type of the index of the phrase modified by predicative
+; PPs, which can either modify a ref-ind nominal or an event VP.
+
+event-or-ref-index := individual.
+
+; Expletives get distinguished index type so they can be
+; selected semantically.  In English, this type has subtypes
+; for it and there.  Most languages have at most one expletive,
+; so those aren't included here.
+
+expl-ind := index.
+; DIVISIBLE distinguishes singular count nouns from plural and mass nouns,
+; for determiners like "some", and for bare-plural NPs -- borrowed from erg 
+ref-ind := index & event-or-ref-index &
+  [ DIVISIBLE bool ].
+
+
+; nom_event-ind := ref-ind & event.
+
+; Types encoding agreement information, analyzed as a part of the
+; index, following Pollard & Sag 1994.  Which subtypes and features
+; are appropriate seems highly language dependent.  The agreement
+; system of English doesn't justify a full cross-classification of
+; number and gender, so the features of png are PN and GENDER in the
+; English grammar.  (See Flickinger 2000.) Sag & Wasow 1999 declare
+; GENDER as a feature of the png type 3sg.
+
+png := avm & 
+  [ PN pernum,
+    GEN gender ].
+
+pernum :< sort.
+  sing :< pernum.
+  non-2sg :< pernum.
+  2sg := sing & 2per.
+  1or3sg := non-2sg & sing.
+  non-1sg :< non-2sg.
+  3per :< non-1sg & non-1per & non-2per.
+  1per :< non-2per & non-3per.
+  2per :< non-1per & non-3per.
+  plur :< non-1sg.
+  1sg := 1or3sg & 1per. 
+  3sg := 1or3sg & 3per.
+  ;3pl := plur & 3per. 
+  ;1pl := plur & 1per.
+  ;2pl := plur & 2per.  
+  1or3pl :< pernum.
+  2or3pl :< pernum.
+  3pl := plur & 1or3pl & 2or3pl & 3per. 
+  1pl := plur & 1or3pl & 1per.
+  2pl := plur & 2or3pl & 2per.  
+  non-1per := pernum.
+  non-2per := pernum.
+  non-3per := pernum.
+
+
+gender := sort.
+  masc_or_fem := gender.
+  masc := masc_or_fem.
+  fem := masc_or_fem.
+  neut := gender.
+
+event := event-or-ref-index &
+  [ E tam,
+    SF iforce ].
+
+iforce := predsort.
+prop-or-ques := iforce.
+prop := prop-or-ques.
+ques := prop-or-ques.
+comm := iforce.
+
+; Coordinated phrases have conjoined indices as their INDEX
+; values.  These are meant to be interpreted as pointers to 
+; the set of indices the conjunction conjoins.
+
+coord-index := event-or-ref-index.
+coord-event := coord-index & event.
+coord-ref-ind := coord-index & ref-ind.
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Basic relation types
+
+; Relations are classified according to the types of arguments they 
+; take. All relations have a handle. In addition, quantifier 
+; relations have a bound variable and a restriction, nominal 
+; relations have an instance, and event relations have an event. 
+; Furthermore, nominal relations and event relations can have 
+; additional roles, depending on their meaning.
+
+; WLINK links semantic relation to input string elements, more or 
+; less. This becomes useful whenever a grammar is used in some 
+; application.
+
+relation := avm &
+  [ LBL handle,
+    PRED predsort,
+    WLINK list, CFROM *top*, CTO *top* ].
+
+; Abstract relation subtypes.  We recommend not positing a type
+; for each lexical relation, but rather using the feature PRED
+; to distinguish different lexical relations of the same type.
+; Relation types are modified in one of two circumstances:
+;
+; (i) A feature needs to be introduced that is relevant for some
+; relations and not others, or
+;
+; (ii) Something in the grammar needs to make reference to a family; of relations that are not otherwise distinguished by a type.
+
+arg0-relation := relation &
+  [ ARG0 individual ].
+
+;aff-relation := arg0-relation &
+;  [ AFFIX semarg ].
+
+arg1-relation := arg0-relation &
+  [ ARG1 semarg ].
+
+arg2-relation := arg0-relation &
+  [ ARG2 semarg ].
+
+arg3-relation := relation &
+  [ ARG3 semarg ].
+
+arg12-relation := arg1-relation & arg2-relation. 
+
+arg123-relation := arg12-relation & arg3-relation. 
+
+arg23-relation := arg2-relation &  arg3-relation. 
+
+arg1234-relation := arg123-relation &
+  [ ARG4 semarg ].
+
+event-relation := arg0-relation &
+  [ ARG0 event ].
+
+
+
+arg1-ev-relation := arg1-relation & event-relation.
+arg2-ev-relation := arg2-relation & event-relation.
+arg12-ev-relation := arg1-ev-relation & arg12-relation.
+arg23-ev-relation := arg2-ev-relation & arg3-relation.
+arg123-ev-relation := arg12-ev-relation & arg3-relation.
+arg1234-ev-relation := arg123-ev-relation & arg1234-relation.
+
+;arg1-affx-relation := arg1-ev-relation & aff-relation. 
+;arg2-affx-relation := arg2-ev-relation & aff-relation. 
+;arg12-affx-relation := arg12-ev-relation & aff-relation. 
+;arg23-affx-relation := arg23-ev-relation & aff-relation. 
+;arg123-affx-relation := arg123-ev-relation & aff-relation. 
+;arg1234-affx-relation := arg1234-ev-relation & aff-relation. 
+
+; Preposition relations
+
+pp-relation := arg1-relation &
+  [ PRED prep_rel ].	
+
+prep-relation := arg12-relation &
+  [ PRED prep_rel,
+    ARG2 semarg ].	 
+
+prep-123-relation := prep-relation & arg3-relation.   
+
+
+; Adjective relations
+
+basic-adj-relation := event-relation.
+
+norm-adj-relation := basic-adj-relation & arg1-relation.
+adj-relation := norm-adj-relation &
+  [ ARG1 semarg ].
+
+adj-arg1-relation := adj-relation.
+adj-arg12-relation := adj-arg1-relation & arg2-relation.
+
+
+; Adverb relations
+
+basic-adv-relation := event-relation.
+
+adv-relation := arg1-relation &
+  [ ARG0.E tam ].
+
+adv12-relation := adv-relation & arg2-relation.
+
+
+; Degree relations
+
+degree-relation := arg1-relation &
+  [ ARG0 semarg ].
+
+; Noun relations
+
+; Relational nouns e.g. picture or claim take an additional semantic argument
+
+nominalize-relation := arg1-relation &
+  [ ARG1 handle,
+    ARG0.SORT pro,
+    PRED nominalization_rel ].
+
+noun-relation := arg0-relation &
+  [ ARG0 ref-ind ].
+
+noun-arg0-relation := noun-relation.
+
+noun-arg1-relation := noun-relation & arg1-relation.
+noun-arg2-relation := noun-relation & arg2-relation.
+noun-arg12-relation := noun-relation & arg12-relation.
+noun-arg123-relation := noun-relation & arg123-relation.
+
+; proper names
+
+carg-relation := relation &
+  [ CARG string ].
+
+named-relation := noun-arg1-relation & carg-relation &
+  [ PRED named_rel ].
+
+date-relation := noun-arg1-relation & carg-relation &
+  [ PRED time_n_rel ].
+
+; pronouns
+
+pron_relation := noun-relation &
+  [ PRED pron_rel,
+    ARG0 ref-ind & [ SORT entity ] ].
+
+; coordinating and subordinating conjunctions
+
+;subord-or-coord-relation := relation &
+;  [ L-HNDL handle,
+;    R-HNDL handle ].
+
+;subord-relation := subord-or-coord-relation & event-relation.
+
+;coordination-relation := subord-or-coord-relation &
+;  [ C-ARG coord-index,
+;    L-INDEX individual,
+;    R-INDEX individual ].
+
+subord-relation := arg12-relation &
+  [ ARG1 handle,
+    ARG2 handle ].
+
+basic-coord-relation := arg0-relation &
+  [ C-ARG coord-index,
+    L-INDEX individual,
+    R-INDEX individual ].
+
+coordination-relation := basic-coord-relation &
+  [ L-HNDL semarg,
+    R-HNDL semarg ].
+
+; Two relations used in coordination:
+; - implicit-coord-rel: used when there's no overt conjunction (or morpheme) providing the coordination relation.
+; - null-coord-rel: used when a conjunction contributes *no* relation.
+
+implicit-coord-rel := coordination-relation &
+  [ PRED implicit_coord_rel ].
+
+null-coord-rel := coordination-relation &
+  [ PRED null_coord_rel ].
+
+
+; quantifier relation
+quant-relation := arg0-relation &
+  [ PRED quant_or_wh_rel,
+    ARG0 ref-ind,
+    RSTR handle,
+    BODY handle ].
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; predsorts
+
+prag_d_rel := predsort.
+focus_d_rel := prag_d_rel.
+topic_d_rel := prag_d_rel.
+parg_d_rel := prag_d_rel.
+
+no_rel := predsort.
+norm_rel := predsort. 
+;non_coord_rel := predsort.
+non_implicit_coord_rel := predsort.
+non_coord_rel := non_implicit_coord_rel.
+unspec_rel := predsort.
+norm_non_coord_rel := non_coord_rel & norm_rel.
+non_event_rel := norm_non_coord_rel.
+norm_dim_rel := norm_non_coord_rel.
+non_event_dim_rel := non_event_rel & norm_dim_rel.
+event_or_degree_rel := norm_non_coord_rel.
+event_rel := event_or_degree_rel.
+selected_rel := event_rel.
+aux_event_rel := event_rel & noncop_id_rel.
+haber_aux_rel := aux_event_rel.
+estar_aux_rel := aux_event_rel.
+ser_aux_rel := aux_event_rel.
+basic_event_dim_rel := norm_dim_rel & event_rel.
+nonaux_event_rel := noncop_id_rel.
+noncop_id_rel := predsort.
+event_dim_rel := basic_event_dim_rel & nonaux_event_rel.
+event_or_mod_rel := predsort.
+mod_rel := event_or_mod_rel.
+event_mod_rel := event_rel & mod_rel.
+event_arg_dim_rel := event_mod_rel & basic_event_dim_rel.
+nontemp_or_coord_rel := norm_rel.
+temp_rel := norm_rel.
+nontemp_rel := nontemp_or_coord_rel.
+selected_or_independent_rel := predsort.
+a_sel_or_indp_rel := selected_or_independent_rel.
+de_sel_or_indp_rel := selected_or_independent_rel.
+con_or_en_sel_or_indp_rel := selected_or_independent_rel.
+en_sel_or_indp_rel := con_or_en_sel_or_indp_rel.
+con_sel_or_indp_rel := con_or_en_sel_or_indp_rel.
+para_sel_or_indp_rel := selected_or_independent_rel.
+por_sel_or_indp_rel := selected_or_independent_rel.
+independent_rel := a_sel_or_indp_rel & de_sel_or_indp_rel & con_or_en_sel_or_indp_rel & para_sel_or_indp_rel & por_sel_or_indp_rel.
+instance_rel := independent_rel. 
+independent_mod_rel := mod_rel & independent_rel. 
+dir_state_modable_rel := predsort.
+modable_rel := basic_nom_rel & dir_state_modable_rel.
+basic_prep_mod_rel := prep_rel & event_arg_dim_rel & independent_rel.
+; marking preps
+prep_rel := event_dim_rel. 
+selected_prep_rel := selected_rel & prep_rel.
+que_or_a_p_comp_rel :< selected_prep_rel.
+a_or_con_p_sel_rel :< selected_prep_rel.
+a_or_con_or_contra_p_sel_rel :< selected_prep_rel.
+a_or_contra_p_sel_rel :< selected_prep_rel.
+a_or_de_or_en_p_sel_rel :< selected_prep_rel.
+a_or_de_p_sel_rel :< a_or_de_or_en_p_sel_rel. 
+a_or_en_p_sel_rel :< a_or_de_or_en_p_sel_rel. 
+a_or_hacia_p_sel_rel  :< selected_prep_rel.
+a_or_hasta_p_sel_rel  :< selected_prep_rel.
+a_or_para_p_sel_rel :< selected_prep_rel.
+a_or_por_p_sel_rel :< selected_prep_rel.
+como_or_de_or_para_p_sel_rel :< selected_prep_rel.
+como_or_de_p_sel_rel :< como_or_de_or_para_p_sel_rel.
+como_or_por_p_sel_rel :< selected_prep_rel.
+con_or_contra_p_sel_rel :< selected_prep_rel.
+con_or_de_or_en_p_sel_rel :< selected_prep_rel.
+con_or_de_p_sel_rel :< selected_prep_rel.
+con_or_en_p_sel_rel :< selected_prep_rel.
+con_or_por_p_sel_rel :< selected_prep_rel.
+contra_or_de_p_sel_rel :< selected_prep_rel.
+de_or_en_or_sobre_p_sel_rel :< selected_prep_rel.
+de_or_en_p_sel_rel :< a_or_de_or_en_p_sel_rel & de_or_en_or_sobre_p_sel_rel.
+de_or_materia_p_sel_rel :< selected_prep_rel.
+de_or_para_p_sel_rel :< como_or_de_or_para_p_sel_rel. 
+de_or_por_p_sel_rel :< selected_prep_rel.
+en_or_entre_p_sel_rel :< selected_prep_rel.
+en_or_para_or_por_p_sel_rel :< selected_prep_rel.
+en_or_por_p_sel_rel :< selected_prep_rel.
+en_or_sobre_p_sel_rel :< de_or_en_or_sobre_p_sel_rel.
+en_or_materia_p_sel_rel :< selected_prep_rel.
+para_or_por_p_sel_rel :< selected_prep_rel.
+contra_or_para_or_por_p_sel_rel :< selected_prep_rel.
+por_or_materia_p_sel_rel :< selected_prep_rel.
+por_or_a_favor_de_p_sel_rel :< selected_prep_rel.
+por_or_sin_p_sel_rel :< selected_prep_rel.
+materia_p_sel_rel := de_or_materia_p_sel_rel & en_or_materia_p_sel_rel & por_or_materia_p_sel_rel.
+; modifying preps
+prep_mod_rel := basic_prep_mod_rel.
+nontemp_prep_rel := prep_mod_rel & nontemp_rel & non_free_relative_nom_rel.
+miscprep_rel := nontemp_prep_rel.
+basic_poss_rel := basic_prep_mod_rel.
+poss_rel := basic_poss_rel & prep_mod_rel.
+loc_abstr_rel := prep_mod_rel.
+generic_loc_rel := loc_abstr_rel.
+temp_loc_abstr_rel := loc_abstr_rel.
+temp_loc_rel := temp_loc_abstr_rel & independent_mod_rel.
+dir_or_state_rel := loc_abstr_rel & dir_state_modable_rel.
+dir_or_state_nontemp_rel := dir_or_state_rel & nontemp_prep_rel.
+dir_rel := dir_or_state_nontemp_rel.
+period_rel := dir_rel.
+orig_rel := dir_rel.
+state_loc_rel := dir_or_state_nontemp_rel & modable_rel.
+loc_rel := dir_or_state_rel.
+dir_or_unsp_loc_rel :< prep_mod_rel.
+unspec_loc_rel := loc_rel & dir_or_unsp_loc_rel.
+unspec_loc_temp_rel := unspec_loc_rel & temp_loc_abstr_rel.
+unspec_loc_nontemp_rel := unspec_loc_rel & nontemp_rel.
+unspec_manner_rel := miscprep_rel & unspec_rel.
+; quants
+quant_or_deg_rel := non_event_dim_rel. 
+pre_indef_art_rel := quant_or_deg_rel.
+i_or_e_quant_or_deg_rel := quant_or_deg_rel.
+impl_or_expl_q_rel := i_or_e_quant_or_deg_rel.
+impl_nondiv_q_rel := predsort.
+explicit_q_rel := impl_or_expl_q_rel.
+quant_or_wh_rel := quant_or_deg_rel.
+quant_rel := quant_or_wh_rel.
+post_todo_q_rel := quant_rel.
+def_num_q_rel := number_q_rel & def_quant_q_rel.
+impl_or_proper_q_rel := quant_rel.
+implicit_q_rel := impl_or_expl_q_rel & impl_or_proper_q_rel.
+impl_undef_q_rel := implicit_q_rel.
+abstr_def_or_udef_q_rel := quant_rel.
+def_or_udef_q_rel := abstr_def_or_udef_q_rel & appos-able_rel.
+udef_q_rel := impl_undef_q_rel & def_or_udef_q_rel.
+;udef_q_rel := implicit_q_rel & def_or_udef_q_rel.
+def_or_proper_q_rel := abstr_def_or_udef_q_rel.
+semi-free_relative_q_rel := def_or_proper_q_rel.
+non_semi-free_relative_q_rel := def_or_proper_q_rel.
+free_relative_q_rel := non_semi-free_relative_q_rel.
+pronoun_q_rel := def_quant_q_rel.
+non_free_relative_q_rel := non_semi-free_relative_q_rel.
+def_explicit_q_rel := def_or_udef_q_rel & non_free_relative_q_rel & explicit_q_rel.
+def_quant_q_rel := def_explicit_q_rel.
+part_q_rel := def_explicit_q_rel.
+tal_q_rel := def_quant_q_rel & part_q_rel.
+semejante_q_rel := def_quant_q_rel & part_q_rel.
+def_q_rel := def_quant_q_rel & pre_otro_q_rel & pre_much_or_poc_q_rel & post_todo_q_rel.
+art_def_q_rel := def_q_rel.
+univ_quant_q_rel := def_quant_q_rel & part_q_rel.
+cada_q_rel := univ_quant_q_rel.
+ambos_q_rel := univ_quant_q_rel.
+sendos_q_rel := univ_quant_q_rel.
+cualquiera_q_rel := univ_quant_q_rel & undef_quant_q_rel.
+quienquiera_q_rel := univ_quant_q_rel & undef_quant_q_rel.
+todo_or_dem_q_rel := def_quant_q_rel & part_q_rel. 
+dem_q_rel := todo_or_dem_q_rel & def_q_rel.
+todo_def_q_rel := todo_or_dem_q_rel & univ_quant_q_rel & pre_indef_art_rel.
+poss_or_card_or_undef_q_rel := def_explicit_q_rel.
+poss_q_rel := def_q_rel & poss_or_card_or_undef_q_rel & part_q_rel & impl_or_proper_q_rel.
+card_or_undef_q_rel := poss_or_card_or_undef_q_rel & undef_quant_q_rel.
+que_q_rel := def_explicit_q_rel.
+excl_q_rel := def_explicit_q_rel.
+_que_q_rel := excl_q_rel.
+_cuanto_q_rel := excl_q_rel.
+_cual_q_rel := excl_q_rel.
+pre_otro_q_rel := def_explicit_q_rel.
+undef_quant_q_rel := pre_otro_q_rel & part_q_rel & implicit_q_rel.
+card_q_rel := card_or_undef_q_rel.
+eval_quant_q_rel := card_or_undef_q_rel.
+otro_q_rel := eval_quant_q_rel & pre_much_or_poc_q_rel.
+mucho_or_poco_q_rel := eval_quant_q_rel.
+mucho_q_rel := mucho_or_poco_q_rel.
+poco_q_rel := mucho_or_poco_q_rel.
+undef_q_rel := eval_quant_q_rel.
+exis_quant_q_rel := undef_quant_q_rel.
+distr_numb_q_rel := undef_quant_q_rel.
+alguno_q_rel := exis_quant_q_rel.
+ninguno_q_rel := exis_quant_q_rel.
+cuantos_q_rel := exis_quant_q_rel.
+todo_undef_q_rel := exis_quant_q_rel.
+pre_poc_q_rel := def_explicit_q_rel.
+pre_card_q_rel := def_explicit_q_rel.
+art_indef_q_rel := pre_card_q_rel & undef_quant_q_rel & post_todo_q_rel.
+pre_much_or_poc_q_rel := pre_card_q_rel.
+; For appositives
+appos-able_rel := predsort.
+num_or_proper_q_rel := non_free_relative_q_rel & appos-able_rel.
+proper_q_rel := num_or_proper_q_rel & impl_or_proper_q_rel.
+proper_expl_q_rel := proper_q_rel & explicit_q_rel.
+number_q_rel := num_or_proper_q_rel.
+; adjectives
+basic_adj_rel := event_dim_rel & nontemp_rel.
+abstr_adj_rel := basic_adj_rel & event_arg_dim_rel.
+adj_rel := abstr_adj_rel & independent_mod_rel.
+compar_adj_rel := abstr_adj_rel & independent_rel & non_modable_rel.
+norm_adj_rel :< adj_rel.
+poss_adj_rel :< norm_adj_rel.
+dem_adj_rel :< norm_adj_rel.
+cualq_adj_rel :< norm_adj_rel.
+ord_rel :< adj_rel.
+_doble_a_rel := norm_adj_rel.
+_triple_a_rel := norm_adj_rel.
+; verbs
+verb_aspect_rel := event_rel & independent_rel.
+elliptical_v_rel := verb_aspect_rel.
+prog_rel := verb_aspect_rel.
+v_event_rel := verb_aspect_rel & event_arg_dim_rel.
+nonaux_v_rel := v_event_rel & nonaux_event_rel.
+aux_arg1_rel := v_event_rel & aux_event_rel.
+_be_v_prd_rel := v_event_rel & aux_event_rel.
+be_v_prd_rel := v_event_rel & aux_event_rel.
+cop_id_rel := v_event_rel.
+_be_v_id_rel := cop_id_rel.
+expected_event_v_rel := v_event_rel.
+; adverbs
+degree_rel := quant_or_deg_rel.
+comp_degree_rel := degree_rel. 
+non-quant_degree_rel := degree_rel. 
+basic_quant_degree_rel := degree_rel & quant_or_wh_rel. 
+quant_degree_rel := basic_quant_degree_rel & non_modable_rel.
+_muy_x_deg_rel := quant_degree_rel.
+_casi_x_deg_rel := quant_degree_rel & pre_indef_art_rel. 
+_mucho_x_deg_rel := quant_degree_rel. 
+poco_degree_rel := degree_rel. 
+tanto_degree_rel := degree_rel. 
+;poco_degree_rel := basic_quant_degree_rel. 
+basic_adv_rel := non_event_rel & nontemp_rel & event_or_degree_rel.
+abstr_adv_rel := basic_adv_rel & independent_mod_rel.
+abstr_adv_dim_rel := abstr_adv_rel & non_event_dim_rel.
+adv_rel :< abstr_adv_dim_rel.
+neg_rel :< abstr_adv_rel.
+; nouns
+impers_pron_rel := predsort.
+free_relative_nom_rel := predsort.
+non_free_relative_nom_rel := predsort.
+basic_nom_rel := non_event_rel & instance_rel. 
+nom_rel := basic_nom_rel. 
+addressee_rel := basic_nom_rel.
+nominalization_rel := all_common_nom_rel & nom_rel.
+non_temp_nom_rel := nom_rel & nontemp_rel & non_free_relative_nom_rel.
+nonpro_rel := nom_rel & non_free_relative_nom_rel.
+temp_nonpro_rel := nonpro_rel & temp_rel & modable_rel.
+;time_n_rel := temp_nonpro_rel.
+;non_temp_nonpro_rel := nonpro_rel & non_temp_nom_rel.
+all_common_nom_rel := predsort.
+time_n_rel := temp_nonpro_rel & non_elliptical_n_rel.
+non_temp_nonpro_rel := all_common_nom_rel & nonpro_rel & non_temp_nom_rel.
+named_non_temp_nonpro_rel := nom_rel & nontemp_rel. 
+;basic_non_modable_rel := nom_rel & nontemp_rel.
+;non_modable_rel := non_temp_nonpro_rel.
+non_modable_rel := predsort.
+non_named_non_modable_rel := non_modable_rel.
+; elliptical_n_rel := non_temp_nonpro_rel & non_modable_rel.
+common_nom_rel := non_temp_nonpro_rel & non_named_non_modable_rel.
+elliptical_n_rel := common_nom_rel.
+non_elliptical_n_rel := common_nom_rel.
+generic_entity_rel := non_temp_nonpro_rel & non_named_non_modable_rel.
+;que_pron_rel :=  all_common_nom_rel & nonpro_rel & non_named_non_modable_rel.
+que_pron_rel := non_temp_nonpro_rel & non_named_non_modable_rel.
+non_que_pron_rel := non_temp_nonpro_rel & non_named_non_modable_rel.
+thing_rel := non_temp_nonpro_rel & non_named_non_modable_rel.
+person_rel := non_temp_nonpro_rel & non_named_non_modable_rel.
+place_n_rel := non_temp_nonpro_rel & modable_rel.
+manner_n_rel := non_temp_nonpro_rel & modable_rel.
+cause_n_rel := non_temp_nonpro_rel & modable_rel.
+quant_n_rel := non_temp_nonpro_rel & modable_rel.
+basic_pron_rel := non_temp_nom_rel.
+reg_nom_rel := non_temp_nonpro_rel.
+pron_rel := basic_pron_rel.
+_le_pron_rel := pron_rel.
+part_nom_rel := non_elliptical_n_rel.
+part_of_rel := part_nom_rel.
+_mucho_part_of_rel := part_of_rel.
+_poco_part_of_rel := part_of_rel.
+_un_poco_part_of_rel := part_of_rel.
+_otro_part_of_rel := part_of_rel.
+group_nom_rel := part_of_rel.
+pseudo-part_nom_rel := part_of_rel.
+free_relative_n_rel := free_relative_nom_rel & nom_rel.
+free_que_pron_rel := free_relative_n_rel. 
+; proper names
+named_rel := named_non_temp_nonpro_rel & non_modable_rel.
+compound_rel := non_modable_rel.
+card_rel := part_of_rel.
+appos_rel := prep_rel.
+; subordinating conj
+subord_rel := independent_rel & event_or_degree_rel.
+; coordination
+basic_coord_rel := norm_rel.
+coord_rel := basic_coord_rel.
+non_advers_coord_rel := basic_coord_rel.
+null_coord_rel := basic_coord_rel & non_implicit_coord_rel.
+implicit_coord_rel := coord_rel & non_advers_coord_rel.
+mult_coord_rel := coord_rel & non_advers_coord_rel & non_implicit_coord_rel.
+_comma_c_rel :< mult_coord_rel.
+_semi-cln_c_rel :< mult_coord_rel.
+_full-stop_c_rel :< mult_coord_rel.
+_y_c_rel :< mult_coord_rel.
+_o_c_rel :< mult_coord_rel.
+_ni_c_rel :< mult_coord_rel.
+_sea_c_rel :< mult_coord_rel.
+_o_sea_c_rel :< mult_coord_rel.
+_bien_c_rel :< mult_coord_rel.
+_o_bien_c_rel :< mult_coord_rel.
+_tanto_c_rel :< mult_coord_rel.
+_como_c_rel :< mult_coord_rel.
+_no_sólo_c_rel :< mult_coord_rel.
+_así_como_c_rel :< mult_coord_rel.
+_sino_c_rel := coord_rel & non_advers_coord_rel.
+_sino_que_c_rel := coord_rel & non_advers_coord_rel.
+advers_coord_rel := coord_rel & non_implicit_coord_rel.
+_aunque_c_rel :< advers_coord_rel.
+_con_todo_c_rel :< advers_coord_rel.
+_mas_c_rel :< advers_coord_rel.
+_pero_c_rel :< advers_coord_rel.
+_empero_c_rel :< advers_coord_rel.
+_ora_c_rel :< mult_coord_rel.
+_siquier_c_rel :<  advers_coord_rel.
+_siquiera_c_rel :< advers_coord_rel.
+_sin_embargo_c_rel :< advers_coord_rel.
+_eso_que_c_rel :< advers_coord_rel.
+
+
+
+; marking prepositions
+_que_p_comp_rel := que_or_a_p_comp_rel.
+;_que_p_sel_rel :< que_or_a_p_comp_rel..
+_que_p_sel_rel :< _que_p_comp_rel. 
+_como_p_comp_rel := selected_prep_rel.
+_como_p_sel_rel := como_or_de_p_sel_rel & como_or_por_p_sel_rel.
+_a_p_sel_rel := non_modable_rel & a_sel_or_indp_rel & que_or_a_p_comp_rel & a_or_con_p_sel_rel & a_or_con_or_contra_p_sel_rel & a_or_contra_p_sel_rel & a_or_de_p_sel_rel & a_or_en_p_sel_rel & a_or_hacia_p_sel_rel & a_or_hasta_p_sel_rel & a_or_para_p_sel_rel & a_or_por_p_sel_rel.
+_con_p_sel_rel := con_sel_or_indp_rel & a_or_con_p_sel_rel & a_or_con_or_contra_p_sel_rel & con_or_contra_p_sel_rel & con_or_de_p_sel_rel & con_or_de_or_en_p_sel_rel & con_or_en_p_sel_rel & con_or_por_p_sel_rel.
+_contra_p_sel_rel := a_or_con_or_contra_p_sel_rel & a_or_contra_p_sel_rel & contra_or_de_p_sel_rel & contra_or_para_or_por_p_sel_rel.
+_en_p_sel_rel := en_sel_or_indp_rel & a_or_en_p_sel_rel & de_or_en_p_sel_rel & con_or_en_p_sel_rel & con_or_de_or_en_p_sel_rel & en_or_entre_p_sel_rel & en_or_para_or_por_p_sel_rel & en_or_por_p_sel_rel & en_or_materia_p_sel_rel & en_or_sobre_p_sel_rel.
+_entre_p_sel_rel := en_or_entre_p_sel_rel.
+_de_p_sel_rel := de_sel_or_indp_rel & a_or_de_p_sel_rel & como_or_de_p_sel_rel & de_or_en_p_sel_rel & de_or_para_p_sel_rel & con_or_de_p_sel_rel & con_or_de_or_en_p_sel_rel & contra_or_de_p_sel_rel & de_or_por_p_sel_rel & de_or_materia_p_sel_rel.
+_hacia_p_sel_rel := a_or_hacia_p_sel_rel.
+_hasta_p_sel_rel := a_or_hasta_p_sel_rel.
+_para_p_sel_rel := para_sel_or_indp_rel & a_or_para_p_sel_rel & de_or_para_p_sel_rel & contra_or_para_or_por_p_sel_rel & en_or_para_or_por_p_sel_rel & para_or_por_p_sel_rel.
+_por_p_sel_rel :=  por_sel_or_indp_rel & como_or_por_p_sel_rel & contra_or_para_or_por_p_sel_rel & en_or_para_or_por_p_sel_rel & en_or_por_p_sel_rel & con_or_por_p_sel_rel & para_or_por_p_sel_rel & por_or_materia_p_sel_rel & por_or_a_favor_de_p_sel_rel & por_or_sin_p_sel_rel & de_or_por_p_sel_rel.
+_sin_p_sel_rel :=  por_or_sin_p_sel_rel.
+_sobre_p_sel_rel := materia_p_sel_rel & en_or_sobre_p_sel_rel.
+_acerca+de_p_sel_rel := materia_p_sel_rel.
+_en+torno+a_p_sel_rel := materia_p_sel_rel.
+_a_favor_de_p_sel_rel:= por_or_a_favor_de_p_sel_rel.
+; modifying prepositions
+comp_or_superl_rel := miscprep_rel.
+compar := comp_or_superl_rel.
+superl := comp_or_superl_rel.
+comp_equal_rel := miscprep_rel.
+_a_p_rel :< dir_state_modable_rel.
+_a_p_dir_rel := _a_p_rel & period_rel.
+_a_p_state_rel := _a_p_rel & state_loc_rel.
+_a_p_temp_rel := temp_loc_rel.
+_ante_p_rel :< state_loc_rel.
+_antes_p_rel :< temp_loc_rel.
+_así_p_rel :< miscprep_rel.
+_bajo_p_rel :< state_loc_rel.
+_cabe_p_rel :< state_loc_rel.
+_como_p_rel :< miscprep_rel.
+_con_p_temp_rel := temp_loc_rel.
+_con_p_rel :< miscprep_rel.
+_conmigo_p_rel :< miscprep_rel.
+_contigo_p_rel :< miscprep_rel.
+_consigo_p_rel :< miscprep_rel.
+_contra_p_rel :< state_loc_rel.
+_de_p_rel :< orig_rel.
+_de_p_temp_rel :< temp_loc_rel.
+_desde_p_rel :< orig_rel.
+_desde_p_temp_rel :< temp_loc_rel.
+_después_p_rel :< temp_loc_rel.
+_después_de_p_temp_rel :< temp_loc_rel.
+_durante_p_temp_rel :< temp_loc_rel.
+_en_p_rel := state_loc_rel.
+_en_p_temp_rel :< temp_loc_rel.
+_en_menos_de_p_temp_rel :< temp_loc_rel.
+_entre_p_rel := state_loc_rel.
+_entre_p_temp_rel :< temp_loc_rel.
+_excepto_p_rel :< miscprep_rel.
+_fuera_de_p_rel :< state_loc_rel.
+_hacia_p_rel :< period_rel.
+_hacia_p_temp_rel :< temp_loc_rel.
+_hasta_p_rel :< period_rel.
+_hasta_p_temp_rel :< temp_loc_rel.
+_mediante_p_rel :< miscprep_rel.
+_más_p_rel :< miscprep_rel.
+_menos_p_rel :< miscprep_rel.
+_para_p_rel :< period_rel.
+_para_p_temp_rel :< temp_loc_rel.
+_por_p_rel :< state_loc_rel.
+_por_p_temp_rel :< temp_loc_rel.
+_pro_p_rel :< miscprep_rel.
+_salvo_p_rel :< miscprep_rel.
+_según_p_rel :< miscprep_rel.
+_sin_p_rel :< miscprep_rel.
+_so_p_rel :<  miscprep_rel.
+_sobre_p_rel :< state_loc_rel.
+_sobre_p_temp_rel :< temp_loc_rel.
+_tras_p_rel :< state_loc_rel.
+_tras_p_temp_rel :< temp_loc_rel.
+_vía_p_rel :< miscprep_rel.
+_versus_p_rel :< miscprep_rel.
+_a_base_de_p_rel :<  miscprep_rel.
+_a_bordo_de_p_rel :<  miscprep_rel.
+_a_cambio_de_p_rel :<  miscprep_rel.
+_a_cargo_de_p_rel :<  miscprep_rel.
+_a_causa_de_p_rel :<  miscprep_rel.
+_a_cerca_de_p_rel :<  miscprep_rel.
+_acerca_de_p_rel :<  miscprep_rel.
+_a_consecuencia_de_p_rel :<  miscprep_rel.
+_a_continuación_de_p_rel :<  miscprep_rel.
+_a_cuenta_de_p_rel :<  miscprep_rel.
+_además_de_p_rel :<  miscprep_rel.
+_a_despecho_de_p_rel :<  miscprep_rel.
+_a_diferencia_de_p_rel :<  miscprep_rel.
+_a_distinción_de_p_rel :<  miscprep_rel.
+_a_dos_dedos_de_p_rel :<  miscprep_rel.
+_a_efecto_de_p_rel :<  miscprep_rel.
+_a_efectos_de_p_rel :<  miscprep_rel.
+_a_eso_de_p_rel :<  miscprep_rel.
+_a_espaldas_de_p_rel :<  miscprep_rel.
+_a_excepción_de_p_rel :<  miscprep_rel.
+_a_expensas_de_p_rel :<  miscprep_rel.
+_a_favor_de_p_rel :<  miscprep_rel.
+_a_fin_de_p_rel :<  miscprep_rel.
+_a_fines_de_p_rel :<  miscprep_rel.
+_a_finales_de_p_temp_rel :< temp_loc_rel.
+_a_fuerza_de_p_rel :<  miscprep_rel.
+_a_guisa_de_p_rel :<  miscprep_rel.
+_a_juzgar_por_p_rel :<  miscprep_rel.
+_al_abrigo_de_p_rel :<  miscprep_rel.
+_a_la_busca_de_p_rel :<  miscprep_rel.
+_a_la_espera_de_p_rel :<  miscprep_rel.
+_a_la_manera_de_p_rel :<  miscprep_rel.
+_a_la_mitad_de_p_rel :<  miscprep_rel.
+_a_la_siga_de_p_rel :<  miscprep_rel.
+_a_la_usanza_de_p_rel :<  miscprep_rel.
+_a_la_vuelta_de_p_rel :<  miscprep_rel.
+_a_la_zona_de_p_rel :<  miscprep_rel.
+_al_cabo_de_p_rel :<  miscprep_rel.
+_al_calor_de_p_rel :<  miscprep_rel.
+_al_cargo_de_p_rel :<  miscprep_rel.
+_al_centro_de_p_rel :<  miscprep_rel.
+_al_compás_de_p_rel :<  miscprep_rel.
+_al_conjuro_de_p_rel :<  miscprep_rel.
+_al_decir_de_p_rel :<  miscprep_rel.
+_al_derredor_de_p_rel :<  miscprep_rel.
+_al_filo_de_p_rel :<  miscprep_rel.
+_al_frente_de_p_rel :<  miscprep_rel.
+_al_gusto_de_p_rel :<  miscprep_rel.
+_al_interior_de_p_rel :<  miscprep_rel.
+_allende_de_p_rel :<  miscprep_rel.
+_al_modo_de_p_rel :<  miscprep_rel.
+_a_lo_ancho_de_p_rel :<  miscprep_rel.
+_al_objeto_de_p_rel :<  miscprep_rel.
+_a_lo_largo_de_p_rel :<  miscprep_rel.
+_a_lo_largo_y_ancho_de_p_rel :<  miscprep_rel.
+_al_olor_de_p_rel :<  miscprep_rel.
+_al_socaire_de_p_rel :<  miscprep_rel.
+_al_tanto_de_p_rel :<  miscprep_rel.
+_al_tenor_de_p_rel :<  miscprep_rel.
+_a_manera_de_p_rel :<  miscprep_rel.
+_a_mediados_de_p_temp_rel :< temp_loc_rel.
+_a_mitad_de_p_rel :<  miscprep_rel.
+_a_modo_de_p_rel :<  miscprep_rel.
+_a_nombre_de_p_rel :<  miscprep_rel.
+_a_todo_lo_largo_de_p_rel :<  miscprep_rel.
+_aparte_de_p_rel :<  miscprep_rel.
+_a_partir_de_p_rel :<  miscprep_rel.
+_a_partir_de_p_temp_rel :< temp_loc_rel.
+_a_pesar_de_p_rel :<  miscprep_rel.
+_a_petición_de_p_rel :<  miscprep_rel.
+_a_primeros_de_p_temp_rel :<  temp_loc_rel.
+_a_principios_de_p_temp_rel :<  temp_loc_rel.
+_a_propósito_de_p_rel :<  miscprep_rel.
+_a_prueba_de_p_rel :<  miscprep_rel.
+_a_punto_de_p_rel :<  miscprep_rel.
+_a_raíz_de_p_rel :<  miscprep_rel.
+_a_ras_de_p_rel :<  miscprep_rel.
+_a_razón_de_p_rel :<  miscprep_rel.
+_a_reserva_de_p_rel :<  miscprep_rel.
+_a_retaguardia_de_p_rel :<  miscprep_rel.
+_a_riesgo_de_p_rel :<  miscprep_rel.
+_a_semejanza_de_p_rel :<  miscprep_rel.
+_a_suplicación_de_p_rel :<  miscprep_rel.
+_a_súplica_de_p_rel :<  miscprep_rel.
+_a_tenor_de_p_rel :<  miscprep_rel.
+_a_título_de_p_rel :<  miscprep_rel.
+_a_través_de_p_rel :<  miscprep_rel.
+_a_trueco_de_p_rel :<  miscprep_rel.
+_a_usanza_de_p_rel :<  miscprep_rel.
+_a_vuelta_de_p_rel :<  miscprep_rel.
+_con_carácter_de_p_rel :<  miscprep_rel.
+_con_efecto_desde_p_rel :<  miscprep_rel.
+_con_excepción_de_p_rel :<  miscprep_rel.
+_conforme_a_p_rel :<  miscprep_rel.
+_con_honores_de_p_rel :<  miscprep_rel.
+_con_la_condición_de_p_rel :<  miscprep_rel.
+_con_lo_que_respecta_a_p_rel :<  miscprep_rel.
+_con_miras_a_p_rel :<  miscprep_rel.
+_con_objeto_de_p_rel :<  miscprep_rel.
+_con_ocasión_de_p_rel :<  miscprep_rel.
+_con_relación_a_p_rel :<  miscprep_rel.
+_con_respecto_a_p_rel :<  miscprep_rel.
+_con_respecto_de_p_rel :<  miscprep_rel.
+_con_tal_de_p_rel :<  miscprep_rel.
+_con_valor_de_p_rel :<  miscprep_rel.
+_con_vistas_a_p_rel :<  miscprep_rel.
+_de_acuerdo_con_p_rel :<  miscprep_rel.
+_de_al_lado_de_p_rel :<  miscprep_rel.
+_debajo_de_p_rel :<  miscprep_rel.
+_debido_a_p_rel :<  miscprep_rel.
+_de_cara_a_p_rel :<  miscprep_rel.
+_de_la_mano_de_p_rel :<  miscprep_rel.
+_delante_de_p_rel :<  miscprep_rel.
+_detrás_de_p_rel :<  miscprep_rel.
+_dirección_a_p_rel :<  miscprep_rel.
+_en_aras_de_p_rel :<  miscprep_rel.
+_en_atención_a_p_rel :<  miscprep_rel.
+_en_base_a_p_rel :<  miscprep_rel.
+_en_busca_de_p_rel :<  miscprep_rel.
+_en_calidad_de_p_rel :<  miscprep_rel.
+_en_cambio_de_p_rel :<  miscprep_rel.
+_en_caso_de_p_rel :<  miscprep_rel.
+_encima_de_p_rel :<  miscprep_rel.
+_en_compañía_de_p_rel :<  miscprep_rel.
+_en_compensación_de_p_rel :<  miscprep_rel.
+_en_concepto_de_p_rel :<  miscprep_rel.
+_en_contra_de_p_rel :<  miscprep_rel.
+_en_cuanto_a_p_rel :<  miscprep_rel.
+_en_cuestión_de_p_rel :<  miscprep_rel.
+_en_cuestión_de_p_temp_rel :< temp_loc_rel.
+_en_defecto_de_p_rel :<  miscprep_rel.
+_en_demanda_de_p_rel :<  miscprep_rel.
+_en_derredor_de_p_rel :<  miscprep_rel.
+_en_dirección_a_p_rel :<  miscprep_rel.
+_en_el_centro_de_p_rel :<  miscprep_rel.
+_en_el_entorno_de_p_rel :<  miscprep_rel.
+_en_el_interior_de_p_rel :<  miscprep_rel.
+_en_el_otro_lado_de_p_rel :<  miscprep_rel.
+_en_el_plazo_de_p_rel :<  miscprep_rel.
+_en_el_puesto_de_p_rel :<  miscprep_rel.
+_en_espera_de_p_rel :<  miscprep_rel.
+_en_evitación_de_p_rel :<  miscprep_rel.
+_en_favor_de_p_rel :<  miscprep_rel.
+_en_función_de_p_rel :<  miscprep_rel.
+_enfrente_de_p_rel :<  miscprep_rel.
+_en_gracia_a_p_rel :<  miscprep_rel.
+_en_guisa_de_p_rel :<  miscprep_rel.
+_en_la_línea_de_p_rel :<  miscprep_rel.
+_en_las_cercanías_de_p_rel :<  miscprep_rel.
+_en_las_proximidades_de_p_rel :<  miscprep_rel.
+_en_la_temporada_de_p_rel :<  miscprep_rel.
+_en_la_zona_de_p_rel :<  miscprep_rel.
+_en_lo_concerniente_a_p_rel :<  miscprep_rel.
+_en_lugar_de_p_rel :<  miscprep_rel.
+_en_manos_de_p_rel :<  miscprep_rel.
+_en_materia_de_p_rel :<  miscprep_rel.
+_en_medio_de_p_rel :<  miscprep_rel.
+_en_memoria_de_p_rel :<  miscprep_rel.
+_en_menos_de_p_rel :<  miscprep_rel.
+_en_mitad_de_p_rel :<  miscprep_rel.
+_en_obligación_de_p_rel :<  miscprep_rel.
+_en_obsequio_a_p_rel :<  miscprep_rel.
+_en_obsequio_de_p_rel :<  miscprep_rel.
+_en_oposición_a_p_rel :<  miscprep_rel.
+_en_orden_a_p_rel :<  miscprep_rel.
+_en_parte_por_p_rel :<  miscprep_rel.
+_en_plan_de_p_rel :<  miscprep_rel.
+_en_pos_de_p_rel :<  miscprep_rel.
+_en_pro_de_p_rel :<  miscprep_rel.
+_en_prueba_de_p_rel :<  miscprep_rel.
+_en_razón_de_p_rel :<  miscprep_rel.
+_en_recuerdo_de_p_rel :<  miscprep_rel.
+_en_representación_de_p_rel :<  miscprep_rel.
+_en_señal_de_p_rel :<  miscprep_rel.
+_en_tiempo_de_p_rel :<  miscprep_rel.
+_en_torno_a_p_rel :<  miscprep_rel.
+_en_torno_de_p_rel :<  miscprep_rel.
+_en_vez_de_p_rel :<  miscprep_rel.
+_en_vías_de_p_rel :<  miscprep_rel.
+_en_virtud_de_p_rel :<  miscprep_rel.
+_en_vista_de_p_rel :<  miscprep_rel.
+_gracias_a_p_rel :<  miscprep_rel.
+_hacia_mediados_de_p_rel :<  miscprep_rel.
+_junto_a_p_rel :<  miscprep_rel.
+_junto_con_p_rel :<  miscprep_rel.
+_lejos_de_p_rel :<  miscprep_rel.
+_más_allá_de_p_rel :<  miscprep_rel.
+;_más_allá_de_p_rel :<  period_rel.
+_pese_a_p_rel :<  miscprep_rel.
+_por_al_lado_de_p_rel :<  miscprep_rel.
+_por_causa_de_p_rel :<  miscprep_rel.
+_por_cuenta_de_p_rel :<  miscprep_rel.
+_por_el_centro_de_p_rel :<  miscprep_rel.
+_por_el_otro_lado_de_p_rel :<  miscprep_rel.
+_por_este_lado_de_p_rel :<  miscprep_rel.
+_por_medio_de_p_rel :<  miscprep_rel.
+_por_motivo_de_p_rel :<  miscprep_rel.
+_por_obra_de_p_rel :<  miscprep_rel.
+_por_obra_y_gracia_de_p_rel :<  miscprep_rel.
+_por_razón_de_p_rel :<  miscprep_rel.
+_por_virtud_de_p_rel :<  miscprep_rel.
+_respecto_a_p_rel :<  miscprep_rel.
+_respecto_a_p_temp_rel :<  temp_loc_rel.
+_respecto_de_p_rel :<  miscprep_rel.
+_según_el_decir_de_p_rel :<  miscprep_rel.
+_sin_contar_con_p_rel :<  miscprep_rel.
+_sin_necesidad_de_p_rel :<  miscprep_rel.
+_si_no_es_por_p_rel :<  miscprep_rel.
+_sin_perjuicio_de_p_rel :<  miscprep_rel.
+_so_pena_de_p_rel :<  miscprep_rel.
+_frente_a_p_rel :<  miscprep_rel.
+_frente_al_p_rel :<  miscprep_rel.
+_alrededor_de_p_rel :<  miscprep_rel.
+_anteriormente_a_p_rel :<  miscprep_rel.
+_antes_de_p_rel :<  miscprep_rel.
+_arriba_de_p_rel :<  miscprep_rel.
+_cerca_de_p_rel :<  state_loc_rel. 
+_dentro_de_p_rel :<  miscprep_rel.
+_dentro_de_p_temp_rel :< temp_loc_rel.
+_después_de_p_rel :<  miscprep_rel.
+_por_encima_de_p_rel :<  miscprep_rel.
+_por_debajo_de_p_rel :<  state_loc_rel.
+_por_delante_de_p_rel :<  state_loc_rel.
+_por_parte_de_p_rel :<  miscprep_rel.
+_luego_de_p_rel :<  miscprep_rel.
+_posteriormente_a_p_rel :<  miscprep_rel.
+_precedentemente_a_p_rel :<  miscprep_rel.
+; determiners & pronouns
+_el_q_rel := art_def_q_rel.
+_un_q_rel := art_indef_q_rel.
+_tal_q_rel := dem_q_rel & tal_q_rel.
+_este_q_rel := dem_q_rel.
+_estotro_q_rel := dem_q_rel.
+_ese_q_rel := dem_q_rel.
+_esotro_q_rel := dem_q_rel.
+_aquel_q_rel := dem_q_rel.
+_ello_q_rel := dem_q_rel.
+_semejante_q_rel := semejante_q_rel.
+_mi_q_rel := poss_q_rel.
+_tu_q_rel := poss_q_rel.
+_su_q_rel := poss_q_rel.
+_nuestro_q_rel := poss_q_rel.
+_vuestro_q_rel := poss_q_rel.
+_todo_q_rel := todo_def_q_rel & todo_undef_q_rel.
+_cada_q_rel := cada_q_rel.
+_ambos_q_rel := ambos_q_rel.
+_sendos_q_rel := sendos_q_rel.
+_cualquiera_q_rel := cualquiera_q_rel.
+_quienquiera_q_rel := quienquiera_q_rel.
+_alguno_q_rel := alguno_q_rel.
+_ninguno_q_rel := ninguno_q_rel.
+_cuantos_q_rel := cuantos_q_rel.
+_otro_q_rel := otro_q_rel.
+_mucho_q_rel := mucho_q_rel.
+_poco_q_rel := poco_q_rel.
+_bastante_q_rel := undef_q_rel.
+_demasiado_q_rel := undef_q_rel.
+_numeroso_q_rel := undef_q_rel.
+_escaso_q_rel := undef_q_rel.
+_varios_q_rel := undef_q_rel.
+_multiples_q_rel := undef_q_rel.
+_demás_q_rel := undef_q_rel.
+; _cuanto_q_rel := undef_q_rel.
+_cierto_q_rel := undef_q_rel.
+_determinado_q_rel := undef_q_rel.
+_diferente_q_rel := undef_q_rel.
+_distinto_q_rel := undef_q_rel.
+_diverso_q_rel := undef_q_rel.
+_raro_q_rel := undef_q_rel.
+_más_q_rel := undef_q_rel.
+_menos_q_rel := undef_q_rel.
+_tanto_q_rel := comp_degree_rel.
+
+_día_n_rel := temp_nonpro_rel.
+_hora_partn_rel := part_of_rel.
+_día_partn_rel := part_of_rel.
+_semana_partn_rel := part_of_rel.
+_año_partn_rel := part_of_rel.
+_mes_partn_rel := part_of_rel.
+_siglo_partn_rel := part_of_rel.
+ 
+
+; Punctuation marks
+
+punctuation_min :< avm.
+
+punctuation := punctuation_min &
+ [ LPUNCT basic_punct_mark,
+   RPUNCT basic_punct_mark ].
+
+lpunct := basic_punct_mark.
+excl_op_punct := lpunct.
+ques_op_punct := lpunct.
+bracket_op_punct := lpunct.
+fra_punct := lpunct.
+quotes_punct := comma_or_no_punct & lpunct.
+
+basic_punct_mark := punctuation_min.
+rpunct := punctuation_min.
+comma_or_clause_or_no_punct := basic_punct_mark & rpunct.
+comma_or_no_punct := comma_or_clause_or_no_punct.
+3dots_or_clause_or_no_punct := basic_punct_mark & rpunct.
+clause_or_no_punct := comma_or_clause_or_no_punct & 3dots_or_clause_or_no_punct. 
+comma_or_clause := comma_punct & clause_punct.
+comma_punct := comma_or_no_punct.
+cln_punct := basic_punct_mark & rpunct.
+clause_punct := clause_or_no_punct.
+;semicol_punct := clause_punct.
+3dots_punct := 3dots_or_clause_or_no_punct.
+excl_cl_punct := 3dots_or_clause_or_no_punct.
+ques_cl_punct := 3dots_or_clause_or_no_punct.
+bracket_cl_punct := comma_or_no_punct.
+frc_punct := comma_or_no_punct.
+no_punct := comma_or_no_punct & 3dots_or_clause_or_no_punct.
+hyphen_punct := comma_or_no_punct.
+
+
+;;; semsorts
+
+nominal-sort := semsort. 
+mod := nominal-sort.
+loc-mod := mod & non-temp.
+manner-mod := mod & non-temp.
+cause-mod := mod & non-temp.
+non-mod := nominal-sort. 
+location := nominal-sort.
+non-temp := nominal-sort.
+non-hum := nominal-sort.
+non-hum_non-temp := non-hum & non-temp.
+non-loc := nominal-sort.
+entity := nominal-sort.
+abs_ani_hum_pot_pro_sem_soc := nominal-sort.
+abs_ani_hum_pot_sem_soc := abs_ani_hum_pot_pro_sem_soc.
+abs_hum_pot_pro_sem_soc := abs_ani_hum_pot_pro_sem_soc.
+ani_cnc_hum_plant_pot_soc := non-loc.
+ani_hum_plant_pot_soc := ani_cnc_hum_plant_pot_soc. 
+abs_ani_cnc_hum_soc := non-loc.
+abs_ani_hum_pro_sem := abs_ani_hum_pot_pro_sem_soc.
+abs_cnc_hum_mat_pro := non-loc.
+abs_cnc_hum_mat_soc := non-loc.
+abs_cnc_hum_pro_soc := non-loc.
+abs_cnc_loc_pro_sem := location.
+abs_cnc_loc_pro_soc := location.
+abs_hum_mat_pro_soc := non-loc.
+abs_hum_pot_pro_soc := abs_hum_pot_pro_sem_soc.
+abs_hum_pot_sem_soc := abs_ani_hum_pot_sem_soc & abs_hum_pot_pro_sem_soc.
+abs_hum_pro_sem_soc := abs_hum_pot_pro_sem_soc.
+ani_cnc_hum_mat_plant := non-loc.
+ani_cnc_hum_mat_soc := non-loc.
+hum_pot_pro_sem_soc := abs_hum_pot_pro_sem_soc.
+abs_ani_cnc_hum := abs_ani_cnc_hum_soc.
+abs_ani_cnc_mat := non-loc.
+abs_ani_cnc_plant := non-loc.
+abs_ani_hum_mat := non-loc.
+abs_ani_hum_soc := abs_ani_hum_pot_sem_soc & abs_ani_cnc_hum_soc.
+abs_ani_pro_sem := abs_ani_hum_pro_sem.
+abs_bpart_cnc_hum := non-loc.
+abs_cnc_hum_plant := non-loc.
+abs_cnc_hum_pot := non-loc.
+abs_cnc_hum_pro := abs_cnc_hum_mat_pro & abs_cnc_hum_pro_soc.
+abs_cnc_hum_soc := abs_ani_cnc_hum_soc & abs_cnc_hum_pro_soc & abs_cnc_hum_mat_soc.
+abs_cnc_loc_plant := location.
+abs_cnc_loc_pro := abs_cnc_loc_pro_sem & abs_cnc_loc_pro_soc.
+abs_cnc_loc_soc := abs_cnc_loc_pro_soc.
+abs_cnc_loc_tmp := location.
+abs_cnc_mat_pro := abs_cnc_hum_mat_pro.
+abs_cnc_pot_pro := non-loc.
+abs_cnc_pro_sem := abs_cnc_loc_pro_sem.
+abs_hum_loc_soc := location.
+abs_hum_pot_pro := abs_hum_pot_pro_soc.
+abs_hum_pot_soc := abs_hum_pot_pro_soc & abs_hum_pot_sem_soc.
+abs_hum_pro_sem := abs_hum_pro_sem_soc & abs_ani_hum_pro_sem.
+abs_hum_pro_soc := abs_hum_pot_pro_soc.
+abs_hum_sem_soc := abs_hum_pro_sem_soc & abs_hum_pot_sem_soc. 
+abs_loc_pro_soc := abs_cnc_loc_pro_soc.
+abs_loc_sem_soc := location.
+abs_plant_pro_sem := non-loc.
+ani_bpart_cnc_hum := non-loc.
+ani_bpart_hum_soc := non-loc.
+ani_cnc_hum_pot := non-loc.
+ani_cnc_hum_plant := ani_cnc_hum_mat_plant & ani_cnc_hum_plant_pot_soc.
+ani_cnc_loc_soc := location.
+ani_cnc_pro_sem := non-loc.
+ani_cnc_pro_soc := non-loc.
+ani_hum_plant_soc := non-loc.
+ani_hum_pot_soc := abs_ani_hum_pot_sem_soc & ani_hum_plant_pot_soc.
+bpart_cnc_hum_plant := non-loc.
+bpart_cnc_hum_soc := non-loc.
+bpart_cnc_loc_mat := location.
+bpart_hum_pot_soc := non-loc.
+cnc_hum_loc_pot_soc := location.
+cnc_hum_loc_soc := cnc_hum_loc_pot_soc.
+cnc_hum_mat_pot := non-loc.
+cnc_hum_mat_soc := abs_cnc_hum_mat_soc & ani_cnc_hum_mat_soc.
+cnc_hum_pot_soc := ani_cnc_hum_plant_pot_soc.
+cnc_hum_sem_soc := non-loc.
+cnc_loc_mat_plant := location.
+cnc_loc_mat_pot := location.
+cnc_loc_sem_soc := location.
+hum_pot_pro_sem := hum_pot_pro_sem_soc.
+hum_pot_pro_soc := abs_hum_pot_pro_soc & hum_pot_pro_sem_soc.
+hum_pot_sem_soc := abs_hum_pot_sem_soc & hum_pot_pro_sem_soc.
+hum_pro_sem_soc := abs_hum_pro_sem_soc & hum_pot_pro_sem_soc.
+pot_pro_sem_soc := hum_pot_pro_sem_soc.
+abs_ani_hum := abs_ani_hum_soc & abs_ani_hum_mat & abs_ani_cnc_hum.
+abs_ani_plant := abs_ani_cnc_plant.
+abs_ani_soc := abs_ani_hum_soc.
+abs_bpart_cnc := abs_bpart_cnc_hum.
+abs_cnc_hum := abs_ani_cnc_hum & abs_cnc_hum_pot & abs_cnc_hum_plant & abs_cnc_hum_pro & abs_cnc_hum_soc.
+abs_cnc_loc := abs_cnc_loc_plant & abs_cnc_loc_pro & abs_cnc_loc_soc & abs_cnc_loc_tmp .
+abs_cnc_mat := abs_ani_cnc_mat & abs_cnc_mat_pro.
+abs_cnc_mea := non-loc.
+abs_cnc_plant := abs_ani_cnc_plant & abs_cnc_hum_plant.
+abs_cnc_pot := abs_cnc_hum_pot & abs_cnc_pot_pro.
+abs_cnc_pro := abs_cnc_loc_pro & abs_cnc_mat_pro & abs_cnc_pot_pro & abs_cnc_pro_sem & abs_cnc_hum_pro_soc.
+abs_cnc_sem := abs_cnc_pro_sem.
+abs_cnc_soc := abs_cnc_hum_soc & abs_cnc_loc_soc.
+abs_cnc_tmp := abs_cnc_loc_tmp.
+abs_cnc_unit := non-loc.
+abs_hum_loc := abs_hum_loc_soc.
+abs_hum_mea := non-loc.
+abs_hum_pot := abs_cnc_hum_pot & abs_hum_pot_pro & abs_hum_pot_sem_soc.
+abs_hum_pro := abs_hum_pot_pro & abs_hum_pro_sem & abs_hum_pro_soc & abs_cnc_hum_pro.
+abs_hum_sem := abs_hum_sem_soc & abs_hum_pro_sem.
+abs_hum_soc := abs_ani_hum_soc & abs_cnc_hum_soc & abs_hum_loc_soc & abs_hum_pot_soc & abs_hum_pro_soc & abs_hum_sem_soc & abs_hum_mat_pro_soc.
+abs_loc_soc := abs_cnc_loc_soc & abs_hum_loc_soc & abs_loc_pro_soc & abs_loc_sem_soc.
+abs_mat_pro := abs_hum_mat_pro_soc & abs_cnc_mat_pro.
+abs_mea_tmp := non-loc.
+abs_pro_sem := abs_ani_pro_sem & abs_cnc_pro_sem & abs_hum_pro_sem & abs_plant_pro_sem.
+abs_pro_tmp := non-loc.
+abs_pot_sem := abs_hum_pot_sem_soc.
+abs_sem_soc := abs_hum_sem_soc & abs_loc_sem_soc.
+ani_bpart_hum := ani_bpart_cnc_hum & ani_bpart_hum_soc.
+ani_bpart_plant := non-loc.
+ani_cnc_hum := abs_ani_cnc_hum & ani_bpart_cnc_hum & ani_cnc_hum_pot & ani_cnc_hum_plant & ani_cnc_hum_mat_soc.
+ani_cnc_loc := ani_cnc_loc_soc.
+ani_cnc_pot := ani_cnc_hum_pot. 
+ani_hum_loc := location.
+ani_hum_pot := ani_cnc_hum_pot & ani_hum_pot_soc.
+ani_hum_pro := abs_ani_hum_pro_sem.
+ani_hum_soc := abs_ani_hum_soc & ani_bpart_hum_soc & ani_hum_plant_soc & ani_hum_pot_soc & ani_cnc_hum_mat_soc.
+bpart_cnc_hum := ani_bpart_cnc_hum & bpart_cnc_hum_plant & bpart_cnc_hum_soc.
+bpart_cnc_loc := location.
+bpart_cnc_mat := bpart_cnc_loc_mat.
+cnc_hum_loc := cnc_hum_loc_soc.
+cnc_hum_mat := cnc_hum_mat_soc & abs_cnc_hum_mat_pro & ani_cnc_hum_mat_plant.
+cnc_hum_pot := abs_cnc_hum_pot & ani_cnc_hum_pot & cnc_hum_pot_soc.
+cnc_hum_pro := abs_cnc_hum_pro.
+cnc_hum_sem := cnc_hum_sem_soc.
+cnc_hum_soc := abs_cnc_hum_soc & bpart_cnc_hum_soc & cnc_hum_loc_soc & cnc_hum_mat_soc & cnc_hum_pot_soc & cnc_hum_sem_soc.
+cnc_loc_mat := bpart_cnc_loc_mat& cnc_loc_mat_plant & cnc_loc_mat_pot.
+cnc_loc_plant := abs_cnc_loc_plant & cnc_loc_mat_plant.
+cnc_loc_pot := cnc_loc_mat_pot.
+cnc_loc_soc := abs_cnc_loc_soc & ani_cnc_loc_soc & cnc_hum_loc_soc & cnc_loc_sem_soc.
+cnc_mat_plant := ani_cnc_hum_mat_plant & cnc_loc_mat_plant.
+cnc_mat_pro := abs_cnc_mat_pro.
+cnc_pot_sem := non-loc.
+hum_loc_soc := abs_hum_loc_soc & cnc_hum_loc_soc. 
+hum_mat_pot := cnc_hum_mat_pot.
+hum_pot_pro := abs_hum_pot_pro & hum_pot_pro_soc.
+hum_pot_soc := abs_hum_pot_soc & ani_hum_pot_soc & bpart_hum_pot_soc & cnc_hum_pot_soc & hum_pot_pro_soc.
+hum_sem_soc := abs_hum_sem_soc & cnc_hum_sem_soc & hum_pot_sem_soc & hum_pro_sem_soc.
+loc_mea_unit := non-temp.
+abs_ani := abs_ani_hum & abs_ani_plant & abs_ani_soc & abs_ani_cnc_mat & abs_ani_pro_sem.
+abs_cnc := abs_cnc_hum & abs_cnc_loc & abs_cnc_mat & abs_cnc_mea & abs_cnc_pot & abs_cnc_plant & abs_cnc_pro & abs_cnc_sem & abs_cnc_soc & abs_cnc_tmp & abs_cnc_unit.
+abs_hum := abs_ani_hum & abs_cnc_hum & abs_hum_loc & abs_hum_mea & abs_hum_pot & abs_hum_pro & abs_hum_sem & abs_hum_soc.
+abs_loc := abs_cnc_loc & abs_hum_loc & abs_loc_soc.
+abs_mea := abs_mea_tmp & abs_cnc_mea & abs_hum_mea.
+abs_pot := abs_cnc_pot & abs_hum_pot & abs_pot_sem.
+abs_pro := abs_cnc_pro & abs_hum_pro & abs_mat_pro & abs_pro_sem & abs_pro_tmp & abs_loc_pro_soc .
+abs_sem := abs_cnc_sem & abs_hum_sem & abs_sem_soc & abs_pro_sem & abs_pot_sem.
+abs_soc := abs_ani_soc & abs_cnc_soc & abs_sem_soc & abs_hum_soc & abs_loc_soc.
+abs_tmp := abs_cnc_tmp & abs_mea_tmp & abs_pro_tmp.
+ani_cnc := ani_cnc_hum & ani_cnc_loc & ani_cnc_pot & ani_cnc_pro_soc & ani_cnc_pro_sem & abs_ani_cnc_plant & abs_ani_cnc_mat.
+ani_hum := abs_ani_hum & ani_bpart_hum & ani_cnc_hum & ani_hum_loc & ani_hum_pot & ani_hum_pro & ani_hum_soc & entity.
+ani_loc :=  ani_cnc_loc & ani_hum_loc.
+ani_mat := abs_ani_cnc_hum & abs_ani_cnc_mat & abs_ani_hum_mat & ani_cnc_hum_mat_plant & ani_cnc_hum_mat_soc.
+ani_plant := abs_ani_plant & ani_cnc_hum_plant & ani_hum_plant_soc & ani_bpart_plant.
+ani_soc := abs_ani_soc & ani_hum_soc & ani_cnc_loc_soc & ani_cnc_pro_soc.
+bpart_cnc := abs_bpart_cnc & bpart_cnc_hum & bpart_cnc_loc & bpart_cnc_mat.
+bpart_hum := ani_bpart_hum & bpart_cnc_hum & bpart_hum_pot_soc.
+cnc_hum := abs_cnc_hum & ani_cnc_hum & bpart_cnc_hum & cnc_hum_loc & cnc_hum_mat & cnc_hum_pot & cnc_hum_sem & cnc_hum_soc.
+cnc_loc :=  ani_cnc_loc & ani_cnc_loc & bpart_cnc_loc & cnc_hum_loc & cnc_loc_mat & cnc_loc_plant & cnc_loc_pot & cnc_loc_soc & abs_cnc_loc_pro & abs_cnc_loc_tmp.
+cnc_mat := abs_cnc_mat & bpart_cnc_mat & cnc_hum_mat & cnc_loc_mat & cnc_mat_plant & cnc_mat_pro.
+cnc_mea := abs_cnc_mea.
+cnc_plant := abs_cnc_plant & cnc_loc_plant & cnc_mat_plant & ani_cnc_hum_plant & bpart_cnc_hum_plant .
+cnc_pot := abs_cnc_pot & ani_cnc_pot & cnc_hum_pot & cnc_loc_pot & cnc_pot_sem.
+cnc_sem := cnc_loc_sem_soc & abs_cnc_sem & cnc_hum_sem & cnc_pot_sem .
+cnc_soc :=  ani_cnc_pro_soc & abs_cnc_soc & cnc_hum_soc & cnc_loc_soc.
+cnc_tmp := abs_cnc_tmp. 
+cnc_unit := abs_cnc_unit.
+hum_loc := abs_hum_loc & ani_hum_loc & cnc_hum_loc & hum_loc_soc.
+hum_mat := abs_hum_mat_pro_soc & abs_ani_hum_mat & cnc_hum_mat & hum_mat_pot.
+hum_plant := abs_cnc_hum_plant & ani_cnc_hum_plant & ani_hum_plant_soc & bpart_cnc_hum_plant.
+hum_pot := abs_hum_pot & ani_hum_pot & cnc_hum_pot & hum_mat_pot & hum_pot_pro & hum_pot_soc & hum_pot_pro_sem.
+hum_soc := abs_hum_soc & ani_hum_soc & cnc_hum_soc & hum_loc_soc & hum_pot_soc & hum_sem_soc.
+hum_sem := hum_sem_soc. 
+loc_mat := cnc_loc_mat.
+loc_plant := cnc_loc_plant.
+loc_sem := abs_cnc_loc_pro_sem & cnc_loc_sem_soc.
+loc_soc := abs_loc_soc & cnc_loc_soc & hum_loc_soc.
+loc_unit := loc_mea_unit.
+mat_plant := cnc_mat_plant.
+tmp_unit := non-loc.
+abs := abs_ani & abs_cnc & abs_hum & abs_loc & abs_mea & abs_pot & abs_pro & abs_sem & abs_soc & abs_tmp & non-temp & non-mod.
+ani := ani_cnc & ani_hum & ani_loc & ani_mat & ani_plant & ani_soc & abs_ani & non-temp & non-mod.
+bpart :=  ani_bpart_plant& bpart_cnc & bpart_hum & non-temp & non-mod.
+cnc := cnc_hum & cnc_loc & cnc_mat & cnc_mea & cnc_plant & cnc_pot & cnc_sem & cnc_soc & cnc_tmp & cnc_unit & abs_cnc & ani_cnc & non-temp & non-mod.
+hum := hum_loc & hum_mat & hum_plant & hum_pot & hum_sem & hum_soc & abs_hum & ani_hum & bpart_hum & cnc_hum & non-temp & non-mod.
+loc := loc_mat & loc_plant & loc_sem & loc_soc & loc_unit & abs_loc & ani_loc & cnc_loc & hum_loc & non-mod.
+mat := ani_mat & cnc_mat & hum_mat & loc_mat & mat_plant & non-temp & non-mod.
+mea := abs_mea & cnc_mea & non-hum & loc_mea_unit & non-mod.
+plant := ani_plant & cnc_plant & hum_plant & loc_plant & mat_plant & non-temp & non-mod.
+pot := abs_pot & cnc_pot & hum_pot & non-temp & non-mod.
+pro := abs_pro & non-hum & non-temp & non-mod.
+sem := abs_sem & cnc_sem & loc_sem & hum_sem & non-hum & non-temp & non-mod.
+soc := abs_soc & ani_soc & cnc_soc & hum_soc & loc_soc & non-temp & non-mod.
+tmp := abs_tmp & cnc_tmp & tmp_unit & non-hum & mod.
+unit := cnc_unit & loc_unit & tmp_unit & mea.

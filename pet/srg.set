@@ -1,0 +1,195 @@
+;;;
+;;; grammar-specific settings for PET; run-time part for cheap parser.
+;;;
+
+include "global".
+
+;;
+;; encoding used in grammar source files (should be `euc-jp' for Japanese).
+;;
+encoding := utf-8.
+
+;;
+;; input preprocessing: disable downcasing and (English-specific) explosion of
+;; apostrophes.
+;;
+trivial-tokenizer.
+
+;;
+;; type of a valid parse, start symbol
+;;
+start-symbols := $root_vp_inf $root_s $root_vpnom $root_np $root_nbar $root_pp $root_ap $root_rp $root_c $root_i.
+
+;;
+;; word-breaking characters in tokenization --- treated as whitespace
+;;
+punctuation-characters := "<>{}[]+*-_\"".
+
+;;
+;; suppress results of regular morphology rules if irregular form exists
+;;
+irregular-forms-only.
+lex-entries-can-fail.
+
+;;
+;; names of attributes not to pass from daughter to mother in parsing
+;;
+deleted-daughters := ARGS HEAD-DTR NON-HEAD-DTR.
+
+;;
+;; names of attributes to filter for packing parser
+;;
+packing-restrictor := RELS HCONS.
+
+;;
+;; path into the MRS semantics, and (temporarily) features to `characterize'
+;;
+mrs-path := "SYNSEM.LOCAL.CONT".
+mrs-cfrom-path := "SYNSEM.LOCAL.CONT.RELS.LIST.CFROM".
+mrs-cto-path := "SYNSEM.LOCAL.CONT.RELS.LIST.CTO".
+
+;;
+;; name of type containing quick check structure
+;;
+qc-structure := $qc_unif_set.
+
+;; 
+;; the scoring model, either for on-line use in best-first parsing or off-line
+;; ranking of complete parse results after parsing.
+;;
+sm := "tibidabo.mem".
+;sm := "bosque.mem".
+
+;;
+;; a `generic model' (i.e. PCFG), used to discard low-probability edges in 
+;; chart pruning (when requested by the `-cp' command-line option).
+;;
+;gm := "tibidabo.pcfg".
+
+;;
+;; as an alternative to the `KEY-ARG' mechanism in the actual rules, one can
+;; stipulate the key daughter for each rule, e.g. (using names that will most
+;; likely not be used in a grammar to avoid interference):
+;;
+#|
+rule-keyargs := 
+  $subj-head-example 2
+  $head-complement-example 1.
+|#
+
+;;
+;; some rules should be constrained to only apply over the entire string, i.e.
+;; to edges that span the full input; this should improve parsing efficiency
+;; only, rather than be considered part of the linguistic analyses.  e.g.
+;;
+#|
+spanning-only-rules := 
+  $runon-s-example.
+|#
+
+;;;
+;;; generic lexical entries for unknown words: basically, for each unknown
+;;; token in the input all generic entries are postulated.  optionally, there
+;;; are two devices to filter out generic entries: suffix-based and by virtue
+;;; of POS tag information.  generic entries that require a certain suffix
+;;; (`generic-le-suffixes') only fire if the input form has the suffix.  if
+;;; the input word has one more more POS tags associated to it, these are
+;;; looked up in the `posmapping' table: this table is a list of pairs (tag,
+;;; gle) where `gle' is the name of one of the generic items in `generic-les'.
+;;; a non-empty `posmapping' table will filter all generic entries that are not
+;;; explicitly licensed by a POS tag.
+;;;
+
+generic-lexentry-status-values := generic-lex-entry.
+
+;;
+;; some generic lexical entries require inflectional marking.  this mechanism
+;; is a filter on which generic entries proposed by other means can survive:
+;; generic entries listed here will only be postulated if the required suffix 
+;; can be matched against the input token.
+;;
+;; when using only generic entries licensed by a POS tag, the suffix filter
+;; really does not make a lot of sense anymore.               (6-jun-03; oe)
+;;
+#|
+generic-le-suffixes := 
+  $generic_trans_verb_pres3sg "S" 
+  $generic_trans_verb_past "ED" 
+  $generic_trans_verb_psp "ED" 
+  $generic_trans_verb_prp "ING" 
+  $generic_pl_noun "S"
+.
+|#
+
+;;
+;; a sample mapping of POS tags to generic lexical entries, borrowed from the
+;; ERG and using the Penn Treebank tagset.
+;;
+#|
+posmapping := 
+  JJ $generic_adj
+  JJR $generic_adj_compar
+  JJS $generic_adj_superl
+  NN $generic_sg_noun
+  NN $generic_mass_noun
+  NNS $generic_pl_noun
+  NNPS $generic_pl_noun
+  NNP $genericname
+  FW $generic_mass_noun
+  RB $generic_adverb
+  VB $generic_trans_verb_bse
+  VBD $generic_trans_verb_past
+  VBG $generic_trans_verb_prp
+  VBN $generic_trans_verb_psp
+  VBP $generic_trans_verb_presn3sg
+  VBZ $generic_trans_verb_pres3sg
+|#
+
+;;
+;; as of august 2003, PET includes ECL and the generic (R)MRS code; hence, we
+;; need to include the MRS settings from the grammar.
+;;
+postload-lisp-files := "lkb/mrsglobals.lisp".
+
+
+
+
+;;;
+;;; following are a number of settings for the new (as of late 2008) token
+;;; mapping and lexical filtering support in PET.
+;;;
+
+;;
+;; first, the general format of chart mapping rules, much like MRS transfer.
+;;
+chart-mapping-context-path  := "+CONTEXT".
+chart-mapping-input-path    := "+INPUT".
+chart-mapping-output-path   := "+OUTPUT".
+chart-mapping-position-path := "+POSITION".
+;;
+;; in lexical instatiation, the list of tokens activating a lexical entry (be
+;; it native or generic) are unified into the lexical entry under this path.
+;;
+lexicon-tokens-path := "TOKENS.+LIST".
+lexicon-last-token-path := "TOKENS.+LAST".
+;;
+;; furthermore, for the various input formats, we need to declare how parts of
+;; input descriptions correspond to the grammar-internal feature geometry; in
+;; the YY input format, for example, token feature structures (aka input items
+;; PET-internally) are created from various parts of the token description.
+;; 
+token-form-path     := "+STEM".       ; [required] string for lexical lookup
+token-id-path       := "+ID".         ; [optional] list of external ids
+token-from-path     := "+FROM".       ; [optional] surface start position
+token-to-path       := "+TO".         ; [optional] surface end position
+token-postags-path  := "+TAG".   ; [optional] list of POS tags
+token-posprobs-path := "+TAG".  ; [optional] list of POS probs
+
+
+;;
+;; finally, declare TDL status values for the various new entity types
+;;
+;;token-mapping-rule-status-values := token-mapping-rule.
+;;lexical-filtering-rule-status-values := lexical-filtering-rule.
+
+

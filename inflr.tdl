@@ -1,0 +1,2249 @@
+
+;;; Hey, emacs (1), this is -*- mode:tdl; Coding: utf-8; -*-
+;;;
+;;;  Montserrat Marimon  
+;;;  IULA - UPF 
+;;;
+;;; inflr.tdl: inflectional rules for the SRG for LKB
+
+; --- non-inflecting categories
+
+; -- adverbs 
+rg := 
+%suffix (rg rg) 
+rg_ilr.
+
+rn :=
+%suffix (rn rn) 
+rg_ilr.
+
+; (-- advnp)
+nc00000 := 
+%suffix (nc00000 nc00000)
+nc00000_ilr.
+
+; (-- interj).
+i :=
+%suffix (i i)
+i_ilr.
+
+; -- prepositions
+sps00 := 
+%suffix (sps00 sps00)
+sps00_ilr.
+
+; -- sub. conjunctions
+cs := 
+%suffix (cs cs) 
+cs_ilr.
+
+; -- coord. conjunctions
+cc := 
+%suffix (cc cc) 
+cc_ilr.
+
+
+; --- named entities
+
+; -- proper names
+np00000 :=
+%suffix (np00000 np00000)
+np00000_ilr.
+
+; -- numbers
+z := 
+%suffix (z z)
+ne_ilr. 
+
+zp := 
+%suffix (zp zp)
+ne_ilr. 
+
+; -- currencies
+zm := 
+%suffix (zm zm)
+ne_ilr. 
+
+zd := 
+%suffix (zd zd)
+ne_ilr. 
+
+; -- measures
+zu := 
+%suffix (zu zu)
+ne_ilr. 
+
+; -- dates
+w := 
+%suffix (w w)
+ne_ilr. 
+
+
+; --- punctuation marks
+
+; -- semi colon ;
+fx := 
+%suffix (fx fx)
+infl-ltow-rule.
+
+; -- colon :
+fd := 
+%suffix (fd fd)
+infl-ltow-rule.
+
+; -- full-stop .
+fp := 
+%suffix (fp fp)
+infl-ltow-rule.
+
+; -- 3dots ...
+fs := 
+%suffix (fs fs)
+infl-ltow-rule.
+
+; -- comma ,
+fc := 
+%suffix (fc fc)
+infl-ltow-rule.
+
+; -- quotes "
+fe := 
+%suffix (fe fe)
+infl-ltow-rule.
+
+; -- hyphen -
+fg := 
+%suffix (fg fg)
+infl-ltow-rule.
+
+; -- question mark open ¿
+fia := 
+%suffix (fia fia)
+infl-ltow-rule.
+
+; -- question mark close ?
+fit := 
+%suffix (fit fit)
+infl-ltow-rule.
+
+; -- exclamative open ¡
+faa := 
+%suffix (faa faa)
+infl-ltow-rule.
+
+; -- exclamative close !
+fat := 
+%suffix (fat fat)
+infl-ltow-rule.
+
+; -- bracket open (
+fpa := 
+%suffix (fpa fpa)
+infl-ltow-rule.
+
+; -- bracket close )
+fpt := 
+%suffix (fpt fpt)
+infl-ltow-rule.
+
+; -- <<
+fra := 
+%suffix (fra fra)
+infl-ltow-rule.
+
+; -- >>
+frc := 
+%suffix (frc frc)
+infl-ltow-rule.
+
+; -- square bracket open [
+fca := 
+%suffix (fca fca)
+infl-ltow-rule.
+
+; -- square bracket close ]
+fct := 
+%suffix (fct fct)
+infl-ltow-rule.
+
+; -- {
+fla := 
+%suffix (fla fla)
+infl-ltow-rule.
+
+; -- }
+flt := 
+%suffix (flt flt)
+infl-ltow-rule.
+
+; -- percentage %
+;ft := 
+;%suffix (ft ft)
+;infl-ltow-rule.
+
+; -- mathematical symbols (+, -, =)
+;fz := 
+;%suffix (fz fz)
+;infl-ltow-rule.
+
+; -- /
+;fh := 
+;%suffix (fh fh)
+;infl-ltow-rule.
+
+
+; --- inflecting categories
+
+; --- determiners
+
+; --- definite articles (el, los, la, las, lo)
+da0ms0 := 
+%suffix (da0ms0 da0ms0)
+da0ms0_ilr.
+
+da0mp0 := 
+%suffix (da0mp0 da0mp0)
+da0mp0_ilr.
+
+da0fs0 := 
+%suffix (da0fs0 da0fs0)
+da0fs0_ilr.
+
+da0fp0 := 
+%suffix (da0fp0 da0fp0)
+da0fp0_ilr.
+
+da0ns0 := 
+%suffix (da0ns0 da0ns0)
+da0ns0_ilr.
+
+
+; --- demonstrative determiners
+; este, ese, aquel
+dd0ms0 := 
+%suffix (dd0ms0 dd0ms0)
+dd0ms0_ilr.
+
+; estos, esos, aquellos
+dd0mp0 := 
+%suffix (dd0mp0 dd0mp0)
+dd0mp0_ilr.
+
+; esta, esa, aquella
+dd0fs0 := 
+%suffix (dd0fs0 dd0fs0)
+dd0fs0_ilr.
+
+; estas, esas, aquellas
+dd0fp0 := 
+%suffix (dd0fp0 dd0fp0)
+dd0fp0_ilr.
+
+; tal, semejante
+dd0cs0 := 
+%suffix (dd0cs0 dd0cs0)
+dd0cs0_ilr.
+
+; tales, semejantes
+dd0cp0 := 
+%suffix (dd0cp0 dd0cp0)
+dd0cp0_ilr.
+
+
+; -- possessive determiners
+; mi
+dp1css := 
+%suffix (dp1css dp1css)
+dp1css_ilr.
+
+; mis
+dp1cps := 
+%suffix (dp1cps dp1cps)
+dp1cps_ilr.
+
+; nuestro
+dp1msp := 
+%suffix (dp1msp dp1msp)
+dp1msp_ilr.
+
+; nuestros
+dp1mpp := 
+%suffix (dp1mpp dp1mpp)
+dp1mpp_ilr.
+
+; nuestra
+dp1fsp := 
+%suffix (dp1fsp dp1fsp)
+dp1fsp_ilr.
+
+; nuestras
+dp1fpp := 
+%suffix (dp1fpp dp1fpp)
+dp1fpp_ilr.
+
+; tu
+dp2css := 
+%suffix (dp2css dp2css)
+dp2css_ilr.
+
+; tus
+dp2cps := 
+%suffix (dp2cps dp2cps)
+dp2cps_ilr.
+
+; vuestro
+dp2msp := 
+%suffix (dp2msp dp2msp)
+dp2msp_ilr.
+
+; vuestros
+dp2mpp := 
+%suffix (dp2mpp dp2mpp)
+dp2mpp_ilr.
+
+; vuestra
+dp2fsp := 
+%suffix (dp2fsp dp2fsp)
+dp2fsp_ilr.
+
+; vuestras
+dp2fpp := 
+%suffix (dp2fpp dp2fpp)
+dp2fpp_ilr.
+
+; su
+dp3cs0 := 
+%suffix (dp3cs0 dp3cs0)
+dp3cs0_ilr.
+
+; sus
+dp3cp0 := 
+%suffix (dp3cp0 dp3cp0)
+dp3cp0_ilr.
+
+
+; -- indefinite determiners
+; algún
+di0ms0 := 
+%suffix (di0ms0 di0ms0)
+di0ms0_ilr.
+
+; algunos
+di0mp0 := 
+%suffix (di0mp0 di0mp0)
+di0mp0_ilr.
+
+; alguna
+di0fs0 := 
+%suffix (di0fs0 di0fs0)
+di0fs0_ilr.
+
+; algunas
+di0fp0 := 
+%suffix (di0fp0 di0fp0)
+di0fp0_ilr.
+
+; bastante
+di0cs0 := 
+%suffix (di0cs0 di0cs0)
+di0cs0_ilr.
+
+; bastantes
+di0cp0 := 
+%suffix (di0cp0 di0cp0)
+di0cp0_ilr.
+
+
+; -- interrogative determiners
+; cuánto
+dt0ms0 := 
+%suffix (dt0ms0 dt0ms0)
+dt0ms0_ilr.
+
+; cuántos
+dt0mp0 := 
+%suffix (dt0mp0 dt0mp0)
+dt0mp0_ilr.
+
+; cuánta
+dt0fs0 := 
+%suffix (dt0fs0 dt0fs0)
+dt0fs0_ilr.
+
+; cuántas
+dt0fp0 := 
+%suffix (dt0fp0 dt0fp0)
+dt0fp0_ilr.
+
+; cuál
+dt0cs0 := 
+%suffix (dt0cs0 dt0cs0)
+dt0cs0_ilr.
+
+; cuáles
+dt0cp0 := 
+%suffix (dt0cp0 dt0cp0)
+dt0cp0_ilr.
+
+; qué
+dt0cn0 := 
+%suffix (dt0cn0 dt0cn0)
+dt0cn0_ilr.
+
+; -- exclamative determiners
+; cuánto
+de0ms0 := 
+%suffix (de0ms0 de0ms0)
+de0ms0_ilr.
+
+; cuántos
+de0mp0 := 
+%suffix (de0mp0 de0mp0)
+de0mp0_ilr.
+
+; cuánta
+de0fs0 := 
+%suffix (de0fs0 de0fs0)
+de0fs0_ilr.
+
+; cuántas
+de0fp0 := 
+%suffix (de0fp0 de0fp0)
+de0fp0_ilr.
+
+; cuál
+de0cs0 := 
+%suffix (de0cs0 de0cs0)
+de0cs0_ilr.
+
+; cuáles
+de0cp0 := 
+%suffix (de0cp0 de0cp0)
+de0cp0_ilr.
+
+; qué
+de0cn0 := 
+%suffix (de0cn0 de0cn0)
+de0cn0_ilr.
+
+
+; --- pronouns 
+
+; -- demonstrative pronouns
+; este, ese, aquel, estotro, esotro, ello
+pd0ms000 := 
+%suffix (pd0ms000 pd0ms000)
+pd0ms000_ilr.
+
+; estos, esos, aquellos
+pd0mp000 := 
+%suffix (pd0mp000 pd0mp000)
+pd0mp000_ilr.
+
+; esta, esa, aquella, estotra, esotra
+pd0fs000 := 
+%suffix (pd0fs000 pd0fs000)
+pd0fs000_ilr.
+
+; estas, esas, aquellas
+pd0fp000 := 
+%suffix (pd0fp000 pd0fp000)
+pd0fp000_ilr.
+
+; esto, eso, aquello
+pd0ns000 := 
+%suffix (pd0ns000 pd0ns000)
+pd0ns000_ilr.
+
+; tal
+pd0cs000 := 
+%suffix (pd0cs000 pd0cs000)
+pd0cs000_ilr.
+
+; tales
+pd0cp000 := 
+%suffix (pd0cp000 pd0cp000)
+pd0cp000_ilr.
+
+
+; -- indefinite pronouns
+; alguno
+pi0ms000 := 
+%suffix (pi0ms000 pi0ms000)
+pi0ms000_ilr.
+
+; algunos
+pi0mp000 := 
+%suffix (pi0mp000 pi0mp000)
+pi0mp000_ilr.
+
+; alguna
+pi0fs000 := 
+%suffix (pi0fs000 pi0fs000)
+pi0fs000_ilr.
+
+; algunas
+pi0fp000 := 
+%suffix (pi0fp000 pi0fp000)
+pi0fp000_ilr.
+
+; bastante
+pi0cs000 := 
+%suffix (pi0cs000 pi0cs000)
+pi0cs000_ilr.
+
+; bastantes
+pi0cp000 := 
+%suffix (pi0cp000 pi0cp000)
+pi0cp000_ilr.
+
+; lo/los/las demás
+pi0cc000 := 
+%suffix (pi0cc000 pi0cc000)
+pi0cc000_ilr.
+
+
+; -- relative pronouns 
+; cuanto, cuyo
+pr0ms000 := 
+%suffix (pr0ms000 pr0ms000)
+dr0ms0_ilr.
+
+; cuantos, cuyos
+pr0mp000 := 
+%suffix (pr0mp000 pr0mp000)
+dr0mp0_ilr.
+
+; cuanta, cuya
+pr0fs000 := 
+%suffix (pr0fs000 pr0fs000)
+dr0fs0_ilr.
+
+; cuantas, cuyas
+pr0fp000 := 
+%suffix (pr0fp000 pr0fp000)
+dr0fp0_ilr.
+
+; quien, cual
+pr0cs000 := 
+%suffix (pr0cs000 pr0cs000)
+pr0cs000_ilr.
+
+; quienes, cuales
+pr0cp000 := 
+%suffix (pr0cp000 pr0cp000)
+pr0cp000_ilr.
+
+; que
+pr0cn000 := 
+%suffix (pr0cn000 pr0cn000)
+pr0cn000_ilr.
+
+; (a)donde, como, cuando
+pr000000 := 
+%suffix (pr000000 pr000000)
+pr000000_ilr.
+
+
+; -- interrogative pronouns
+; cuánto
+pt0ms000 := 
+%suffix (pt0ms000 pt0ms000)
+pt0ms000_ilr.
+
+; cuántos
+pt0mp000 := 
+%suffix (pt0mp000 pt0mp000)
+pt0mp000_ilr.
+
+; cuánta
+pt0fs000 := 
+%suffix (pt0fs000 pt0fs000)
+pt0fs000_ilr.
+
+; cuántas
+pt0fp000 := 
+%suffix (pt0fp000 pt0fp000)
+pt0fp000_ilr.
+
+; cuál, quién
+pt0cs000 := 
+%suffix (pt0cs000 pt0cs000)
+pt0cs000_ilr.
+
+; cuáles, quiénes
+pt0cp000 := 
+%suffix (pt0cp000 pt0cp000)
+pt0cp000_ilr.
+
+; qué
+pt0cn000 := 
+%suffix (pt0cn000 pt0cn000)
+pt0cn000_ilr.
+
+; (a)dónde, cómo, cuándo
+pt000000 := 
+%suffix (pt000000 pt000000)
+pt000000_ilr.
+
+
+; -- exclamative pronouns
+; cuánto
+pe0ms000 := 
+%suffix (pe0ms000 pe0ms000)
+pe0ms000_ilr.
+
+; cuántos
+pe0mp000 := 
+%suffix (pe0mp000 pe0mp000)
+pe0mp000_ilr.
+
+; cuánta
+pe0fs000 := 
+%suffix (pe0fs000 pe0fs000)
+pe0fs000_ilr.
+
+; cuántas
+pe0fp000 := 
+%suffix (pe0fp000 pe0fp000)
+pe0fp000_ilr.
+
+; cuál, quién
+pe0cs000 := 
+%suffix (pe0cs000 pe0cs000)
+pe0cs000_ilr.
+
+; cuáles, quiénes
+pe0cp000 := 
+%suffix (pe0cp000 pe0cp000)
+pe0cp000_ilr.
+
+; qué, (a)dónde, cómo, cuándo
+pe000000 := 
+%suffix (pe000000 pe000000)
+pe000000_ilr.
+
+; -- personal pronouns
+; yo
+pp1csn00 :=
+%suffix (pp1csn00 pp1csn00) 
+pp1csn00_ilr.
+
+; tú
+pp2csn00 :=
+%suffix (pp2csn00 pp2csn00) 
+pp2csn00_ilr.
+
+; él
+pp3ms000 :=
+%suffix (pp3ms000 pp3ms000) 
+pp3ms000_ilr.
+
+; ella
+pp3fs000 :=
+%suffix (pp3fs000 pp3fs000) 
+pp3fs000_ilr.
+
+; ello
+pp3ns000 :=
+%suffix (pp3ns000 pp3ns000) 
+pp3ns000_ilr.
+
+; nosotros
+pp1mp000 :=
+%suffix (pp1mp000 pp1mp000) 
+pp1mp000_ilr.
+
+; nosotras
+pp1fp000 :=
+%suffix (pp1fp000 pp1fp000) 
+pp1fp000_ilr.
+
+; vosotros
+pp2mp000 :=
+%suffix (pp2mp000 pp2mp000) 
+pp2mp000_ilr.
+
+; vosotras
+pp2fp000 :=
+%suffix (pp2fp000 pp2fp000) 
+pp2fp000_ilr.
+
+; ellos
+pp3mp000 :=
+%suffix (pp3mp000 pp3mp000) 
+pp3mp000_ilr.
+
+; ellas
+pp3fp000 :=
+%suffix (pp3fp000 pp3fp000) 
+pp3fp000_ilr.
+
+; usted
+pp2cs00p :=
+%suffix (pp2cs00p pp2cs00p) 
+pp2cs00p_ilr.
+
+; ustedes
+pp2cp00p :=
+%suffix (pp2cp00p pp2cp00p) 
+pp2cp00p_ilr.
+
+
+; mí, conmigo
+pp1cso00 := 
+%suffix (pp1cso00 pp1cso00) 
+pp1cso00_ilr.
+
+; tí, contigo,
+pp2cso00 := 
+%suffix (pp2cso00 pp2cso00) 
+pp2cso00_ilr.
+
+; sí, consigo
+pp3cno00 := 
+%suffix (pp3cno00 pp3cno00) 
+pp3cno00_ilr.
+
+
+; --- clitics (affixes)
+; la
+pp3fsa00 := 
+%suffix (pp3fsa00 pp3fsa00) 
+affx_3sg-fem_ilr.
+
+; las
+pp3fpa00 := 
+%suffix (pp3fpa00 pp3fpa00) 
+affx_3pl-fem_ilr.
+
+; lo
+pp3cna00 := 
+%suffix (pp3cna00 pp3cna00) 
+affx_3sg-masc_ilr.
+
+; lo
+pp3msa00 := 
+%suffix (pp3msa00 pp3msa00) 
+affx_3sg-masc_ilr.
+
+; los
+pp3mpa00 := 
+%suffix (pp3mpa00 pp3mpa00) 
+affx_3pl-masc_ilr.
+
+; me
+pp1cs000 := 
+%suffix (pp1cs000 pp1cs000) 
+pp1cs000_ilr.
+
+p01cs000 := 
+%suffix (p01cs000 p01cs000) 
+p01cs000_ilr.
+;no_ilr.
+
+; nos
+pp1cp000 := 
+%suffix (pp1cp000 pp1cp000)
+affx_1pl_ilr. 
+
+p01cp000 := 
+%suffix (p01cp000 p01cp000) 
+affx_1pl_ilr. 
+;no_ilr.
+
+; te
+pp2cs000 := 
+%suffix (pp2cs000 pp2cs000) 
+affx_2sg_ilr.
+
+p02cs000 := 
+%suffix (p02cs000 p02cs000) 
+affx_2sg_ilr.
+;no_ilr.
+
+; os
+pp2cp000 := 
+%suffix (pp2cp000 pp2cp000) 
+affx_2pl_ilr.
+
+p02cp000 := 
+%suffix (p02cp000 p02cp000) 
+affx_2pl_ilr.
+;no_ilr.
+
+; se
+pp3cn000 := 
+%suffix (pp3cn000 pp3cn000) 
+affx_3per_ilr.
+
+p03cn000 := 
+%suffix (p03cn000 p03cn000) 
+affx_3per_ilr.
+
+p00cn000 := 
+%suffix (p00cn000 p00cn000) 
+affx_3per_ilr.
+;no_ilr. 
+
+; le
+pp3csd00 := 
+%suffix (pp3csd00 pp3csd00) 
+affx_3sg_ilr.
+
+; les
+pp3cpd00 := 
+%suffix (pp3cpd00 pp3cpd00) 
+affx_3pl_ilr.
+
+
+; --- common nouns
+
+ncms000 := 
+%suffix (ncms000 ncms000)
+n_masc-sg_ilr. 
+
+ncmp000 := 
+%suffix (ncmp000 ncmp000)
+n_masc-pl_ilr.
+
+ncfs000 := 
+%suffix (ncfs000 ncfs000)
+n_fem-sg_ilr.
+
+ncfp000 := 
+%suffix (ncfp000 ncfp000)
+n_fem-pl_ilr.
+
+ncms00a := 
+%suffix (ncms00a ncms00a)
+n_masc-sg_ilr. 
+
+ncmp00a := 
+%suffix (ncmp00a ncmp00a)
+n_masc-pl_ilr.
+
+ncfs00a := 
+%suffix (ncfs00a ncfs00a)
+n_fem-sg_ilr.
+
+ncfp00a := 
+%suffix (ncfp00a ncfp00a)
+n_fem-pl_ilr.
+
+ncms00d := 
+%suffix (ncms00d ncms00d)
+n_masc-sg_ilr. 
+
+ncmp00d := 
+%suffix (ncmp00d ncmp00d)
+n_masc-pl_ilr.
+
+ncfs00d := 
+%suffix (ncfs00d ncfs00d)
+n_fem-sg_ilr.
+
+ncfp00d := 
+%suffix (ncfp00d ncfp00d)
+n_fem-pl_ilr.
+
+ncms00x := 
+%suffix (ncms00x ncms00x)
+n_masc-sg_ilr. 
+
+ncmp00x := 
+%suffix (ncmp00x ncmp00x)
+n_masc-pl_ilr.
+
+ncfs00x := 
+%suffix (ncfs00x ncfs00x)
+n_fem-sg_ilr.
+
+ncfp00x := 
+%suffix (ncfp00x ncfp00x)
+n_fem-pl_ilr.
+
+nccs000 := 
+%suffix (nccs000 nccs000)
+n_sg_ilr.
+
+nccp000 := 
+%suffix (nccp000 nccp000)
+n_pl_ilr.
+
+ncmn000 := 
+%suffix (ncmn000 ncmn000)
+n_masc_ilr.
+
+ncfn000 := 
+%suffix (ncfn000 ncfn000)
+n_fem_ilr.
+
+nccn000 := 
+%suffix (nccn000 nccn000)
+n_com_ilr.
+
+
+; --- adjectives
+
+; -- ordinals
+; primera
+ao0fs0 := 
+%suffix (ao0fs0 ao0fs0)
+a_fem-sg_ilr.
+
+; primeras
+ao0fp0 := 
+%suffix (ao0fp0 ao0fp0)
+a_fem-pl_ilr.
+
+; primer, primero
+ao0ms0 := 
+%suffix (ao0ms0 ao0ms0) 
+infl-ltow-rule.
+;a_masc-sg_ilr.
+
+; primeros
+ao0mp0 := 
+%suffix (ao0mp0 ao0mp0)
+a_masc-pl_ilr.
+
+; -- possessives
+; mía
+px1fs0s0 := 
+%suffix (px1fs0s0 px1fs0s0) 
+a_fem-sg_ilr.
+
+; mías
+px1fp0s0 := 
+%suffix (px1fp0s0 px1fp0s0) 
+a_fem-pl_ilr.
+
+; mío
+px1ms0s0 := 
+%suffix (px1ms0s0 px1ms0s0) 
+a_masc-sg_ilr.
+
+; mío
+px1ns0s0 := 
+%suffix (px1ns0s0 px1ns0s0) 
+a_neut-sg_ilr.
+
+; míos
+px1mp0s0 := 
+%suffix (px1mp0s0 px1mp0s0) 
+a_masc-pl_ilr.
+
+; nuestra
+px1fs0p0 := 
+%suffix (px1fs0p0 px1fs0p0) 
+a_fem-sg_ilr.
+
+; nuestras
+px1fp0p0 := 
+%suffix (px1fp0p0 px1fp0p0) 
+a_fem-pl_ilr.
+
+; nuestro
+px1ms0p0 := 
+%suffix (px1ms0p0 px1ms0p0) 
+a_masc-sg_ilr.
+
+; nuestro
+px1ns0p0 := 
+%suffix (px1ns0p0 px1ns0p0) 
+a_neut-sg_ilr.
+
+; nuestros
+px1mp0p0 := 
+%suffix (px1mp0p0 px1mp0p0)
+a_masc-pl_ilr. 
+
+; tuya
+px2fs0s0 := 
+%suffix (px2fs0s0 px2fs0s0)  
+a_fem-sg_ilr.
+
+; tuyas
+px2fp0s0 := 
+%suffix (px2fp0s0 px2fp0s0) 
+a_fem-pl_ilr.
+
+; tuyo
+px2ms0s0 := 
+%suffix (px2ms0s0 px2ms0s0) 
+a_masc-sg_ilr.
+
+; tuyo
+px2ns0s0 := 
+%suffix (px2ns0s0 px2ns0s0) 
+a_neut-sg_ilr.
+
+; tuyos 
+px2mp0s0 := 
+%suffix (px2mp0s0 px2mp0s0) 
+a_masc-pl_ilr.
+
+; vuestra
+px2fs0p0 := 
+%suffix (px2fs0p0 px2fs0p0)  
+a_fem-sg_ilr.
+
+; vuestras
+px2fp0p0 := 
+%suffix (px2fp0p0 px2fp0p0) 
+a_fem-pl_ilr.
+
+; vuestro
+px2ms0p0 := 
+%suffix (px2ms0p0 px2ms0p0) 
+a_masc-sg_ilr.
+
+; vuestro
+px2ns0p0 := 
+%suffix (px2ns0p0 px2ns0p0) 
+a_neut-sg_ilr.
+
+; vuestros
+px2mp0p0 := 
+%suffix (px2mp0p0 px2mp0p0) 
+a_masc-pl_ilr.
+
+; suya
+px3fs0c0 := 
+%suffix (px3fs0c0 px3fs0c0) 
+a_fem-sg_ilr.
+
+; suyas
+px3fp0c0 := 
+%suffix (px3fp0c0 px3fp0c0) 
+a_fem-pl_ilr.
+
+; suyo
+px3ms0c0 := 
+%suffix (px3ms0c0 px3ms0c0) 
+a_masc-sg_ilr.
+
+; suyo
+px3ns0c0 := 
+%suffix (px3ns0c0 px3ns0c0) 
+a_neut-sg_ilr.
+
+; suyos
+px3mp0c0 := 
+%suffix (px3mp0c0 px3mp0c0) 
+a_masc-pl_ilr.
+
+; -- qualitatives
+; bonito
+aq0ms0 := 
+%suffix (aq0ms0 aq0ms0) 
+a_masc-sg_ilr.
+
+; bonitos
+aq0mp0 := 
+%suffix (aq0mp0 aq0mp0)
+a_masc-pl_ilr.
+
+; bonita
+aq0fs0 := 
+%suffix (aq0fs0 aq0fs0)
+a_fem-sg_ilr.
+
+; bonitas
+aq0fp0 := 
+%suffix (aq0fp0 aq0fp0)
+a_fem-pl_ilr.
+
+; alegre
+aq0cs0 := 
+%suffix (aq0cs0 aq0cs0)
+a_sg_ilr.
+
+; alegres
+aq0cp0 := 
+%suffix (aq0cp0 aq0cp0) 
+a_pl_ilr.
+
+; antiarrugas
+aq0cn0 := 
+%suffix (aq0cn0 aq0cn0) 
+a_ilr.
+
+; -- comparatives
+; e.g. mejor
+aqccs0 := 
+%suffix (aqccs0 aqccs0)
+a_sg_ilr.
+
+; e.g. mejores
+aqccp0 := 
+%suffix (aqccp0 aqccp0) 
+a_pl_ilr.
+
+; -- superlatives
+; e.g. dificilísimo 
+aqsms0 := 
+%suffix (aqsms0 aqsms0)
+a_masc-sg_ilr.
+
+; e.g. dificilísimos
+aqsmp0 := 
+%suffix (aqsmp0 aqsmp0)
+a_masc-pl_ilr.
+
+; e.g. dificilísima 
+aqsfs0 := 
+%suffix (aqsfs0 aqsfs0)
+a_fem-sg_ilr.
+
+; e.g. dificilísimas
+aqsfp0 := 
+%suffix (aqsfp0 aqsfp0)
+a_fem-pl_ilr.
+
+; -- diminutives
+; e.g. pequeñísimo
+aqdms0 := 
+%suffix (aqdms0 aqdms0)
+a_masc-sg_ilr.
+
+; e.g. pequeñísimos
+aqdmp0 := 
+%suffix (aqdmp0 aqdmp0)
+a_masc-pl_ilr.
+
+; e.g. pequeñísima
+aqdfs0 := 
+%suffix (aqdfs0 aqdfs0)
+a_fem-sg_ilr.
+
+; e.g. pequeñísimos
+aqdfp0 := 
+%suffix (aqdfp0 aqdfp0)
+a_fem-pl_ilr.
+
+aq0000 := 
+%suffix (aq0000 aq0000)
+no_ilr.
+
+
+; -- pastpart (only for 3 verbs)
+; desnudo, sujeto, inadvertido
+aq0msp := 
+%suffix (aq0msp aq0msp) 
+a_masc-sg_ilr.
+
+; desnudos, sujetos, inadvertido
+aq0mpp := 
+%suffix (aq0mpp aq0mpp)
+a_masc-pl_ilr.
+
+; desnuda, sujeta, inadvertida
+aq0fsp := 
+%suffix (aq0fsp aq0fsp)
+a_fem-sg_ilr.
+
+; desnudas, sujetas, inadvertidas
+aq0fpp := 
+%suffix (aq0fpp aq0fpp)
+a_fem-pl_ilr.
+
+
+; --- verbal inflection rules
+
+; --- main verbs
+
+vmip1s0 :=
+%suffix (vmip1s vmip1s)
+pres-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 1sg ] ].
+vmip2s0 :=
+%suffix (vmip2s vmip2s)
+pres-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 2sg ] ].
+
+vmip3s0 :=
+%suffix (vmip3s vmip3s)
+pres-ind_ilr &
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 3sg ] ].
+
+vmib1p0 :=
+%suffix (vmips1p vmips1p)
+ind-vfin_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1or3pl,
+                   CAT.HEAD [ AUX -,
+                              TAM.TENSE pres_or_ppast ] ] ].
+
+vmip1p0 :=
+%suffix (vmip1p vmip1p)
+pres-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 1or3pl ] ].
+
+vmip2p0 :=
+%suffix (vmip2p vmip2p)
+pres-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 2or3pl ] ].
+
+vmip3p0 := 
+%suffix (vmip3p vmip3p)
+pres-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 3pl ] ].
+
+vmii4s0 := 
+%suffix (vmii13s vmii13s)
+ipast-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 1or3sg ] ].
+
+vmii1s0 :=
+%suffix (vmii1s vmii1s)
+ipast-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 1sg ] ].
+
+vmii2s0 :=
+%suffix (vmii2s vmii2s)
+ipast-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 2sg ] ].
+
+vmii3s0 :=
+%suffix (vmii3s vmii3s)
+ipast-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 3sg ] ].
+
+vmii1p0 :=
+%suffix (vmii1p vmii1p)
+ipast-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 1or3pl ] ].
+
+vmii2p0 := 
+%suffix (vmii2p vmii2p)
+ipast-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 2pl ] ].
+
+vmii3p0 :=
+%suffix (vmii3p vmii3p)
+ipast-ind_ilr &
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 3pl ] ].
+
+vmis1s0 :=
+%suffix (vmis1s vmisis)
+ppast-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 1sg ] ].
+
+vmis2s0 :=
+%suffix (vmis2s vmis2s)
+ppast-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 2sg ] ].
+
+vmis3s0 := 
+%suffix (vmis3s vmis3s)
+ppast-ind_ilr &
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 3sg ] ].
+
+vmis1p0 :=
+%suffix (vmis1p vmis1p)
+ppast-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 1pl ] ].
+
+vmis2p0 :=
+%suffix (vmis2p vmis2p)
+ppast-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 2pl ] ].
+
+vmis3p0 :=
+%suffix (vmis3p vmis3p)
+ppast-ind_ilr &
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 3pl ] ].
+
+vmif1s0 := 
+%suffix (vmif1s vmif1s)
+fut-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 1sg ] ].
+
+vmif2s0 :=
+%suffix (vmif2s vmif2s)
+fut-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 2sg ] ].
+
+vmif3s0 :=
+%suffix (vmif3s vmif3s)
+fut-ind_ilr &
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 3sg ] ].
+
+vmif1p0 :=
+%suffix (vmif1p vmif1p)
+fut-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 1pl ] ].
+
+vmif2p0 :=
+%suffix (vmif2p vmif2p)
+fut-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 2pl ] ].
+
+vmif3p0 :=
+%suffix (vmif3p vmif3p)
+fut-ind_ilr &
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 3pl ] ].
+
+vmic4s0 :=
+%suffix (vmic13s vmic13s)
+cond-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 1or3sg ] ].
+
+vmic1s0 :=
+%suffix (vmic1s vmic1s)
+cond-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 1sg ] ].
+
+vmic2s0 :=
+%suffix (vmic2s vmic2s)
+cond-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 2sg ] ].
+
+vmic3s0 :=
+%suffix (vmic3s vmic3s)
+cond-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 3sg ] ].
+
+vmic1p0 :=
+%suffix (vmic1p vmic1p)
+cond-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 1pl ] ].
+
+vmic2p0 :=
+%suffix (vmic2p vmic2p)
+cond-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 2pl ] ].
+
+vmic3p0 :=
+%suffix (vmic3p vmic3p)
+cond-ind_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 3pl ] ].
+
+vmsp4s0 :=
+%suffix (vmsp13s vmip13s)
+pres-sub_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 1or3sg ] ].
+
+vmsp1s0 :=
+%suffix (vmsp1s vmip1s)
+pres-sub_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 1sg ] ].
+
+vmsp2s0 :=
+%suffix (vmsp2s vmsp2s)
+pres-sub_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 2sg ] ].
+
+vmsp3s0 :=
+%suffix (vmsp3s vmsp3s)
+pres-sub_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 3sg ] ].
+
+vmsp1p0 :=
+%suffix (vmsp1p vmsp1p)
+pres-sub_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 1pl ] ].
+
+vmsp2p0 :=
+%suffix (vmsp2p vmsp2p)
+pres-sub_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 2pl ] ].
+
+vmsp3p0 :=
+%suffix (vmsp3p vmsp3p)
+pres-sub_ilr &
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 3pl ] ].
+
+vmsi4s0 := 
+%suffix (vmsi13s vmsi13s)
+ipast-sub_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 1or3sg ] ].
+
+vmsi1s0 := 
+%suffix (vmsi1s vmsi1s)
+ipast-sub_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 1sg ] ].
+
+vmsi2s0 :=
+%suffix (vmsi2s vmsi2s)
+ipast-sub_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 2sg ] ].
+
+vmsi3s0 := 
+%suffix (vmsi3s vmsi3s)
+ipast-sub_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 3sg ] ].
+
+vmsi1p0 :=
+%suffix (vmsi1p vmsi1p)
+ipast-sub_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 1pl ] ].
+
+vmsi2p0 :=
+%suffix (vmsi2p vmsi2p)
+ipast-sub_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 2pl ] ].
+
+vmsi3p0 :=
+%suffix (vmsi3p vmsi3p)
+ipast-sub_ilr &
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 3pl ] ].
+
+vmsf4s0 :=
+%suffix (vmsf13s vmsp13s)
+fut-sub_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 1or3sg ] ].
+
+vmsf1s0 :=
+%suffix (vmsf1s vmsf1s)
+fut-sub_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 1sg ] ].
+
+vmsf2s0 :=
+%suffix (vmsf2s vmsf2s)
+fut-sub_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 2sg ] ].
+
+vmsf3s0 :=
+%suffix (vmsf3s vmsf3s)
+fut-sub_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 3sg ] ].
+
+vmsf1p0 :=
+%suffix (vmsf1p vmsf0p)
+fut-sub_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 1pl ] ].
+
+vmsf2p0 :=
+%suffix (vmsf20 vmsf2p)
+fut-sub_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 2pl ] ].
+
+vmsf3p0 :=
+%suffix (vmsf3p vmsf3p)
+fut-sub_ilr &
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 3pl ] ].
+
+vmm02s0 :=
+%suffix (vmm02s vmm02s)
+imperative_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 2sg ] ].
+
+vmm03s0 := 
+%suffix (vmm03s vmm03s)
+imperative_ilr &
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 3sg ] ].
+
+vmm01p0 :=
+%suffix (vmm01p vmm01p)
+imperative_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 1pl ] ].
+
+vmm02p0 :=
+%suffix (vmm02p vmm02p)
+imperative_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 2pl ] ].
+
+vmm03p0 :=
+%suffix (vmm03p vmm03p0)
+imperative_ilr &
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG.PN 3pl ] ].
+
+vmn0000 := 
+%suffix (vmn vmn)
+vinf_ilr & 
+  [ SYNSEM.LOCAL.CAT.HEAD.AUX - ].
+
+vmg0000 := 
+%suffix (vmn vmn)
+vger_ilr & 
+  [ SYNSEM.LOCAL.CAT.HEAD.AUX - ].
+
+vmp0000 := 
+%suffix (vmp vmp)
+vpart_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+                   AGR.PNG [ PN sing, GEN masc ] ] ].
+
+vmp00sm := 
+%suffix (vmpsm vmpsm)
+vpart_ilr.
+
+vmp00pm := 
+%suffix (vmppm vmppm)
+vpart_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX - ] ].
+
+vmp00sf := 
+%suffix (vmpsf vmpsf)
+vpart_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX - ] ].
+
+vmp00pf := 
+%suffix (vmppf vmppf)
+vpart_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX - ] ].
+
+
+; --- auxiliary verbs
+
+vaip1s0 :=
+%suffix (vaip1s vaip1s)
+pres-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
+
+vaip2s0 :=
+%suffix (vaip2s vaip2s)
+pres-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
+
+vaip3s0 :=
+%suffix (vaip3s vaip3s)
+pres-ind_ilr &
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
+
+vaip1p0 :=
+%suffix (vaip1p vaip1p)
+pres-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
+
+vaip2p0 :=
+%suffix (vaip2p vaip2p)
+pres-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
+
+vaip3p0 := 
+%suffix (vaip3p vaip3p)
+pres-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
+
+vaii4s0 := 
+%suffix (vaii13s vaii13s)
+ipast-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1or3sg ] ].
+
+vaii1s0 :=
+%suffix (vaii1s vaii1s)
+ipast-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
+
+vaii2s0 :=
+%suffix (vaii2s vaii2s)
+ipast-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
+
+vaii3s0 :=
+%suffix (vaii3s vaii3s)
+ipast-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
+
+vaii1p0 :=
+%suffix (vaii1p vaii1p)
+ipast-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
+
+vaii2p0 := 
+%suffix (vaii2p vaii2p)
+ipast-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
+
+vaii3p0 :=
+%suffix (vaii3p vaii3p)
+ipast-ind_ilr &
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
+
+vais1s0 :=
+%suffix (vais1s vaisis)
+ppast-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
+
+vais2s0 :=
+%suffix (vais2s vais2s)
+ppast-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
+
+vais3s0 := 
+%suffix (vais3s vais3s)
+ppast-ind_ilr &
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
+
+vais1p0 :=
+%suffix (vais1p vais1p)
+ppast-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
+
+vais2p0 :=
+%suffix (vais2p vais2p)
+ppast-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
+
+vais3p0 :=
+%suffix (vais3p vais3p)
+ppast-ind_ilr &
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
+
+vaif1s0 := 
+%suffix (vaif1s vaif1s)
+fut-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
+
+vaif2s0 :=
+%suffix (vaif2s vaif2s)
+fut-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
+
+vaif3s0 :=
+%suffix (vaif3s vaif3s)
+fut-ind_ilr &
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
+
+vaif1p0 :=
+%suffix (vaif1p vaif1p)
+fut-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
+
+vaif2p0 :=
+%suffix (vaif2p vaif2p)
+fut-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
+
+vaif3p0 :=
+%suffix (vaif3p vaif3p)
+fut-ind_ilr &
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
+
+vaic4s0 :=
+%suffix (vaic13s vaic13s)
+cond-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1or3sg ] ].
+
+vaic1s0 :=
+%suffix (vaic1s vaic1s)
+cond-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
+
+vaic2s0 :=
+%suffix (vaic2s vaic2s)
+cond-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
+
+vaic3s0 :=
+%suffix (vaic3s vaic3s)
+cond-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
+
+vaic1p0 :=
+%suffix (vaic1p vaic1p)
+cond-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
+
+vaic2p0 :=
+%suffix (vaic2p vaic2p)
+cond-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
+
+vaic3p0 :=
+%suffix (vaic3p vaic3p)
+cond-ind_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
+
+vasp4s0 :=
+%suffix (vasp13s vaip13s)
+pres-sub_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1or3sg ] ].
+
+vasp1s0 :=
+%suffix (vasp1s vasp1s)
+pres-sub_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
+
+vasp2s0 :=
+%suffix (vasp2s vasp2s)
+pres-sub_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
+
+vasp3s0 :=
+%suffix (vasp3s vasp3s)
+pres-sub_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
+
+vasp1p0 :=
+%suffix (vasp1p vasp1p)
+pres-sub_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
+
+vasp2p0 :=
+%suffix (vasp2p vasp2p)
+pres-sub_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
+
+vasp3p0 :=
+%suffix (vasp3p vasp3p)
+pres-sub_ilr &
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
+
+vasi4s0 := 
+%suffix (vasi13s vasi13s)
+ipast-sub_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1or3sg ] ].
+
+vasi1s0 :=
+%suffix (vasi1s vasi1s)
+ipast-sub_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
+
+vasi2s0 :=
+%suffix (vasi2s vasi2s)
+ipast-sub_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
+
+vasi3s0 := 
+%suffix (vasi3s vasi3s)
+ipast-sub_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
+
+vasi1p0 :=
+%suffix (vasi1p vasi1p)
+ipast-sub_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
+
+vasi2p0 :=
+%suffix (vasi2p vasi2p)
+ipast-sub_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
+
+vasi3p0 :=
+%suffix (vasi3p vasi3p)
+ipast-sub_ilr &
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
+
+vasf4s0 :=
+%suffix (vasf13s vasp13s)
+fut-sub_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1or3sg ] ].
+
+vasf1s0 :=
+%suffix (vasf1s vasf1s)
+fut-sub_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
+
+vasf2s0 :=
+%suffix (vasf2s vasf2s)
+fut-sub_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
+
+vasf3s0 :=
+%suffix (vasf3s vasf3s)
+fut-sub_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
+
+vasf1p0 :=
+%suffix (vasf1p vasf0p)
+fut-sub_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
+
+vasf2p0 :=
+%suffix (vasf20 vasf2p)
+fut-sub_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
+
+vasf3p0 :=
+%suffix (vasf3p vasf3p)
+fut-sub_ilr &
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
+
+vam02s0 :=
+%suffix (vam02s vam02s)
+imperative_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
+
+vam03s0 := 
+%suffix (vam03s vam03s)
+imperative_ilr &
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
+
+vam01p0 :=
+%suffix (vam01p vam01p)
+imperative_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
+
+vam02p0 :=
+%suffix (vam02p vam02p)
+imperative_ilr & 
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
+
+vam03p0 :=
+%suffix (vam03p0 vam03p0)
+imperative_ilr &
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
+
+van0000 := 
+%suffix (van van)
+vinf_ilr.
+
+vag0000 := 
+%suffix (van van)
+vger_ilr. 
+
+vap00sm := 
+%suffix (vapsm vapsm)
+vpart_ilr.
+
+vap00pm := 
+%suffix (vappm vappm)
+vpart_ilr.
+
+vap00sf := 
+%suffix (vapsf vapsf)
+vpart_ilr.
+
+vap00pf := 
+%suffix (vappf vappf)
+vpart_ilr. 
+
+; ---
+
+vsip1s0 :=
+%suffix (vsip1s vsip1s)
+pres-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 1sg ].
+
+vsip2s0 :=
+%suffix (vsip2s vsip2s)
+pres-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 2sg ].
+
+vsip3s0 :=
+%suffix (vsip3s vsip3s)
+pres-ind_ilr &
+  [ SYNSEM.LOCAL.AGR.PNG.PN 3sg ].
+
+vsip1p0 :=
+%suffix (vsip1p vsip1p)
+pres-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 1pl ].
+
+vsip2p0 :=
+%suffix (vsip2p vsip2p)
+pres-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 2pl ].
+
+vsip3p0 := 
+%suffix (vsip3p vsip3p)
+pres-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 3pl ].
+
+vsii4s0 := 
+%suffix (vsii13s vsii13s)
+ipast-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 1or3sg ].
+
+vsii1s0 :=
+%suffix (vsii1s vsii1s)
+ipast-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 1sg ].
+
+vsii2s0 :=
+%suffix (vsii2s vsii2s)
+ipast-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 2sg ].
+
+vsii3s0 :=
+%suffix (vsii3s vsii3s)
+ipast-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 3sg ].
+
+vsii1p0 :=
+%suffix (vsii1p vsii1p)
+ipast-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 1pl ].
+
+vsii2p0 := 
+%suffix (vsii2p vsii2p)
+ipast-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 2pl ].
+
+vsii3p0 :=
+%suffix (vsii3p vsii3p)
+ipast-ind_ilr &
+  [ SYNSEM.LOCAL.AGR.PNG.PN 3pl ].
+
+vsis1s0 :=
+%suffix (vsis1s vsisis)
+ppast-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 1sg ].
+
+vsis2s0 :=
+%suffix (vsis2s vsis2s)
+ppast-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 2sg ].
+
+vsis3s0 := 
+%suffix (vsis3s vsis3s)
+ppast-ind_ilr &
+  [ SYNSEM.LOCAL.AGR.PNG.PN 3sg ].
+
+vsis1p0 :=
+%suffix (vsis1p vsis1p)
+ppast-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 1pl ].
+
+vsis2p0 :=
+%suffix (vsis2p vsis2p)
+ppast-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 2pl ].
+
+vsis3p0 :=
+%suffix (vsis3p vsis3p)
+ppast-ind_ilr &
+  [ SYNSEM.LOCAL.AGR.PNG.PN 3pl ].
+
+vsif1s0 := 
+%suffix (vsif1s vsif1s)
+fut-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 1sg ].
+
+vsif2s0 :=
+%suffix (vsif2s vsif2s)
+fut-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 2sg ].
+
+vsif3s0 :=
+%suffix (vsif3s vsif3s)
+fut-ind_ilr &
+  [ SYNSEM.LOCAL.AGR.PNG.PN 3sg ].
+
+vsif1p0 :=
+%suffix (vsif1p vsif1p)
+fut-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 1pl ].
+
+vsif2p0 :=
+%suffix (vsif2p vsif2p)
+fut-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 2pl ].
+
+vsif3p0 :=
+%suffix (vsif3p vsif3p)
+fut-ind_ilr &
+  [ SYNSEM.LOCAL.AGR.PNG.PN 3pl ].
+
+vsic4s0 :=
+%suffix (vsic13s vsic13s)
+cond-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 1or3sg ].
+
+vsic1s0 :=
+%suffix (vsic1s vsic1s)
+cond-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 1sg ].
+
+vsic2s0 :=
+%suffix (vsic2s vsic2s)
+cond-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 2sg ].
+
+vsic3s0 :=
+%suffix (vsic3s vsic3s)
+cond-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 3sg ].
+
+vsic1p0 :=
+%suffix (vsic1p vsic1p)
+cond-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 1pl ].
+
+vsic2p0 :=
+%suffix (vsic2p vsic2p)
+cond-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 2pl ].
+
+vsic3p0 :=
+%suffix (vsic3p vsic3p)
+cond-ind_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 3pl ].
+
+vssp4s0 :=
+%suffix (vssp13s vsip13s)
+pres-sub_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 1or3sg ].
+
+vssp1s0 :=
+%suffix (vssp1s vssp1s)
+pres-sub_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 1sg ].
+
+vssp2s0 :=
+%suffix (vssp2s vssp2s)
+pres-sub_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 2sg ].
+
+vssp3s0 :=
+%suffix (vssp3s vssp3s)
+pres-sub_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 3sg ].
+
+vssp1p0 :=
+%suffix (vssp1p vssp1p)
+pres-sub_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 1pl ].
+
+vssp2p0 :=
+%suffix (vssp2p vssp2p)
+pres-sub_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 2pl ].
+
+vssp3p0 :=
+%suffix (vssp3p vssp3p)
+pres-sub_ilr &
+  [ SYNSEM.LOCAL.AGR.PNG.PN 3pl ].
+
+vssi4s0 := 
+%suffix (vssi13s vssi13s)
+ipast-sub_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 1or3sg ].
+
+vssi1s0 :=
+%suffix (vssi1s vssi1s)
+ipast-sub_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 1sg ].
+
+vssi2s0 :=
+%suffix (vssi2s vssi2s)
+ipast-sub_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 2sg ].
+
+vssi3s0 := 
+%suffix (vssi3s vssi3s)
+ipast-sub_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 3sg ].
+
+vssi1p0 :=
+%suffix (vssi1p vssi1p)
+ipast-sub_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 1pl ].
+
+vssi2p0 :=
+%suffix (vssi2p vssi2p)
+ipast-sub_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 2pl ].
+
+vssi3p0 :=
+%suffix (vssi3p vssi3p)
+ipast-sub_ilr &
+  [ SYNSEM.LOCAL.AGR.PNG.PN 3pl ].
+
+vssf4s0 :=
+%suffix (vssf13s vssp13s)
+fut-sub_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 1or3sg ].
+
+vssf1s0 :=
+%suffix (vssf1s vssf1s)
+fut-sub_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 1sg ].
+
+vssf2s0 :=
+%suffix (vssf2s vssf2s)
+fut-sub_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 2sg ].
+
+1vssf3s0 :=
+%suffix (vssf3s vssf3s)
+fut-sub_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 3sg ].
+
+vssf1p0 :=
+%suffix (vssf1p vssf0p)
+fut-sub_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 1pl ].
+
+vssf2p0 :=
+%suffix (vssf20 vssf2p)
+fut-sub_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 2pl ].
+
+vssf3p0 :=
+%suffix (vssf3p vssf3p)
+fut-sub_ilr &
+  [ SYNSEM.LOCAL.AGR.PNG.PN 3pl ].
+
+vsm02s0 :=
+%suffix (vsm02s vsm02s)
+imperative_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 2sg ].
+
+vsm03s0 := 
+%suffix (vsm03s vsm03s)
+imperative_ilr &
+  [ SYNSEM.LOCAL.AGR.PNG.PN 2sg ].
+
+vsm01p0 :=
+%suffix (vsm01p vsm01p)
+imperative_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 1pl ].
+
+vsm02p0 :=
+%suffix (vsm02p vsm02p)
+imperative_ilr & 
+  [ SYNSEM.LOCAL.AGR.PNG.PN 2pl ].
+
+vsm03p0 :=
+%suffix (vsm03p0 vsm03p0)
+imperative_ilr &
+  [ SYNSEM.LOCAL.AGR.PNG.PN 2pl ].
+
+vsn0000 := 
+%suffix (vsn vsn)
+vinf_ilr.
+
+vsg0000 := 
+%suffix (vsg vsg)
+vger_ilr.
+
+vsp00sm := 
+%suffix (vspsm vspsm)
+vpart_ilr.
+
+vsp00pm := 
+%suffix (vsppm vsppm)
+vpart_ilr.
+
+vsp00sf := 
+%suffix (vspsf vspsf)
+vpart_ilr.
+
+vsp00pf := 
+%suffix (vsppf vsppf)
+vpart_ilr.
+
+
+; -- enclitics
+
++PP3MSA00 := 
+%suffix (vmlo vmlo)
+pp3msa_ilr.
+
++PP3CNA00 := 
+%suffix (vmlo2 vmlo2) 
+pp3cna_ilr.
+
+
++PP3MPA00 := 
+%suffix (vmlos vmlos)
+acc_enclt_ilr & 
+  [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG [ PN 3pl, GEN masc ] ],... > ].
+
++PP3FSA00 := 
+%suffix (vmla vmla)
+acc_enclt_ilr & 
+  [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG [ PN 3sg, GEN fem ] ],... > ].
+
++PP3FPA00 := 
+%suffix (vmlas vmlas)
+acc_enclt_ilr &
+  [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG [ PN 3pl, GEN fem ] ],... > ].
+
++PP3CSD00 := 
+%suffix (vmle vmle)
+dat_enclt_ilr & 
+  [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG.PN 3sg ],... > ].
+
++PP3CPD00 := 
+%suffix (vmles vmles)
+dat_enclt_ilr & 
+  [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG.PN 3pl ],... > ].
+
++PP1CS000 := 
+%suffix (vmme vmme)
+acc_or_dat_or_rflx_enclt_ilr & 
+  [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG.PN 1sg ],... > ].
+
++PP2CS000 := 
+%suffix (vmte vmte)
+acc_or_dat_or_rflx_enclt_ilr & 
+  [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG.PN 2sg ],... > ].
+
++PP1CP000 := 
+%suffix (vmnos vmnos)
+acc_or_dat_or_rflx_or_recip_enclt_ilr & 
+  [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG.PN 1pl ],... > ].
+
++PP2CP000 := 
+%suffix (vmos vmos)
+acc_or_dat_or_rflx_or_recip_enclt_ilr & 
+  [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG.PN 2pl ],... > ].
+
++PP3CN000 := 
+%suffix (vmse vmse)
+se_enclt_ilr & 
+  [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG.PN 3per ],... > ].
+
++P03CN000 := 
+%suffix (vmse vmse)
+se_impers_enclt_ilr.
+
++P00CN000 := 
+%suffix (vmse vmse)
+se_impers_enclt_ilr.
+
+

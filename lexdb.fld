@@ -1,0 +1,23 @@
+type TEXT
+orth TEXT
+sort0 TEXT
+sort1 TEXT
+sort2 TEXT
+sort3 TEXT
+pred TEXT
+ckey TEXT
+ockey TEXT
+oc2key TEXT
+altkey TEXT
+alt2key TEXT
+comments TEXT
+exemplars TEXT
+usages TEXT
+lang TEXT
+country TEXT
+dialect TEXT
+domains TEXT
+genres TEXT
+register TEXT
+confidence real DEFAULT 1
+source TEXT

@@ -1,0 +1,6 @@
+supported-psql-server	7.4
+supported-psql-server	8.0
+supported-psql-server	8.1
+user	montse
+lexdb-version	4.90
+mod_time	2006-07-10 10:01:35.166855+02
