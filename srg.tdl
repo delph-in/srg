@@ -1,0 +1,76 @@
+;;; -*- Mode: tdl; Coding: utf-8; -*-
+;;;
+
+:begin :type.
+
+;;
+;; the type hierarchy
+;;
+:include "fundamentals".
+:include "hdtypes.tdl".
+:include "letypes.tdl".
+:include "irtypes.tdl".
+:include "lrtypes.tdl".
+:include "srtypes.tdl".
+; :include "cmt.tdl".
+:end :type.
+
+;;
+;; token mapping: manipulate the token lattice prior to lexical look-up
+;; NOT USED
+;; :begin :instance :status token-mapping-rule.
+;; :include "tmr.tdl".
+;; :end :instance.
+
+;;
+;; lexical filtering: reduce the chart after lexical instantiation and the
+;; application of lexical rules, right before we turn loose syntactic rules.
+;;
+
+;;:begin :instance :status lexical-filtering-rule.
+;;:include "lfr.tdl".
+;;:end :instance.
+
+
+;;
+;; lexicon entries (instances of status lex-entry or generic-lex-entry)
+;;
+
+:begin :instance :status lex-entry.
+:include "lexicon".
+:end :instance.
+
+;:begin :instance :status generic-lex-entry.
+;:include "generics".
+;:end :instance.
+
+;;
+;; grammar rules and lexical rules (instances of status rule)
+;;
+
+
+:begin :instance :status rule.
+:include "srules".
+:end :instance.
+
+:begin :instance :status lex-rule.
+:include "lrules".
+:include "inflr".
+; :include "inflrl".
+:end :instance.
+
+;;
+;; parse-tree labels (instances)
+;;
+
+:begin :instance.
+:include "labels".
+:end :instance.
+
+;;
+;; start symbols of the grammar (instances)
+;;
+
+:begin :instance.
+:include "roots".
+:end :instance.
