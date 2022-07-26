@@ -49,7 +49,7 @@
 ;;
 ;; preprocessor rules versioning; auto-maintained upon CVS (or SVN) check-in.
 ;; 
-@$Date: 2021-04-04 19:40:24 +0200 (Sun, 04 Apr 2021) $
+@$Date: 2021-04-04 10:40:24 -0700 (Sun, 04 Apr 2021) $
 
 ;;
 ;; tokenization pattern: after normalization, the string will be broken up at
@@ -79,84 +79,6 @@
 !^(.+)$								 \1 
 ![\t　]								 
 !  +								 
-
-;; a set of `mark-up modules', often replacing mark-up character entities with
-;; actual UniCode characters (e.g. |&mdash;| or |---| as |—|), or just ditching
-;; mark-up that has no bearing on parsing for now (e.g. most wiki mark-up).
-;; these modules can be activated selectively by name in the REPP environment
-;; or the top-level call into REPP.
-
->xml
->latex
->ascii
->html
->wiki
->lgt
->gml
-
-;;
-;; we hope to keep it to a minimum and only invoke it in select configurations,
-;; but at times we need to heuristically `fix up' deficiencies in the input;
-;; for example spurious duplicate punctuation, and such.
-;;
->robustness
-
-;;
-;; our treatment of quote marks continues to evolve.  as of february 2010, it
-;; seems we need to support two distinct scenarios: (a) inputs using standard
-;; typography (quotes either are directional already or can be diambiguated by
-;; adjacency to preceding or following whitespace) vs. (b) inputs that already
-;; have been pre-tokenized or otherwise damaged (as in the current CoNLL 2010
-;; training data), where we stand no chance of disambiguating quote marks.  in
-;; downstream processing, we thus need to handle six types of quotes: genuine
-;; directional quotes (|“|, |”|, |‘|, and |’|) and ambiguous, straight ones
-;; (|"| and |'|).  the former group can be restricted to opening and closing
-;; functions, and in the case of closing quotes also to apostrophes and units
-;; of measure (feet and inches, or seconds and minutes; for which in `proper'
-;; typography the double prime and prime symbols could be used); the straight
-;; quotes, on the other hand, need to be considered ambiguous between opening
-;; and closing, apostrophe, or prime usages.                    (9-feb-10; oe)
-;;
->quotes
-
-;;
-;; two special cases involving periods: map ASCII ellipsis (|...|) to a single
-;; UniCode character (|…|), and convert |..| between numbers into an n-dash,
-;; i.e. a numeric range (typically tokenized off, i.e. |42| |–| |43|).  maybe
-;; the latter can also occur between non-numbers?  we could also just preserve
-;; it, but always make it a token in its own right?
-;;
-;; _fix_me_
-;; what about a sentence-final period following the ellipsis (as in cb/7060)?
-;;                                                              (24-sep-08; oe)
-;; _fix_me_
-;; several years later, i believe the ellipsis (|…|) should just be considered
-;; a suffix punctuation mark (possibly contributing a piece of semantics) that
-;; contributes the same punctuation quality as token-final periods.  however,
-;; so far we have kept periods following ellipsis as separate tokens, and this
-;; also appears to be the analysis in the venerable PTB (and hence we cannot
-;; revise it while finalizing DeepBank 1.0).  at the same time, the PTB has a
-;; number of sentences ending in just ellipsis, and (for maximum compliance) 
-;; we want to normalize these to the UniCode glyph too.         (10-feb-13; oe)
-;;
-!([0-9]) *\.\. *([0-9])						\1 – \2
-!(?:(?:\. ){3,}|(?:\.){3,})(?![])}”’ ]*$)			…
-!(?:\. ){3}|(?:\.){3}						…
-
-
-;;
-;; some UniCode characters force token boundaries: m-dash, ellipsis.  we used
-;; to include n-dashes in this list, but some authors (e.g. ESR) use n-dashes
-;; much like hyphens, attempting to be clever about bracketing in expressions
-;; like |non–source-aware| [users].
-;;
-!([—…])								 \1 
-
-;;
-;; remove space after initial |O'| and |L'|, i.e. irish and romance names, to
-;; avoid stripping off their apostrophes.
-;;
-! ([OL])['’] 							 \1’
 
 ;;
 ;; a new REPP facility: named groups and iterative group calls.  there are a
@@ -214,8 +136,8 @@
 #1
 ! ([^ (]+)(\)) ([^ ]|$)						 \1 \2 \3
 ! ([^ \[]+)(]) ([^ ]|$)						 \1 \2 \3
-!([^ ])([\]}?!,，、;:@#$€¢£¥%&”"’']) ([^ ]|$)			\1 \2 \3
-!([^ ])([\]}?!,，、;:@#$€¢£¥%&”"’'])([–-])([^ ]|$)		\1 \2 \3 \4
+!([^ ])([\]}?!,，、;:@#$€¢£¥%&”"’'_]) ([^ ]|$)			\1 \2 \3
+!([^ ])([\]}?!,，、;:@#$€¢£¥%&”"’'_])([–-])([^ ]|$)		\1 \2 \3 \4
 !([^ ])(\.) ([\])}”"’'… ]*)(⌊.⌋)*$				\1 \2 \3\4
 !(^|[^ ]) ([\[({:@#$€¢£¥%&\*“‘])([^ ])				\1 \2 \3
 #
@@ -281,25 +203,3 @@
 #
 >3
 
-;;
-;; _fix_me_
-;; in principle, we still need to re-attach ERG derivational prefixes.
-;;
-
-;;
-;; _fix_me_
-;; this is arguably a PTB idiosyncrasy, but (at least while finalizing DeepBank
-;; 1.0) we want it in the ‘standard’ parsing configuration.  some lines start
-;; with lower-case, one-letter identifiers, possibly remnants of footnotes or
-;; something similar.                                           (10-feb-13; oe)
-;;
-!^( *[a-z])(-)([\[({“‘0-9A-Z])					\1 \2 \3
-
->ptb
-
-;;
-;; to allow parsing (of inputs involving basic punctuation) in the LKB, there 
-;; is a REPP module to undo PTB-style separation of tokens.  this module will
-;; only be activated for use within the LKB, not by preprocess-for-pet().
-;;
->lkb
