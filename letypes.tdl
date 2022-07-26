@@ -22,12 +22,14 @@ basic-verb-lex := lex-item &
                            VAL.SPR < > ],
                      CONT.HOOK.INDEX event & [ E #tam ] ],
              NON-LOCAL.REL 0-dlist,
-             LKEYS.KEYREL event-relation ] ].
+             LKEYS.KEYREL event-relation ] ]
+""" Supertype for all verbs. """.
  
 basic-aux-verb := basic-verb-lex & 
   [ SYNSEM [ LOCAL.CAT.HEAD [ AUX +,
                               KEYS.KEY aux_event_rel & #pred ],
-             LKEYS.KEYREL.PRED #pred ] ]. 
+             LKEYS.KEYREL.PRED #pred ] ]
+""" Supertype for all auxiliary verbs. """. 
 
 basic-main-verb := basic-verb-lex & 
   [ SYNSEM [ LOCAL [ CAT [ MC bool,
