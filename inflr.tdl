@@ -535,8 +535,8 @@ pr0cp000 :=
 pr0cp000_ilr.
 
 ; que
-pr0cn000 := 
-%suffix (pr0cn000 pr0cn000)
+pr0cn00 := 
+%suffix (pr0cn00 pr0cn00)
 pr0cn000_ilr.
 
 ; (a)donde, como, cuando
@@ -733,7 +733,7 @@ pp3mpa00 :=
 affx_3pl-masc_ilr.
 
 ; me
-pp1cs000 := 
+pp1cs00 := 
 %suffix (pp1cs000 pp1cs000) 
 pp1cs000_ilr.
 
@@ -1036,7 +1036,7 @@ a_masc-pl_ilr.
 
 ; -- qualitatives
 ; bonito
-aq0ms0 := 
+aq0ms00 := 
 %suffix (aq0ms0 aq0ms0) 
 a_masc-sg_ilr.
 
