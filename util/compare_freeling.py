@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+import editdistance
 
 TAGS = 'tags'
 SURFACES = 'surfaces'
@@ -19,18 +20,21 @@ def process_freeling_file(f, data):
         data[k][TAGS][tag].append(surface)
     return data
 
-def find_match():
-    forms = new_version[pos][TAGS][tag]
+def find_match(t):
+    forms = new_version[pos][TAGS][t]
+    max = (0, None, 1000)
     for form in forms:
         if form in old_version[pos][SURFACES]:
             old_tags = old_version[pos][SURFACES][form]
             for ot in old_tags:
                 oforms = old_version[pos][TAGS][ot]
                 isect = len(set(forms).intersection(oforms))/len(set(forms))
-                if isect > 0.5:
-                    return ot, isect
+                ed = editdistance.eval(ot, t)
+                if isect >= max[0] and ed <= max[2]:
+                    max = (isect, ot, ed)
         else:
             print('Form {} not found'.format(form))
+    return max
 
 
 old_version = {}
@@ -59,7 +63,7 @@ for pos in new_version:
     print(pos)
     for tag in new_version[pos][TAGS]:
         if not tag in old_version[pos][TAGS]:
-            matching_tag, confidence = find_match()
+            (confidence, matching_tag, edist) = find_match(tag)
             to_update.append('{}->{} with confidence {}'.format(matching_tag, tag, confidence))
 
 print(len(to_update))
