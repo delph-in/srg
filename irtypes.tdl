@@ -316,8 +316,7 @@ pt0fs00_ilr :=  pt_ilr & sg_ilr & fem_ilr.
 pt0fp00_ilr :=  pt_ilr & pl_ilr & fem_ilr. 
 pt0cs00_ilr :=  pt_ilr & sg_ilr.
 pt0cp00_ilr :=  pt_ilr & pl_ilr.
-pt0cn000_ilr :=  pt_ilr.
-pt000000_ilr :=  pt_ilr.
+pt00000_ilr :=  pt_ilr.
 
 ; -- exclamative pron.
 pe0ms00_ilr :=  pe_ilr & sg_ilr & masc_ilr. 

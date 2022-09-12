@@ -577,15 +577,10 @@ pt0cp00 :=
 pt0cp00_ilr.
 
 ; qué
-pt0cn000 := 
-%suffix (pt0cn000 pt0cn000)
-pt0cn000_ilr.
-
 ; (a)dónde, cómo, cuándo
-pt000000 := 
-%suffix (pt000000 pt000000)
-pt000000_ilr.
-
+pt00000 := 
+%suffix (pt00000 pt00000)
+pt00000_ilr.
 
 ; -- exclamative pronouns
 ; cuánto
@@ -2188,17 +2183,17 @@ pp3msa_ilr.
 pp3cna_ilr.
 
 
-+PP3MPA00 := 
++PP3MPA0 := 
 %suffix (vmlos vmlos)
 acc_enclt_ilr & 
   [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG [ PN 3pl, GEN masc ] ],... > ].
 
-+PP3FSA00 := 
++PP3FSA0 := 
 %suffix (vmla vmla)
 acc_enclt_ilr & 
   [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG [ PN 3sg, GEN fem ] ],... > ].
 
-+PP3FPA00 := 
++PP3FPA0 := 
 %suffix (vmlas vmlas)
 acc_enclt_ilr &
   [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG [ PN 3pl, GEN fem ] ],... > ].
@@ -2213,32 +2208,32 @@ dat_enclt_ilr &
 dat_enclt_ilr & 
   [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG.PN 3pl ],... > ].
 
-+PP1CS000 := 
++PP1CS00 := 
 %suffix (vmme vmme)
 acc_or_dat_or_rflx_enclt_ilr & 
   [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG.PN 1sg ],... > ].
 
-+PP2CS000 := 
++PP2CS00 := 
 %suffix (vmte vmte)
 acc_or_dat_or_rflx_enclt_ilr & 
   [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG.PN 2sg ],... > ].
 
-+PP1CP000 := 
++PP1CP00 := 
 %suffix (vmnos vmnos)
 acc_or_dat_or_rflx_or_recip_enclt_ilr & 
   [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG.PN 1pl ],... > ].
 
-+PP2CP000 := 
++PP2CP00 := 
 %suffix (vmos vmos)
 acc_or_dat_or_rflx_or_recip_enclt_ilr & 
   [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG.PN 2pl ],... > ].
 
-+PP3CN000 := 
++PP3CN00 := 
 %suffix (vmse vmse)
 se_enclt_ilr & 
   [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG.PN 3per ],... > ].
 
-+P03CN000 := 
++P03CN00 := 
 %suffix (vmse vmse)
 se_impers_enclt_ilr.
 
