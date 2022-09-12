@@ -262,24 +262,24 @@ dp1cps :=
 dp1cps_ilr.
 
 ; nuestro
-dp1msp := 
-%suffix (dp1msp dp1msp)
-dp1msp_ilr.
+ap0ms1p := 
+%suffix (ap0ms1p ap0ms1p)
+ap0ms1p_ilr.
 
 ; nuestros
-dp1mpp := 
-%suffix (dp1mpp dp1mpp)
-dp1mpp_ilr.
+ap0mp1p := 
+%suffix (ap0mp1p ap0mp1p)
+ap0mp1p_ilr.
 
 ; nuestra
-dp1fsp := 
-%suffix (dp1fsp dp1fsp)
+ap0fs1p := 
+%suffix (ap0fs1p ap0fs1p)
 dp1fsp_ilr.
 
 ; nuestras
-dp1fpp := 
-%suffix (dp1fpp dp1fpp)
-dp1fpp_ilr.
+ap0fp1p := 
+%suffix (ap0fp1p ap0fp1p)
+ap0fp1p_ilr.
 
 ; tu
 dp2css := 
@@ -292,24 +292,24 @@ dp2cps :=
 dp2cps_ilr.
 
 ; vuestro
-dp2msp := 
-%suffix (dp2msp dp2msp)
-dp2msp_ilr.
+ap0ms2p := 
+%suffix (ap0ms2p ap0ms2p)
+ap0ms2p_ilr.
 
 ; vuestros
-dp2mpp := 
-%suffix (dp2mpp dp2mpp)
-dp2mpp_ilr.
+ap0mp2p := 
+%suffix (ap0mp2p ap0mp2p)
+ap0mp2p_ilr.
 
 ; vuestra
-dp2fsp := 
-%suffix (dp2fsp dp2fsp)
-dp2fsp_ilr.
+ap0fs2p := 
+%suffix (ap0fs2p ap0fs2p)
+ap0fs2p_ilr.
 
 ; vuestras
-dp2fpp := 
-%suffix (dp2fpp dp2fpp)
-dp2fpp_ilr.
+ap0fp2p := 
+%suffix (ap0fp2p ap0fp2p)
+ap0fp2p_ilr.
 
 ; su
 dp3csn := 
@@ -431,24 +431,24 @@ de0cn0_ilr.
 
 ; -- demonstrative pronouns
 ; este, ese, aquel, estotro, esotro, ello
-pd0ms000 := 
-%suffix (pd0ms000 pd0ms000)
-pd0ms000_ilr.
+pd0ms00 := 
+%suffix (pd0ms00 pd0ms00)
+pd0ms00_ilr.
 
 ; estos, esos, aquellos
-pd0mp000 := 
-%suffix (pd0mp000 pd0mp000)
-pd0mp000_ilr.
+pd0mp00 := 
+%suffix (pd0mp00 pd0mp00)
+pd0mp00_ilr.
 
 ; esta, esa, aquella, estotra, esotra
-pd0fs000 := 
-%suffix (pd0fs000 pd0fs000)
-pd0fs000_ilr.
+pd0fs00 := 
+%suffix (pd0fs00 pd0fs00)
+pd0fs00_ilr.
 
 ; estas, esas, aquellas
-pd0fp000 := 
-%suffix (pd0fp000 pd0fp000)
-pd0fp000_ilr.
+pd0fp00 := 
+%suffix (pd0fp00 pd0fp00)
+pd0fp00_ilr.
 
 ; esto, eso, aquello
 pd00s00 := 
@@ -456,36 +456,36 @@ pd00s00 :=
 pd00s00_ilr.
 
 ; tal
-pd0cs000 := 
-%suffix (pd0cs000 pd0cs000)
-pd0cs000_ilr.
+pd0cs00 := 
+%suffix (pd0cs00 pd0cs00)
+pd0cs00_ilr.
 
 ; tales
-pd0cp000 := 
-%suffix (pd0cp000 pd0cp000)
+pd0cp00 := 
+%suffix (pd0cp00 pd0cp00)
 pd0cp000_ilr.
 
 
 ; -- indefinite pronouns
 ; alguno
-pi0ms000 := 
-%suffix (pi0ms000 pi0ms000)
-pi0ms000_ilr.
+pi0ms00 := 
+%suffix (pi0ms00 pi0ms00)
+pi0ms00_ilr.
 
 ; algunos
-pi0mp000 := 
-%suffix (pi0mp000 pi0mp000)
-pi0mp000_ilr.
+pi0mp00 := 
+%suffix (pi0mp00 pi0mp00)
+pi0mp00_ilr.
 
 ; alguna
-pi0fs000 := 
-%suffix (pi0fs000 pi0fs000)
-pi0fs000_ilr.
+pi0fs00 := 
+%suffix (pi0fs00 pi0fs00)
+pi0fs00_ilr.
 
 ; algunas
-pi0fp000 := 
-%suffix (pi0fp000 pi0fp000)
-pi0fp000_ilr.
+pi0fp00 := 
+%suffix (pi0fp00 pi0fp00)
+pi0fp00_ilr.
 
 ; bastante
 pi0cs00 := 
@@ -537,44 +537,44 @@ pr0cp00_ilr.
 ; que
 pr0cn00 := 
 %suffix (pr0cn00 pr0cn00)
-pr0cn000_ilr.
+pr0cn00_ilr.
 
 ; (a)donde, como, cuando
-pr000000 := 
-%suffix (pr000000 pr000000)
-pr000000_ilr.
+pr00000 := 
+%suffix (pr00000 pr00000)
+pr00000_ilr.
 
 
 ; -- interrogative pronouns
 ; cuánto
-pt0ms000 := 
-%suffix (pt0ms000 pt0ms000)
-pt0ms000_ilr.
+pt0ms00 := 
+%suffix (pt0ms00 pt0ms00)
+pt0ms00_ilr.
 
 ; cuántos
-pt0mp000 := 
-%suffix (pt0mp000 pt0mp000)
-pt0mp000_ilr.
+pt0mp00 := 
+%suffix (pt0mp00 pt0mp00)
+pt0mp00_ilr.
 
 ; cuánta
-pt0fs000 := 
-%suffix (pt0fs000 pt0fs000)
-pt0fs000_ilr.
+pt0fs00 := 
+%suffix (pt0fs00 pt0fs00)
+pt0fs00_ilr.
 
 ; cuántas
-pt0fp000 := 
-%suffix (pt0fp000 pt0fp000)
-pt0fp000_ilr.
+pt0fp00 := 
+%suffix (pt0fp00 pt0fp00)
+pt0fp00_ilr.
 
 ; cuál, quién
-pt0cs000 := 
-%suffix (pt0cs000 pt0cs000)
-pt0cs000_ilr.
+pt0cs00 := 
+%suffix (pt0cs00 pt0cs00)
+pt0cs00_ilr.
 
 ; cuáles, quiénes
-pt0cp000 := 
-%suffix (pt0cp000 pt0cp000)
-pt0cp000_ilr.
+pt0cp00 := 
+%suffix (pt0cp00 pt0cp00)
+pt0cp00_ilr.
 
 ; qué
 pt0cn000 := 
@@ -589,24 +589,24 @@ pt000000_ilr.
 
 ; -- exclamative pronouns
 ; cuánto
-pe0ms000 := 
-%suffix (pe0ms000 pe0ms000)
-pe0ms000_ilr.
+pe0ms00 := 
+%suffix (pe0ms00 pe0ms00)
+pe0ms00_ilr.
 
 ; cuántos
-pe0mp000 := 
-%suffix (pe0mp000 pe0mp000)
-pe0mp000_ilr.
+pe0mp00 := 
+%suffix (pe0mp00 pe0mp00)
+pe0mp00_ilr.
 
 ; cuánta
-pe0fs000 := 
-%suffix (pe0fs000 pe0fs000)
-pe0fs000_ilr.
+pe0fs00 := 
+%suffix (pe0fs00 pe0fs00)
+pe0fs00_ilr.
 
 ; cuántas
-pe0fp000 := 
-%suffix (pe0fp000 pe0fp000)
-pe0fp000_ilr.
+pe0fp00 := 
+%suffix (pe0fp00 pe0fp00)
+pe0fp00_ilr.
 
 ; cuál, quién
 pe0cs00 := 
@@ -708,13 +708,13 @@ pp3cno0_ilr.
 
 ; --- clitics (affixes)
 ; la
-pp3fsa00 := 
-%suffix (pp3fsa00 pp3fsa00) 
+pp3fsa0 := 
+%suffix (pp3fsa0 pp3fsa0) 
 affx_3sg-fem_ilr.
 
 ; las
-pp3fpa00 := 
-%suffix (pp3fpa00 pp3fpa00) 
+pp3fpa0 := 
+%suffix (pp3fpa0 pp3fpa0) 
 affx_3pl-fem_ilr.
 
 ; lo
@@ -723,19 +723,19 @@ pp3cna00 :=
 affx_3sg-masc_ilr.
 
 ; lo
-pp3msa00 := 
-%suffix (pp3msa00 pp3msa00) 
+pp3msa0 := 
+%suffix (pp3msa0 pp3msa0) 
 affx_3sg-masc_ilr.
 
 ; los
-pp3mpa00 := 
-%suffix (pp3mpa00 pp3mpa00) 
+pp3mpa0 := 
+%suffix (pp3mpa0 pp3mpa0) 
 affx_3pl-masc_ilr.
 
 ; me
 pp1cs00 := 
-%suffix (pp1cs000 pp1cs000) 
-pp1cs000_ilr.
+%suffix (pp1cs00 pp1cs00) 
+pp1cs00_ilr.
 
 p01cs00 := 
 %suffix (p01cs00 p01cs00) 
@@ -743,8 +743,8 @@ p01cs00_ilr.
 ;no_ilr.
 
 ; nos
-pp1cp000 := 
-%suffix (pp1cp000 pp1cp000)
+pp1cp00 := 
+%suffix (pp1cp00 pp1cp00)
 affx_1pl_ilr. 
 
 p01cp00 := 
@@ -753,8 +753,8 @@ affx_1pl_ilr.
 ;no_ilr.
 
 ; te
-pp2cs000 := 
-%suffix (pp2cs000 pp2cs000) 
+pp2cs00 := 
+%suffix (pp2cs00 pp2cs00) 
 affx_2sg_ilr.
 
 p02cs00 := 
@@ -763,8 +763,8 @@ affx_2sg_ilr.
 ;no_ilr.
 
 ; os
-pp2cp000 := 
-%suffix (pp2cp000 pp2cp000) 
+pp2cp00 := 
+%suffix (pp2cp00 pp2cp00) 
 affx_2pl_ilr.
 
 p02cp00 := 
@@ -773,12 +773,12 @@ affx_2pl_ilr.
 ;no_ilr.
 
 ; se
-pp3cn000 := 
-%suffix (pp3cn000 pp3cn000) 
+pp3cn00 := 
+%suffix (pp3cn00 pp3cn00) 
 affx_3per_ilr.
 
-p03cn000 := 
-%suffix (p03cn000 p03cn000) 
+p03cn00 := 
+%suffix (p03cn00 p03cn00) 
 affx_3per_ilr.
 
 p00cn00 := 
@@ -1546,13 +1546,13 @@ vpart_ilr &
 
 ; --- auxiliary verbs
 
-vaip1s0 :=
-%suffix (vaip1s vaip1s)
+vmip1s0 :=
+%suffix (vmip1s vmip1s)
 pres-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
 
-vaip2s0 :=
-%suffix (vaip2s vaip2s)
+vmip2s0 :=
+%suffix (vmip2s vmip2s)
 pres-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
 
@@ -1566,13 +1566,13 @@ vaip1p0 :=
 pres-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
 
-vaip2p0 :=
-%suffix (vaip2p vaip2p)
+vmip2p0 :=
+%suffix (vmip2p vmip2p)
 pres-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
 
-vaip3p0 := 
-%suffix (vaip3p vaip3p)
+vmip3p0 := 
+%suffix (vmip3p vmip3p)
 pres-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
 
@@ -1586,8 +1586,8 @@ vaii1s0 :=
 ipast-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
 
-vaii2s0 :=
-%suffix (vaii2s vaii2s)
+vmii2s0 :=
+%suffix (vmii2s vmii2s)
 ipast-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
 
@@ -1596,28 +1596,28 @@ vaii3s0 :=
 ipast-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
 
-vaii1p0 :=
-%suffix (vaii1p vaii1p)
+vmii1p0 :=
+%suffix (vmii1p vmii1p)
 ipast-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
 
-vaii2p0 := 
-%suffix (vaii2p vaii2p)
+vmii2p0 := 
+%suffix (vmii2p vmii2p)
 ipast-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
 
-vaii3p0 :=
-%suffix (vaii3p vaii3p)
+vmii3p0 :=
+%suffix (vmii3p vmii3p)
 ipast-ind_ilr &
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
 
-vais1s0 :=
-%suffix (vais1s vaisis)
+vmis1s0 :=
+%suffix (vmis1s vmisis)
 ppast-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
 
-vais2s0 :=
-%suffix (vais2s vais2s)
+vmis2s0 :=
+%suffix (vmis2s vmis2s)
 ppast-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
 
@@ -1626,28 +1626,28 @@ vais3s0 :=
 ppast-ind_ilr &
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
 
-vais1p0 :=
-%suffix (vais1p vais1p)
+vmis1p0 :=
+%suffix (vmis1p vmis1p)
 ppast-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
 
-vais2p0 :=
-%suffix (vais2p vais2p)
+vmis2p0 :=
+%suffix (vmis2p vmis2p)
 ppast-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
 
-vais3p0 :=
-%suffix (vais3p vais3p)
+vmis3p0 :=
+%suffix (vmis3p vmis3p)
 ppast-ind_ilr &
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
 
-vaif1s0 := 
-%suffix (vaif1s vaif1s)
+vmif1s0 := 
+%suffix (vmif1s vmif1s)
 fut-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
 
-vaif2s0 :=
-%suffix (vaif2s vaif2s)
+vmif2s0 :=
+%suffix (vmif2s vmif2s)
 fut-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
 
@@ -1656,18 +1656,18 @@ vaif3s0 :=
 fut-ind_ilr &
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
 
-vaif1p0 :=
-%suffix (vaif1p vaif1p)
+vmif1p0 :=
+%suffix (vmif1p0 vmif1p0)
 fut-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
 
-vaif2p0 :=
-%suffix (vaif2p vaif2p)
+vmif2p0 :=
+%suffix (vmif2p vmif2p)
 fut-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
 
-vaif3p0 :=
-%suffix (vaif3p vaif3p)
+vmif3p0 :=
+%suffix (vmif3p vmif3p)
 fut-ind_ilr &
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
 
@@ -1681,8 +1681,8 @@ vaic1s0 :=
 cond-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
 
-vaic2s0 :=
-%suffix (vaic2s vaic2s)
+vmic2s0 :=
+%suffix (vmic2s vmic2s)
 cond-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
 
@@ -1691,18 +1691,18 @@ vaic3s0 :=
 cond-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
 
-vaic1p0 :=
-%suffix (vaic1p vaic1p)
+vmic1p0 :=
+%suffix (vmic1p vmic1p)
 cond-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
 
-vaic2p0 :=
-%suffix (vaic2p vaic2p)
+vmic2p0 :=
+%suffix (vmic2p vmic2p)
 cond-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
 
-vaic3p0 :=
-%suffix (vaic3p vaic3p)
+vmic3p0 :=
+%suffix (vmic3p vmic3p)
 cond-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
 
@@ -1716,8 +1716,8 @@ vasp1s0 :=
 pres-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
 
-vasp2s0 :=
-%suffix (vasp2s vasp2s)
+vmsp2s0 :=
+%suffix (vmsp2s vmsp2s)
 pres-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
 
@@ -1726,18 +1726,18 @@ vasp3s0 :=
 pres-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
 
-vasp1p0 :=
-%suffix (vasp1p vasp1p)
+vmsp1p0 :=
+%suffix (vmsp1p vmsp1p)
 pres-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
 
-vasp2p0 :=
-%suffix (vasp2p vasp2p)
+vmsp2p0 :=
+%suffix (vmsp2p vmsp2p)
 pres-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
 
-vasp3p0 :=
-%suffix (vasp3p vasp3p)
+vmsp3p0 :=
+%suffix (vmsp3p vmsp3p)
 pres-sub_ilr &
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
 
@@ -1751,8 +1751,8 @@ vasi1s0 :=
 ipast-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
 
-vasi2s0 :=
-%suffix (vasi2s vasi2s)
+vmsi2s0 :=
+%suffix (vmsi2s vmsi2s)
 ipast-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
 
@@ -1761,18 +1761,18 @@ vasi3s0 :=
 ipast-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
 
-vasi1p0 :=
-%suffix (vasi1p vasi1p)
+vmsi1p0 :=
+%suffix (vmsi1p vmsi1p)
 ipast-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
 
-vasi2p0 :=
-%suffix (vasi2p vasi2p)
+vmsi2p0 :=
+%suffix (vmsi2p vmsi2p)
 ipast-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
 
-vasi3p0 :=
-%suffix (vasi3p vasi3p)
+vmsi3p0 :=
+%suffix (vmsi3p vmsi3p)
 ipast-sub_ilr &
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
 
@@ -1786,8 +1786,8 @@ vasf1s0 :=
 fut-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
 
-vasf2s0 :=
-%suffix (vasf2s vasf2s)
+vmsf2s0 :=
+%suffix (vmsf2s vmsf2s)
 fut-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
 
@@ -1796,18 +1796,18 @@ vasf3s0 :=
 fut-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
 
-vasf1p0 :=
-%suffix (vasf1p vasf0p)
+vmsf1p0 :=
+%suffix (vmsf1p vmsf0p)
 fut-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
 
-vasf2p0 :=
-%suffix (vasf20 vasf2p)
+vmsf2p0 :=
+%suffix (vmsf20 vmsf2p)
 fut-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
 
-vasf3p0 :=
-%suffix (vasf3p vasf3p)
+vmsf3p0 :=
+%suffix (vmsf3p vmsf3p)
 fut-sub_ilr &
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
 
@@ -2203,12 +2203,12 @@ acc_enclt_ilr &
 acc_enclt_ilr &
   [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG [ PN 3pl, GEN fem ] ],... > ].
 
-+PP3CSD00 := 
++PP3CSD0 := 
 %suffix (vmle vmle)
 dat_enclt_ilr & 
   [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG.PN 3sg ],... > ].
 
-+PP3CPD00 := 
++PP3CPD0 := 
 %suffix (vmles vmles)
 dat_enclt_ilr & 
   [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG.PN 3pl ],... > ].
@@ -2242,7 +2242,7 @@ se_enclt_ilr &
 %suffix (vmse vmse)
 se_impers_enclt_ilr.
 
-+P00CN000 := 
++P00CN00 := 
 %suffix (vmse vmse)
 se_impers_enclt_ilr.
 
