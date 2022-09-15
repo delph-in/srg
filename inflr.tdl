@@ -463,7 +463,7 @@ pd0cs00_ilr.
 ; tales
 pd0cp00 := 
 %suffix (pd0cp00 pd0cp00)
-pd0cp000_ilr.
+pd0cp00_ilr.
 
 
 ; -- indefinite pronouns
