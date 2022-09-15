@@ -274,7 +274,7 @@ ap0mp1p_ilr.
 ; nuestra
 ap0fs1p := 
 %suffix (ap0fs1p ap0fs1p)
-dp1fsp_ilr.
+ap0fs1p_ilr.
 
 ; nuestras
 ap0fp1p := 
