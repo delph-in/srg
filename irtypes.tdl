@@ -133,7 +133,7 @@ cc_ilr :=  infl-ltow-rule &
   [ SYNSEM.LOCAL.CAT.HEAD conj ].
 
 ; -- named entities
-np00000_ilr :=  infl-ltow-rule & 
+np00sp0_ilr :=  infl-ltow-rule & 
   [ SYNSEM.LOCAL.CAT.HEAD noun & [ KEYS.KEY named_rel ] ].
 
 ne_ilr :=  infl-ltow-rule & 

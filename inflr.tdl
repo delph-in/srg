@@ -46,9 +46,9 @@ cc_ilr.
 ; --- named entities
 
 ; -- proper names
-np00000 :=
-%suffix (np00000 np00000)
-np00000_ilr.
+np00sp0 :=
+%suffix (np00sp0 np00sp0)
+np00sp0_ilr.
 
 ; -- numbers
 z := 
