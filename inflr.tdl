@@ -1541,13 +1541,13 @@ vpart_ilr &
 
 ; --- auxiliary verbs
 
-vmip1s0 :=
-%suffix (vmip1s vmip1s)
+vaip1s0 :=
+%suffix (vaip1s vaip1s)
 pres-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
 
-vmip2s0 :=
-%suffix (vmip2s vmip2s)
+vaip2s0 :=
+%suffix (vaip2s vaip2s)
 pres-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
 
@@ -1561,13 +1561,13 @@ vaip1p0 :=
 pres-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
 
-vmip2p0 :=
-%suffix (vmip2p vmip2p)
+vaip2p0 :=
+%suffix (vaip2p vaip2p)
 pres-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
 
-vmip3p0 := 
-%suffix (vmip3p vmip3p)
+vaip3p0 := 
+%suffix (vaip3p vaip3p)
 pres-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
 
@@ -1581,8 +1581,8 @@ vaii1s0 :=
 ipast-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
 
-vmii2s0 :=
-%suffix (vmii2s vmii2s)
+vaii2s0 :=
+%suffix (vaii2s vaii2s)
 ipast-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
 
@@ -1591,28 +1591,28 @@ vaii3s0 :=
 ipast-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
 
-vmii1p0 :=
-%suffix (vmii1p vmii1p)
+vaii1p0 :=
+%suffix (vaii1p vaii1p)
 ipast-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
 
-vmii2p0 := 
-%suffix (vmii2p vmii2p)
+vaii2p0 := 
+%suffix (vaii2p vaii2p)
 ipast-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
 
-vmii3p0 :=
-%suffix (vmii3p vmii3p)
+vaii3p0 :=
+%suffix (vaii3p vaii3p)
 ipast-ind_ilr &
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
 
-vmis1s0 :=
-%suffix (vmis1s vmisis)
+vais1s0 :=
+%suffix (vais1s vaisis)
 ppast-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
 
-vmis2s0 :=
-%suffix (vmis2s vmis2s)
+vais2s0 :=
+%suffix (vais2s vais2s)
 ppast-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
 
@@ -1621,28 +1621,28 @@ vais3s0 :=
 ppast-ind_ilr &
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
 
-vmis1p0 :=
-%suffix (vmis1p vmis1p)
+vais1p0 :=
+%suffix (vais1p vais1p)
 ppast-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
 
-vmis2p0 :=
-%suffix (vmis2p vmis2p)
+vais2p0 :=
+%suffix (vais2p vais2p)
 ppast-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
 
-vmis3p0 :=
-%suffix (vmis3p vmis3p)
+vais3p0 :=
+%suffix (vais3p vais3p)
 ppast-ind_ilr &
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
 
-vmif1s0 := 
-%suffix (vmif1s vmif1s)
+vaif1s0 := 
+%suffix (vaif1s vaif1s)
 fut-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
 
-vmif2s0 :=
-%suffix (vmif2s vmif2s)
+vaif2s0 :=
+%suffix (vaif2s vaif2s)
 fut-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
 
@@ -1651,18 +1651,18 @@ vaif3s0 :=
 fut-ind_ilr &
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
 
-vmif1p0 :=
-%suffix (vmif1p0 vmif1p0)
+vaif1p0 :=
+%suffix (vaif1p0 vaif1p0)
 fut-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
 
-vmif2p0 :=
-%suffix (vmif2p vmif2p)
+vaif2p0 :=
+%suffix (vaif2p vaif2p)
 fut-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
 
-vmif3p0 :=
-%suffix (vmif3p vmif3p)
+vaif3p0 :=
+%suffix (vaif3p vaif3p)
 fut-ind_ilr &
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
 
@@ -1676,8 +1676,8 @@ vaic1s0 :=
 cond-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
 
-vmic2s0 :=
-%suffix (vmic2s vmic2s)
+vaic2s0 :=
+%suffix (vaic2s vaic2s)
 cond-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
 
@@ -1686,17 +1686,17 @@ vaic3s0 :=
 cond-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
 
-vmic1p0 :=
-%suffix (vmic1p vmic1p)
+vaic1p0 :=
+%suffix (vaic1p vaic1p)
 cond-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
 
-vmic2p0 :=
-%suffix (vmic2p vmic2p)
+vaic2p0 :=
+%suffix (vaic2p vaic2p)
 cond-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
 
-vmic3p0 :=
+vaic3p0 :=
 %suffix (vmic3p vmic3p)
 cond-ind_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
@@ -1711,8 +1711,8 @@ vasp1s0 :=
 pres-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
 
-vmsp2s0 :=
-%suffix (vmsp2s vmsp2s)
+vasp2s0 :=
+%suffix (vasp2s vasp2s)
 pres-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
 
@@ -1721,18 +1721,18 @@ vasp3s0 :=
 pres-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
 
-vmsp1p0 :=
-%suffix (vmsp1p vmsp1p)
+vasp1p0 :=
+%suffix (vasp1p vasp1p)
 pres-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
 
-vmsp2p0 :=
-%suffix (vmsp2p vmsp2p)
+vasp2p0 :=
+%suffix (vasp2p vasp2p)
 pres-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
 
-vmsp3p0 :=
-%suffix (vmsp3p vmsp3p)
+vasp3p0 :=
+%suffix (vasp3p vasp3p)
 pres-sub_ilr &
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
 
@@ -1746,8 +1746,8 @@ vasi1s0 :=
 ipast-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
 
-vmsi2s0 :=
-%suffix (vmsi2s vmsi2s)
+vasi2s0 :=
+%suffix (vasi2s vasi2s)
 ipast-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
 
@@ -1756,18 +1756,18 @@ vasi3s0 :=
 ipast-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
 
-vmsi1p0 :=
-%suffix (vmsi1p vmsi1p)
+vasi1p0 :=
+%suffix (vasi1p vasi1p)
 ipast-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
 
-vmsi2p0 :=
-%suffix (vmsi2p vmsi2p)
+vasi2p0 :=
+%suffix (vasi2p vasi2p)
 ipast-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
 
-vmsi3p0 :=
-%suffix (vmsi3p vmsi3p)
+vasi3p0 :=
+%suffix (vasi3p vasi3p)
 ipast-sub_ilr &
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
 
@@ -1781,8 +1781,8 @@ vasf1s0 :=
 fut-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
 
-vmsf2s0 :=
-%suffix (vmsf2s vmsf2s)
+vasf2s0 :=
+%suffix (vasf2s vasf2s)
 fut-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
 
@@ -1791,18 +1791,18 @@ vasf3s0 :=
 fut-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
 
-vmsf1p0 :=
-%suffix (vmsf1p vmsf0p)
+vasf1p0 :=
+%suffix (vasf1p vasf0p)
 fut-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
 
-vmsf2p0 :=
-%suffix (vmsf20 vmsf2p)
+vasf2p0 :=
+%suffix (vasf20 vasf2p)
 fut-sub_ilr & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
 
-vmsf3p0 :=
-%suffix (vmsf3p vmsf3p)
+vasf3p0 :=
+%suffix (vasf3p vasf3p)
 fut-sub_ilr &
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
 
