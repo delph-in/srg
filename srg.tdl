@@ -40,9 +40,9 @@
 :include "lexicon".
 :end :instance.
 
-;:begin :instance :status generic-lex-entry.
-;:include "generics".
-;:end :instance.
+:begin :instance :status generic-lex-entry.
+:include "generics".
+:end :instance.
 
 ;;
 ;; grammar rules and lexical rules (instances of status rule)
