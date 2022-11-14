@@ -3,6 +3,7 @@
 
 n_-_mc_ge := n_-_mc_le &
 [ STEM < "n_-_mc_le" >,
+  TOKENS.+LIST.FIRST.+TNT.+MAIN.+TAG "np00sp0",
   SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ].
 
 ;n_pp_mc_ge := n_pp_mc_le &
