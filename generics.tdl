@@ -1,32 +1,33 @@
 ;;; Hey, emacs (1), this is -*- mode:tdl; Coding: utf-8; -*-
 
 
-n_-_mc_ge := n_-_mc_le &
-[ STEM < "n_-_mc_le" >,
-  SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel".
-  TRAITS generic_token_list ].
+;n_-_mc_ge := n_-_mc_le &
+;[ STEM < "n_-_mc_le" >,
+;  SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel".
+;  TRAITS generic_token_list ].
 
 ;n_pp_mc_ge := n_pp_mc_le &
 ;[ STEM < *top* >,
 ;  SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ].
 
 v_np_ge := v_np*_le &
-[ STEM < "v_np*_le" >,
-  TOKENS.+LIST.FIRST.+TNT.+MAIN.+TAG "vmip3p0",
-  SYNSEM.LKEYS.KEYREL [ PRED "_generic_v_rel" ],
-  TRAITS generic_token_list ].
+[ STEM < "_generic_v_rel" >,
+  TOKENS.+LIST generic_token_list & 
+                < [ +POS.+TAGS "vmip3p0" ], 
+                    +PRED #pred >,
+  SYNSEM.LKEYS.KEYREL [ PRED #pred ] ].
 
-aj_-_i_ge := aj_-_i_le & 
-[ STEM < "aj_-_i_le" >,
-  SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel",
-  TRAITS generic_token_list ].
+;aj_-_i_ge := aj_-_i_le & 
+;[ STEM < "aj_-_i_le" >,
+;  SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel",
+;  TRAITS generic_token_list ].
 
-av_-_i-sm_ge := av_-_i-sm_le &
-[ STEM < "av_-_i-sm_le" >,
-  SYNSEM.LKEYS.KEYREL.PRED "_generic_x_rel",
-  TRAITS generic_token_list ].
+;av_-_i-sm_ge := av_-_i-sm_le &
+;[ STEM < "av_-_i-sm_le" >,
+;  SYNSEM.LKEYS.KEYREL.PRED "_generic_x_rel",
+;  TRAITS generic_token_list ].
 
-av_-_i-vm-spd_ge := av_-_i-vm-spd_le &
-[ STEM < "av_-_i-vm-spd_le" >,
-  SYNSEM.LKEYS.KEYREL.PRED "_generic_x_rel",
-  TRAITS generic_token_list ].
+;av_-_i-vm-spd_ge := av_-_i-vm-spd_le &
+;[ STEM < "av_-_i-vm-spd_le" >,
+;  SYNSEM.LKEYS.KEYREL.PRED "_generic_x_rel",
+;  TRAITS generic_token_list ].
