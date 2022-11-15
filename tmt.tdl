@@ -18,14 +18,16 @@ relation :+
 lex-item :+
 """
 This links the CFROM and CTO to the position in the orthography.
+OZ 15-Nov-2022: I am taking out CTO and CFROM constraints for now
+because they break compilation.
 """
 [ TRAITS #traits,
   STEM [ FROM #from,
 	 TO #to ],
-  SYNSEM.LKEYS.KEYREL [ CFROM #from, 
-		        CTO #to	],
-  SYNSEM.LKEYS.ALTKEYREL [ CFROM #from, 
-		           CTO #to	],
+  ;SYNSEM.LKEYS.KEYREL [ CFROM #from, 
+	;	        CTO #to	],
+  ;SYNSEM.LKEYS.ALTKEYREL [ CFROM #from, 
+	;	           CTO #to	],
   TOKENS tokens &
 	 [ +LIST #traits &
 		 [ FIRST.+FROM #from ], 
@@ -114,9 +116,6 @@ generic_token_list := list.
 generic_token_cons := generic_token_list & cons &
 [ FIRST.+TRAIT generic_trait, REST generic_token_list ].
 generic_token_null := generic_token_list & null.
-
-
-
 
 
 pos := *top* &
