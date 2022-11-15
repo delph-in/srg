@@ -11,11 +11,10 @@
 ;  SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ].
 
 v_np_ge := v_np*_le &
-[ STEM < "_generic_v_rel" >,
+[ STEM < "v_np*_le" >,
   TOKENS.+LIST generic_token_list & 
-                < [ +POS.+TAGS "vmip3p0" ], 
-                    +PRED #pred >,
-  SYNSEM.LKEYS.KEYREL [ PRED #pred ] ].
+                < [ +POS.+TAGS  < "vmip3p0" > ] >,
+  SYNSEM.LKEYS.KEYREL [ PRED "_generic_v_rel" ] ].
 
 ;aj_-_i_ge := aj_-_i_le & 
 ;[ STEM < "aj_-_i_le" >,
