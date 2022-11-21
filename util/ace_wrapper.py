@@ -4,7 +4,6 @@ import glob
 
 
 def run_with_srg(sentence_list, grammar, ace_exec):
-    global f #wth is this?
     with open('ace_err.txt', 'w') as errf:
         with ace.ACEParser(grammar, cmdargs=['-y', '--yy-rules'], executable=ace_exec, stderr=errf) as parser:
             for s in sentence_list:
@@ -30,12 +29,14 @@ def run_with_erg(path, grammar, ace_exec):
                     baseline_response = parser.interact(response['i-input'])
                     if len(baseline_response['results']) == 0:
                         no_result.append(response['i-input'])
-                    baseline_responses.append(response)
+                    else:
+                        baseline_responses.append(response)
         with open('ace_err.txt', 'r') as errf:
             errors = errf.readlines()
         with open('noresults.txt', 'w') as f:
             for i, nrs in enumerate(no_result):
                 f.write(nrs + ': ' + errors[i] + '\n')
+        
 
 
 if __name__ == "__main__":
