@@ -52,7 +52,7 @@ for sent in corpus:
             output += ') '
 
             _from_c += 1   # assume a single space after the word
-    print(''.join(output.strip()))
+    print(''.join(output.strip().lower()))
     # else:
     #     sentid += 1
     #     _num = 0       # lattice ID
