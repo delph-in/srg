@@ -161,7 +161,7 @@
 (145) [4 (0) hd-pt_c z fpt] -6.7887e+0 {3551 4}
 (146) [4 (0) hd-pt_c +pp3cna00 fc] -7.4818e+0 {3551 2}
 (147) [4 (0) hd-pt_c px3mp0c0 fp] -7.4818e+0 {3551 2}
-(148) [4 (0) hd-pt_c pi0fp000 fp] -8.1749e+0 {3551 1}
+(148) [4 (0) hd-pt_c pi0fp00 fp] -8.1749e+0 {3551 1}
 (149) [4 (0) hd-pt_c vmif1p0 fc] -7.4818e+0 {3551 2}
 (150) [4 (0) hd-pt_c vmii4s0 fp] -7.0763e+0 {3551 3}
 (151) [4 (0) hd-pt_c aq0cs00 fs] -8.1749e+0 {3551 1}
@@ -201,7 +201,7 @@
 (185) [4 (0) hd-pt_c +pp3fpa0 fit] -8.1749e+0 {3551 1}
 (186) [4 (0) hd-pt_c vmsp3p0 fp] -7.4818e+0 {3551 2}
 (187) [4 (0) hd-pt_c nccp000 fit] -8.1749e+0 {3551 1}
-(188) [4 (0) hd-pt_c pi0fp000 fc] -8.1749e+0 {3551 1}
+(188) [4 (0) hd-pt_c pi0fp00 fc] -8.1749e+0 {3551 1}
 (189) [4 (0) hd-pt_c ncfp000 fit] -6.7887e+0 {3551 4}
 (190) [4 (0) hd-pt_c vmp00sm fc] -7.0763e+0 {3551 3}
 (191) [4 (0) hd-pt_c pi0mp000 fp] -6.5655e+0 {3551 5}
@@ -593,7 +593,7 @@
 (577) [4 (0) hd_optsp_c pp2cp00p] -7.1838e+0 {1318 1}
 (578) [4 (0) hd_optsp_c n-n_nu-cpd_c] -7.1838e+0 {1318 1}
 (579) [4 (0) hd_optsp_c ncfp000] -6.4907e+0 {1318 2}
-(580) [4 (0) hd_optsp_c pi0fp000] -6.4907e+0 {1318 2}
+(580) [4 (0) hd_optsp_c pi0fp00] -6.4907e+0 {1318 2}
 (581) [4 (0) hd_optsp_c pd0mp000] -7.1838e+0 {1318 1}
 (582) [4 (0) hd_optsp_c hd-ad_i-cn-pp_c] -5.7976e+0 {1318 4}
 (583) [4 (0) hd_optsp_c rg] -5.5744e+0 {1318 5}
@@ -4728,7 +4728,7 @@
 (4712) [4 (0) hd-cmp_c v_ppart-t_dlr ad-hd_s_c] -8.3877e+0 {4393 1}
 (4713) [4 (0) hd-cmp_c aq0fs0 pp-pp_e-crd-mt_c] -8.3877e+0 {4393 1}
 (4714) [4 (0) hd-cmp_c vmip1s0 hd-ad_i-np-xp-pt_c] -8.3877e+0 {4393 1}
-(4715) [4 (0) hd-cmp_c pi0fp000 hd-cmp_mrk_c] -8.3877e+0 {4393 1}
+(4715) [4 (0) hd-cmp_c pi0fp00 hd-cmp_mrk_c] -8.3877e+0 {4393 1}
 (4716) [4 (0) hd-cmp_c hd-ad_i-v-pp_c sp-hd_ell-sfrel_c] -7.6946e+0 {4393 2}
 (4717) [4 (0) hd-cmp_c hd-ad_i-v-modnp_c hd_optcmp-r_c] -8.3877e+0 {4393 1}
 (4718) [4 (0) hd-cmp_c vsis3p0 hd_nbar_c] -8.3877e+0 {4393 1}
@@ -6621,7 +6621,7 @@
 (6605) [4 (0) sp-hd_c da0mp0 ncmn000] -6.6091e+0 {3709 5}
 (6606) [4 (0) sp-hd_c da0fs0 n-n_cpd_c] -7.5253e+0 {3709 2}
 (6607) [4 (0) sp-hd_c sp-hd_hdt_c hd-ad_i-cn-ap_c] -7.1199e+0 {3709 3}
-(6608) [4 (0) sp-hd_c di0fp0 pi0fp000] -8.2184e+0 {3709 1}
+(6608) [4 (0) sp-hd_c di0fp0 pi0fp00] -8.2184e+0 {3709 1}
 (6609) [4 (0) sp-hd_c dd0fp0 hd_optcmp-n_c] -6.6091e+0 {3709 5}
 (6610) [4 (0) sp-hd_c dd0fs0 hd-ad_i-cn-ap_c] -6.8322e+0 {3709 4}
 (6611) [4 (0) sp-hd_c da0fs0 nccs000] -5.5105e+0 {3709 15}
@@ -9453,7 +9453,7 @@
 (9437) [4 (0) sb-hd_c hd-ad_i-cn-cn_c hd_optcmp-v_c] -7.1943e+0 {1332 1}
 (9438) [4 (0) sb-hd_c np-np_crd-ot_c hd-cmp_v-cp_c] -7.1943e+0 {1332 1}
 (9439) [4 (0) sb-hd_c sp-hd_c vmif3s0] -7.1943e+0 {1332 1}
-(9440) [4 (0) sb-hd_c pi0fp000 hd-cmp_aux-vp_c] -7.1943e+0 {1332 1}
+(9440) [4 (0) sb-hd_c pi0fp00 hd-cmp_aux-vp_c] -7.1943e+0 {1332 1}
 (9441) [4 (0) sb-hd_c hd-ad_i-np-xp-pt_c hd-cmp_v-cp-sld_c] -7.1943e+0 {1332 1}
 (9442) [4 (0) sb-hd_c hd-ad_i-cn-pn_c hd_optcmp-v_c] -7.1943e+0 {1332 1}
 (9443) [4 (0) sb-hd_c hd-ad_i-cn-pn_c hd-cmp_aux-vp_c] -6.5013e+0 {1332 2}
@@ -9529,7 +9529,7 @@
 (9513) [4 (0) sb-hd_c pi0mp000 hd_xcmp-v_c] -7.1943e+0 {1332 1}
 (9514) [4 (0) sb-hd_c sp-hd_ell_c ct-hd_c] -6.5013e+0 {1332 2}
 (9515) [4 (0) sb-hd_c hd-ad_i-cn-pn_c hd-cmp_v-cp_c] -5.5850e+0 {1332 5}
-(9516) [4 (0) sb-hd_c pi0fp000 hd-cmp_v-cp_c] -7.1943e+0 {1332 1}
+(9516) [4 (0) sb-hd_c pi0fp00 hd-cmp_v-cp_c] -7.1943e+0 {1332 1}
 (9517) [4 (0) sb-hd_c ad-hd_s_c hd-cmp_c] -5.8081e+0 {1332 4}
 (9518) [4 (0) sb-hd_c sp-hd_ell_c hd-cmp_c] -4.8919e+0 {1332 10}
 (9519) [4 (0) sb-hd_c hd-ad_i-cn-pn_c hd-ad_i-v-pp_c] -6.5013e+0 {1332 2}
@@ -9571,7 +9571,7 @@
 (9555) [4 (0) sb-hd_c sp-hd_c ad-hd_i-rp-s_c] -5.1150e+0 {1332 8}
 (9556) [4 (0) sb-hd_c pi0mp000 hd-cmp_aux-vp_c] -6.5013e+0 {1332 2}
 (9557) [4 (0) sb-hd_c sp-hd_c ad-hd_s_c] -3.0201e+0 {1332 65}
-(9558) [4 (0) sb-hd_c pi0fp000 hd-cmp_c] -7.1943e+0 {1332 1}
+(9558) [4 (0) sb-hd_c pi0fp00 hd-cmp_c] -7.1943e+0 {1332 1}
 (9559) [4 (0) sb-hd_c hd_optsp_c ad-hd_s_c] -3.7605e+0 {1332 31}
 (9560) [4 (0) sb-hd_c hd_optcmp-v_c hd-cmp_c] -6.0958e+0 {1332 3}
 (9561) [4 (0) sb-hd_c sp-hd_c hd-cmp_c] -1.5997e+0 {1332 269}
@@ -11736,10 +11736,10 @@
 (11720) [1 (0) d_-_dem-este_le "estos"] -2.4224e+0 {124 11}
 (11721) [1 (0) d_-_dem-este_le "Este"] -2.1122e+0 {124 15}
 (11722) [1 (0) d_-_dem-este_le "Esta"] -2.2553e+0 {124 13}
-(11723) [2 (0) pi0fp000 n_pp_pr-part-mucho_le] -2.1972e+0 {9 1}
-(11724) [2 (0) pi0fp000 n_-_pr-idf-todo_le] -2.1972e+0 {9 1}
-(11725) [2 (0) pi0fp000 n_-_npart-pr-spd_dlr] -8.1096e-1 {9 4}
-(11726) [2 (0) pi0fp000 n_-_pr-df-ambos_le] -1.0986e+0 {9 3}
+(11723) [2 (0) pi0fp00 n_pp_pr-part-mucho_le] -2.1972e+0 {9 1}
+(11724) [2 (0) pi0fp00 n_-_pr-idf-todo_le] -2.1972e+0 {9 1}
+(11725) [2 (0) pi0fp00 n_-_npart-pr-spd_dlr] -8.1096e-1 {9 4}
+(11726) [2 (0) pi0fp00 n_-_pr-df-ambos_le] -1.0986e+0 {9 3}
 (11727) [1 (0) n_-_pr-df-ambos_le "ambas"] -1.9459e+0 {7 1}
 (11728) [1 (0) n_-_pr-df-ambos_le "ambos"] -1.2528e+0 {7 2}
 (11729) [1 (0) n_-_pr-df-ambos_le "Ambos"] -1.2528e+0 {7 2}
