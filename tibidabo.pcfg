@@ -249,7 +249,7 @@
 (233) [4 (0) hd-pt_c pi0ms00 fit] -8.1749e+0 {3551 1}
 (234) [4 (0) hd-pt_c w fit] -8.1749e+0 {3551 1}
 (235) [4 (0) hd-pt_c sps00 fp] -6.2291e+0 {3551 7}
-(236) [4 (0) hd-pt_c +pp3cpd00 fit] -8.1749e+0 {3551 1}
+(236) [4 (0) hd-pt_c +pp3cpd0 fit] -8.1749e+0 {3551 1}
 (237) [4 (0) hd-pt_c ncfs000 fe] -8.1749e+0 {3551 1}
 (238) [4 (0) hd-pt_c np00000 fpt] -5.6100e+0 {3551 13}
 (239) [4 (0) hd-pt_c ncms000 fd] -7.4818e+0 {3551 2}
@@ -4696,7 +4696,7 @@
 (4680) [4 (0) hd-cmp_c nccs000 pp-pp_e-crd-mt_c] -8.3877e+0 {4393 1}
 (4681) [4 (0) hd-cmp_c vmif3s0 np-np_crd-mt-3p_c] -8.3877e+0 {4393 1}
 (4682) [4 (0) hd-cmp_c vsic4s0 aq0cs0] -8.3877e+0 {4393 1}
-(4683) [4 (0) hd-cmp_c +pp3cpd00 ad-hd_s_c] -8.3877e+0 {4393 1}
+(4683) [4 (0) hd-cmp_c +pp3cpd0 ad-hd_s_c] -8.3877e+0 {4393 1}
 (4684) [4 (0) hd-cmp_c hd-ad_i-v-modnp_c hd-cmp_x-cp_c] -8.3877e+0 {4393 1}
 (4685) [4 (0) hd-cmp_c vmii4s0 hd-cmp_c] -8.3877e+0 {4393 1}
 (4686) [4 (0) hd-cmp_c vmif3p0 aq0mp0] -8.3877e+0 {4393 1}
@@ -4830,7 +4830,7 @@
 (4814) [4 (0) hd-cmp_c vmib1p0 sp-hd_c] -8.3877e+0 {4393 1}
 (4815) [4 (0) hd-cmp_c cs n-n_crd-mt_c] -8.3877e+0 {4393 1}
 (4816) [4 (0) hd-cmp_c vsip1p0 hd_optcmp-a_c] -8.3877e+0 {4393 1}
-(4817) [4 (0) hd-cmp_c +pp3cpd00 sp-hd_c] -8.3877e+0 {4393 1}
+(4817) [4 (0) hd-cmp_c +pp3cpd0 sp-hd_c] -8.3877e+0 {4393 1}
 (4818) [4 (0) hd-cmp_c cs pd0cs000] -8.3877e+0 {4393 1}
 (4819) [4 (0) hd-cmp_c vssi4s0 hd-pt_c] -8.3877e+0 {4393 1}
 (4820) [4 (0) hd-cmp_c vmic3p0 hd_ajpart_c] -8.3877e+0 {4393 1}
@@ -8396,7 +8396,7 @@
 (8380) [1 (0) n_pp_c_le "Entrada"] -6.1527e+0 {470 1}
 (8381) [1 (0) n_pp_c_le "final"] -4.2069e+0 {470 7}
 (8382) [4 (0) ct-hd_c pp2cs000 hd-ad_i-v-pp_c] -6.3153e+0 {553 1}
-(8383) [4 (0) ct-hd_c pp3cpd00 hd_xad-v_c] -6.3153e+0 {553 1}
+(8383) [4 (0) ct-hd_c pp3cpd0 hd_xad-v_c] -6.3153e+0 {553 1}
 (8384) [4 (0) ct-hd_c pp3mpa00 vmii3p0] -6.3153e+0 {553 1}
 (8385) [4 (0) ct-hd_c pp1cs000 hd-cmp_v-cp-sld_c] -5.6222e+0 {553 2}
 (8386) [4 (0) ct-hd_c pp3mpa00 hd_xad-v_c] -6.3153e+0 {553 1}
@@ -8408,7 +8408,7 @@
 (8392) [4 (0) ct-hd_c pp3csd00 vmic4s0] -6.3153e+0 {553 1}
 (8393) [4 (0) ct-hd_c pp3fsa00 vmib1p0] -6.3153e+0 {553 1}
 (8394) [4 (0) ct-hd_c pp3csd00 hd-ad_s-x-cl_c] -6.3153e+0 {553 1}
-(8395) [4 (0) ct-hd_c pp3cpd00 vmip3s0] -6.3153e+0 {553 1}
+(8395) [4 (0) ct-hd_c pp3cpd0 vmip3s0] -6.3153e+0 {553 1}
 (8396) [4 (0) ct-hd_c pp3fsa00 hd_xad-v_c] -6.3153e+0 {553 1}
 (8397) [4 (0) ct-hd_c pp3msa00 vmip1p0] -6.3153e+0 {553 1}
 (8398) [4 (0) ct-hd_c pp3fsa00 hd-ad_i-v-rp_c] -6.3153e+0 {553 1}
@@ -8442,13 +8442,13 @@
 (8426) [4 (0) ct-hd_c pp3csd00 hd-cmp_v-cp_c] -4.5236e+0 {553 6}
 (8427) [4 (0) ct-hd_c pp3csd00 hd_optcmp-v_c] -6.3153e+0 {553 1}
 (8428) [4 (0) ct-hd_c pp3fsa00 hd-ad_s-x-cl_c] -5.6222e+0 {553 2}
-(8429) [4 (0) ct-hd_c pp3cpd00 hd-cmp_c] -5.2167e+0 {553 3}
+(8429) [4 (0) ct-hd_c pp3cpd0 hd-cmp_c] -5.2167e+0 {553 3}
 (8430) [4 (0) ct-hd_c pp3fsa00 hd-cmp_v-cp-sld_c] -6.3153e+0 {553 1}
 (8431) [4 (0) ct-hd_c pp3mpa00 hd-cmp_c] -5.2167e+0 {553 3}
-(8432) [4 (0) ct-hd_c pp3cpd00 hd-ad_i-v-pp_c] -6.3153e+0 {553 1}
+(8432) [4 (0) ct-hd_c pp3cpd0 hd-ad_i-v-pp_c] -6.3153e+0 {553 1}
 (8433) [4 (0) ct-hd_c pp3fpa00 hd_xad-v_c] -6.3153e+0 {553 1}
 (8434) [4 (0) ct-hd_c pp1cs000 hd_xad-v_c] -5.6222e+0 {553 2}
-(8435) [4 (0) ct-hd_c pp3cpd00 hd-cmp_v-cp_c] -6.3153e+0 {553 1}
+(8435) [4 (0) ct-hd_c pp3cpd0 hd-cmp_v-cp_c] -6.3153e+0 {553 1}
 (8436) [4 (0) ct-hd_c pp1cp000 ct-hd_c] -5.6222e+0 {553 2}
 (8437) [4 (0) ct-hd_c p03cn000 hd_xad-v_c] -4.5236e+0 {553 6}
 (8438) [4 (0) ct-hd_c p03cn000 vmip3s0] -4.0128e+0 {553 10}
@@ -8457,7 +8457,7 @@
 (8441) [4 (0) ct-hd_c pp1cp000 hd-cmp_aux-vp_c] -5.2167e+0 {553 3}
 (8442) [4 (0) ct-hd_c pp2cs000 hd-ad_i-v-modnp_c] -6.3153e+0 {553 1}
 (8443) [4 (0) ct-hd_c pp2cs000 hd_xad-v_c] -6.3153e+0 {553 1}
-(8444) [4 (0) ct-hd_c pp3cpd00 hd-pt_c] -5.6222e+0 {553 2}
+(8444) [4 (0) ct-hd_c pp3cpd0 hd-pt_c] -5.6222e+0 {553 2}
 (8445) [4 (0) ct-hd_c pp3csd00 hd_xad-v_c] -5.6222e+0 {553 2}
 (8446) [4 (0) ct-hd_c pp3mpa00 hd-ad_s-x-cl_c] -6.3153e+0 {553 1}
 (8447) [4 (0) ct-hd_c pp3fsa00 vmip3p0] -6.3153e+0 {553 1}
@@ -11797,7 +11797,7 @@
 (11781) [1 (0) v_cp_q_le "informó"] -2.8332e+0 {17 1}
 (11782) [1 (0) v_cp_q_le "saber"] -2.8332e+0 {17 1}
 (11783) [1 (0) v_cp_q_le "sabía"] -2.8332e+0 {17 1}
-(11784) [2 (0) +pp3cpd00 vmn0000] -3.3379e-5 {3 3}
+(11784) [2 (0) +pp3cpd0 vmn0000] -3.3379e-5 {3 3}
 (11785) [1 (0) v_ap_seq-prn_le "harán"] -2.7726e+0 {16 1}
 (11786) [1 (0) v_ap_seq-prn_le "quedó"] -2.7726e+0 {16 1}
 (11787) [1 (0) v_ap_seq-prn_le "hacerse"] -2.7726e+0 {16 1}
@@ -12756,7 +12756,7 @@
 (12740) [1 (0) p_np_i-tmp-durante-vm_le "Durante"] -1.7346e+0 {17 3}
 (12741) [4 (0) hd-sp_c ncms000 hd-pt_c] -3.3379e-5 {3 3}
 (12742) [3 (0) d_-_pstn-alg_dlr di0ms0] -3.3379e-5 {3 3}
-(12743) [2 (0) pp3cpd00 n_-_pr-pers-le_le] -1.1146e-5 {9 9}
+(12743) [2 (0) pp3cpd0 n_-_pr-pers-le_le] -1.1146e-5 {9 9}
 (12744) [1 (0) p_adv_i-vm_le "Desde"] -2.0794e+0 {8 1}
 (12745) [1 (0) p_adv_i-vm_le "desde"] -1.3863e+0 {8 2}
 (12746) [1 (0) p_adv_i-vm_le "de"] -4.7003e-1 {8 5}
