@@ -1,8 +1,15 @@
 ;;; Hey, emacs (1), this is -*- mode:tdl; Coding: utf-8; -*-
 ;;; 
-;;;  Montserrat Marimon
+;;;  Montserrat Marimon, Olga Zamaraeva
 ;;;
 ;;;  lextypes.tdl: Lexical types for the SRG
+
+native_le := lex-item &
+[ TRAITS native_token_list ]
+""" We need to add this constraint to most entries in the lexicon, 
+ to be able to filter out generic lexical entries where an entry
+ already is present in the lexicon. """.
+
 
 ; Reflexionó durante un buen rato sobre qué cajón sacar.
 ; --- Verbs
