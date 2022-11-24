@@ -24,34 +24,36 @@ def update_lexicon(filepath_lex, filepath_letypes):
                                                         'This is a native lexical entry type, '
                                                         'for words that are in the lexicon.')
                 new_type.conjunction.add(pydelphin_tdl.TypeIdentifier('native_le'))
-                updated_letypes.append(new_type)
-            updated_letypes.append(obj)
+                updated_letypes.append((event, new_type, lineno))
+            updated_letypes.append((event, obj, lineno))
         else:
-            updated_letypes.append(obj)
+            updated_letypes.append((event, obj, lineno))
     save_tdl_objects(updated_letypes, 'updated_letypes.tdl')
 
     updated_lexical_entries = []
     for event, obj, lineno in pydelphin_tdl.iterparse(filepath_lex):
         if event == 'TypeDefinition':
-            terms = [add_word_to_typename(obj.identifier, '_native', '_le')]
+            terms = [add_word_to_typename(obj.supertypes[0], '_native', '_le')]
             terms.extend(obj.conjunction.terms[1:])
             conj = pydelphin_tdl.Conjunction(terms)
             new_type = pydelphin_tdl.TypeDefinition(obj.identifier, conj, obj.docstring)
-            updated_lexical_entries.append(new_type)
+            updated_lexical_entries.append((event, new_type, lineno))
         else:
-            updated_lexical_entries.append(obj)
+            updated_lexical_entries.append((event, obj, lineno))
 
     save_tdl_objects(updated_lexical_entries, 'updated_lexicon.tdl')
 
 
 def save_tdl_objects(tdl_objects, filename):
     with open(filename, 'w') as f:
-        for obj in tdl_objects:
-            if isinstance(obj, str):
+        for event, obj, lineno in tdl_objects:
+            if event == 'LineComment':
                 if not obj.startswith(';'):
                     f.write('; ' + obj + '\n')
                 else:
                     f.write(obj + '\n')
+            elif event == 'BlockComment':
+                f.write('#|' + obj + '|#\n\n')
             else:
                 f.write(pydelphin_tdl.format(obj) + '\n\n')
 
