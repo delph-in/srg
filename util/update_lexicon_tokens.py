@@ -49,9 +49,9 @@ def save_tdl_objects(tdl_objects, filename):
         for obj in tdl_objects:
             if isinstance(obj, str):
                 if not obj.startswith(';'):
-                    f.write('; ' + obj + '\n\n')
+                    f.write('; ' + obj + '\n')
                 else:
-                    f.write(obj + '\n\n')
+                    f.write(obj + '\n')
             else:
                 f.write(pydelphin_tdl.format(obj) + '\n\n')
 
