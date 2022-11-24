@@ -2332,7 +2332,7 @@ v_np-pp*_e-rfx-rcp_lex := v_trans_np_mrkd_np & main-verb & basic-three-arg &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_np_synsem, 
                          VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ]. 
 
-v_np*-pp*_e-rfx-rcp_le := v_trans_np_mrkd_np & main-verb & basic-three-arg & 
+v_np*-pp*_e-rfx-rcp_lex := v_trans_np_mrkd_np & main-verb & basic-three-arg & 
   [ ALTS [ IMPERS +, PASS +, RCP +, RFX + ],
     SYNSEM v_trans_np_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_np_synsem, 
@@ -3704,7 +3704,7 @@ v_np-xp := basic-main-verb &
 
 
 ; e.g. eso se considera plagio
-v_np-np_sor-rfx_le := v_np-xp & main-verb & basic-three-arg & 
+v_np-np_sor-rfx_lex := v_np-xp & main-verb & basic-three-arg & 
   [ ALTS.RFX -,
     SYNSEM v_np-np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_np-np_synsem, 
@@ -4409,7 +4409,7 @@ n_-_c-tmp_lex := basic-noun-lex & norm-sem-lex-item & basic-one-arg &
                           RELS <! date-relation & 
                                   [ PRED time_n_rel ] !> ] ] ].
 
-n_-_c-qnt_le := pronominal-lex & norm-zero-arg &
+n_-_c-qnt_lex := pronominal-lex & norm-zero-arg &
   [ SYNSEM quant_pron_adverb_synsem & 
            [ LOCAL [ AGR #agr,
                      CAT.VAL.SPR < [ OPT -,
@@ -4886,7 +4886,7 @@ n_-_pr-idf-demas_lex := spec-indefinite-pron-lex &
                      CONT.RELS <! [ PRED generic_entity_rel ] !> ] ] ].
 
 ; e.g. cada cual mantuvo su posición
-n_-_pr-idf-cual_le := spec-indefinite-pron-lex &
+n_-_pr-idf-cual_lex := spec-indefinite-pron-lex &
   [ SYNSEM indefinite_pron_synsem & 
            [ LOCAL [ CAT.VAL.SPR < [ OPT -, 
                                      LOCAL.CAT.HEAD.KEYS.KEY _cada_q_rel ] >,
@@ -5503,7 +5503,7 @@ aj_adv := a_intrans & non-modfied-adj-lex & norm-zero-arg &
 ; e.g. periódicas revisiones, largo adiós, esporádicas crisis
 aj_-_s-nprd_lex := aj_adv.
 
-aj_-_s-mismo_le := a_intrans & non-modfied-adj-lex & norm-zero-arg & 
+aj_-_s-mismo_lex := a_intrans & non-modfied-adj-lex & norm-zero-arg & 
   [ SYNSEM non-agr_basic_adjective_synsem & 
            [ LOCAL [ CAT [ POSTHEAD +,
                            HEAD [ PRD non-prd,
@@ -6900,18 +6900,18 @@ p_vp_ptcl_lex := mark-adp-lex & p_cp_prop_or_ques_inf &
 
 ; - comparatives
 ; e.g. tan distantes como antes
-p_rg_ptcl_le := mark-adp-lex & p_adv & 
+p_rg_ptcl_lex := mark-adp-lex & p_adv & 
   [ SYNSEM basic_mark-adp_synsem & 
            [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD.KEYS.KEY adv_rel ] > ] ].
 
 ; e.g. igual que en una película, contará con más funciones que en la anterior
-p_pp_ptcl_le := mark-adp-lex & p_pp & 
+p_pp_ptcl_lex := mark-adp-lex & p_pp & 
   [ SYNSEM basic_mark-adp_synsem & 
            [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT [ MC na,
                                                  HEAD.MOD < [ LOCAL.CAT.HEAD noun ] > ] ]> ] ].  
 
 ; e.g. tan maravillada como rutinatia
-p_ap_ptcl_le := mark-adp-lex & p_ap & 
+p_ap_ptcl_lex := mark-adp-lex & p_ap & 
   [ SYNSEM basic_mark-adp_synsem & 
            [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.MC na ] > ] ].
 
@@ -7087,7 +7087,7 @@ p_adv_i-vm_lex := mod-adp-lex & p_adv & norm-sem-lex-item &
 
 ; Taking MODNP
 ; e.g. Como ahora
-p_modnp_i-vm_le := mod-adp-lex & p_modnp & norm-sem-lex-item & 
+p_modnp_i-vm_lex := mod-adp-lex & p_modnp & norm-sem-lex-item & 
   [ SYNSEM p_vmod_synsem &
            [ LKEYS.KEYREL.PRED prep_mod_rel ] ].
 
@@ -7113,7 +7113,7 @@ p_pp_i-e-vm_lex := mod-adp-lex & p_mrkd_np & norm-sem-lex-item &
                      --COMPKEY  _por_p_sel_rel ] ] ].  
 
 ; e.g. tengo que ser honesta conmigo
-pp_-_i-vm_le := mod-pp-lex & norm-sem-lex-item & 
+pp_-_i-vm_lex := mod-pp-lex & norm-sem-lex-item & 
   [ SYNSEM pp_vmod_synsem ]. 
 
 ; --- Adjectival modifying prepositions (degree)
@@ -7627,35 +7627,35 @@ d_quant_eval := det_quant_eval &
   [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
              LKEYS.ALTKEYREL.PRED undef_q_rel ] ].
 
-d_-_q-cierto_le := det_quant_indef & 
+d_-_q-cierto_lex := det_quant_indef & 
   [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
              LKEYS.ALTKEYREL.PRED _cierto_q_rel ] ].
 
-d_-_q-determinado_le := det_quant_indef & 
+d_-_q-determinado_lex := det_quant_indef & 
   [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
              LKEYS.ALTKEYREL.PRED _determinado_q_rel ] ].
 
-d_-_q-diferente_le := det_quant_indef & 
+d_-_q-diferente_lex := det_quant_indef & 
   [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
              LKEYS.ALTKEYREL.PRED _diferente_q_rel ] ].
 
-d_-_q-distinto_le := det_quant_indef & 
+d_-_q-distinto_lex := det_quant_indef & 
   [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
              LKEYS.ALTKEYREL.PRED _distinto_q_rel ] ].
 
-d_-_q-diverso_le := det_quant_indef & 
+d_-_q-diverso_lex := det_quant_indef & 
   [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
              LKEYS.ALTKEYREL.PRED _diverso_q_rel ] ].
 
-d_-_q-escaso_le := det_quant_indef & 
+d_-_q-escaso_lex := det_quant_indef & 
   [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
              LKEYS.ALTKEYREL.PRED _escaso_q_rel ] ].
 
-d_-_q-numeroso_le := det_quant_indef & 
+d_-_q-numeroso_lex := det_quant_indef & 
   [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
              LKEYS.ALTKEYREL.PRED _numeroso_q_rel ] ].
 
-d_-_q-raro_le := det_quant_indef & 
+d_-_q-raro_lex := det_quant_indef & 
   [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
              LKEYS.ALTKEYREL.PRED _raro_q_rel ] ].
 
@@ -7835,13 +7835,13 @@ det_excl := det_nonque_nonrel_nonposs &
                               LBL #lbl ],
                      ALTKEYREL.LBL #lbl ] ] ].
 
-d_-_excl-que_le := det_excl &
+d_-_excl-que_lex := det_excl &
  [ SYNSEM.LKEYS.KEYREL.PRED _que_q_rel ].
 
-d_-_excl-cuanto_le := det_excl &
+d_-_excl-cuanto_lex := det_excl &
  [ SYNSEM.LKEYS.KEYREL.PRED _cuanto_q_rel ].
 
-d_-_excl-cual_le := det_excl &
+d_-_excl-cual_lex := det_excl &
  [ SYNSEM.LKEYS.KEYREL.PRED _cual_q_rel ].
 
 
@@ -8434,7 +8434,7 @@ c_xp_sino_lex := basic-coordconj-lex & basic-one-arg &
            [ LOCAL.COORD-STRAT one,
              LKEYS.KEYREL.PRED _sino_c_rel ] ].
 
-c_xp_sin-embargo_le := basic-coordconj-lex & basic-one-arg &
+c_xp_sin-embargo_lex := basic-coordconj-lex & basic-one-arg &
   [ SYNSEM norm_coordconj_synsem &
            [ LOCAL.COORD-STRAT one,
              LKEYS.KEYREL.PRED _sin_embargo_c_rel ] ].
@@ -8444,7 +8444,7 @@ c_xp_sino-que_lex := basic-coordconj-lex & basic-one-arg &
            [ LOCAL.COORD-STRAT one,
              LKEYS.KEYREL.PRED _sino_que_c_rel ] ].
 
-c_xp_eso-que_le := basic-coordconj-lex & basic-one-arg &
+c_xp_eso-que_lex := basic-coordconj-lex & basic-one-arg &
   [ SYNSEM norm_coordconj_synsem &
            [ LOCAL.COORD-STRAT one,
              LKEYS.KEYREL.PRED _eso_que_c_rel ] ].
@@ -9017,6 +9017,52 @@ transitive_verb_synsem := lex-synsem.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;;;; Leaf types
+v_np*-pp*_e-rfx-rcp_le := v_np*-pp*_e-rfx-rcp_lex.
+
+v_np-np_sor-rfx_le := v_np-np_sor-rfx_lex.
+
+n_-_c-qnt_le := n_-_c-qnt_lex.
+
+n_-_pr-idf-cual_le := n_-_pr-idf-cual_lex.
+
+aj_-_s-mismo_le := aj_-_s-mismo_lex.
+
+p_rg_ptcl_le := p_rg_ptcl_lex.
+
+p_pp_ptcl_le := p_pp_ptcl_lex.  
+
+p_ap_ptcl_le := p_ap_ptcl_lex.          
+
+p_modnp_i-vm_le := p_modnp_i-vm_lex.
+
+pp_-_i-vm_le := pp_-_i-vm_lex. 
+
+d_-_q-cierto_le := d_-_q-cierto_lex.
+
+d_-_q-determinado_le := d_-_q-determinado_lex.
+
+d_-_q-diferente_le := d_-_q-diferente_lex.
+
+d_-_q-distinto_le := d_-_q-distinto_lex.
+
+d_-_q-diverso_le := d_-_q-diverso_lex.
+
+d_-_q-escaso_le := d_-_q-escaso_lex.
+
+d_-_q-numeroso_le := d_-_q-numeroso_lex.
+
+d_-_q-raro_le := d_-_q-raro_lex.
+
+d_-_excl-que_le := d_-_excl-que_lex.
+
+d_-_excl-cuanto_le := d_-_excl-cuanto_lex.
+
+d_-_excl-cual_le := d_-_excl-cual_lex.
+
+c_xp_sin-embargo_le := c_xp_sin-embargo_lex.
+
+c_xp_eso-que_le := c_xp_eso-que_lex.
+
 
 ; <type val="v_-_nsbj_le">
 ; <description>Verb, no compl, no subj (weather verbs)
