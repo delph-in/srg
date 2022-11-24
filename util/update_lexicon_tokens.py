@@ -2,6 +2,14 @@ import sys
 import copy
 from delphin import tdl as pydelphin_tdl
 
+"""
+This script helps to modify the grammar so that all entries in the lexicon are native lexical entries, as in, they
+inherit from a supertype which inherits from native_le.
+
+This is not a fully working script in the sense that it won't give you a fully working new version of letypes.tdl and
+lexicon.tdl; you will need to (a) only copy over the updated portion of letypes starting from Leaf types; (b) change 
+a couple more things manually until the grammar compiles.
+"""
 
 def update_lexicon(filepath_lex, filepath_letypes):
     le_to_update = set()
