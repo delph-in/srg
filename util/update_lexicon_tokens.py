@@ -1,7 +1,6 @@
-import glob, sys
+import sys
 import copy
 from delphin import tdl as pydelphin_tdl
-from gmcs import tdl as matrix_tdl
 
 
 def update_lexicon(filepath_lex, filepath_letypes):
@@ -55,8 +54,6 @@ def save_tdl_objects(tdl_objects, filename):
                     f.write(obj + '\n\n')
             else:
                 f.write(pydelphin_tdl.format(obj) + '\n\n')
-
-# print(pydelphin_tdl.format(obj))
 
 
 def add_word_to_typename(name, word, suffix):
