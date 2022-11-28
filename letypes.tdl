@@ -9017,9 +9017,9 @@ transitive_verb_synsem := lex-synsem.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; 
 ;;; Leaf types
-v_np-ap_sor-rfx_le : = v_np-ap_sor-rfx_lex.
+v_np-ap_sor-rfx_le := v_np-ap_sor-rfx_lex.
 
-v_np-ap_sor-rfx_native_le : = v_np-ap_sor-rfx_lex & native_le
+v_np-ap_sor-rfx_native_le := v_np-ap_sor-rfx_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
   """.
