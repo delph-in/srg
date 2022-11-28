@@ -1,13 +1,6 @@
 ;;; -*- Mode: tdl; Coding: utf-8; -*-
 ;;;
 
-;; lexical filtering: reduce the chart after lexical instantiation and the
-;; application of lexical rules, right before we turn loose syntactic rules.
-:begin :instance :status lexical-filtering-rule.
-:include "lfr.tdl".
-:end :instance.
-
-
 :begin :type.
 
 ;;
@@ -30,14 +23,14 @@
 ;   ;:include "tmr/pos-ipa".
 ;   :include "tmr/finis".
 ;:end :instance.
-;;
+
+
 ;; lexical filtering: reduce the chart after lexical instantiation and the
 ;; application of lexical rules, right before we turn loose syntactic rules.
 ;;
-
-;;:begin :instance :status lexical-filtering-rule.
-;;:include "lfr.tdl".
-;;:end :instance.
+:begin :instance :status lexical-filtering-rule.
+:include "lfr.tdl".
+:end :instance.
 
 
 ;;
