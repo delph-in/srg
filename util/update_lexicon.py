@@ -76,8 +76,13 @@ def create_generic_entries(tags, supertype, pred):
         id = pydelphin_tdl.TypeIdentifier(t + '_ge')
         super_id = pydelphin_tdl.TypeIdentifier(supertype)
         v = [pydelphin_tdl.String(supertype)]
-        term = pydelphin_tdl.AVM([('STEM', pydelphin_tdl.ConsList(values=v,end=pydelphin_tdl.EMPTY_LIST_TYPE))])#,
-                                  #('TOKENS.+LIST', 'generic_token_list & < [ +POS.+TAGS  < ' + t + ' > ] >'),
+        token_id = pydelphin_tdl.TypeIdentifier('generic_token_list')
+        pos_list = pydelphin_tdl.ConsList(values=[pydelphin_tdl.String(t)], end=pydelphin_tdl.EMPTY_LIST_TYPE)
+        pos_avm = pydelphin_tdl.AVM([('+POS.+TAGS', pos_list)])
+        tok_list = pydelphin_tdl.ConsList(values = [pos_avm], end=pydelphin_tdl.EMPTY_LIST_TYPE)
+        token_conj = pydelphin_tdl.Conjunction([token_id, tok_list])
+        term = pydelphin_tdl.AVM([('STEM', pydelphin_tdl.ConsList(values=v,end=pydelphin_tdl.EMPTY_LIST_TYPE)),
+                                  ('TOKENS.+LIST', token_conj)])
                                   #('SYNSEM.LKEYS.KEYRE.PRED', '_generic_' + pred + '_rel') ])
 
         #tokens_term = pydelphin_tdl.Term('TOKENS.+LIST generic_token_list & < [ +POS.+TAGS  < ' + t + ' > ] >')
