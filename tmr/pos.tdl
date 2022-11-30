@@ -28,12 +28,12 @@
 ;; value, intervening rules could have `leaked' PoS information.  if so, once
 ;; again, fully annul the +POS value.
 ;;
-pos_default_tmr := one_one_tmt &
-[ +INPUT < [ +FORM #form, +TRAIT #trait, +CLASS #class,
-             +PRED #pred, +CARG #carg, 
-             +POS [ +TAGS < anti_string, ... > ] ] >,
-  +OUTPUT < [ +FORM #form, +TRAIT #trait, +CLASS #class,
-              +PRED #pred, +CARG #carg, +POS null_pos ] > ].
+;pos_default_tmr := one_one_tmt &
+;[ +INPUT < [ +FORM #form, +TRAIT #trait, +CLASS #class,
+;             +PRED #pred, +CARG #carg, 
+;             +POS [ +TAGS < anti_string, ... > ] ] >,
+;  +OUTPUT < [ +FORM #form, +TRAIT #trait, +CLASS #class,
+;              +PRED #pred, +CARG #carg, +POS null_pos ] > ].
 
 pos_recurse_tmr := token_mapping_rule &
 [ +INPUT < [ +FORM #form, +TRAIT anti_trait,

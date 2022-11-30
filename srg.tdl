@@ -17,12 +17,11 @@
 
 ;;
 ;; token mapping: manipulate the token lattice prior to lexical look-up
-;:begin :instance :status token-mapping-rule.
-;   :include "tmr/prelude".
-;   :include "tmr/pos".
-;   ;:include "tmr/pos-ipa".
-;   :include "tmr/finis".
-;:end :instance.
+:begin :instance :status token-mapping-rule.
+   :include "tmr/prelude".
+   :include "tmr/pos".
+   :include "tmr/finis".
+:end :instance.
 
 
 ;; lexical filtering: reduce the chart after lexical instantiation and the
