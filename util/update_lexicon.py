@@ -72,7 +72,8 @@ def add_word_to_typename(name, word, suffix):
 
 def create_generic_entries(tags, supertype, pred):
     entries = []
-    for t in tags:
+    for tag in tags:
+        t = tag.strip()
         id = pydelphin_tdl.TypeIdentifier(t + '_ge')
         super_id = pydelphin_tdl.TypeIdentifier(supertype)
         v = [pydelphin_tdl.String(supertype)]
@@ -85,8 +86,6 @@ def create_generic_entries(tags, supertype, pred):
                                   ('TOKENS.+LIST', token_conj),
                                   ('SYNSEM.LKEYS.KEYREL.PRED', pydelphin_tdl.String('_generic_' + pred + '_rel'))])
 
-        #tokens_term = pydelphin_tdl.Term('TOKENS.+LIST generic_token_list & < [ +POS.+TAGS  < ' + t + ' > ] >')
-        #pred_term = pydelphin_tdl.Term('SYNSEM.LKEYS.KEYREL [ PRED "_generic_' + pred + '_rel" ]')
         ds = 'Generic lexical entry that will be triggered by tag {}.'.format(t)
         terms = [super_id, term]
         conj = pydelphin_tdl.Conjunction(terms)
@@ -98,4 +97,7 @@ def create_generic_entries(tags, supertype, pred):
 
 #update_lexicon(sys.argv[1],sys.argv[2])
 adverbial_tags = ['rg', 'rn', 'nc00000']
-create_generic_entries(adverbial_tags, 'av_-_i-vm_le', 'adv')
+v_tags = "vmip1s0, vmip2s0, vmip3s0, vmib1p0, vmip1p0, vmip2p0, vmii4s0, vmii2s0, vmii3s0, vmii1p0, vmii2p0, vmii3p0, vmis1s0, vmis2s0, vmis3s0, vmis1p0, vmis2p0, vmis3p0, vmif1s0, vmif2s0, vmif3s0, vmif1p0, vmif2p0, vmif3p0, vmic4s0, vmic1s0, vmic2s0, vmic3s0, vmic1p0, vmic2p0, vmic3p0, vmsp4s0, vmsp1s0, vmsp2s0, vmsp3s0, vmsp1p0, vmsp2p0, vmsp3p0, vmsi4s0, vmsi1s0, vmsi2s0, vmsi3s0, vmsi1p0, vmsi2p0, vmsi3p0, vmsf4s0, vmsf1s0, vmsf2s0, vmsf3s0, vmsf1p0, vmsf2p0, vmsf3p0, vmm02s0, vmm03s0, vmm01p0, vmm02p0, vmm03p0, vmn0000, vmg0000, vmp0000, vmp00sm, vmp00pm, vmp00sf, vmp00pf"
+v_tags = v_tags.split(',')
+
+create_generic_entries(v_tags, 'v_np*_le', 'v')
