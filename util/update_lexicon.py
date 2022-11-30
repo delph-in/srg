@@ -82,8 +82,8 @@ def create_generic_entries(tags, supertype, pred):
         tok_list = pydelphin_tdl.ConsList(values = [pos_avm], end=pydelphin_tdl.EMPTY_LIST_TYPE)
         token_conj = pydelphin_tdl.Conjunction([token_id, tok_list])
         term = pydelphin_tdl.AVM([('STEM', pydelphin_tdl.ConsList(values=v,end=pydelphin_tdl.EMPTY_LIST_TYPE)),
-                                  ('TOKENS.+LIST', token_conj)])
-                                  #('SYNSEM.LKEYS.KEYRE.PRED', '_generic_' + pred + '_rel') ])
+                                  ('TOKENS.+LIST', token_conj),
+                                  ('SYNSEM.LKEYS.KEYRE.PRED', pydelphin_tdl.String('_generic_' + pred + '_rel'))])
 
         #tokens_term = pydelphin_tdl.Term('TOKENS.+LIST generic_token_list & < [ +POS.+TAGS  < ' + t + ' > ] >')
         #pred_term = pydelphin_tdl.Term('SYNSEM.LKEYS.KEYREL [ PRED "_generic_' + pred + '_rel" ]')
@@ -94,7 +94,7 @@ def create_generic_entries(tags, supertype, pred):
         entries.append(new_type)
     with open(pred + '_entries.tdl', 'w') as f:
         for e in entries:
-            f.write(pydelphin_tdl.format(e) + '\n')
+            f.write(pydelphin_tdl.format(e) + '\n\n')
 
 #update_lexicon(sys.argv[1],sys.argv[2])
 adverbial_tags = ['rg', 'rn', 'nc00000']
