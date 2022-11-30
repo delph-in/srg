@@ -70,4 +70,27 @@ def add_word_to_typename(name, word, suffix):
     first_part = name[:len(name)-len(suffix)]
     return pydelphin_tdl.TypeIdentifier(first_part + word + suffix)
 
-update_lexicon(sys.argv[1],sys.argv[2])
+def create_generic_entries(tags, supertype, pred):
+    entries = []
+    for t in tags:
+        id = pydelphin_tdl.TypeIdentifier(t + '_ge')
+        super_id = pydelphin_tdl.TypeIdentifier(supertype)
+        v = [pydelphin_tdl.String(supertype)]
+        term = pydelphin_tdl.AVM([('STEM', pydelphin_tdl.ConsList(values=v,end=pydelphin_tdl.EMPTY_LIST_TYPE))])#,
+                                  #('TOKENS.+LIST', 'generic_token_list & < [ +POS.+TAGS  < ' + t + ' > ] >'),
+                                  #('SYNSEM.LKEYS.KEYRE.PRED', '_generic_' + pred + '_rel') ])
+
+        #tokens_term = pydelphin_tdl.Term('TOKENS.+LIST generic_token_list & < [ +POS.+TAGS  < ' + t + ' > ] >')
+        #pred_term = pydelphin_tdl.Term('SYNSEM.LKEYS.KEYREL [ PRED "_generic_' + pred + '_rel" ]')
+        ds = 'Generic lexical entry that will be triggered by tag {}.'.format(t)
+        terms = [super_id, term]
+        conj = pydelphin_tdl.Conjunction(terms)
+        new_type = pydelphin_tdl.TypeDefinition(id, conj, ds)
+        entries.append(new_type)
+    with open(pred + '_entries.tdl', 'w') as f:
+        for e in entries:
+            f.write(pydelphin_tdl.format(e) + '\n')
+
+#update_lexicon(sys.argv[1],sys.argv[2])
+adverbial_tags = ['rg', 'rn', 'nc00000']
+create_generic_entries(adverbial_tags, 'av_-_i-vm_le', 'adv')
