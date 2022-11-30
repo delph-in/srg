@@ -40,6 +40,32 @@ vmip3p0_ge := v_np*_le &
 
 ; rg, rn, nc00000, 
 
+rg_ge := av_-_i-vm_le &
+  [ STEM < "av_-_i-vm_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "rg" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_adv_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag rg.
+  """.
+
+rn_ge := av_-_i-vm_le &
+  [ STEM < "av_-_i-vm_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "rn" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_adv_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag rn.
+  """.
+
+nc00000_ge := av_-_i-vm_le &
+  [ STEM < "av_-_i-vm_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "nc00000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_adv_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag nc00000.
+  """.
+
+
+
 ;;; Generic lexical entries for adjectives
 
 ; aq0ms00, aq0mp00, aq0fs00, aq0fp00, aq0cs00, aq0cp00, aq0cn00, aqccs0, aqccp0, aqsms00, aqsmp00, aqsfs00, aqsfp0, aqdms0, aqdmp0, aqdfs0, aqdfp0, aq0000,
