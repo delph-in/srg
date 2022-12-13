@@ -10,7 +10,7 @@ def insert_at(filepath, positions):
         updated_item = item
         for i,pos in enumerate(positions):
             indices = find_all(updated_item,'@')
-            assert len(indices) >= pos+i
+            assert len(indices) >= pos-1+i
             updated_item = updated_item[:indices[pos-1+i]]+'@'+ updated_item[indices[pos-1+i]:]
         updated.append(updated_item)
     with open(filepath+'updated', 'w') as f:
