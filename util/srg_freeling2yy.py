@@ -20,6 +20,7 @@ def convert_sentences(sentence_file):
     # perro perro NCMS000 1
     # duerme dormir VMIP3S0 0.989241
     # . . Fp 1
+    yy_sentences = []
     for sent in corpus:
         output = ""
         sentid = 1
@@ -56,14 +57,14 @@ def convert_sentences(sentence_file):
                 output += ') '
                 _from_c += 1   # assume a single space after the word
         #print(''.join(output.strip().lower()))
-        return(''.join(output.strip().lower()))
+        yy_sentences.append(''.join(output.strip().lower()))
         # else:
         #     sentid += 1
         #     _num = 0       # lattice ID
         #     _from = 0      # lattice from
         #     _from_c = 0    # character from
         #     output = output.strip() + "\n"
-
+    return yy_sentences
 if __name__ == "__main__":
     convert_sentences(sys.argv[1])
 

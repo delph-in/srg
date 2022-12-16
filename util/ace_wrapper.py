@@ -56,4 +56,5 @@ if __name__ == "__main__":
     script_output = run_script('./sentences2freeling.sh', 'debug.txt')
     #print(script_output)
     yy = convert_sentences(script_output)
-    print(yy)
+    #print(yy)
+    run_with_srg(yy, grammar, ace_exec)
