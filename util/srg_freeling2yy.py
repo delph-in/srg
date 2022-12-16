@@ -8,8 +8,13 @@ import sys
 #words = sys.stdin.readlines()
 
 def convert_sentences(sentence_file):
-    with open(sentence_file, 'r') as f:
-        corpus = f.read().split('\n\n')
+    if isinstance(sentence_file, str):
+        with open(sentence_file, 'r') as f:
+           corpus = f.read().split('\n\n')
+    elif isinstance(sentence_file, list):
+        corpus = sentence_file
+    else:
+        raise ValueError('The script was not given a list of sentences or a file with a list of sentences.')
     # FREELING OUTPUT EXAMPLE (sentences are separated by a single new line):
     # El el DA0MS0 1
     # perro perro NCMS000 1
@@ -50,7 +55,8 @@ def convert_sentences(sentence_file):
                 output += '"' + pos +'" ' + conf
                 output += ') '
                 _from_c += 1   # assume a single space after the word
-        print(''.join(output.strip().lower()))
+        #print(''.join(output.strip().lower()))
+        return(''.join(output.strip().lower()))
         # else:
         #     sentid += 1
         #     _num = 0       # lattice ID

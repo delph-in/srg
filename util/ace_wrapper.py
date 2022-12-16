@@ -2,6 +2,7 @@ import sys
 from delphin import ace, itsdb
 import glob
 import subprocess
+from srg_freeling2yy import convert_sentences
 
 
 def run_with_srg(sentence_list, grammar, ace_exec):
@@ -40,7 +41,7 @@ def run_with_erg(path, grammar, ace_exec):
         
 def run_script(script_path, arg_path):
     output = subprocess.run("'%s' '%s'" % (script_path, arg_path),shell=True,stdout=subprocess.PIPE)
-    return output.stdout.decode('utf-8')
+    return [output.stdout.decode('utf-8').strip()]
 
 if __name__ == "__main__":
     sentence_file = sys.argv[1]
@@ -53,4 +54,6 @@ if __name__ == "__main__":
         sentences = f.readlines()
     #run_with_srg(sentences,grammar,ace_exec)
     script_output = run_script('./sentences2freeling.sh', 'debug.txt')
-    print(script_output)
+    #print(script_output)
+    yy = convert_sentences(script_output)
+    print(yy)
