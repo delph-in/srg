@@ -18,8 +18,8 @@
 ;;
 ;; token mapping: manipulate the token lattice prior to lexical look-up
 :begin :instance :status token-mapping-rule.
-   :include "tmr/prelude".
-   :include "tmr/pos".
+   ;:include "tmr/prelude".
+   ;:include "tmr/pos".
    :include "tmr/finis".
 :end :instance.
 

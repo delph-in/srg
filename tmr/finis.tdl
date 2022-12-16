@@ -11,6 +11,7 @@
 ;; on all tokens that we expect to activate named entries, make the +CARG
 ;; value reflect the orthography.
 ;;
+#|
 generic_name_tmr := token_mapping_rule &  
 [ +INPUT < [ +FORM #form,
              +TRAIT #trait & generic_trait, +CLASS #class & proper_ne, 
@@ -25,7 +26,7 @@ generic_name_tmr := token_mapping_rule &
               +ID #id, +FROM #from, +TO #to,
               +POS #pos ] >,
   +POSITION "O1@I1" ].
-
+|#
 ;;
 ;; on all tokens that we expect to activate generic entries, make the +PRED
 ;; value reflect the orthography and PoS tag.
@@ -62,6 +63,7 @@ generic_noun_tmr := token_mapping_rule &
               +POS #pos ] >,
   +POSITION "O1@I1" ].
 
+#|
 generic_pred_tmr := token_mapping_rule &  
 [ +INPUT < [ +FORM #form,
              +TRAIT #trait & generic_trait, +CLASS #class & non_ne, 
@@ -76,7 +78,7 @@ generic_pred_tmr := token_mapping_rule &
               +ID #id, +FROM #from, +TO #to,
               +POS #pos ] >,
   +POSITION "O1@I1" ].
-
+|#
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -105,12 +107,13 @@ default_trait_tmr := one_one_tmt &
               +CLASS #class, +PRED #pred, +CARG #carg, +POS #tnt ] > ].
 |#
 
+#|
 default_class_tmr := one_one_tmt &
 [ +INPUT < [ +FORM #form, +TRAIT #trait, +CLASS no_class,
              +PRED #pred, +CARG #carg, +POS #tnt ] >,
   +OUTPUT < [ +FORM #form, +TRAIT #trait, +CLASS non_ne,
               +PRED #pred, +CARG #carg, +POS #tnt ] > ].
-
+|#
 
 ;;
 ;; _fix_me_
