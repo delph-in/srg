@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 ################################################################################
 # Expected usage should be something like:
 # 

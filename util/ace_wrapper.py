@@ -39,7 +39,8 @@ def run_with_erg(path, grammar, ace_exec):
                 f.write(nrs + ': ' + errors[i] + '\n')
         
 def run_script(script_path, arg_path):
-    subprocess.call("'%s' '%s'" % (script_path, arg_path),shell=True)
+    output = subprocess.run("'%s' '%s'" % (script_path, arg_path),shell=True,stdout=subprocess.PIPE)
+    return output.stdout.decode('utf-8')
 
 if __name__ == "__main__":
     sentence_file = sys.argv[1]
@@ -51,4 +52,5 @@ if __name__ == "__main__":
     with open(sentence_file, 'r') as f:
         sentences = f.readlines()
     #run_with_srg(sentences,grammar,ace_exec)
-    run_script('./test.sh', 153)
+    script_output = run_script('./sentences2freeling.sh', 'debug.txt')
+    print(script_output)
