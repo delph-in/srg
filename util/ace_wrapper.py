@@ -1,6 +1,7 @@
 import sys
 from delphin import ace, itsdb
 import glob
+import subprocess
 
 
 def run_with_srg(sentence_list, grammar, ace_exec):
@@ -37,12 +38,17 @@ def run_with_erg(path, grammar, ace_exec):
             for i, nrs in enumerate(no_result):
                 f.write(nrs + ': ' + errors[i] + '\n')
         
-
+def run_script(script_path, arg_path):
+    subprocess.call("'%s' '%s'" % (script_path, arg_path),shell=True)
 
 if __name__ == "__main__":
-    path = sys.argv[1]
+    sentence_file = sys.argv[1]
     grammar = sys.argv[2]
     ace_exec = sys.argv[3]
     ace_responces = []
     no_result = []
-    run_with_erg(path, grammar, ace_exec)
+    #run_with_erg(path, grammar, ace_exec)
+    with open(sentence_file, 'r') as f:
+        sentences = f.readlines()
+    #run_with_srg(sentences,grammar,ace_exec)
+    run_script('./test.sh', 153)
