@@ -50,6 +50,12 @@ np00sp0 :=
 %suffix (np00sp0 np00sp0)
 np00sp0_ilr.
 
+; OZ: Is there anything special about np00g00, compared to np00sp0?
+np00g00 :=
+%suffix (np00g00 np00g00)
+np00sp0_ilr.
+
+
 ; -- numbers
 z := 
 %suffix (z z)
