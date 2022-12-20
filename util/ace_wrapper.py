@@ -1,4 +1,5 @@
 import sys
+from tempfile import NamedTemporaryFile
 from delphin import ace, itsdb
 import glob
 import subprocess
@@ -39,18 +40,21 @@ def run_with_erg(path, grammar, ace_exec):
                 f.write(nrs + ': ' + errors[i] + '\n')
         
 def run_script(script_path, arg_path):
-    output = subprocess.run("'%s' '%s'" % (script_path, arg_path),shell=True,stdout=subprocess.PIPE)
+    output = subprocess.run("'%s' '%s'" % (script_path, str(arg_path)),shell=True,stdout=subprocess.PIPE)
     #print(output.stdout.decode('utf-8'))
     return [ s for s in output.stdout.decode('utf-8').split('\n\n') if s ]
 
 def read_testsuite(path):
     ts = itsdb.TestSuite(path)
-    items = list(ts.processed_items())
+    items = ts['item']
     sentences = [item['i-input'] for item in items]
-    return sentences
+    #tmp_sentence_file = NamedTemporaryFile("w", delete=False)
+    with open('tmp.txt', 'w') as tmp_f:
+        for s in sentences:
+            tmp_f.write(s+'\n')
+    return tmp_f.name
 
 if __name__ == "__main__":
-    print(5)
     sentence_list = read_testsuite(sys.argv[1])
     grammar = sys.argv[2]
     ace_exec = sys.argv[3]
@@ -58,8 +62,11 @@ if __name__ == "__main__":
     no_result = []
     #run_with_erg(path, grammar, ace_exec)
     #run_with_srg(sentences,grammar,ace_exec)
+    #with open(sentence_list, 'r') as sf:
     script_output = run_script('./sentences2freeling.sh', sentence_list)
-    #print(script_output)
+    print(script_output)
     yy = convert_sentences(script_output)
     #print(yy)
+    #with open (sentence_list, 'r') as f:
+    #    yy = f.readlines()
     run_with_srg(yy, grammar, ace_exec)
