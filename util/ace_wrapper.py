@@ -1,3 +1,4 @@
+import string
 import sys
 from tempfile import NamedTemporaryFile
 from delphin import ace, itsdb
@@ -5,19 +6,30 @@ import glob
 import subprocess
 from srg_freeling2yy import convert_sentences
 
-def run_with_srg(sentence_list, grammar, ace_exec):
+def run_with_srg(ts, grammar, ace_exec):
+    responces = []
+    no_result = []
+    sentence_list = read_testsuite(ts)
+    script_output = run_script('./sentences2freeling.sh', sentence_list)
+    yy = convert_sentences(script_output)
+    assert len(yy) == len(ts['item'])
+    for i, row in enumerate(ts['item']):
+        ts['item'].update(i, {'i-tokens': yy[i]})
+    #ts['item'].update(7,yy)
+    ts.commit()
     with open('ace_err.txt', 'w') as errf:
         with ace.ACEParser(grammar, cmdargs=['-y', '--yy-rules'], executable=ace_exec, stderr=errf) as parser:
-            for s in sentence_list:
+            for s in yy:
                 response = parser.interact(s)
                 if len(response['results']) == 0:
                     no_result.append(s)
-                ace_responces.append(response)
+                responces.append(response)
     with open('ace_err.txt', 'r') as errf:
         errors = errf.readlines()
     with open('noresults.txt', 'w') as f:
-        for i, nrs in enumerate(no_result):
-            f.write(nrs + ': ' + errors[i] + '\n')
+        for nrs in no_result:
+            f.write(nrs+'\n')
+    return responces, no_result
 
 def run_with_erg(path, grammar, ace_exec):
     for i, tsuite in enumerate(sorted(glob.iglob(path + '/**'))):
@@ -38,35 +50,33 @@ def run_with_erg(path, grammar, ace_exec):
         with open('noresults.txt', 'w') as f:
             for i, nrs in enumerate(no_result):
                 f.write(nrs + ': ' + errors[i] + '\n')
+        return baseline_responses
         
 def run_script(script_path, arg_path):
     output = subprocess.run("'%s' '%s'" % (script_path, str(arg_path)),shell=True,stdout=subprocess.PIPE)
     #print(output.stdout.decode('utf-8'))
-    return [ s for s in output.stdout.decode('utf-8').split('\n\n') if s ]
+    return [s for s in output.stdout.decode('utf-8').split('\n\n') if s]
 
-def read_testsuite(path):
-    ts = itsdb.TestSuite(path)
+def read_testsuite(ts):
     items = ts['item']
     sentences = [item['i-input'] for item in items]
-    #tmp_sentence_file = NamedTemporaryFile("w", delete=False)
-    with open('tmp.txt', 'w') as tmp_f:
+    tmp_sentence_file = NamedTemporaryFile("w", delete=False)
+    with open(tmp_sentence_file.name, 'w') as tmp_f:
         for s in sentences:
+            if not s[-1] in string.punctuation:
+                # assume a dot at the end
+                s = s + '.'
             tmp_f.write(s+'\n')
     return tmp_f.name
 
 if __name__ == "__main__":
-    sentence_list = read_testsuite(sys.argv[1])
+    ts = itsdb.TestSuite(sys.argv[1])
     grammar = sys.argv[2]
     ace_exec = sys.argv[3]
-    ace_responces = []
-    no_result = []
-    #run_with_erg(path, grammar, ace_exec)
-    #run_with_srg(sentences,grammar,ace_exec)
-    #with open(sentence_list, 'r') as sf:
-    script_output = run_script('./sentences2freeling.sh', sentence_list)
-    print(script_output)
-    yy = convert_sentences(script_output)
-    #print(yy)
-    #with open (sentence_list, 'r') as f:
-    #    yy = f.readlines()
-    run_with_srg(yy, grammar, ace_exec)
+    parses, no_parses = run_with_srg(ts, grammar, ace_exec)
+    assert len(parses) == len(ts['item'])
+    #ts['result'] = parses
+    #fm = itsdb.FieldMapper(ts)
+    #for p in parses:
+    #    fm.map(p)
+    print('done')
