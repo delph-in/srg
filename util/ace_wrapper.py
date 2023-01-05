@@ -50,7 +50,6 @@ def read_testsuite(path):
     return sentences
 
 if __name__ == "__main__":
-    print(5)
     sentence_list = read_testsuite(sys.argv[1])
     grammar = sys.argv[2]
     ace_exec = sys.argv[3]
