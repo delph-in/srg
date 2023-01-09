@@ -329,8 +329,10 @@ v_ppa-cp_passive-se_dlr := passive-lex-rule &
 
 
 ; --- LR types for finite clause / VPinf alternation
+;; OZ 2023-01-09 This used to inherit from basic-lex-rule.
+;; I am not sure whether that was intentional and I don't have treebanks setup yet to be able to test well.
 
-vfin_vinf-lex-rule := basic-lex-rule & phrase-or-lexrule &
+vfin_vinf-lex-rule := lex-rule & phrase-or-lexrule &
   [ STEM #stem,
     INFLECTED #infl,
     ALTS [ VCALT -,
