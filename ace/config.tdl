@@ -7,7 +7,7 @@ preprocessor              := "../rpp/tokenizer.rpp".
 ;preprocessor-modules      := ../rpp/xml.rpp ../rpp/ascii.rpp ../rpp/lgt.rpp ../rpp/quotes.rpp ../rpp/wiki.rpp ../rpp/gml.rpp ../rpp/html.rpp.
 ;generation-ignore-lexemes := "../lkb/nogen-lex.set".
 ;generation-ignore-rules   := "../lkb/nogen-rules.set".
-;parse-node-labels         := "../labels.tdl".
+parse-node-labels         := "../labels.tdl".
 ;generation-trigger-rules  := "../trigger.mtr".
 version                   := "../Version.lsp".
 
@@ -51,3 +51,6 @@ parsing-packing-restrictor := RELS HCONS ICONS RNAME.
 
 generation-packing-restrictor := 
   RELS HCONS ICONS RNAME.
+
+;;; SRG hsd LABEL-NAME as the path for tree node labels; ACE's default is LNAME, so, need to specify.
+label-path := LABEL-NAME.
