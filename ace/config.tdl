@@ -7,7 +7,7 @@ preprocessor              := "../rpp/tokenizer.rpp".
 ;preprocessor-modules      := ../rpp/xml.rpp ../rpp/ascii.rpp ../rpp/lgt.rpp ../rpp/quotes.rpp ../rpp/wiki.rpp ../rpp/gml.rpp ../rpp/html.rpp.
 ;generation-ignore-lexemes := "../lkb/nogen-lex.set".
 ;generation-ignore-rules   := "../lkb/nogen-rules.set".
-;parse-node-labels         := "../labels.tdl".
+parse-node-labels         := "../labels.tdl".
 ;generation-trigger-rules  := "../trigger.mtr".
 version                   := "../Version.lsp".
 
@@ -120,6 +120,7 @@ lex-pred-path             := SYNSEM LKEYS KEYREL PRED.
 rule-rels-path            := C-CONT RELS.
 
 parsing-roots := root_vp_inf root_s root_vpnom root_np root_nbar root_pp root_ap root_rp root_c root_i.
+;parsing-roots := root_s.
 
 ;generation-roots          := root_strict root_frag.
 ;generation-roots        := root_strict.
@@ -176,3 +177,5 @@ parsing-packing-restrictor := RELS HCONS ICONS RNAME.
 
 generation-packing-restrictor := 
   RELS HCONS ICONS RNAME.
+  
+label-path := LABEL-NAME.
