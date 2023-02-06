@@ -34,6 +34,7 @@ def update_testsuite(ts):
 
 
 if __name__ == "__main__":
+    print(5)
     for i, ts_path in enumerate(sorted(glob.iglob(sys.argv[1] + '/**'))):
         ts = itsdb.TestSuite(ts_path)
         update_testsuite(ts)

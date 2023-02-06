@@ -41,6 +41,12 @@ lex-rule :+
    STEM.TO #to,
    DTR [ TRAITS #traits,
 	 STEM.TO #to ] ].
+	 
+tmt-lex-rule := basic-lex-rule & 
+ [ TRAITS #traits,
+   STEM.TO #to,
+   DTR [ TRAITS #traits,
+	 STEM.TO #to ] ].
 
 phrase-or-lexrule :+ 
  [ STEM.FROM #from,

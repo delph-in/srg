@@ -332,7 +332,7 @@ v_ppa-cp_passive-se_dlr := passive-lex-rule &
 ;; OZ 2023-01-09 This used to inherit from basic-lex-rule.
 ;; I am not sure whether that was intentional and I don't have treebanks setup yet to be able to test well.
 
-vfin_vinf-lex-rule := lex-rule & phrase-or-lexrule &
+vfin_vinf-lex-rule := tmt-lex-rule & phrase-or-lexrule &
   [ STEM #stem,
     INFLECTED #infl,
     ALTS [ VCALT -,
@@ -1039,7 +1039,7 @@ v_pastpart-attr-intr_dlr := const-ltol-rule  &
 ; for "evaluativos" quantifiers (otro, mucho/poco, bastante,...). These may co-occur in 
 ; predicative constructions (e.g. sus problemas eran demasiados) or as pre-nominal adjectives 
 ; (e.g. sus demasiados problemas).
-indef-adj-lex-rule := basic-lex-rule & phrase-or-lexrule & 
+indef-adj-lex-rule := tmt-lex-rule & phrase-or-lexrule & 
   [ STEM #stem,
     INFLECTED #infl,
     SYNSEM [ PUNCT #punct,
@@ -1116,7 +1116,7 @@ a_indef-nu-card_dlr := indef-adj-lex-rule &
 
 
 ; --- LR types for determiners/quantifiers following the noun
-quant-or-det_postn_lex-rule := basic-lex-rule & phrase-or-lexrule & 
+quant-or-det_postn_lex-rule := tmt-lex-rule & phrase-or-lexrule & 
   [ STEM #stem,
     INFLECTED #infl,
     ALTS #alts,
@@ -1199,7 +1199,7 @@ d_pstn-idf-ningun_dlr := quant_postn_lex-rule &
 
 ; --- LR types for partitive pronouns/quantifying nouns
 
-partitive-lex-rule := basic-lex-rule & phrase-or-lexrule & 
+partitive-lex-rule := tmt-lex-rule & phrase-or-lexrule & 
   [ STEM #stem,
     INFLECTED #infl,
     ALTS #alts,

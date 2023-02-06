@@ -1,0 +1,2 @@
+(1, 0, 1, <0:5>, 1, "ellos" "ellos", 0, "pp3mp00", "pp3mp00" 1) (2, 1, 2, <6:13>, 1, "dormir" "duermen", 0, "vmip3p0", "vmip3p0" 1)
+

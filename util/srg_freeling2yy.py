@@ -66,7 +66,9 @@ def convert_sentences(sentence_file):
         #     output = output.strip() + "\n"
     return yy_sentences
 if __name__ == "__main__":
-    convert_sentences(sys.argv[1])
+    sentences = convert_sentences(sys.argv[1])
+    for s in sentences:
+        print(s)
 
 
 

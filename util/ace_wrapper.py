@@ -1,10 +1,8 @@
-import string
 import sys
-from tempfile import NamedTemporaryFile
 from delphin import ace, itsdb
 import glob
-import subprocess
 from srg_freeling2yy import convert_sentences
+from populate_tokens import run_script, read_testsuite
 
 def run_with_srg(ts, grammar, ace_exec):
     responces = []
@@ -36,6 +34,7 @@ def run_with_erg(path, grammar, ace_exec):
         ts = itsdb.TestSuite(tsuite)
         items = list(ts.processed_items())
         baseline_responses = []
+        no_result = []
         with open('ace_err.txt', 'w') as errf:
             with ace.ACEParser(grammar, executable=ace_exec, stderr=errf) as parser:
                 for response in items:
@@ -51,23 +50,7 @@ def run_with_erg(path, grammar, ace_exec):
             for i, nrs in enumerate(no_result):
                 f.write(nrs + ': ' + errors[i] + '\n')
         return baseline_responses
-        
-def run_script(script_path, arg_path):
-    output = subprocess.run("'%s' '%s'" % (script_path, str(arg_path)),shell=True,stdout=subprocess.PIPE)
-    #print(output.stdout.decode('utf-8'))
-    return [s for s in output.stdout.decode('utf-8').split('\n\n') if s]
 
-def read_testsuite(ts):
-    items = ts['item']
-    sentences = [item['i-input'] for item in items]
-    tmp_sentence_file = NamedTemporaryFile("w", delete=False)
-    with open(tmp_sentence_file.name, 'w') as tmp_f:
-        for s in sentences:
-            if not s[-1] in string.punctuation:
-                # assume a dot at the end
-                s = s + '.'
-            tmp_f.write(s+'\n')
-    return tmp_f.name
 
 if __name__ == "__main__":
     ts = itsdb.TestSuite(sys.argv[1])
@@ -75,8 +58,4 @@ if __name__ == "__main__":
     ace_exec = sys.argv[3]
     parses, no_parses = run_with_srg(ts, grammar, ace_exec)
     assert len(parses) == len(ts['item'])
-    #ts['result'] = parses
-    #fm = itsdb.FieldMapper(ts)
-    #for p in parses:
-    #    fm.map(p)
     print('done')

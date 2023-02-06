@@ -1198,7 +1198,7 @@ pres-ind_ilr &
                    AGR.PNG.PN 3pl ] ].
 
 vmii4s0 := 
-%suffix (vmii13s vmii13s)
+%suffix (vmii4s0 vmii4s0)
 ipast-ind_ilr & 
   [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
                    AGR.PNG.PN 1or3sg ] ].
