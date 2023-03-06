@@ -1,26 +1,951 @@
 ;;; Hey, emacs (1), this is -*- mode:tdl; Coding: utf-8; -*-
 
+;;;
+;;; Olga Zamaraeva
+;;;
+;;; These generic lexical entries correspond to tags 
+;;; which come from the Freeling 4.0 morphophonological analyzer.
+;;; Each open category tag requires a separate entry.
+;;; In order for these entries to not be used in parse charts for words
+;;; found in the lexicon, a lexical filtering rule has to be enabled
+;;; in srg.tdl.
 
-n_-_mc_ge := n_-_mc_le &
-[ STEM < *top* >,
-  SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ].
+
+;n_-_mc_ge := n_-_mc_le &
+;[ STEM < "n_-_mc_le" >,
+;  SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel".
+;  TRAITS generic_token_list ].
 
 ;n_pp_mc_ge := n_pp_mc_le &
 ;[ STEM < *top* >,
 ;  SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ].
 
-v_np_ge := v_np*_le &
-[ STEM < *top* >,
+;;; Generic lexical entries for noun tags
+
+; np00sp0, np00g00 (proper names)
+
+
+np00sp0_ge := n_-_pn_le &
+  [ STEM < "n_-_pn_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "np00sp0" >, +FORM #form ] >,
+    SYNSEM.LKEYS.KEYREL [ PRED named_rel, CARG #form ] ]
+  """
+  Generic lexical entry that will be triggered by tag np00sp0.
+  """.
+
+np00g00_ge := n_-_pn_le &
+  [ STEM < "n_-_pn_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "np00g00" >, +FORM #form ] >,
+    SYNSEM.LKEYS.KEYREL [ PRED named_rel, CARG #form ] ]
+  """
+  Generic lexical entry that will be triggered by tag np00g00.
+  """.
+
+
+; ncms000, ncmp000, ncfs000, ncfp000, ncms00a, ncmp00a, ncfs00a, ncfp00a, ncms00d, ncmp00d, ncfs00d, ncfp00d, ncms00x, ncmp00x, ncfs00x, ncfp00x, nccs000, nccp000, ncmn000, ncfn000, nccn000
+
+ncms000_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncms000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncms000.
+  """.
+
+ncmp000_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncmp000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncmp000.
+  """.
+
+ncfs000_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncfs000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncfs000.
+  """.
+
+ncfp000_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncfp000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncfp000.
+  """.
+
+ncms00a_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncms00a" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncms00a.
+  """.
+
+ncmp00a_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncmp00a" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncmp00a.
+  """.
+
+ncfs00a_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncfs00a" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncfs00a.
+  """.
+
+ncfp00a_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncfp00a" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncfp00a.
+  """.
+
+ncms00d_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncms00d" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncms00d.
+  """.
+
+ncmp00d_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncmp00d" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncmp00d.
+  """.
+
+ncfs00d_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncfs00d" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncfs00d.
+  """.
+
+ncfp00d_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncfp00d" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncfp00d.
+  """.
+
+ncms00x_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncms00x" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncms00x.
+  """.
+
+ncmp00x_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncmp00x" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncmp00x.
+  """.
+
+ncfs00x_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncfs00x" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncfs00x.
+  """.
+
+ncfp00x_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncfp00x" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncfp00x.
+  """.
+
+nccs000_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "nccs000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag nccs000.
+  """.
+
+nccp000_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "nccp000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag nccp000.
+  """.
+
+ncmn000_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncmn000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncmn000.
+  """.
+
+ncfn000_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncfn000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncfn000.
+  """.
+
+nccn000_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "nccn000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag nccn000.
+  """.
+
+np00v00_ge := foreign_le & 
+[ STEM < "foreign_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "np00v00" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED named_rel ]
+  """
+  Generic lexical entry that will be triggered by tag np00v00.
+  """.
+
+
+
+;;; Generic lexical entries for verbal tags
+
+; vmip1s0, vmip2s0, vmip3s0, vmib1p0, vmip1p0, vmip2p0, vmii4s0, vmii2s0, vmii3s0, vmii1p0, vmii2p0, vmii3p0, vmis1s0, vmis2s0, vmis3s0, vmis1p0, vmis2p0, vmis3p0, vmif1s0, vmif2s0, vmif3s0, vmif1p0, vmif2p0, vmif3p0, vmic4s0, vmic1s0, vmic2s0, vmic3s0, vmic1p0, vmic2p0, vmic3p0, vmsp4s0, vmsp1s0, vmsp2s0, vmsp3s0, vmsp1p0, vmsp2p0, vmsp3p0, vmsi4s0, vmsi1s0, vmsi2s0, vmsi3s0, vmsi1p0, vmsi2p0, vmsi3p0, vmsf4s0, vmsf1s0, vmsf2s0, vmsf3s0, vmsf1p0, vmsf2p0, vmsf3p0, vmm02s0, vmm03s0, vmm01p0, vmm02p0, vmm03p0, vmn0000, vmg0000, vmp0000, vmp00sm, vmp00pm, vmp00sf, vmp00pf 
+
+vmip3p0_ge := v_np*_le &
+[ STEM < "v_np*_le" >,
+  TOKENS.+LIST generic_token_list & 
+                < [ +POS.+TAGS  < "vmip3p0" > ] >,
   SYNSEM.LKEYS.KEYREL [ PRED "_generic_v_rel" ] ].
 
-aj_-_i_ge := aj_-_i_le & 
-[ STEM < *top* >,
-  SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel" ].
+vmip1s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmip1s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmip1s0.
+  """.
 
-av_-_i-sm_ge := av_-_i-sm_le &
-[ STEM < *top* >,
-  SYNSEM.LKEYS.KEYREL.PRED "_generic_x_rel" ].
+vmip2s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmip2s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmip2s0.
+  """.
 
-av_-_i-vm-spd_ge := av_-_i-vm-spd_le &
-[ STEM < *top* >,
-  SYNSEM.LKEYS.KEYREL.PRED "_generic_x_rel" ].
+vmip3s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmip3s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmip3s0.
+  """.
+
+vmib1p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmib1p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmib1p0.
+  """.
+
+vmip1p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmip1p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmip1p0.
+  """.
+
+vmip2p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmip2p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmip2p0.
+  """.
+
+vmii4s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmii4s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmii4s0.
+  """.
+
+vmii2s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmii2s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmii2s0.
+  """.
+
+vmii3s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmii3s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmii3s0.
+  """.
+
+vmii1p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmii1p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmii1p0.
+  """.
+
+vmii2p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmii2p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmii2p0.
+  """.
+
+vmii3p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmii3p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmii3p0.
+  """.
+
+vmis1s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmis1s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmis1s0.
+  """.
+
+vmis2s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmis2s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmis2s0.
+  """.
+
+vmis3s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmis3s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmis3s0.
+  """.
+
+vmis1p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmis1p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmis1p0.
+  """.
+
+vmis2p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmis2p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmis2p0.
+  """.
+
+vmis3p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmis3p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmis3p0.
+  """.
+
+vmif1s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmif1s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmif1s0.
+  """.
+
+vmif2s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmif2s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmif2s0.
+  """.
+
+vmif3s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmif3s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmif3s0.
+  """.
+
+vmif1p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmif1p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmif1p0.
+  """.
+
+vmif2p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmif2p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmif2p0.
+  """.
+
+vmif3p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmif3p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmif3p0.
+  """.
+
+vmic4s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmic4s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmic4s0.
+  """.
+
+vmic1s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmic1s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmic1s0.
+  """.
+
+vmic2s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmic2s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmic2s0.
+  """.
+
+vmic3s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmic3s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmic3s0.
+  """.
+
+vmic1p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmic1p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmic1p0.
+  """.
+
+vmic2p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmic2p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmic2p0.
+  """.
+
+vmic3p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmic3p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmic3p0.
+  """.
+
+vmsp4s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmsp4s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmsp4s0.
+  """.
+
+vmsp1s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmsp1s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmsp1s0.
+  """.
+
+vmsp2s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmsp2s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmsp2s0.
+  """.
+
+vmsp3s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmsp3s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmsp3s0.
+  """.
+
+vmsp1p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmsp1p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmsp1p0.
+  """.
+
+vmsp2p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmsp2p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmsp2p0.
+  """.
+
+vmsp3p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmsp3p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmsp3p0.
+  """.
+
+vmsi4s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmsi4s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmsi4s0.
+  """.
+
+vmsi1s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmsi1s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmsi1s0.
+  """.
+
+vmsi2s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmsi2s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmsi2s0.
+  """.
+
+vmsi3s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmsi3s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmsi3s0.
+  """.
+
+vmsi1p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmsi1p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmsi1p0.
+  """.
+
+vmsi2p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmsi2p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmsi2p0.
+  """.
+
+vmsi3p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmsi3p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmsi3p0.
+  """.
+
+vmsf4s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmsf4s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmsf4s0.
+  """.
+
+vmsf1s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmsf1s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmsf1s0.
+  """.
+
+vmsf2s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmsf2s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmsf2s0.
+  """.
+
+vmsf3s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmsf3s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmsf3s0.
+  """.
+
+vmsf1p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmsf1p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmsf1p0.
+  """.
+
+vmsf2p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmsf2p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmsf2p0.
+  """.
+
+vmsf3p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmsf3p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmsf3p0.
+  """.
+
+vmm02s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmm02s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmm02s0.
+  """.
+
+vmm03s0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmm03s0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmm03s0.
+  """.
+
+vmm01p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmm01p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmm01p0.
+  """.
+
+vmm02p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmm02p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmm02p0.
+  """.
+
+vmm03p0_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmm03p0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmm03p0.
+  """.
+
+vmn0000_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmn0000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmn0000.
+  """.
+
+vmg0000_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmg0000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmg0000.
+  """.
+
+vmp0000_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmp0000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmp0000.
+  """.
+
+vmp00sm_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmp00sm" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmp00sm.
+  """.
+
+vmp00pm_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmp00pm" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmp00pm.
+  """.
+
+vmp00sf_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmp00sf" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmp00sf.
+  """.
+
+vmp00pf_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmp00pf" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmp00pf.
+  """.
+
+
+;;; Generic lexical entries for interjections
+
+; i
+
+interj_ge := i_-_le & 
+ [ STEM < "i_-_le" >,
+   TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "i" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_interj_rel ]
+ """
+ Generic lexical entry for interjections, triggered by tag i.
+ """.
+
+;;; Generic lexical entries for adverbial tags
+
+; rg, rn, nc00000, 
+
+rg_ge := av_-_i-vm_le &
+  [ STEM < "av_-_i-vm_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "rg" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_adv_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag rg.
+  """.
+
+rn_ge := av_-_i-vm_le &
+  [ STEM < "av_-_i-vm_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "rn" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_adv_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag rn.
+  """.
+
+nc00000_ge := av_-_i-vm_le &
+  [ STEM < "av_-_i-vm_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "nc00000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_adv_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag nc00000.
+  """.
+
+
+
+;;; Generic lexical entries for adjectives
+
+; aq0ms00, aq0mp00, aq0fs00, aq0fp00, aq0cs00, aq0cp00, aq0cn00, aqccs0, aqccp0, aqsms00, aqsmp00, aqsfs00, aqsfp0, aqdms0, aqdmp0, aqdfs0, aqdfp0, aq0000,
+
+;aj_-_i_ge := aj_-_i_le & 
+;[ STEM < "aj_-_i_le" >,
+;  SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel",
+;  TRAITS generic_token_list ].
+
+;av_-_i-sm_ge := av_-_i-sm_le &
+;[ STEM < "av_-_i-sm_le" >,
+;  SYNSEM.LKEYS.KEYREL.PRED "_generic_x_rel",
+;  TRAITS generic_token_list ].
+
+;av_-_i-vm-spd_ge := av_-_i-vm-spd_le &
+;[ STEM < "av_-_i-vm-spd_le" >,
+;  SYNSEM.LKEYS.KEYREL.PRED "_generic_x_rel",
+;  TRAITS generic_token_list ].
+
+aq0ms00_ge := aj_pp*_i_le &
+  [ STEM < "aj_pp*_i_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "aq0ms00" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag aq0ms00.
+  """.
+
+aq0mp00_ge := aj_pp*_i_le &
+  [ STEM < "aj_pp*_i_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "aq0mp00" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag aq0mp00.
+  """.
+
+aq0fs00_ge := aj_pp*_i_le &
+  [ STEM < "aj_pp*_i_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "aq0fs00" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag aq0fs00.
+  """.
+
+aq0fp00_ge := aj_pp*_i_le &
+  [ STEM < "aj_pp*_i_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "aq0fp00" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag aq0fp00.
+  """.
+
+aq0cs00_ge := aj_pp*_i_le &
+  [ STEM < "aj_pp*_i_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "aq0cs00" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag aq0cs00.
+  """.
+
+aq0cp00_ge := aj_pp*_i_le &
+  [ STEM < "aj_pp*_i_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "aq0cp00" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag aq0cp00.
+  """.
+
+aq0cn00_ge := aj_pp*_i_le &
+  [ STEM < "aj_pp*_i_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "aq0cn00" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag aq0cn00.
+  """.
+
+aqccs0_ge := aj_pp*_i_le &
+  [ STEM < "aj_pp*_i_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "aqccs0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag aqccs0.
+  """.
+
+aqccp0_ge := aj_pp*_i_le &
+  [ STEM < "aj_pp*_i_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "aqccp0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag aqccp0.
+  """.
+
+aqsms00_ge := aj_pp*_i_le &
+  [ STEM < "aj_pp*_i_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "aqsms00" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag aqsms00.
+  """.
+
+aqsmp00_ge := aj_pp*_i_le &
+  [ STEM < "aj_pp*_i_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "aqsmp00" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag aqsmp00.
+  """.
+
+aqsfs00_ge := aj_pp*_i_le &
+  [ STEM < "aj_pp*_i_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "aqsfs00" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag aqsfs00.
+  """.
+
+aqsfp0_ge := aj_pp*_i_le &
+  [ STEM < "aj_pp*_i_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "aqsfp0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag aqsfp0.
+  """.
+
+aqdms0_ge := aj_pp*_i_le &
+  [ STEM < "aj_pp*_i_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "aqdms0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag aqdms0.
+  """.
+
+aqdmp0_ge := aj_pp*_i_le &
+  [ STEM < "aj_pp*_i_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "aqdmp0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag aqdmp0.
+  """.
+
+aqdfs0_ge := aj_pp*_i_le &
+  [ STEM < "aj_pp*_i_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "aqdfs0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag aqdfs0.
+  """.
+
+aqdfp0_ge := aj_pp*_i_le &
+  [ STEM < "aj_pp*_i_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "aqdfp0" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag aqdfp0.
+  """.
+
+aq0000_ge := aj_pp*_i_le &
+  [ STEM < "aj_pp*_i_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "aq0000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag aq0000.
+  """.

@@ -12,24 +12,24 @@
 :include "irtypes.tdl".
 :include "lrtypes.tdl".
 :include "srtypes.tdl".
-; :include "cmt.tdl".
+:include "tmt.tdl".
 :end :type.
 
 ;;
 ;; token mapping: manipulate the token lattice prior to lexical look-up
-;; NOT USED
-;; :begin :instance :status token-mapping-rule.
-;; :include "tmr.tdl".
-;; :end :instance.
+:begin :instance :status token-mapping-rule.
+   ;:include "tmr/prelude".
+   ;:include "tmr/pos".
+   :include "tmr/finis".
+:end :instance.
 
-;;
+
 ;; lexical filtering: reduce the chart after lexical instantiation and the
 ;; application of lexical rules, right before we turn loose syntactic rules.
 ;;
-
-;;:begin :instance :status lexical-filtering-rule.
-;;:include "lfr.tdl".
-;;:end :instance.
+:begin :instance :status lexical-filtering-rule.
+:include "lfr.tdl".
+:end :instance.
 
 
 ;;
@@ -40,9 +40,9 @@
 :include "lexicon".
 :end :instance.
 
-;:begin :instance :status generic-lex-entry.
-;:include "generics".
-;:end :instance.
+:begin :instance :status generic-lex-entry.
+:include "generics.tdl".
+:end :instance.
 
 ;;
 ;; grammar rules and lexical rules (instances of status rule)

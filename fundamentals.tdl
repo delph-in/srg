@@ -108,7 +108,11 @@ onull := olist & null.
 ; --- Types for Sign, Word, Phrase, and Lex-Entry
 
 sign-min := avm &
-  [ STEM list ].
+  [ STEM orthog ].
+
+orthog := cons &
+  [ FROM string,
+    TO string ].  
 
 basic-sign := sign-min &
   [ KEY-ARG bool ].
