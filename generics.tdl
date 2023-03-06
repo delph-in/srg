@@ -212,6 +212,14 @@ nccn000_ge := n_cp*_p-c_le &
   Generic lexical entry that will be triggered by tag nccn000.
   """.
 
+np00v00_ge := foreign_le & 
+[ STEM < "foreign_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "np00v00" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED named_rel ]
+  """
+  Generic lexical entry that will be triggered by tag np00v00.
+  """.
+
 
 
 ;;; Generic lexical entries for verbal tags
@@ -736,6 +744,18 @@ vmp00pf_ge := v_np*_le &
   Generic lexical entry that will be triggered by tag vmp00pf.
   """.
 
+
+;;; Generic lexical entries for interjections
+
+; i
+
+interj_ge := i_-_le & 
+ [ STEM < "i_-_le" >,
+   TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "i" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_interj_rel ]
+ """
+ Generic lexical entry for interjections, triggered by tag i.
+ """.
 
 ;;; Generic lexical entries for adverbial tags
 

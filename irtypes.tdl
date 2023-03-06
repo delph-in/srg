@@ -20,7 +20,7 @@ basic-lex-rule := word-or-lexrule &
                            COORD-STRAT #coord-strat ] ] ],
     ARGS < #dtr > ].
 
-non_cann-lex-rule := basic-lex-rule &
+non_cann-lex-rule := tmt-lex-rule &
   [ SYNSEM.LOCAL.CONT [ RELS #rels,
 			HCONS #hcons ],
     DTR.SYNSEM.LOCAL.CONT [ RELS #rels,
@@ -118,6 +118,10 @@ rg_ilr := infl-ltow-rule &
   [ SYNSEM.LOCAL.CAT.HEAD +nr ].
 
 nc00000_ilr :=  infl-ltow-rule & 
+  [ SYNSEM.LOCAL.CAT.HEAD noun ].
+
+; foreign words sometimes get this tag.  
+np00v00_ilr := infl-ltow-rule & 
   [ SYNSEM.LOCAL.CAT.HEAD noun ].
 
 i_ilr := infl-ltow-rule & 
@@ -433,7 +437,7 @@ pp1cs00_ilr := affx_1sg_ilr.
 p01cs00_ilr := affx_1sg_ilr.
 
 ; --- Common Nouns
-n_ilr :=  basic-lex-rule & phrase-or-lexrule & 
+n_ilr :=  tmt-lex-rule & phrase-or-lexrule & 
   [ NEEDS-AFFIX +,
     INFLECTED +,
     KEY-ARG #keyarg,   

@@ -5,7 +5,32 @@
 ################################################################################
 
 import sys
+from override_freeling import TAGS, DO_NOT_OVERRIDE, STEM_EQUALS_TAG, REPLACE_LEMMA_AND_TAG
 #words = sys.stdin.readlines()
+
+'''
+In the old version of the grammar, some of the Freeling tags were overridden.
+For compatibility, we will do the same for now.
+i -> AQ0MS0 (interjection to a default adjective form; will then undergo an adjective-to-interjection rule...)
+'''
+def override_tag(tag, word, prob):
+    #return TAGS[tag] if tag in TAGS else tag
+    if tag in TAGS:
+        if word not in DO_NOT_OVERRIDE:
+            return TAGS[tag]
+    elif word in REPLACE_LEMMA_AND_TAG:
+        return REPLACE_LEMMA_AND_TAG[word]['tag']
+    # elif (tag in LEMMA_TAG_PAIRS and word in LEMMA_TAG_PAIRS[tag]):
+    #     if float(prob) < LEMMA_TAG_PAIRS[tag][word]['prob']:
+    #         return LEMMA_TAG_PAIRS[tag][word]['replace']
+    return tag
+
+def override_lemma(lemma, tag):
+    if tag in STEM_EQUALS_TAG:
+        return tag
+    elif lemma in REPLACE_LEMMA_AND_TAG:
+        return REPLACE_LEMMA_AND_TAG[lemma]['lemma']
+    return lemma
 
 def convert_sentences(sentence_file):
     if isinstance(sentence_file, str):
@@ -32,9 +57,9 @@ def convert_sentences(sentence_file):
                 w = ln.split()
                 # print(w)
                 surface = w[0]
-                lemma = w[1]
-                pos = w[2]
                 conf = w[3]
+                lemma = override_lemma(w[1], w[2])
+                pos = override_tag(w[2], w[1], conf)
                 _num += 1
                 output += '('
                 output += str(_num)

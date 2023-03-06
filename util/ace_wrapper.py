@@ -58,4 +58,12 @@ if __name__ == "__main__":
     ace_exec = sys.argv[3]
     parses, no_parses = run_with_srg(ts, grammar, ace_exec)
     assert len(parses) == len(ts['item'])
+<<<<<<< HEAD
     print('done')
+=======
+    #ts['result'] = parses
+    #fm = itsdb.FieldMapper(ts)
+    #for p in parses:
+    #    fm.map(p)
+    print('done')
+>>>>>>> 919419403d06992bd1a676e1fcda055c132abd87
