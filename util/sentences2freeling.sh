@@ -11,4 +11,4 @@
 
 MYPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-analyze -f es.cfg  <$1 2>/dev/null 
+analyze -f es.cfg --output json <$1 2>/dev/null
