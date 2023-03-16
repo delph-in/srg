@@ -13,16 +13,12 @@ In the old version of the grammar, some of the Freeling tags were overridden.
 For compatibility, we will do the same for now.
 i -> AQ0MS0 (interjection to a default adjective form; will then undergo an adjective-to-interjection rule...)
 '''
-def override_tag(tag, word, prob):
-    #return TAGS[tag] if tag in TAGS else tag
+def override_tag(tag, word):
     if tag in TAGS:
         if word not in DO_NOT_OVERRIDE:
             return TAGS[tag]
     elif word in REPLACE_LEMMA_AND_TAG:
         return REPLACE_LEMMA_AND_TAG[word]['tag']
-    # elif (tag in LEMMA_TAG_PAIRS and word in LEMMA_TAG_PAIRS[tag]):
-    #     if float(prob) < LEMMA_TAG_PAIRS[tag][word]['prob']:
-    #         return LEMMA_TAG_PAIRS[tag][word]['replace']
     return tag
 
 def override_lemma(lemma, tag):
@@ -32,7 +28,7 @@ def override_lemma(lemma, tag):
         return REPLACE_LEMMA_AND_TAG[lemma]['lemma']
     return lemma
 
-def convert_sentences(sentence_file):
+def convert_sentences_file(sentence_file):
     if isinstance(sentence_file, str):
         with open(sentence_file, 'r') as f:
            corpus = f.read().split('\n\n')
@@ -90,8 +86,45 @@ def convert_sentences(sentence_file):
         #     _from_c = 0    # character from
         #     output = output.strip() + "\n"
     return yy_sentences
+
+def convert_sentences(sentences):
+    yy_sentences = []
+    for i, sent in enumerate(sentences):
+        output = ""
+        _num = 0       # lattice ID
+        _from = 0      # lattice from
+        for j,tok in enumerate(sent['tokens']):
+            best_tag = max(tok['tags'], key=lambda x: x['prob']) # get the highest prob
+            tag = best_tag['tag']
+            conf = best_tag['prob']
+            surface = tok['form']
+            lemma = override_lemma(tok['lemma'], tag)
+            pos = override_tag(tag, tok['lemma'])
+            _num += 1
+            output += '('
+            output += str(_num)
+            output += ', '
+            output += str(_from)
+            output += ', '
+            _from += 1
+            output += str(_from)
+            output += ', <'
+            output += str(int(tok['start'])) # - subtract)
+            output += ':'
+            output += str(int(tok['end'])) # - subtract)
+            output += '>, 1, '
+            output += '"' + lemma +'" '
+            output += '"' + surface +'", '
+            output += '0, '
+            output += '"' + pos +'", '                 # lrule
+            output += '"' + pos +'" ' + str(conf)
+            output += ') '
+        #print(''.join(output.strip().lower()))
+        yy_sentences.append(''.join(output.strip().lower()))
+    return yy_sentences
+
 if __name__ == "__main__":
-    sentences = convert_sentences(sys.argv[1])
+    sentences = convert_sentences_file(sys.argv[1])
     for s in sentences:
         print(s)
 

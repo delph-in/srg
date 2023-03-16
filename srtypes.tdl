@@ -881,7 +881,7 @@ basic-head-adj-phrase := basic-head-mod-phrase-simple & phrasal &
 head-adj-phrase := basic-head-adj-phrase & head-initial.
 non_str-head-adj-phrase := basic-head-adj-phrase & non_str-head-initial.
 
-; We split head-adj-phrase and adj-head-phrase into two each, bone for intersective 
+; We split head-adj-phrase and adj-head-phrase into two each, one for intersective 
 ; modifiers and one for scopal modifiers, in order to get desired results for recursive 
 ; modification as in "apparently difficult problem" (cf. Kasper '98). This split is also 
 ; used in generation, where we delay construction of intersective modification, but not scopal.
