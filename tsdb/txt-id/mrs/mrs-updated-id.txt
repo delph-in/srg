@@ -1,0 +1,110 @@
+11	Llueve.
+21	Pitágoras ladró.
+31	La ventana se abrió.
+41	Montse persiguió a Núria.
+51	Montse dió a Núria el cigarrillo.
+61	Montse dió el cigarrillo a Núria.
+71	Montse apostó con Núria un cigarrillo a que llovía.
+81	Montse sabía que llovía.
+91	Pitágoras quería ladrar.
+101	Montse ordenó a Pitágoras ladrar
+111	Todos los gatos ladran.
+121	Todos los gatos perseguían a algún perro.
+131	Mi gato ladró.
+141	Ladró.
+151	El gato lo perseguía.
+161	El gato se perseguía.
+171	El gato perseguía uno.
+181	El mío ladró.
+191	Ése se abrió.
+201	Los gatos ladran.
+211	Núria llegó.
+221	Algunos ladran.
+231	Algunos de los gatos ladran.
+241	Ningún gato ladró.
+251	El perro ladró?
+261	Qué perro ladró?
+271	El perro de quién ladró?
+281	Persigue a Núria!
+291	Montse sabía qué perro ladraba.
+301	Montse se preguntaba si Pitágoras ladraba
+311	El perro que perseguía Núria ladró.
+321	El perro a perseguir está ladrando
+331	El perro fue perseguido por Núria
+341	El perro perseguido por Núria ladró
+351	El perro está ladrando.
+361	El perro ha ladrado.
+371	El perro ha estado ladrando.
+381	El perro había estado ladrando.
+391	El perro ladrará.
+401	El perro va a ladrar.
+411	El perro podía ladrar.
+421	El perro no podía ladrar.
+431	El perro viejo ladró.
+441	El perro ladró suavemente.
+451	El perro probablemente ladró.
+461	El perro ladró en el jardín.
+471	El perro ladra ahora.
+481	El perro del jardín ladra.
+491	The tobacco garden dog barked.
+501	El gato es viejo .
+511	El gato está en el jardín .
+521	El perro ladrador perseguía a Núria.
+531	Los perros perseguidos ladran.
+541	Perseguir al gato es antiguo.
+551	Que el gato perseguía a Pitágoras es obvio.
+561	Los perros persiguen cualquier cosa que ladre.
+571	El perro ladró cada día.
+581	¿Cuándo ladró el perro?
+591	Tres de los perros ladran.
+601	Tres ladran.
+611	El perro de Núria ladra.
+621	El de Núria ladra.
+631	Veintitrés perros ladran.
+641	Doscientos veintidós perros ladran.
+651	Montse llegó en coche.
+661	Pitágoras siguió ladrando.
+671	Núria metió el gato a la fuerza.
+681	Núria metió a la fuerza el gato.
+691	La fotografía de Montse llegó.
+701	Abrams wiped the table clean.
+711	Montse puso a Pitágoras en el jardín.
+721	El perro ladrará si Núria llega.
+731	Montse y Núria llegaron.
+741	Montse, Núria y el perro llegaron.
+751	El perro llegó y ladró.
+761	El perro llegó y Pitágoras ladró.
+771	El perro ladró, no?
+781	Es obvio que el perro ladró.
+791	Pitágoras prometió a Núria ladrar.
+801	Pitágoras parece ladrar.
+811	Montse cree que Pitágoras está ladrando.
+821	A Montse le preocupó que Pitágoras ladrase.
+831	Montse tardó 10 minutos en llegar
+841	Abrams left it to Browne to bark.
+851	A Montse Núria le parece rara.
+861	Núria considera a Pepe viejo.
+871	A Montse le gustó la idea de que Pitágoras podía ladrar.
+881	Pitágoras ladró desde las diez hasta las tres.
+891	Pitágoras era muy viejo.
+901	Casi todos los perros ladran.
+911	Pitágoras ladró muy flojo.
+921	La persecución de Núria de los perros preocupaba a Montse
+931	A Núria le preocupaba que Pitágoras persiguiera a los gatos.
+941	El 3 de junio llegó
+951	Montse llegó a las tres y veinte.
+961	Núria llegó el martes por la mañana.
+971	Los gatos encontraron un modo de ladrar.
+981	El gato más feliz persiguió a Núria.
+991	Había gatos en el jardín.
+1001	Aquel perro perseguía a Núria.
+1011	Alguien perseguía a Montse.
+1021	How happy was Abrams?
+1031	El número cinco preocupa a Núria.
+1041	Montse pudo.
+1051	Núria lo intentó.
+1061	No ladres!
+1071	El perro llegó ladrando.
+316	El perro que perseguía a Núria ladró.
+556	Es obvio que el gato perseguía a Pitágoras.
+
