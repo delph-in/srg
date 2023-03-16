@@ -1,5 +1,10 @@
 The scripts in this folder are mainly for the interface with the morphophonological analyzer (Freeling).
 
+*************************************************************************************************
+
+CREATING TSDB TEST SUITES WITH YY TOKENS WITH FREELING TAGS:
+
+
 The grammar currently relies on Freeling to provide morphophonological tags which are then mapped to "inflectional" rules (found in inflr.tdl). Once the tags are successfully mapped to those rules, the grammar can proceed with trying to find a syntactic analysis for the input.
 
 The tags the grammar currently assumed correspond to Freeling v.4.2.
@@ -25,3 +30,27 @@ Note that this will modify the test suite, so make sure to back it up first.
 The updated test suite can be processed by ACE using e.g. pydelphin wrapper as follows:
 
 delphin process --options="-y --yy-rules" -g ~/delphin/srg/ace/srg.dat --full-forest --select i-tokens path-to-test-suite
+
+*************************************************************************************************
+
+TSDB TREEBANKS UPDATES
+
+All old Spanish treebanks required updates with respect to the `relations` file, which involves some manual work (see https://github.com/delph-in/docs/wiki/ItsdbProfileManipulation#updating-old-profiles).
+
+The MRS test suite required significant changes (correcting typos, removing English sentences, updating example IDs. The relevant scripts are found under tsdb-updates/
+
+*************************************************************************************************
+
+RUNNING ACE ON INDICIDUAL SENTENCES:
+
+see https://github.com/delph-in/docs/wiki/SrgTop
+
+The scripts are under the folder analyze-wrappers/
+
+*************************************************************************************************
+
+ARCHAEOLOGY:
+
+The folder "freeling-updates" contains the history of tag updates motivated by the changes in Freeling 4.2 compared to Freeling 3.0 as well as by adding token mapping to the grammar. 
+
+
