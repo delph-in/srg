@@ -1,0 +1,5 @@
+Los el DA0MP0 0.992728
+perros perro NCMP000 1
+ladran ladrar VMIP3P0 1
+. . Fp 1
+

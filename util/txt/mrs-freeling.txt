@@ -1,0 +1,700 @@
+Llueve llover VMIP3S0 1
+. . Fp 1
+
+Pitágoras pitágoras NP00SP0 1
+ladró ladrar VMIS3S0 1
+. . Fp 1
+
+La el DA0FS0 0.98926
+ventana ventana NCFS000 1
+se se P00CN00 0.494509
+abrió abrir VMIS3S0 1
+. . Fp 1
+
+Montse montse NP00SP0 1
+persiguió perseguir VMIS3S0 1
+a a SP 0.998775
+Núria núria NP00G00 1
+. . Fp 1
+
+Montse montse NP00SP0 1
+dió dió VMIS3S0 1
+a a SP 0.998775
+Núria núria NP00G00 1
+el el DA0MS0 1
+cigarrillo cigarrillo NCMS000 1
+. . Fp 1
+
+Montse montse NP00SP0 1
+dió dió VMIS3S0 1
+el el DA0MS0 1
+cigarrillo cigarrillo NCMS000 1
+a a SP 0.998775
+Núria núria NP00G00 1
+. . Fp 1
+
+Montse montse NP00SP0 1
+apostó apostar VMIS3S0 1
+con con SP 1
+Núria núria NP00SP0 1
+un uno DI0MS0 0.99698
+cigarrillo cigarrillo NCMS000 1
+a a SP 0.998775
+que que PR0CN00 0.550139
+llovía llover VMII3S0 1
+. . Fp 1
+
+Montse montse NP00SP0 1
+sabía saber VMII3S0 0.65
+que que CS 0.449861
+llovía llover VMII3S0 1
+. . Fp 1
+
+Pitágoras pitágoras NP00SP0 1
+quería querer VMII3S0 0.630645
+ladrar ladrar VMN0000 1
+. . Fp 1
+
+Montse montse NP00SP0 1
+ordenó ordenar VMIS3S0 1
+a a SP 0.998775
+Pitágoras pitágoras NP00SP0 1
+ladrar ladrar VMN0000 1
+Todos todo DI0MP0 0.70665
+los el DA0MP0 0.992728
+gatos gato NCMP000 1
+ladran ladrar VMIP3P0 1
+. . Fp 1
+
+Todos todo DI0MP0 0.70665
+los el DA0MP0 0.992728
+gatos gato NCMP000 1
+perseguían perseguir VMII3P0 1
+a a SP 0.998775
+algún alguno DI0MS0 1
+perro perro NCMS000 1
+. . Fp 1
+
+Mi mi DP1CSS 0.999325
+gato gato NCMS000 1
+ladró ladrar VMIS3S0 1
+. . Fp 1
+
+Ladró ladrar VMIS3S0 1
+. . Fp 1
+
+El el DA0MS0 1
+gato gato NCMS000 1
+lo lo PP3MSA0 0.334764
+perseguía perseguir VMII3S0 0.65
+. . Fp 1
+
+El el DA0MS0 1
+gato gato NCMS000 1
+se se P00CN00 0.494509
+perseguía perseguir VMII3S0 0.65
+. . Fp 1
+
+El el DA0MS0 1
+gato gato NCMS000 1
+perseguía perseguir VMII3S0 0.65
+uno uno PI0MS00 0.981709
+. . Fp 1
+
+El el DA0MS0 1
+mío mío AP0MS1S 0.340007
+lladró lladró VMIS3S0 1
+. . Fp 1
+
+Ése ese PD0MS00 1
+se se P00CN00 0.494509
+abrió abrir VMIS3S0 1
+. . Fp 1
+
+Los el DA0MP0 0.992728
+gatos gato NCMP000 1
+ladran ladrar VMIP3P0 1
+. . Fp 1
+
+Núria núria NP00SP0 1
+llegó llegar VMIS3S0 1
+. . Fp 1
+
+Algunos alguno PI0MP00 0.39667
+ladran ladrar VMIP3P0 1
+. . Fp 1
+
+Algunos alguno PI0MP00 0.39667
+de de SP 0.999961
+los el DA0MP0 0.992728
+gatos gato NCMP000 1
+ladran ladrar VMIP3P0 1
+. . Fp 1
+
+Ningún ninguno DI0MS0 1
+gato gato NCMS000 1
+ladró ladrar VMIS3S0 1
+. . Fp 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+ladró ladrar VMIS3S0 1
+? ? Fit 1
+
+Qué qué DE0CN0 0.0652643
+perro perro NCMS000 1
+ladró ladrar VMIS3S0 1
+? ? Fit 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+de de SP 0.999961
+quién quién PT0CS00 0.997449
+ladró ladrar VMIS3S0 1
+? ? Fit 1
+
+Persigue perseguir VMIP3S0 0.989241
+a a SP 0.998775
+Núria núria NP00G00 1
+! ! Fat 1
+
+Montse montse NP00SP0 1
+sabía saber VMII3S0 0.65
+qué qué DT0CN0 0.216289
+perro perro NCMS000 1
+ladraba ladrar VMII3S0 0.649996
+. . Fp 1
+
+Montse montse NP00SP0 1
+se se P00CN00 0.494509
+preguntaba preguntar VMII3S0 0.65
+si si CS 0.999827
+Pitágoras pitágoras NP00SP0 1
+ladraba ladrar VMII3S0 0.649996
+El el DA0MS0 1
+perro perro NCMS000 1
+que que PR0CN00 0.550139
+perseguía perseguir VMII3S0 0.65
+a a SP 0.998775
+Núria núria NP00SP0 1
+lladró lladró VMIS3S0 1
+. . Fp 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+a a SP 0.998775
+perseguir perseguir VMN0000 1
+está estar VAIP3S0 0.000200642
+ladrando ladrar VMG0000 1
+El el DA0MS0 1
+perro perro NCMS000 1
+fue ser VSIS3S0 0.980739
+perseguido perseguir VMP00SM 1
+por por SP 1
+Núria_El núria_el NP00SP0 1
+perro perro NCMS000 1
+perseguido perseguir VMP00SM 1
+por por SP 1
+Núria núria NP00SP0 1
+ladró ladrar VMIS3S0 1
+El el DA0MS0 1
+perro perro NCMS000 1
+está estar VAIP3S0 0.000200642
+ladrando ladrar VMG0000 1
+. . Fp 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+ha haber VAIP3S0 0.999889
+ladrado ladrar VMP00SM 1
+. . Fp 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+ha haber VAIP3S0 0.999889
+estado estar VAP00SM 0.00578512
+ladrando ladrar VMG0000 1
+. . Fp 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+había haber VAII3S0 0.499853
+estado estar VAP00SM 0.00578512
+ladrando ladrar VMG0000 1
+. . Fp 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+ladrará ladrar VMIF3S0 1
+. . Fp 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+va ir VMIP3S0 1
+a a SP 0.998775
+ladrar ladrar VMN0000 1
+. . Fp 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+podía poder VMII3S0 0.643617
+ladrar ladrar VMN0000 1
+. . Fp 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+no no RN 0.999297
+podía poder VMII3S0 0.643617
+ladrar ladrar VMN0000 1
+. . Fp 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+viejo viejo AQ0MS00 0.993421
+ladró ladrar VMIS3S0 1
+. . Fp 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+ladró ladrar VMIS3S0 1
+suavemente suavemente RG 1
+. . Fp 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+probablemente probablemente RG 1
+ladró ladrar VMIS3S0 1
+. . Fp 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+ladró ladrar VMIS3S0 1
+en en SP 1
+el el DA0MS0 1
+jardín jardín NCMS000 1
+. . Fp 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+ladra ladrar VMIP3S0 0.207706
+ahora ahora RG 1
+. . Fp 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+de de SP 1
+el el DA0MS0 1
+jardín jardín NCMS000 1
+ladra ladra NCFS000 0.788979
+. . Fp 1
+
+The_tobacco_garden_dog_barked the_tobacco_garden_dog_barked NP00V00 1
+. . Fp 1
+
+El el DA0MS0 1
+gato gato NCMS000 1
+es ser VSIP3S0 1
+viejo viejo AQ0MS00 0.993421
+. . Fp 1
+
+El el DA0MS0 1
+gato gato NCMS000 1
+está estar VMIP3S0 0.999398
+en en SP 1
+el el DA0MS0 1
+jardín jardín NCMS000 1
+. . Fp 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+ladrador ladrador AQ0MS00 0.0909198
+perseguía perseguir VMII3S0 0.65
+a a SP 0.998775
+Núria núria NP00G00 1
+. . Fp 1
+
+Los el DA0MP0 0.992728
+perros perro NCMP000 1
+perseguidos perseguir VMP00PM 1
+ladran ladrar VMIP3P0 1
+. . Fp 1
+
+Perseguir perseguir VMN0000 1
+a a SP 1
+el el DA0MS0 1
+gato gato NCMS000 1
+es ser VSIP3S0 1
+antiguo antiguo AQ0MS00 0.994169
+. . Fp 1
+
+Es ser VSIP3S0 1
+obvio obvio AQ0MS00 0.97619
+que que CS 0.449861
+el el DA0MS0 1
+gato gato NCMS000 1
+persiguía persiguía VMII3S0 0.64711
+a a SP 0.998775
+Pitágoras pitágoras NP00G00 1
+. . Fp 1
+
+Los el DA0MP0 0.992728
+perros perro NCMP000 1
+persiguen perseguir VMIP3P0 1
+cualquier cualquiera DI0CS0 1
+cosa cosa NCFS000 0.992574
+que que PR0CN00 0.550139
+ladre ladrar VMSP3S0 0.620797
+. . Fp 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+ladró ladrar VMIS3S0 1
+cada cada DI0CS0 1
+día día NCMS000 1
+. . Fp 1
+
+¿ ¿ Fia 1
+Cuándo cuándo PT00000 0.991071
+ladró ladrar VMIS3S0 1
+el el DA0MS0 1
+perro perro NCMS000 1
+? ? Fit 1
+
+Tres 3 Z 1
+de de SP 0.999961
+los el DA0MP0 0.992728
+perros perro NCMP000 1
+ladran ladrar VMIP3P0 1
+. . Fp 1
+
+Tres 3 Z 1
+ladran ladrar VMIP3P0 1
+. . Fp 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+de de SP 0.999961
+Núria núria NP00O00 1
+ladra ladra NCFS000 0.788979
+. . Fp 1
+
+El el DA0MS0 1
+de de SP 0.999961
+Núria núria NP00G00 1
+ladra ladra NCFS000 0.788979
+. . Fp 1
+
+Veintitrés 23 Z 1
+perros perro NCMP000 1
+ladran ladrar VMIP3P0 1
+. . Fp 1
+
+Doscientos_veintidós 222 Z 1
+perros perro NCMP000 1
+ladran ladrar VMIP3P0 1
+. . Fp 1
+
+Montse montse NP00SP0 1
+llegó llegar VMIS3S0 1
+en en SP 1
+coche coche NCMS000 0.998155
+. . Fp 1
+
+Pitágoras pitágoras NP00SP0 1
+siguió seguir VMIS3S0 1
+ladrando ladrar VMG0000 1
+. . Fp 1
+
+Núria núria NP00SP0 1
+metió meter VMIS3S0 1
+el el DA0MS0 1
+gato gato NCMS000 1
+a a SP 0.998775
+la el DA0FS0 0.98926
+fuerza fuerza NCFS000 0.99684
+. . Fp 1
+
+Núria núria NP00SP0 1
+metió meter VMIS3S0 1
+a a SP 0.998775
+la el DA0FS0 0.98926
+fuerza fuerza NCFS000 0.99684
+el el DA0MS0 1
+gato gato NCMS000 1
+. . Fp 1
+
+La el DA0FS0 0.98926
+fotografía fotografía NCFS000 0.962264
+de de SP 0.999961
+Montse montse NP00SP0 1
+llegó llegar VMIS3S0 1
+. . Fp 1
+
+Abrams abra_milisegundo NCFS000 1
+wiped wiped NCMS000 1
+the the NCFS000 0.499941
+table table AQ0CS00 1
+clean clean VMIP3P0 1
+. . Fp 1
+
+Montse montse NP00SP0 1
+puso poner VMIS3S0 1
+a a SP 0.998775
+Pitágoras pitágoras NP00SP0 1
+en en SP 1
+el el DA0MS0 1
+jardín jardín NCMS000 1
+. . Fp 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+ladrará ladrar VMIF3S0 1
+si si CS 0.999827
+Núria núria NP00SP0 1
+llega llegar VMIP3S0 0.972637
+. . Fp 1
+
+Montse montse NP00SP0 1
+y y CC 0.999989
+Núria núria NP00SP0 1
+llegaron llegar VMIS3P0 1
+. . Fp 1
+
+Montse montse NP00SP0 1
+, , Fc 1
+Núria núria NP00SP0 1
+y y CC 0.999989
+el el DA0MS0 1
+perro perro NCMS000 1
+llegaron llegar VMIS3P0 1
+. . Fp 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+llegó llegar VMIS3S0 1
+y y CC 0.999989
+ladró ladrar VMIS3S0 1
+. . Fp 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+llegó llegar VMIS3S0 1
+y y CC 0.999989
+Pitágoras pitágoras NP00SP0 1
+ladró ladrar VMIS3S0 1
+. . Fp 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+ladró ladrar VMIS3S0 1
+, , Fc 1
+no no RN 0.999297
+? ? Fit 1
+
+Es ser VSIP3S0 1
+obvio obvio AQ0MS00 0.97619
+que que CS 0.449861
+el el DA0MS0 1
+perro perro NCMS000 1
+ladró ladrar VMIS3S0 1
+. . Fp 1
+
+Pitágoras pitágoras NP00SP0 1
+prometió prometer VMIS3S0 1
+a a SP 0.998775
+Núria núria NP00O00 1
+ladrar ladrar VMN0000 1
+. . Fp 1
+
+Pitágoras pitágoras NP00SP0 1
+parece parecer VMIP3S0 0.999002
+ladrar ladrar VMN0000 1
+. . Fp 1
+
+Montse montse NP00SP0 1
+cree creer VMIP3S0 0.991398
+que que CS 0.449861
+Pitágoras pitágoras NP00O00 1
+está estar VAIP3S0 0.000200642
+ladrando ladrar VMG0000 1
+. . Fp 1
+
+A a SP 0.998775
+Montse montse NP00SP0 1
+le le PP3CSD0 1
+preocupó preocupar VMIS3S0 1
+que que CS 0.449861
+Pitágoras pitágoras NP00O00 1
+ladrase ladrar VMSI3S0 0.634863
+. . Fp 1
+
+Montse montse NP00SP0 1
+tardó tardar VMIS3S0 1
+10_minutos TM_min:10 Zu 1
+en en SP 1
+llegar llegar VMN0000 1
+Abrams_left_it_to_Browne_to_bark abrams_left_it_to_browne_to_bark NP00V00 1
+. . Fp 1
+
+A a SP 0.998775
+Montse_Núria montse_núria NP00SP0 1
+le le PP3CSD0 1
+parece parecer VMIP3S0 0.999002
+rara raro AQ0FS00 1
+. . Fp 1
+
+Núria núria NP00O00 1
+considera considerar VMIP3S0 0.998721
+a a SP 0.998775
+Pepe pepe NP00O00 1
+viejo viejo AQ0MS00 0.993421
+. . Fp 1
+
+A a SP 0.998775
+Montse montse NP00SP0 1
+le le PP3CSD0 1
+gustó gustar VMIS3S0 1
+la el DA0FS0 0.98926
+idea idea NCFS000 0.994163
+de de SP 0.999961
+que que CS 0.449861
+Pitágoras pitágoras NP00O00 1
+podía poder VMII3S0 0.643617
+ladrar ladrar VMN0000 1
+. . Fp 1
+
+Pitágoras pitágoras NP00SP0 1
+ladró ladrar VMIS3S0 1
+desde desde SP 1
+las el DA0FP0 0.988184
+diez 10 Z 1
+hasta hasta SP 0.922749
+las el DA0FP0 0.988184
+tres 3 Z 1
+. . Fp 1
+
+Pitágoras pitágoras NP00SP0 1
+era ser VSII3S0 0.491317
+muy muy RG 1
+viejo viejo AQ0MS00 0.993421
+. . Fp 1
+
+Casi casi RG 1
+todos todo DI0MP0 0.70665
+los el DA0MP0 0.992728
+perros perro NCMP000 1
+ladran ladrar VMIP3P0 1
+. . Fp 1
+
+Pitágoras pitágoras NP00SP0 1
+ladró ladrar VMIS3S0 1
+muy muy RG 1
+flojo flojo AQ0MS00 1
+. . Fp 1
+
+La el DA0FS0 0.98926
+persecución persecución NCFS000 1
+de de SP 0.999961
+Núria núria NP00G00 1
+de de SP 0.999961
+los el DA0MP0 0.992728
+perros perro NCMP000 1
+preocupaba preocupar VMII3S0 0.649967
+a a SP 0.998775
+Montse_A_Núria montse_a_núria NP00SP0 1
+le le PP3CSD0 1
+preocupaba preocupar VMII3S0 0.649967
+que que CS 0.449861
+Pitágoras pitágoras NP00SP0 1
+persiguiera perseguir VMSI3S0 0.65
+a a SP 0.998775
+los el DA0MP0 0.992728
+gatos gato NCMP000 1
+. . Fp 1
+
+El el DA0MS0 1
+3_de_junio [??:3/6/??:??.??:??] W 1
+llegó llegar VMIS3S0 1
+Montse montse NP00SP0 1
+llegó llegar VMIS3S0 1
+a a SP 0.998775
+las el DA0FP0 0.988184
+tres 3 Z 1
+y y CC 0.999989
+veinte 20 Z 1
+. . Fp 1
+
+Núria núria NP00G00 1
+llegó llegar VMIS3S0 1
+el el DA0MS0 1
+martes_por_la_mañana [M:??/??/??:??.??:am] W 1
+. . Fp 1
+
+Los el DA0MP0 0.992728
+gatos gato NCMP000 1
+encontraron encontrar VMIS3P0 1
+un uno DI0MS0 0.99698
+modo modo NCMS000 1
+de de SP 0.999961
+ladrar ladrar VMN0000 1
+. . Fp 1
+
+El el DA0MS0 1
+gato gato NCMS000 1
+más más RG 0.99993
+feliz feliz AQ0CS00 0.992424
+perseguió perseguió VMIS3S0 1
+a a SP 0.998775
+Núria núria NP00G00 1
+. . Fp 1
+
+Había haber VMII3S0 0.000147406
+gatos gato NCMP000 1
+en en SP 1
+el el DA0MS0 1
+jardín jardín NCMS000 1
+. . Fp 1
+
+Aquel aquel DD0MS0 0.879147
+perro perro NCMS000 1
+perseguía perseguir VMII3S0 0.65
+a a SP 0.998775
+Núria núria NP00G00 1
+. . Fp 1
+
+Alguién alguién NP00SP0 1
+perseguía perseguir VMII3S0 0.65
+a a SP 0.998775
+Montse montse NP00G00 1
+. . Fp 1
+
+How_happy_was_Abrams how_happy_was_abrams NP00V00 1
+? ? Fit 1
+
+El el DA0MS0 1
+número número NCMS000 1
+cinco 5 Z 0.999454
+preocupa preocupar VMIP3S0 0.987805
+a a SP 0.998775
+Núria núria NP00O00 1
+. . Fp 1
+
+Montse montse NP00SP0 1
+pudo poder VMIS3S0 1
+. . Fp 1
+
+Núria núria NCFS000 0.624207
+lo lo PP3MSA0 0.334764
+intentó intentar VMIS3S0 1
+. . Fp 1
+
+No no RN 0.999297
+ladres ladrar VMSP2S0 1
+! ! Fat 1
+
+El el DA0MS0 1
+perro perro NCMS000 1
+llegó llegar VMIS3S0 1
+ladrando ladrar VMG0000 1
+. . Fp 1
+
