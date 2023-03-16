@@ -1,0 +1,24 @@
+rg_ge := av_-_i-vm_le &
+  [ STEM < "av_-_i-vm_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "rg" > ] >,
+    SYNSEM.LKEYS.KEYRE.PRED "_generic_adv_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag rg.
+  """.
+
+rn_ge := av_-_i-vm_le &
+  [ STEM < "av_-_i-vm_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "rn" > ] >,
+    SYNSEM.LKEYS.KEYRE.PRED "_generic_adv_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag rn.
+  """.
+
+nc00000_ge := av_-_i-vm_le &
+  [ STEM < "av_-_i-vm_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "nc00000" > ] >,
+    SYNSEM.LKEYS.KEYRE.PRED "_generic_adv_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag nc00000.
+  """.
+
