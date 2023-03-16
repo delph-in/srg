@@ -12370,6 +12370,11 @@ n_-_pn_native_le := n_-_pn_lex & native_le
   This is a native lexical entry type, for words that are in the lexicon.
   """.
 
+foreign_le := n_-_pn_lex
+"""
+Assume for now that it is useful to treat foreign words/fragments as named entities.
+""".
+
 n_-_pn_le := n_-_pn_lex.
 
 ;  <type val="n_-_pr-pers-n_le">

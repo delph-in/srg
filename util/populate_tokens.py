@@ -12,20 +12,6 @@ from freeling.freeling_API.tokenize_and_tag import Freeling_tok_tagger
 # REMOVE = {'The tobacco garden dog barked.', 'Abrams wiped the table clean.',
 #           'Abrams left it to Browne to bark.', 'How happy was Abrams?'}
 
-def read_testsuite2(ts):
-    items = ts['item']
-    # Strip the trailing hyphens to match old LKB output, although may want to put them back in later.
-    sentences = [item['i-input'].strip('-') for item in items ]
-    # debug:
-    #sentences = sentences[47:49]
-    tmp_sentence_file = NamedTemporaryFile("w", delete=False)
-    with open(tmp_sentence_file.name, 'w') as tmp_f:
-        for s in sentences:
-            if not s[-1] in string.punctuation:
-                # assume a dot at the end
-                s = s + '.'
-            tmp_f.write(s+'\n')
-    return tmp_f.name
 
 def read_testsuite(ts):
     items = ts['item']
@@ -34,6 +20,13 @@ def read_testsuite(ts):
     # debug:
     #sentences = sentences[47:49]
 
+'''
+The below two methods are not used; the API is used instead, 
+but they are an example of how the Freeling `analyze` binary can be called 
+as a subprocess.
+Input: a file
+Output: a string, which in some cases needs to be postprocessed.
+'''
 def run_script_json(script_path, arg_path):
     output = subprocess.run("'%s' '%s'" % (script_path, str(arg_path)),shell=True,stdout=subprocess.PIPE)
     #print(output.stdout.decode('utf-8'))
@@ -90,15 +83,6 @@ def update_testsuite(ts):
             ts['item'].update(i, {'i-id':101})
     ts.commit()
 
-'''
-I cannot figure out how to pass the subprocess anything that is not a file.
-Furthermore, the freeling command which is currently the only one I can successfully use,
-analyze -f es.cfg --output json
-outputs a string which is a concatenation of json dicts, where begin and end of each token
-are computed from the beginning of the first sentence, as if the whole output were a single sentence (?).
-So, for now I am left with creating a temporary file for each input sentence.
-I will try to ask L. Padro about it (or yet find the answer in the docs).
-'''
 def freeling2json(s):
     tmp_sentence_file = NamedTemporaryFile("w", delete=False)
     with open(tmp_sentence_file.name, 'w') as tmp_f:
