@@ -1,0 +1,168 @@
+ncms000_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncms000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncms000.
+  """.
+
+ncmp000_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncmp000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncmp000.
+  """.
+
+ncfs000_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncfs000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncfs000.
+  """.
+
+ncfp000_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncfp000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncfp000.
+  """.
+
+ncms00a_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncms00a" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncms00a.
+  """.
+
+ncmp00a_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncmp00a" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncmp00a.
+  """.
+
+ncfs00a_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncfs00a" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncfs00a.
+  """.
+
+ncfp00a_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncfp00a" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncfp00a.
+  """.
+
+ncms00d_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncms00d" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncms00d.
+  """.
+
+ncmp00d_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncmp00d" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncmp00d.
+  """.
+
+ncfs00d_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncfs00d" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncfs00d.
+  """.
+
+ncfp00d_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncfp00d" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncfp00d.
+  """.
+
+ncms00x_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncms00x" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncms00x.
+  """.
+
+ncmp00x_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncmp00x" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncmp00x.
+  """.
+
+ncfs00x_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncfs00x" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncfs00x.
+  """.
+
+ncfp00x_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncfp00x" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncfp00x.
+  """.
+
+nccs000_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "nccs000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag nccs000.
+  """.
+
+nccp000_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "nccp000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag nccp000.
+  """.
+
+ncmn000_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncmn000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncmn000.
+  """.
+
+ncfn000_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncfn000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncfn000.
+  """.
+
+nccn000_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "nccn000" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag nccn000.
+  """.
+
