@@ -1,0 +1,56 @@
+The scripts in this folder are mainly for the interface with the morphophonological analyzer (Freeling).
+
+*************************************************************************************************
+
+CREATING TSDB TEST SUITES WITH YY TOKENS WITH FREELING TAGS:
+
+
+The grammar currently relies on Freeling to provide morphophonological tags which are then mapped to "inflectional" rules (found in inflr.tdl). Once the tags are successfully mapped to those rules, the grammar can proceed with trying to find a syntactic analysis for the input.
+
+The tags the grammar currently assumed correspond to Freeling v.4.2.
+
+In order to use ACE, the input format should be the so-called "YY input" (see https://github.com/delph-in/docs/wiki/SrgTop).
+
+Current folder contains scripts which will allow you to update existing [incr tsdb] test suites with a field called i-tokens for each sentence item, which will contain YY-formatted input with Freeling tags. For that, you will need to install Freeling 4.2.
+
+1) Put the test suites in a desired location and make sure you have the Freeling python API (currently included in this repo under freeling/freeling_API) as well as a successful Freeling 4.2 installation (again, see https://github.com/delph-in/docs/wiki/SrgTop). 
+
+2) In the API folder, make sure this line: 
+
+os.environ["FREELINGDIR"] = '/usr' 
+
+...reflects the actual location of the freeling 4.2 installation; this can vary. Sometimes it is /usr/local, sometimes it is something else. 
+
+Once you do (1) and (2), you can run populate_tokens.py as follows:
+
+python3 populate_tokens.py test-suite-to-update-location
+
+Note that this will modify the test suite, so make sure to back it up first. 
+
+The updated test suite can be processed by ACE using e.g. pydelphin wrapper as follows:
+
+delphin process --options="-y --yy-rules" -g ~/delphin/srg/ace/srg.dat --full-forest --select i-tokens path-to-test-suite
+
+*************************************************************************************************
+
+TSDB TREEBANKS UPDATES
+
+All old Spanish treebanks required updates with respect to the `relations` file, which involves some manual work (see https://github.com/delph-in/docs/wiki/ItsdbProfileManipulation#updating-old-profiles).
+
+The MRS test suite required significant changes (correcting typos, removing English sentences, updating example IDs. The relevant scripts are found under tsdb-updates/
+
+*************************************************************************************************
+
+RUNNING ACE ON INDICIDUAL SENTENCES:
+
+see https://github.com/delph-in/docs/wiki/SrgTop
+
+The scripts are under the folder analyze-wrappers/
+
+*************************************************************************************************
+
+ARCHAEOLOGY:
+
+The folder "freeling-updates" contains the history of tag updates motivated by the changes in Freeling 4.2 compared to Freeling 3.0 as well as by adding token mapping to the grammar. 
+
+
