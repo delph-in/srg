@@ -41,6 +41,14 @@ np00g00_ge := n_-_pn_le &
   Generic lexical entry that will be triggered by tag np00g00.
   """.
 
+np00000_ge := n_-_pn_le &
+  [ STEM < "n_-_pn_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "np00000" >, +FORM #form ] >,
+    SYNSEM.LKEYS.KEYREL [ PRED named_rel, CARG #form ] ]
+  """
+  Generic lexical entry that will be triggered by tag np00000.
+  """.
+
 
 ; ncms000, ncmp000, ncfs000, ncfp000, ncms00a, ncmp00a, ncfs00a, ncfp00a, ncms00d, ncmp00d, ncfs00d, ncfp00d, ncms00x, ncmp00x, ncfs00x, ncfp00x, nccs000, nccp000, ncmn000, ncfn000, nccn000
 

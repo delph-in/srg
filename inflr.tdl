@@ -56,9 +56,9 @@ np00g00 :=
 np00sp0_ilr.
 
 ; OZ: Not sure what this rule is for. Right now it is occurs where NCFS000 should.
-;np00o00 := 
-;%suffix (np00o00 np00o00)
-;np00sp0_ilr.
+np00000 := 
+%suffix (np00000 np00000)
+np00sp0_ilr.
 
 np00v00 :=
 %suffix (np00v00 np00v00)

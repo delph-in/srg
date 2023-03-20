@@ -1,6 +1,6 @@
 
 # Freeling tags to override and replace by other tags
-TAGS = {'I': 'AQ0MS00', 'NP00O00':'NCFS000'}
+TAGS = {'I': 'AQ0MS00'}
 
 # Sometimes Freeling gives a wrong tag in very simple cases, such as for the 3SG verb 'ladrar' it returns a noun tag
 # with the probability 78%.
