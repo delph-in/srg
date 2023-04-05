@@ -9,10 +9,6 @@ from srg_freeling2yy import convert_sentences
 # I cannot figure out how to use the pyfreeling library:
 from freeling.freeling_API.tokenize_and_tag import Freeling_tok_tagger
 
-# REMOVE = {'The tobacco garden dog barked.', 'Abrams wiped the table clean.',
-#           'Abrams left it to Browne to bark.', 'How happy was Abrams?'}
-
-
 def read_testsuite(ts):
     items = ts['item']
     # Strip the trailing hyphens to match old LKB output, although may want to put them back in later.
@@ -79,8 +75,6 @@ def update_testsuite(ts):
     print('{} items in the corpus'.format(len(yy)))
     for i, row in enumerate(ts['item']):
         ts['item'].update(i, {'i-tokens': yy[i]})
-        if ts['item'][i]['i-id'] == 10:
-            ts['item'].update(i, {'i-id':101})
     ts.commit()
 
 def freeling2json(s):
