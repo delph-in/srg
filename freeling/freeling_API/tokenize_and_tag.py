@@ -50,27 +50,32 @@ class Freeling_tok_tagger:
         sid=self.sp.open_session()
         # process input text
         for i,lin in enumerate(sentence_list):
-            if not lin[-1] in string.punctuation:
+            if (not lin[-1] in string.punctuation) or lin.endswith(' ...'):
                 # assume a dot at the end
-                lin = lin + '.'
+                lin = lin + ' .'
             output.append({'sentence': lin, 'tokens':[]})
             s = self.tk.tokenize(lin)
             s = self.sp.split(sid,s,False)
             s = self.mf.analyze(s)
             s = self.tg.analyze(s)
-            assert len(s) == 1
-            s = s[0]
-            ws = s.get_words()
-            for j,w in enumerate(ws) :
-                output[i]['tokens'].append({'lemma':w.get_lemma(), 'form': w.get_form(),
-                                            'start':w.get_span_start(), 'end': w.get_span_finish(),
-                                            'selected-tag': w.get_tag(), 'all-tags': []})
-                analyses = list(w.get_analysis())
-                for a in analyses:
-                    #print("\ttag: {}, prob: {}".format(a_i.get_tag(), a_i.get_prob()))
-                    output[i]['tokens'][j]['all-tags'].append({'tag': a.get_tag(), 'prob': a.get_prob()})
-                    if a.get_tag() == output[i]['tokens'][j]['selected-tag']:
-                        output[i]['tokens'][j]['selected-prob'] = a.get_prob()
+            if len(s) == 0:
+                print("No Freeling analysis for {}".format(lin))
+                output[i]['sentence'] = lin
+                output[i]['tokens'] = None
+            else:
+                assert len(s) == 1
+                s = s[0]
+                ws = s.get_words()
+                for j,w in enumerate(ws) :
+                    output[i]['tokens'].append({'lemma':w.get_lemma(), 'form': w.get_form(),
+                                                'start':w.get_span_start(), 'end': w.get_span_finish(),
+                                                'selected-tag': w.get_tag(), 'all-tags': []})
+                    analyses = list(w.get_analysis())
+                    for a in analyses:
+                        #print("\ttag: {}, prob: {}".format(a_i.get_tag(), a_i.get_prob()))
+                        output[i]['tokens'][j]['all-tags'].append({'tag': a.get_tag(), 'prob': a.get_prob()})
+                        if a.get_tag() == output[i]['tokens'][j]['selected-tag']:
+                            output[i]['tokens'][j]['selected-prob'] = a.get_prob()
         # clean up
         self.sp.close_session(sid)
         return output
