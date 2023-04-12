@@ -81,7 +81,7 @@ def update_testsuite(ts):
 def freeling2json(s):
     tmp_sentence_file = NamedTemporaryFile("w", delete=False)
     with open(tmp_sentence_file.name, 'w') as tmp_f:
-        if (not s[-1] in string.punctuation) or s.endswith(' ...'):
+        if (not s[-1] in string.punctuation) or s.endswith('...'):
             # assume a dot at the end; NB: Freeling doesn't seem to handle sentences ending with " ..."
             s = s + '.'
         tmp_f.write(s + '\n')

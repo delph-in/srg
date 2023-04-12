@@ -50,7 +50,7 @@ class Freeling_tok_tagger:
         sid=self.sp.open_session()
         # process input text
         for i,lin in enumerate(sentence_list):
-            if (not lin[-1] in string.punctuation) or lin.endswith(' ...'):
+            if (not lin[-1] in string.punctuation) or lin.endswith('...'):
                 # assume a dot at the end
                 lin = lin + ' .'
             output.append({'sentence': lin, 'tokens':[]})
