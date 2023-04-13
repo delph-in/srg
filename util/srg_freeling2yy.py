@@ -14,16 +14,14 @@ For compatibility, we will do the same for now.
 i -> AQ0MS0 (interjection to a default adjective form; will then undergo an adjective-to-interjection rule...)
 '''
 def override_tag(selected, all, word):
-    if selected in TAGS:
-        if word not in DO_NOT_OVERRIDE:
-            return {'tag': TAGS[selected], 'prob': -1 }
+    if selected in TAGS and word not in DO_NOT_OVERRIDE and word not in REPLACE_LEMMA_AND_TAG:
+        return {'tag': TAGS[selected], 'prob': -1 }
     elif word in REPLACE_LEMMA_AND_TAG:
         return { 'tag': REPLACE_LEMMA_AND_TAG[word]['tag'], 'prob': -1 }
-    else:
-        for t in all:
-            if t['tag'] == selected:
-                return t
-        raise Exception("selected tag not in tag list")
+    for t in all:
+        if t['tag'] == selected:
+            return t
+    #raise Exception("selected tag not in tag list")
 
 def override_lemma(lemma, tag):
     if tag in STEM_EQUALS_TAG:
@@ -94,34 +92,41 @@ def convert_sentences_file(sentence_file):
 def convert_sentences(sentences):
     yy_sentences = []
     for i, sent in enumerate(sentences):
+        #if i > 76:
+        #    print("stop")
         output = ""
         _num = 0       # lattice ID
         _from = 0      # lattice from
-        for j,tok in enumerate(sent['tokens']):
-            surface = tok['form']
-            best = override_tag(tok['selected-tag'],tok['all-tags'], tok['lemma'])
-            pos = best['tag']
-            conf = best['prob']
-            lemma = override_lemma(tok['lemma'], pos)
-            _num += 1
-            output += '('
-            output += str(_num)
-            output += ', '
-            output += str(_from)
-            output += ', '
-            _from += 1
-            output += str(_from)
-            output += ', <'
-            output += str(int(tok['start'])) # - subtract)
-            output += ':'
-            output += str(int(tok['end'])) # - subtract)
-            output += '>, 1, '
-            output += '"' + lemma +'" '
-            output += '"' + surface +'", '
-            output += '0, '
-            output += '"' + pos +'", '                 # lrule
-            output += '"' + pos +'" ' + str(conf)
-            output += ') '
+        if not sent['tokens']:
+            output = '(1,0,1, <0:{}>,1,"{}" "{}",0, "np00v00", "np00v00" 1.0)'.format(len(sent['sentence']),
+                                                                                      sent['sentence'],
+                                                                                      sent['sentence'])
+        else:
+            for j,tok in enumerate(sent['tokens']):
+                surface = tok['form']
+                best = override_tag(tok['selected-tag'],tok['all-tags'], surface.lower())
+                pos = best['tag']
+                conf = best['prob']
+                lemma = override_lemma(tok['lemma'], pos)
+                _num += 1
+                output += '('
+                output += str(_num)
+                output += ', '
+                output += str(_from)
+                output += ', '
+                _from += 1
+                output += str(_from)
+                output += ', <'
+                output += str(int(tok['start'])) # - subtract)
+                output += ':'
+                output += str(int(tok['end'])) # - subtract)
+                output += '>, 1, '
+                output = output + '"' + lemma + '" ' if lemma != '"' else output + '"' + r'\"' + '" '
+                output = output + '"' + surface +'", ' if surface != '"' else output + '"' + r'\"' + '", '
+                output += '0, '
+                output += '"' + pos +'", '                 # lrule
+                output += '"' + pos +'" ' + str(conf)
+                output += ') '
         #print(''.join(output.strip().lower()))
         yy_sentences.append(''.join(output.strip().lower()))
     return yy_sentences

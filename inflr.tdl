@@ -60,6 +60,7 @@ np00000 :=
 %suffix (np00000 np00000)
 np00sp0_ilr.
 
+; OZ: I will use this for various cases which cause Freeling to not return an analysis
 np00v00 :=
 %suffix (np00v00 np00v00)
 np00v00_ilr.
@@ -191,9 +192,9 @@ flt :=
 infl-ltow-rule.
 
 ; -- percentage %
-;ft := 
-;%suffix (ft ft)
-;infl-ltow-rule.
+ft := 
+%suffix (ft ft)
+infl-ltow-rule.
 
 ; -- mathematical symbols (+, -, =)
 ;fz := 
