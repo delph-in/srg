@@ -56,8 +56,8 @@ np00g00 :=
 np00sp0_ilr.
 
 ; OZ: Not sure what this rule is for. Right now it is occurs where NCFS000 should.
-np00000 := 
-%suffix (np00000 np00000)
+np00o00 := 
+%suffix (np00o00 np00o00)
 np00sp0_ilr.
 
 ; OZ: I will use this for various cases which cause Freeling to not return an analysis
