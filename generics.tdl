@@ -760,7 +760,7 @@ vmp00pf_ge := v_np*_le &
 interj_ge := i_-_le & 
  [ STEM < "i_-_le" >,
    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "i" > ] >,
-    SYNSEM.LKEYS.KEYREL.PRED "_generic_interj_rel ]
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_interj_rel" ]
  """
  Generic lexical entry for interjections, triggered by tag i.
  """.
