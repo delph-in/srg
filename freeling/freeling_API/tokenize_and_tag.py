@@ -56,6 +56,8 @@ class Freeling_tok_tagger:
                 lin = lin + ' .'
                 fake_final_dot = True
             output.append({'sentence': lin, 'tokens':[]})
+            if "creerlo" in lin:
+                print("stop")
             # For now, do not assume that uppercased items are all named entities.
             # This may need to change in the future because maybe the user need to take care of lowercasing things.
             s = self.tk.tokenize(lin.lower().capitalize()) if lin.isupper() else self.tk.tokenize(lin)
