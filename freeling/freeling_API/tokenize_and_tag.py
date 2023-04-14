@@ -28,7 +28,7 @@ class Freeling_tok_tagger:
                            self.DATA + self.LANG + "/afixos.dat",
                            "",
                            self.DATA + self.LANG + "/locucions.dat",
-                           self.DATA + self.LANG + "/np.dat",
+                           self.DATA + self.LANG + "/nerc/nerc/nerc.dat",
                            self.DATA + self.LANG + "/quantities.dat",
                            self.DATA + self.LANG + "/probabilitats.dat")
 
@@ -40,7 +40,7 @@ class Freeling_tok_tagger:
         # activate mmorpho odules to be used in next call
         self.mf.set_active_options(umap=False, num=True, pun=True, dat=False,  # select which among created
                               dic=True, aff=True, comp=False, rtk=True,  # submodules are to be used.
-                              mw=False, ner=True, qt=False, prb=True )  # default: all created submodules are used
+                              mw=True, ner=True, qt=False, prb=True )  # default: all created submodules are used
 
         self.tg=pyfreeling.hmm_tagger(self.DATA+self.LANG+"/tagger.dat",True,1)
         #self.tg = pyfreeling.relax_tagger(self.DATA+self.LANG+"/constr_gram-B.dat",500,670.0,0.001,True,1)
@@ -58,9 +58,10 @@ class Freeling_tok_tagger:
             output.append({'sentence': lin, 'tokens':[]})
             #if "creerlo" in lin:
             #    print("stop")
-            # For now, do not assume that uppercased items are all named entities.
-            # This may need to change in the future because maybe the user need to take care of lowercasing things.
-            s = self.tk.tokenize(lin.lower().capitalize()) if lin.isupper() else self.tk.tokenize(lin)
+            # With the basic NER Freeling module, may need this, as it will assume that
+            # all uppercased items are all named entities.
+            #s = self.tk.tokenize(lin.lower().capitalize()) if lin.isupper() else self.tk.tokenize(lin)
+            s = self.tk.tokenize(lin)
             s = self.sp.split(sid,s,False)
             s = self.mf.analyze(s)
             s = self.tg.analyze(s)

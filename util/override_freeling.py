@@ -8,6 +8,6 @@ REPLACE_LEMMA_AND_TAG = {'ladra': {'lemma': 'ladrar', 'tag':'VMIP3S0'}, 'dió': 
                          'señor': {'lemma': 'señor', 'tag': 'NCMS000'}}
 
 
-DO_NOT_OVERRIDE = {'uf', 'je', 'ja', 'oh'}
+DO_NOT_OVERRIDE = {'uf', 'je', 'ja', 'oh', 'todo_lo_contrario', 'ojalá'}
 
 STEM_EQUALS_TAG = {'Z', 'W'}

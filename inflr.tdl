@@ -55,7 +55,7 @@ np00g00 :=
 %suffix (np00g00 np00g00)
 np00sp0_ilr.
 
-; OZ: Not sure what this rule is for. Right now it is occurs where NCFS000 should.
+; OZ: Freeling returns this tag for some named entities.
 np00o00 := 
 %suffix (np00o00 np00o00)
 np00sp0_ilr.
@@ -197,9 +197,9 @@ ft :=
 infl-ltow-rule.
 
 ; -- mathematical symbols (+, -, =)
-;fz := 
-;%suffix (fz fz)
-;infl-ltow-rule.
+fz := 
+%suffix (fz fz)
+infl-ltow-rule.
 
 ; -- /
 ;fh := 
