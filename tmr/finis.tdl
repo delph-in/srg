@@ -25,6 +25,7 @@ generic_name_tmr := token_mapping_rule &
               +CARG #carg,
               +ID #id, +FROM #from, +TO #to,
               +POS #pos ] >,
+  +CONTEXT < >,
   +POSITION "O1@I1" ].
 |#
 ;;
@@ -46,6 +47,7 @@ generic_sahen_tmr := token_mapping_rule &
               +CARG #carg,
               +ID #id, +FROM #from, +TO #to,
               +POS #pos ] >,
+  +CONTEXT < >,
   +POSITION "O1@I1" ].
 
 generic_noun_tmr := token_mapping_rule &  
@@ -61,6 +63,7 @@ generic_noun_tmr := token_mapping_rule &
               +CARG #carg,
               +ID #id, +FROM #from, +TO #to,
               +POS #pos ] >,
+  +CONTEXT < >,
   +POSITION "O1@I1" ].
 
 #|
@@ -77,6 +80,7 @@ generic_pred_tmr := token_mapping_rule &
               +CARG #carg,
               +ID #id, +FROM #from, +TO #to,
               +POS #pos ] >,
+  +CONTEXT < >,
   +POSITION "O1@I1" ].
 |#
 

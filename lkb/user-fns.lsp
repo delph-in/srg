@@ -38,6 +38,14 @@
                                (rule-full-fs rule)) 'needs-affix)))
     (and affix (bool-value-true affix))))
 
+
+;;; return true for types that shouldn't be displayed in type hierarchy
+;;; window. None of their descendents (if any) will be displayed either
+
+(defun hide-in-type-hierarchy-p (type-name)
+  (and (symbolp type-name)
+       (search "GLBTYPE" (symbol-name type-name))))
+
 ;;;
 ;;; create feature structure representation of orthography value for insertion
 ;;; into the output structure of inflectional rules; somewhat more complicated
@@ -114,18 +122,20 @@
 ;;; label can be a longer string shown in the pop-up area on mouse-over.
 ;;;
 (defun lui-chart-edge-name (edge)
-  (let ((rname (existing-dag-at-end-of 
-                (tdfs-indef (edge-dag edge)) '(RNAME))))
-    (format 
-     nil 
-     "~a[~a]"
-     (cond (rname (dag-type rname))
-           ((not (edge-children edge)) 
-            (let ((le (get-lex-entry-from-id (first (edge-lex-ids edge)))))
-              (dag-type (tdfs-indef (lex-entry-full-fs le)))))
-           (t (tree-node-text-string 
-               (find-category-abb (edge-dag edge)))))
-     (edge-id edge))))
+  (let* ((rule (edge-rule edge))
+         (rname
+           (when (rule-p rule)
+             (existing-dag-at-end-of 
+               (tdfs-indef (rule-full-fs rule)) '(RNAME)))))
+    (format nil "~a[~a]"
+      (cond 
+        ((not (edge-children edge)) 
+          (let ((le (get-lex-entry-from-id (first (edge-lex-ids edge)))))
+            (dag-type (tdfs-indef (lex-entry-full-fs le)))))
+        (rname (dag-type rname))
+        (t
+          (tree-node-text-string (find-category-abb (edge-dag edge)))))
+      (edge-id edge))))
 
 
 ;;;

@@ -88,4 +88,3 @@ class Freeling_tok_tagger:
         # clean up
         self.sp.close_session(sid)
         return output
-    

@@ -11,17 +11,10 @@
 (load-lkb-preferences (this-directory) "user-prefs.lsp")
 (lkb-load-lisp (this-directory) "patches.lsp")
 
-;;; Now the core grammar, which will typically be spread out 
-;;; across multiple files.  The Matrix provides matrix.tdl, 
-;;; defining most of the matrix types and head-types.tdl, which
-;;; contains the intermediate types in the subhierarchy under head
-;;; (as they would unnecessarily clutter matrix.tdl).  You should
-;;; rename my_language.tdl to something appropriate, and enter
-;;; language-specific types there.  In larger grammars, it is common
-;;; to separate out e.g. lexical types from construction types
-;;; into distinct files.  All files containing types used in 
-;;; the grammar should be mentioned in the following command.
-
+;;;
+;;; Now the core grammar, spread out across multiple files;
+;;; e.g. lexical types and construction types are separated
+;;; into distinct files.
 ;;;
 ;;; (2004-06-08) transfer.tdl includes some types which support 
 ;;; transfer rules.  Still under development -- ignore for the
@@ -31,59 +24,85 @@
   (list 
    (lkb-pathname (parent-directory) "fundamentals.tdl")
    (lkb-pathname (parent-directory) "hdtypes.tdl")
+   (lkb-pathname (parent-directory) "letypes.tdl")
    (lkb-pathname (parent-directory) "irtypes.tdl")
    (lkb-pathname (parent-directory) "lrtypes.tdl")
    (lkb-pathname (parent-directory) "srtypes.tdl")
-   (lkb-pathname (parent-directory) "letypes.tdl")
-;#+:mt 
-;   (lkb-pathname (this-directory) "transfer.tdl")
+   (lkb-pathname (parent-directory) "tmt.tdl")
 ))
 
 ;;;
 ;;; Next, the lexicon itself, instantiating (lexical) types of the grammar
-;;; (some grammars with larger lexica organize them into multiple files).
+;;; (grammars with larger lexica may organize them into multiple files).
+;;; Generic lexical entries are loaded as a sub-lexicon called "gle".
 ;;;
+(if *lexdb-params*
+    (load-lexdb-from-script)
+    (read-cached-lex-if-available 
+      (list
+        (lkb-pathname (parent-directory) "lexicon.tdl"))))
 
-(read-cached-lex-if-available
+(read-cached-sublex-if-available 
+  "gle"
   (list
-    (lkb-pathname (parent-directory) "lexicon.tdl")
     (lkb-pathname (parent-directory) "generics.tdl")))
-
-;;; For grammars with small lexicons, no need to use a cache file:
-;(if *lexdb-params*
-;    (load-lexdb-from-script)
-;    (read-cached-lex-if-available 
-;      (list
-;         (lkb-pathname (parent-directory) "lexicon.tdl"))))
-
 
 ;;;
 ;;; Finally, the grammar rules, lexical rules (given special treatment in the
 ;;; parser in that they can apply _prior_ to `inflectional' rules), and the
 ;;; `inflectional' rules themselves (rules with an associated orthographemic
-;;; alternation of the surface string).
+;;; alteration of the surface string).
 ;;;
 (read-tdl-grammar-file-aux (lkb-pathname (parent-directory) "srules.tdl"))
 (read-tdl-lex-rule-file-aux (lkb-pathname (parent-directory) "lrules.tdl"))
 (read-morph-file-aux (lkb-pathname (parent-directory) "inflr.tdl"))
 
 ;;;
-;;; The `start symbol(s)' of the grammar.
+;;; The `start symbol(s)' of the grammar
 ;;;
 (read-tdl-psort-file-aux (lkb-pathname (parent-directory) "roots.tdl"))
 
 ;;;
-;;; Optionally, a set of types providing labels for nodes in parse trees
+;;; A set of types providing labels for nodes in parse trees
 ;;;
 (read-tdl-parse-node-file-aux (lkb-pathname (parent-directory) "labels.tdl"))
 
 ;;;
-;;; A few more LKB-specific settings, this time for MRS post-processing and
-;;; generation; also, we always compute the generation index (while we have
-;;; small lexica) in the hope that the generator will be used frequently.
+;;; LKB-specific settings for MRS post-processing
 ;;;
 (lkb-load-lisp (this-directory) "mrsglobals.lisp" t)
 
+;;;
+;;; The LKB won't run the Regular Expression Pre-Processor (REPP), since we're
+;;; using FreeLing as the preprocessor instead.
+;;;
+;(lkb-load-lisp (parent-directory "rpp") "setup.lsp" t nil)
+
+;;;
+;;; Load the chart-mapping rules. NB the LKB won't apply token mapping rules
+;;; if a preprocessor that outputs morphosyntactic information (e.g. FreeLing)
+;;; is being used, since there's no sensible way to order these two modules.
+;;;
+#+:chart-mapping
+(progn
+; (read-token-mapping-file-aux (lkb-pathname (parent-directory) "tmr/prelude.tdl"))
+; (read-token-mapping-file-aux (lkb-pathname (parent-directory) "tmr/pos.tdl"))
+;(read-token-mapping-file-aux (lkb-pathname (parent-directory) "tmr/finis.tdl"))
+
+(read-lexical-filtering-file-aux (lkb-pathname (parent-directory) "lfr.tdl"))
+)
+
+;;;
+;;; When loaded into an environment including [incr tsdb()], also load a Maximum
+;;; Entropy realization ranking model and activate ranking of results - for both
+;;; parsing and generation. The parameters *first-only-p* and *gen-first-only-p*
+;;; determine how many of the top-ranked results are actually returned. (Note that
+;;; previously the read-time conditional :logon prevented loading in LKB-FOS).
+;;;
+#+:tsdb
+(tsdb::read-model (lkb-pathname (parent-directory) "tibidabo.mem"))
+#+:tsdb
+(setf *unpacking-scoring-hook* #'tsdb::mem-score-configuration)
 
 ;;;
 ;;; Matrix-derived grammars often have stable enough semantic 
@@ -93,10 +112,9 @@
 ;;; small lexica, this takes a trivial amount of time.  If
 ;;; generation is not being used regularly, and the indexing
 ;;; is taking too long, comment out the following.  index-for-generator()
-;;; can also be run from the expanded LKB top menu, under
-;;; Generate
+;;; can also be run from the expanded LKB top menu, under Generate
 ;;;
-
+;(setq mrs::*normalize-predicates-p* nil) ; required if there is no SEMI
 ;(index-for-generator)
 
 ;;;
@@ -104,7 +122,6 @@
 ;;; This is still under development and should be ignored for
 ;;; the time being.
 ;;;
-
 ;#+:mt
 ;(mt:initialize-transfer)
 ;#+:mt
@@ -113,7 +130,6 @@
 ;;; If using transfer rules, they can be loaded as
 ;;; follows, assuming they are stored in a file called
 ;;; transfer.mtr.
-
 ;#+:mt
 ;(mt:read-transfer-rules 
 ; (list
@@ -127,9 +143,12 @@
 ;;; short list of basic sentences from your language
 ;;; in that position may be helpful.
 ;;;
+(when (and (listp *last-parses*) (= (length *last-parses*) 1))
+  (setf *last-parses* '("Mi perro duerme." "La ventana se abrió.")))
 
-;(if (eq (length *last-parses*) 1)
-;    (setf *last-parses* '("your sentence 1" "your sentence 2")))
+;;;
+;;; Start up FreeLing as preprocessor (in this setup, REPP and token mapping
+;;; rules are bypassed).
+;;;
+(fl-initialize)
 
-
-(initialize-sppp)
