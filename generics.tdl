@@ -204,6 +204,15 @@ ncmn000_ge := n_cp*_p-c_le &
   Generic lexical entry that will be triggered by tag ncmn000.
   """.
 
+ncmp00v_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncmp00v" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncmp00v.
+  """.
+
+
 ncfn000_ge := n_cp*_p-c_le &
   [ STEM < "n_cp*_p-c_le" >,
     TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncfn000" > ] >,

@@ -833,6 +833,10 @@ ncmp00a :=
 %suffix (ncmp00a ncmp00a)
 n_masc-pl_ilr.
 
+ncmp00v := 
+%suffix (ncmp00v ncmp00v)
+n_masc-pl_ilr.
+
 ncfs00a := 
 %suffix (ncfs00a ncfs00a)
 n_fem-sg_ilr.
