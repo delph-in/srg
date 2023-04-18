@@ -13,10 +13,12 @@ In the old version of the grammar, some of the Freeling tags were overridden.
 For compatibility, we will do the same for now.
 i -> AQ0MS0 (interjection to a default adjective form; will then undergo an adjective-to-interjection rule...)
 '''
-def override_tag(selected, all, word):
+def override_tag(selected, all, word, lemma):
+    if lemma.isnumeric():
+        return {'tag': 'Z', 'prob': -1}
     if selected in TAGS and word not in DO_NOT_OVERRIDE and word not in REPLACE_LEMMA_AND_TAG:
         return {'tag': TAGS[selected], 'prob': -1 }
-    elif word in REPLACE_LEMMA_AND_TAG:
+    if word in REPLACE_LEMMA_AND_TAG:
         return { 'tag': REPLACE_LEMMA_AND_TAG[word]['tag'], 'prob': -1 }
     for t in all:
         if t['tag'] == selected:
@@ -45,7 +47,7 @@ def convert_sentences(sentences):
         else:
             for j,tok in enumerate(sent['tokens']):
                 surface = tok['form']
-                best = override_tag(tok['selected-tag'],tok['all-tags'], surface.lower())
+                best = override_tag(tok['selected-tag'],tok['all-tags'], surface.lower(), tok['lemma'])
                 pos = best['tag']
                 conf = best['prob']
                 lemma = override_lemma(tok['lemma'], pos)

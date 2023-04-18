@@ -733,9 +733,15 @@ pp3cna00 :=
 affx_3sg-masc_ilr.
 
 ; lo
+;pp3msa0 := 
+;%suffix (pp3msa0 pp3msa0) 
+;affx_3sg-masc_ilr.
+
 pp3msa0 := 
-%suffix (pp3msa0 pp3msa0) 
-affx_3sg-masc_ilr.
+%suffix (lo lo) 
+pp3cna_ilr.
+;affx_3sg-masc_ilr.
+
 
 ; los
 pp3mpa0 := 
@@ -2200,7 +2206,6 @@ pp3msa_ilr.
 +PP3CNA00 := 
 %suffix (vmlo2 vmlo2) 
 pp3cna_ilr.
-
 
 +PP3MPA0 := 
 %suffix (vmlos vmlos)

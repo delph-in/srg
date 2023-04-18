@@ -2,9 +2,6 @@ import sys
 from freeling.freeling_API.tokenize_and_tag import Freeling_tok_tagger
 from srg_freeling2yy import convert_sentences
 
-
-
-
 if __name__ == "__main__":
     # read input from file or standard input; sentences are separated by one
     # or more blank lines. Put the sentence through freeling and convert the

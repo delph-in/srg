@@ -966,3 +966,15 @@ aq0000_ge := aj_pp*_i_le &
   """
   Generic lexical entry that will be triggered by tag aq0000.
   """.
+  
+  ; Generic lexical entries for numbers
+  
+  ;z_ge := aj_-_i-nu-ord_le &
+  ;[ STEM < "z" >,
+  ;  TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "z" >, +FORM #form ] >,
+  ;  SYNSEM.LKEYS.KEYREL [ PRED named_rel, CARG #form ] ]
+  ;"""
+  ;Generic lexical entry that will be triggered by tag z.
+  ;""".
+
+  
