@@ -7,7 +7,7 @@ from tempfile import NamedTemporaryFile
 from delphin import itsdb
 from srg_freeling2yy import convert_sentences
 # I cannot figure out how to use the pyfreeling library:
-from freeling.freeling_API.tokenize_and_tag import Freeling_tok_tagger
+from util.tokenize_and_tag import Freeling_tok_tagger
 
 def read_testsuite(ts):
     items = ts['item']

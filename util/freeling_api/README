@@ -1,0 +1,32 @@
+
+  === SPPP FreeLing interface for the SRG ===
+
+  This directory contains the configuration and data files for SPPP interface
+  for the LKB Spanish  Resource Grammar, which allows it to use the low-level
+  language processors in FreeLing library.
+
+  Contents of this directory:
+
+   sppp.dat:  File with rules that control the interface behaviour, in order
+             to make it meet the needs of your LKB grammar.
+
+              You can:
+              - Specify how FreeLing output (form, lemma, PoS) is mapped 
+                to SPPP fields (stem, rule_id, form) 
+              - List forms for which all analysis are to be retained (i.e.
+                ignoring PoS tagger decisions)
+              - List forms for which FreeLing output is to be
+                changed by another user-specified list of tags.
+              - List tag combinations that are to be changed to a single tag
+
+              See the comments in sppp.dat to find out more about
+              its possiblities.
+
+   logon.cfg:  Configuration file for FreeLing. You can configure the 
+              kind of output (morphological analysys, PoS disambiguation...),
+              the linguistic resources used (e.g. form dictionary, multiword 
+              lists, enabled/disabled modules, etc.).
+               See FreeLing documentation for details on the available options.
+  
+   data:  Subdirectory containing linguistic data (different than FreeLing defaults)
+          which are used in sppp.dat. 
