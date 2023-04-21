@@ -55,11 +55,12 @@ np00g00 :=
 %suffix (np00g00 np00g00)
 np00sp0_ilr.
 
-; OZ: Not sure what this rule is for. Right now it is occurs where NCFS000 should.
-np00000 := 
-%suffix (np00000 np00000)
+; OZ: Freeling returns this tag for some named entities.
+np00o00 := 
+%suffix (np00o00 np00o00)
 np00sp0_ilr.
 
+; OZ: I will use this for various cases which cause Freeling to not return an analysis
 np00v00 :=
 %suffix (np00v00 np00v00)
 np00v00_ilr.
@@ -191,14 +192,14 @@ flt :=
 infl-ltow-rule.
 
 ; -- percentage %
-;ft := 
-;%suffix (ft ft)
-;infl-ltow-rule.
+ft := 
+%suffix (ft ft)
+infl-ltow-rule.
 
 ; -- mathematical symbols (+, -, =)
-;fz := 
-;%suffix (fz fz)
-;infl-ltow-rule.
+fz := 
+%suffix (fz fz)
+infl-ltow-rule.
 
 ; -- /
 ;fh := 
@@ -830,6 +831,10 @@ n_masc-sg_ilr.
 
 ncmp00a := 
 %suffix (ncmp00a ncmp00a)
+n_masc-pl_ilr.
+
+ncmp00v := 
+%suffix (ncmp00v ncmp00v)
 n_masc-pl_ilr.
 
 ncfs00a := 
@@ -2195,7 +2200,6 @@ pp3msa_ilr.
 +PP3CNA00 := 
 %suffix (vmlo2 vmlo2) 
 pp3cna_ilr.
-
 
 +PP3MPA0 := 
 %suffix (vmlos vmlos)

@@ -1,0 +1,153 @@
+## List of forms (or tags, if uppercased) for which PoS tagger output will 
+## be ignored (no analysis discarded) when found at the specified @position
+<NoDisambiguate>
+NP00000 @begin
+que @any
+hasta @any
+tanto @any
+como @any
+fui @any
+fuiste @any
+fue @any
+fuimos @any
+fuisteis @any
+fueron @any
+</NoDisambiguate>
+
+## List of words for which the list of output analysis given
+## by FreeLing must be ignored and replaced by the specified list.
+## One entry per line, format:
+##      form lemma1 tag1 lemma2 tag2 ...
+<ReplaceAll>
+quería querer VMII4S0
+un un Z
+uno uno Z
+una una Z
+acá acá NC00000
+acullá acullá NC00000
+ahí ahí NC00000
+ahora ahora NC00000
+allá allá NC00000
+allende allende NC00000
+allí allí NC00000
+anoche anoche NC00000
+antaño antaño NC00000
+anteanoche anteanoche NC00000
+anteanteayer anteanteayer NC00000
+anteayer anteayer NC00000
+antes_de_anoche antes_de_anoche NC00000
+antes_de_ayer antes_de_ayer NC00000
+aquende aquende NC00000
+aquí aquí NC00000
+así así NC00000 así SPS00
+ayer ayer NC00000
+ayer_noche ayer_noche NC00000
+entonces entonces NC00000
+hogaño hogaño NC00000
+hoy hoy NC00000
+ibídem ibídem NC00000
+mañana mañana NC00000
+pasado_mañana pasado_mañana NC00000
+ni ni CC ni RG
+demás demás PI0CC000
+vez vez NC00000
+veces vez NC00000
+antes antes SPS00 antes RG
+después después SPS00 después RG
+más más AQ0CS0 más SPS00 más RG
+menos menos AQ0CS0 menos SPS00 menos RG
+múltiples múltiple DI0CP0
+cierta cierto AQ0FS0 cierto DI0FS0
+ciertas cierto AQ0FP0 cierto DI0FP0
+cierto cierto AQ0MS0 cierto DI0MS0
+ciertos cierto AQ0MP0 cierto DI0MP0
+determinada determinar VMP00SF determinado DI0FS0
+determinadas determinar VMP00PF determinado DI0FP0
+determinado determinar VMP00SM determinado DI0MS0
+determinados determinar VMP00PM determinado DI0MP0
+diferente diferente AQ0CS0 diferente DI0CS0
+diferentes diferente AQ0CP0 diferente DI0CP0
+distinta diferente AQ0FS0 diferente DI0FS0
+distintas distinto AQ0FP0 diferente DI0FP0
+distinta distinto AQ0FS0 distinto DI0FS0
+distintas distinto AQ0FP0 distinto DI0FP0
+distinto distinto AQ0MS0 distinto DI0MS0
+distintos distinto AQ0MP0 distinto DI0MP0
+diversa diverso AQ0FS0 diverso DI0FS0
+diversas diverso AQ0FP0 diverso DI0FP0
+diverso diverso AQ0MS0 diverso DI0MS0
+diversos diverso AQ0MP0 diverso DI0MP0
+escasa escaso AQ0FS0 escaso DI0FS0
+escasas escaso AQ0FP0 escaso DI0FP0
+escaso escaso AQ0MS0 escaso DI0MS0
+escasos escaso AQ0MP0 escaso DI0MP0
+numerosa numeroso AQ0FS0 numeroso DI0FS0
+numerosas numeroso AQ0FP0 numeroso DI0FP0
+numeroso numeroso AQ0MS0 numeroso DI0MS0
+numerosos numeroso AQ0MP0 numeroso DI0MP0
+rara raro AQ0FS0 raro DI0FS0
+raras raro AQ0FP0 raro DI0FP0
+raro raro AQ0MS0 raro DI0MS0
+raros raro AQ0MP0 raro DI0MP0
+cientos ciento Zd
+millares millar Zd
+miles mil Zd
+mejor mejor AQ0CS0
+off-line off-line AQ0CN0
+on-line on-line AQ0CN0
+peor peor AQ0CS0
+
+</ReplaceAll>
+
+## List of tag fusions to perform. 
+## When a word has all tags at the left hand side (with the same lemma),
+## they are replaced by the tag at the right hand side (keeping the same lemma).
+## Format:
+##    tag1 tag2 ... tagn => tag
+<Fusion>
+VMII1S0 VMII3S0 => VMII4S0
+VMIC1S0 VMIC3S0 => VMIC4S0
+VMSP1S0 VMSP3S0 => VMSP4S0
+VMSI1S0 VMSI3S0 => VMSI4S0
+VMSF1S0 VMSF3S0 => VMSF4S0
+VAII1S0 VAII3S0 => VAII4S0
+VAIC1S0 VAIC3S0 => VAIC4S0
+VASP1S0 VASP3S0 => VASP4S0
+VASI1S0 VASI3S0 => VASI4S0
+VASF1S0 VASF3S0 => VASF4S0
+VSII1S0 VSII3S0 => VSII4S0
+VSIC1S0 VSIC3S0 => VSIC4S0
+VSSP1S0 VSSP3S0 => VSSP4S0
+VSSI1S0 VSSI3S0 => VSSI4S0
+VSSF1S0 VSSF3S0 => VSSF4S0
+VMIP1P0 VMIS1P0 => VMIB1P0
+PP3CNA00 PP3MSA00 => PP3MSA00
+NCMS000 NCFS000 => NCCS000
+NCMP000 NCFP000 => NCCP000
+P00CN000 P03CN000 => P03CN000
+</Fusion>
+
+## Rearrangements to SPPP output fields
+## Rule form is:
+##     form lemma tag  =>  stem rule_id form
+##
+##  On the left hand side:
+##    "form", "lemma", and "tag" are regular expressions.
+##    "*" may be used to mean "anything".
+##    For "form" and "lemma" complete match will be checked.
+##    For "tag" prefix match will be used.
+##    Symbol "!" preceding the regexp negates it.
+##
+##  On the right hand side:
+##    "stem" may be "F" (form), "L" (lemma), "T" (tag), or any lowercase literal.
+##    "rule_id" may be "F" (form), "L" (lemma), or "T" (tag).
+##    "form" may be any combination of "F", "L", and "T". form/lemma/tag will be 
+##           concatenated in the given order, separated by "#".
+##
+##  Rules are applied in order, until a match is found, thus, a last default
+##  rule "* * *" is needed.
+<Output>
+*             *  !(Z|W|NP|AO)  =>  L  T  F   ## stem=lema per tots excepte numeros, dates, NPs i AOs.
+(un|una|uno)  *  Z             =>  F  T  FL  ## lema="un/o/a" per "un/o/a" amb tag Z (tenien lema="1")
+*             *  *             =>  T  T  FL  ## stem=tag per la resta (numeros!="un/o/a", dates, NPs, AOs)
+</Output>

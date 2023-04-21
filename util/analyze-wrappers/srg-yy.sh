@@ -1,14 +1,24 @@
 ################################################################################
-# Expected usage should be something like:
+# Usage:
 # 
-# $ bash srg-yy.sh srg-test.txt
+# $ bash srg-yy.sh
 #
-# ...where "srg-test.txt" is a text file with one sentence in each line.
-# Make sure you have the correct path to your srg.dat (or whatever your ACE-compiled
-# grammar is called). You may need to modify the python command to python3,
-# depending on your environment.
+# Reads from standard input with one sentence per line. Invokes FreeLing with the
+# Spanish configuration, and post-processes the output into DELPH-IN YY format.
+#
+# srg_freeling2yy.py assumes python3
 ################################################################################
 
 MYPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-analyze -f es.cfg  <$1 2>/dev/null | python $MYPATH/srg-freeling2yy.py | ace -g ../srg.dat -y --yy-rules
+# if one of the commands below fails then set the script exit status $? accordingly
+set -o pipefail
+
+# For this script to work properly with the LKB we need the following options:
+#   analyze --flush: process each line as an independent sentence
+#   python3 -u: unbuffered stdout
+#
+# In the analyze command we could discard output to stderr (i.e. 2>/dev/null), but
+# that seems superflous with our usage of analyze; also, stderr communicates useful
+# error messages such as "command not found"
+analyze -f es.cfg --flush | python3 -u $MYPATH/srg_freeling2yy.py -

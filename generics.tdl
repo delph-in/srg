@@ -41,9 +41,9 @@ np00g00_ge := n_-_pn_le &
   Generic lexical entry that will be triggered by tag np00g00.
   """.
 
-np00000_ge := n_-_pn_le &
+np00o00_ge := n_-_pn_le &
   [ STEM < "n_-_pn_le" >,
-    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "np00000" >, +FORM #form ] >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "np00o00" >, +FORM #form ] >,
     SYNSEM.LKEYS.KEYREL [ PRED named_rel, CARG #form ] ]
   """
   Generic lexical entry that will be triggered by tag np00000.
@@ -203,6 +203,15 @@ ncmn000_ge := n_cp*_p-c_le &
   """
   Generic lexical entry that will be triggered by tag ncmn000.
   """.
+
+ncmp00v_ge := n_cp*_p-c_le &
+  [ STEM < "n_cp*_p-c_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncmp00v" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag ncmp00v.
+  """.
+
 
 ncfn000_ge := n_cp*_p-c_le &
   [ STEM < "n_cp*_p-c_le" >,
@@ -760,7 +769,7 @@ vmp00pf_ge := v_np*_le &
 interj_ge := i_-_le & 
  [ STEM < "i_-_le" >,
    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "i" > ] >,
-    SYNSEM.LKEYS.KEYREL.PRED "_generic_interj_rel ]
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_interj_rel" ]
  """
  Generic lexical entry for interjections, triggered by tag i.
  """.
@@ -957,3 +966,15 @@ aq0000_ge := aj_pp*_i_le &
   """
   Generic lexical entry that will be triggered by tag aq0000.
   """.
+  
+  ; Generic lexical entries for numbers
+  
+  ;z_ge := aj_-_i-nu-ord_le &
+  ;[ STEM < "z" >,
+  ;  TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "z" >, +FORM #form ] >,
+  ;  SYNSEM.LKEYS.KEYREL [ PRED named_rel, CARG #form ] ]
+  ;"""
+  ;Generic lexical entry that will be triggered by tag z.
+  ;""".
+
+  
