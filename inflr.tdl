@@ -202,9 +202,9 @@ fz :=
 infl-ltow-rule.
 
 ; -- /
-;fh := 
-;%suffix (fh fh)
-;infl-ltow-rule.
+fh := 
+%suffix (fh fh)
+infl-ltow-rule.
 
 
 ; --- inflecting categories
@@ -828,6 +828,11 @@ n_fem-pl_ilr.
 ncms00a := 
 %suffix (ncms00a ncms00a)
 n_masc-sg_ilr. 
+
+ncms00v := 
+%suffix (ncms00v ncms00v)
+n_masc-sg_ilr. 
+
 
 ncmp00a := 
 %suffix (ncmp00a ncmp00a)
