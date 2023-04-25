@@ -70,7 +70,6 @@ def update_testsuite(ts):
     ftt = Freeling_tok_tagger()
     sentence_list = read_testsuite(ts)
     output = ftt.tokenize_and_tag(sentence_list)
-    print('{} items with no Freeling token analysis'.format(output.count(None)))
     yy = convert_sentences(output)
     assert len(yy) == len(ts['item'])
     print('{} items in the corpus'.format(len(yy)))
@@ -92,5 +91,5 @@ def freeling2json(s):
 if __name__ == "__main__":
     for i, ts_path in enumerate(sorted(glob.iglob(sys.argv[1] + '/**'))):
         ts = itsdb.TestSuite(ts_path)
-        print('Processing {}'.format(ts.path.stem))
+        print('Processing {} in {}'.format(ts.path.stem, ts_path))
         update_testsuite(ts)

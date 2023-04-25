@@ -806,7 +806,7 @@ nc00000_ge := av_-_i-vm_le &
 
 ;;; Generic lexical entries for adjectives
 
-; aq0ms00, aq0mp00, aq0fs00, aq0fp00, aq0cs00, aq0cp00, aq0cn00, aqccs0, aqccp0, aqsms00, aqsmp00, aqsfs00, aqsfp0, aqdms0, aqdmp0, aqdfs0, aqdfp0, aq0000,
+; aq0ms00, aq0mp00, aq0fs00, aq0fp00, aq0cs00, aq0cp00, aq0cn00, aqccs0, aqccp0, aqsms00, aqsmp00, aqsfs00, aqsfp0, aqdms0, aqdmp0, aqdfs0, aqdfp0, aq0000, aq00000
 
 ;aj_-_i_ge := aj_-_i_le & 
 ;[ STEM < "aj_-_i_le" >,
@@ -965,6 +965,8 @@ aq0000_ge := aj_pp*_i_le &
     SYNSEM.LKEYS.KEYREL.PRED "_generic_a_rel" ]
   """
   Generic lexical entry that will be triggered by tag aq0000.
+  OZ: This probably won't work because the corresponding aq0000 rule in inflr.tdl
+  inherits from a no_ilr. Need to investigate why that is.
   """.
   
   ; Generic lexical entries for numbers

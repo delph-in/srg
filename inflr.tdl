@@ -276,6 +276,14 @@ dp1cps :=
 %suffix (dp1cps dp1cps)
 dp1cps_ilr.
 
+; OZ: It is not clear to me at the moment why mi/mis get a dp tag while the rest get the ap ones.
+; If this changes, then the TAGS dictionary in util/override_freeling.py will need to be modified.
+; nuestros
+;dp1mpp := 
+;%suffix (dp1mpp dp1mpp)
+;ap0mp1p_ilr.
+
+
 ; nuestro
 ap0ms1p := 
 %suffix (ap0ms1p ap0ms1p)
@@ -285,6 +293,7 @@ ap0ms1p_ilr.
 ap0mp1p := 
 %suffix (ap0mp1p ap0mp1p)
 ap0mp1p_ilr.
+
 
 ; nuestra
 ap0fs1p := 
@@ -1054,6 +1063,11 @@ ap0mp3n :=
 a_masc-pl_ilr.
 
 ; -- qualitatives
+
+;aq00000 :=
+;%suffix (aq00000 aq00000)
+;a_masc-sg_ilr.
+
 ; bonito
 aq0ms00 := 
 %suffix (aq0ms00 aq0ms00) 
@@ -1063,6 +1077,11 @@ a_masc-sg_ilr.
 aq0mp00 := 
 %suffix (aq0mp00 aq0mp00)
 a_masc-pl_ilr.
+
+; pequeñitos
+;aqvmp00 := 
+;%suffix (aqvmp00 aqvmp00)
+;a_masc-pl_ilr.
 
 ; bonita
 aq0fs00 := 
