@@ -21,4 +21,4 @@ set -o pipefail
 # In the analyze command we could discard output to stderr (i.e. 2>/dev/null), but
 # that seems superflous with our usage of analyze; also, stderr communicates useful
 # error messages such as "command not found"
-analyze -f es.cfg --flush | python3 -u $MYPATH/srg_freeling2yy_jc.py -
+analyze -f es.cfg --flush | python3 -u $MYPATH/srg_freeling2yy.py -
