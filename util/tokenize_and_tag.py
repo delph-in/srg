@@ -65,12 +65,14 @@ class Freeling_tok_tagger:
             s = self.sp.split(sid,s,False)
             s = self.mf.analyze(s)
             s = self.tg.analyze(s)
-            if len(s) == 0:
-                print("No Freeling analysis for {}".format(lin))
+            if len(s) == 0 or len(s) > 1:
+                if len(s) == 0:
+                    print("No Freeling analysis for {}".format(lin))
+                else:
+                    print("Line {} seems to contain more than one sentence and was not tokenized properly. Skipping it.".format(lin))
                 output[i]['sentence'] = lin
                 output[i]['tokens'] = None
             else:
-                assert len(s) == 1
                 s = s[0]
                 ws = s.get_words()
                 if fake_final_dot:
