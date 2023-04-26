@@ -42,8 +42,8 @@ def convert_sentences(sentences):
         _from = 0      # lattice from
         if not sent['tokens']:
             output = '(1,0,1, <0:{}>,1,"{}" "{}",0, "np00v00", "np00v00" 1.0)'.format(len(sent['sentence']),
-                                                                                      sent['sentence'],
-                                                                                      sent['sentence'])
+                                                                                      sent['sentence'].replace('"','\\"'),
+                                                                                      sent['sentence'].replace('"','\\"'))
         else:
             for j,tok in enumerate(sent['tokens']):
                 surface = tok['form']
@@ -68,7 +68,7 @@ def convert_sentences(sentences):
                 output = output + '"' + surface +'", ' if surface != '"' else output + '"' + r'\"' + '", '
                 output += '0, '
                 output += '"' + pos +'", '                 # lrule
-                output += '"' + pos +'" ' + str(conf)
+                output += '"' + pos +'" ' + "{:.8f}".format(float(conf))
                 output += ') '
         #print(''.join(output.strip().lower()))
         yy_sentences.append(''.join(output.strip().lower()))
