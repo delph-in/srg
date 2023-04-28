@@ -56,8 +56,8 @@ class Freeling_tok_tagger:
                 lin = lin + ' .'
                 fake_final_dot = True
             output.append({'sentence': lin, 'tokens':[]})
-            if "tabaco" in lin:
-                print("stop")
+            #if "tabaco" in lin:
+            #    print("debug")
             # With the basic NER Freeling module, may need this, as it will assume that
             # all uppercased items are all named entities.
             #s = self.tk.tokenize(lin.lower().capitalize()) if lin.isupper() else self.tk.tokenize(lin)
