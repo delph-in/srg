@@ -7,6 +7,6 @@ directory="$1"
 
 for profile in "$directory"/*; do
   echo $profile
-  delphin process --options="-y --yy-rules" -g ~/delphin/SRG/grammar/srg/ace/srg.dat --full-forest --select i-tokens "$profile"
+  delphin process --options="-y --yy-rules -1" -g ~/delphin/SRG/grammar/srg/ace/srg.dat --full-forest --select i-tokens "$profile"
 done
 
