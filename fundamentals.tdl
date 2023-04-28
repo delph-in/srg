@@ -1716,7 +1716,7 @@ bracket_cl_punct := comma_or_no_punct.
 frc_punct := comma_or_no_punct.
 no_punct := comma_or_no_punct & 3dots_or_clause_or_no_punct.
 hyphen_punct := comma_or_no_punct.
-
+lhyphen_punct := lpunct.
 
 ;;; semsorts
 
