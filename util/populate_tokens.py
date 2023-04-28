@@ -7,12 +7,13 @@ from tempfile import NamedTemporaryFile
 from delphin import itsdb
 from srg_freeling2yy import convert_sentences
 # I cannot figure out how to use the pyfreeling library:
-from util.tokenize_and_tag import Freeling_tok_tagger
+from tokenize_and_tag import Freeling_tok_tagger
 
 def read_testsuite(ts):
     items = ts['item']
     # Strip the trailing hyphens to match old LKB output, although may want to put them back in later.
-    return [item['i-input'].strip('-') for item in items ]
+    #return [item['i-input'].strip('-') for item in items ]
+    return [item['i-input'] for item in items ]
     # debug:
     #sentences = sentences[47:49]
 

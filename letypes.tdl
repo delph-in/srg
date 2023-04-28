@@ -8552,6 +8552,11 @@ pt_-_hyphn_lex := basic-punct-lex &
   [ SYNSEM punct_synsem & 
            [ LOCAL.CAT.HEAD.PUNCT-MK hyphen_punct ] ].
 
+pt_-_lhyphn_lex := basic-punct-lex & 
+  [ SYNSEM punct_synsem & 
+           [ LOCAL.CAT.HEAD.PUNCT-MK lhyphen_punct ] ].
+
+
 pt_-_quest-op_lex := basic-punct-lex & 
   [ SYNSEM punct_synsem & 
            [ LOCAL.CAT.HEAD.PUNCT-MK ques_op_punct ] ].
@@ -15094,6 +15099,16 @@ pt_-_cln_le := pt_-_cln_lex.
 ;  <ex>
 ;  <todo>
 pt_-_quots_le := pt_-_quots_lex.
+
+;  <type val="pt_-_hyphn_le">
+;  <description>Punct, hyphen
+;  <ex>
+;  <todo>
+pt_-_lhyphn_native_le := pt_-_lhyphn_lex & native_le
+  """
+  This is a native lexical entry type, for words that are in the lexicon.
+  """.
+
 
 ;  <type val="pt_-_hyphn_le">
 ;  <description>Punct, hyphen
