@@ -61,10 +61,7 @@ class Freeling_tok_tagger:
             # With the basic NER Freeling module, may need this, as it will assume that
             # all uppercased items are all named entities.
             #s = self.tk.tokenize(lin.lower().capitalize()) if lin.isupper() else self.tk.tokenize(lin)
-            s = self.tk.tokenize(lin)
-            s = self.sp.split(sid,s,False)
-            s = self.mf.analyze(s)
-            s = self.tg.analyze(s)
+            s = self.freeling_analyze(lin, sid)
             if len(s) == 0 or len(s) > 1:
                 if len(s) == 0:
                     print("No Freeling analysis for {}".format(lin))
@@ -78,29 +75,32 @@ class Freeling_tok_tagger:
                 if fake_final_dot:
                     ws = ws[:-1]
                 for j,w in enumerate(ws) :
-                    all_tags = self.get_tags(w)
+                    tags_probs = self.get_selected_tags(w)
+                    tag = '" "+'.join([tp['tag'] for tp in tags_probs])
+                    prob = tags_probs[-1]['prob']
                     #print("lemma: {}, form: {}, start: {}, end: {}, tag: {}".format(w.get_lemma(), w.get_form(), w.get_span_start(), w.get_span_finish(), w.get_tag()))
                     output[i]['tokens'].append({'lemma':w.get_lemma(), 'form': w.get_form(),
                                                 'start':w.get_span_start(), 'end': w.get_span_finish(),
-                                                'selected-tag': w.get_tag(), 'all-tags': all_tags})
-                    #analyses = list(w.get_analysis())
-                    #for a in analyses:
-                        #print("\ttag: {}, prob: {}".format(a_i.get_tag(), a_i.get_prob()))
-                    #    output[i]['tokens'][j]['all-tags'].append({'tag': a.get_tag(), 'prob': a.get_prob()})
-                    #    if a.get_tag() == output[i]['tokens'][j]['selected-tag']:
-                    #        output[i]['tokens'][j]['selected-prob'] = a.get_prob()
+                                                'selected-tag': tag, 'selected-prob': prob})
         # clean up
         self.sp.close_session(sid)
         return output
 
-    def get_tags(self, w):
-        all_tags = []
+    def freeling_analyze(self, lin, sid):
+        s = self.tk.tokenize(lin)
+        s = self.sp.split(sid, s, False)
+        s = self.mf.analyze(s)
+        s = self.tg.analyze(s)
+        return s
+
+    def get_selected_tags(self, w):
+        tags = []
         for a in w:
             if a.is_selected():
                 if a.is_retokenizable():
                     tks = a.get_retokenizable()
                     for tk in tks:
-                        all_tags.append(({'tag': tk.get_tag(), 'prob': a.get_prob()}))
+                        tags.append(({'tag': tk.get_tag(), 'prob': a.get_prob()}))
                 else:
-                    all_tags.append(({'tag': a.get_tag(), 'prob': a.get_prob()}))
-        return all_tags
+                    tags.append(({'tag': a.get_tag(), 'prob': a.get_prob()}))
+        return tags

@@ -13,16 +13,14 @@ In the old version of the grammar, some of the Freeling tags were overridden.
 For compatibility, we will do the same for now.
 i -> AQ0MS0 (interjection to a default adjective form; will then undergo an adjective-to-interjection rule...)
 '''
-def override_tag(selected, all, word, lemma):
+def override_tag(selected, word, lemma):
     if lemma.isnumeric():
         return {'tag': 'Z', 'prob': -1}
-    if selected in TAGS and word not in DO_NOT_OVERRIDE and word not in REPLACE_LEMMA_AND_TAG:
-        return {'tag': TAGS[selected], 'prob': -1 }
+    if selected['tag'] in TAGS and word not in DO_NOT_OVERRIDE and word not in REPLACE_LEMMA_AND_TAG:
+        return {'tag': TAGS[selected['tag']], 'prob': -1 }
     if word in REPLACE_LEMMA_AND_TAG:
         return { 'tag': REPLACE_LEMMA_AND_TAG[word]['tag'], 'prob': -1 }
-    for t in all:
-        if t['tag'] == selected:
-            return t
+    return selected
     #raise Exception("selected tag not in tag list")
 
 def override_lemma(lemma, tag):
@@ -47,9 +45,10 @@ def convert_sentences(sentences):
         else:
             for j,tok in enumerate(sent['tokens']):
                 surface = tok['form']
-                best = override_tag(tok['selected-tag'],tok['all-tags'], surface.lower(), tok['lemma'])
-                pos = best['tag']
-                conf = best['prob']
+                tag_prob = {'tag': tok['selected-tag'], 'prob':tok['selected-prob']}
+                pos_conf = override_tag(tag_prob, surface.lower(), tok['lemma'])
+                pos = pos_conf['tag']
+                conf = pos_conf['prob']
                 lemma = override_lemma(tok['lemma'], pos)
                 _num += 1
                 output += '('

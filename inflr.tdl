@@ -2217,11 +2217,11 @@ vpart_ilr.
 
 ; -- enclitics
 
-+PP3MSA00 := 
++PP3MSA0 := 
 %suffix (vmlo vmlo)
 pp3msa_ilr.
 
-+PP3CNA00 := 
++PP3CNA0 := 
 %suffix (vmlo2 vmlo2) 
 pp3cna_ilr.
 
