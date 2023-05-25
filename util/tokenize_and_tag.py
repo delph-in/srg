@@ -42,7 +42,7 @@ class Freeling_tok_tagger:
                               dic=True, aff=True, comp=False, rtk=True,  # submodules are to be used.
                               mw=True, ner=True, qt=False, prb=True )  # default: all created submodules are used
 
-        self.tg=pyfreeling_api.hmm_tagger(self.DATA+self.LANG+"/tagger.dat",True,1)
+        self.tg=pyfreeling_api.hmm_tagger(self.DATA+self.LANG+"/tagger.dat",False,0)
         #self.tg = pyfreeling_api.relax_tagger(self.DATA+self.LANG+"/constr_gram-B.dat",500,670.0,0.001,True,1)
 
     def tokenize_and_tag(self, sentence_list):
@@ -56,8 +56,8 @@ class Freeling_tok_tagger:
                 lin = lin + ' .'
                 fake_final_dot = True
             output.append({'sentence': lin, 'tokens':[]})
-            #if "tabaco" in lin:
-            #    print("debug")
+            if "creerlo" in lin:
+                print("debug")
             # With the basic NER Freeling module, may need this, as it will assume that
             # all uppercased items are all named entities.
             #s = self.tk.tokenize(lin.lower().capitalize()) if lin.isupper() else self.tk.tokenize(lin)
@@ -78,15 +78,29 @@ class Freeling_tok_tagger:
                 if fake_final_dot:
                     ws = ws[:-1]
                 for j,w in enumerate(ws) :
+                    all_tags = self.get_tags(w)
+                    #print("lemma: {}, form: {}, start: {}, end: {}, tag: {}".format(w.get_lemma(), w.get_form(), w.get_span_start(), w.get_span_finish(), w.get_tag()))
                     output[i]['tokens'].append({'lemma':w.get_lemma(), 'form': w.get_form(),
                                                 'start':w.get_span_start(), 'end': w.get_span_finish(),
-                                                'selected-tag': w.get_tag(), 'all-tags': []})
-                    analyses = list(w.get_analysis())
-                    for a in analyses:
+                                                'selected-tag': w.get_tag(), 'all-tags': all_tags})
+                    #analyses = list(w.get_analysis())
+                    #for a in analyses:
                         #print("\ttag: {}, prob: {}".format(a_i.get_tag(), a_i.get_prob()))
-                        output[i]['tokens'][j]['all-tags'].append({'tag': a.get_tag(), 'prob': a.get_prob()})
-                        if a.get_tag() == output[i]['tokens'][j]['selected-tag']:
-                            output[i]['tokens'][j]['selected-prob'] = a.get_prob()
+                    #    output[i]['tokens'][j]['all-tags'].append({'tag': a.get_tag(), 'prob': a.get_prob()})
+                    #    if a.get_tag() == output[i]['tokens'][j]['selected-tag']:
+                    #        output[i]['tokens'][j]['selected-prob'] = a.get_prob()
         # clean up
         self.sp.close_session(sid)
         return output
+
+    def get_tags(self, w):
+        all_tags = []
+        for a in w:
+            if a.is_selected():
+                if a.is_retokenizable():
+                    tks = a.get_retokenizable()
+                    for tk in tks:
+                        all_tags.append(({'tag': tk.get_tag(), 'prob': a.get_prob()}))
+                else:
+                    all_tags.append(({'tag': a.get_tag(), 'prob': a.get_prob()}))
+        return all_tags
