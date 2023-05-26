@@ -51,14 +51,9 @@ class Freeling_tok_tagger:
         sid=self.sp.open_session()
         # process input text
         for i,lin in enumerate(sentence_list):
-            fake_final_dot = False
-            if (not lin[-1] in string.punctuation) or lin.endswith('...'):
-                # assume a dot at the end since otherwise Freeling sometimes can't handle the sentence
-                lin = lin + ' .'
-                fake_final_dot = True
             output.append({'sentence': lin, 'tokens':[]})
-            if "enhorabuena" in lin:
-                print("debug")
+            #if "enhorabuena" in lin:
+            #    print("debug")
             # With the basic NER Freeling module, may need this, as it will assume that
             # all uppercased items are all named entities.
             #s = self.tk.tokenize(lin.lower().capitalize()) if lin.isupper() else self.tk.tokenize(lin)
@@ -73,8 +68,6 @@ class Freeling_tok_tagger:
             else:
                 s = s[0]
                 ws = s.get_words()
-                if fake_final_dot:
-                    ws = ws[:-1]
                 for j,w in enumerate(ws) :
                     tags_probs = self.get_selected_tags(w)
                     tag = '" "+'.join([tp['tag'] for tp in tags_probs])
@@ -89,7 +82,7 @@ class Freeling_tok_tagger:
 
     def freeling_analyze(self, lin, sid):
         s = self.tk.tokenize(lin)
-        s = self.sp.split(sid, s, False)
+        s = self.sp.split(sid, s, True)
         s = self.mf.analyze(s)
         s = self.tg.analyze(s)
         return s
