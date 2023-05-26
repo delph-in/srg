@@ -14,6 +14,7 @@ class Freeling_tok_tagger:
 
         # Location of FreeLing configuration files.
         self.DATA = os.environ["FREELINGDIR"]+"/share/freeling/"
+        self.CUSTOM_DATA = "/home/olga/delphin/SRG/grammar/srg/util/freeling_api/srg-freeling-debug.dat"
         # Init locales
         pyfreeling_api.util_init_locale("default")
         # create language detector. Used just to show it. Results are printed
@@ -22,7 +23,7 @@ class Freeling_tok_tagger:
         # create options set for maco analyzer. Default values are Ok, except for data files.
         self.LANG="es"
         self.op= pyfreeling_api.maco_options(self.LANG)
-        self.op.set_data_files( "",
+        self.op.set_data_files( self.CUSTOM_DATA,
                            self.DATA + "common/punct.dat",
                            self.DATA + self.LANG + "/dicc.src",
                            self.DATA + self.LANG + "/afixos.dat",
@@ -38,7 +39,7 @@ class Freeling_tok_tagger:
         self.mf=pyfreeling_api.maco(self.op)
 
         # activate mmorpho odules to be used in next call
-        self.mf.set_active_options(umap=False, num=True, pun=True, dat=False,  # select which among created
+        self.mf.set_active_options(umap=True, num=True, pun=True, dat=False,  # select which among created
                               dic=True, aff=True, comp=False, rtk=True,  # submodules are to be used.
                               mw=True, ner=True, qt=False, prb=True )  # default: all created submodules are used
 
@@ -56,7 +57,7 @@ class Freeling_tok_tagger:
                 lin = lin + ' .'
                 fake_final_dot = True
             output.append({'sentence': lin, 'tokens':[]})
-            if "creerlo" in lin:
+            if "enhorabuena" in lin:
                 print("debug")
             # With the basic NER Freeling module, may need this, as it will assume that
             # all uppercased items are all named entities.
@@ -103,4 +104,6 @@ class Freeling_tok_tagger:
                         tags.append(({'tag': tk.get_tag(), 'prob': a.get_prob()}))
                 else:
                     tags.append(({'tag': a.get_tag(), 'prob': a.get_prob()}))
+            #else:
+            #    print("Non-selected analysis: {}".format(a.get_tag()))
         return tags

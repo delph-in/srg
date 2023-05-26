@@ -6,7 +6,7 @@
 ################################################################################
 
 import sys
-from override_freeling import TAGS, DO_NOT_OVERRIDE, STEM_EQUALS_TAG, REPLACE_LEMMA_AND_TAG
+from override_freeling import TAGS, DO_NOT_OVERRIDE, STEM_EQUALS_TAG, REPLACE_LEMMA_AND_TAG, FUSE
 
 '''
 In the old version of the grammar, some of the Freeling tags were overridden.
@@ -20,6 +20,8 @@ def override_tag(selected, word, lemma):
         return {'tag': TAGS[selected['tag']], 'prob': -1 }
     if word in REPLACE_LEMMA_AND_TAG:
         return { 'tag': REPLACE_LEMMA_AND_TAG[word]['tag'], 'prob': -1 }
+    if selected['tag'] in FUSE:
+        return {'tag': FUSE[selected['tag']], 'prob': -1 }
     return selected
     #raise Exception("selected tag not in tag list")
 
@@ -33,8 +35,8 @@ def override_lemma(lemma, tag):
 def convert_sentences(sentences):
     yy_sentences = []
     for i, sent in enumerate(sentences):
-        #if i > 76:
-        #    print("stop")
+        if i == 8:
+            print("stop")
         output = ""
         _num = 0       # lattice ID
         _from = 0      # lattice from
