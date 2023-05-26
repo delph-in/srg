@@ -7,21 +7,22 @@
 
 import sys
 from override_freeling import TAGS, DO_NOT_OVERRIDE, STEM_EQUALS_TAG, REPLACE_LEMMA_AND_TAG, FUSE
+import parse_sppp_dat
 
 '''
 In the old version of the grammar, some of the Freeling tags were overridden.
 For compatibility, we will do the same for now.
 i -> AQ0MS0 (interjection to a default adjective form; will then undergo an adjective-to-interjection rule...)
 '''
-def override_tag(selected, word, lemma):
+def override_tag(selected, word, lemma, override_dicts):
     if lemma.isnumeric():
         return {'tag': 'Z', 'prob': -1}
     if selected['tag'] in TAGS and word not in DO_NOT_OVERRIDE and word not in REPLACE_LEMMA_AND_TAG:
         return {'tag': TAGS[selected['tag']], 'prob': -1 }
     if word in REPLACE_LEMMA_AND_TAG:
         return { 'tag': REPLACE_LEMMA_AND_TAG[word]['tag'], 'prob': -1 }
-    if selected['tag'] in FUSE:
-        return {'tag': FUSE[selected['tag']], 'prob': -1 }
+    if selected['tag'] in override_dicts['fuse']:
+        return {'tag': override_dicts['fuse'][selected['tag']], 'prob': -1 }
     return selected
     #raise Exception("selected tag not in tag list")
 
@@ -32,7 +33,7 @@ def override_lemma(lemma, tag):
         return REPLACE_LEMMA_AND_TAG[lemma]['lemma']
     return lemma
 
-def convert_sentences(sentences):
+def convert_sentences(sentences, override_dicts):
     yy_sentences = []
     for i, sent in enumerate(sentences):
         if i == 8:
@@ -48,7 +49,7 @@ def convert_sentences(sentences):
             for j,tok in enumerate(sent['tokens']):
                 surface = tok['form']
                 tag_prob = {'tag': tok['selected-tag'], 'prob':tok['selected-prob']}
-                pos_conf = override_tag(tag_prob, surface.lower(), tok['lemma'])
+                pos_conf = override_tag(tag_prob, surface.lower(), tok['lemma'], override_dicts)
                 pos = pos_conf['tag']
                 conf = pos_conf['prob']
                 lemma = override_lemma(tok['lemma'], pos)
@@ -76,6 +77,8 @@ def convert_sentences(sentences):
     return yy_sentences
 
 if __name__ == "__main__":
+    fuse, replace, no_disambiguate, output = parse_sppp_dat.parse_sppp('./freeling_api/srg-freeling.dat')
+    override_dicts = {'fuse': fuse, 'replace': replace, 'no_disambiguate': no_disambiguate, 'output': output}
     # read FreeLing output from file or standard input; sentences are separated by one
     # or more blank lines
     if len(sys.argv) < 2 or sys.argv[1] == "-":
@@ -86,12 +89,12 @@ if __name__ == "__main__":
     for ln in f:
         if ln.strip() == "": # inter-sentence blank line?
             if sent != "":
-                print(convert_sentences([sent])[0])
+                print(convert_sentences([sent], override_dicts)[0])
                 sent = ""
         else:
             sent += ln
     if sent != "":
-        print(convert_sentences([sent])[0])
+        print(convert_sentences([sent], override_dicts)[0])
     if f is not sys.stdin:
         f.close()
 

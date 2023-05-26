@@ -8,6 +8,7 @@ from delphin import itsdb
 from srg_freeling2yy import convert_sentences
 # I cannot figure out how to use the pyfreeling library:
 from tokenize_and_tag import Freeling_tok_tagger
+import parse_sppp_dat
 
 def read_testsuite(ts):
     items = ts['item']
@@ -65,11 +66,11 @@ def parse_recursive_dicts(input_string):
         #print('\n')
     return sentences
 
-def update_testsuite(ts):
+def update_testsuite(ts, override_dicts):
     ftt = Freeling_tok_tagger()
     sentence_list = read_testsuite(ts)
     output = ftt.tokenize_and_tag(sentence_list)
-    yy = convert_sentences(output)
+    yy = convert_sentences(output, override_dicts)
     assert len(yy) == len(ts['item'])
     print('{} items in the corpus'.format(len(yy)))
     for i, row in enumerate(ts['item']):
@@ -88,7 +89,9 @@ def freeling2json(s):
 
 
 if __name__ == "__main__":
+    fuse, replace, no_disambiguate, output = parse_sppp_dat.parse_sppp('./freeling_api/srg-freeling.dat')
+    override_dicts = {'fuse': fuse, 'replace': replace, 'no_disambiguate': no_disambiguate, 'output': output}
     for i, ts_path in enumerate(sorted(glob.iglob(sys.argv[1] + '/**'))):
         ts = itsdb.TestSuite(ts_path)
         print('Processing {} in {}'.format(ts.path.stem, ts_path))
-        update_testsuite(ts)
+        update_testsuite(ts, override_dicts)
