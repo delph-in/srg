@@ -6,7 +6,7 @@
 ################################################################################
 
 import sys
-from override_freeling import TAGS, DO_NOT_OVERRIDE, STEM_EQUALS_TAG, REPLACE_LEMMA_AND_TAG, FUSE
+from override_freeling import TAGS, DO_NOT_OVERRIDE, STEM_EQUALS_TAG, REPLACE_LEMMA_AND_TAG
 import parse_sppp_dat
 
 '''
@@ -16,19 +16,24 @@ i -> AQ0MS0 (interjection to a default adjective form; will then undergo an adje
 '''
 def override_tag(selected, word, lemma, override_dicts):
     if lemma.isnumeric():
-        return {'tag': 'Z', 'prob': -1}
+        return {'tags': ['Z'], 'prob': -1}
     if selected['tag'] in TAGS and word not in DO_NOT_OVERRIDE and word not in REPLACE_LEMMA_AND_TAG:
-        return {'tag': TAGS[selected['tag']], 'prob': -1 }
+        return {'tags': [TAGS[selected['tag']]], 'prob': -1 }
     if word in REPLACE_LEMMA_AND_TAG:
-        return { 'tag': REPLACE_LEMMA_AND_TAG[word]['tag'], 'prob': -1 }
+        return { 'tags': [REPLACE_LEMMA_AND_TAG[word]['tag']], 'prob': -1 }
     if selected['tag'] in override_dicts['fuse']:
-        return {'tag': override_dicts['fuse'][selected['tag']], 'prob': -1 }
-    return selected
+        return {'tags': [override_dicts['fuse'][selected['tag']]], 'prob': -1 }
+    if lemma in override_dicts['replace']:
+        return {'tags': override_dicts['replace'][lemma]['tag'], 'prob': -1 }
+    return {'tags': [selected['tag']], 'prob': selected['prob']}
     #raise Exception("selected tag not in tag list")
 
-def override_lemma(lemma, tag):
+def override_lemma(lemma, tag, override_dicts):
     if tag in STEM_EQUALS_TAG:
         return tag
+    if lemma in override_dicts['replace']:
+        # there may be more than one lemma-tag replacement pair; I have not yet figured out what to do with that
+        return override_dicts['replace'][lemma]['lemma'][0]
     elif lemma in REPLACE_LEMMA_AND_TAG:
         return REPLACE_LEMMA_AND_TAG[lemma]['lemma']
     return lemma
@@ -36,7 +41,7 @@ def override_lemma(lemma, tag):
 def convert_sentences(sentences, override_dicts):
     yy_sentences = []
     for i, sent in enumerate(sentences):
-        if i == 8:
+        if i == 149:
             print("stop")
         output = ""
         _num = 0       # lattice ID
@@ -50,9 +55,11 @@ def convert_sentences(sentences, override_dicts):
                 surface = tok['form']
                 tag_prob = {'tag': tok['selected-tag'], 'prob':tok['selected-prob']}
                 pos_conf = override_tag(tag_prob, surface.lower(), tok['lemma'], override_dicts)
-                pos = pos_conf['tag']
+                if len(pos_conf['tags']) > 1:
+                    print("Warning: more than one tag for token: {}".format(tok['form']))
+                pos = pos_conf['tags'][0]
                 conf = pos_conf['prob']
-                lemma = override_lemma(tok['lemma'], pos)
+                lemma = override_lemma(tok['lemma'], pos, override_dicts)
                 _num += 1
                 output += '('
                 output += str(_num)

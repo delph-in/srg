@@ -52,8 +52,8 @@ class Freeling_tok_tagger:
         # process input text
         for i,lin in enumerate(sentence_list):
             output.append({'sentence': lin, 'tokens':[]})
-            #if "enhorabuena" in lin:
-            #    print("debug")
+            if "aburrido" in lin:
+                print("debug")
             # With the basic NER Freeling module, may need this, as it will assume that
             # all uppercased items are all named entities.
             #s = self.tk.tokenize(lin.lower().capitalize()) if lin.isupper() else self.tk.tokenize(lin)

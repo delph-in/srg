@@ -12,7 +12,8 @@ def parse_sppp(filepath):
             if ln.strip() == '<NoDisambiguate>':
                 pass
             elif ln.strip() == '<ReplaceAll>':
-                pass
+                end_replace = find_concluding_line(lines, i, '<ReplaceAll>')
+                replace = parse_replace(lines[i+1:end_replace])
             elif ln.strip() == '<Fusion>':
                 end_fusion = find_concluding_line(lines, i, '<Fusion>')
                 fuse = parse_fusion(lines[i+1:end_fusion])
@@ -33,3 +34,16 @@ def parse_fusion(lines):
         tag1, tag2, arrow, fused_tag = ln.strip().split()
         fuse[tag1 + '" "+' + tag2] = fused_tag
     return fuse
+
+def parse_replace(lines):
+    replace = {}
+    for ln in lines:
+        if ln.strip():
+            # the line is of the form: <surfaceform> <lemma1> <tag1> <lemma2> <tag2> ...
+            # split the line on the first space:
+            form, lemma_tag_pairs = ln.strip().split(' ', 1)
+            # split the lemma-tag pairs on spaces:
+            lemma_tag_pairs = lemma_tag_pairs.split()
+            # put the odd items in lemma_tag_pairs list into the 'tag' key of replace[form] and the even items into the 'lemma' key:
+            replace[form] = {'tag': lemma_tag_pairs[1::2], 'lemma': lemma_tag_pairs[::2]}
+    return replace
