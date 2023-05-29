@@ -21,6 +21,13 @@ def override_tag(selected, word, lemma, override_dicts):
         return {'tags': [TAGS[selected['tag']]], 'prob': -1 }
     if word in REPLACE_LEMMA_AND_TAG:
         return { 'tags': [REPLACE_LEMMA_AND_TAG[word]['tag']], 'prob': -1 }
+    # Sometimes Freeling returns a sequence of two identical tags;
+    # I am not sure what this means for the moment.
+    # We will assume for now a single tag is sufficient.
+    if '+' in selected['tag']:
+        tag1, tag2 = selected['tag'].split('+')
+        if tag1.strip() == tag2.strip():
+            return {'tags': [tag1.strip()], 'prob': -1 }
     if selected['tag'] in override_dicts['fuse']:
         return {'tags': [override_dicts['fuse'][selected['tag']]], 'prob': -1 }
     if lemma in override_dicts['replace']:
