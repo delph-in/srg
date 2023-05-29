@@ -859,6 +859,10 @@ ncfs00a :=
 %suffix (ncfs00a ncfs00a)
 n_fem-sg_ilr.
 
+ncfs00v := 
+%suffix (ncfs00v ncfs00v)
+n_fem-sg_ilr.
+
 ncfp00a := 
 %suffix (ncfp00a ncfp00a)
 n_fem-pl_ilr.
