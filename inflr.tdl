@@ -1110,13 +1110,13 @@ a_ilr.
 
 ; -- comparatives
 ; e.g. mejor
-aqccs0 := 
-%suffix (aqccs0 aqccs0)
+aqccs00 := 
+%suffix (aqccs00 aqccs00)
 a_sg_ilr.
 
 ; e.g. mejores
-aqccp0 := 
-%suffix (aqccp0 aqccp0) 
+aqccp00 := 
+%suffix (aqccp00 aqccp00) 
 a_pl_ilr.
 
 ; -- superlatives
@@ -1136,33 +1136,33 @@ aqsfs00 :=
 a_fem-sg_ilr.
 
 ; e.g. dificilísimas
-aqsfp0 := 
-%suffix (aqsfp0 aqsfp0)
+aqsfp00 := 
+%suffix (aqsfp00 aqsfp00)
 a_fem-pl_ilr.
 
 ; -- diminutives
 ; e.g. pequeñísimo
-aqdms0 := 
-%suffix (aqdms0 aqdms0)
+aqdms00 := 
+%suffix (aqdms00 aqdms00)
 a_masc-sg_ilr.
 
 ; e.g. pequeñísimos
-aqdmp0 := 
-%suffix (aqdmp0 aqdmp0)
+aqdmp00 := 
+%suffix (aqdmp00 aqdmp00)
 a_masc-pl_ilr.
 
 ; e.g. pequeñísima
-aqdfs0 := 
-%suffix (aqdfs0 aqdfs0)
+aqdfs00 := 
+%suffix (aqdfs00 aqdfs00)
 a_fem-sg_ilr.
 
 ; e.g. pequeñísimos
-aqdfp0 := 
-%suffix (aqdfp0 aqdfp0)
+aqdfp00 := 
+%suffix (aqdfp00 aqdfp00)
 a_fem-pl_ilr.
 
-aq0000 := 
-%suffix (aq0000 aq0000)
+aq00000 := 
+%suffix (aq00000 aq00000)
 no_ilr.
 
 
