@@ -834,6 +834,10 @@ ncfp000 :=
 %suffix (ncfp000 ncfp000)
 n_fem-pl_ilr.
 
+ncfp00v := 
+%suffix (ncfp00v ncfp00v)
+n_fem-pl_ilr.
+
 ncms00a := 
 %suffix (ncms00a ncms00a)
 n_masc-sg_ilr. 
