@@ -28,6 +28,7 @@ def override_tag(selected, word, lemma, override_dicts):
         tag1, tag2 = selected['tag'].split('+')
         if tag1.strip() == tag2.strip():
             return {'tags': [tag1.strip()], 'prob': -1 }
+    # Otherwise, two tags need to be fused according to a data file (e.g. srg-freeling.dat)
     if selected['tag'] in override_dicts['fuse']:
         return {'tags': [override_dicts['fuse'][selected['tag']]], 'prob': -1 }
     if lemma in override_dicts['replace']:
