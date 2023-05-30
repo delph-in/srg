@@ -4,6 +4,13 @@ from freeling_api.python_API import pyfreeling_api
 import sys, os, string
 
 class Freeling_tok_tagger:
+    '''
+    NB: There are numerous ways to configure the Freeling modules (the morphological analyzer, the splitter, the tagger).
+    Each small difference may result in the grammar no longer parsing things or parsing them differently,
+    because some of the tags will be different, and the tokenization may be different.
+    In principle, all the possibilities are described well in the Freeling docs: https://freeling-tutorial.readthedocs.io/
+    but they are vast and it is not always trivial to find the relevant pieces.
+    '''
     def __init__(self):
         os.environ["FREELINGDIR"] = '/usr'
         if not os.path.exists(os.environ["FREELINGDIR"]+"/share/freeling") :
@@ -13,7 +20,7 @@ class Freeling_tok_tagger:
            sys.exit(1)
 
         # Location of FreeLing configuration files.
-        self.DATA = os.environ["FREELINGDIR"]+"/share/freeling/"
+        self.DATA = os.environ["FREELINGDIR"]+"/share/freeling/" #usermap; currently empty
         self.CUSTOM_DATA = "/home/olga/delphin/SRG/grammar/srg/util/freeling_api/srg-freeling-debug.dat"
         # Init locales
         pyfreeling_api.util_init_locale("default")
@@ -21,12 +28,12 @@ class Freeling_tok_tagger:
         # but ignored (after, it is assumed language is LANG)
         self.la=pyfreeling_api.lang_ident(self.DATA+"common/lang_ident/ident-few.dat")
         # create options set for maco analyzer. Default values are Ok, except for data files.
-        self.LANG="es"
+        self.LANG="es" # This means the file es.cfg will be used (located in the freeling installation location)
         self.op= pyfreeling_api.maco_options(self.LANG)
         self.op.set_data_files( self.CUSTOM_DATA,
                            self.DATA + "common/punct.dat",
                            self.DATA + self.LANG + "/dicc.src",
-                           self.DATA + self.LANG + "/afixos.dat",
+                           self.DATA + self.LANG + "/afixos.dat", # important for the clitics!
                            "",
                            self.DATA + self.LANG + "/locucions.dat",
                            self.DATA + self.LANG + "/nerc/nerc/nerc.dat",
@@ -39,12 +46,14 @@ class Freeling_tok_tagger:
         self.mf=pyfreeling_api.maco(self.op)
 
         # activate mmorpho odules to be used in next call
-        self.mf.set_active_options(umap=True, num=True, pun=True, dat=False,  # select which among created
-                              dic=True, aff=True, comp=False, rtk=True,  # submodules are to be used.
-                              mw=True, ner=True, qt=False, prb=True )  # default: all created submodules are used
+        # These are crucial for the specific output.
+        self.mf.set_active_options(umap=True, num=True, pun=True, dat=False,  # no time and date detection (dat=False)
+                              dic=True, aff=True, comp=False, rtk=True,
+                              mw=True, ner=True, qt=False, prb=True )  # No quantities detection (qt=False)
 
+        # The tagger is instantiated with RETOKENIZATION SET TO FALSE (second parameter). This is crucial to get
+        # sequences of tags such as VMN00000 +PP3MSA0, for words like "creerlo" which will not be tokenized into two
         self.tg=pyfreeling_api.hmm_tagger(self.DATA+self.LANG+"/tagger.dat",False,0)
-        #self.tg = pyfreeling_api.relax_tagger(self.DATA+self.LANG+"/constr_gram-B.dat",500,670.0,0.001,True,1)
 
     def tokenize_and_tag(self, sentence_list):
         output = []
