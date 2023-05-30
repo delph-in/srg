@@ -25,12 +25,16 @@ def override_tag(selected, word, lemma, override_dicts):
     # I am not sure what this means for the moment.
     # We will assume for now a single tag is sufficient.
     if '+' in selected['tag']:
-        tag1, tag2 = selected['tag'].split('+')
-        if tag1.strip() == tag2.strip():
-            return {'tags': [tag1.strip()], 'prob': -1 }
-    # Otherwise, two tags need to be fused according to a data file (e.g. srg-freeling.dat)
-    if selected['tag'] in override_dicts['fuse']:
-        return {'tags': [override_dicts['fuse'][selected['tag']]], 'prob': -1 }
+        if selected['tag'] in override_dicts['fuse']:
+            return {'tags': [override_dicts['fuse'][selected['tag']]], 'prob': -1}
+        #print(selected['tag'])
+        else:
+            tags = selected['tag'].split('+')
+            if len(tags) == 2:
+                if tags[0][:-3] == tags[1]: # The first tag will have a trailing space followed by an extra quote mark, e.g. 'VMN0000 "'
+                    return {'tags': [tags[0][:-3]], 'prob': -1 }
+            else:
+                print("More than two tags in Freeling output: {}".format(selected['tag']))
     if lemma in override_dicts['replace']:
         return {'tags': override_dicts['replace'][lemma]['tag'], 'prob': -1 }
     return {'tags': [selected['tag']], 'prob': selected['prob']}
