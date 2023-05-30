@@ -14,6 +14,7 @@ class Freeling_tok_tagger:
 
         # Location of FreeLing configuration files.
         self.DATA = os.environ["FREELINGDIR"]+"/share/freeling/"
+        self.CUSTOM_DATA = "/home/olga/delphin/SRG/grammar/srg/util/freeling_api/srg-freeling-debug.dat"
         # Init locales
         pyfreeling_api.util_init_locale("default")
         # create language detector. Used just to show it. Results are printed
@@ -22,7 +23,7 @@ class Freeling_tok_tagger:
         # create options set for maco analyzer. Default values are Ok, except for data files.
         self.LANG="es"
         self.op= pyfreeling_api.maco_options(self.LANG)
-        self.op.set_data_files( "",
+        self.op.set_data_files( self.CUSTOM_DATA,
                            self.DATA + "common/punct.dat",
                            self.DATA + self.LANG + "/dicc.src",
                            self.DATA + self.LANG + "/afixos.dat",
@@ -38,11 +39,11 @@ class Freeling_tok_tagger:
         self.mf=pyfreeling_api.maco(self.op)
 
         # activate mmorpho odules to be used in next call
-        self.mf.set_active_options(umap=False, num=True, pun=True, dat=False,  # select which among created
+        self.mf.set_active_options(umap=True, num=True, pun=True, dat=False,  # select which among created
                               dic=True, aff=True, comp=False, rtk=True,  # submodules are to be used.
                               mw=True, ner=True, qt=False, prb=True )  # default: all created submodules are used
 
-        self.tg=pyfreeling_api.hmm_tagger(self.DATA+self.LANG+"/tagger.dat",True,1)
+        self.tg=pyfreeling_api.hmm_tagger(self.DATA+self.LANG+"/tagger.dat",False,0)
         #self.tg = pyfreeling_api.relax_tagger(self.DATA+self.LANG+"/constr_gram-B.dat",500,670.0,0.001,True,1)
 
     def tokenize_and_tag(self, sentence_list):
@@ -50,21 +51,13 @@ class Freeling_tok_tagger:
         sid=self.sp.open_session()
         # process input text
         for i,lin in enumerate(sentence_list):
-            fake_final_dot = False
-            if (not lin[-1] in string.punctuation) or lin.endswith('...'):
-                # assume a dot at the end since otherwise Freeling sometimes can't handle the sentence
-                lin = lin + ' .'
-                fake_final_dot = True
             output.append({'sentence': lin, 'tokens':[]})
-            #if "tabaco" in lin:
+            #if "aburrido" in lin:
             #    print("debug")
             # With the basic NER Freeling module, may need this, as it will assume that
             # all uppercased items are all named entities.
             #s = self.tk.tokenize(lin.lower().capitalize()) if lin.isupper() else self.tk.tokenize(lin)
-            s = self.tk.tokenize(lin)
-            s = self.sp.split(sid,s,False)
-            s = self.mf.analyze(s)
-            s = self.tg.analyze(s)
+            s = self.freeling_analyze(lin, sid)
             if len(s) == 0 or len(s) > 1:
                 if len(s) == 0:
                     print("No Freeling analysis for {}".format(lin))
@@ -75,18 +68,35 @@ class Freeling_tok_tagger:
             else:
                 s = s[0]
                 ws = s.get_words()
-                if fake_final_dot:
-                    ws = ws[:-1]
                 for j,w in enumerate(ws) :
+                    tags_probs = self.get_selected_tags(w)
+                    tag = '" "+'.join([tp['tag'] for tp in tags_probs])
+                    prob = tags_probs[-1]['prob']
+                    #print("lemma: {}, form: {}, start: {}, end: {}, tag: {}".format(w.get_lemma(), w.get_form(), w.get_span_start(), w.get_span_finish(), w.get_tag()))
                     output[i]['tokens'].append({'lemma':w.get_lemma(), 'form': w.get_form(),
                                                 'start':w.get_span_start(), 'end': w.get_span_finish(),
-                                                'selected-tag': w.get_tag(), 'all-tags': []})
-                    analyses = list(w.get_analysis())
-                    for a in analyses:
-                        #print("\ttag: {}, prob: {}".format(a_i.get_tag(), a_i.get_prob()))
-                        output[i]['tokens'][j]['all-tags'].append({'tag': a.get_tag(), 'prob': a.get_prob()})
-                        if a.get_tag() == output[i]['tokens'][j]['selected-tag']:
-                            output[i]['tokens'][j]['selected-prob'] = a.get_prob()
+                                                'selected-tag': tag, 'selected-prob': prob})
         # clean up
         self.sp.close_session(sid)
         return output
+
+    def freeling_analyze(self, lin, sid):
+        s = self.tk.tokenize(lin)
+        s = self.sp.split(sid, s, True)
+        s = self.mf.analyze(s)
+        s = self.tg.analyze(s)
+        return s
+
+    def get_selected_tags(self, w):
+        tags = []
+        for a in w:
+            if a.is_selected():
+                if a.is_retokenizable():
+                    tks = a.get_retokenizable()
+                    for tk in tks:
+                        tags.append(({'tag': tk.get_tag(), 'prob': a.get_prob()}))
+                else:
+                    tags.append(({'tag': a.get_tag(), 'prob': a.get_prob()}))
+            #else:
+            #    print("Non-selected analysis: {}".format(a.get_tag()))
+        return tags

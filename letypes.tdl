@@ -8556,7 +8556,6 @@ pt_-_lhyphn_lex := basic-punct-lex &
   [ SYNSEM punct_synsem & 
            [ LOCAL.CAT.HEAD.PUNCT-MK lhyphen_punct ] ].
 
-
 pt_-_quest-op_lex := basic-punct-lex & 
   [ SYNSEM punct_synsem & 
            [ LOCAL.CAT.HEAD.PUNCT-MK ques_op_punct ] ].
@@ -8588,7 +8587,6 @@ pt_-_fr-cl_lex := basic-punct-lex &
 pt_-_fr-op_lex := basic-punct-lex & 
   [ SYNSEM punct_synsem & 
            [ LOCAL.CAT.HEAD.PUNCT-MK fra_punct ] ].
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
