@@ -79,16 +79,20 @@ class Freeling_tok_tagger:
                 ws = s.get_words()
                 for j,w in enumerate(ws) :
                     tags_probs, additional_arcs = self.get_selected_tags(w, override_dicts)
+                    additional = len(additional_arcs) > 0
                     tag = '" "+'.join([tp['tag'] for tp in tags_probs])
                     prob = tags_probs[-1]['prob']
                     #print("lemma: {}, form: {}, start: {}, end: {}, tag: {}".format(w.get_lemma(), w.get_form(), w.get_span_start(), w.get_span_finish(), w.get_tag()))
                     output[i]['tokens'].append({'lemma':w.get_lemma(), 'form': w.get_form(),
                                                 'start':w.get_span_start(), 'end': w.get_span_finish(),
-                                                'selected-tag': tag, 'selected-prob': prob})
-                    for arc in additional_arcs:
-                        output[i]['tokens'].append({'lemma': arc['lemma'], 'form': w.get_form(),
+                                                'selected-tag': tag, 'selected-prob': prob, 'additional': additional})
+                    for i,arc in enumerate(additional_arcs):
+                        entry = {'lemma': arc['lemma'], 'form': w.get_form(),
                                                     'start': w.get_span_start(), 'end': w.get_span_finish(),
-                                                    'selected-tag': arc['tag'], 'selected-prob': -1})
+                                                    'selected-tag': arc['tag'], 'selected-prob': -1, 'additional': True}
+                        if i == len(additional_arcs) - 1:
+                            entry['last'] = True
+                        output[i]['tokens'].append(entry)
         # clean up
         self.sp.close_session(sid)
         return output
@@ -111,14 +115,14 @@ class Freeling_tok_tagger:
                         tags.append(({'tag': tk.get_tag(), 'prob': a.get_prob()}))
                 else:
                     if not w.get_form().lower() in override_dicts['replace']:
-                        tags.append(({'tag': a.get_tag(), 'prob': a.get_prob()}))
+                        tags.append(({'additional':False, 'tag': a.get_tag(), 'prob': a.get_prob()}))
                     else:
                         for i, additional_tag in enumerate(override_dicts['replace'][w.get_form().lower()]['tag']):
                             additional_lemma = override_dicts['replace'][w.get_form().lower()]['lemma'][i]
                             if i == 0:
-                                tags.append(({'tag': additional_tag, 'prob': -1, 'lemma': additional_lemma}))
+                                tags.append(({'additional':True, 'tag': additional_tag, 'prob': -1, 'lemma': additional_lemma}))
                             else:
-                                additional_arcs.append(({'tag': additional_tag, 'prob': -1, 'lemma': additional_lemma}))
+                                additional_arcs.append(({'additional':True, 'tag': additional_tag, 'prob': -1, 'lemma': additional_lemma}))
             #else:
             #    print("Non-selected analysis: {}".format(a.get_tag()))
         return tags, additional_arcs

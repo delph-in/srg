@@ -55,14 +55,20 @@ def convert_sentences(sentences, override_dicts):
     for i, sent in enumerate(sentences):
         output = ""
         _num = 0       # lattice ID
-        _from = 0      # lattice from
+        _from = 0
+        _to = 1
+        _keep_from = 0
+        _keep_to = 1
         if not sent['tokens']:
             output = '(1,0,1, <0:{}>,1,"{}" "{}",0, "np00v00", "np00v00" 1.0)'.format(len(sent['sentence']),
                                                                                       sent['sentence'].replace('"','\\"'),
                                                                                       sent['sentence'].replace('"','\\"'))
         else:
             for j,tok in enumerate(sent['tokens']):
+                is_additional = tok['additional']
                 surface = tok['form']
+                if tok['lemma'] == 'más':
+                    print('debug')
                 tag_prob = {'tag': tok['selected-tag'], 'prob':tok['selected-prob']}
                 pos_conf = override_tag(tag_prob, surface.lower(), tok['lemma'], override_dicts)
                 if len(pos_conf['tags']) > 1:
@@ -76,8 +82,10 @@ def convert_sentences(sentences, override_dicts):
                 output += ', '
                 output += str(_from)
                 output += ', '
-                _from += 1
-                output += str(_from)
+                output += str(_to)
+                if not is_additional or ('last' in tok and tok['last']):
+                    _to += 1
+                    _from += 1
                 output += ', <'
                 output += str(int(tok['start'])) # - subtract)
                 output += ':'
