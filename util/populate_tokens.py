@@ -69,7 +69,7 @@ def parse_recursive_dicts(input_string):
 def update_testsuite(ts, override_dicts):
     ftt = Freeling_tok_tagger()
     sentence_list = read_testsuite(ts)
-    output = ftt.tokenize_and_tag(sentence_list)
+    output = ftt.tokenize_and_tag(sentence_list, override_dicts)
     yy = convert_sentences(output, override_dicts)
     assert len(yy) == len(ts['item'])
     print('{} items in the corpus'.format(len(yy)))

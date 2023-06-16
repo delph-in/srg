@@ -35,7 +35,7 @@ def override_tag(selected, word, lemma, override_dicts):
                     return {'tags': [tags[0][:-3]], 'prob': -1 }
             else:
                 print("More than two tags in Freeling output: {}".format(selected['tag']))
-    if lemma in override_dicts['replace']:
+    if lemma in override_dicts['replace'] and len(override_dicts['replace'][lemma]['lemma']) == 1:
         return {'tags': override_dicts['replace'][lemma]['tag'], 'prob': -1 }
     return {'tags': [selected['tag']], 'prob': selected['prob']}
     #raise Exception("selected tag not in tag list")
@@ -53,8 +53,6 @@ def override_lemma(lemma, tag, override_dicts):
 def convert_sentences(sentences, override_dicts):
     yy_sentences = []
     for i, sent in enumerate(sentences):
-        if i == 149:
-            print("stop")
         output = ""
         _num = 0       # lattice ID
         _from = 0      # lattice from

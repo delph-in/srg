@@ -55,14 +55,14 @@ class Freeling_tok_tagger:
         # sequences of tags such as VMN00000 +PP3MSA0, for words like "creerlo" which will not be tokenized into two
         self.tg=pyfreeling_api.hmm_tagger(self.DATA+self.LANG+"/tagger.dat",False,0)
 
-    def tokenize_and_tag(self, sentence_list):
+    def tokenize_and_tag(self, sentence_list, override_dicts):
         output = []
         sid=self.sp.open_session()
         # process input text
         for i,lin in enumerate(sentence_list):
             output.append({'sentence': lin, 'tokens':[]})
-            #if "aburrido" in lin:
-            #    print("debug")
+            if "Más" in lin:
+                print("debug")
             # With the basic NER Freeling module, may need this, as it will assume that
             # all uppercased items are all named entities.
             #s = self.tk.tokenize(lin.lower().capitalize()) if lin.isupper() else self.tk.tokenize(lin)
@@ -78,13 +78,17 @@ class Freeling_tok_tagger:
                 s = s[0]
                 ws = s.get_words()
                 for j,w in enumerate(ws) :
-                    tags_probs = self.get_selected_tags(w)
+                    tags_probs, additional_arcs = self.get_selected_tags(w, override_dicts)
                     tag = '" "+'.join([tp['tag'] for tp in tags_probs])
                     prob = tags_probs[-1]['prob']
                     #print("lemma: {}, form: {}, start: {}, end: {}, tag: {}".format(w.get_lemma(), w.get_form(), w.get_span_start(), w.get_span_finish(), w.get_tag()))
                     output[i]['tokens'].append({'lemma':w.get_lemma(), 'form': w.get_form(),
                                                 'start':w.get_span_start(), 'end': w.get_span_finish(),
                                                 'selected-tag': tag, 'selected-prob': prob})
+                    for arc in additional_arcs:
+                        output[i]['tokens'].append({'lemma': arc['lemma'], 'form': w.get_form(),
+                                                    'start': w.get_span_start(), 'end': w.get_span_finish(),
+                                                    'selected-tag': arc['tag'], 'selected-prob': -1})
         # clean up
         self.sp.close_session(sid)
         return output
@@ -96,8 +100,9 @@ class Freeling_tok_tagger:
         s = self.tg.analyze(s)
         return s
 
-    def get_selected_tags(self, w):
+    def get_selected_tags(self, w, override_dicts):
         tags = []
+        additional_arcs = []
         for a in w:
             if a.is_selected():
                 if a.is_retokenizable():
@@ -105,7 +110,15 @@ class Freeling_tok_tagger:
                     for tk in tks:
                         tags.append(({'tag': tk.get_tag(), 'prob': a.get_prob()}))
                 else:
-                    tags.append(({'tag': a.get_tag(), 'prob': a.get_prob()}))
+                    if not w.get_form().lower() in override_dicts['replace']:
+                        tags.append(({'tag': a.get_tag(), 'prob': a.get_prob()}))
+                    else:
+                        for i, additional_tag in enumerate(override_dicts['replace'][w.get_form().lower()]['tag']):
+                            additional_lemma = override_dicts['replace'][w.get_form().lower()]['lemma'][i]
+                            if i == 0:
+                                tags.append(({'tag': additional_tag, 'prob': -1, 'lemma': additional_lemma}))
+                            else:
+                                additional_arcs.append(({'tag': additional_tag, 'prob': -1, 'lemma': additional_lemma}))
             #else:
             #    print("Non-selected analysis: {}".format(a.get_tag()))
-        return tags
+        return tags, additional_arcs
