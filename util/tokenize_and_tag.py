@@ -61,8 +61,8 @@ class Freeling_tok_tagger:
         # process input text
         for i,lin in enumerate(sentence_list):
             output.append({'sentence': lin, 'tokens':[]})
-            #if "Más" in lin:
-            #    print("debug")
+            if "tanto" in lin:
+                print("debug")
             # With the basic NER Freeling module, may need this, as it will assume that
             # all uppercased items are all named entities.
             #s = self.tk.tokenize(lin.lower().capitalize()) if lin.isupper() else self.tk.tokenize(lin)
@@ -85,11 +85,11 @@ class Freeling_tok_tagger:
                     #print("lemma: {}, form: {}, start: {}, end: {}, tag: {}".format(w.get_lemma(), w.get_form(), w.get_span_start(), w.get_span_finish(), w.get_tag()))
                     output[i]['tokens'].append({'lemma':w.get_lemma(), 'form': w.get_form(),
                                                 'start':w.get_span_start(), 'end': w.get_span_finish(),
-                                                'selected-tag': tag, 'selected-prob': prob, 'additional': additional})
+                                                'tag': tag, 'prob': prob, 'additional': additional})
                     for k,arc in enumerate(additional_arcs):
                         entry = {'lemma': arc['lemma'], 'form': w.get_form(),
                                                     'start': w.get_span_start(), 'end': w.get_span_finish(),
-                                                    'selected-tag': arc['tag'], 'selected-prob': -1, 'additional': True}
+                                                    'tag': arc['tag'], 'prob': prob, 'additional': True}
                         if k == len(additional_arcs) - 1:
                             entry['last'] = True
                         output[i]['tokens'].append(entry)
@@ -123,6 +123,12 @@ class Freeling_tok_tagger:
                                 tags.append(({'additional':True, 'tag': additional_tag, 'prob': -1, 'lemma': additional_lemma}))
                             else:
                                 additional_arcs.append(({'additional':True, 'tag': additional_tag, 'prob': -1, 'lemma': additional_lemma}))
-            #else:
-            #    print("Non-selected analysis: {}".format(a.get_tag()))
+            else:
+                # There are words for which Freeling selected analysis should be ignored (no analysis discarded).
+                # In principle, there is also one tag for which it should be done if the word is in the first position:
+                # NP00000 @begin
+                # This is not yet implemented and will lead to mismatches with the old treebanks, especially with proper names.
+                if w.get_form().lower() in override_dicts['no_disambiguate']:
+                    additional_arcs.append(({'additional': True, 'tag': a.get_tag(), 'prob': a.get_prob(), 'lemma': a.get_lemma()}))
+                    #print("Non-selected analysis: {}".format(a.get_tag()))
         return tags, additional_arcs

@@ -69,7 +69,7 @@ def convert_sentences(sentences, override_dicts):
                 surface = tok['form']
                 #if tok['lemma'] == 'más':
                 #    print('debug')
-                tag_prob = {'tag': tok['selected-tag'], 'prob':tok['selected-prob']}
+                tag_prob = {'tag': tok['tag'], 'prob':tok['prob']}
                 pos_conf = override_tag(tag_prob, surface.lower(), tok['lemma'], override_dicts)
                 if len(pos_conf['tags']) > 1:
                     print("Warning: more than one tag for token: {}".format(tok['form']))
