@@ -67,8 +67,8 @@ def convert_sentences(sentences, override_dicts):
             for j,tok in enumerate(sent['tokens']):
                 is_additional = tok['additional']
                 surface = tok['form']
-                if tok['lemma'] == 'más':
-                    print('debug')
+                #if tok['lemma'] == 'más':
+                #    print('debug')
                 tag_prob = {'tag': tok['selected-tag'], 'prob':tok['selected-prob']}
                 pos_conf = override_tag(tag_prob, surface.lower(), tok['lemma'], override_dicts)
                 if len(pos_conf['tags']) > 1:

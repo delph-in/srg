@@ -61,8 +61,8 @@ class Freeling_tok_tagger:
         # process input text
         for i,lin in enumerate(sentence_list):
             output.append({'sentence': lin, 'tokens':[]})
-            if "Más" in lin:
-                print("debug")
+            #if "Más" in lin:
+            #    print("debug")
             # With the basic NER Freeling module, may need this, as it will assume that
             # all uppercased items are all named entities.
             #s = self.tk.tokenize(lin.lower().capitalize()) if lin.isupper() else self.tk.tokenize(lin)
@@ -86,11 +86,11 @@ class Freeling_tok_tagger:
                     output[i]['tokens'].append({'lemma':w.get_lemma(), 'form': w.get_form(),
                                                 'start':w.get_span_start(), 'end': w.get_span_finish(),
                                                 'selected-tag': tag, 'selected-prob': prob, 'additional': additional})
-                    for i,arc in enumerate(additional_arcs):
+                    for k,arc in enumerate(additional_arcs):
                         entry = {'lemma': arc['lemma'], 'form': w.get_form(),
                                                     'start': w.get_span_start(), 'end': w.get_span_finish(),
                                                     'selected-tag': arc['tag'], 'selected-prob': -1, 'additional': True}
-                        if i == len(additional_arcs) - 1:
+                        if k == len(additional_arcs) - 1:
                             entry['last'] = True
                         output[i]['tokens'].append(entry)
         # clean up
