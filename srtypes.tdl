@@ -24,19 +24,22 @@ headed-phrase := basic-headed-phrase &
 
 non-headed-phrase := phrase.
 
-; Most but not all phrases have SYNSEM phr-synsem
 phrasal := phrase &
-  [ SYNSEM phr-synsem ].
+  [ SYNSEM phr-synsem ]
+""" Most but not all phrases have SYNSEM phr-synsem
+""".
 
 
+head-compositional := headed-phrase &
+  [ C-CONT.HOOK #hook,
+    HEAD-DTR.SYNSEM.LOCAL.CONT.HOOK #hook ]
+"""
 ; C-CONT is the semantic contribution of the phrase itself. The hook of the phrase is 
 ; identified with the hook of C-CONT (which is possibly but not necessarily identified 
 ; with the hook of one of the daughters. The rels and hcons of the phrase result from 
 ; appending the rels and hcons of C-CONT and the rels and hcons of the daughters.
 ; Head-compositional phrases identify the syntactic head daughter as the semantic head.
-head-compositional := headed-phrase &
-  [ C-CONT.HOOK #hook,
-    HEAD-DTR.SYNSEM.LOCAL.CONT.HOOK #hook ].
+""".
 
 
 basic-unary-phrase := phrase &
@@ -234,10 +237,12 @@ basic-head-final := basic-binary-headed-phrase &
 head-final := basic-head-final & binary-headed-phrase.
 
 
+binary-rule-left-to-right := rule &
+  [ ARGS < [ KEY-ARG + ] , [ KEY-ARG bool ] > ]
+"""
 ; For more efficient parsing, designate one argument or the other
 ; as the KEY-ARG: that which should be unified with first.
-binary-rule-left-to-right := rule &
-  [ ARGS < [ KEY-ARG + ] , [ KEY-ARG bool ] > ].
+""".
 
 binary-rule-right-to-left := rule &
   [ ARGS < [ KEY-ARG bool ], [ KEY-ARG + ] > ].
@@ -245,16 +250,20 @@ binary-rule-right-to-left := rule &
 ternary_rule_left_to_right := rule &
   [ ARGS < [ KEY-ARG + ] , [ KEY-ARG bool ] , [ KEY-ARG bool ] > ].
 
-; *** moved key from daughter 1 to daughter 2
 quad_rule_left_to_right := rule &
-  [ ARGS < [ KEY-ARG bool ], [ KEY-ARG + ], [ KEY-ARG bool ], [ KEY-ARG bool ] > ].
+  [ ARGS < [ KEY-ARG bool ], [ KEY-ARG + ], [ KEY-ARG bool ], [ KEY-ARG bool ] > ]
+"""
+; *** moved key from daughter 1 to daughter 2
+""".
 
 
-; head/nexus phrases pass up the REL and QUE values of the head daughter, 
-; which has amalgamated the REL and QUE values of its arguments to the mother
 head-nexus-rel-phrase := headed-phrase &
   [ SYNSEM.NON-LOCAL.REL #rel,
-    HEAD-DTR.SYNSEM.NON-LOCAL.REL #rel ].
+    HEAD-DTR.SYNSEM.NON-LOCAL.REL #rel ]
+"""
+; head/nexus phrases pass up the REL and QUE values of the head daughter, 
+; which has amalgamated the REL and QUE values of its arguments to the mother
+""".
 
 head-nexus-que-phrase := headed-phrase &
   [ SYNSEM.NON-LOCAL.QUE #que,
@@ -262,11 +271,13 @@ head-nexus-que-phrase := headed-phrase &
 
 head-nexus-phrase := head-nexus-rel-phrase & head-nexus-que-phrase.
 
-; In a head/local dependent phrase, the SLASH feature of the mother is token-identical 
-; to that of the head daughter, which has already amalgamated the SLASH values of its arguments. 
 head-valence-phrase := head-nexus-phrase &
   [ SYNSEM.NON-LOCAL.SLASH #slash,
-    HEAD-DTR.SYNSEM.NON-LOCAL.SLASH #slash ].
+    HEAD-DTR.SYNSEM.NON-LOCAL.SLASH #slash ]
+"""
+; In a head/local dependent phrase, the SLASH feature of the mother is token-identical 
+; to that of the head daughter, which has already amalgamated the SLASH values of its arguments. 
+""".
 
 
 ; --- clause types
@@ -283,16 +294,18 @@ mc-fillhead-phrase := headed-phrase &
 			 QUE 0-dlist ] ],
     HEAD-DTR.SYNSEM.LOCAL.CONT.HOOK.XARG #xarg ].
 
-; The immediate subtypes of clause are now relative-clause and non_rel_clause. 
-; The latter groups together decl, imp, and (wh_)interrog, which are similar in 
-; that they can't serve as modifiers and have empty REL values.
 relative-clause := clause & 
   [ SYNSEM.LOCAL.CAT [ MC na,
                        POSTHEAD +,
                        HEAD verb &
                             [ MOD < [ LOCAL intersective-mod & 
                                             [ CAT.VAL [ SUBJ < >,
-                                                        COMPS < > ] ] ] > ] ] ].
+                                                        COMPS < > ] ] ] > ] ] ]
+"""
+; The immediate subtypes of clause are now relative-clause and non_rel_clause. 
+; The latter groups together decl, imp, and (wh_)interrog, which are similar in 
+; that they can't serve as modifiers and have empty REL values.
+""".
   
 non-rel-phrase := head-nexus-rel-phrase & 
   [ SYNSEM [ LOCAL.CONT.HOOK [ LTOP #ltop,
@@ -432,47 +445,54 @@ norm-basic-head-subj-phrase := basic-head-subj-phrase &
     NON-HEAD-DTR.SYNSEM #synsem ].
 
 
-; In languages which do realize all COMPS before the SUBJ, head-subj-phrase should allow [COMPS olist]
 subj-head-phrase := norm-basic-head-subj-phrase & head-final & 
   [ SYNSEM.LOCAL.CAT [ POSTHEAD +,
                        VAL.COMPS < > ],
     HEAD-DTR.SYNSEM.LOCAL.CAT [ HEAD verb & 
                                      [ INV -, 
                                        VFORM fin ],
-                                VAL.COMPS olist ] ].
+                                VAL.COMPS olist ] ]
+"""
+; In languages which do realize all COMPS before the SUBJ, head-subj-phrase should allow [COMPS olist]
+""".
 
 subj-head_nonque_phrase := subj-head-phrase &
   [ HEAD-DTR.SYNSEM.NON-LOCAL.QUE 0-dlist,
     NON-HEAD-DTR.SYNSEM.NON-LOCAL.QUE 0-dlist ].
 
-; VOS, VPS, VOPS (el sujeto es foco)
-; VSOP (admite una interpretación de foco amplio
 head-subj_phrase := norm-basic-head-subj-phrase & head-initial & 
   [ HEAD-DTR.SYNSEM [ LOCAL.CAT.HEAD verb & 
                                      [ VFORM fin,
                                        TAM.MOOD ind_or_sub_mood ],
                       NON-LOCAL [ QUE 0-dlist,
                                   SLASH 0-dlist ] ], 
-    NON-HEAD-DTR.SYNSEM.NON-LOCAL.QUE 0-dlist ].
+    NON-HEAD-DTR.SYNSEM.NON-LOCAL.QUE 0-dlist ]
+"""
+; VOS, VPS, VOPS (el sujeto es foco)
+; VSOP (admite una interpretación de foco amplio
+""".
 
-; for inverted subjects in relative and interrogative clauses
 head-subj_rel_phrase := norm-basic-head-subj-phrase & head-initial & 
   [ HEAD-DTR.SYNSEM [ LOCAL.CAT.HEAD [ VFORM fin,
                                        VOICE active,
                                        TAM.MOOD ind_or_sub_mood ],
                       NON-LOCAL [ SLASH 1-dlist,
                                   QUE 0-dlist ] ],  
-    NON-HEAD-DTR.SYNSEM.NON-LOCAL.QUE 0-dlist ].  
+    NON-HEAD-DTR.SYNSEM.NON-LOCAL.QUE 0-dlist ]
+"""
+; for inverted subjects in relative and interrogative clauses
+""".  
 
-; for inverted subjects in imperative (e.g. vengan ustedes)
 head-subj_imperative_phrase := norm-basic-head-subj-phrase & head-initial & 
   [ HEAD-DTR.SYNSEM [ LOCAL.CAT.HEAD [ VFORM fin,
                                        TAM.MOOD imp ],
                       NON-LOCAL [ SLASH 0-dlist,
                                   QUE 0-dlist ] ],  
-    NON-HEAD-DTR.SYNSEM.NON-LOCAL.QUE 0-dlist ].  
+    NON-HEAD-DTR.SYNSEM.NON-LOCAL.QUE 0-dlist ]
+"""
+; for inverted subjects in imperative (e.g. vengan ustedes)
+""".  
 
-; for inverted subjects in CPA constructions (e.g. muerto el perro, se acabó la rabia)
 head-subj_cpa_phrase := norm-basic-head-subj-phrase & head-initial & 
   [ HEAD-DTR.SYNSEM [ LOCAL.CAT [ HEAD verb & 
                                        [ AUX -,
@@ -483,19 +503,20 @@ head-subj_cpa_phrase := norm-basic-head-subj-phrase & head-initial &
 ;                                 VAL.COMPS < [ ] > ],
                       NON-LOCAL [ QUE 0-dlist,
                                   SLASH 0-dlist ] ],  
-    NON-HEAD-DTR.SYNSEM.NON-LOCAL.QUE 0-dlist ].  
+    NON-HEAD-DTR.SYNSEM.NON-LOCAL.QUE 0-dlist ]
+"""
+; for inverted subjects in CPA constructions (e.g. muerto el perro, se acabó la rabia)
+""".  
 
-; for inverted subjects in VPinf (e.g. empezó tras irrumpir los manifestantes)
 head-subj_vpinf_phrase := norm-basic-head-subj-phrase & head-initial & 
   [ HEAD-DTR.SYNSEM [ LOCAL.CAT.HEAD.VFORM inf,
                       NON-LOCAL [ QUE 0-dlist,
                                   SLASH 0-dlist ] ],
-    NON-HEAD-DTR.SYNSEM.NON-LOCAL.QUE 0-dlist ].  
+    NON-HEAD-DTR.SYNSEM.NON-LOCAL.QUE 0-dlist ]
+"""
+; for inverted subjects in VPinf (e.g. empezó tras irrumpir los manifestantes)
+""".  
 
-; for inverted coordinated subject - mostly, coordinated subjects are in plural, but 
-; there may be partial agreement with one of the subjects when the verb precedes the 
-; subject and when the subject denotes an abstract entity 
-; (e.g. en la corte existía/existían el favoritismo y la corrupción).
 head-subj_coord_phrase := basic-head-subj-phrase & head-initial & 
   [ SYNSEM.LOCAL.CAT.VAL.SUBJ < >,
     HEAD-DTR.SYNSEM [ LOCAL.CAT [ HEAD verb & [ TAM.MOOD ind_or_sub_mood ],
@@ -513,7 +534,13 @@ head-subj_coord_phrase := basic-head-subj-phrase & head-initial &
                                                 XARG #xarg ],
                                          RELS #rels,
                                          HCONS #hcons ] ],
-                          NON-LOCAL #nlocal & [ QUE 0-dlist ] ] ].  
+                          NON-LOCAL #nlocal & [ QUE 0-dlist ] ] ]
+"""
+; for inverted coordinated subject - mostly, coordinated subjects are in plural, but 
+; there may be partial agreement with one of the subjects when the verb precedes the 
+; subject and when the subject denotes an abstract entity 
+; (e.g. en la corte existía/existían el favoritismo y la corrupción).
+""".  
 
 
 ; --- head-comp-phrase types
@@ -661,8 +688,6 @@ clit-head_phrase_cl := clit-head_phrase_basic &
 
 ; --- head-spec-phrase types
 
-; agreement features are percolated from HEAD-DTR.SYNSEM.LOCAL.CONT.HOOK.INDEX 
-; where NUMBER is not checked in 'ad sensum agreement'
 basic-head-spec-phrase := head-valence-phrase & phrasal & very-basic-binary-phrase & 
   [ INFLECTED +,
     SYNSEM [ SLSHD #slshd,
@@ -695,7 +720,11 @@ basic-head-spec-phrase := head-valence-phrase & phrasal & very-basic-binary-phra
                                               COMPS #spcomps ] ] ],
                           MODIFIED #modif ],
     C-CONT [ RELS  <! !>,
-             HCONS <! !> ] ].
+             HCONS <! !> ] ]
+"""
+; agreement features are percolated from HEAD-DTR.SYNSEM.LOCAL.CONT.HOOK.INDEX 
+; where NUMBER is not checked in 'ad sensum agreement'
+""".
 
 norm-basic-head-spec-phrase := basic-head-spec-phrase & 
   [ SYNSEM.LOCAL.CAT.HEAD [ MOD #mod,
@@ -736,9 +765,11 @@ head-spec_phrase := norm-basic-head-spec-phrase & binary-headed-phrase &
                                             COMPS < > ] ] ],
                         NON-LOCAL.REL 0-dlist ] ],
     ARGS < #head-dtr, #non-head-dtr >,
-    C-CONT.HOOK #hook ].
+    C-CONT.HOOK #hook ]
+"""
+; for specifiers following nouns
+""".
 
-; for specifiers of nouns
 spec-head_phrase := norm_spec-head-phrase & binary-headed-phrase & 
   [ SYNSEM.LOCAL [ CAT [ HEAD #head & 
                               [ CASE #case, 
@@ -754,9 +785,12 @@ spec-head_phrase := norm_spec-head-phrase & binary-headed-phrase &
                         [ LOCAL [ CAT [ HEAD det & [ KEYS.KEY quant_or_wh_rel ],
                                         VAL.SPEC < [ LOCAL.CAT.HEAD #head ] > ],
                                   CONT.HOOK #hook ] ],
-    C-CONT.HOOK #hook ].
+    C-CONT.HOOK #hook ]
+"""
+; for specifiers of nouns
+""".
 
-; for specifiers of relative pronouns
+
 spec-head_hdrel_phrase := norm_spec-head-phrase & explt-binary-phrase &
   [ INFLECTED +,
     SYNSEM [ PUNCT [ LPUNCT #lpunct,
@@ -778,9 +812,11 @@ spec-head_hdrel_phrase := norm_spec-head-phrase & explt-binary-phrase &
                                           VAL.SPEC < [ LOCAL.CAT.HEAD #head ] > ],
                                     CONT.HOOK #hook ],
                             NON-LOCAL.REL 0-dlist ] ],
-    C-CONT.HOOK #hook ].
+    C-CONT.HOOK #hook ]
+"""
+; for specifiers of relative pronouns
+""".
 
-; for specifiers of determiners (e.g. todos los, casi todos los, sólo los,...) 
 spec-head_hddet_phrase := norm_spec-head-phrase & head-final & head-compositional & 
   [ SYNSEM.LOCAL [ STR.HEADING right_or_no,
                    CAT [ HEAD #head & [ KEYS #keys ],
@@ -791,9 +827,11 @@ spec-head_hddet_phrase := norm_spec-head-phrase & head-final & head-compositiona
                                         COMPS < > ] ] ],
     NON-HEAD-DTR.SYNSEM.LOCAL.CAT [ HEAD det,
                                     VAL [ SPEC < [ LOCAL.CAT.HEAD #head ] >,
-                                          SPR #spr ] ] ].
+                                          SPR #spr ] ] ]
+"""
+; for specifiers of determiners (e.g. todos los, casi todos los, sólo los,...) 
+""".
 
-; for "cuyo"
 spec-head_specrel_phrase := norm_spec-head-phrase & binary-headed-phrase & 
   [ SYNSEM.LOCAL [ STR.HEADING right_or_no,
                    CAT [ HEAD [ CASE #case, 
@@ -810,9 +848,11 @@ spec-head_specrel_phrase := norm_spec-head-phrase & binary-headed-phrase &
                         [ LOCAL [ CAT [ HEAD det ],
                                   CONT.HOOK #hook ],
                           NON-LOCAL.REL 1-dlist ],
-    C-CONT.HOOK #hook ].
+    C-CONT.HOOK #hook ]
+"""
+; for "cuyo"
+""".
 
-; for degree specifiers
 spec-head_specdeg_phrase := norm_spec-head-phrase & head-final & head-compositional & 
   [ SYNSEM.LOCAL.CAT [ HEAD #head & [ KEYS #keys ],
                        VAL.SPR #spr ],
@@ -820,7 +860,10 @@ spec-head_specdeg_phrase := norm_spec-head-phrase & head-final & head-compositio
                             CAT.HEAD.KEYS #keys ],
     NON-HEAD-DTR.SYNSEM.LOCAL.CAT [ HEAD.KEYS.KEY degree_rel,
                                     VAL [ SPEC < [ LOCAL.CAT.HEAD #head ] >,
-                                          SPR #spr ] ] ].
+                                          SPR #spr ] ] ]
+"""
+; for degree specifiers
+""".
 
 
 ; --- head-mod-phrase types
@@ -905,17 +948,21 @@ isect-mod-phrase := head-mod-phrase-simple & head-compositional &
                                 CONT.HOOK.LTOP #hand ],
     C-CONT.HCONS <! !> ].
 
-; scopal adjunct + head
 adj-head_scop_phrase := adj-head-phrase & scopal-mod-phrase &
   [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < >,
-    NON-HEAD-DTR.SYNSEM.LOCAL.CAT.POSTHEAD - ].
+    NON-HEAD-DTR.SYNSEM.LOCAL.CAT.POSTHEAD - ]
+"""
+; scopal adjunct + head
+""".
                                     
-; intersective adjunct + head
 adj-head_int-xp-xp_phrase :=  adj-head-phrase & isect-mod-phrase &
   [ HEAD-DTR.SYNSEM [ LOCAL.CAT [ HEAD +jrp,
                                   VAL.COMPS < > ],
                       NON-LOCAL.REL 0-dlist ],
-    NON-HEAD-DTR.SYNSEM.LOCAL.CAT.POSTHEAD - ].
+    NON-HEAD-DTR.SYNSEM.LOCAL.CAT.POSTHEAD - ]
+"""
+; intersective adjunct + head
+""".
 
 adj-head_int-xp-n_phrase :=  adj-head-phrase & isect-mod-phrase &
   [ SYNSEM.LOCAL.CAT.VAL.SPR #spr,
@@ -958,7 +1005,6 @@ adj-head_int-pp-vp_phrase := adj-head-phrase & isect-mod-phrase &
 ;                     NON-LOCAL.SLASH <! [ ] !> ], 
     NON-HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD adp & [ KEYS.ALT2KEY non_free_relative_q_rel ] ].
 
-; head + scopal adjunct
 head-adj_scop-xp-cl_phrase := head-adj-phrase & scopal-mod-phrase & 
   [ SYNSEM.LOCAL.CAT [ POSTHEAD #ph, 
                        VAL.SPR #spr ],
@@ -969,7 +1015,10 @@ head-adj_scop-xp-cl_phrase := head-adj-phrase & scopal-mod-phrase &
                                         HEAD adp ],
                                   CONT.HOOK.INDEX event & 
                                                   [ SF prop-or-ques ] ],
-                          NON-LOCAL.REL 0-dlist ] ].
+                          NON-LOCAL.REL 0-dlist ] ]
+"""
+; head + scopal adjunct
+""".
 
 head-adj_scop-xp-xp_phrase := head-adj-phrase & scopal-mod-phrase & 
   [ SYNSEM.LOCAL.CAT [ POSTHEAD #ph, 
@@ -984,7 +1033,6 @@ head-adj_scop-xp-xp_phrase := head-adj-phrase & scopal-mod-phrase &
                           NON-LOCAL [ SLASH 0-dlist,
                                       REL 0-dlist ] ] ].
 
-; head + intersective adjunct
 head-adj_int-ap-xp_phrase := head-adj-phrase & isect-mod-phrase &
   [ SYNSEM.LOCAL.CAT [ POSTHEAD #ph, 
                        VAL.SPR #spr ],
@@ -994,7 +1042,10 @@ head-adj_int-ap-xp_phrase := head-adj-phrase & isect-mod-phrase &
                                   VAL.SPR #spr ] ],
     NON-HEAD-DTR.SYNSEM [ LOCAL.CAT.POSTHEAD +,
                           NON-LOCAL [ SLASH 0-dlist,
-                                      REL 0-dlist & [ LIST < > ] ] ] ].
+                                      REL 0-dlist & [ LIST < > ] ] ] ]
+"""
+; head + intersective adjunct
+""".
 
 head-adj_int-pp-xp_phrase := head-adj-phrase & isect-mod-phrase &
   [ SYNSEM.LOCAL.CAT [ POSTHEAD #ph, 
@@ -1006,7 +1057,6 @@ head-adj_int-pp-xp_phrase := head-adj-phrase & isect-mod-phrase &
                                   VAL.SPR #spr ] ],
     NON-HEAD-DTR.SYNSEM.LOCAL.CAT.POSTHEAD + ].
 
-; verbal head + intersective adjuncts
 head-adj-int-v-xp-phrase := head-adj-phrase & isect-mod-phrase &
   [ SYNSEM.LOCAL.CAT.VAL.SPR #spr,
     HEAD-DTR.SYNSEM [ LOCAL.CAT [ HEAD verb,
@@ -1014,16 +1064,21 @@ head-adj-int-v-xp-phrase := head-adj-phrase & isect-mod-phrase &
                       NON-LOCAL.REL 0-dlist ],
 ;   NON-HEAD-DTR.SYNSEM [ LOCAl.CAT.POSTHEAD +, 
     NON-HEAD-DTR.SYNSEM.NON-LOCAL [ SLASH 0-dlist,
-                                    REL 0-dlist & [ LIST < > ] ] ].
+                                    REL 0-dlist & [ LIST < > ] ] ]
+"""
+; verbal head + intersective adjuncts
+""".
 
-; también le pidió un papel, como Harrison Ford
 head-adj_int-s-xp_phrase := head-adj-int-v-xp-phrase &
   [ SYNSEM.LOCAL.CAT.POSTHEAD #ph,
     HEAD-DTR.SYNSEM [ PUNCT.RPUNCT comma_punct,
                       LOCAL.CAT [ POSTHEAD #ph, 
                                   VAL [ SUBJ < >, 
                                         COMPS < > ] ] ],
-    NON-HEAD-DTR.SYNSEM.LOCAl.CAT.HEAD adp ].
+    NON-HEAD-DTR.SYNSEM.LOCAl.CAT.HEAD adp ]
+"""
+; también le pidió un papel, como Harrison Ford
+""".
 
 head-adj_int-v-pp_phrase := head-adj-int-v-xp-phrase &
   [ HEAD-DTR.SYNSEM [ LOCAL.CAT.POSTHEAD -,
@@ -1046,15 +1101,16 @@ head-adj_int-v-vger_phrase := head-adj-int-v-xp-phrase &
                       MODIFIED notmod-or-rmod ],
     NON-HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD verb & [ VFORM ger ] ].
 
-; for free RC, which can't be separated from the head-dtr with a comma
 head-adj_int-v-frel_phrase := head-adj-int-v-xp-phrase &
   [ HEAD-DTR.SYNSEM [ MODIFIED notmod-or-rmod,
                       LOCAL.CAT.POSTHEAD - ],
     HEAD-DTR.SYNSEM.PUNCT.RPUNCT no_punct,
     NON-HEAD-DTR.SYNSEM.LOCAL [ CAT.HEAD modnp & [ KEYS.KEY prep_mod_rel ],
-                                CONT.RELS.LIST.REST.FIRST.PRED free_relative_q_rel ] ].
+                                CONT.RELS.LIST.REST.FIRST.PRED free_relative_q_rel ] ]
+"""
+; for free RC, which can't be separated from the head-dtr with a comma
+""".
 
-; nominal head + intersective adjuncts
 head-adj-int-n-xp-phrase := head-adj-phrase & isect-mod-phrase &
   [ SYNSEM.LOCAL.CAT [ POSTHEAD #ph, 
                        LASTNMOD - ],
@@ -1065,16 +1121,21 @@ head-adj-int-n-xp-phrase := head-adj-phrase & isect-mod-phrase &
     NON-HEAD-DTR.SYNSEM [ LOCAL.CAT.POSTHEAD +,
                           NON-LOCAL [ SLASH 0-dlist,
                                       QUE 0-dlist & [ LIST < > ],
-                                      REL 0-dlist & [ LIST < > ] ] ] ].
+                                      REL 0-dlist & [ LIST < > ] ] ] ]
+"""
+; nominal head + intersective adjuncts
+""".
 
-; common nouns
 head-adj_int-cn-ap_phrase := head-adj-int-n-xp-phrase &
   [ SYNSEM.LOCAL.CAT.VAL.SPR #spr,
     HEAD-DTR.SYNSEM [ PUNCT.RPUNCT no_punct,
                       LOCAL [ CAT [ HEAD.KEYS.KEY all_common_nom_rel,
                                     VAL.SPR #spr & < [ ] > ],
                               CONT.HOOK.INDEX.PRONTYPE not_pron ] ],
-    NON-HEAD-DTR.SYNSEM.LOCAl.CAT.HEAD adj ].
+    NON-HEAD-DTR.SYNSEM.LOCAl.CAT.HEAD adj ]
+"""
+; common nouns
+""".
 
 head-adj_int-cn-pp_phrase := head-adj-int-n-xp-phrase &
   [ SYNSEM.LOCAL.CAT.VAL.SPR #spr,
@@ -1122,31 +1183,39 @@ head-adj_int-np-xp-crd_phrase := head-adj-int-n-xp-phrase &
                                     VAL.SPR #spr & < > ],
                               CONT.HOOK.INDEX.PRONTYPE not_pron ] ] ].
 
-; proper names
 head-adj_int-pname-xp_phrase := head-adj-int-n-xp-phrase &
   [ SYNSEM.LOCAL.CAT.VAL.SPR < [ LOCAL #local,
                                  NON-LOCAL #nlocal ] >,
     HEAD-DTR.SYNSEM.LOCAL [ CAT [ HEAD.KEYS.KEY named_rel,
                                   VAL.SPR < [ LOCAL #local,
                                               NON-LOCAL #nlocal ] > ],
-                            CONT.HOOK.INDEX.PRONTYPE not_pron ] ].
-; la Rocío del otro día
+                            CONT.HOOK.INDEX.PRONTYPE not_pron ] ]
+"""
+; proper names
+""".
+
 head-adj_int-pn-xp_phrase := head-adj_int-pname-xp_phrase &
   [ SYNSEM.LOCAL.CAT.VAL.SPR < [ OPT - ] >,
-    HEAD-DTR.SYNSEM.PUNCT.RPUNCT no_punct ].
+    HEAD-DTR.SYNSEM.PUNCT.RPUNCT no_punct ]
+"""
+; la Rocío del otro día
+""".
 
-; Andrea Hoffmann es originaria de Kassel, en el land de Hesse
 head-adj_int-pn-xp-pt_phrase := head-adj_int-pname-xp_phrase &
   [ SYNSEM.LOCAL.CAT.VAL.SPR < [ OPT + ] >,
-    HEAD-DTR.SYNSEM.PUNCT.RPUNCT comma_punct ].
+    HEAD-DTR.SYNSEM.PUNCT.RPUNCT comma_punct ]
+"""
+; Andrea Hoffmann es originaria de Kassel, en el land de Hesse
+""".
 
-; pronouns
 head-adj_int-pr-xp_phrase := head-adj-int-n-xp-phrase &
   [ SYNSEM.LOCAL.CAT.VAL.SPR #spr,
     HEAD-DTR.SYNSEM.LOCAL [ CAT.VAL.SPR #spr,
-                            CONT.HOOK.INDEX.PRONTYPE real_pron ] ].
+                            CONT.HOOK.INDEX.PRONTYPE real_pron ] ]
+"""
+; pronouns
+""".
 
-; adjuncts co-ocurring at last positions
 head-adj-int-n-rc-phrase := head-adj-phrase & isect-mod-phrase &
   [ SYNSEM.LOCAL.CAT [ POSTHEAD #ph,
                        LASTNMOD + ],
@@ -1160,7 +1229,10 @@ head-adj-int-n-rc-phrase := head-adj-phrase & isect-mod-phrase &
                                       HEAD verb & [  MOD < [ PUNCT.RPUNCT no_punct ] > ] ],
                           NON-LOCAL [ SLASH 0-dlist,
                                       QUE 0-dlist,
-                                      REL 1-dlist ] ] ].
+                                      REL 1-dlist ] ] ]
+"""
+; adjuncts co-ocurring at last positions
+""".
 
 head-adj_int-n-rc_phrase := head-adj-int-n-rc-phrase &
   [ SYNSEM.LOCAL.CAT.VAL.SPR #spr,
@@ -1227,7 +1299,6 @@ head-adj_int-pr-rcpp_phrase := head-adj-int-n-rcpp-phrase &
     HEAD-DTR.SYNSEM.LOCAL [ CAT.VAL.SPR #spr,
                             CONT.HOOK.INDEX.PRONTYPE real_pron ] ].
 
-; non-restrictive RCs
 head-adj_int-n-rcnr_phrase := non_str-head-adj-phrase & isect-mod-phrase & 
   [ SYNSEM.LOCAL.CAT [ POSTHEAD #ph,
                        LASTNMOD +,
@@ -1243,7 +1314,10 @@ head-adj_int-n-rcnr_phrase := non_str-head-adj-phrase & isect-mod-phrase &
                                       HEAD verb ],
                           NON-LOCAL [ SLASH 0-dlist & [ LIST < > ],
                                       QUE 0-dlist,
-                                      REL 1-dlist ] ] ].
+                                      REL 1-dlist ] ] ]
+"""
+; non-restrictive RCs
+""".
 
 ; apposition
 
@@ -1286,14 +1360,16 @@ basic-appos-phrase := head-nexus-phrase & head-compositional & basic-binary-phra
                        ARG1 #hind,
                        ARG2 #modind ] !> ] ].
 
-; -- appositions between brackets
 head-adj_int-bracket-appos_phrase := basic-appos-phrase &
   [ HEAD-DTR.SYNSEM [ PUNCT.RPUNCT no_punct,
                       NON-LOCAL [ SLASH 0-dlist,
                                   QUE 0-dlist,
                                   REL 0-dlist ] ],
     NON-HEAD-DTR.SYNSEM [ PUNCT [ LPUNCT bracket_op_punct,
-                                  RPUNCT bracket_cl_punct ] ] ].   
+                                  RPUNCT bracket_cl_punct ] ] ]
+"""
+; -- appositions between brackets
+""".   
 
 head-adj_int-cn-cn-appos_phrase := basic-appos-phrase &
   [ HEAD-DTR.SYNSEM [ PUNCT.RPUNCT comma_punct,
@@ -1341,12 +1417,14 @@ head-adj_int-pn-cn-appos_phrase := basic-appos-phrase &
     NON-HEAD-DTR.SYNSEM.LOCAL [ CAT.HEAD noun & [ KEYS.KEY non_modable_rel & non_elliptical_n_rel ],
                                 CONT.HOOK.INDEX [ PRONTYPE not_pron,
                                                   SORT #sort ] ] ]. 
-; muy poco, casi nada, que resñar.
 head-adj_int-prn-prn-appos_phrase := basic-appos-phrase &
   [ HEAD-DTR.SYNSEM [ LOCAL.CONT.HOOK.INDEX.PRONTYPE real_pron ],
     NON-HEAD-DTR.SYNSEM [ PUNCT [ LPUNCT comma_punct,
                                   RPUNCT comma_punct ],
-                          LOCAL.CONT.HOOK.INDEX.PRONTYPE real_pron ] ].   
+                          LOCAL.CONT.HOOK.INDEX.PRONTYPE real_pron ] ]
+"""
+; muy poco, casi nada, que resñar.
+""".   
 
 head-adj_int-modnp-appos_phrase := basic-appos-phrase &
   [ HEAD-DTR.SYNSEM.LOCAL [ CAT.HEAD noun & 
@@ -1365,15 +1443,17 @@ head-adj_int-modnp-adv-appos_phrase := basic-appos-phrase &
                                       VAL.SPR < [ ] > ],
                                 CONT.HOOK.INDEX.SORT #sort & non-temp ] ].
 
-; la propuesta 23
 head-adj_int-nu-appos_phrase := basic-appos-phrase &
   [ HEAD-DTR.SYNSEM [ PUNCT.RPUNCT no_punct,
                       LOCAL.CAT [ HEAD.KEYS.KEY non_elliptical_n_rel,
                                   VAL.SPR < > ] ],
     NON-HEAD-DTR.SYNSEM.LOCAL [ CAT [ HEAD noun & [ KEYS.KEY non_modable_rel ],
                                       VAL.SPR < > ],
-                                CONT.RELS <! [ PRED generic_entity_rel ], [ PRED card_q_rel ] !> ] ].
-; la propuesta número 23
+                                CONT.RELS <! [ PRED generic_entity_rel ], [ PRED card_q_rel ] !> ] ]
+"""
+; la propuesta 23
+""".
+
 head-adj_int-cmp-nu-appos_phrase := basic-appos-phrase &
   [ HEAD-DTR.SYNSEM [ PUNCT.RPUNCT no_punct,
                       LOCAL.CAT [ HEAD.KEYS.KEY non_elliptical_n_rel,
@@ -1384,10 +1464,14 @@ head-adj_int-cmp-nu-appos_phrase := basic-appos-phrase &
                                              [ PRED undef_q_rel ], 
                                              relation, 
                                              [ PRED card_rel ], 
-                                             [ PRED card_q_rel ] !> ] ].
+                                             [ PRED card_q_rel ] !> ] ]
+"""
+; la propuesta número 23
+""".
 
 
 ; compounds
+
 basic_n_n_cmpnd_phrase := head-valence-phrase & head-compositional & basic-binary-phrase &
   [ SYNSEM [ SLSHD #slshd,
              MODIFIED notmod,
@@ -1425,7 +1509,7 @@ basic_np_name_cmpnd_phrase := basic_n_n_cmpnd_phrase &
 	     HCONS <! qeq & [ HARG #rhand,
                               LARG #nhltop ] !> ] ].
 
-; e.g. coche bomba, mesa camilla,...
+
 n_n_cmpnd_phrase := basic_np_name_cmpnd_phrase & head-initial & 
   [ HEAD-DTR.SYNSEM.LOCAL [ CAT [ HEAD.KEYS.KEY common_nom_rel,
                                   VAL.SPR < [ LOCAL.CAT.HEAD det,
@@ -1436,20 +1520,25 @@ n_n_cmpnd_phrase := basic_np_name_cmpnd_phrase & head-initial &
     NON-HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.SPR < [ LOCAL.CAT.HEAD det,
                                               NON-LOCAL [ SLASH 0-dlist & [ LIST < > ],
                                                           QUE 0-dlist,
-                                                          REL 0-dlist ] ] > ].
+                                                          REL 0-dlist ] ] > ]
+"""
+; e.g. coche bomba, mesa camilla,...
+""".
 
-; e.g. número dos
+
 n_n-num_cmpnd_phrase := basic_np_name_cmpnd_phrase & head-initial & 
   [ HEAD-DTR.SYNSEM.LOCAL.CAT [ VAL.SPR < [ LOCAL.CAT.HEAD det,
                                             NON-LOCAL [ SLASH 0-dlist & [ LIST < > ],
                                                         QUE 0-dlist,
                                                         REL 0-dlist ] ] > ],
-    NON-HEAD-DTR.SYNSEM.LOCAL.CONT.RELS <! [ PRED generic_entity_rel ], [ PRED card_q_rel ] !> ].
+    NON-HEAD-DTR.SYNSEM.LOCAL.CONT.RELS <! [ PRED generic_entity_rel ], [ PRED card_q_rel ] !> ]
+"""
+; e.g. número dos
+""".
 
 
 ; --- unary phrase types for optionality
 
-; -- optional subject
 optsubj_phrase := head-valence-phrase & head-only & head-compositional &
   [ INFLECTED #infl,
     SYNSEM [ MODIFIED #mod,
@@ -1486,17 +1575,12 @@ optsubj_phrase := head-valence-phrase & head-only & head-compositional &
                                             CLTS #clit & < > ] ] ],
                         NON-LOCAL #nlocal ] ],
     C-CONT [ RELS  <! !>,
-             HCONS <! !> ] ].
+             HCONS <! !> ] ]
+"""
+; -- optional subject
+""".
 
 
-; -- optional complement
-; The feature DEF-OPT allows the head to specify whether the optional
-; complement is interpreted as definite (+), indefinite (-), or
-; either (underspecified).  basic-head-opt-comp-phrase copies this
-; information into the index of the unexpressed argument.
-; Need to decide what to do about LIGHT here.  
-;   [ SYNSEM.LOCAL.CAT.AGR #agr,
-;     HEAD-DTR.SYNSEM.LOCAL.CAT.AGR #agr ] 
 optcomp-phrase := head-valence-phrase & head-only & head-compositional &
   [ INFLECTED #infl,
     SYNSEM canonical-synsem &
@@ -1528,10 +1612,18 @@ optcomp-phrase := head-valence-phrase & head-only & head-compositional &
                                             CLTS #clit ] ] ],
                         NON-LOCAL #nlocal ] ],
     C-CONT [ RELS  <! !>,
-             HCONS <! !> ] ]. 
+             HCONS <! !> ] ]
+"""
+; -- optional complement
+; The feature DEF-OPT allows the head to specify whether the optional
+; complement is interpreted as definite (+), indefinite (-), or
+; either (underspecified).  basic-head-opt-comp-phrase copies this
+; information into the index of the unexpressed argument.
+; Need to decide what to do about LIGHT here.  
+;   [ SYNSEM.LOCAL.CAT.AGR #agr,
+;     HEAD-DTR.SYNSEM.LOCAL.CAT.AGR #agr ] 
+""". 
 
-; si diem que el subjecte no s'ha cancel·lat, no podem analitzar
-; "volvió el hindú su rostro"
 optcomp-v_phrase := optcomp-phrase &
   [ SYNSEM.LOCAL.CAT [ POSTHEAD #ph,
                        VAL.COMPS #comps ],
@@ -1539,7 +1631,10 @@ optcomp-v_phrase := optcomp-phrase &
                             CAT [ POSTHEAD #ph, 
                                   HEAD verb & [ KEYS.KEY v_event_rel ],
                                   VAL [ SUBJ < [ ] >,
-                                        COMPS < [ NON-LOCAL.SLASH 0-dlist ]. #comps > ] ] ] ]. 
+                                        COMPS < [ NON-LOCAL.SLASH 0-dlist ]. #comps > ] ] ] ]
+"""; si diem que el subjecte no s'ha cancel·lat, no podem analitzar
+; "volvió el hindú su rostro"
+""". 
 
 optcomp-n_phrase := optcomp-phrase &
   [ SYNSEM.LOCAL [ CAT [ POSTHEAD #ph,
@@ -1563,7 +1658,7 @@ optcomp-r_phrase := optcomp-phrase &
                       LOCAL [ STR.HEADED solely,
                               CAT [ HEAD adv & [ KEYS.KEY basic_adv_rel ] ] ] ] ]. 
 
-; -- optional specifier
+
 optspec_phrase := head-valence-phrase & non-clause & head-only & head-compositional & 
   [ INFLECTED #infl,
     SYNSEM [ MODIFIED #mod,
@@ -1595,7 +1690,10 @@ optspec_phrase := head-valence-phrase & non-clause & head-only & head-compositio
                                             COMPS #comps & < >,
                                             SPEC #spec ] ] ] ] ],
     C-CONT [ RELS <! !>,
-             HCONS <! !> ] ].
+             HCONS <! !> ] ]
+"""
+; -- optional specifier
+""".
 
 
 ; --- unary phrase types for interjections
@@ -1662,6 +1760,7 @@ interj-impropias-cmp-phrase := head-valence-phrase & head-compositional & binary
 ; interj_improp_cmp_constr := interj-impropias-cmp-phrase & rule. 
 
 ; --- unary phrase types for Nbare (distinguished by the INDEX [ DIVISIBLE + ])
+
 basic-nbar-phrase := unary-phrase &
   [ SYNSEM synsem & 
            [ LIGHT -, 
@@ -1878,7 +1977,7 @@ npadv_modn_phrase := basic-npadv-phrase &
                    [ ARG2 #index ] !> ].
 
 
-; hace tres semanas ...
+
 pp_npadv_phrase := basic-npadv-phrase &
   [  SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL.CAT.HEAD verb ] >,
      ARGS < [ SYNSEM.LOCAL [ CAT [ HEAD verb & 
@@ -1888,10 +1987,12 @@ pp_npadv_phrase := basic-npadv-phrase &
                                                     [ PRED "_hacer_v_rel",
                                                       ARG2 #arg2 & [ SORT tmp ] ] ] ] ] >,
     C-CONT.RELS <! prep-relation &
-                   [ ARG2 #arg2 ] !> ].
+                   [ ARG2 #arg2 ] !> ]
+"""
+; hace tres semanas ...
+""".
 
 
-; unary phrase types for vocatives
 vocative_np_phrase := basic-unary-phrase & phrasal & 
   [ INFLECTED +,
     SYNSEM [ PUNCT #punct,
@@ -1940,7 +2041,10 @@ vocative_np_phrase := basic-unary-phrase & phrasal &
                       PRED addressee_rel,
                       ARG1 #arg1,
                       ARG2 #arg2 ] !>,
-            HCONS <! !> ] ].
+            HCONS <! !> ] ]
+"""
+; unary phrase types for vocatives
+""".
 
 vocative_np_prh_phrase := vocative_np_phrase &
 [ SYNSEM [ PUNCT [ LPUNCT no_punct,
@@ -1952,7 +2056,6 @@ vocative_np_psth_phrase  := vocative_np_phrase &
            LOCAL.CAT.POSTHEAD + ] ].
 
 
-; más de dos niños
 partitive_num_phrase := basic-unary-phrase & phrasal &
   [ SYNSEM [ PUNCT #punct,
              SLSHD #slshd,
@@ -1998,7 +2101,10 @@ partitive_num_phrase := basic-unary-phrase & phrasal &
 	     RELS <! [ PRED generic_entity_rel,
                        LBL #nhand,
                        ARG0 #index ] !>,
-	     HCONS <! !> ] ].
+	     HCONS <! !> ] ]
+"""
+; más de dos niños
+""".
 
 
 ; --- unary phrase types for gerundive constructions
@@ -2065,8 +2171,6 @@ vger_phrase := unary-phrase &
              HCONS <! qeq & [ HARG #main, LARG #modltop ], 
                       qeq & [ HARG #subord, LARG #vpltop ] !> ] ].
 
-; --- unary phrase type for adj-pastpart
-; removed "PRD non-prd" to deal with esos tíos son muy pesados
 adjpart_phrase := unary-phrase & 
   [ SYNSEM [ LIGHT -,
              SLSHD #slshd,
@@ -2108,10 +2212,11 @@ adjpart_phrase := unary-phrase &
                       NON-LOCAL #non-local ] ] >,
     C-CONT [ HOOK #hook,
              RELS <! !>,
-             HCONS <! !> ] ].
-
-; --- unary phrase type for predicative phrases
-; The adjective is not required to be POSTHEAD + to deal with "manipular mejor", comparative adjectives are POSTHEAD -
+             HCONS <! !> ] ]
+"""
+; --- unary phrase type for adj-pastpart
+; removed "PRD non-prd" to deal with esos tíos son muy pesados
+""".
 
 prdp_phrase := unary-phrase & 
   [ SYNSEM [ LIGHT -,
@@ -2166,12 +2271,13 @@ prdp_phrase := unary-phrase &
                        ARG1 #main,
                        ARG2 #subord ] !>,
              HCONS <! qeq & [ HARG #main, LARG #modltop ], 
-                      qeq & [ HARG #subord, LARG #vpltop ] !> ] ].
+                      qeq & [ HARG #subord, LARG #vpltop ] !> ] ]
+"""
+; --- unary phrase type for predicative phrases
+; The adjective is not required to be POSTHEAD + to deal with "manipular mejor", comparative adjectives are POSTHEAD -
+""".
 
 
-; --- unary phrase types for "construcciones de participio absoluto". 
-; Verb (transitive/unaccusative) passive participle + non-pronominal NP (subject)
-; e.g. acabada *ella/la reunión, todos se pusieron a trabajar. 
 cpa_phrase := unary-phrase & phrasal &
   [ SYNSEM [ PUNCT.RPUNCT comma_punct,
              SLSHD #slshd,
@@ -2221,10 +2327,13 @@ cpa_phrase := unary-phrase & phrasal &
                        ARG1 #arg1,
                        ARG2 #arg2 ] !>,
              HCONS <! [ HARG #arg1, LARG #larg1 ],
-                      [ HARG #arg2, LARG #larg2 ] !> ] ].
+                      [ HARG #arg2, LARG #larg2 ] !> ] ]
+"""
+; --- unary phrase types for "construcciones de participio absoluto". 
+; Verb (transitive/unaccusative) passive participle + non-pronominal NP (subject)
+; e.g. acabada *ella/la reunión, todos se pusieron a trabajar. 
+""".
 
-; --- unary phrase types adding the article to finite completive clauses
-; e.g. "El que haya dicho esto no me importa"
 cp-nom_phrase := unary-phrase & phrasal &
   [ SYNSEM [ SLSHD #slshd,
              LOCAL [ AGR.PNG.PN 3sg,
@@ -2256,10 +2365,12 @@ cp-nom_phrase := unary-phrase & phrasal &
     C-CONT [ HOOK.INDEX #index & ref-ind & [ PNG.PN 3sg ],
 	     RELS <! nominalize-relation &
                      [ ARG0 #index,
-                       ARG1 #chand ] !> ] ].
+                       ARG1 #chand ] !> ] ]
+"""
+; --- unary phrase types adding the article to finite completive clauses
+; e.g. "El que haya dicho esto no me importa"
+""".
 
-; --- unary phrase types adding the article to VP inf
-; e.g. 
 vp-nom_phrase := unary-phrase & phrasal &
   [ SYNSEM [ MODIFIED notmod,
              SLSHD #slshd,
@@ -2300,7 +2411,11 @@ vp-nom_phrase := unary-phrase & phrasal &
                           PRONTYPE not_pron ],
 	     RELS <! nominalize-relation &
                      [ ARG0 #index,
-                       ARG1 #chand ] !> ] ].
+                       ARG1 #chand ] !> ] ]
+"""
+; --- unary phrase types adding the article to VP inf
+; e.g. 
+""".
 
 ; --- phrase types for ellipsis
 
@@ -2375,12 +2490,14 @@ basic-ellipis-phrase := basic-headed-phrase & phrasal & basic-binary-phrase &
                         ARG0 #arg0 ]!>,
              HCONS <! !> ] ].
 
-; removed SYNSEM.LOCAL.STR.HEADING right_or_no, to deal with "el próximo, quizá"
 np_ell_phrase := basic-ellipis-phrase & binary-punct-phrase &
   [ SYNSEM.LOCAL.CAT.HEAD.KEYS.ALTKEY _el_q_rel, 
     HEAD-DTR.SYNSEM [ LOCAL.CAT.HEAD +vjp & [ MOD < [ LOCAL.CAT.HEAD.KEYS.ALTKEY def_q_rel ] > ],
                       NON-LOCAL.REL 0-dlist ],
-    NON-HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.SPEC < [ LOCAL.CAT.HEAD.KEYS.ALTKEY def_q_rel ] > ].
+    NON-HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.SPEC < [ LOCAL.CAT.HEAD.KEYS.ALTKEY def_q_rel ] > ]
+"""
+; removed SYNSEM.LOCAL.STR.HEADING right_or_no, to deal with "el próximo, quizá"
+""".
 
 np_ell-indef_phrase := basic-ellipis-phrase & binary-punct-phrase &
   [ SYNSEM.LOCAL.CAT.HEAD.KEYS.ALTKEY art_indef_q_rel, 
@@ -2389,6 +2506,15 @@ np_ell-indef_phrase := basic-ellipis-phrase & binary-punct-phrase &
     NON-HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.SPEC < [ LOCAL.CAT.HEAD.KEYS.ALTKEY art_indef_q_rel ] > ].
 
 
+np_ell-sfrel_phrase := basic-ellipis-phrase & 
+  [ SYNSEM.LOCAL.STR.HEADING no,
+    HEAD-DTR.SYNSEM [ LOCAL.CAT.HEAD verb & 
+                                     [ VFORM fin,
+                                       TAM.MOOD ind_or_sub_mood,
+                                       MOD < [ LOCAL [ CAT.HEAD.KEYS.KEY non_named_non_modable_rel,
+                                                       CONT.HOOK.INDEX.SORT non-temp ] ] > ],
+                      NON-LOCAL.REL 1-dlist ] ]
+"""
 ; -- semi-free relatives (e.g. el/aquel que te dijo eso no conoce las raíces del conflicto)
 ; - el artículo determinado, o pron. demostrativo, informa de los rasgos de género y número 
 ; del antecedente elíptico
@@ -2398,14 +2524,7 @@ np_ell-indef_phrase := basic-ellipis-phrase & binary-punct-phrase &
 ; el verbo de la subordinada el que la selecciona (e.g. aquella de (la) que te hablé era espectacular).
 ; Pero si el determinante del antecedente es el artículo, tales casos son siempre agramaticales 
 ; (e.g. *la de (la) que te hablé era espectacular).
-np_ell-sfrel_phrase := basic-ellipis-phrase & 
-  [ SYNSEM.LOCAL.STR.HEADING no,
-    HEAD-DTR.SYNSEM [ LOCAL.CAT.HEAD verb & 
-                                     [ VFORM fin,
-                                       TAM.MOOD ind_or_sub_mood,
-                                       MOD < [ LOCAL [ CAT.HEAD.KEYS.KEY non_named_non_modable_rel,
-                                                       CONT.HOOK.INDEX.SORT non-temp ] ] > ],
-                      NON-LOCAL.REL 1-dlist ] ].
+""".
 
 
 ; --- filler-head-phrase types
@@ -2599,7 +2718,41 @@ filler-head-non_wh-phrase := filler-head-phrase & mc-fillhead-phrase & non-rel-c
                        LBL #ltop,
                        ARG1 #vind,
                        ARG2 #nhind ] !>,
-	     HCONS <! !> ] ]. 
+	     HCONS <! !> ] ]
+"""
+; i)- focus (foco antepuesto)
+; a). may be place to the left peripherical position of the main clause; i.e. may be separated from its clause by other 
+; clauses (e.g. Manzanas dijo María que compró Juan) or to the left peripherical position of the subordinated clause 
+; (e.g. María dijo que manzanas compró Juan), but it can't be related to any position within a relative, an adverbial 
+; and a subject clause (*A Pedro conocemos la mujer que traicionó); b). focus DO can't be doubled by an acc clitic 
+; (e.g. el diario (*lo) compró Juan); c). tiene que estar adyacente al verbo (*el diario Pedro lo compró);
+; d). puede relacionarse con un pronombre (e.g. su propio auto deberá asegurar cada taxista)      
+;
+; [sentential topic (vs discourse topic) may be associated to different sentential positions, e.g. subject 
+; in passive constructions ('NY es habitada por el rey de Francia), but there are some sentential positions 
+; that can only function as topic. This is the case of the left peripherical position we find in hanging topic 
+; and left dislocation.]
+; ii)- left dislocation ('dislocación a la izquierda')
+; a). puede aparecer en la periferia izquierda de la cláusula matriz o de la subordinada; b). existe una dependencia 
+; gramatical entre el tema y la posición dentro de la cláusula con la que se relationa; c). el tema no puede relacionarse 
+; con un epíteto ni con un pronombre tónico, pero cuando se relaciona con un OD o OI es obligatorio el clítico acc o dat; 
+; d). el tema no puede relacionarse con una posición dentro de una cláusula relativa, adverbial o sujeto
+; e.g. a sus amigos, María los invitó a cenar
+;      estoy segura de que a sus amigos, María los invitó a cenar
+;     *estoy segura de que a Pedro, conocemos la mujer que lo traicionó
+;
+; iii)- hanging topic ('tema vinculante') (may be preceded by the expression 'en cuanto a', 'con respecto a'). 
+; a). can only appear in the left peripherical position of the main clause; b). may be related with any position 
+; within the sentence which is occupied by a pronominal element (tónico o átono), o un epíteto, o puede tener una 
+; relación de tipo inalienable con un sintagma. Esta relación es referencial, no hay dependencia gramatical.
+; c). puede entrar en relación con cualquier posición sintáctica dentro de una cl. relativa, adverbial o de sujeto.
+; e.g. en cuanto al hermano, parece que los padres lo contemplan mucho/hablan de él constantemente
+;      en cuanto a el hermano, parece que el desgraciado se lleva bien con todo el mundo,
+;      en cuanto a la capacidad científica del Sr. González, basta con mencionar que este acaba de ganar un premio
+;      en cuanto al BMW, parece que los frenos le fallan constantemente
+;      (en cuanto a) el Sr. González, conocemos la mujer que lo traicionó 
+; !!! not covered
+""". 
   
 filler-head-non_wh_focus-phrase := filler-head-non_wh-phrase & 
   [ C-CONT.RELS <! [ PRED focus_d_rel ] !> ]. 
@@ -2708,6 +2861,20 @@ filler-head-rel-phrase := filler-head-phrase & relative-clause &
              HCONS <! !> ] ].
 
 
+filler-head-restr-rel-phrase := filler-head-rel-phrase & 
+  [ SYNSEM.LOCAL [ COORD #coord,
+                   COORD-STRAT #coord-strat,
+                   STR.HEADING no,
+                   CAT.HEAD [ VFORM fin_or_inf,
+                              MOD < [ PUNCT.RPUNCT no_punct, 
+                                      LOCAL.CAT.HEAD noun &
+                                                     [ KEYS.KEY nonpro_rel ] ] > ] ],
+    ARGS < [ SYNSEM.NON-LOCAL.REL 1-dlist & [ LIST < [ ] > ] ],
+           [ INFLECTED +,
+             SYNSEM [ PUNCT.LPUNCT no_punct, 
+                      LOCAL [ COORD #coord,
+                              COORD-STRAT #coord-strat ] ] ] > ]
+"""
 ; --- Restrictive RCs (e.g. la casa tenía [dos [habitaciones [que daban al parque]]])
 ; - Tiempo/modo:
 ;   - admiten las construcciones de infinitivo (hallamos el camino por donde escapar) 
@@ -2737,23 +2904,9 @@ filler-head-rel-phrase := filler-head-phrase & relative-clause &
 ;   a la subordinada, sino a la principal, siempre que el antecedente ocupe la posición posverbal.
 ;   e.g. le entregué una lista a María que contenía los nombres de todos los inscritos
 ;        de repente, apareció en la sala un individuo que parecía sacado de una película de terror.
-filler-head-restr-rel-phrase := filler-head-rel-phrase & 
-  [ SYNSEM.LOCAL [ COORD #coord,
-                   COORD-STRAT #coord-strat,
-                   STR.HEADING no,
-                   CAT.HEAD [ VFORM fin_or_inf,
-                              MOD < [ PUNCT.RPUNCT no_punct, 
-                                      LOCAL.CAT.HEAD noun &
-                                                     [ KEYS.KEY nonpro_rel ] ] > ] ],
-    ARGS < [ SYNSEM.NON-LOCAL.REL 1-dlist & [ LIST < [ ] > ] ],
-           [ INFLECTED +,
-             SYNSEM [ PUNCT.LPUNCT no_punct, 
-                      LOCAL [ COORD #coord,
-                              COORD-STRAT #coord-strat ] ] ] > ].
+""".
 
 
-; - RCs modifying elliptical NPs
-; e.g. lo único que importa es esto.
 filler-head-rel-np-mn-ellip-phrase := filler-head-restr-rel-phrase & 
   [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL [ CAT [ HEAD.KEYS [ KEY elliptical_n_rel,
                                                             ALTKEY _el_q_rel ],
@@ -2762,13 +2915,15 @@ filler-head-rel-np-mn-ellip-phrase := filler-head-restr-rel-phrase &
     ARGS < [ SYNSEM [ LOCAL.CAT [ HEAD noun & [ KEYS.ALTKEY proper_q_rel ],
                                   VAL.SPR < > ],
                       NON-LOCAL.REL 1-dlist & [ LIST < [ INDEX #ind & [ SORT #sort ] ] > ] ] ],
-           [ INFLECTED + ] > ]. 
+           [ INFLECTED + ] > ]
+"""
+; - RCs modifying elliptical NPs
+; e.g. lo único que importa es esto.
+""". 
 
 filler-head_rel-fin-np-mn-ellip_phrase := filler-head-rel-np-mn-ellip-phrase & filler-head-phrase-fin.
 
 
-; - RCs modifying proper names
-; e.g. El Luís que más me gusta es el que sabe sobreponerse a cualquier dificultad
 filler-head-restr-rel-pname-phrase := filler-head-rel-phrase & 
   [ SYNSEM.LOCAL [ COORD #coord,
                    COORD-STRAT #coord-strat,
@@ -2791,40 +2946,46 @@ filler-head-restr-rel-pname-phrase := filler-head-rel-phrase &
            [ INFLECTED +,
              SYNSEM [ PUNCT.LPUNCT no_punct, 
                       LOCAL [ COORD #coord,
-                              COORD-STRAT #coord-strat ] ] ] > ].
+                              COORD-STRAT #coord-strat ] ] ] > ]
+"""
+; - RCs modifying proper names
+; e.g. El Luís que más me gusta es el que sabe sobreponerse a cualquier dificultad
+""".
 
 filler-head_rel-fin-np-mpn_phrase := filler-head-restr-rel-pname-phrase & filler-head-phrase-fin.
 
 
-; - RCs modifying common nouns, NP filler - for subject and DO RCs
-; e.g. la casa tenía dos habitaciones que daban al parque; la casa que compramos tenía dos habitaciones
 filler-head-rel-np-mn-phrase := filler-head-restr-rel-phrase & 
   [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL [ CAT [ VAL.SPR < [ ] > ],
                                           CONT.HOOK.INDEX #ind ] ] >,
     ARGS < [ SYNSEM [ LOCAL.CAT [ HEAD noun & [ KEYS.ALTKEY proper_q_rel ],
                                   VAL.SPR < > ],
                       NON-LOCAL.REL 1-dlist & [ LIST < [ INDEX #ind ] > ] ] ],
-           [ INFLECTED + ] > ]. 
+           [ INFLECTED + ] > ]
+"""
+; - RCs modifying common nouns, NP filler - for subject and DO RCs
+; e.g. la casa tenía dos habitaciones que daban al parque; la casa que compramos tenía dos habitaciones
+""". 
 
 filler-head_rel-fin-np-mn_phrase := filler-head-rel-np-mn-phrase & filler-head-phrase-fin.
 filler-head_rel-inf-np-mn_phrase := filler-head-rel-np-mn-phrase & filler-head-phrase-inf &
   [ ARGS < [ SYNSEM.LOCAL.CAT.HEAD.CASE acc ], [ INFLECTED + ] > ].
 
 
-; - RCs modifying common nouns, MODNP filler - for lcomp/adjunct RCs
-; e.g. recuerdo el modo como llegó, la ciudad donde creció
 filler-head-rel-modnp-mn-phrase := filler-head-restr-rel-phrase & 
   [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL.CAT [ HEAD.KEYS.KEY non_modable_rel,
                                               VAL.SPR < [ LOCAL.CONT.HCONS  <! qeq !> ] > ] ] >,
     ARGS < [ SYNSEM.LOCAL.CAT.HEAD modnp ],
-           [ INFLECTED + ] > ]. 
+           [ INFLECTED + ] > ]
+"""
+; - RCs modifying common nouns, MODNP filler - for lcomp/adjunct RCs
+; e.g. recuerdo el modo como llegó, la ciudad donde creció
+""". 
 
 filler-head_rel-fin-modnp-mn_phrase := filler-head-rel-modnp-mn-phrase & filler-head-phrase-fin.
 filler-head_rel-inf-modnp-mn_phrase := filler-head-rel-modnp-mn-phrase & filler-head-phrase-inf.
 
 
-; - RCs modifying common nouns, PP filler - for lcomp/adjunct RCs
-; e.g. la ciudad en la que creció, el país hacia el que partió
 filler-head-rel-pp-mn-phrase := filler-head-restr-rel-phrase & 
   [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL [ CAT [ HEAD.KEYS.KEY non_modable_rel,
                                                 VAL.SPR < [ LOCAL.CONT.HCONS  <! qeq !> ] > ],
@@ -2832,41 +2993,47 @@ filler-head-rel-pp-mn-phrase := filler-head-restr-rel-phrase &
     ARGS < [ SYNSEM [ LOCAL.CAT.HEAD adp & [ KEYS [ KEY independent_rel,
                                                     ALT2KEY def_q_rel ] ],
                       NON-LOCAL.REL 1-dlist & [ LIST < [ INDEX #ind & [ SORT #sort ] ] > ] ] ],
-           [ INFLECTED + ] > ]. 
+           [ INFLECTED + ] > ]
+"""
+; - RCs modifying common nouns, PP filler - for lcomp/adjunct RCs
+; e.g. la ciudad en la que creció, el país hacia el que partió
+""". 
 
 filler-head_rel-fin-pp-mn_phrase := filler-head-rel-pp-mn-phrase & filler-head-phrase-fin.
 filler-head_rel-inf-pp-mn_phrase := filler-head-rel-pp-mn-phrase & filler-head-phrase-inf.
 
 
-; - RCs modifying common nouns, marked NP filler - for PPcomp RCs
-; e.g. la persona en la que más confío
 filler-head-rel-mkn-mn-phrase := filler-head-restr-rel-phrase & 
   [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL [ CAT [ HEAD.KEYS.KEY non_modable_rel,
                                                 VAL.SPR < [ LOCAL.CONT.RELS  <! relation !> ] > ],
                                           CONT.HOOK.INDEX #ind & [ SORT #sort ] ] ] >,
     ARGS < [ SYNSEM [ LOCAL.CAT.HEAD adp & [ KEYS.KEY selected_rel ],
                       NON-LOCAL.REL 1-dlist & [ LIST < [ INDEX #ind & [ SORT #sort ] ] > ] ] ],
-           [ INFLECTED + ] > ]. 
+           [ INFLECTED + ] > ]
+"""
+; - RCs modifying common nouns, marked NP filler - for PPcomp RCs
+; e.g. la persona en la que más confío
+""". 
 
 filler-head_rel-fin-mkn-mn_phrase := filler-head-rel-mkn-mn-phrase & filler-head-phrase-fin.
 filler-head_rel-inf-mkn-mn_phrase := filler-head-rel-mkn-mn-phrase & filler-head-phrase-inf.
 
 
-; - RCs modifying common nouns, prep+donde filler (e.g. la ciudad en donde)
 filler-head-rel-r-mn-phrase := filler-head-restr-rel-phrase & 
   [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL.CAT [ HEAD.KEYS.KEY non_modable_rel,
                                               VAL.SPR < [ LOCAL.CONT.RELS  <! relation !> ] > ] ] >,
     ARGS < [ SYNSEM [ LOCAL [ CAT.HEAD adp,
                               CONT.RELS.LIST.REST.FIRST.PRED state_loc_rel ],
                       NON-LOCAL.REL 1-dlist & [ LIST < [ INDEX.SORT mod ] > ] ] ],
-           [ INFLECTED + ] > ]. 
+           [ INFLECTED + ] > ]
+"""
+; - RCs modifying common nouns, prep+donde filler (e.g. la ciudad en donde)
+""". 
 
 filler-head_rel-fin-r-mn_phrase := filler-head-rel-r-mn-phrase & filler-head-phrase-fin.
 filler-head_rel-inf-r-mn_phrase := filler-head-rel-r-mn-phrase & filler-head-phrase-inf.
 
 
-; - RCs modifying pronouns, NP filler
-; e.g. 
 filler-head-rel-np-mpr-phrase := filler-head-restr-rel-phrase & 
   [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL [ CAT [ HEAD.KEYS [ KEY non_modable_rel,
                                                             ALTKEY def_or_udef_q_rel ],
@@ -2876,15 +3043,17 @@ filler-head-rel-np-mpr-phrase := filler-head-restr-rel-phrase &
     ARGS < [ SYNSEM [ LOCAL.CAT [ HEAD noun & [ KEYS.ALTKEY proper_q_rel ],
                                   VAL.SPR < > ],
                       NON-LOCAL.REL 1-dlist & [ LIST < [ INDEX #ind ] > ] ] ],
-           [ INFLECTED + ] > ]. 
+           [ INFLECTED + ] > ]
+"""
+; - RCs modifying pronouns, NP filler
+; e.g. 
+""". 
 
 filler-head_rel-fin-np-mpr_phrase := filler-head-rel-np-mpr-phrase & filler-head-phrase-fin.
 filler-head_rel-inf-np-mpr_phrase := filler-head-rel-np-mpr-phrase & filler-head-phrase-inf &
   [ ARGS < [ SYNSEM.LOCAL.CAT.HEAD.CASE acc ], [ ] > ].
 
 
-; - RCs modifying pronouns, PP filler
-; e.g. 
 filler-head-rel-pp-mpr-phrase := filler-head-restr-rel-phrase & 
   [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL [ CAT [ HEAD.KEYS.KEY non_modable_rel,
                                                 VAL.SPR < > ],
@@ -2892,14 +3061,16 @@ filler-head-rel-pp-mpr-phrase := filler-head-restr-rel-phrase &
                                                  RELS <! relation, quant-relation !> ] ] ] >,
     ARGS < [ SYNSEM [ LOCAL.CAT.HEAD prep_or_modnp,
                       NON-LOCAL.REL 1-dlist & [ LIST < [ INDEX #ind ] > ] ] ],
-           [ INFLECTED + ] > ]. 
+           [ INFLECTED + ] > ]
+"""
+; - RCs modifying pronouns, PP filler
+; e.g. 
+""". 
 
 filler-head_rel-fin-pp-mpr_phrase := filler-head-rel-pp-mpr-phrase & filler-head-phrase-fin.
 filler-head_rel-inf-pp-mpr_phrase := filler-head-rel-pp-mpr-phrase & filler-head-phrase-inf.
 
 
-; - RCs modifying pronouns, RCs modifying deictic adverbs (only donde) 
-; e.g. allá donde estés tú estaré yo)
 filler-head-rel-pp-mr-phrase := filler-head-restr-rel-phrase & filler-head-phrase-fin & 
   [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL [ CAT [ HEAD.KEYS.KEY modable_rel,
                                                 VAL.SPR < > ] ,
@@ -2907,7 +3078,11 @@ filler-head-rel-pp-mr-phrase := filler-head-restr-rel-phrase & filler-head-phras
     ARGS < [ SYNSEM [ LOCAL.CAT.HEAD prep_or_modnp,
                       NON-LOCAL.REL 1-dlist & [ LIST < [ INDEX #ind & [ SORT loc-mod ] ] > ] ] ],
            [ INFLECTED +,
-             SYNSEM.LOCAL.CAT.HEAD.VFORM fin ] > ].
+             SYNSEM.LOCAL.CAT.HEAD.VFORM fin ] > ]
+"""
+; - RCs modifying pronouns, RCs modifying deictic adverbs (only donde) 
+; e.g. allá donde estés tú estaré yo)
+""".
 
 filler-head_rel-fin-pp-mr_phrase := filler-head-rel-pp-mr-phrase.
 
@@ -2941,37 +3116,6 @@ filler-head_rel-fin-pp-mr_phrase := filler-head-rel-pp-mr-phrase.
 ; flr-hd_rel-inf-modnp-mntmp_constr := filler-head_rel-inf-modnp-mntmp_phrase & binary-rule-right-to-left.
 
 
-; --- Non-restrictive RCs (e.g. La casa tenía [[dos habitaciones],[que daban al parque]])
-; - vform and mood
-;   - rechazan las construcciones de infinitivo, y, sólo muy esporádicamente, admiten el subjuntivo
-;   e.g. *hallamos el camino, por donde escapar
-; - Relative pronouns
-;   - "el cual" y "quien" pueden aparecer sin restricción alguna.
-;   e.g. el periodista, quien dio la noticia, lleva tres días desaparecido
-;   llevó a reparar la pluma, la cual no escribía bien.
-;   - "que" debe puede concurrir con el artículo cuando aparece como término de ciertas preposiciones
-;   e.g. *donó la pluma, con que solía escribir/donó la pluma, con la que solía escribir
-; - antecedent:
-;   - pueden modificar un SN cuyo núcleo denote por sí solo entidades referenciales (pron. 
-;   personales tónico, nombres propios)
-;   e.g. Él/Luis, que estaba en desacuerdo, fue destituido fulminantemente
-;   - el antecedente puede llevar un posesivo prenominal
-;   e.g. su libro, con el que estudiamos, está un tanto desfasado
-;   - no pueden concurrir con antecedentes inespecíficos 
-;   e.g. *no ha venido nadie, que lo haya autorizado
-;   - pueden tener PPs como antecedentes en oraciones en las que la subordinada aparece introducida 
-;   por un relativo adverbial (como, cuando, donde)
-;   e.g. iremos de vacaciones en la primavera, cuando haya terminado este capítulo 
-;   - !!! pueden tener un antecedente oracional (un SN con valor proposicional), en la subordinada el 
-;   verbo debe seleccionar una completiva. Si la oración subordinada no lleva un verbo copulativo, es 
-;   necesario el artículo neutro
-;   e.g. finalmente, abandonó la reunión, que fue lo más prudente 
-;        presentó el recuso fuera de plazo, *(lo) que provocó que no fuera admitido
-;   - !!! con antecedente coordinado, los determinantes puden ser de distinta clase,
-;   e.g. el dragaminas y una corbeta, que cruzaron el estrecho, se dirigieron...
-; - !!! extraposición de la cláusula de relativo: la subordinada debe tener un inciso parentético,
-; el elemento interpuesto no puede ser confundido con el antecedente
-; e.g. me llamó tu primo ayer, que --por cierto-- no sabía que era tu cumpleaños
 filler-head-nonrestr-rel-phrase := binary-phrase & relative-clause &
   [ SYNSEM phr-synsem & 
            [ SLSHD #slshd,
@@ -3034,10 +3178,41 @@ filler-head-nonrestr-rel-phrase := binary-phrase & relative-clause &
                                   REL 0-dlist ] ] ] >,
     C-CONT [ HOOK.LTOP #ltop,
              RELS <! !>,
-             HCONS <! !> ] ].
+             HCONS <! !> ] ]
+"""
+; --- Non-restrictive RCs (e.g. La casa tenía [[dos habitaciones],[que daban al parque]])
+; - vform and mood
+;   - rechazan las construcciones de infinitivo, y, sólo muy esporádicamente, admiten el subjuntivo
+;   e.g. *hallamos el camino, por donde escapar
+; - Relative pronouns
+;   - "el cual" y "quien" pueden aparecer sin restricción alguna.
+;   e.g. el periodista, quien dio la noticia, lleva tres días desaparecido
+;   llevó a reparar la pluma, la cual no escribía bien.
+;   - "que" debe puede concurrir con el artículo cuando aparece como término de ciertas preposiciones
+;   e.g. *donó la pluma, con que solía escribir/donó la pluma, con la que solía escribir
+; - antecedent:
+;   - pueden modificar un SN cuyo núcleo denote por sí solo entidades referenciales (pron. 
+;   personales tónico, nombres propios)
+;   e.g. Él/Luis, que estaba en desacuerdo, fue destituido fulminantemente
+;   - el antecedente puede llevar un posesivo prenominal
+;   e.g. su libro, con el que estudiamos, está un tanto desfasado
+;   - no pueden concurrir con antecedentes inespecíficos 
+;   e.g. *no ha venido nadie, que lo haya autorizado
+;   - pueden tener PPs como antecedentes en oraciones en las que la subordinada aparece introducida 
+;   por un relativo adverbial (como, cuando, donde)
+;   e.g. iremos de vacaciones en la primavera, cuando haya terminado este capítulo 
+;   - !!! pueden tener un antecedente oracional (un SN con valor proposicional), en la subordinada el 
+;   verbo debe seleccionar una completiva. Si la oración subordinada no lleva un verbo copulativo, es 
+;   necesario el artículo neutro
+;   e.g. finalmente, abandonó la reunión, que fue lo más prudente 
+;        presentó el recuso fuera de plazo, *(lo) que provocó que no fuera admitido
+;   - !!! con antecedente coordinado, los determinantes puden ser de distinta clase,
+;   e.g. el dragaminas y una corbeta, que cruzaron el estrecho, se dirigieron...
+; - !!! extraposición de la cláusula de relativo: la subordinada debe tener un inciso parentético,
+; el elemento interpuesto no puede ser confundido con el antecedente
+; e.g. me llamó tu primo ayer, que --por cierto-- no sabía que era tu cumpleaños
+""".
 
-; - NRRCs modifying common/proper nouns, filler "que"
-; e.g. La casa tenía [[dos habitaciones],[que daban al parque]]
 filler-head_nonrestrel-n-mnp_phrase := filler-head-nonrestr-rel-phrase &
   [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL [ CAT [ HEAD noun & 
                                                      [ KEYS.KEY non_modable_rel ],
@@ -3052,11 +3227,13 @@ filler-head_nonrestrel-n-mnp_phrase := filler-head-nonrestr-rel-phrase &
                       NON-LOCAL.REL 1-dlist & [ LIST < [ INDEX #ind & 
                                                                [ PNG #png,
                                                                  SORT #sort ] ] > ] ] ],
-           [ INFLECTED + ] > ]. 
+           [ INFLECTED + ] > ]
+"""
+; - NRRCs modifying common/proper nouns, filler "que"
+; e.g. La casa tenía [[dos habitaciones],[que daban al parque]]
+""". 
 
 
-; - NRRCs modifying common/proper nouns, filler "el cual"/"quien"
-; e.g. el periodista, quien dio la noticia, desapareció; reparó la pluma, la cual no escribía bien.
 filler-head_nonrestrel-np-mnp_phrase := filler-head-nonrestr-rel-phrase &
   [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL [ CAT [ HEAD noun & 
                                                      [ KEYS.KEY non_modable_rel ],
@@ -3072,11 +3249,13 @@ filler-head_nonrestrel-np-mnp_phrase := filler-head-nonrestr-rel-phrase &
                       NON-LOCAL.REL 1-dlist & [ LIST < [ INDEX #ind & 
                                                                [ PNG #png,
                                                                  SORT #sort ] ] > ] ] ],
-           [ INFLECTED + ] > ]. 
+           [ INFLECTED + ] > ]
+"""
+; - NRRCs modifying common/proper nouns, filler "el cual"/"quien"
+; e.g. el periodista, quien dio la noticia, desapareció; reparó la pluma, la cual no escribía bien.
+""". 
 
 
-; - NRRCs modifying common/proper nouns, filler PP
-; e.g. donó la pluma, con la que solía escribir
 filler-head_nonrestrel-pp-mnp_phrase := filler-head-nonrestr-rel-phrase & 
   [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL [ CAT [ HEAD noun & 
                                                      [ KEYS [ KEY non_modable_rel,
@@ -3086,11 +3265,13 @@ filler-head_nonrestrel-pp-mnp_phrase := filler-head-nonrestr-rel-phrase &
     ARGS < [ SYNSEM [ LOCAL.CAT.HEAD adp & [ KEYS [ KEY independent_rel,
                                                     ALT2KEY def_q_rel ] ],
                       NON-LOCAL.REL 1-dlist & [ LIST < [ INDEX.SORT #sort ] > ] ] ],
-           [ INFLECTED + ] > ]. 
+           [ INFLECTED + ] > ]
+"""
+; - NRRCs modifying common/proper nouns, filler PP
+; e.g. donó la pluma, con la que solía escribir
+""". 
 
 
-; -  NRRCs modifying common/proper nouns, filler marked NP
-; e.g. 
 filler-head_nonrestrel-mkn-mnp_phrase := filler-head-nonrestr-rel-phrase & 
   [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL [ CAT [ HEAD noun & 
                                                      [ KEYS [ KEY non_modable_rel,
@@ -3099,11 +3280,13 @@ filler-head_nonrestrel-mkn-mnp_phrase := filler-head-nonrestr-rel-phrase &
                                           CONT.HOOK.INDEX.SORT #sort ] ] >,
     ARGS < [ SYNSEM [ LOCAL.CAT.HEAD adp & [ KEYS.KEY selected_rel ],
                       NON-LOCAL.REL 1-dlist & [ LIST < [ INDEX.SORT #sort ] > ] ] ],
-           [ INFLECTED + ] > ]. 
+           [ INFLECTED + ] > ]
+"""
+; -  NRRCs modifying common/proper nouns, filler marked NP
+; e.g. 
+""". 
 
 
-; - NRRCs modifying common/proper nouns, filler modnp
-; e.g. fue hallada en la casa de Comillas, donde vivió en su juventud
 filler-head_nonrestrel-modnp-mnp_phrase :=  filler-head-nonrestr-rel-phrase &
   [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL.CAT [ HEAD noun & 
                                                      [ KEYS [ KEY non_modable_rel,
@@ -3111,51 +3294,41 @@ filler-head_nonrestrel-modnp-mnp_phrase :=  filler-head-nonrestr-rel-phrase &
                                               VAL.SPR < > ] ] > ,
     ARGS < [ SYNSEM [ LOCAL.CAT.HEAD modnp,
                       NON-LOCAL.REL 1-dlist & [ LIST < [ ] > ] ] ],
-           [ INFLECTED + ] > ].
+           [ INFLECTED + ] > ]
+"""
+; - NRRCs modifying common/proper nouns, filler modnp
+; e.g. fue hallada en la casa de Comillas, donde vivió en su juventud
+""".
 
 
-; - NRRCs modifying adverbs/PPs, filler modnp
-; e.g. lo hice [discretamente/con precaución], como me había recomendado
 filler-head_nonrestrel-modnp-mpp_phrase :=  filler-head-nonrestr-rel-phrase &
   [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL.CAT [ HEAD +rp,
                                               VAL.SPR < [ ] > ] ] >,
     ARGS < [ SYNSEM [ LOCAL.CAT.HEAD modnp,
                       NON-LOCAL.REL 1-dlist & [ LIST < [ ] > ] ] ],
-           [ INFLECTED + ] > ].
+           [ INFLECTED + ] > ]
+"""
+; - NRRCs modifying adverbs/PPs, filler modnp
+; e.g. lo hice [discretamente/con precaución], como me había recomendado
+""".
 
 
-; - NRRCs modifying modnp, filler modnp
-; e.g. lo hice así, como me había recomendado; recuerdo ese día, cuando dimitió
 filler-head_nonrestrel-modnp-mr_phrase :=  filler-head-nonrestr-rel-phrase &
   [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL [ CAT [ HEAD modnp & [ KEYS.KEY modable_rel ],
                                                 VAL.SPR < > ],
                                           CONT.HOOK.INDEX #ind ] ] >,
     ARGS < [ SYNSEM [ LOCAL.CAT.HEAD modnp,
                       NON-LOCAL.REL 1-dlist & [ LIST < [ INDEX #ind & [ SORT mod ] ] > ] ] ],
-           [ INFLECTED + ] > ].
+           [ INFLECTED + ] > ]
+"""
+; - NRRCs modifying modnp, filler modnp
+; e.g. lo hice así, como me había recomendado; recuerdo ese día, cuando dimitió
+""".
 
 
 ; e.g. vivía sola, como siempre había deseado 
 
 
-; --- Free RCs (es el propio pronombre relativo el que delmita, en virtud de sus propios 
-; rasgos léxicos, el valor del antecedente). El valor de tales construcciones es el de proyecciones 
-; sintagmáticas infraoracionales (SN, SP, SAdv)
-; e.g. [quien te dijo eso] no conoce las raíces del conflicto, [con quien me quiero casar] vive aquí, 
-;      [donde vive tu hermano] es demasiado lejos para ir de vacaciones (NPs)
-;      he soñado [con quien soñé ayer], ayer vi [a quien le compraste el piso] (PPs)
-;      este traje lo llevaba [cuando se casó] (SAdv)
-; - sólo con "quien" y relativos adverbiales.
-; - admiten como máximo una preposición ante el pronombre o adverbio que las encabeza: 
-;   - esté doblemente seleccionada: e.g. he soñado con quien soñé ayer, ayer vi a quien se lo compraste
-;   - si la preposición corresponde al antecedente elíptico, la construcción es gramatical:
-;   e.g. luchó contra quienes se le opusieron
-;   - si la preposición está dentro de la relativa: si la relativa forma parte del sujeto 
-;   preverbal de la oración principal, la construcción es gramatical (e.g. con quien me quiero 
-;   casar vive a la vuelta); si desempeña cualquier otra función, es agramatical, excepto si es el OD
-;   (e.g. no tiene con quien salir). Este tipo de r. libres se construyen en infinitivo. 
-; ARGS < [ SYNSEM [ LOCAL [ CONT.HOOK.XARG #hand ] ],
-;        [ SYNSEM [ LOCAL [ CONT [ HOOK.LTOP #hand ] ] ] >.
 filler-head-free-rel-phrase := binary-phrase & phrasal &
   [ SYNSEM [ SLSHD #slshd,
              LOCAL [ COORD #coord,
@@ -3201,11 +3374,29 @@ filler-head-free-rel-phrase := binary-phrase & phrasal &
                                   REL 0-dlist ] ] ] >,
     C-CONT [ HOOK #hook, 
              RELS <! !>,
-	     HCONS <! !> ] ].
+	     HCONS <! !> ] ]
+"""
+; --- Free RCs (es el propio pronombre relativo el que delmita, en virtud de sus propios 
+; rasgos léxicos, el valor del antecedente). El valor de tales construcciones es el de proyecciones 
+; sintagmáticas infraoracionales (SN, SP, SAdv)
+; e.g. [quien te dijo eso] no conoce las raíces del conflicto, [con quien me quiero casar] vive aquí, 
+;      [donde vive tu hermano] es demasiado lejos para ir de vacaciones (NPs)
+;      he soñado [con quien soñé ayer], ayer vi [a quien le compraste el piso] (PPs)
+;      este traje lo llevaba [cuando se casó] (SAdv)
+; - sólo con "quien" y relativos adverbiales.
+; - admiten como máximo una preposición ante el pronombre o adverbio que las encabeza: 
+;   - esté doblemente seleccionada: e.g. he soñado con quien soñé ayer, ayer vi a quien se lo compraste
+;   - si la preposición corresponde al antecedente elíptico, la construcción es gramatical:
+;   e.g. luchó contra quienes se le opusieron
+;   - si la preposición está dentro de la relativa: si la relativa forma parte del sujeto 
+;   preverbal de la oración principal, la construcción es gramatical (e.g. con quien me quiero 
+;   casar vive a la vuelta); si desempeña cualquier otra función, es agramatical, excepto si es el OD
+;   (e.g. no tiene con quien salir). Este tipo de r. libres se construyen en infinitivo. 
+; ARGS < [ SYNSEM [ LOCAL [ CONT.HOOK.XARG #hand ] ],
+;        [ SYNSEM [ LOCAL [ CONT [ HOOK.LTOP #hand ] ] ] >.
+""".
 
 
-; - argumental free RC, NP filler 
-; e.g. [quien te dijo eso] no conoce las raíces del conflicto
 filler-head-free-rel-np-arg-phrase := filler-head-free-rel-phrase &
   [ SYNSEM.LOCAL [ AGR #agr,
                    CAT.HEAD #head ],
@@ -3215,13 +3406,15 @@ filler-head-free-rel-np-arg-phrase := filler-head-free-rel-phrase &
                       NON-LOCAL.SLASH <! #loc !> ] ], 
            [ SYNSEM.NON-LOCAL.SLASH 1-dlist &
                                     <! #loc & 
-                                       [ CAT.HEAD.KEYS.ALTKEY #altkey ] !> ] > ].
+                                       [ CAT.HEAD.KEYS.ALTKEY #altkey ] !> ] > ]
+"""
+; - argumental free RC, NP filler 
+; e.g. [quien te dijo eso] no conoce las raíces del conflicto
+""".
 
 filler-head_free-rel-fin-np-arg_phrase := filler-head-free-rel-np-arg-phrase & filler-head-phrase-fin.
 
 
-; - argumental free RC, marked NP filler 
-; e.g. [con quien me quiero casar] vive aquí, no tiene [con quien salir]
 filler-head-free-rel-mkn-arg-phrase := filler-head-free-rel-phrase &
   [ SYNSEM [ LOCAL.CAT.HEAD noun & [ MOD < >, 
                                      KEYS [ KEY #altkey,
@@ -3231,7 +3424,11 @@ filler-head-free-rel-mkn-arg-phrase := filler-head-free-rel-phrase &
                               CONT.RELS.LIST.FIRST.PRED free_relative_q_rel ],
                       NON-LOCAL.SLASH <! #loc !> ] ],
            [ SYNSEM.NON-LOCAL.SLASH 1-dlist &
-                                    <! #loc !> ] > ].
+                                    <! #loc !> ] > ]
+"""
+; - argumental free RC, marked NP filler 
+; e.g. [con quien me quiero casar] vive aquí, no tiene [con quien salir]
+""".
 
 filler-head_free-rel-fin-mkn-arg_phrase := filler-head-free-rel-mkn-arg-phrase & filler-head-phrase-fin & 
   [ SYNSEM.LOCAL.CAT.HEAD.CASE nom,
@@ -3242,8 +3439,6 @@ filler-head_free-rel-inf-mkn-arg_phrase := filler-head-free-rel-mkn-arg-phrase &
   [ SYNSEM.LOCAL.CAT.HEAD.CASE acc ].
 
 
-; - argumental free RC, PP filler 
-; e.g. no tiene [donde vivir]
 filler-head-free-rel-pp-arg-phrase := filler-head-free-rel-phrase &
   [ SYNSEM [ LOCAL.CAT.HEAD noun & [ MOD < >, 
                                      KEYS [ KEY #altkey,
@@ -3253,7 +3448,11 @@ filler-head-free-rel-pp-arg-phrase := filler-head-free-rel-phrase &
                               CONT.RELS.LIST.REST.FIRST.PRED free_relative_q_rel ],
                       NON-LOCAL.SLASH <! #loc !> ] ],
            [ SYNSEM.NON-LOCAL.SLASH 1-dlist &
-                                    <! #loc & [ CAT.HEAD.MOD < [ ] > ] !> ] > ].
+                                    <! #loc & [ CAT.HEAD.MOD < [ ] > ] !> ] > ]
+"""
+; - argumental free RC, PP filler 
+; e.g. no tiene [donde vivir]
+""".
 
 filler-head_free-rel-fin-pp-arg_phrase := filler-head-free-rel-pp-arg-phrase & filler-head-phrase-fin & 
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg,
@@ -3265,8 +3464,6 @@ filler-head_free-rel-inf-pp-arg_phrase := filler-head-free-rel-pp-arg-phrase & f
   [ SYNSEM.LOCAL.CAT.HEAD.CASE acc ].
 
 
-; - adjunct free RCs, PP filler 
-; e.g. este traje lo llevaba [cuando se casó]
 filler-head-free-rel-pp-adj-phrase := filler-head-free-rel-phrase &
   [ SYNSEM.LOCAL.CAT.HEAD #head,
     ARGS < [ SYNSEM [ LOCAL [ CAT.HEAD #head & adp,
@@ -3288,7 +3485,11 @@ filler-head-free-rel-pp-adj-phrase := filler-head-free-rel-phrase &
                                                VAL #val ],
                                          CONT #cont,
                                          AGR #agr,
-                                         CTXT #ctxt ] !> ] > ].
+                                         CTXT #ctxt ] !> ] > ]
+"""
+; - adjunct free RCs, PP filler 
+; e.g. este traje lo llevaba [cuando se casó]
+""".
 
 filler-head_free-rel-fin-pp-adj_phrase := filler-head-free-rel-pp-adj-phrase & filler-head-phrase-fin.
 filler-head_free-rel-inf-pp-adj_phrase := filler-head-free-rel-pp-adj-phrase & filler-head-phrase-inf.
@@ -3393,6 +3594,13 @@ extcomp-a_phrase := basic-extracted-comp-phrase &
 extcomp-v_phrase := basic-extracted-comp-phrase &
   [ HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD verb & [ KEYS.KEY v_event_rel ] ].
 
+extcomp-n_phrase := basic-extracted-comp-phrase &
+  [ SYNSEM.SLSHD -, 
+    HEAD-DTR.SYNSEM.LOCAL [ CAT [ HEAD noun,
+                                  VAL.COMPS < [ OPT +, 
+                                                LOCAL.CAT.HEAD.KEYS.KEY _de_p_sel_rel ] > ] ,
+                            CONT.HOOK.INDEX.SORT non-temp ] ]
+"""
 ; -- extracción de complementos nominales
 ; - si aparecen realizados simultáneamente un genitivo subjetivo y otro objetivo, no es 
 ; posible la relativización de este último (e.g. *al asesino, cuya descripción de María...)
@@ -3403,18 +3611,8 @@ extcomp-v_phrase := basic-extracted-comp-phrase &
 ; e.g. esa novela, de la que acaban de salir varias traducciones, ha tenido un gran éxito
 ; pero para cubrir "de las ventas totales, el 72% corresponde a la farmacia", quito 
 ; HEAD-DTR.SYNSEM.LOCAL [ CAT [ HEAD noun & [ KEYS.ALTKEY undef_quant_q_rel ],
-extcomp-n_phrase := basic-extracted-comp-phrase &
-  [ SYNSEM.SLSHD -, 
-    HEAD-DTR.SYNSEM.LOCAL [ CAT [ HEAD noun,
-                                  VAL.COMPS < [ OPT +, 
-                                                LOCAL.CAT.HEAD.KEYS.KEY _de_p_sel_rel ] > ] ,
-                            CONT.HOOK.INDEX.SORT non-temp ] ].
+""".
 
-; - con SNs determinados sólo puede aparecer "cuyo". Las codas de los partitivos no pueden 
-; ser relativizadas a través de cuyo
-; e.g. esa novela, cuyas traducciones acaban de salir, ha tenido un gran éxito (subj)
-;      tu amigo, cuyas padres conozco perfectamente, es un cretino (DO)
-;      en un lugar de la Mancha de cuyo nombre no quiero acordarme... (PPcomp)
 extcomp-n-df_phrase := head-only & head-compositional &
   [ SYNSEM.SLSHD -, 
     SYNSEM [ LIGHT -,
@@ -3449,9 +3647,15 @@ extcomp-n-df_phrase := head-only & head-compositional &
                                   QUE 0-dlist,
                                   REL 0-dlist ] ],
     C-CONT [ RELS <! !>,
-	     HCONS <! !> ] ].
+	     HCONS <! !> ] ]
+"""
+; - con SNs determinados sólo puede aparecer "cuyo". Las codas de los partitivos no pueden 
+; ser relativizadas a través de cuyo
+; e.g. esa novela, cuyas traducciones acaban de salir, ha tenido un gran éxito (subj)
+;      tu amigo, cuyas padres conozco perfectamente, es un cretino (DO)
+;      en un lugar de la Mancha de cuyo nombre no quiero acordarme... (PPcomp)
+""".
 
-; verbal adjunct are extracted before canceling the complement because "ayer cumplió usted años"
 basic-extracted-adj-phrase := head-mod-phrase & head-only & phrasal & 
   [ SYNSEM [ LOCAL.CAT [ POSTHEAD #ph,
                          MC #mc,
@@ -3477,7 +3681,10 @@ basic-extracted-adj-phrase := head-mod-phrase & head-only & phrasal &
                       NON-LOCAL.SLASH 0-dlist ],
     C-CONT [ HOOK #hook,
 	     RELS <! !>,
-	     HCONS <! !> ] ].
+	     HCONS <! !> ] ]
+"""
+; verbal adjunct are extracted before canceling the complement because "ayer cumplió usted años"
+""".
 
 extadj-v_phrase := basic-extracted-adj-phrase &
   [ SYNSEM [ SLSHD -, 
@@ -3490,15 +3697,17 @@ extadj-v_phrase := basic-extracted-adj-phrase &
                       LOCAL.CAT [ HEAD verb & [ AUX -, MOD < > ],
                                   VAL.SUBJ #subj ] ] ].
 
-; (possesivos) - cuando el elemento poseído es indeterminado debe expresarse con un SP_de
-; e.g. el vecino del que guardo algunos objetos vendrá mañana.
 extadj-n_phrase := basic-extracted-adj-phrase &
   [ SYNSEM [ SLSHD -, 
              NON-LOCAL.SLASH <! [ CAT.HEAD.KEYS.KEY _de_p_rel ] !> ],
     HEAD-DTR.SYNSEM [ LOCAL.CAT.HEAD noun & [ KEYS [ KEY common_nom_rel, 
                                                      ALTKEY undef_quant_q_rel ] ],
                       NON-LOCAL [ REL 0-dlist,
-                                  QUE 0-dlist ] ] ].
+                                  QUE 0-dlist ] ] ]
+"""
+; (possesivos) - cuando el elemento poseído es indeterminado debe expresarse con un SP_de
+; e.g. el vecino del que guardo algunos objetos vendrá mañana.
+""".
 
 
 
@@ -3589,31 +3798,41 @@ conj_no_verb_phrase := phrase &
                                   QUE 0-dlist,
                                   REL 0-dlist ] ] ], ... >,
     C-CONT [ HOOK #hook,
-	     HCONS #hcons ] ].
+	     HCONS #hcons ] ]
+"""
+;; elliptical constructions both for S+S gapping and VP=VP conjunction reduction, 
+;; where in both cases the verb is missing from the second conjunct.  
+;; The approach is to have a multi-daughter rule where
+;; the first daughter is the full S or VP, the second daughter is a 
+;; conjunction lexical item, and the remaining two or three daughters are
+;; the complements and/or modifiers of the missing verb.
+""".
 
-;; VP+conj+XP+XP
-;;
 conj_reduct_phrase := conj_no_verb_phrase &
   [ ARGS.FIRST.SYNSEM.LOCAL [ CAT [ HEAD.LSYNSEM.LOCAL [ CAT.VAL.SUBJ #subj,
 							 CONT.HOOK.XARG #xarg ],
 				    VAL.SUBJ #subj & < synsem > ] ],
-    C-CONT.HOOK.XARG #xarg ].
-
-
-;; Double complement
+    C-CONT.HOOK.XARG #xarg ]
+"""
+;; VP+conj+XP+XP
 ;;
+""".
+
+
 conj_red_c_c_phrase := conj_reduct_phrase & quad_phrase &
   [ ARGS < [ SYNSEM.LOCAL.CAT.HEAD.LSYNSEM [ LOCAL.CAT.VAL.COMPS < #comp1, #comp2 >, 
 					     LKEYS.KEYREL.LBL #rltop ] ],
 	   [ SYNSEM.LKEYS.KEYREL.R-HNDL #rltop ], 
 	   [ SYNSEM #comp1 ], 
 	   [ SYNSEM #comp2 ] >,
-    C-CONT.RELS <! !> ].
+    C-CONT.RELS <! !> ]
+"""
+;; Double complement
+;;
+""".
 
 conj_red_c_c_constr := conj_red_c_c_phrase & quad_rule_left_to_right.
 
-;; Final phrase is a modifier
-;;
 basic_conj_red_x_m_rule := conj_reduct_phrase & quad_phrase &
   [ ARGS < [ SYNSEM [ LOCAL.CAT #vpcat & 
                                 [ HEAD.LSYNSEM.LOCAL.CAT.VAL.COMPS < #comp > ],
@@ -3623,12 +3842,15 @@ basic_conj_red_x_m_rule := conj_reduct_phrase & quad_phrase &
 	   [ SYNSEM phr-synsem &
 		    [ LOCAL [ CAT.HEAD.MOD < synsem &
 					     [ LOCAL.CAT #vpcat ] >,
-			      CONT.HOOK.LTOP #rltop ] ] ] > ].
+			      CONT.HOOK.LTOP #rltop ] ] ] > ]
+"""
+;; Final phrase is a modifier
+;;
+""".
 
 conj_red_x_m_rule := basic_conj_red_x_m_rule &
   [ C-CONT.RELS <! !> ].
 
-;; Intersective modifier
 basic_conj_red_x_m-int_rule := basic_conj_red_x_m_rule &
   [ ARGS < [ SYNSEM.LOCAL.CAT.HEAD.LSYNSEM.LKEYS.KEYREL [ LBL #ltop,
 							  ARG0 #index ] ],
@@ -3638,38 +3860,45 @@ basic_conj_red_x_m-int_rule := basic_conj_red_x_m_rule &
 							 [ LTOP #ltop,
 							   INDEX #index ] ] ] >,
 			    CONT.HOOK [ LTOP #ltop,
-					XARG #index ] ] ] > ].
+					XARG #index ] ] ] > ]
+"""
+;; Intersective modifier
+""".
 
 conj_red_x_m-int_rule := basic_conj_red_x_m-int_rule & conj_red_x_m_rule.
 
-;; Scopal modifier
 basic_conj_red_x_m-scop_rule := conj_red_x_m_rule &
   [ ARGS < [ SYNSEM.LOCAL.CAT.HEAD.LSYNSEM.LKEYS.KEYREL [ LBL #ltop,
 							  ARG0 #index ] ],
 	   [ ], [ ],
 	   [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL scopal-mod &
 					         [ CONT.HOOK [ LTOP #ltop,
-						               INDEX #index ] ] ] > ] > ].
+						               INDEX #index ] ] ] > ] > ]
+"""
+;; Scopal modifier
+""".
 
-;; Identity of complement followed by intersective modifier
-;;
 conj_red_c_m-int_constr := conj_red_x_m-int_rule & quad_rule_left_to_right &
   [ ARGS < [ SYNSEM.LOCAL.CAT.HEAD.LSYNSEM.LOCAL.CAT.VAL.COMPS < #comp1 > ],
 	   [ ],
 	   [ SYNSEM #comp1 ], 
-	   [ ] > ].
-
-;; Identity of complement followed by scopal modifier
+	   [ ] > ]
+"""
+;; Identity of complement followed by intersective modifier
 ;;
+""".
+
 conj_red_c_m-scop_constr := basic_conj_red_x_m-scop_rule & quad_rule_left_to_right &
   [ ARGS < [ SYNSEM.LOCAL.CAT.HEAD.LSYNSEM.LOCAL.CAT.VAL.COMPS < #comp1 > ],
 	   [ ],
 	   [ SYNSEM #comp1 ], 
-	   [ ] > ].
-
-
-;; For sentence-level gapping: S + SnoV
+	   [ ] > ]
+"""
+;; Identity of complement followed by scopal modifier
 ;;
+""".
+
+
 basic_conj_nov_subj_rule := conj_no_verb_phrase & quad_rule_left_to_right &
 			    quad_phrase &
   [ ARGS < [ SYNSEM.LOCAL [ CAT [ VAL [ SUBJ < >, 
@@ -3679,7 +3908,11 @@ basic_conj_nov_subj_rule := conj_no_verb_phrase & quad_rule_left_to_right &
 	   [ ], 
 	   [ ],
 	   [ ] >,
-    C-CONT.RELS <! !> ].
+    C-CONT.RELS <! !> ]
+"""
+;; For sentence-level gapping: S + SnoV
+;;
+""".
 
 conj_nov_subj_rule := basic_conj_nov_subj_rule &
   [ ARGS < [ SYNSEM.LOCAL.CAT.HEAD.LSYNSEM.LOCAL.CAT.VAL.SUBJ < #subj > ],
@@ -3688,18 +3921,19 @@ conj_nov_subj_rule := basic_conj_nov_subj_rule &
 	   [ ] >,
     C-CONT.RELS <! !> ].
 
-;; S+and+NP+Comp
-;;
+
 conj_nov_sb_c_rule := conj_nov_subj_rule &
   [ ARGS < [ SYNSEM.LOCAL.CAT.HEAD.LSYNSEM [ LOCAL.CAT.VAL.COMPS < #comp1 >,
 					     LKEYS.KEYREL.LBL #rltop ] ],
 	   [ SYNSEM.LKEYS.KEYREL.R-HNDL #rltop ], 
 	   [ ], 
-	   [ SYNSEM #comp1 & [ NON-LOCAL.SLASH.LAST < > ] ] > ].
-
-
-;; S+and+NP+Mod (intersective)
+	   [ SYNSEM #comp1 & [ NON-LOCAL.SLASH.LAST < > ] ] > ]
+"""
+;; S+and+NP+Comp
 ;;
+""".
+
+
 conj_nov_sb_m-int_rule := conj_nov_subj_rule &
   [ ARGS < [ SYNSEM [ LOCAL.CAT.HEAD.LSYNSEM [ LKEYS.KEYREL [ LBL #ltop,
 							      ARG0 #index ] ],
@@ -3714,10 +3948,12 @@ conj_nov_sb_m-int_rule := conj_nov_subj_rule &
 						    [ LTOP #ltop,
 						      INDEX #index ] ] ] >,
 			      CONT.HOOK [ LTOP #ltop,
-					  XARG #index ] ] ] ] > ].
-
-;; S+and+NP+Mod (scopal)
+					  XARG #index ] ] ] ] > ]
+"""
+;; S+and+NP+Mod (intersective)
 ;;
+""".
+
 conj_nov_sb_m-scop_rule := conj_nov_subj_rule &
   [ ARGS < [ SYNSEM [ LOCAL.CAT.HEAD.LSYNSEM [ LKEYS.KEYREL [ LBL #ltop,
 							      ARG0 #ind ] ],
@@ -3730,11 +3966,13 @@ conj_nov_sb_m-scop_rule := conj_nov_subj_rule &
 					       [ CAT.HEAD verb, 
 						 CONT.HOOK [ LTOP #ltop,
 							     INDEX #ind ] ] ] >,
-			      CONT.HOOK.LTOP #rltop ] ] ] > ].
-
-
-;; S+and+Mod+NP (intersective)
+			      CONT.HOOK.LTOP #rltop ] ] ] > ]
+"""
+;; S+and+NP+Mod (scopal)
 ;;
+""".
+
+
 conj_nov_m-int_sb_rule := basic_conj_nov_subj_rule &
   [ ARGS < [ SYNSEM [ LOCAL.CAT.HEAD.LSYNSEM [ LOCAL.CAT.VAL.SUBJ < #subj >,
                                                LKEYS.KEYREL [ LBL #ltop,
@@ -3750,10 +3988,12 @@ conj_nov_m-int_sb_rule := basic_conj_nov_subj_rule &
 						      INDEX #index ] ] ] >,
 			      CONT.HOOK [ LTOP #ltop,
 					  XARG #index ] ] ] ], 
-	   [ SYNSEM #subj ] > ].
+	   [ SYNSEM #subj ] > ]
+"""
+;; S+and+Mod+NP (intersective)
+;;
+""".
 
-
-;;; coordinate reduction
 
 vp-vp_crd-red_phrase := coord-phrase & 
   [ SYNSEM [ SLSHD #slshd,
@@ -3782,7 +4022,10 @@ vp-vp_crd-red_phrase := coord-phrase &
     C-CONT [ RELS <! !>,
 	     HCONS <! !>, 
              HOOK [ LTOP #lbl, 
-                    INDEX #carg ] ] ].
+                    INDEX #carg ] ] ]
+"""
+;;; coordinate reduction
+""".
 
 
 vp-vp_crd-red_constr := vp-vp_crd-red_phrase &  binary-rule-right-to-left. 
@@ -3902,7 +4145,12 @@ monopoly-top-coord-phrase := top-coord-phrase &
   [ SYNSEM.LOCAL.STR.HEADED right,
     LCOORD-DTR.SYNSEM.LOCAL.COORD -,
     RCOORD-DTR.SYNSEM.LOCAL [ COORD +,
-                              STR.HEADING right ] ].
+                              STR.HEADING right ] ]
+"""
+; -- monopoly*: Mandatory monosyndeton with optional polysyndeton. This is the 
+; familiar Indo-European pattern, in which at least one coordinator is mandatory 
+; ("A B and C") and more than one is possible ("A and B and C").
+""".
 
 non_advers-monopoly-top-coord-phrase := monopoly-top-coord-phrase & 
   [ LCOORD-DTR.SYNSEM.LOCAL.COORD-STRAT zero_or_one,
@@ -3958,6 +4206,7 @@ monopoly-mid-coord-phrase := mid-coord-phrase &
 ; *left* daughter instead of the right.
 ;
 ; We use it for complex conjunctions
+
 omni-binary-bottom-coord-phrase := bottom-coord-phrase & binary-phrase &
   [ SYNSEM.LOCAL [ COORD +,
                    COORD-REL null-coord-rel,
@@ -3971,7 +4220,31 @@ omni-binary-bottom-coord-phrase := bottom-coord-phrase & binary-phrase &
                                CAT [ HEAD #mod,
                                      VAL #val ] ],
     C-CONT [ RELS <! !>,
-	     HCONS <! !> ] ].
+	     HCONS <! !> ] ]
+"""
+; -- omni: This handles a variety of polysyndeton, called here for
+; clarity "omnisyndeton", in which for an N-way coordination, N
+; coordinators are required:
+;
+;     "and A and B and C" or "A and B and C and".
+;
+; This coordination strategy requires a significantly approach than
+; the others. Rather than a single kind of bottom rule, there are two
+; kinds. The first kind, still called "bottom", handles the single
+; lowest (rightmost) coordinand.  The other kind, called "left",
+; handles all other coordinands (it's called "left" because it is
+; always the left daughter of a top- or mid- rule).  Because there are
+; N coordinators for N coordinands in this strategy, one of the
+; conjunctions must contribute *no* coordination relation, or else
+; we'd have too many.  The bottom rule is the exceptional one: it
+; requires that its conjunction daughter be of type nosem-conj-lex.
+;
+; The mid- and top- rules are also slightly different from the other
+; coordination strategies, in that they take the COORD-REL from the
+; *left* daughter instead of the right.
+;
+; We use it for complex conjunctions
+""".
 
 omni-conj-first-bottom-coord-phrase := omni-binary-bottom-coord-phrase &
   [ SYNSEM.LOCAL [ STR [ HEADED left,
@@ -4074,6 +4347,20 @@ nom-coord-phrase := coord-phrase &
 
 
 ; N coordination types
+
+n-top-coord-phrase := nom-coord-phrase & 
+  [ SYNSEM.LOCAL [ AGR [ PNG #png,
+                         DIVISIBLE + ],
+                   CONT.HOOK.INDEX.PNG #png ],
+    LCOORD-DTR.SYNSEM.LOCAL [ AGR.PNG #png,
+                              CAT [ HEAD.KEYS.KEY non_named_non_modable_rel, 
+                                    VAL.SPR < [ ] > ] ],
+    RCOORD-DTR.SYNSEM.LOCAL [ CAT [ HEAD.KEYS.KEY non_named_non_modable_rel,
+                                    VAL.SPR < [ ] > ] ],
+    C-CONT [ RELS <! !>,
+	     HCONS <! !> ] ]
+"""
+; N coordination types
 ; - cuando se coordinan dos nombres concretos, que comparten el determinante, el 
 ; resultado sólo designa a un objeto con las propiedades designadas por los dos 
 ; sustantivos. La concordancia con el verbo es en singular (el presidente y 
@@ -4087,17 +4374,7 @@ nom-coord-phrase := coord-phrase &
 ; de sujeto siempre se interpreta como definido y el de objeto como indefinido. 
 ; Sólo aparecen en predicados episódicos (madre e hijo estaban en casa, 
 ; *madre e hijo eran altos).
-n-top-coord-phrase := nom-coord-phrase & 
-  [ SYNSEM.LOCAL [ AGR [ PNG #png,
-                         DIVISIBLE + ],
-                   CONT.HOOK.INDEX.PNG #png ],
-    LCOORD-DTR.SYNSEM.LOCAL [ AGR.PNG #png,
-                              CAT [ HEAD.KEYS.KEY non_named_non_modable_rel, 
-                                    VAL.SPR < [ ] > ] ],
-    RCOORD-DTR.SYNSEM.LOCAL [ CAT [ HEAD.KEYS.KEY non_named_non_modable_rel,
-                                    VAL.SPR < [ ] > ] ],
-    C-CONT [ RELS <! !>,
-	     HCONS <! !> ] ].
+""".
 
 n-middle-coord-phrase := nom-coord-phrase & 
   [ SYNSEM.LOCAL [ COORD-REL #crel,
@@ -4137,6 +4414,14 @@ n-n_crd-omni-left_phrase := n-bottom-coord-phrase & omni-conj-first-left-coord-p
 n-n_crd-omni-bot_phrase := n-bottom-coord-phrase & omni-conj-first-bottom-coord-phrase.
 
 
+np-top-coord-phrase := nom-coord-phrase & 
+  [ SYNSEM.LOCAL [ AGR [ PNG.PN plur,
+                         DIVISIBLE + ],
+                   CAT.VAL.SPR < > ],
+    RCOORD-DTR.SYNSEM.LOCAL.CAT.VAL.SPR < >,
+    C-CONT [ RELS <! !>,
+	     HCONS <! !> ] ]
+"""
 ; NP coordination types
 ; - mostly, coordinated subjects are in plural, but there may be partial agreement 
 ; with one of the subjects when the verb precedes the subject and when the subject denotes
@@ -4157,13 +4442,7 @@ n-n_crd-omni-bot_phrase := n-bottom-coord-phrase & omni-conj-first-bottom-coord-
 ; adopta dos patrones: si el adjetivo concuerda en plural, éste modifica a todo el 
 ; sintagma ([el pensamiento y la acción] políticos); si sólo modifica a una de las
 ; partes, debe concordar con esa parte ([el pensamiento y la acció política]). 
-np-top-coord-phrase := nom-coord-phrase & 
-  [ SYNSEM.LOCAL [ AGR [ PNG.PN plur,
-                         DIVISIBLE + ],
-                   CAT.VAL.SPR < > ],
-    RCOORD-DTR.SYNSEM.LOCAL.CAT.VAL.SPR < >,
-    C-CONT [ RELS <! !>,
-	     HCONS <! !> ] ].
+""".
 
 3per_np-top-coord-phrase := np-top-coord-phrase.
 
@@ -4262,10 +4541,7 @@ np-np_crd-omni-bot_phrase := np-bottom-coord-phrase & omni-conj-first-bottom-coo
 
 
 ; AP coordination types
-; NOTE that in fact qualitative adjectives may be coordinated without restrictions (e.g. 
-; el magnífico y único recital, comidas (muy buenas) y (muy baratas), coordination of 
-; relational adjectives show some restrictions (productos alemanes y suecos, *producto 
-; alemán y sueco, *el verdadero y alemán espía)
+
 adj-coord-phrase := event-coord-phrase &
   [ SYNSEM.LOCAL [ CAT [ MC na,
                          LASTNMOD #lastnmod,
@@ -4280,7 +4556,13 @@ adj-coord-phrase := event-coord-phrase &
     RCOORD-DTR.SYNSEM.LOCAL [ CAT [ LASTNMOD #lastnmod,
                                     POSTHEAD #ph,
                                     HEAD adj & [ MOD < [ LOCAL.CONT #cont ] > ] ],
-                              CONT.HOOK.XARG #xarg ] ].
+                              CONT.HOOK.XARG #xarg ] ]
+"""
+; NOTE that in fact qualitative adjectives may be coordinated without restrictions (e.g. 
+; el magnífico y único recital, comidas (muy buenas) y (muy baratas), coordination of 
+; relational adjectives show some restrictions (productos alemanes y suecos, *producto 
+; alemán y sueco, *el verdadero y alemán espía)
+""".
 
 adj-top-coord-phrase := adj-coord-phrase &
   [ C-CONT [ RELS <! !>,
@@ -4312,17 +4594,23 @@ adj-bottom-coord-phrase := bottom-coord-phrase &
                                CONT.HOOK [ INDEX #ind,
                                            XARG #xarg ] ] ].
 
+a-a_crd-advrs_phrase := adj-top-coord-phrase & advers-monopoly-top-coord-phrase
+"""
 ; binary (adversative) coordination (guapo pero antipático)
-a-a_crd-advrs_phrase := adj-top-coord-phrase & advers-monopoly-top-coord-phrase.
+""".
 
+a-a_crd-mono-top_phrase := i-adj-top-coord-phrase & non_advers-monopoly-top-coord-phrase
+"""
 ; multiple monosyndeton/polysyndeton coordination (guapo, (y) listo y simpático) and 
-a-a_crd-mono-top_phrase := i-adj-top-coord-phrase & non_advers-monopoly-top-coord-phrase.
+""".
 a-a_s-crd-mono-top_phrase := s-adj-top-coord-phrase & non_advers-monopoly-top-coord-phrase.
 a-a_crd-mono-mid_phrase := adj-middle-coord-phrase & monopoly-mid-coord-phrase.
 a-a_crd-mono-bot_phrase := adj-bottom-coord-phrase & conj-first-bottom-coord-phrase.
 
+a-a_crd-omni-top_phrase := adj-top-coord-phrase & omni-top-coord-phrase
+"""
 ; omnisyndeton coordination (no sólo guapo sino simpático)
-a-a_crd-omni-top_phrase := adj-top-coord-phrase & omni-top-coord-phrase.
+""".
 a-a_crd-omni-mid_phrase := adj-middle-coord-phrase & omni-mid-coord-phrase.
 a-a_crd-omni-left_phrase := adj-bottom-coord-phrase & omni-conj-first-left-coord-phrase.
 a-a_crd-omni-bot_phrase := adj-bottom-coord-phrase & omni-conj-first-bottom-coord-phrase.
@@ -4382,10 +4670,6 @@ r-r_crd-omni-bot_phrase := adv-bottom-coord-phrase & omni-conj-first-bottom-coor
 
 ; -- Coordination of verbs
 
-; S coordination types
-; not need to have the same tense and mood (e.g. [Pepa no llegó] y [no pedirá un tinto])
-; !!! they may share a complement (los Pérez trajeron, y los invitados se comieron, una 
-; ensalada deliciosa)- always between commas
 cl-coord-phrase := event-coord-phrase & 
   [ SYNSEM [ LOCAL.CAT [ MC #mc,
                          LASTNMOD #lastnmod,
@@ -4408,7 +4692,13 @@ cl-coord-phrase := event-coord-phrase &
                                          [ VFORM #vform,
                                            MOD #mod,
                                            PRD #prd ] ],
-                        NON-LOCAL #nlocal ] ].
+                        NON-LOCAL #nlocal ] ]
+"""
+; S coordination types
+; not need to have the same tense and mood (e.g. [Pepa no llegó] y [no pedirá un tinto])
+; !!! they may share a complement (los Pérez trajeron, y los invitados se comieron, una 
+; ensalada deliciosa)- always between commas
+""".
 
 cl-top-coord-phrase := cl-coord-phrase & 
   [ C-CONT [ RELS <! !>,
@@ -4448,8 +4738,7 @@ cl-cl_crd-omni-bot_phrase := cl-bottom-coord-phrase & omni-conj-first-bottom-coo
 
 
 ; VP coordination types
-; - only with the same tense and mood (e.g. Magdalena casi [se tropezó y se cayó/*se cae])
-; but "el régimen se tambalea y pronto caerá", so they don't need to have the same tense
+
 vp-coord-phrase := event-coord-phrase & 
   [ SYNSEM.LOCAL.CAT [ LASTNMOD #lastnmod,
                        MC #mc,
@@ -4473,7 +4762,12 @@ vp-coord-phrase := event-coord-phrase &
                                          VFORM #vform ],
                                   VAL [ SUBJ < [ ] >,
                                         COMPS < >,
-                                        CLTS < > ] ] ].
+                                        CLTS < > ] ] ]
+"""
+; VP coordination types
+; - only with the same tense and mood (e.g. Magdalena casi [se tropezó y se cayó/*se cae])
+; but "el régimen se tambalea y pronto caerá", so they don't need to have the same tense
+""".
 
 vp-top-coord-phrase := vp-coord-phrase & 
   [ C-CONT [ RELS <! !>,
@@ -4506,15 +4800,7 @@ vp-vp_crd-omni-bot_phrase := vp-bottom-coord-phrase & omni-conj-first-bottom-coo
 
 
 ; V coordination types
-; - la coordinación de núcleos verbales es más aceptable en la medida en que los 
-; dos verbos se interpretan como relacionados semánticamente (trajo y se llevó un 
-; paquete). El segundo complemento puede ser opcional y de distinto tipo
-; - se pueden coordinar verbos que llevan cliticos (lo leyó y resumió en un santiamén,
-; intentarlo comprar o alquilar) pero (*lee y resúmelo cuanto antes, *lo pensó y dijo).
-; - los verbos auxiliaries funcionales (*hemos y han llamado) presentan más restricciones 
-; que los modales (pueden y quieren salir), los aspectuales (comenzó y terminó de hablar)
-; y los prospectivos  los modales (quieren y van a seguir viniendo). Pero un elemento 
-; proclitico (preposición) no puede preceder a la conjunción (*van a y quieren seguir)
+
 v-coord-phrase := event-coord-phrase & 
   [ SYNSEM.LOCAL.CAT [ MC #mc,
                        LASTNMOD #lastnmod,
@@ -4541,7 +4827,18 @@ v-coord-phrase := event-coord-phrase &
                                          CLIT #clit ],
                                   VAL [ SUBJ #subj,
                                         COMPS < #comps,... >,  
-                                        CLTS #clts ] ] ].
+                                        CLTS #clts ] ] ]
+"""
+; - la coordinación de núcleos verbales es más aceptable en la medida en que los 
+; dos verbos se interpretan como relacionados semánticamente (trajo y se llevó un 
+; paquete). El segundo complemento puede ser opcional y de distinto tipo
+; - se pueden coordinar verbos que llevan cliticos (lo leyó y resumió en un santiamén,
+; intentarlo comprar o alquilar) pero (*lee y resúmelo cuanto antes, *lo pensó y dijo).
+; - los verbos auxiliaries funcionales (*hemos y han llamado) presentan más restricciones 
+; que los modales (pueden y quieren salir), los aspectuales (comenzó y terminó de hablar)
+; y los prospectivos  los modales (quieren y van a seguir viniendo). Pero un elemento 
+; proclitico (preposición) no puede preceder a la conjunción (*van a y quieren seguir)
+""".
 
 v-top-coord-phrase := v-coord-phrase & 
   [ C-CONT [ RELS <! !>,
@@ -4579,13 +4876,8 @@ v-v_crd-omni-bot_phrase := v-bottom-coord-phrase & omni-conj-first-bottom-coord-
 ; - if they function as DO the VP may follow the finite clause (e.g. sugirió que hicieran 
 ; una fiesta e invitar a sus amigos)
 
-
 ; PP coordination types
-; - !!! coordinación de dos complementos preposicionales con un adjetivo (que cada uno 
-; disponga [[del espacio y de la tierra] necesarios]).
-; - es posible coordinar ciertas preposiciones (todo por, para y sin el pueblo). Las 
-; preposiciones con menos contenido semántico y menos peso fonológico (a, de, en) 
-; son menos aceptables en coordinación (viajan *de y a Madrid/desde y hacia Madrid)
+
 prep-coord-phrase := coord-phrase &
   [ SYNSEM.LOCAL.CAT [ MC #mc,
                        LASTNMOD #lastnmod,
@@ -4609,7 +4901,14 @@ prep-coord-phrase := coord-phrase &
                                   HEAD adp  & 
                                        [ MOD #mod,
                                          TAM #tam, 
-                                         PRD #prd ] ] ].
+                                         PRD #prd ] ] ]
+"""
+; - !!! coordinación de dos complementos preposicionales con un adjetivo (que cada uno 
+; disponga [[del espacio y de la tierra] necesarios]).
+; - es posible coordinar ciertas preposiciones (todo por, para y sin el pueblo). Las 
+; preposiciones con menos contenido semántico y menos peso fonológico (a, de, en) 
+; son menos aceptables en coordinación (viajan *de y a Madrid/desde y hacia Madrid)
+""".
 
 mod-prep-coord-phrase := prep-coord-phrase &
   [ SYNSEM.LOCAL.CAT.HEAD.KEYS.KEY prep_mod_rel,
@@ -4672,11 +4971,13 @@ pp-pp_crd-omni-bot_phrase := prep-bottom-coord-phrase & omni-conj-first-bottom-c
   [ SYNSEM.LOCAL.CAT.VAL.COMPS < > ].
 
 
-; INTERJ-INTERJ coordination types (e.g. je, je)
 interj_interj-coord-phrase := event-coord-phrase &
   [ SYNSEM.LOCAL.CAT.HEAD interj,
     LCOORD-DTR.SYNSEM.LOCAL.CAT.HEAD interj,
-    RCOORD-DTR.SYNSEM.LOCAL.CAT.HEAD interj ].
+    RCOORD-DTR.SYNSEM.LOCAL.CAT.HEAD interj ]
+"""
+; INTERJ-INTERJ coordination types (e.g. je, je)
+""".
 
 interj_interj-top-coord-phrase := interj_interj-coord-phrase &
   [  LCOORD-DTR.SYNSEM.LIGHT +,
@@ -4702,9 +5003,6 @@ i-i_crd-mono-mid_phrase := interj_interj-middle-coord-phrase & monopoly-mid-coor
 i-i_crd-mono-bot_phrase := interj-bottom-coord-phrase & conj-first-bottom-coord-phrase.
 
 ; DET coordination types
-; - los demostrativos pueden coordinarse (este y ese participante deben presentarse 
-; en la oficina) y yo creo que los artículos también (el y la estudiente desarrollan 
-; la creatividad, el y la estudiante explore diferentes posibilidades)
 
 d-top-coord-phrase := coord-phrase & 
   [ SYNSEM.LOCAL [ AGR [ PNG.GEN #gen,
@@ -4716,7 +5014,13 @@ d-top-coord-phrase := coord-phrase &
     RCOORD-DTR.SYNSEM.LOCAL [ CAT [ HEAD.KEYS.KEY non_named_non_modable_rel,
                                     VAL.SPR #spr ] ],
     C-CONT [ RELS <! !>,
-	     HCONS <! !> ] ].
+	     HCONS <! !> ] ]
+"""
+; DET coordination types
+; - los demostrativos pueden coordinarse (este y ese participante deben presentarse 
+; en la oficina) y yo creo que los artículos también (el y la estudiente desarrollan 
+; la creatividad, el y la estudiante explore diferentes posibilidades)
+""".
 
 d-bottom-coord-phrase := bottom-coord-phrase &
   [ SYNSEM.LOCAL [ COORD-REL.R-INDEX #ind,
@@ -4733,12 +5037,6 @@ d-d_crd-mono-bot_phrase := d-bottom-coord-phrase & conj-first-bottom-coord-phras
 
 ; Coordination of unlike categories
  
-; Finite completive clauses and VPs may be coordinated with eventive nouns 
-; (e.g. odio las llegadas de Segundino y que Cecilia se niegue a verlo), but not 
-; with non-event nouns (e.g. *odio a Segundino y que Cecilia se niegue a verlo) 
-; unless they are interpreted as two separate events (e.g. Qué cosas te gustaron 
-; más del viaje? El avión y que el piloto nos mostrara las ciudades durante la ruta)
-; Agreement: singular
 #|
 nom_verb-coord-phrase := coord-phrase &
   [ SYNSEM.LOCAL [ AGR.PNG.PN 3per,
@@ -4765,12 +5063,17 @@ n_v-middle-coord-phrase := nom_verb-coord-phrase &
 	     HCONS <! !> ] ].
 
 n_v_crd-mono-top_phrase := n_v-top-coord-phrase & non_advers-monopoly-top-coord-phrase.
-n_v_crd-mono-mid_phrase := n_v-middle-coord-phrase & monopoly-mid-coord-phrase.
+n_v_crd-mono-mid_phrase := n_v-middle-coord-phrase & monopoly-mid-coord-phrase
+"""
+; Finite completive clauses and VPs may be coordinated with eventive nouns 
+; (e.g. odio las llegadas de Segundino y que Cecilia se niegue a verlo), but not 
+; with non-event nouns (e.g. *odio a Segundino y que Cecilia se niegue a verlo) 
+; unless they are interpreted as two separate events (e.g. Qué cosas te gustaron 
+; más del viaje? El avión y que el piloto nos mostrara las ciudades durante la ruta)
+; Agreement: singular
+""".
 |#
 
-; ADV-PP coordination types
-; - si no son complementos, no se rige el criterio de compatibilidad semántica y similitud 
-; jerárquica (e.g. va al médico frecuentemente y sin pretexto)
 adjprep-coord-phrase := event-coord-phrase &
   [ SYNSEM.LOCAL [ CAT [ POSTHEAD #ph,
                          LASTNMOD #lastnmod,
@@ -4778,7 +5081,12 @@ adjprep-coord-phrase := event-coord-phrase &
     LCOORD-DTR.SYNSEM.LOCAL.CAT [ LASTNMOD #lastnmod,
                                   HEAD.MOD #mod ],
     RCOORD-DTR.SYNSEM.LOCAL [ CAT [ POSTHEAD #ph,
-                                    HEAD.MOD #mod ] ] ].
+                                    HEAD.MOD #mod ] ] ]
+"""
+; ADV-PP coordination types
+; - si no son complementos, no se rige el criterio de compatibilidad semántica y similitud 
+; jerárquica (e.g. va al médico frecuentemente y sin pretexto)
+""".
 
 adjprep-top-coord-phrase := adjprep-coord-phrase &
   [ C-CONT [ RELS <! !>,
@@ -4809,8 +5117,7 @@ p_a_crd-mono-top_phrase := adjprep-top-coord-phrase & prep_adj-coord-phrase & no
 p_a_crd-mono-mid_phrase := adjprep-middle-coord-phrase & prep_adj-coord-phrase & monopoly-mid-coord-phrase.
 
 ; ADV-PP coordination types
-; - si no son complementos, no se rige el criterio de compatibilidad semántica y similitud 
-; jerárquica (e.g. va al médico frecuentemente y sin pretexto)
+
 advprep-coord-phrase := event-coord-phrase &
   [ SYNSEM.LOCAL [ AGR #agr,
                    CAT [ POSTHEAD #ph,
@@ -4820,7 +5127,11 @@ advprep-coord-phrase := event-coord-phrase &
                                   HEAD.MOD #mod ],
     RCOORD-DTR.SYNSEM.LOCAL [ AGR #agr,
                               CAT [ POSTHEAD #ph,
-                                    HEAD.MOD #mod ] ] ].
+                                    HEAD.MOD #mod ] ] ]
+"""
+; - si no son complementos, no se rige el criterio de compatibilidad semántica y similitud 
+; jerárquica (e.g. va al médico frecuentemente y sin pretexto)
+""".
 
 advprep-top-coord-phrase := advprep-coord-phrase &
   [ C-CONT [ RELS <! !>,
@@ -4849,7 +5160,6 @@ p_r_crd-mono-top_phrase := advprep-top-coord-phrase & prep_adv-coord-phrase & no
 p_r_crd-mono-mid_phrase := advprep-middle-coord-phrase & prep_adv-coord-phrase & monopoly-mid-coord-phrase.
 
 
-; ADJ-ADV coordination types (e.g. comimos maravillosa y estupendamente)
 adj_adv-coord-phrase := event-coord-phrase &
   [ SYNSEM.LOCAL [ CAT [ POSTHEAD #ph,
                          LASTNMOD #lastnmod,
@@ -4858,7 +5168,10 @@ adj_adv-coord-phrase := event-coord-phrase &
     LCOORD-DTR.SYNSEM.LOCAL.CAT.HEAD adj,
     RCOORD-DTR.SYNSEM.LOCAL [ CAT [ POSTHEAD #ph,
                                     LASTNMOD #lastnmod,
-                                    HEAD adv ] ] ].
+                                    HEAD adv ] ] ]
+"""
+; ADJ-ADV coordination types (e.g. comimos maravillosa y estupendamente)
+""".
 
 adj_adv-top-coord-phrase := adj_adv-coord-phrase &
   [ C-CONT [ RELS <! !>,
@@ -4936,6 +5249,7 @@ np_ell-indef_constr := np_ell-indef_phrase & binary-rule-right-to-left.
 np_ell-sfrel_constr := np_ell-sfrel_phrase & binary-rule-right-to-left.
 
 ; *** all ad-hd below changed from right-to-left to left-to-right
+
 ad-hd_s_constr := adj-head_scop_phrase & binary-rule-left-to-right.
 ad-hd_i-xp-xp_constr := adj-head_int-xp-xp_phrase & binary-rule-left-to-right.
 ad-hd_i-xp-n_constr := adj-head_int-xp-n_phrase & binary-rule-left-to-right.
@@ -4944,7 +5258,9 @@ ad-hd_i-vp-vp_constr := adj-head_int-vp-vp_phrase & binary-rule-left-to-right.
 ad-hd_i-pp-vp_constr := adj-head_int-pp-vp_phrase & binary-rule-left-to-right.
 ad-hd_i-adv-vp_constr := adj-head_int-adv-vp_phrase & binary-rule-left-to-right.
 ad-hd_i-modnp-vp_constr := adj-head_int-modnp-vp_phrase & binary-rule-left-to-right.
+
 ; *** all hd-ad below changed from left-to-right to right-to-left
+
 hd-ad_s-xp-cl_constr := head-adj_scop-xp-cl_phrase & binary-rule-right-to-left.
 hd-ad_s-xp-xp_constr := head-adj_scop-xp-xp_phrase & binary-rule-right-to-left.
 hd-ad_i-ap-xp_constr := head-adj_int-ap-xp_phrase & binary-rule-right-to-left.
@@ -4972,7 +5288,9 @@ hd-ad_i-pn-rcpp_constr := head-adj_int-pn-rcpp_phrase & binary-rule-right-to-lef
 hd-ad_i-pr-rcpp_constr := head-adj_int-pr-rcpp_phrase & binary-rule-right-to-left.
 hd-ad_i-n-rcnr_constr := head-adj_int-n-rcnr_phrase & binary-rule-right-to-left.
 hd-ad_i-brckt-appos_constr := head-adj_int-bracket-appos_phrase & binary-rule-right-to-left. 
+
 ; *** most hd-ad -appos below reverted to left-to-right
+
 hd-ad_i-cn-cn-appos_constr := head-adj_int-cn-cn-appos_phrase & binary-rule-left-to-right. 
 hd-ad_i-cn-cn-cln-appos_constr := head-adj_int-cn-cn-cln-appos_phrase & binary-rule-left-to-right. 
 hd-ad_i-pn-cn-appos_constr := head-adj_int-pn-cn-appos_phrase & binary-rule-left-to-right. 
@@ -4985,11 +5303,15 @@ n_n_cmpnd_constr := n_n_cmpnd_phrase & binary-rule-left-to-right.
 n_n-nu_cmpnd_constr := n_n-num_cmpnd_phrase & binary-rule-left-to-right. 
 
 flr-hd_wh-fin_constr := filler-head_wh-fin_phrase & binary-rule-left-to-right. 
+
 ; *** flr-hd_wh-inf_constr onwards changed from left-to-right to right-to-left
+
 flr-hd_wh-inf_constr := filler-head_wh-inf_phrase & binary-rule-right-to-left.  
 flr-hd_nonwh_constr := filler-head_nonwh_phrase & binary-rule-right-to-left. 
 flr-hd_nonwh-nfin_constr := filler-head_nonwh-nfin_phrase & binary-rule-right-to-left. 
+
 ; *** flr-hd_rel-fin-np-mn-ellip_constr onwards changed from right-to-left to left-to-right
+
 flr-hd_rel-fin-np-mn-ellip_constr := filler-head_rel-fin-np-mn-ellip_phrase & binary-rule-left-to-right.
 flr-hd_rel-fin-np-mpn_constr := filler-head_rel-fin-np-mpn_phrase & binary-rule-left-to-right.
 flr-hd_rel-fin-np-mn_constr := filler-head_rel-fin-np-mn_phrase & binary-rule-left-to-right.
@@ -5033,6 +5355,7 @@ pt-hd_constr := punct-head_phrase & binary-rule-left-to-right.
 pt-hd_clt_constr := punct-head_clt_phrase & binary-rule-left-to-right.
 
 ; *** crd mono-bot/omni-bot/omni-left changed from right-to-left to left-to-right
+
 n-n_crd-advrs_constr := n-n_crd-advrs_phrase & binary-rule-right-to-left.
 n-n_crd-mono-top_constr := n-n_crd-mono-top_phrase & binary-rule-right-to-left.
 n-n_crd-mono-mid_constr := n-n_crd-mono-mid_phrase & binary-rule-right-to-left.
