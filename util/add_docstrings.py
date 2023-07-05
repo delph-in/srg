@@ -11,13 +11,13 @@ def save_tdl_objects(tdl_objects, filename):
         for event, obj, lineno in tdl_objects:
             if event == 'LineComment':
                 if not obj.startswith(';'):
-                    f.write('; ' + obj + '\n\n')
+                    f.write('; ' + obj + '\n')
                 else:
-                    f.write(obj + '\n\n')
+                    f.write(obj + '\n')
             elif event == 'BlockComment':
                 f.write('#|' + obj + '|#\n\n')
             else:
-                f.write(tdl.format(obj) + '\n\n')
+                f.write('\n' + tdl.format(obj) + '\n\n')
 
 
 def convert_comments_to_docstrings(tdl_file):
@@ -26,8 +26,6 @@ def convert_comments_to_docstrings(tdl_file):
     is_type_comment = False
     for event, obj, lineno in tdl.iterparse(tdl_file):
         if event == 'LineComment' or event == 'BlockComment':
-            if 'proper names' in obj:
-                print('stop')
             cur_comment = cur_comment + obj + '\n'
             cur_ln = lineno
             new_type = obj
