@@ -1636,254 +1636,323 @@ v_reflex-vprd_dlr := comp-clt-lex-rule &
 ; a sintagmas con para en oraciones impersonales con "ser/resultar + adjetivo" (le es fácil 
 ; conducir, le resulta divertido).
 
-; intransitive verbs
-v_dat-cmp-clt_dlr := comp-clt-lex-rule & 
+
+v_dat-cmp-clt_dlr := comp-clt-lex-rule &
   [ SYNSEM.LOCAL [ CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE dat,
                                             CONT.HOOK.INDEX #ind2 ] ] >,
                    CONT.RELS.LIST.FIRST.ARG2 #ind2 ],
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local ] > ].
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local ] > ]
+  """
+  intransitive verbs
+  """.
 
-; ditransitive verbs (e.g. le prometió que iría/venir)
-v_dat-1st-cmp-clt_dlr := comp-clt-lex-rule & 
+
+v_dat-1st-cmp-clt_dlr := comp-clt-lex-rule &
   [ SYNSEM.LOCAL [ CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE dat,
                                             CONT.HOOK.INDEX #ind3 ] ] >,
                    CONT.RELS.LIST.FIRST [ ARG2 #ind2,
                                           ARG3 #ind3 ] ],
     DTR.SYNSEM.LOCAL [ CAT.VAL.COMPS < [ LOCAL dative_local ], [ ] >,
-                       CONT.RELS.LIST.FIRST arg123-ev-relation & 
-                                            [ ARG2 #ind2 ] ] ].
+                       CONT.RELS.LIST.FIRST arg123-ev-relation & [ ARG2 #ind2 ] ] ]
+  """
+  ditransitive verbs (e.g. le prometió que iría/venir)
+  """.
 
-; ditransitive verbs (e.g. les compró caramelos)
-v_dat-2nd-cmp-clt_dlr := 2nd-comp-clt-lex-rule & 
+
+v_dat-2nd-cmp-clt_dlr := 2nd-comp-clt-lex-rule &
   [ SYNSEM.LOCAL [ CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE dat,
                                             CONT.HOOK.INDEX #ind3 ] ] >,
                    CONT.RELS.LIST.FIRST [ ARG2 #ind2,
                                           ARG3 #ind3 ] ],
     DTR.SYNSEM.LOCAL [ CAT.VAL.COMPS < [ ], [ LOCAL dative_local ] >,
-                       CONT.RELS.LIST.FIRST [ ARG2 #ind2 ] ] ].
-
+                       CONT.RELS.LIST.FIRST.ARG2 #ind2 ] ]
+  """
+  ditransitive verbs (e.g. les compró caramelos)
+  """.
 
 ; -- multiple complement cliticization (including pronominal verbs)
-; ditransitive verbs taking DO and IO (e.g. se los compró) and ditransitive verbs taking IO 
-; and verbal complement (e.g. se lo prometió)
-; order: - 2nd+1st (te me fuiste) / 1st/2nd+3rd (me/te lo dieron)  
-;        - reflexive benefactive dative accusative
-; !!! no pueden coaparecer un clitico dativo de tercera persona y uno acusativo de primera o segunda persona
-; (e.g. se le entregó, *me le entregaron)
 
-v_mult-cmp-clt_dlr := comp-clt-lex-rule & 
+v_mult-cmp-clt_dlr := comp-clt-lex-rule &
   [ ALTS.PASS -,
     SYNSEM.LOCAL [ CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE acc,
-                                            CONT.HOOK.INDEX #ind2 ] ], 
+                                            CONT.HOOK.INDEX #ind2 ] ],
                                   [ LOCAL.CAT.HEAD.CASE rflx ] >,
                    CONT.RELS.LIST.FIRST.ARG2 #ind2 ],
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local ],... >  ].
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local ], ... > ]
+  """
+  -- multiple complement cliticization (including pronominal verbs)
+  ditransitive verbs taking DO and IO (e.g. se los compró) and ditransitive verbs taking IO
+  and verbal complement (e.g. se lo prometió)
+  order: - 2nd+1st (te me fuiste) / 1st/2nd+3rd (me/te lo dieron)
+         - reflexive benefactive dative accusative
+  !!! no pueden coaparecer un clitico dativo de tercera persona y uno acusativo de primera o segunda persona
+  (e.g. se le entregó, *me le entregaron)
+  """.
 
-v_mult-cmp-clt-prn_dlr := comp-clt-lex-rule & 
+
+v_mult-cmp-clt-prn_dlr := comp-clt-lex-rule &
   [ SYNSEM.LOCAL [ CAT.VAL [ SUBJ < [ LOCAL.CAT.HEAD noun ] >,
                              CLTS < [ LOCAL [ CAT.HEAD.CASE dat,
-                                              CONT.HOOK.INDEX #ind2 ] ], 
+                                              CONT.HOOK.INDEX #ind2 ] ],
                                     [ LOCAL.CAT.HEAD.CASE rflx ] > ],
                    CONT.RELS.LIST.FIRST.ARG2 #ind2 ],
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local ],... > ].
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local ], ... > ]
+  """
+  
+  """.
 
-; actually, impersonal o passive; e.g. se le atribuyen cuatro accidentes mortales.
-v_mult-cmp-clt-imp_dlr := comp-clt-lex-rule & 
+
+v_mult-cmp-clt-imp_dlr := comp-clt-lex-rule &
   [ SYNSEM.LOCAL [ CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE dat,
-                                            CONT.HOOK.INDEX #ind3 ] ], 
+                                            CONT.HOOK.INDEX #ind3 ] ],
                                   [ LOCAL.CAT.HEAD.CASE none ] >,
                    CONT.RELS.LIST.FIRST.ARG3 #ind3 ],
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local ],... > ].
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local ], ... > ]
+  """
+  actually, impersonal o passive; e.g. se le atribuyen cuatro accidentes mortales.
+  """.
 
-;; clitic climbing with causative verbs
-v_mult-cmp-clt-cc_dlr := comp-enclt-lex-rule & 
+; ; clitic climbing with causative verbs
+
+v_mult-cmp-clt-cc_dlr := comp-enclt-lex-rule &
   [ SYNSEM.LOCAL [ CAT.VAL.CLTS < [ LOCAL.CAT.HEAD.CASE acc ],
                                   [ LOCAL [ CAT.HEAD.CASE dat,
                                             CONT.HOOK.INDEX #ind3 ] ] >,
                    CONT.RELS.LIST.FIRST.ARG3 #ind3 ],
     DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local ],
-                                     [ LOCAL.CAT.HEAD +vpc ] > ].
+                                     [ LOCAL.CAT.HEAD +vpc ] > ]
+  """
+  ; clitic climbing with causative verbs
+  """.
 
 ; rules for enclitics
-v_mult-cmp-enclt_dlr := comp-enclt-lex-rule & 
+
+v_mult-cmp-enclt_dlr := comp-enclt-lex-rule &
   [ SYNSEM.LOCAL [ CAT.VAL.CLTS < [ LOCAL.CAT.HEAD.CASE rflx ],
                                   [ LOCAL [ CAT.HEAD.CASE acc,
                                             CONT.HOOK.INDEX #ind2 ] ] >,
                    CONT.RELS.LIST.FIRST.ARG2 #ind2 ],
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local ],... > ].
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local ], ... > ]
+  """
+  rules for enclitics
+  """.
 
-v_mult-cmp-enclt-prn_dlr := comp-enclt-lex-rule & 
+
+v_mult-cmp-enclt-prn_dlr := comp-enclt-lex-rule &
   [ SYNSEM.LOCAL [ CAT.VAL.CLTS < [ LOCAL.CAT.HEAD.CASE rflx ],
                                   [ LOCAL [ CAT.HEAD.CASE dat,
                                             CONT.HOOK.INDEX #ind2 ] ] >,
                    CONT.RELS.LIST.FIRST.ARG2 #ind2 ],
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local ],... > ].
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local ], ... > ]
+  """
+  
+  """.
 
-v_dat-enclt_dlr := comp-enclt-lex-rule & 
+
+v_dat-enclt_dlr := comp-enclt-lex-rule &
   [ SYNSEM.LOCAL [ CAT.VAL.CLTS < [ LOCAL.CAT.HEAD.CASE rflx ],
                                   [ LOCAL [ CAT.HEAD.CASE dat,
                                             CONT.HOOK.INDEX #ind2 ] ] >,
-                   CONT.RELS.LIST.FIRST.ARG2 #ind2 ] ].
+                   CONT.RELS.LIST.FIRST.ARG2 #ind2 ] ]
+  """
+  
+  """.
 
-v_mult-cmp-enclt-imp_dlr := comp-enclt-lex-rule & 
+
+v_mult-cmp-enclt-imp_dlr := comp-enclt-lex-rule &
   [ SYNSEM.LOCAL [ CAT.VAL.CLTS < [ LOCAL.CAT.HEAD.CASE none ],
                                   [ LOCAL [ CAT.HEAD.CASE dat,
                                             CONT.HOOK.INDEX #ind2 ] ] >,
                    CONT.RELS.LIST.FIRST.ARG2 #ind2 ],
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local ],... > ].
-
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local ], ... > ]
+  """
+  
+  """.
 
 ; --- Clitic doubling
-; !!! when the canonic object, both direct and indirect, is a pronoun (except "usted" and "ello"), 
-; clitic doubling is obligatory (e.g. *(me) ha visto a mí; (le) agradezco a usted; dedicaré a ello 
-; el siguiente capítulo)
 
-; - clitic-doubling the first element in the COMPS list (e.g. le ordenó al chico salir)
 basic-1st-clt-doubl-lex-rule := cliticization-lex-rule &
   [ SYNSEM.LOCAL [ CAT.VAL.COMPS < [ OPT -,
                                      CLTCZD -,
-				     LOCAL #local,
-                                     NON-LOCAL #nonloc ]
-                                   . #comps >,
+                                     LOCAL #local,
+                                     NON-LOCAL #nonloc ] . #comps >,
                    CONT #cont ],
     DTR.SYNSEM.LOCAL [ CAT.VAL.COMPS < [ CLTCZD +,
-				         LOCAL #local,
-                                         NON-LOCAL #nonloc ]
-                                     . #comps >,
-                      CONT #cont ] ].
+                                         LOCAL #local,
+                                         NON-LOCAL #nonloc ] . #comps >,
+                       CONT #cont ] ]
+  """
+  --- Clitic doubling
+  !!! when the canonic object, both direct and indirect, is a pronoun (except "usted" and "ello"),
+  clitic doubling is obligatory (e.g. *(me) ha visto a mí; (le) agradezco a usted; dedicaré a ello
+  el siguiente capítulo)
+  - clitic-doubling the first element in the COMPS list (e.g. le ordenó al chico salir)
+  """.
+
 
 1st-clt-doubl-lex-rule := basic-1st-clt-doubl-lex-rule &
   [ SYNSEM.LOCAL.CAT [ HEAD.CLIT #case,
-                       VAL.CLTS < #clt & clitic-synsem & 
-                                  [ OPT -,
-                                    LOCAL.CAT.HEAD.CASE #case ] 
-                                  . #clts > ],
-    ARG-ST < #argst . < #clt > >,
+                       VAL.CLTS < #clt & clitic-synsem & [ OPT -,
+                                                           LOCAL.CAT.HEAD.CASE #case ] . #clts > ],
+    ARG-ST < #argst, #clt . < #clt > >,
     DTR [ SYNSEM.LOCAL.CAT.VAL.CLTS #clts,
-          ARG-ST #argst ] ].
+          ARG-ST #argst ] ]
+  """
+  
+  """.
+
 
 1st-enclt-doubl-lex-rule := basic-1st-clt-doubl-lex-rule &
   [ SYNSEM.LOCAL.CAT [ HEAD.CLIT #case,
                        VAL.CLTS < #clts,
-                                  #clt & clitic-synsem & 
-                                  [ OPT -,
-                                    LOCAL.CAT.HEAD.CASE #case ] > ],
-    ARG-ST < #argst . < #clt > >,
+                                  #clt & clitic-synsem & [ OPT -,
+                                                           LOCAL.CAT.HEAD.CASE #case ] > ],
+    ARG-ST < #argst, #clt . < #clt > >,
     DTR [ SYNSEM.LOCAL.CAT.VAL.CLTS < #clts >,
-          ARG-ST #argst ] ].
+          ARG-ST #argst ] ]
+  """
+  
+  """.
 
-; -- clitic-doubling the second element in the COMPS list 
-; e.g. le envió cartas a su padre
+
 2nd-clt-doubl-lex-rule := cliticization-lex-rule &
   [ SYNSEM.LOCAL [ CAT [ HEAD.CLIT #case,
                          VAL [ COMPS < #comp,
                                        [ OPT -,
                                          CLTCZD -,
-				         LOCAL #local,
+                                         LOCAL #local,
                                          NON-LOCAL #nonloc ] >,
-                               CLTS < #clt & clitic-synsem & 
-                                      [ OPT -,
-                                        LOCAL [ CAT.HEAD.CASE #case,
-                                                CONT.HOOK.INDEX.PNG #aff ] ]
-                                      . #clts > ] ],
+                               CLTS < #clt & clitic-synsem & [ OPT -,
+                                                               LOCAL [ CAT.HEAD.CASE #case,
+                                                                       CONT.HOOK.INDEX.PNG #aff ] ] . #clts > ] ],
                    CONT #cont ],
-    ARG-ST < #argst . < #clt > >,
-    DTR [ SYNSEM.LOCAL [ CAT.VAL [ COMPS < #comp, 
+    ARG-ST < #argst, #clt . < #clt > >,
+    DTR [ SYNSEM.LOCAL [ CAT.VAL [ COMPS < #comp,
                                            [ CLTCZD +,
-				             LOCAL #local & [ CAT.HEAD.CASE #case,
+                                             LOCAL #local & [ CAT.HEAD.CASE #case,
                                                               CONT.HOOK.INDEX.PNG #aff ],
                                              NON-LOCAL #nonloc ] >,
                                    CLTS #clts ],
                          CONT #cont ],
-          ARG-ST #argst ] ].
-
+          ARG-ST #argst ] ]
+  """
+  -- clitic-doubling the second element in the COMPS list
+  e.g. le envió cartas a su padre
+  """.
 
 ; -- accusative clitic doubling lexical rule
-; transitive verbs when the DO is a quantifier (e.g. lo sé todo, los conozco a todos) or 
-; takes a numeral (e.g. los conozco a los tres), though we may also find examples like: la ayudo 
-; a mi madre, lo sé que te sientes mal, therefore, I don't specify restrictions when it takes a 
-; single complement
-; !!! dislocated DOs require clitics, unless it's indefinite (e.g. esa película la ví hace tres años, 
-; unos libros compré ayer)
-v_acc-clt-doubl_dlr := 1st-clt-doubl-lex-rule & 
+
+v_acc-clt-doubl_dlr := 1st-clt-doubl-lex-rule &
   [ ALTS.PASS -,
     SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE acc_or_dat,
                                           CONT.HOOK.INDEX.PNG #index ] ] >,
-    DTR.SYNSEM [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local & 
-                                               [ CONT.HOOK.INDEX.PNG #index ] ],... > ] ].
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local & [ CONT.HOOK.INDEX.PNG #index ] ], ... > ]
+  """
+  -- accusative clitic doubling lexical rule
+  transitive verbs when the DO is a quantifier (e.g. lo sé todo, los conozco a todos) or
+  takes a numeral (e.g. los conozco a los tres), though we may also find examples like: la ayudo
+  a mi madre, lo sé que te sientes mal, therefore, I don't specify restrictions when it takes a
+  single complement
+  !!! dislocated DOs require clitics, unless it's indefinite (e.g. esa película la ví hace tres años,
+  unos libros compré ayer)
+  """.
 
 ; -- dative clitic doubling lexical rule
-; for ditrans verbs (e.g. les compró caramelos a los niños, le dijeron a Juan que viniera)
-; !!! dative clitic doubling is always possible. With ditransitive verbs it's optional 
-; (e.g. (le) dieron el premio al escritor, (le) dijeron a Juan que viniera), it's obligatory with 
-; dativos experimentantes (*(le) gusta el cine a Juan), beneficiarios ((*le) preparó un brevaje al 
-; enfermo, *(le) hice los deberes a los niños), poseedor inelienable (*(le) cortaron las uñas al 
-; niño, *(le) le duele la pierna a Pedro). El clitico dativo de tercera persona puede perder la 
-; marca de plural cuando está reduplicado (no le tiene miedo a las balas)
-v_dat-clt-doubl_dlr := 1st-clt-doubl-lex-rule & 
+
+v_dat-clt-doubl_dlr := 1st-clt-doubl-lex-rule &
   [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE dat,
                                           CONT.HOOK.INDEX.PNG #index ] ] >,
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local & 
-                                             [ CONT.HOOK.INDEX.PNG #index ] ],... > ].
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local & [ CONT.HOOK.INDEX.PNG #index ] ], ... > ]
+  """
+  -- dative clitic doubling lexical rule
+  for ditrans verbs (e.g. les compró caramelos a los niños, le dijeron a Juan que viniera)
+  !!! dative clitic doubling is always possible. With ditransitive verbs it's optional
+  (e.g. (le) dieron el premio al escritor, (le) dijeron a Juan que viniera), it's obligatory with
+  dativos experimentantes (*(le) gusta el cine a Juan), beneficiarios ((*le) preparó un brevaje al
+  enfermo, *(le) hice los deberes a los niños), poseedor inelienable (*(le) cortaron las uñas al
+  niño, *(le) le duele la pierna a Pedro). El clitico dativo de tercera persona puede perder la
+  marca de plural cuando está reduplicado (no le tiene miedo a las balas)
+  """.
 
-v_dat-1st-clt-doubl_dlr := 1st-clt-doubl-lex-rule & 
+
+v_dat-1st-clt-doubl_dlr := 1st-clt-doubl-lex-rule &
   [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE dat,
                                           CONT.HOOK.INDEX.PNG #index ] ] >,
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local & 
-                                             [ CONT.HOOK.INDEX.PNG #index ] ],... > ].
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local & [ CONT.HOOK.INDEX.PNG #index ] ], ... > ]
+  """
+  
+  """.
 
-v_dat-2nd-clt-doubl_dlr := 2nd-clt-doubl-lex-rule & 
+
+v_dat-2nd-clt-doubl_dlr := 2nd-clt-doubl-lex-rule &
   [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE dat,
                                           CONT.HOOK.INDEX.PNG #index ] ] >,
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < synsem, 
-                                     [ LOCAL dative_local & 
-                                             [ CONT.HOOK.INDEX.PNG #index ] ] > ].
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < synsem,
+                                     [ LOCAL dative_local & [ CONT.HOOK.INDEX.PNG #index ] ] > ]
+  """
+  
+  """.
 
 
-; -- multiple clitic doubling
-; ditransitive verbs taking DO and IO (e.g. se los compró al chico) & ditransitive verbs 
-; taking IO and verbal complement (e.g. se lo prometió al chico)
-v_mult-clt-doubl_dlr := 1st-clt-doubl-lex-rule & 
+v_mult-clt-doubl_dlr := 1st-clt-doubl-lex-rule &
   [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE acc,
-                                          CONT.HOOK.INDEX.PNG #index ] ], 
+                                          CONT.HOOK.INDEX.PNG #index ] ],
                                 [ LOCAL.CAT.HEAD.CASE rflx ] >,
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local & 
-                                             [ CONT.HOOK.INDEX.PNG #index ] ],... > ].
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local & [ CONT.HOOK.INDEX.PNG #index ] ], ... > ]
+  """
+  -- multiple clitic doubling
+  ditransitive verbs taking DO and IO (e.g. se los compró al chico) & ditransitive verbs
+  taking IO and verbal complement (e.g. se lo prometió al chico)
+  """.
 
-v_mult-clt-doubl-prn_dlr := 1st-clt-doubl-lex-rule & 
+
+v_mult-clt-doubl-prn_dlr := 1st-clt-doubl-lex-rule &
   [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE dat,
-                                          CONT.HOOK.INDEX.PNG #index ] ], 
+                                          CONT.HOOK.INDEX.PNG #index ] ],
                                 [ LOCAL.CAT.HEAD.CASE rflx ] >,
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local &
-                                             [ CONT.HOOK.INDEX.PNG #index ] ],... > ].
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local & [ CONT.HOOK.INDEX.PNG #index ] ], ... > ]
+  """
+  
+  """.
 
-v_mult-clt-doubl-imp_dlr := 1st-clt-doubl-lex-rule & 
+
+v_mult-clt-doubl-imp_dlr := 1st-clt-doubl-lex-rule &
   [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE dat,
-                                          CONT.HOOK.INDEX.PNG #index ] ], 
+                                          CONT.HOOK.INDEX.PNG #index ] ],
                                 [ LOCAL.CAT.HEAD.CASE none ] >,
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local &
-                                             [ CONT.HOOK.INDEX.PNG #index ] ],... > ].
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local & [ CONT.HOOK.INDEX.PNG #index ] ], ... > ]
+  """
+  
+  """.
 
-v_2nd-mult-clt-doubl-imp_dlr := 2nd-clt-doubl-lex-rule & 
+
+v_2nd-mult-clt-doubl-imp_dlr := 2nd-clt-doubl-lex-rule &
   [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE dat,
-                                          CONT.HOOK.INDEX.PNG #index ] ], 
+                                          CONT.HOOK.INDEX.PNG #index ] ],
                                 [ LOCAL.CAT.HEAD.CASE none ] >,
     DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < synsem,
-                                     [ LOCAL dative_local &
-                                             [ CONT.HOOK.INDEX.PNG #index ] ] > ].
+                                     [ LOCAL dative_local & [ CONT.HOOK.INDEX.PNG #index ] ] > ]
+  """
+  
+  """.
 
-; enclitics
-v_mult-enclt-doubl_dlr := 1st-enclt-doubl-lex-rule & 
+
+v_mult-enclt-doubl_dlr := 1st-enclt-doubl-lex-rule &
   [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CAT.HEAD.CASE rflx ],
                                 [ LOCAL [ CAT.HEAD.CASE acc,
                                           CONT.HOOK.INDEX.PNG #index ] ] >,
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local & 
-                                             [ CONT.HOOK.INDEX.PNG #index ] ],... > ].
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local & [ CONT.HOOK.INDEX.PNG #index ] ], ... > ]
+  """
+  enclitics
+  """.
 
-v_mult-enclt-doubl-prn_dlr := 1st-enclt-doubl-lex-rule & 
+
+v_mult-enclt-doubl-prn_dlr := 1st-enclt-doubl-lex-rule &
   [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CAT.HEAD.CASE rflx ],
                                 [ LOCAL [ CAT.HEAD.CASE rflx,
                                           CONT.HOOK.INDEX.PNG #index ] ] >,
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local &
-                                             [ CONT.HOOK.INDEX.PNG #index ] ],... > ].
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local & [ CONT.HOOK.INDEX.PNG #index ] ], ... > ]
+  """
+  
+  """.
 
