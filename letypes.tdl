@@ -8580,20 +8580,24 @@ basic_det_synsem := lex-synsem &
 ; with 'ad-sensum' agr. 
 """.
 
-; dets taking spr and building a DP
 specfd_det_synsem := basic_det_synsem &
   [ LOCAL [ AGR #agr,
             CAT.VAL.SPR < [ LIGHT +,
                             LOCAL.AGR #agr,
                             NON-LOCAL [ QUE 0-dlist,
-                                        REL 0-dlist ] ] > ] ].
+                                        REL 0-dlist ] ] > ] ]
+"""
+; dets taking spr and building a DP
+""".
 
-; sub-hierarchy of dets on the basis of non-local values
 det_que := basic-det-lex & 
   [ SYNSEM [ LOCAL.CAT [ POSTHEAD -,
                          VAL.COMPS < > ], 
              NON-LOCAL [ QUE 1-dlist & [ LIST < param > ],
-                         REL 0-dlist ] ] ]. 
+                         REL 0-dlist ] ] ]
+"""
+; sub-hierarchy of dets on the basis of non-local valuess
+""". 
 
 det_nonque := basic-det-lex & 
   [ SYNSEM.NON-LOCAL.QUE 0-dlist ]. 
@@ -8614,8 +8618,7 @@ det_nonque_nonrel_nonposs := det_nonque_nonrel &
 
 
 ; --- 6.1. Definite articles
-; - (todo) + DEF. ART + (adj. indef.)* + (adj. qual.)* + N'
-; e.g. (todos) los (otros) (muchos/pocos/tres) libros
+
 d_-_art-d := det_nonque_nonrel_nonposs & 
   [ SYNSEM basic_det_synsem & 
            [ LOCAL.CAT [ POSTHEAD -,
@@ -8625,16 +8628,18 @@ d_-_art-d := det_nonque_nonrel_nonposs &
                                COMPS < > ] ],
              LKEYS [ KEYREL [ PRED _el_q_rel,
                               LBL #lbl ],
-                     ALTKEYREL.LBL #lbl ] ] ].
+                     ALTKEYREL.LBL #lbl ] ] ]
+"""
+; --- 6.1. Definite articles
+; - (todo) + DEF. ART + (adj. indef.)* + (adj. qual.)* + N'
+; e.g. (todos) los (otros) (muchos/pocos/tres) libros
+""".
 
 d_-_art-d_lex := d_-_art-d &
   [ SYNSEM specfd_det_synsem ].
 
  
 ; --- 6.2. Indefinite article
-; - INDEF. ART + (cardinal) + Pl_N'
-; e.g. Necesito unas tres personas 
-; !!! yet not covered: ¡cayó una (cantidad) de agua...!
 d_-_art-i_lex := det_nonque_nonrel_nonposs &
   [ SYNSEM specfd_det_synsem &
            [ LOCAL.CAT [ POSTHEAD -,
@@ -8643,23 +8648,16 @@ d_-_art-i_lex := det_nonque_nonrel_nonposs &
                                        LOCAL.CAT.HEAD.KEYS.KEY pre_indef_art_rel ] > ] ],
              LKEYS [ KEYREL [ PRED art_indef_q_rel,
                               LBL #lbl ],
-                     ALTKEYREL.LBL #lbl ] ] ].
+                     ALTKEYREL.LBL #lbl ] ] ]
+"""
+; --- 6.2. Indefinite article
+; - INDEF. ART + (cardinal) + Pl_N'
+; e.g. Necesito unas tres personas 
+; !!! yet not covered: ¡cayó una (cantidad) de agua...!
+""".
 
 ; --- 6.3. Possessives 
-; - no puede aparecer con relativas especificativas, ni con SNs cuyo núcleu se relacione con
-; verbos impersonales meteorológicos (*su nevada nos dejó aislados). Tampoco en un SN con 
-; núcleo elíptico (*su coche pequeño y mi grande).No se puede interpretar de forma impersonal, 
-; a no ser que exista un antecedente impersonal sintácticamente explícito. Puede realizar las 
-; funciones de poseedor, agente o tema, pronominalizando complementos o adjuntos introducidos 
-; por la prep "de". Pero no pueden pronominalizar complementos locativos de procedencia, ni 
-; adjuntos que expresan materia, ni expresiones temporales, ni los complementos partitivos 
-; - Existe una jerarquía para la realización de los argumentos como posesivos: (POSEEDOR >) AGENTE > TEMA
-; - when they follow the noun, they are modifiers and they require the def. article or the 
-; demonstrative, e.g. la/esa canción tuya me gustó
-; - (todo) + POSS + (adj. indef.)* + (adj. qual.)* + N'
-;   e.g. (todos) tus (otros) (muchos/pocos/tres) libros
-; - dem + POSS + N'
-;   e.g. esos tus ojos
+
 det_poss := det_nonque_nonrel & 
   [ SYNSEM specfd_det_synsem &
            [ LOCAL [ CAT [ POSTHEAD -,
@@ -8686,7 +8684,24 @@ det_poss := det_nonque_nonrel &
                             HCONS <! qeq, qeq & [ HARG #rhand,
                                                   LARG #prohand ] !> ] ],
              LKEYS [ KEYREL.PRED poss_q_rel, 
-                     ALTKEYREL #altkey ] ] ]. 
+                     ALTKEYREL #altkey ] ] ]
+"""
+; --- 6.3. Possessives 
+; - no puede aparecer con relativas especificativas, ni con SNs cuyo núcleu se relacione con
+; verbos impersonales meteorológicos (*su nevada nos dejó aislados). Tampoco en un SN con 
+; núcleo elíptico (*su coche pequeño y mi grande).No se puede interpretar de forma impersonal, 
+; a no ser que exista un antecedente impersonal sintácticamente explícito. Puede realizar las 
+; funciones de poseedor, agente o tema, pronominalizando complementos o adjuntos introducidos 
+; por la prep "de". Pero no pueden pronominalizar complementos locativos de procedencia, ni 
+; adjuntos que expresan materia, ni expresiones temporales, ni los complementos partitivos 
+; - Existe una jerarquía para la realización de los argumentos como posesivos: (POSEEDOR >) AGENTE > TEMA
+; - when they follow the noun, they are modifiers and they require the def. article or the 
+; demonstrative, e.g. la/esa canción tuya me gustó
+; - (todo) + POSS + (adj. indef.)* + (adj. qual.)* + N'
+;   e.g. (todos) tus (otros) (muchos/pocos/tres) libros
+; - dem + POSS + N'
+;   e.g. esos tus ojos
+""". 
 
 d_-_poss-mi_lex := det_poss &
  [ SYNSEM.LKEYS.KEYREL.PRED _mi_q_rel ]. 
@@ -8704,12 +8719,7 @@ d_-_poss-vuestro_lex := det_poss &
  [ SYNSEM.LKEYS.KEYREL.PRED _vuestro_q_rel ].
 
 ; --- 6.4. Demonstratives
-; - when they follow the noun, they are modifiers and they require the definite article
-; e.g. la canción esa me gustó
-; - (todo) + DEM + (otro) (mucho/poco/cardinal) + N'
-;   e.g. (todos) estos (otros) (muchos/pocos/tres) libros
-; - DEM + poss + N'
-;   e.g. esos tus ojos
+
 det_dem := det_nonque_nonrel_nonposs & 
   [ SYNSEM specfd_det_synsem &
            [ LOCAL.CAT [ POSTHEAD -,
@@ -8718,7 +8728,16 @@ det_dem := det_nonque_nonrel_nonposs &
                                COMPS < > ] ],
              LKEYS [ KEYREL [ PRED dem_q_rel,
                               LBL #lbl ],
-                     ALTKEYREL.LBL #lbl ] ] ].
+                     ALTKEYREL.LBL #lbl ] ] ]
+"""
+; --- 6.4. Demonstratives
+; - when they follow the noun, they are modifiers and they require the definite article
+; e.g. la canción esa me gustó
+; - (todo) + DEM + (otro) (mucho/poco/cardinal) + N'
+;   e.g. (todos) estos (otros) (muchos/pocos/tres) libros
+; - DEM + poss + N'
+;   e.g. esos tus ojos
+""".
 
 d_-_dem-este_lex := det_dem &
  [ SYNSEM.LKEYS.KEYREL.PRED _este_q_rel ].
@@ -8729,8 +8748,6 @@ d_-_dem-ese_lex := det_dem &
 d_-_dem-aquel_lex := det_dem &
  [ SYNSEM.LKEYS.KEYREL.PRED _aquel_q_rel ].
 
-; --- the demonstrative "tal" 
-; e.g. en tal ocasión, en tales casos
 d_-_tal_lex := det_nonque_nonrel_nonposs & 
   [ SYNSEM basic_det_synsem &
            [ LOCAL.CAT [ POSTHEAD -,
@@ -8739,10 +8756,12 @@ d_-_tal_lex := det_nonque_nonrel_nonposs &
                                COMPS < > ] ],
              LKEYS [ KEYREL [ PRED _tal_q_rel,
                               LBL #lbl ],
-                     ALTKEYREL.LBL #lbl ] ] ].
+                     ALTKEYREL.LBL #lbl ] ] ]
+"""
+; --- the demonstrative "tal" 
+; e.g. en tal ocasión, en tales casos
+""".
 
-; --- The demonstrative "semejante" 
-; e.g. semenjante persona no puede estar aquí
 d_-_semejante_lex := det_nonque_nonrel_nonposs & 
   [ SYNSEM basic_det_synsem &
            [ LOCAL.CAT [ POSTHEAD -,
@@ -8751,102 +8770,141 @@ d_-_semejante_lex := det_nonque_nonrel_nonposs &
                                COMPS < > ] ],
              LKEYS [ KEYREL [ PRED _semejante_q_rel,
                               LBL #lbl ],
-                     ALTKEYREL.LBL #lbl ] ] ].
+                     ALTKEYREL.LBL #lbl ] ] ]
+"""
+; --- The demonstrative "semejante" 
+; e.g. semenjante persona no puede estar aquí
+""".
 
 ; --- 6.5. Quantifiers
+
 det_quant := det_nonque_nonrel_nonposs & 
   [ SYNSEM basic_det_synsem &
            [ LOCAL.CAT.VAL.COMPS < >,
              LKEYS [ KEYREL.LBL #lbl,
                      ALTKEYREL.LBL #lbl ] ] ].
 
+
 ; --- 6.5.1. Universal Def/Indef. Quantifier (cualquier)
-; - cualquier + (otro) + Count Sg_N'
+  
 d_-_q-cualquier_lex := det_quant &
   [ SYNSEM [ LOCAL [ AGR [ PNG.PN sing,
                            DIVISIBLE - ],
                      CAT [ POSTHEAD -,
                            VAL [ SPEC < [ LOCAL.CAT.HEAD noun ] >,
                                  SPR < > ] ] ],
-             LKEYS.KEYREL.PRED _cualquiera_q_rel ] ].
+             LKEYS.KEYREL.PRED _cualquiera_q_rel ] ]
+  """
+  --- 6.5.1. Universal Def/Indef. Quantifier (cualquier)
+  - cualquier + (otro) + Count Sg_N'
+  """.
 
-; - cualquiera: it may follow (modify) the noun, but then it needs an indef. article or a cardinal number
-; e.g. un hombre cualquiera, tres libros cualesquiera.
-aj_-_i-nprd-cualquiera_lex := aj_rel & a_intrans & norm-zero-arg & 
-  [ SYNSEM.LOCAL.CAT [ POSTHEAD +, 
+
+aj_-_i-nprd-cualquiera_lex := aj_rel & a_intrans & norm-zero-arg &
+  [ SYNSEM.LOCAL.CAT [ POSTHEAD +,
                        HEAD [ PRD non-prd,
                               MOD < [ LOCAL.CAT [ HEAD.KEYS.ALTKEY undef_quant_q_rel,
-                                                  VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY quant_rel ] > ] ] > ] ] ].
+                                                  VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY quant_rel ] > ] ] > ] ] ]
+  """
+  - cualquiera: it may follow (modify) the noun, but then it needs an indef. article or a cardinal number
+  e.g. un hombre cualquiera, tres libros cualesquiera.
+  """.
 
-; --- 6.5.2. Universal (or definite) Quantifiers 
-; !!! pueden cuantificar nombres contables, de sustancia o abstractos
-; - tienen caracter definido 
-; e.g. *hay [cada libro/ambos libros/todos los libros] en el estante
+; --- 6.5.2. Universal (or definite) Quantifiers  
+
 det_def_quant := det_quant &
   [ SYNSEM [ LOCAL.CAT.POSTHEAD -,
-             LKEYS.KEYREL.PRED univ_quant_q_rel ] ].
+             LKEYS.KEYREL.PRED univ_quant_q_rel ] ]
+  """
+  --- 6.5.2. Universal (or definite) Quantifiers
+  !!! pueden cuantificar nombres contables, de sustancia o abstractos
+  - tienen caracter definido
+  e.g. *hay [cada libro/ambos libros/todos los libros] en el estante
+  """.
 
-; - AMBOS + Pl_N'
+
 d_-_q-ambos_lex := det_nonque_nonrel &
-  [ SYNSEM basic_det_synsem &
-           [ LOCAL [ CAT [ POSTHEAD -,
-                           VAL.COMPS < > ],
-                     CONT [ HOOK.INDEX #index,
-                            HCONS <! [ LARG #larg ] !>,
-                            RELS <! relation, 
-                                    #altkey & 
-                                    [ LBL #larg,
-                                      PRED card_q_rel,
-                                      ARG1 #index,
-                                      CARG "2" ] !> ] ],
-             LKEYS [ KEYREL.PRED univ_quant_q_rel &_ambos_q_rel, 
-                     ALTKEYREL #altkey ] ] ].
+  [ SYNSEM basic_det_synsem & [ LOCAL [ CAT [ POSTHEAD -,
+                                              VAL.COMPS < > ],
+                                        CONT [ HOOK.INDEX #index,
+                                               HCONS <! [ LARG #larg ] !>,
+                                               RELS <! relation,
+                                                       #altkey & [ LBL #larg,
+                                                                   PRED card_q_rel,
+                                                                   ARG1 #index,
+                                                                   CARG "2" ] !> ] ],
+                                LKEYS [ KEYREL.PRED univ_quant_q_rel & _ambos_q_rel,
+                                        ALTKEYREL #altkey ] ] ]
+  """
+  - AMBOS + Pl_N'
+  """.
 
-; - SENDOS + Pl_N'
-d_-_q-sendos_lex := det_def_quant & 
+
+d_-_q-sendos_lex := det_def_quant &
   [ SYNSEM [ LOCAL [ AGR.PNG.PN plur,
                      CAT.VAL.SPEC < [ LOCAL.CAT.HEAD noun ] > ],
-             LKEYS.KEYREL.PRED _sendos_q_rel ] ].
+             LKEYS.KEYREL.PRED _sendos_q_rel ] ]
+  """
+  - SENDOS + Pl_N'
+  """.
 
-; - CADA + Sg_N'
-; e.g. íbamos al cine cada día
+
 d_-_q-cada_lex := det_def_quant &
   [ SYNSEM [ LOCAL [ AGR.PNG.PN sing,
                      CAT.VAL.SPEC < [ LOCAL.CAT.HEAD noun ] > ],
-             LKEYS.KEYREL.PRED _cada_q_rel ] ].
-
-; - (casi) + TODO + art_def;dem;poss + N'
-; e.g. (casi) todos los/estos/sus alumnos
-d_-_q-todo_lex := det_def_quant & 
-  [ SYNSEM specfd_det_synsem &
-           [ LOCAL.CAT.VAL [ SPR < [ OPT +,
-                                     LOCAL [ CAT.HEAD.KEYS.KEY _casi_x_deg_rel,
-                                             CONT.HOOK.LTOP #lbl ] ] >,
-                             SPEC < [ LOCAL.CAT.HEAD.KEYS.KEY post_todo_q_rel ] > ],
-             LKEYS [ KEYREL.PRED todo_def_q_rel,
-                     ALTKEYREL.LBL #lbl ] ] ].
-;                         SPEC < [ LOCAL.CAT.HEAD.KEYS.KEY def_q_rel ] > ],
-
-; e.g. (casi) todos estos/nosotros
-d_-_q-prn-todo_lex := det_def_quant & 
-  [ SYNSEM specfd_det_synsem &
-           [ LOCAL [ AGR.PNG.PN plur,
-                     CAT.VAL [ SPR < [ OPT +,
-                                       LOCAL [ CAT.HEAD.KEYS.KEY _casi_x_deg_rel,
-                                               CONT.HOOK.LTOP #lbl ] ] >,
-                               SPEC < [ LOCAL [ CAT.HEAD noun & [ KEYS.KEY non_modable_rel ],
-                                                CONT.HOOK.INDEX.PRONTYPE real_pron ] ] > ] ],
-             LKEYS [ KEYREL.PRED todo_def_q_rel,
-                     ALTKEYREL.LBL #lbl ] ] ]. 
+             LKEYS.KEYREL.PRED _cada_q_rel ] ]
+  """
+  - CADA + Sg_N'
+  e.g. íbamos al cine cada día
+  """.
 
 
-; --- 6.5.3. Non-universal (or indef.) Quantifiers
-; - forman SSNN indefinidos. e.g. había algunos/muchos/varios (otros) problemas
+d_-_q-todo_lex := det_def_quant &
+  [ SYNSEM specfd_det_synsem & [ LOCAL.CAT.VAL [ SPR < [ OPT +,
+                                                         LOCAL [ CAT.HEAD.KEYS.KEY _casi_x_deg_rel,
+                                                                 CONT.HOOK.LTOP #lbl ] ] >,
+                                                 SPEC < [ LOCAL.CAT.HEAD.KEYS.KEY post_todo_q_rel ] > ],
+                                 LKEYS [ KEYREL.PRED todo_def_q_rel,
+                                         ALTKEYREL.LBL #lbl ] ] ]
+  """
+  - (casi) + TODO + art_def;dem;poss + N'
+  e.g. (casi) todos los/estos/sus alumnos
+
+  ;                         SPEC < [ LOCAL.CAT.HEAD.KEYS.KEY def_q_rel ] > ],
+  
+  """.
+
+
+d_-_q-prn-todo_lex := det_def_quant &
+  [ SYNSEM specfd_det_synsem & [ LOCAL [ AGR.PNG.PN plur,
+                                         CAT.VAL [ SPR < [ OPT +,
+                                                           LOCAL [ CAT.HEAD.KEYS.KEY _casi_x_deg_rel,
+                                                                   CONT.HOOK.LTOP #lbl ] ] >,
+                                                   SPEC < [ LOCAL [ CAT.HEAD noun & [ KEYS.KEY non_modable_rel ],
+                                                                    CONT.HOOK.INDEX.PRONTYPE real_pron ] ] > ] ],
+                                 LKEYS [ KEYREL.PRED todo_def_q_rel,
+                                         ALTKEYREL.LBL #lbl ] ] ]
+  """
+  e.g. (casi) todos estos/nosotros
+  """.
+
+;--- 6.5.3. Non-universal (or indef.) Quantifiers
+  
 det_quant_indef := det_quant &
   [ SYNSEM [ LOCAL.CAT [ POSTHEAD -,
                          VAL.SPEC < [ LOCAL.CAT.HEAD noun ] > ],
-             LKEYS.KEYREL.PRED undef_quant_q_rel ] ].
+             LKEYS.KEYREL.PRED undef_quant_q_rel ] ]
+  """
+  --- 6.5.3. Non-universal (or indef.) Quantifiers
+  - forman SSNN indefinidos. e.g. había algunos/muchos/varios (otros) problemas
+  """.
 
+
+; --- 6.5.3.1. Cuantificadores de existencia
+
+d_qnt-indf_alg-ning := det_quant_indef &
+  [ SYNSEM.LOCAL.CAT.VAL.SPR < > ]
+"""
 ; --- 6.5.3.1. Cuantificadores de existencia
 ; - no pueden ser predicados, ni como atributos, ni como adjetivos pospuestos a otro 
 ; determinante. e.g. *sus problemas eran algunos/ningunos, *su alguna/ninguna compañera
@@ -8855,115 +8913,166 @@ det_quant_indef := det_quant &
 ; - alguno/ninguno always follow the noun (e.g. no tengo miedo alguno); 
 ; algún/ningún always precede the nouns; alguna/os/as, ninguna may precede 
 ; and follow the noun. 
-d_qnt-indf_alg-ning := det_quant_indef &
-  [ SYNSEM.LOCAL.CAT.VAL.SPR < > ]. 
+
+""". 
+
 
 d_-_q-algun_lex := d_qnt-indf_alg-ning &
-  [ SYNSEM.LKEYS.KEYREL.PRED _alguno_q_rel ]. 
+  [ SYNSEM.LKEYS.KEYREL.PRED _alguno_q_rel ]
+  """
+  
+  """.
+
 
 d_-_q-ningun_lex := d_qnt-indf_alg-ning &
-  [ SYNSEM.LKEYS.KEYREL.PRED _ninguno_q_rel ]. 
+  [ SYNSEM.LKEYS.KEYREL.PRED _ninguno_q_rel ]
+  """
+  
+  """.
 
-; b)- UNOS CUANTOS + (otro) Pl_N'
-; e.g. 
-d_-_q-cuantos_lex := det_quant_indef & 
-  [ SYNSEM specfd_det_synsem &
-           [ LOCAL [ AGR.PNG.PN plur,
-                     CAT.VAL.SPR < [ OPT -,
-                                     LOCAL.CAT.HEAD.KEYS.KEY art_indef_q_rel ] > ],
-             LKEYS.KEYREL.PRED _cuantos_q_rel ] ].
 
-; b)- TODO + (otro) Sg_N'
-; e.g. toda persona ajena a la empresa
-d_-_q-todo-sg_lex := det_quant & 
+d_-_q-cuantos_lex := det_quant_indef &
+  [ SYNSEM specfd_det_synsem & [ LOCAL [ AGR.PNG.PN plur,
+                                         CAT.VAL.SPR < [ OPT -,
+                                                         LOCAL.CAT.HEAD.KEYS.KEY art_indef_q_rel ] > ],
+                                 LKEYS.KEYREL.PRED _cuantos_q_rel ] ]
+  """
+  b)- UNOS CUANTOS + (otro) Pl_N'
+  e.g.
+  """.
+
+
+d_-_q-todo-sg_lex := det_quant &
   [ SYNSEM [ LOCAL [ AGR [ DIVISIBLE -,
                            PNG.PN sing ],
                      CAT [ POSTHEAD -,
                            VAL [ SPEC < [ LOCAL.CAT.HEAD noun ] >,
                                  SPR < > ] ] ],
-             LKEYS.KEYREL.PRED todo_undef_q_rel ] ].
+             LKEYS.KEYREL.PRED todo_undef_q_rel ] ]
+  """
+  b)- TODO + (otro) Sg_N'
+  e.g. toda persona ajena a la empresa
+  """.
 
-; --- 6.5.3.2. Cuantificadores evaluativos
-; pueden ser predicados, sea como atributo, sea como adjetivo pospuesto a otro 
-; determinante (i.e. se les aplicaran RLs que los convertiran en adj. indef.)
-; e.g. sus problemas eran muchos/demasiado, sus demasiados/muchos problemas.
-det_quant_eval := det_nonque_nonrel & 
-  [ SYNSEM basic_det_synsem &
-           [ LOCAL [ CAT [ POSTHEAD -,
-                           VAL [ SPEC < [ LOCAL.CAT.HEAD noun ] >,
-                                 COMPS < > ] ],
-                     CONT [ HOOK [ LTOP #ltop,
-                                   INDEX #index,
-                                   XARG #larg ], 
-                            HCONS <! qeq & [ HARG #harg,
-                                             LARG #larg ] !>,
-                            RELS <! [ LBL #ltop,
-                                      PRED undef_q_rel,
-                                      ARG0 #index,
-                                      RSTR #harg ],
-                                    #altkey & [ PRED card_or_undef_q_rel,
-                                                LBL #larg,
-                                                ARG1 #index ] !> ] ],
-             LKEYS.ALTKEYREL #altkey ] ].
+;--- 6.5.3.2. Cuantificadores evaluativos
 
-; a)- OTRO (mediante una regla léxica se convierte en adj. indef que modifica a un sust.
-; que tendrá un especificador con KEYS.KEY pre_otro_q_rel 
-; (el/este/su/algún/poco/bastante) + otro + N'
+det_quant_eval := det_nonque_nonrel &
+  [ SYNSEM basic_det_synsem & [ LOCAL [ CAT [ POSTHEAD -,
+                                              VAL [ SPEC < [ LOCAL.CAT.HEAD noun ] >,
+                                                    COMPS < > ] ],
+                                        CONT [ HOOK [ LTOP #ltop,
+                                                      INDEX #index,
+                                                      XARG #larg ],
+                                               HCONS <! qeq & [ HARG #harg,
+                                                                LARG #larg ] !>,
+                                               RELS <! [ LBL #ltop,
+                                                         PRED undef_q_rel,
+                                                         ARG0 #index,
+                                                         RSTR #harg ],
+                                                       #altkey & [ PRED card_or_undef_q_rel,
+                                                                   LBL #larg,
+                                                                   ARG1 #index ] !> ] ],
+                                LKEYS.ALTKEYREL #altkey ] ]
+  """
+  --- 6.5.3.2. Cuantificadores evaluativos
+  pueden ser predicados, sea como atributo, sea como adjetivo pospuesto a otro
+  determinante (i.e. se les aplicaran RLs que los convertiran en adj. indef.)
+  e.g. sus problemas eran muchos/demasiado, sus demasiados/muchos problemas.
+  """.
+
+
 d_-_q-otro_lex := det_quant_eval &
-   [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
-              LKEYS.ALTKEYREL.PRED _otro_q_rel ] ]. 
+  [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
+             LKEYS.ALTKEYREL.PRED _otro_q_rel ] ]
+  """
+  a)- OTRO (mediante una regla léxica se convierte en adj. indef que modifica a un sust.
+  que tendrá un especificador con KEYS.KEY pre_otro_q_rel
+  (el/este/su/algún/poco/bastante) + otro + N'
+  """.
 
-; b)- MUCHO/POCO (mediante una regla léxica se convierten en adj. indef que modifican a un 
-; sust. que tendrán un especificador con KEYS.KEY pre_much_or_poc_q_rel 
-; (el/este/su/otro) + poco/mucho + N'
-; lo mismo para los numerales cardinales
+
 d_-_q-mucho_lex := det_quant_eval &
-   [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
-              LKEYS.ALTKEYREL.PRED _mucho_q_rel ] ]. 
+  [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
+             LKEYS.ALTKEYREL.PRED _mucho_q_rel ] ]
+  """
+  b)- MUCHO/POCO (mediante una regla léxica se convierten en adj. indef que modifican a un
+  sust. que tendrán un especificador con KEYS.KEY pre_much_or_poc_q_rel
+  (el/este/su/otro) + poco/mucho + N'
+  lo mismo para los numerales cardinales
+  """.
 
-d_-_q-poco_lex := det_quant_eval & 
-   [ SYNSEM specfd_det_synsem &
-            [ LOCAL.CAT.VAL.SPR < [ OPT +,
-                                    LOCAL [ CAT.HEAD.KEYS.KEY _muy_x_deg_rel,
-                                            CONT.HOOK.LTOP #lbl ] ] >,
-              LKEYS [ ALTKEYREL.PRED _poco_q_rel,
-                      KEYREL.LBL #lbl ] ] ]. 
 
-; c)- Other
-; - mediante una regla léxica se convierten en adj. indef que modifican a un sust. que 
-; tendrán un especificador con KEYS.KEY def_q_rel
-; - co-ocurring with divisible nouns (plural/mass nouns)
-det_quant_eval_div := det_quant_eval & 
+d_-_q-poco_lex := det_quant_eval &
+  [ SYNSEM specfd_det_synsem & [ LOCAL.CAT.VAL.SPR < [ OPT +,
+                                                       LOCAL [ CAT.HEAD.KEYS.KEY _muy_x_deg_rel,
+                                                               CONT.HOOK.LTOP #lbl ] ] >,
+                                 LKEYS [ ALTKEYREL.PRED _poco_q_rel,
+                                         KEYREL.LBL #lbl ] ] ]
+  """
+  
+  """.
+
+
+det_quant_eval_div := det_quant_eval &
   [ SYNSEM [ LOCAL.AGR.DIVISIBLE +,
-             LKEYS.ALTKEYREL.PRED undef_q_rel ] ].
+             LKEYS.ALTKEYREL.PRED undef_q_rel ] ]
+  """
+  c)- Other
+  - mediante una regla léxica se convierten en adj. indef que modifican a un sust. que
+  tendrán un especificador con KEYS.KEY def_q_rel
+  - co-ocurring with divisible nouns (plural/mass nouns)
+  """.
 
-d_-_q-bastante_lex := det_quant_eval_div & 
-  [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
-             LKEYS.ALTKEYREL.PRED _bastante_q_rel ] ].
 
-d_-_q-demasiado_lex := det_quant_eval_div & 
+d_-_q-bastante_lex := det_quant_eval_div &
   [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
-             LKEYS.ALTKEYREL.PRED _demasiado_q_rel ] ].
+             LKEYS.ALTKEYREL.PRED _bastante_q_rel ] ]
+  """
+  
+  """.
 
-d_-_q-varios_lex := det_quant_eval_div & 
-  [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
-             LKEYS.ALTKEYREL.PRED _varios_q_rel ] ].
 
-d_-_q-multiples_lex := det_quant_eval_div & 
+d_-_q-demasiado_lex := det_quant_eval_div &
   [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
-             LKEYS.ALTKEYREL.PRED _multiples_q_rel ] ].
+             LKEYS.ALTKEYREL.PRED _demasiado_q_rel ] ]
+  """
+  
+  """.
 
-; DEMÁS puede aparecer sin artículo en el cierre de enumeración
-; e.g. vinieron mi padre, mi madre y demás familia.
-d_-_q-demas_lex := det_quant_eval_div & 
-  [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
-             LKEYS.ALTKEYREL.PRED _demás_q_rel ] ].
 
-; - the following ones are now encoded as adjectives
-; cierto, determinado, distinto, diverso, escaso, numeroso, raro, cuanto
-d_quant_eval := det_quant_eval & 
+d_-_q-varios_lex := det_quant_eval_div &
   [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
-             LKEYS.ALTKEYREL.PRED undef_q_rel ] ].
+             LKEYS.ALTKEYREL.PRED _varios_q_rel ] ]
+  """
+  
+  """.
+
+
+d_-_q-multiples_lex := det_quant_eval_div &
+  [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
+             LKEYS.ALTKEYREL.PRED _multiples_q_rel ] ]
+  """
+  
+  """.
+
+
+d_-_q-demas_lex := det_quant_eval_div &
+  [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
+             LKEYS.ALTKEYREL.PRED _demás_q_rel ] ]
+  """
+  DEMÁS puede aparecer sin artículo en el cierre de enumeración
+  e.g. vinieron mi padre, mi madre y demás familia.
+  """.
+
+
+d_quant_eval := det_quant_eval &
+  [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
+             LKEYS.ALTKEYREL.PRED undef_q_rel ] ]
+  """
+  - the following ones are now encoded as adjectives
+  cierto, determinado, distinto, diverso, escaso, numeroso, raro, cuanto
+  """.
+
 
 d_-_q-cierto_lex := det_quant_indef & 
   [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
@@ -9035,42 +9144,55 @@ basic_comp_det_synsem := basic_det_synsem &
     NON-LOCAL [ REL 0-dlist,
                 QUE 0-dlist ] ].
 
-; a)- (mucho/poco/bastante) + MÁS/MENOS + N' ( + que + N')
-; e.g. (muchos) más niños (que niñas)
+
 det_cmp_deg_spec := basic-comp-det-lex &
-  [ SYNSEM basic_comp_det_synsem &
-           [ LOCAL [ CAT [ HEAD adv & [ KEYS.KEY comp_degree_rel ],
-                           VAL [ SPEC < [ LOCAL.CAT.HEAD noun ] >,
-                                 SPR < [ LOCAL.CAT.HEAD.KEYS.KEY basic_quant_degree_rel ] >,
-                                 COMPS < [ LOCAL mrkd_np_local &
-                                                 [ CAT.HEAD.KEYS.KEY #ckey,  
-                                                   CONT.HOOK.INDEX #arg2 ] ] > ] ],
-                     CONT.RELS <! relation, 
-                                  relation, 
-                                  [ PRED compar, ARG2 #arg2 ] !> ],
-             LKEYS.--COMPKEY #ckey & _que_p_comp_rel ] ]. 
+  [ SYNSEM basic_comp_det_synsem & [ LOCAL [ CAT [ HEAD adv & [ KEYS.KEY comp_degree_rel ],
+                                                   VAL [ SPEC < [ LOCAL.CAT.HEAD noun ] >,
+                                                         SPR < [ LOCAL.CAT.HEAD.KEYS.KEY basic_quant_degree_rel ] >,
+                                                         COMPS < [ LOCAL mrkd_np_local & [ CAT.HEAD.KEYS.KEY #ckey,
+                                                                                           CONT.HOOK.INDEX #arg2 ] ] > ] ],
+                                             CONT.RELS <! relation,
+                                                          relation,
+                                                          [ PRED compar,
+                                                            ARG2 #arg2 ] !> ],
+                                     LKEYS.--COMPKEY #ckey & _que_p_comp_rel ] ]
+  """
+  a)- (mucho/poco/bastante) + MÁS/MENOS + N' ( + que + N')
+  e.g. (muchos) más niños (que niñas)
+  """.
+
 
 d_pp_cmp-mas_lex := det_cmp_deg_spec &
- [ SYNSEM.LKEYS.ALTKEYREL.PRED _más_q_rel ].
+  [ SYNSEM.LKEYS.ALTKEYREL.PRED _más_q_rel ]
+  """
+  
+  """.
+
 
 d_pp_cmp-menos_lex := det_cmp_deg_spec &
- [ SYNSEM.LKEYS.ALTKEYREL.PRED _menos_q_rel ].
+  [ SYNSEM.LKEYS.ALTKEYREL.PRED _menos_q_rel ]
+  """
+  
+  """.
 
-; b)- (casi) TANTO + N' ( + como N')
-; e.g. tantos niños (como niñas)
+
 d_pp_cmp-tanto_lex := basic-comp-det-lex &
-  [ SYNSEM basic_comp_det_synsem &
-           [ LOCAL [ CAT [ HEAD det & [ KEYS.KEY comp_degree_rel ],
-                           VAL [ SPEC < [ LOCAL.CAT.HEAD noun ] >,
-                                 SPR < [ LOCAL.CAT.HEAD.KEYS.KEY _casi_x_deg_rel ] >,
-                                 COMPS < [ LOCAL mrkd_np_local &
-                                                 [ CAT.HEAD.KEYS.KEY #ckey,  
-                                                   CONT.HOOK.INDEX #arg2 ] ] > ] ],
-                     CONT.RELS <! relation, 
-                                  relation, 
-                                  [ PRED comp_equal_rel, ARG2 #arg2 ] !> ],
-             LKEYS [ ALTKEYREL.PRED _tanto_q_rel,
-                     --COMPKEY #ckey & _como_p_comp_rel ] ] ].
+  [ SYNSEM basic_comp_det_synsem & [ LOCAL [ CAT [ HEAD det & [ KEYS.KEY comp_degree_rel ],
+                                                   VAL [ SPEC < [ LOCAL.CAT.HEAD noun ] >,
+                                                         SPR < [ LOCAL.CAT.HEAD.KEYS.KEY _casi_x_deg_rel ] >,
+                                                         COMPS < [ LOCAL mrkd_np_local & [ CAT.HEAD.KEYS.KEY #ckey,
+                                                                                           CONT.HOOK.INDEX #arg2 ] ] > ] ],
+                                             CONT.RELS <! relation,
+                                                          relation,
+                                                          [ PRED comp_equal_rel,
+                                                            ARG2 #arg2 ] !> ],
+                                     LKEYS [ ALTKEYREL.PRED _tanto_q_rel,
+                                             --COMPKEY #ckey & _como_p_comp_rel ] ] ]
+  """
+  b)- (casi) TANTO + N' ( + como N')
+  e.g. tantos niños (como niñas)
+  """.
+
 
 ; c)- (mucho/poco/bastante) + MÁS/MENOS + 'de' + Number
 ; e.g. más/menos de tres chicos
@@ -9111,7 +9233,15 @@ rel_det_synsem := basic_det_synsem &
 	          [ LIST < [ LTOP #hand,
 			     INDEX #ind ] > ],
     LKEYS [ KEYREL.PRED proper_q_rel,
-            ALTKEYREL #altkey ] ].
+            ALTKEYREL #altkey ] ]
+"""
+; a)-  "cuyo" (whose)
+; - can only appear in restrictive and non-restrictive RCs
+; - does nor agree with the antecedent (i.e. possessor), but the head of the NP (e.g. el autor cuya novela 
+; fue premiada estaba exultante)
+; - only appears sólo puede aparecer al frente de SN determinados. Cuando el elemento poseído es indeterminado,
+; es sustituido por un SP encabezado por "de"
+""".
 
 d_-_rel-poss_lex := det_rel & 
   [ SYNSEM rel_det_synsem ].
@@ -9121,42 +9251,47 @@ d_-_rel-poss_lex := det_rel &
  
 ; --- 6.8. Interrogative determiners
  
-; - qué (what) (e.g. ¿qué libros has leído?)
-d_-_wh-que_lex := det_que & 
-  [ SYNSEM basic_det_synsem &
-           [ LOCAL [ CAT.VAL [ SPEC < [ LOCAL.CAT.HEAD noun ] >,
-                               SPR < >,
-                               COMPS < > ],
-                     CONT [ RELS <! quant-relation !>,
-                            HCONS <! qeq !> ] ],
-             LKEYS.KEYREL.PRED que_q_rel ] ]. 
 
-; - cuál (which) (e.g. ¿cuáles poemas de Neruda conoces?)
-d_-_wh-cual_lex := det_que & 
-  [ SYNSEM basic_det_synsem &
-           [ LOCAL [ CAT.VAL [ SPEC < [ LOCAL.CAT.HEAD noun ] >,
-                               SPR < >,
-                               COMPS < > ],
-                     CONT [ RELS <! quant-relation !>,
-                            HCONS <! qeq !> ] ],
-             LKEYS.KEYREL.PRED que_q_rel ] ]. 
- 
-; - cuánto + Mass/Pl_N' (how much/many) (e.g. ¿cuánto dinero te dieron?)
-d_-_wh-cuanto_lex := det_que & 
-  [ SYNSEM basic_det_synsem &
-           [ LOCAL [ AGR.DIVISIBLE +,
-                     CAT.VAL [ SPEC < [ LOCAL.CAT.HEAD noun ] >,
-                               SPR < >,
-                               COMPS < > ],
-                     CONT [ HOOK [ INDEX #index,
-                                   XARG #larg ], 
-                            RELS <! quant-relation & 
-                                    [ PRED undef_q_rel ],
-                                    #altkey & 
-                                    [ LBL #larg,
-                                      ARG1 #index ] !>,
-			    HCONS <! qeq !> ] ],
-             LKEYS.ALTKEYREL #altkey ] ].
+d_-_wh-que_lex := det_que &
+  [ SYNSEM basic_det_synsem & [ LOCAL [ CAT.VAL [ SPEC < [ LOCAL.CAT.HEAD noun ] >,
+                                                  SPR < >,
+                                                  COMPS < > ],
+                                        CONT [ RELS <! quant-relation !>,
+                                               HCONS <! qeq !> ] ],
+                                LKEYS.KEYREL.PRED que_q_rel ] ]
+  """
+  - qué (what) (e.g. ¿qué libros has leído?)
+  """.
+
+
+d_-_wh-cual_lex := det_que &
+  [ SYNSEM basic_det_synsem & [ LOCAL [ CAT.VAL [ SPEC < [ LOCAL.CAT.HEAD noun ] >,
+                                                  SPR < >,
+                                                  COMPS < > ],
+                                        CONT [ RELS <! quant-relation !>,
+                                               HCONS <! qeq !> ] ],
+                                LKEYS.KEYREL.PRED que_q_rel ] ]
+  """
+  - cuál (which) (e.g. ¿cuáles poemas de Neruda conoces?)
+  """.
+
+
+d_-_wh-cuanto_lex := det_que &
+  [ SYNSEM basic_det_synsem & [ LOCAL [ AGR.DIVISIBLE +,
+                                        CAT.VAL [ SPEC < [ LOCAL.CAT.HEAD noun ] >,
+                                                  SPR < >,
+                                                  COMPS < > ],
+                                        CONT [ HOOK [ INDEX #index,
+                                                      XARG #larg ],
+                                               RELS <! quant-relation & [ PRED undef_q_rel ],
+                                                       #altkey & [ LBL #larg,
+                                                                   ARG1 #index ] !>,
+                                               HCONS <! qeq !> ] ],
+                                LKEYS.ALTKEYREL #altkey ] ]
+  """
+  - cuánto + Mass/Pl_N' (how much/many) (e.g. ¿cuánto dinero te dieron?)
+  """.
+
 
 
 ; --- 6.9. Exclamative determiners 
@@ -9171,7 +9306,11 @@ det_excl := det_nonque_nonrel_nonposs &
                                COMPS < > ] ],
              LKEYS [ KEYREL [ PRED excl_q_rel,
                               LBL #lbl ],
-                     ALTKEYREL.LBL #lbl ] ] ].
+                     ALTKEYREL.LBL #lbl ] ] ]
+"""
+; 'qué/cuánto/cuál' + Sg/Pl_N'
+; e.g. 
+""".
 
 d_-_excl-que_lex := det_excl &
  [ SYNSEM.LKEYS.KEYREL.PRED _que_q_rel ].
@@ -9197,48 +9336,56 @@ d_-_excl-cual_lex := det_excl &
 
 ; --- 7.1. Cardinals (Indef. Quantifiers/Pronoun)
 
-; a)- determiners / indef. adjectives (Z)
-; !!! num + sust pueden formar una unidad inseparable, e.g. esas tristes dos pesetas, 
-; esas famosas tres tardes con Teresa
-; e.g. (los) tres hermanos
-d_-_q-nu-card_lex := det_quant_eval &
-  [ SYNSEM [ LOCAL [ AGR.PNG.PN 3pl, 
-                     CAT.VAL.SPR < > ],
-             LKEYS.ALTKEYREL.PRED card_q_rel ] ].
 
-; b)- pronouns (Z)
-; e.g. dame dos (de ésos/de esos libros), dos (de nosotros) comeremos sopa.
-;n_pp_pr-part-nu-card_lex := partitive-pron-lex &
-;  [ SYNSEM norm_partitive_synsem &
-;           [ LKEYS.ALTKEYREL.PRED card_q_rel ] ].
+d_-_q-nu-card_lex := det_quant_eval &
+  [ SYNSEM [ LOCAL [ AGR.PNG.PN 3pl,
+                     CAT.VAL.SPR < > ],
+             LKEYS.ALTKEYREL.PRED card_q_rel ] ]
+  """
+  a)- determiners / indef. adjectives (Z)
+  !!! num + sust pueden formar una unidad inseparable, e.g. esas tristes dos pesetas,
+  esas famosas tres tardes con Teresa
+  e.g. (los) tres hermanos
+  """.
+
 
 n_pp_pr-part-nu-card_lex := partitive-pron-lex &
-  [ SYNSEM norm-basic-partitive-pron-synsem &
-           [ LOCAL [ AGR.PNG.GEN #gender,
-                     CAT.VAL.COMPS < [ OPT -, 
-                                       LOCAL.CONT.HOOK.INDEX.PNG [ PN plur, 
-                                                                   GEN #gender ] ] > ], 
-             NON-LOCAL.QUE 0-dlist,
-             LKEYS.ALTKEYREL.PRED card_q_rel ] ].
+  [ SYNSEM norm-basic-partitive-pron-synsem & [ LOCAL [ AGR.PNG.GEN #gender,
+                                                        CAT.VAL.COMPS < [ OPT -,
+                                                                          LOCAL.CONT.HOOK.INDEX.PNG [ PN plur,
+                                                                                                      GEN #gender ] ] > ],
+                                                NON-LOCAL.QUE 0-dlist,
+                                                LKEYS.ALTKEYREL.PRED card_q_rel ] ]
+  """
+   b)- pronouns (Z)
+   e.g. dame dos (de ésos/de esos libros), dos (de nosotros) comeremos sopa.
+  n_pp_pr-part-nu-card_lex := partitive-pron-lex &
+    [ SYNSEM norm_partitive_synsem &
+             [ LKEYS.ALTKEYREL.PRED card_q_rel ] ].
+  """.
 
 
-; c)- pseudo-partitive pronouns (Zd): decena, docena, centenar, millar, millón
-; e.g. compró tres docenas (de (*los) huevos)
-n_pp_pr-psd-part-nu-card_lex := basic-nominal-lex & 
-  [ SYNSEM norm-basic-partitive-pron-synsem & 
-           [ LOCAL [ AGR #agr,
-                     CAT.VAL [ SPR #spr & < [ OPT + ] >,
-                               COMPS #comps & < [ OPT -, 
-                                                  LOCAL [ CAT.HEAD.KEYS.ALT2KEY udef_q_rel,
-                                                          CONT.HOOK.INDEX.DIVISIBLE + ] ] > ],
-                     CONT.HOOK.INDEX #agr ] ],
-    ARG-ST < #spr. #comps > ].
+n_pp_pr-psd-part-nu-card_lex := basic-nominal-lex &
+  [ SYNSEM norm-basic-partitive-pron-synsem & [ LOCAL [ AGR #agr,
+                                                        CAT.VAL [ SPR #spr & < [ OPT + ] >,
+                                                                  COMPS #comps & < [ OPT -,
+                                                                                     LOCAL [ CAT.HEAD.KEYS.ALT2KEY udef_q_rel,
+                                                                                             CONT.HOOK.INDEX.DIVISIBLE + ] ] > ],
+                                                        CONT.HOOK.INDEX #agr ] ],
+    ARG-ST < #spr . #comps > ]
+  """
+  c)- pseudo-partitive pronouns (Zd): decena, docena, centenar, millar, millón
+  e.g. compró tres docenas (de (*los) huevos)
+  """.
 
-; d)- pseudo-partitive nouns; e.g. decena, veintena, treintena, 
-n_pp_psd-part-nu-card_lex := n_quant & 
+
+n_pp_psd-part-nu-card_lex := n_quant &
   [ ALTS.PASS -,
-    SYNSEM n_group-or-pseudopart_synsem &
-           [ LOCAL.CAT.VAL.COMPS < [ OPT + ] > ] ].
+    SYNSEM n_group-or-pseudopart_synsem & [ LOCAL.CAT.VAL.COMPS < [ OPT + ] > ] ]
+  """
+  d)- pseudo-partitive nouns; e.g. decena, veintena, treintena,
+  """.
+
 
 
 ; --- 7.2. Ordinals (Adjectives)
