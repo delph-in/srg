@@ -7525,27 +7525,39 @@ av_-_pr-menos_lex := pronominal-lex & norm-zero-arg &
 
 ; --- 4.4.2. Deictic adverbs 
 
-; a)- place (aquí, allí, ahí, acá, allá, acullá, aquende, allende)
 av_-_deic-place_lex := pronominal-lex & norm-zero-arg &
   [ SYNSEM pron_adverb_synsem &
            [ LOCAL [ CAT [ HEAD.KEYS.KEY place_n_rel,
                            VAL.SPR < > ],
-                     CONT.HOOK.INDEX.SORT loc-mod ] ] ].
+                     CONT.HOOK.INDEX.SORT loc-mod ] ] ]
+"""
+; --- 4.4.2. Deictic adverbs 
+; a)- place (aquí, allí, ahí, acá, allá, acullá, aquende, allende)
 
-; b)- temporal (ahora, entonces, hoy, ayer, anteayer, mañana, anoche, anteanoche, anteayer, 
-; anteanteayer, antes de ayer, antes de anoche, pasado mañana, hogaño, antaño) 
+""".
+
 av_-_deic-tmp_lex := pronominal-lex & norm-zero-arg &
   [ SYNSEM pron_adverb_synsem &
            [ LOCAL [ CAT [ HEAD.KEYS.KEY time_n_rel,
                            VAL.SPR < > ],
-                     CONT.HOOK.INDEX.SORT tmp ] ] ].
+                     CONT.HOOK.INDEX.SORT tmp ] ] ]
+"""
+; --- 4.4.2. Deictic adverbs 
+; b)- temporal (ahora, entonces, hoy, ayer, anteayer, mañana, anoche, anteanoche, anteayer, 
+; anteanteayer, antes de ayer, antes de anoche, pasado mañana, hogaño, antaño) 
 
-; c)- manner (así)
+""".
+
 av_-_deic-mann_lex := pronominal-lex & norm-zero-arg &
   [ SYNSEM pron_adverb_synsem &
            [ LOCAL [ CAT [ HEAD.KEYS.KEY manner_n_rel,
                            VAL.SPR < > ],
-                     CONT.HOOK.INDEX.SORT manner-mod ] ] ].
+                     CONT.HOOK.INDEX.SORT manner-mod ] ] ]
+"""
+; --- 4.4.2. Deictic adverbs 
+; c)- manner (así)
+
+""".
 
 ; d)- quant (cuanto)
 ; av_-_deic-qnt_lex := pronominal-lex & norm-zero-arg &
@@ -7556,7 +7568,7 @@ av_-_deic-mann_lex := pronominal-lex & norm-zero-arg &
 
 
 ; --- 4.4.3. Relative adverbs (como, (a)donde, cuando) 
-; pueden aparecer en rel. especificativas, explicativas, yuxtapuestas, predicativas y libres.
+
 rel_loc_adverb_synsem := lex-synsem & 
   [ LOCAL [ AGR ref-ind & [ PNG.PN 3sg ],
             CAT [ HC-LIGHT -,
@@ -7574,7 +7586,12 @@ rel_loc_adverb_synsem := lex-synsem &
     NON-LOCAL [ REL 1-dlist & [ LIST < [ INDEX #objind ] > ],
                 SLASH 0-dlist,
                 QUE 0-dlist ],
-    LKEYS.KEYREL.LBL #khand ].
+    LKEYS.KEYREL.LBL #khand ]
+"""
+; --- 4.4.3. Relative adverbs (como, (a)donde, cuando)
+; pueden aparecer en rel. especificativas, explicativas, yuxtapuestas, predicativas y libres.
+
+""".
 
 rel_adverb_synsem := basic_np_adv_synsem & 
   [ LOCAL [ CAT [ POSTHEAD -,
@@ -7618,68 +7635,81 @@ free_rel_adverb_synsem := lex-synsem &
             ALTKEYREL #key,
             ALT2KEYREL #alt2key ] ].
 
-; a)- "donde" (adonde)
-; - expresses location (with or without the preposition 'en'), and when 
-; co-ocurring with prepositions, denotes todas las gamas de movimiento.
-; - admite antecedentes explícitos: sustantivos locativos (la casa donde vivía), 
-; PP locativo (fue hallada en la casa de Comillas, donde vivió en su juventud), 
-; adverbios pronominales de lugar (allá donde estés tú estaré yo).
-; in fact rel_loc_adverb_synsem
-av_-_rel-place_lex := pronominal-lex & 
-  [ SYNSEM rel_adverb_synsem & 
-           [ LOCAL [ CAT.HEAD.KEYS.KEY state_loc_rel,
-                     CONT.HOOK.INDEX.SORT loc-mod ],
-             NON-LOCAL.REL 1-dlist & [ LIST < [ INDEX.SORT loc-mod ] > ] ] ].
 
-; e.g. [donde vive tu hermano] es demasiado lejos para ir de vacaciones (NPs)
+av_-_rel-place_lex := pronominal-lex &
+  [ SYNSEM rel_adverb_synsem & [ LOCAL [ CAT.HEAD.KEYS.KEY state_loc_rel,
+                                         CONT.HOOK.INDEX.SORT loc-mod ],
+                                 NON-LOCAL.REL 1-dlist & [ LIST < [ INDEX.SORT loc-mod ] > ] ] ]
+  """
+  a)- "donde" (adonde)
+  - expresses location (with or without the preposition 'en'), and when
+  co-ocurring with prepositions, denotes todas las gamas de movimiento.
+  - admite antecedentes explícitos: sustantivos locativos (la casa donde vivía),
+  PP locativo (fue hallada en la casa de Comillas, donde vivió en su juventud),
+  adverbios pronominales de lugar (allá donde estés tú estaré yo).
+  in fact rel_loc_adverb_synsem
+  """.
+
+
 av_-_free-rel-place_lex := free_rel_pro_lex &
-  [ SYNSEM free_rel_adverb_synsem & 
-           [ LOCAL.CONT.HOOK.INDEX.SORT loc-mod,
-             LKEYS [ ALT2KEYREL.PRED unspec_loc_rel,
-                     KEYREL.PRED state_loc_rel ] ] ].
+  [ SYNSEM free_rel_adverb_synsem & [ LOCAL.CONT.HOOK.INDEX.SORT loc-mod,
+                                      LKEYS [ ALT2KEYREL.PRED unspec_loc_rel,
+                                              KEYREL.PRED state_loc_rel ] ] ]
+  """
+  e.g. [donde vive tu hermano] es demasiado lejos para ir de vacaciones (NPs)
+  """.
 
-; b)- cuando 
-; - expresses time. Admite antecedentes explícitos: sustantivos temporales
-; (recuerdo el día cuando dimitió), adverbio pronominal, pero sólo en cláusulas
-; explicativas (hoy, cuando consigas el permiso, podrás volver).
-av_-_rel-tmp_lex := pronominal-lex & 
-  [ SYNSEM rel_adverb_synsem & 
-           [ LOCAL [ CAT.HEAD.KEYS.KEY time_n_rel, 
-                     CONT.HOOK.INDEX.SORT tmp ],
-             NON-LOCAL.REL 1-dlist & [ LIST < [ INDEX.SORT mod ] > ] ] ].
 
-; - en función de complemento directo (recuerdo cuando vino), complemento 
-; predicativo de OD (la ví cuando salía del metro). Tambén puede aparecer como
-; complemento de un nombre (el diploma de cuando te graduaste), de un adjetivo 
-; (preparado para cuando te vayas), de un adverbio (además de cuando hizo la 
-; mili, feu allí un par de veces) y de preposición (para cuando te vayas, ya habrá 
-; llegado el buen tiempo). También en función de adverbiales (cuando consigas el 
-; permiso, podrás volver)
+av_-_rel-tmp_lex := pronominal-lex &
+  [ SYNSEM rel_adverb_synsem & [ LOCAL [ CAT.HEAD.KEYS.KEY time_n_rel,
+                                         CONT.HOOK.INDEX.SORT tmp ],
+                                 NON-LOCAL.REL 1-dlist & [ LIST < [ INDEX.SORT mod ] > ] ] ]
+  """
+  b)- cuando
+  - expresses time. Admite antecedentes explícitos: sustantivos temporales
+  (recuerdo el día cuando dimitió), adverbio pronominal, pero sólo en cláusulas
+  explicativas (hoy, cuando consigas el permiso, podrás volver).
+  """.
+
+
 av_-_free-rel-tmp_lex := free_rel_pro_lex &
-  [ SYNSEM free_rel_adverb_synsem & 
-           [ LOCAL.CONT.HOOK.INDEX.SORT mod,
-             LKEYS [ ALT2KEYREL.PRED unspec_loc_rel,
-                     KEYREL.PRED prep_mod_rel ] ] ].
+  [ SYNSEM free_rel_adverb_synsem & [ LOCAL.CONT.HOOK.INDEX.SORT mod,
+                                      LKEYS [ ALT2KEYREL.PRED unspec_loc_rel,
+                                              KEYREL.PRED prep_mod_rel ] ] ]
+  """
+  - en función de complemento directo (recuerdo cuando vino), complemento
+  predicativo de OD (la ví cuando salía del metro). Tambén puede aparecer como
+  complemento de un nombre (el diploma de cuando te graduaste), de un adjetivo
+  (preparado para cuando te vayas), de un adverbio (además de cuando hizo la
+  mili, feu allí un par de veces) y de preposición (para cuando te vayas, ya habrá
+  llegado el buen tiempo). También en función de adverbiales (cuando consigas el
+  permiso, podrás volver)
+  """.
 
-; c)- como
-; - los únicos sustantivos que puede modificar son propio, manera y forma 
-; (la manera como contestó al periodista), it can also modify the adverb 
-; 'así' (lo hice así, como me había recomendado), and manner adverb/PP 
-; (lo hice distretamente/con precaución, como me había recomendado). 
-; También puede reproducir entidades predicativas (vivía sola, como 
-; siempre había deseado) 
-av_-_rel-mann_lex := pronominal-lex & 
-  [ SYNSEM rel_adverb_synsem & 
-           [ LOCAL.CONT.HOOK.INDEX.SORT manner-mod,
-             NON-LOCAL.REL 1-dlist & [ LIST < [ INDEX.SORT mod ] > ] ] ].
 
-; - en función de atributo (será como tú digas) y de complemento 
-; predicativo (los niños dejaron la sala como ya os podéis imaginar)
+av_-_rel-mann_lex := pronominal-lex &
+  [ SYNSEM rel_adverb_synsem & [ LOCAL.CONT.HOOK.INDEX.SORT manner-mod,
+                                 NON-LOCAL.REL 1-dlist & [ LIST < [ INDEX.SORT mod ] > ] ] ]
+  """
+  c)- como
+  - los únicos sustantivos que puede modificar son propio, manera y forma
+  (la manera como contestó al periodista), it can also modify the adverb
+  'así' (lo hice así, como me había recomendado), and manner adverb/PP
+  (lo hice distretamente/con precaución, como me había recomendado).
+  También puede reproducir entidades predicativas (vivía sola, como
+  siempre había deseado)
+  """.
+
+
 av_-_free-rel-mann_lex := free_rel_pro_lex &
-  [ SYNSEM free_rel_adverb_synsem & 
-           [ LOCAL.CONT.HOOK.INDEX.SORT manner-mod,
-             LKEYS [ ALT2KEYREL.PRED unspec_manner_rel,
-                     KEYREL.PRED prep_mod_rel ] ] ].
+  [ SYNSEM free_rel_adverb_synsem & [ LOCAL.CONT.HOOK.INDEX.SORT manner-mod,
+                                      LKEYS [ ALT2KEYREL.PRED unspec_manner_rel,
+                                              KEYREL.PRED prep_mod_rel ] ] ]
+  """
+  - en función de atributo (será como tú digas) y de complemento
+  predicativo (los niños dejaron la sala como ya os podéis imaginar)
+  """.
+
 
 
 ; --- 4.4.4. Interrogative adverbs (cómo, (a)dónde, cuándo)
