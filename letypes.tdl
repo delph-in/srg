@@ -7409,92 +7409,118 @@ quant_pron_adverb_synsem := pron_adverb_synsem &
 
 ; --- 4.4.1. Quant pronominal adverbs
 
-; e.g. llovió mucho
 av_-_pr-mucho_lex := pronominal-lex & norm-zero-arg &
   [ SYNSEM quant_pron_adverb_synsem & 
            [ LOCAL [ CAT.VAL.SPR < >,
                      CONT.HOOK.INDEX.PNG.PN 3sg ],
-             LKEYS.ALT2KEYREL.PRED "_mucho_x_rel" ] ].
+             LKEYS.ALT2KEYREL.PRED "_mucho_x_rel" ] ]
+"""
+; --- 4.4.1. Quant pronominal adverbs
+; e.g. llovió mucho
+""".
 
-; e.g. llovió bastante
+
 av_-_pr-bastante_lex := pronominal-lex & norm-zero-arg &
-  [ SYNSEM quant_pron_adverb_synsem & 
-           [ LOCAL [ CAT.VAL.SPR < >,
-                     CONT.HOOK.INDEX.PNG.PN 3sg ],
-             LKEYS.ALT2KEYREL.PRED "_bastante_x_rel" ] ].
+  [ SYNSEM quant_pron_adverb_synsem & [ LOCAL [ CAT.VAL.SPR < >,
+                                                CONT.HOOK.INDEX.PNG.PN 3sg ],
+                                        LKEYS.ALT2KEYREL.PRED "_bastante_x_rel" ] ]
+  """
+  e.g. llovió bastante
+  """.
 
-; e.g. llovió demasiado
+
 av_-_pr-demasiado_lex := pronominal-lex & norm-zero-arg &
-  [ SYNSEM quant_pron_adverb_synsem & 
-           [ LOCAL [ CAT.VAL.SPR < >,
-                     CONT.HOOK.INDEX.PNG.PN 3sg ],
-             LKEYS.ALT2KEYREL.PRED "_demasiado_x_rel" ] ].
+  [ SYNSEM quant_pron_adverb_synsem & [ LOCAL [ CAT.VAL.SPR < >,
+                                                CONT.HOOK.INDEX.PNG.PN 3sg ],
+                                        LKEYS.ALT2KEYREL.PRED "_demasiado_x_rel" ] ]
+  """
+  e.g. llovió demasiado
+  """.
 
-; e.g. llovió tanto
+
 av_-_pr-tanto_lex := pronominal-lex & norm-zero-arg &
-  [ SYNSEM quant_pron_adverb_synsem & 
-           [ LOCAL [ CAT.VAL.SPR < >,
-                     CONT.HOOK.INDEX.PNG.PN 3sg ],
-             LKEYS.ALT2KEYREL.PRED "_tanto_x_rel" ] ].
+  [ SYNSEM quant_pron_adverb_synsem & [ LOCAL [ CAT.VAL.SPR < >,
+                                                CONT.HOOK.INDEX.PNG.PN 3sg ],
+                                        LKEYS.ALT2KEYREL.PRED "_tanto_x_rel" ] ]
+  """
+  e.g. llovió tanto
+  """.
 
-; e.g. llovió algo
+
 av_-_pr-algo_lex := pronominal-lex & norm-zero-arg &
-  [ SYNSEM quant_pron_adverb_synsem & 
-           [ LOCAL [ CAT.VAL.SPR < >,
-                     CONT.HOOK.INDEX.PNG.PN 3sg ],
-             LKEYS.ALT2KEYREL.PRED "_algo_x_rel" ] ].
+  [ SYNSEM quant_pron_adverb_synsem & [ LOCAL [ CAT.VAL.SPR < >,
+                                                CONT.HOOK.INDEX.PNG.PN 3sg ],
+                                        LKEYS.ALT2KEYREL.PRED "_algo_x_rel" ] ]
+  """
+  e.g. llovió algo
+  """.
 
-; e.g. llovió suficiente
+
 av_-_pr-suficiente_lex := pronominal-lex & norm-zero-arg &
-  [ SYNSEM quant_pron_adverb_synsem & 
-           [ LOCAL [ CAT.VAL.SPR < >,
-                     CONT.HOOK.INDEX.PNG.PN 3sg ],
-             LKEYS.ALT2KEYREL.PRED "_suficiente_x_rel" ] ].
+  [ SYNSEM quant_pron_adverb_synsem & [ LOCAL [ CAT.VAL.SPR < >,
+                                                CONT.HOOK.INDEX.PNG.PN 3sg ],
+                                        LKEYS.ALT2KEYREL.PRED "_suficiente_x_rel" ] ]
+  """
+  e.g. llovió suficiente
+  """.
 
-; e.g. aumentaron el 20%
+
 av_-_pr-mea_lex := pronominal-lex & norm-zero-arg &
-  [ SYNSEM quant_pron_adverb_synsem & 
-           [ LOCAL [ CAT.VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY quant_or_deg_rel ] >,
-                     CONT.HOOK.INDEX.PNG.PN 3sg ] ] ].
+  [ SYNSEM quant_pron_adverb_synsem & [ LOCAL [ CAT.VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY quant_or_deg_rel ] >,
+                                                CONT.HOOK.INDEX.PNG.PN 3sg ] ] ]
+  """
+  e.g. aumentaron el 20%
+  """.
 
-; e.g. llovió un poco
+
 av_-_pr-un-poco_lex := pronominal-lex & norm-zero-arg &
-  [ SYNSEM quant_pron_adverb_synsem & 
-           [ LOCAL [ CAT.VAL.SPR < >,
-                     CONT.HOOK.INDEX.PNG.PN 3sg ],
-             LKEYS.ALT2KEYREL.PRED "_un_poco_x_rel" ] ].
+  [ SYNSEM quant_pron_adverb_synsem & [ LOCAL [ CAT.VAL.SPR < >,
+                                                CONT.HOOK.INDEX.PNG.PN 3sg ],
+                                        LKEYS.ALT2KEYREL.PRED "_un_poco_x_rel" ] ]
+  """
+  e.g. llovió un poco
+  """.
 
-; e.g. llovió (casi) nada
+
 av_-_pr-nada_lex := pronominal-lex & norm-zero-arg &
-  [ SYNSEM quant_pron_adverb_synsem & 
-           [ LOCAL [ CAT.VAL.SPR < [ LOCAL [ CAT.HEAD.KEYS.KEY _casi_x_deg_rel,
-                                             CONT.HOOK.XARG #index ] ] >,
-                     CONT.HOOK.INDEX #index & [ PNG.PN 3sg ] ],
-             LKEYS.ALT2KEYREL.PRED "_nada_x_rel" ] ].
+  [ SYNSEM quant_pron_adverb_synsem & [ LOCAL [ CAT.VAL.SPR < [ LOCAL [ CAT.HEAD.KEYS.KEY _casi_x_deg_rel,
+                                                                        CONT.HOOK.XARG #index ] ] >,
+                                                CONT.HOOK.INDEX #index & [ PNG.PN 3sg ] ],
+                                        LKEYS.ALT2KEYREL.PRED "_nada_x_rel" ] ]
+  """
+  e.g. llovió (casi) nada
+  """.
 
-; e.g. llovió (bien/muy/bastante/...) poco
+
 av_-_pr-poco_lex := pronominal-lex & norm-zero-arg &
-  [ SYNSEM quant_pron_adverb_synsem & 
-           [ LOCAL [ CAT.VAL.SPR < [ LOCAL [ CAT.HEAD.KEYS.KEY quant_degree_rel,
-                                             CONT.HOOK.XARG #index ] ] >,
-                     CONT.HOOK.INDEX #index & [ PNG.PN 3sg ] ],
-             LKEYS.ALT2KEYREL.PRED "_poco_x_rel" ] ].
+  [ SYNSEM quant_pron_adverb_synsem & [ LOCAL [ CAT.VAL.SPR < [ LOCAL [ CAT.HEAD.KEYS.KEY quant_degree_rel,
+                                                                        CONT.HOOK.XARG #index ] ] >,
+                                                CONT.HOOK.INDEX #index & [ PNG.PN 3sg ] ],
+                                        LKEYS.ALT2KEYREL.PRED "_poco_x_rel" ] ]
+  """
+  e.g. llovió (bien/muy/bastante/...) poco
+  """.
 
-; e.g. llovió (mucho/poco/bastante/...) más
+
 av_-_pr-más_lex := pronominal-lex & norm-zero-arg &
-  [ SYNSEM quant_pron_adverb_synsem & 
-           [ LOCAL [ CAT.VAL.SPR < [ LOCAL [ CAT.HEAD.KEYS.KEY quant_degree_rel,
-                                             CONT.HOOK.XARG #index ] ] >,
-                     CONT.HOOK.INDEX #index & [ PNG.PN 3sg ] ],
-             LKEYS.ALT2KEYREL.PRED "_más_x_rel" ] ].
+  [ SYNSEM quant_pron_adverb_synsem & [ LOCAL [ CAT.VAL.SPR < [ LOCAL [ CAT.HEAD.KEYS.KEY quant_degree_rel,
+                                                                        CONT.HOOK.XARG #index ] ] >,
+                                                CONT.HOOK.INDEX #index & [ PNG.PN 3sg ] ],
+                                        LKEYS.ALT2KEYREL.PRED "_más_x_rel" ] ]
+  """
+  e.g. llovió (mucho/poco/bastante/...) más
+  """.
 
-; e.g. llovió (mucho/poco/bastante/...) menos
+
 av_-_pr-menos_lex := pronominal-lex & norm-zero-arg &
-  [ SYNSEM quant_pron_adverb_synsem & 
-           [ LOCAL [ CAT.VAL.SPR < [ LOCAL [ CAT.HEAD.KEYS.KEY quant_degree_rel,
-                                             CONT.HOOK.XARG #index ] ] >,
-                     CONT.HOOK.INDEX #index & [ PNG.PN 3sg ] ],
-             LKEYS.ALT2KEYREL.PRED "_menos_x_rel" ] ].
+  [ SYNSEM quant_pron_adverb_synsem & [ LOCAL [ CAT.VAL.SPR < [ LOCAL [ CAT.HEAD.KEYS.KEY quant_degree_rel,
+                                                                        CONT.HOOK.XARG #index ] ] >,
+                                                CONT.HOOK.INDEX #index & [ PNG.PN 3sg ] ],
+                                        LKEYS.ALT2KEYREL.PRED "_menos_x_rel" ] ]
+  """
+  e.g. llovió (mucho/poco/bastante/...) menos
+  """.
+
 
 
 ; --- 4.4.2. Deictic adverbs 
