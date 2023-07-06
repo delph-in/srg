@@ -103,7 +103,7 @@ def convert_all_comments_to_docstrings(tdl_file):
         if event == 'LineComment':
             cur_comment = cur_comment + obj + '\n'
         if event == 'TypeDefinition':
-            ds = cur_comment.strip('\n')
+            ds = obj.docstring + '\n' + cur_comment.strip('\n') if obj.docstring else cur_comment.strip('\n')
             conj = copy.deepcopy(obj.conjunction)
             new_type = tdl.TypeDefinition(obj.identifier, conj, ds)
             output.append((event, new_type, lineno))
