@@ -6254,8 +6254,6 @@ n_pp_pr-wh-cuanto_lex := pron_wh_part_lex &
   """.
 
 
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ; --- 3. Adjectives
@@ -6358,10 +6356,14 @@ modfied-adj-lex := basic-adjective-lex &
 
 
 ; -- subcat types
+
 a_intrans := basic-adjective-lex & 
   [ SYNSEM.LOCAL [ CAT [ HEAD.KEYS.KEY adj_rel,
                          VAL.COMPS < > ], 
-                   CONT.RELS <! adj-arg1-relation !> ] ].  
+                   CONT.RELS <! adj-arg1-relation !> ] ]
+"""
+; -- subcat types
+""".  
 
 a_trans := basic-adjective-lex & 
   [ SYNSEM.LOCAL [ CAT [ POSTHEAD +,
@@ -6427,345 +6429,438 @@ a_mrkd_cp_prop_inf_rais_synsem := basic_adjective_synsem &
                    ARG1 #harg ] ]. 
 
 ; fot LRs
+
 a_mrkd_cp_prop-or-ques_fin_synsem := intersective_adjective_synsem &
   [  LOCAL.CAT.VAL.COMPS < [ LOCAL mrkd_or_unmrkd_cp_prop_or_ques_local &
                                    [ CAT.HEAD.KEYS.ALTKEY v_event_rel,
                                      CONT.HOOK.INDEX.E [ TENSE tense,
-                                                         MOOD ind_or_sub_mood ] ] ] > ].
+                                                         MOOD ind_or_sub_mood ] ] ] > ]
+"""
+; fot LRs
+""".
 
 a_mrkd_cp_prop-or-ques_inf_synsem := intersective_adjective_synsem &
   [  LOCAL.CAT.VAL.COMPS < [ LOCAL mrkd_or_unmrkd_cp_prop_or_ques_local &
                                    [ CAT.HEAD.KEYS.ALTKEY v_event_rel,
                                      CONT.HOOK.INDEX.E [ TENSE nontense,
-                                                         ASPECT no-aspect ] ] ] > ]. 
+                                                         ASPECT no-aspect ] ] ] > ]
+"""
+; fot LRs
+""". 
 
 
 ; --- Adjectival lexical entry types
 
-; --- 3.1. Adverbial adjectives (do not introduce properties, but modify a referent modifier) 
-aj_adv := a_intrans & non-modfied-adj-lex & norm-zero-arg & 
-  [ SYNSEM scopal_adjective_synsem &
-           [ LOCAL.CAT.HEAD.PRD non-prd ] ].
 
-; --- 3.1.1. Event modifiers (they refer to objects or processes as entities which take place in 
-; a particular time, place and manner. They are variants of qualitative adjectives)
-; a)- Circunstanciales (temporal, locative, manner)
-; e.g. próximo año/año próximo, cercana casa/casa cercana, mirada dulce/dulce mirada
-; b)- Aspectual (modify event or result nouns, and nouns refering to states or relations) 
-; e.g. periódicas revisiones, largo adiós, esporádicas crisis
-aj_-_s-nprd_lex := aj_adv.
+aj_adv := a_intrans & non-modfied-adj-lex & norm-zero-arg &
+  [ SYNSEM scopal_adjective_synsem & [ LOCAL.CAT.HEAD.PRD non-prd ] ]
+  """
+  --- 3.1. Adverbial adjectives (do not introduce properties, but modify a referent modifier)
+  """.
 
-aj_-_s-mismo_lex := a_intrans & non-modfied-adj-lex & norm-zero-arg & 
-  [ SYNSEM non-agr_basic_adjective_synsem & 
-           [ LOCAL [ CAT [ POSTHEAD +,
-                           HEAD [ PRD non-prd,
-                                  MOD < [ LOCAL scopal-mod &
-                                                [ CAT [ HEAD noun,
-                                                        VAL.SPR < > ],
-                                                  CONT.HOOK [ LTOP #larg,
-                                                              INDEX #index & [ PRONTYPE real_pron ] ] ] ] > ] ],
-                     CONT [ HOOK.INDEX #index,
-                            HCONS <! qeq & [ HARG #harg,
-                                             LARG #larg ] !> ] ],
-             LKEYS.KEYREL.ARG1 #harg ] ].
 
-; --- 3.1.2. Intentional (indicate the way a given concept applies to a given referent)
-; a)- Modal: e.g. el presunto asesino, un posible acuerdo, un falso amigo
-; b)- Restrictive: e.g. el mero hecho, la verdadera razón
-aj_-_s-nprd-prh_lex := aj_adv & 
-  [ SYNSEM.LOCAL.CAT.POSTHEAD - ]. 
+aj_-_s-nprd_lex := aj_adv
+  """
+  --- 3.1.1. Event modifiers (they refer to objects or processes as entities which take place in
+  a particular time, place and manner. They are variants of qualitative adjectives)
+  a)- Circunstanciales (temporal, locative, manner)
+  e.g. próximo año/año próximo, cercana casa/casa cercana, mirada dulce/dulce mirada
+  b)- Aspectual (modify event or result nouns, and nouns refering to states or relations)
+  e.g. periódicas revisiones, largo adiós, esporádicas crisis
+  """.
 
-; --- 3.2. Relational adjectives  (they express a set of properties)
-; - not graduable but may co-occur with focalizing adverbs (e.g. viaje específicamente/sólo turístico)
-; - by default intersective
-; - always in post-nominal position (except those ones that are recategorized as calificative adjectives).
-; - the noun and the relational adjectives which follow it form a compact unit, they cannot be intercalated 
-; among them or with calificative adjectives (eg. magnífica actuación policial/actuación 
-; policial magnífica/*actuación policial magnífica), neither with modals nor with adverbials (el posible 
-; avance normando/*el avance posible normando) or possessives (un recurso administrativo suyo/*un
-; recurso suyo administrativo), or "alguno" (no tengo reloj eléctrico alguno/*reloj alguno 
-; eléctrico), or PPs (eg. la producción industrial de Francia/*la producción de Francia 
-; industrial), or when N+PP form a semi-compound (eg. tren francés de alta velocidad/?tren 
-; de alta velocidad francés), but they admit pronouns, eg. la sociedad industrial y la cibernética
-aj_rel :=  non-modfied-adj-lex & 
-  [ SYNSEM intersective_adjective_synsem &
-           [ LOCAL.CAT.POSTHEAD + ] ].
 
-; --- 3.2.1. Predicative relational adjectives
-; Classifying predicates that co-occur with concrete or abstract nouns.
-; e.g. la revista mensual / la revista es mensual
-aj_-_i-nspd_lex := aj_rel & a_intrans & norm-zero-arg & 
+aj_-_s-mismo_lex := a_intrans & non-modfied-adj-lex & norm-zero-arg &
+  [ SYNSEM non-agr_basic_adjective_synsem & [ LOCAL [ CAT [ POSTHEAD +,
+                                                            HEAD [ PRD non-prd,
+                                                                   MOD < [ LOCAL scopal-mod & [ CAT [ HEAD noun,
+                                                                                                      VAL.SPR < > ],
+                                                                                                CONT.HOOK [ LTOP #larg,
+                                                                                                            INDEX #index & [ PRONTYPE real_pron ] ] ] ] > ] ],
+                                                      CONT [ HOOK.INDEX #index,
+                                                             HCONS <! qeq & [ HARG #harg,
+                                                                              LARG #larg ] !> ] ],
+                                              LKEYS.KEYREL.ARG1 #harg ] ]
+  """
+  
+  """.
+
+
+aj_-_s-nprd-prh_lex := aj_adv &
+  [ SYNSEM.LOCAL.CAT.POSTHEAD - ]
+  """
+  --- 3.1.2. Intentional (indicate the way a given concept applies to a given referent)
+  a)- Modal: e.g. el presunto asesino, un posible acuerdo, un falso amigo
+  b)- Restrictive: e.g. el mero hecho, la verdadera razón
+  """.
+
+
+aj_rel := non-modfied-adj-lex &
+  [ SYNSEM intersective_adjective_synsem & [ LOCAL.CAT.POSTHEAD + ] ]
+  """
+  --- 3.2. Relational adjectives  (they express a set of properties)
+  - not graduable but may co-occur with focalizing adverbs (e.g. viaje específicamente/sólo turístico)
+  - by default intersective
+  - always in post-nominal position (except those ones that are recategorized as calificative adjectives).
+  - the noun and the relational adjectives which follow it form a compact unit, they cannot be intercalated
+  among them or with calificative adjectives (eg. magnífica actuación policial/actuación
+  policial magnífica/*actuación policial magnífica), neither with modals nor with adverbials (el posible
+  avance normando/*el avance posible normando) or possessives (un recurso administrativo suyo/*un
+  recurso suyo administrativo), or "alguno" (no tengo reloj eléctrico alguno/*reloj alguno
+  eléctrico), or PPs (eg. la producción industrial de Francia/*la producción de Francia
+  industrial), or when N+PP form a semi-compound (eg. tren francés de alta velocidad/?tren
+  de alta velocidad francés), but they admit pronouns, eg. la sociedad industrial y la cibernética
+  """.
+
+
+aj_-_i-nspd_lex := aj_rel & a_intrans & norm-zero-arg &
   [ SYNSEM.LOCAL [ CAT.HEAD.PRD.COPV ser,
-                   CONT.HCONS <! !> ] ].
+                   CONT.HCONS <! !> ] ]
+  """
+  --- 3.2.1. Predicative relational adjectives
+  Classifying predicates that co-occur with concrete or abstract nouns.
+  e.g. la revista mensual / la revista es mensual
+  """.
 
-; --- 3.2.2. Non-predicative relational intransitive
-; they mostly go with deverbal nouns, but only result nominalizations, and describe the arguments of the noun
-; e.g. la actuación policial / *la actuación fue policial
-aj_-_i-nprd_lex := aj_rel & a_intrans & norm-zero-arg & 
+
+aj_-_i-nprd_lex := aj_rel & a_intrans & norm-zero-arg &
   [ SYNSEM.LOCAL [ CAT.HEAD.PRD non-prd,
-                   CONT.HCONS <! !> ] ].
+                   CONT.HCONS <! !> ] ]
+  """
+  --- 3.2.2. Non-predicative relational intransitive
+  they mostly go with deverbal nouns, but only result nominalizations, and describe the arguments of the noun
+  e.g. la actuación policial / *la actuación fue policial
+  """.
 
-; --- 3.2.3. Non-predicative relational transitive adjectives
-; e.g. consistente en 
+
 aj_pp_i-nprd_lex := aj_rel & a_mrkd_np & basic-one-arg &
   [ SYNSEM.LOCAL.CAT [ HEAD.PRD non-prd,
-                       VAL.COMPS < [ OPT - ] > ] ].
+                       VAL.COMPS < [ OPT - ] > ] ]
+  """
+  --- 3.2.3. Non-predicative relational transitive adjectives
+  e.g. consistente en
+  """.
 
-; --- for "referente a" and "consistente en", e.g. "una visión de negocio consistente en estar alerta/
-; que estén alerta/cómo se ha ejercido..." 
+
 aj_cp_p-i-nprd_lex := aj_rel & a_cp_prop_fin & basic-one-arg &
-  [ SYNSEM [ LOCAL.CAT [ HEAD.PRD non-prd,
-                          VAL.COMPS < [ OPT -,
-                                        LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ].
+  [ SYNSEM.LOCAL.CAT [ HEAD.PRD non-prd,
+                       VAL.COMPS < [ OPT -,
+                                     LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ]
+  """
+  --- for "referente a" and "consistente en", e.g. "una visión de negocio consistente en estar alerta/
+  que estén alerta/cómo se ha ejercido..."
+  """.
+
 
 aj_cp_q-i-nprd_lex := aj_rel & a_cp_question & basic-one-arg &
   [ SYNSEM.LOCAL.CAT [ HEAD.PRD non-prd,
-                       VAL.COMPS < [ OPT - ] > ] ].
+                       VAL.COMPS < [ OPT - ] > ] ]
+  """
+  
+  """.
 
-; --- 3.3. Qualitative Adjectives (express a single property)
-; - they are predicative and gradable
-a_qual := modfied-adj-lex & 
-  [ SYNSEM basic_adjective_synsem & 
-           [ LOCAL.CAT [ HEAD.PRD prd,
-                         VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY degree_rel ] > ] ] ]. 
 
-; --- 3.3.1. Qualitative intransitive adjectives
-aj_qual_intr := a_qual & a_intrans & basic-one-arg & 
-   [ SYNSEM.LOCAL.CONT.HCONS <! !> ].
+a_qual := modfied-adj-lex &
+  [ SYNSEM basic_adjective_synsem & [ LOCAL.CAT [ HEAD.PRD prd,
+                                                  VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY degree_rel ] > ] ] ]
+  """
+  --- 3.3. Qualitative Adjectives (express a single property)
+  - they are predicative and gradable
+  """.
 
-; a)- scopal qualitative intransitive adjectives (co-ocurring with ser and estar
-; and pre/post-nominal (adjectives of evaluation, physical dimension, velocity, age, physical 
-; properties (weight, consistency, taste, touch, smell, temperature, sonority))
-; e.g. ésto es/está alto, dulce sabor/sabor dulce  
-; !!! problem in predicative constructions
-aj_-_s_lex := aj_qual_intr & 
-  [ SYNSEM intersective_adjective_synsem ].
 
-; b)- intersective qualitative intransitive adjectives co-ocurring with ser (though 
-; we could also find them with estar), and pre/post-nominal (adjectives of colour, shape, 
-; aptitudes and human (pre)dispositions)
-; e.g. el cielo es/está azul, ojos negros/negros ojos 
-aj_-_i_lex := aj_qual_intr & 
-  [ SYNSEM intersective_adjective_synsem ].
+aj_qual_intr := a_qual & a_intrans & basic-one-arg &
+  [ SYNSEM.LOCAL.CONT.HCONS <! !> ]
+  """
+  --- 3.3.1. Qualitative intransitive adjectives
+  """.
 
-; c)- intersective qualitative intransitive adjectives co-occurring with 'ser' 
-; (though we could also find them with estar), and post-nominal (aptitude and human 
-; (pre)disposition adjectives
-; e.g. 
-aj_-_i-psth_lex := aj_qual_intr & 
-  [ SYNSEM intersective_adjective_synsem & 
-           [ LOCAL.CAT.POSTHEAD + ] ]. 
 
-; d)- intersective qualitative intransitive adjectives, co-occurring with 'estar' 
-; and post-nominal (adjectives derived from participles and adjectival participles)
-; e.g. está seco, maduro, abierto lleno (un vaso lleno/*un lleno vaso) 
-aj_-_i-e_lex := aj_qual_intr & 
-  [ SYNSEM intersective_adjective_synsem & 
-           [ LOCAL.CAT [ POSTHEAD +,
-                         HEAD.PRD.COPV estar ] ] ]. 
+aj_-_s_lex := aj_qual_intr &
+  [ SYNSEM intersective_adjective_synsem ]
+  """
+  a)- scopal qualitative intransitive adjectives (co-ocurring with ser and estar
+  and pre/post-nominal (adjectives of evaluation, physical dimension, velocity, age, physical
+  properties (weight, consistency, taste, touch, smell, temperature, sonority))
+  e.g. ésto es/está alto, dulce sabor/sabor dulce
+  !!! problem in predicative constructions
+  """.
 
-; --- 3.3.2. Qualitative transitive adjectives 
-a_qual_trans := a_qual & basic-two-arg & 
-  [ SYNSEM intersective_adjective_synsem ].
 
-; --- 3.3.2.1. Qualitative transitive adjectives taking marked NPs
-; they can have dative clitics which alter with the complements with the preposition 
-; "para" ("for")(e.g. le es útil/es útil para él) 
+aj_-_i_lex := aj_qual_intr &
+  [ SYNSEM intersective_adjective_synsem ]
+  """
+  b)- intersective qualitative intransitive adjectives co-ocurring with ser (though
+  we could also find them with estar), and pre/post-nominal (adjectives of colour, shape,
+  aptitudes and human (pre)dispositions)
+  e.g. el cielo es/está azul, ojos negros/negros ojos
+  """.
 
-; e.g. es/está muy atento con sus compañeros
+
+aj_-_i-psth_lex := aj_qual_intr &
+  [ SYNSEM intersective_adjective_synsem & [ LOCAL.CAT.POSTHEAD + ] ]
+  """
+  c)- intersective qualitative intransitive adjectives co-occurring with 'ser'
+  (though we could also find them with estar), and post-nominal (aptitude and human
+  (pre)disposition adjectives
+  e.g.
+  """.
+
+
+aj_-_i-e_lex := aj_qual_intr &
+  [ SYNSEM intersective_adjective_synsem & [ LOCAL.CAT [ POSTHEAD +,
+                                                         HEAD.PRD.COPV estar ] ] ]
+  """
+  d)- intersective qualitative intransitive adjectives, co-occurring with 'estar'
+  and post-nominal (adjectives derived from participles and adjectival participles)
+  e.g. está seco, maduro, abierto lleno (un vaso lleno/*un lleno vaso)
+  """.
+
+
+a_qual_trans := a_qual & basic-two-arg &
+  [ SYNSEM intersective_adjective_synsem ]
+  """
+  --- 3.3.2. Qualitative transitive adjectives
+  """.
+
+
 aj_pp_i_lex := a_qual_trans & a_mrkd_np &
   [ SYNSEM.LOCAL.CAT [ POSTHEAD +,
-                       VAL.COMPS < [ OPT - ] > ] ].
+                       VAL.COMPS < [ OPT - ] > ] ]
+  """
+  --- 3.3.2.1. Qualitative transitive adjectives taking marked NPs
+  they can have dative clitics which alter with the complements with the preposition
+  "para" ("for")(e.g. le es útil/es útil para él)
+  e.g. es/está muy atento con sus compañeros
+  """.
 
-; e.g. es/está muy vulnerable (a todo)
+
 aj_pp*_i_lex := a_qual_trans & a_mrkd_np &
-  [ SYNSEM.LOCAL.CAT.VAL.COMPS < [ OPT + ] > ].
+  [ SYNSEM.LOCAL.CAT.VAL.COMPS < [ OPT + ] > ]
+  """
+  e.g. es/está muy vulnerable (a todo)
+  """.
 
-; e.g. está/*es atento a las notícias
-aj_pp_i-e_lex := a_qual_trans & a_mrkd_np & 
+
+aj_pp_i-e_lex := a_qual_trans & a_mrkd_np &
   [ SYNSEM.LOCAL.CAT [ POSTHEAD +,
                        HEAD.PRD.COPV estar,
-                       VAL.COMPS < [ OPT - ] > ] ].
+                       VAL.COMPS < [ OPT - ] > ] ]
+  """
+  e.g. está/*es atento a las notícias
+  """.
 
-; e.g. estoy/*soy harto (de tí)
+
 aj_pp*_i-e_lex := a_qual_trans & a_mrkd_np &
   [ SYNSEM.LOCAL.CAT [ POSTHEAD +,
                        HEAD.PRD.COPV estar,
-                       VAL.COMPS < [ OPT + ] > ] ].
+                       VAL.COMPS < [ OPT + ] > ] ]
+  """
+  e.g. estoy/*soy harto (de tí)
+  """.
 
-; --- 3.3.2.2. Qualitative transitive adjectives taking finite completive clauses/free infinitives
 
-; e.g. es partidaria (de) que legalizen la droga/de legalizar la droga
-aj_cp_p-i-s_lex := a_qual_trans & a_cp_prop_fin & 
+aj_cp_p-i-s_lex := a_qual_trans & a_cp_prop_fin &
   [ SYNSEM.LOCAL.CAT [ HEAD.PRD.COPV ser,
-                       VAL.COMPS < [ OPT - ] > ] ].
+                       VAL.COMPS < [ OPT - ] > ] ]
+  """
+  --- 3.3.2.2. Qualitative transitive adjectives taking finite completive clauses/free infinitives
+  e.g. es partidaria (de) que legalizen la droga/de legalizar la droga
+  """.
 
-; e.g. estoy segura (de) que vendrá/de cambiarlo
-aj_cp_p-i-e_lex := a_qual_trans & a_cp_prop_fin & 
+
+aj_cp_p-i-e_lex := a_qual_trans & a_cp_prop_fin &
   [ SYNSEM.LOCAL.CAT [ HEAD.PRD.COPV estar,
-                       VAL.COMPS < [ OPT - ] > ] ].
+                       VAL.COMPS < [ OPT - ] > ] ]
+  """
+  e.g. estoy segura (de) que vendrá/de cambiarlo
+  """.
 
-; --- 3.3.2.3. Qualitative transitive adjectives taking interrogative clauses (finite & infinitival)
 
-; e.g. es muy revelador de cómo actuan
-aj_q_i-s_lex := a_qual_trans & a_cp_question & 
+aj_q_i-s_lex := a_qual_trans & a_cp_question &
   [ SYNSEM.LOCAL.CAT [ HEAD.PRD.COPV ser,
-                       VAL.COMPS < [ OPT - ] > ] ].
+                       VAL.COMPS < [ OPT - ] > ] ]
+  """
+  --- 3.3.2.3. Qualitative transitive adjectives taking interrogative clauses (finite & infinitival)
+  e.g. es muy revelador de cómo actuan
+  """.
 
-; e.g. no estoy muy seguro de cuándo/de si vendrá/ir
-aj_q_i-e_lex := a_qual_trans & a_cp_question & 
+
+aj_q_i-e_lex := a_qual_trans & a_cp_question &
   [ SYNSEM.LOCAL.CAT [ POSTHEAD +,
                        HEAD.PRD.COPV estar,
-                       VAL.COMPS < [ OPT - ] > ] ].
+                       VAL.COMPS < [ OPT - ] > ] ]
+  """
+  e.g. no estoy muy seguro de cuándo/de si vendrá/ir
+  """.
 
-; -- 3.4. Subject Raising Adjectives
-; - post-nominal, co-occurring with 'ser', optional complement
-; e.g. soy muy libre de pensarlo
-aj_vp_sr-i-s_lex := a_qual & a_cp_prop_inf & basic-two-arg & 
-  [ SYNSEM a_mrkd_cp_prop_inf_rais_synsem & 
-            [ LOCAL [ CAT [ POSTHEAD +,
-                            HEAD.PRD.COPV ser,
-                            VAL.COMPS < [ OPT -, 
-                                          LOCAL.CONT.HOOK.XARG #ctrl,
-                                          NON-LOCAL.SLASH 0-dlist ] > ],
-                      CONT.HOOK.XARG #ctrl & ref-ind ] ] ]. 
 
-; --- 3.5. Subject Control Adjectives 
-aj_sctrl := a_qual & a_cp_prop_inf & basic-two-arg & 
-  [ SYNSEM a_mrkd_cp_prop_inf_ctrl_synsem & 
-           [ LOCAL [ CAT [ POSTHEAD +,
-                           VAL.COMPS < [ LOCAL.CONT.HOOK.XARG #ctrl,
-                                         NON-LOCAL.SLASH 0-dlist ] > ],
-                     CONT.HOOK.XARG #ctrl & ref-ind ] ] ]. 
+aj_vp_sr-i-s_lex := a_qual & a_cp_prop_inf & basic-two-arg &
+  [ SYNSEM a_mrkd_cp_prop_inf_rais_synsem & [ LOCAL [ CAT [ POSTHEAD +,
+                                                            HEAD.PRD.COPV ser,
+                                                            VAL.COMPS < [ OPT -,
+                                                                          LOCAL.CONT.HOOK.XARG #ctrl,
+                                                                          NON-LOCAL.SLASH 0-dlist ] > ],
+                                                      CONT.HOOK.XARG #ctrl & ref-ind ] ] ]
+  """
+  -- 3.4. Subject Raising Adjectives
+  - post-nominal, co-occurring with 'ser', optional complement
+  e.g. soy muy libre de pensarlo
+  """.
 
-; e.g. aficionado a (es aficionado (a jugar a tenis)), capaz de (no soy capaz (de hacerlo))
-aj_vp_sc-i-s_lex := aj_sctrl & 
+
+aj_sctrl := a_qual & a_cp_prop_inf & basic-two-arg &
+  [ SYNSEM a_mrkd_cp_prop_inf_ctrl_synsem & [ LOCAL [ CAT [ POSTHEAD +,
+                                                            VAL.COMPS < [ LOCAL.CONT.HOOK.XARG #ctrl,
+                                                                          NON-LOCAL.SLASH 0-dlist ] > ],
+                                                      CONT.HOOK.XARG #ctrl & ref-ind ] ] ]
+  """
+  --- 3.5. Subject Control Adjectives
+  """.
+
+
+aj_vp_sc-i-s_lex := aj_sctrl &
   [ SYNSEM.LOCAL.CAT [ HEAD.PRD.COPV ser,
-                       VAL.COMPS < [ OPT - ] > ] ]. 
+                       VAL.COMPS < [ OPT - ] > ] ]
+  """
+  e.g. aficionado a (es aficionado (a jugar a tenis)), capaz de (no soy capaz (de hacerlo))
+  """.
 
-; e.g. dispuesto a (no estoy dispuesto a venderlo), seguro de (no estoy seguro (de poder hacerlo))
-aj_vp_sc-i-e_lex := aj_sctrl & 
+
+aj_vp_sc-i-e_lex := aj_sctrl &
   [ SYNSEM.LOCAL.CAT [ HEAD.PRD.COPV estar,
-                       VAL.COMPS < [ OPT - ] > ] ]. 
+                       VAL.COMPS < [ OPT - ] > ] ]
+  """
+  e.g. dispuesto a (no estoy dispuesto a venderlo), seguro de (no estoy seguro (de poder hacerlo))
+  """.
 
-;--- 3.6. Object Raising Adjectives
-; - pre/post-nominal, co-occurring with 'ser', optional complement (PPde)
-; e.g. difícil de (el violín es muy difícil (de tocar))
-aj_vp_or-i-s_lex := a_qual & a_cp_prop_inf & o_rais-two-arg & 
-  [ SYNSEM a_mrkd_cp_prop_inf_rais_synsem & 
-           [ LOCAL [ CAT [ POSTHEAD +,
-                           HEAD [ PRD.COPV ser,
-                                  MOD #mod ],
-                           VAL.COMPS < [ OPT -, 
-                                         NON-LOCAL.SLASH <! np_acc_local &
-                                                            [ CAT.HEAD.MOD #mod,
-                                                              CONT.HOOK.INDEX #ctrl ] !> ] > ], 
-                     CONT.HOOK.XARG #ctrl & ref-ind ] ] ]. 
 
-; --- 3.7. Object Control Adjectives
-; - post-nominal, co-occurring with 'estar', complement (PPde)
-; e.g. pendiente (el contrato está (*muy) pendiente (de firmar/ser firmado/firma)))!!!
-aj_vp_oc-i-s_lex := non-modfied-adj-lex & a_cp_prop_inf & o_rais-one-arg & 
-  [ SYNSEM a_mrkd_cp_prop_inf_ctrl_synsem & 
-           [ LOCAL [ CAT[ POSTHEAD +,
-                          HEAD.PRD.COPV estar,
-                          VAL.COMPS < [ OPT -, 
-                                        NON-LOCAL.SLASH <! np_acc_local &
-                                                           [ CONT.HOOK.INDEX #ctrl ] !> ] > ],
-                     CONT.HOOK.XARG #ctrl & ref-ind ] ] ]. 
+aj_vp_or-i-s_lex := a_qual & a_cp_prop_inf & o_rais-two-arg &
+  [ SYNSEM a_mrkd_cp_prop_inf_rais_synsem & [ LOCAL [ CAT [ POSTHEAD +,
+                                                            HEAD [ PRD.COPV ser,
+                                                                   MOD #mod ],
+                                                            VAL.COMPS < [ OPT -,
+                                                                          NON-LOCAL.SLASH <! np_acc_local & [ CAT.HEAD.MOD #mod,
+                                                                                                              CONT.HOOK.INDEX #ctrl ] !> ] > ],
+                                                      CONT.HOOK.XARG #ctrl & ref-ind ] ] ]
+  """
+  --- 3.6. Object Raising Adjectives
+   - pre/post-nominal, co-occurring with 'ser', optional complement (PPde)
+   e.g. difícil de (el violín es muy difícil (de tocar))
+  """.
 
-; --- 3.8. Comparative Adjectives
-compar-adj-lex := basic-adjective-lex & basic-two-arg & 
-  [ SYNSEM intersective_adjective_synsem &
-           [ LOCAL [ CAT [ POSTHEAD -,
-                           HEAD [ PRD prd,
-                                  KEYS [ ALTKEY compar ],
-                                  MOD < [ LOCAL.CAT.VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY quant_rel ] > ] > ],
-                           VAL [ SPR < #spr & 
-                                       [ OPT +,
-                                         LOCAL [ CAT [ MC na,
-                                                       HEAD adv & [ KEYS.KEY degree_rel ],
-                                                       VAL.COMPS < > ], 
-                                                 CONT.HOOK [ LTOP #hand,
-                                                             XARG #altarg0 ] ],
-                                         NON-LOCAL.SLASH 0-dlist ] >,
-                                 COMPS #comps &
-;                                       < [ LOCAL mrkd_np_local &
-;                                                 [ CAT.HEAD.KEYS.KEY #ckey & selected_rel,  
-;                                                   CONT.HOOK.INDEX #arg2 ] ] > ] ],
-                                       < [ LOCAL local &
-                                                 [ CAT [ HEAD adp & 
-                                                              [ PRD non-prd,
-                                                                MOD < >,
-                                                                KEYS.KEY #ckey & selected_rel ], 
-                                                         VAL [ SUBJ < >,
-                                                               COMPS < > ] ], 
-                                                   CONT.HOOK.INDEX #arg2 ] ] > ] ],
-                     CONT [ RELS <! adj-arg1-relation &
-                                    [ LBL #hand,
-                                      ARG0 #arg0 ],
-                                    #altkey & 
-                                    [ PRED compar,
-                                      LBL #hand,
-                                      ARG0 #altarg0,
-                                      ARG1 #arg0,
-                                      ARG2 #arg2 ] !>,
-                            HCONS <! !> ] ],
-             LKEYS [ ALTKEYREL #altkey,
-                     --COMPKEY #ckey ] ], 
-    ARG-ST < #spr . #comps > ].
 
-; a)- (mucho/bastante/...) mejor, peor, mayor, menor + que
-aj_pp_i-cmp_lex := compar-adj-lex & 
+aj_vp_oc-i-s_lex := non-modfied-adj-lex & a_cp_prop_inf & o_rais-one-arg &
+  [ SYNSEM a_mrkd_cp_prop_inf_ctrl_synsem & [ LOCAL [ CAT [ POSTHEAD +,
+                                                            HEAD.PRD.COPV estar,
+                                                            VAL.COMPS < [ OPT -,
+                                                                          NON-LOCAL.SLASH <! np_acc_local & [ CONT.HOOK.INDEX #ctrl ] !> ] > ],
+                                                      CONT.HOOK.XARG #ctrl & ref-ind ] ] ]
+  """
+  --- 3.7. Object Control Adjectives
+  - post-nominal, co-occurring with 'estar', complement (PPde)
+  e.g. pendiente (el contrato está (*muy) pendiente (de firmar/ser firmado/firma)))!!!
+  """.
+
+
+compar-adj-lex := basic-adjective-lex & basic-two-arg &
+  [ SYNSEM intersective_adjective_synsem & [ LOCAL [ CAT [ POSTHEAD -,
+                                                           HEAD [ PRD prd,
+                                                                  KEYS.ALTKEY compar,
+                                                                  MOD < [ LOCAL.CAT.VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY quant_rel ] > ] > ],
+                                                           VAL [ SPR < #spr & [ OPT +,
+                                                                                LOCAL [ CAT [ MC na,
+                                                                                              HEAD adv & [ KEYS.KEY degree_rel ],
+                                                                                              VAL.COMPS < > ],
+                                                                                        CONT.HOOK [ LTOP #hand,
+                                                                                                    XARG #altarg0 ] ],
+                                                                                NON-LOCAL.SLASH 0-dlist ] >,
+                                                                 COMPS #comps & < [ LOCAL local & [ CAT [ HEAD adp & [ PRD non-prd,
+                                                                                                                       MOD < >,
+                                                                                                                       KEYS.KEY #ckey & selected_rel ],
+                                                                                                          VAL [ SUBJ < >,
+                                                                                                                COMPS < > ] ],
+                                                                                                    CONT.HOOK.INDEX #arg2 ] ] > ] ],
+                                                     CONT [ RELS <! adj-arg1-relation & [ LBL #hand,
+                                                                                          ARG0 #arg0 ],
+                                                                    #altkey & [ PRED compar,
+                                                                                LBL #hand,
+                                                                                ARG0 #altarg0,
+                                                                                ARG1 #arg0,
+                                                                                ARG2 #arg2 ] !>,
+                                                            HCONS <! !> ] ],
+                                             LKEYS [ ALTKEYREL #altkey,
+                                                     --COMPKEY #ckey ] ],
+    ARG-ST < #spr . #comps > ]
+  """
+  --- 3.8. Comparative Adjectives
+  """.
+
+
+aj_pp_i-cmp_lex := compar-adj-lex &
   [ SYNSEM [ LOCAL.CAT.HEAD.KEYS.KEY adj_rel,
-             LKEYS.--COMPKEY _que_p_comp_rel ] ].
+             LKEYS.--COMPKEY _que_p_comp_rel ] ]
+  """
+  a)- (mucho/bastante/...) mejor, peor, mayor, menor + que
+  """.
 
-; b)- (mucho/bastante/...) igual, anterior, posterior, inferior, superior + que/a
-aj_pp_i-cmp-altp_lex := compar-adj-lex & 
+
+aj_pp_i-cmp-altp_lex := compar-adj-lex &
   [ SYNSEM [ LOCAL.CAT.HEAD.KEYS.KEY adj_rel,
-             LKEYS.--COMPKEY que_or_a_p_comp_rel ] ]. 
+             LKEYS.--COMPKEY que_or_a_p_comp_rel ] ]
+  """
+  b)- (mucho/bastante/...) igual, anterior, posterior, inferior, superior + que/a
+  """.
 
-; c)- (mucho/poco/bastante) + MÁS/MENOS + 'de' + Number
-; e.g. más/menos de tres chicos
-aj_pp_i-cmp-menos_lex := compar-adj-lex & 
+
+aj_pp_i-cmp-menos_lex := compar-adj-lex &
   [ SYNSEM [ LOCAL.CAT [ HEAD.KEYS.KEY compar_adj_rel,
                          VAL.COMPS < [ OPT + ] > ],
-             LKEYS.--COMPKEY _de_p_sel_rel ] ].
+             LKEYS.--COMPKEY _de_p_sel_rel ] ]
+  """
+  c)- (mucho/poco/bastante) + MÁS/MENOS + 'de' + Number
+  e.g. más/menos de tres chicos
+  """.
 
-aj_pp_i-cmp-mas_lex := compar-adj-lex & 
+
+aj_pp_i-cmp-mas_lex := compar-adj-lex &
   [ SYNSEM [ LOCAL.CAT [ HEAD.KEYS.KEY compar_adj_rel,
                          VAL.COMPS < [ OPT + ] > ],
-             LKEYS.--COMPKEY _de_p_sel_rel ] ].
+             LKEYS.--COMPKEY _de_p_sel_rel ] ]
+  """
+  
+  """.
 
-; --- 3.9. Superlative Adjectives (mejor, peor, mayor, menor)
-aj_pp_i-sup_lex := non-modfied-adj-lex & basic-one-arg & 
-  [ SYNSEM intersective_adjective_synsem &
-           [ LOCAL [ CAT [ HEAD [ PRD prd,
-                                  KEYS.ALTKEY superl,
-                                  MOD < [ LOCAL.CAT.VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY def_q_rel ] > ] > ],
-                           VAL.COMPS #comps &
-                                     < [ LOCAL mrkd_np_local &
-                                               [ CAT.HEAD.KEYS.KEY #ckey & _de_p_sel_rel ] ] >  ],
-                     CONT [ RELS <! adj-arg1-relation &
-                                    [ LBL #hand,
-                                      ARG0 #arg0 ],
-                                    #altkey & 
-                                    [ PRED superl,
-                                      LBL #hand,
-                                      ARG0 event,
-                                      ARG1 #arg0 ]!>,
-                            HCONS <! !> ] ],
-             LKEYS [ ALTKEYREL #altkey,
-                     --COMPKEY #ckey ] ], 
-    ARG-ST #comps ].
 
-; --- 3.10. Possessives: when they follow the noun, they are modifiers 
-; and they require the def. article or the demonstrative
-; e.g. la/esa canción tuya me gustó
-aj_-_i-poss_lex := aj_qual_intr & 
-  [ SYNSEM intersective_adjective_synsem &
-           [ LOCAL.CAT [ HEAD.KEYS.KEY poss_adj_rel,
-                         POSTHEAD + ] ] ]. 
+aj_pp_i-sup_lex := non-modfied-adj-lex & basic-one-arg &
+  [ SYNSEM intersective_adjective_synsem & [ LOCAL [ CAT [ HEAD [ PRD prd,
+                                                                  KEYS.ALTKEY superl,
+                                                                  MOD < [ LOCAL.CAT.VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY def_q_rel ] > ] > ],
+                                                           VAL.COMPS #comps & < [ LOCAL mrkd_np_local & [ CAT.HEAD.KEYS.KEY #ckey & _de_p_sel_rel ] ] > ],
+                                                     CONT [ RELS <! adj-arg1-relation & [ LBL #hand,
+                                                                                          ARG0 #arg0 ],
+                                                                    #altkey & [ PRED superl,
+                                                                                LBL #hand,
+                                                                                ARG0 event,
+                                                                                ARG1 #arg0 ] !>,
+                                                            HCONS <! !> ] ],
+                                             LKEYS [ ALTKEYREL #altkey,
+                                                     --COMPKEY #ckey ] ],
+    ARG-ST #comps ]
+  """
+  --- 3.9. Superlative Adjectives (mejor, peor, mayor, menor)
+  """.
+
+
+aj_-_i-poss_lex := aj_qual_intr &
+  [ SYNSEM intersective_adjective_synsem & [ LOCAL.CAT [ HEAD.KEYS.KEY poss_adj_rel,
+                                                         POSTHEAD + ] ] ]
+  """
+  --- 3.10. Possessives: when they follow the noun, they are modifiers
+  and they require the def. article or the demonstrative
+  e.g. la/esa canción tuya me gustó
+  """.
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
