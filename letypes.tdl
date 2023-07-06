@@ -9755,129 +9755,187 @@ norm_coordconj_synsem := basic_coordconj_synsem &
                    LBL #ltop,
                    C-ARG #index ] ].
 
-; norel_coordconj contributes no relation, used in "omnisyndeton" coord.
-norel_coordconj_synsem := basic_coordconj_synsem & 
+
+norel_coordconj_synsem := basic_coordconj_synsem &
   [ LOCAL [ COORD-STRAT two,
             CAT.HEAD.KEYS.KEY #key,
             CONT.RELS <! !> ],
-    LKEYS.KEYREL.PRED #key ].
+    LKEYS.KEYREL.PRED #key ]
+  """
+  norel_coordconj contributes no relation, used in "omnisyndeton" coord.
+  """.
 
 
-; -- punctuations as conjunctions
 c_xp_comma_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norm_coordconj_synsem &
-           [ LOCAL.COORD-STRAT one,
-             LKEYS.KEYREL.PRED _comma_c_rel ] ].
+  [ SYNSEM norm_coordconj_synsem & [ LOCAL.COORD-STRAT one,
+                                     LKEYS.KEYREL.PRED _comma_c_rel ] ]
+  """
+  -- punctuations as conjunctions
+  """.
+
 
 c_xp_fstop_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norm_coordconj_synsem &
-           [ LOCAL.COORD-STRAT one,
-             LKEYS.KEYREL.PRED _full-stop_c_rel ] ].
+  [ SYNSEM norm_coordconj_synsem & [ LOCAL.COORD-STRAT one,
+                                     LKEYS.KEYREL.PRED _full-stop_c_rel ] ]
+  """
+  
+  """.
+
 
 c_xp_semi-cln_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norm_coordconj_synsem &
-           [ LOCAL.COORD-STRAT one,
-             LKEYS.KEYREL.PRED _semi-cln_c_rel ] ].
+  [ SYNSEM norm_coordconj_synsem & [ LOCAL.COORD-STRAT one,
+                                     LKEYS.KEYREL.PRED _semi-cln_c_rel ] ]
+  """
+  
+  """.
 
-; - multiple copulative coordination: 'y' (and) (e.g. Juan y Pedro lloran).
+
 c_xp_y_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norm_coordconj_synsem &
-           [ LOCAL.COORD-STRAT one,
-             LKEYS.KEYREL.PRED _y_c_rel ] ].
+  [ SYNSEM norm_coordconj_synsem & [ LOCAL.COORD-STRAT one,
+                                     LKEYS.KEYREL.PRED _y_c_rel ] ]
+  """
+  - multiple copulative coordination: 'y' (and) (e.g. Juan y Pedro lloran).
+  """.
+
 
 c_xp_e_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norm_coordconj_synsem &
-           [ LOCAL.COORD-STRAT one,
-             LKEYS.KEYREL.PRED _y_c_rel ] ].
+  [ SYNSEM norm_coordconj_synsem & [ LOCAL.COORD-STRAT one,
+                                     LKEYS.KEYREL.PRED _y_c_rel ] ]
+  """
+  
+  """.
 
-; - multiple disjunctive coordination: 'o' (or) (Juan o Pedro lloran).
+
 c_xp_o_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norm_coordconj_synsem &
-           [ LKEYS.KEYREL.PRED _o_c_rel ] ].
+  [ SYNSEM norm_coordconj_synsem & [ LKEYS.KEYREL.PRED _o_c_rel ] ]
+  """
+  - multiple disjunctive coordination: 'o' (or) (Juan o Pedro lloran).
+  """.
+
 
 c_xp_u_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norm_coordconj_synsem &
-           [ LKEYS.KEYREL.PRED _o_c_rel ] ].
+  [ SYNSEM norm_coordconj_synsem & [ LKEYS.KEYREL.PRED _o_c_rel ] ]
+  """
+  
+  """.
 
-; - exclusive disjunction: 'o...o' (either) (e.g. o Juan o Marta traerán el regalo) 
-; Not with imperatives, interrogatives and exclamatives
+
 c_xp_o-nrel_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norel_coordconj_synsem &
-           [ LOCAL.CAT.HEAD.LEFT < _o_c_rel >,
-             LKEYS.KEYREL.PRED _o_c_rel ] ].
+  [ SYNSEM norel_coordconj_synsem & [ LOCAL.CAT.HEAD.LEFT < _o_c_rel >,
+                                      LKEYS.KEYREL.PRED _o_c_rel ] ]
+  """
+  - exclusive disjunction: 'o...o' (either) (e.g. o Juan o Marta traerán el regalo)
+  Not with imperatives, interrogatives and exclamatives
+  """.
+
 
 c_xp_u-nrel_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norel_coordconj_synsem &
-           [ LOCAL.CAT.HEAD.LEFT < _o_c_rel >,
-             LKEYS.KEYREL.PRED _o_c_rel ] ].
+  [ SYNSEM norel_coordconj_synsem & [ LOCAL.CAT.HEAD.LEFT < _o_c_rel >,
+                                      LKEYS.KEYREL.PRED _o_c_rel ] ]
+  """
+  
+  """.
 
-; - '(ni)...ni' (neither) (e.g. no traje el libro ni para Juan ni para Pedro)
-; Can't co-occur within a prepositional complement (*traje el libro para Juan ni Pedro, 
-; *no traje el libro para Juan ni Pedro, *no traje el libro para ni Juan ni Pedro)
-; La posibilidad de omitir el primer 'ni' depende de la posición del sintagma: en 
-; posición pre-verbal no es posible, en posición post-verbal sí.
+
 c_xp_ni_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norm_coordconj_synsem &
-           [ LKEYS.KEYREL.PRED _ni_c_rel ] ].
+  [ SYNSEM norm_coordconj_synsem & [ LKEYS.KEYREL.PRED _ni_c_rel ] ]
+  """
+  - '(ni)...ni' (neither) (e.g. no traje el libro ni para Juan ni para Pedro)
+  Can't co-occur within a prepositional complement (*traje el libro para Juan ni Pedro,
+  *no traje el libro para Juan ni Pedro, *no traje el libro para ni Juan ni Pedro)
+  La posibilidad de omitir el primer 'ni' depende de la posición del sintagma: en
+  posición pre-verbal no es posible, en posición post-verbal sí.
+  """.
+
 
 c_xp_ni-nrel_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norel_coordconj_synsem &
-           [ LOCAL.CAT.HEAD.LEFT < _ni_c_rel >,
-             LKEYS.KEYREL.PRED _ni_c_rel ] ].
+  [ SYNSEM norel_coordconj_synsem & [ LOCAL.CAT.HEAD.LEFT < _ni_c_rel >,
+                                      LKEYS.KEYREL.PRED _ni_c_rel ] ]
+  """
+  
+  """.
 
-; - 'sea...(o) sea' (be it) (e.g. lo compraremos de todos modos, sea grande (o) sea pequeño)
-; Can't co-occur in argumental complements (*el monstruo era sea grande (o) sea pequeño).
+
 c_xp_sea_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norm_coordconj_synsem &
-           [ LOCAL.COORD-STRAT two,
-             LKEYS.KEYREL.PRED _sea_c_rel ] ].
+  [ SYNSEM norm_coordconj_synsem & [ LOCAL.COORD-STRAT two,
+                                     LKEYS.KEYREL.PRED _sea_c_rel ] ]
+  """
+  - 'sea...(o) sea' (be it) (e.g. lo compraremos de todos modos, sea grande (o) sea pequeño)
+  Can't co-occur in argumental complements (*el monstruo era sea grande (o) sea pequeño).
+  """.
+
 
 c_xp_sea-nrel_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norel_coordconj_synsem &
-           [ LOCAL.CAT.HEAD.LEFT < _sea_c_rel >,
-             LKEYS.KEYREL.PRED _sea_c_rel ] ]. 
+  [ SYNSEM norel_coordconj_synsem & [ LOCAL.CAT.HEAD.LEFT < _sea_c_rel >,
+                                      LKEYS.KEYREL.PRED _sea_c_rel ] ]
+  """
+  
+  """.
+
 
 c_xp_o-sea-nrel_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norel_coordconj_synsem &
-           [ LOCAL.CAT.HEAD.LEFT < _sea_c_rel >,
-             LKEYS.KEYREL.PRED _o_sea_c_rel ] ].
+  [ SYNSEM norel_coordconj_synsem & [ LOCAL.CAT.HEAD.LEFT < _sea_c_rel >,
+                                      LKEYS.KEYREL.PRED _o_sea_c_rel ] ]
+  """
+  
+  """.
 
-; - '(o) bien...(o) bien' (either) e.g. recoge el correo (o) bien en la tarde (o) bien en la mañana
+
 c_xp_bien_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norm_coordconj_synsem &
-           [ LOCAL.COORD-STRAT two,
-             LKEYS.KEYREL.PRED _bien_c_rel ] ].
+  [ SYNSEM norm_coordconj_synsem & [ LOCAL.COORD-STRAT two,
+                                     LKEYS.KEYREL.PRED _bien_c_rel ] ]
+  """
+  - '(o) bien...(o) bien' (either) e.g. recoge el correo (o) bien en la tarde (o) bien en la mañana
+  """.
+
 
 c_xp_bien-nrel_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norel_coordconj_synsem &
-           [ LOCAL.CAT.HEAD.LEFT < _bien_c_rel >,
-             LKEYS.KEYREL.PRED _bien_c_rel ] ].
+  [ SYNSEM norel_coordconj_synsem & [ LOCAL.CAT.HEAD.LEFT < _bien_c_rel >,
+                                      LKEYS.KEYREL.PRED _bien_c_rel ] ]
+  """
+  
+  """.
+
 
 c_xp_o-bien_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norm_coordconj_synsem &
-           [ LOCAL.COORD-STRAT two,
-             LKEYS.KEYREL.PRED _o_bien_c_rel ] ].
+  [ SYNSEM norm_coordconj_synsem & [ LOCAL.COORD-STRAT two,
+                                     LKEYS.KEYREL.PRED _o_bien_c_rel ] ]
+  """
+  
+  """.
+
 
 c_xp_o-bien-nrel_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norel_coordconj_synsem &
-           [ LOCAL.CAT.HEAD.LEFT < _bien_c_rel >,
-             LKEYS.KEYREL.PRED _o_bien_c_rel ] ].
+  [ SYNSEM norel_coordconj_synsem & [ LOCAL.CAT.HEAD.LEFT < _bien_c_rel >,
+                                      LKEYS.KEYREL.PRED _o_bien_c_rel ] ]
+  """
+  
+  """.
+
 
 c_xp_o-bien-nrel-o-bien_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norel_coordconj_synsem &
-           [ LOCAL.CAT.HEAD.LEFT < _o_bien_c_rel >,
-             LKEYS.KEYREL.PRED _o_bien_c_rel ] ].
+  [ SYNSEM norel_coordconj_synsem & [ LOCAL.CAT.HEAD.LEFT < _o_bien_c_rel >,
+                                      LKEYS.KEYREL.PRED _o_bien_c_rel ] ]
+  """
+  
+  """.
 
-; - 'ora...ora' (e.g. tomando ora la espada, ora la pluma)
+
 c_xp_ora_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norm_coordconj_synsem &
-           [ LOCAL.COORD-STRAT two,
-             LKEYS.KEYREL.PRED _ora_c_rel ] ].
+  [ SYNSEM norm_coordconj_synsem & [ LOCAL.COORD-STRAT two,
+                                     LKEYS.KEYREL.PRED _ora_c_rel ] ]
+  """
+  - 'ora...ora' (e.g. tomando ora la espada, ora la pluma)
+  """.
+
 
 c_xp_ora-nrel_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norel_coordconj_synsem &
-           [ LOCAL.CAT.HEAD.LEFT < _ora_c_rel >,
-             LKEYS.KEYREL.PRED _ora_c_rel ] ]. 
+  [ SYNSEM norel_coordconj_synsem & [ LOCAL.CAT.HEAD.LEFT < _ora_c_rel >,
+                                      LKEYS.KEYREL.PRED _ora_c_rel ] ]
+  """
+  
+  """.
+
 
 ; - 'siquiera' (e.g. siquiera venga, siquiera no venga')
 ;c_xp_siquiera_lex := basic-coordconj-lex & basic-one-arg &
