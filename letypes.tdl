@@ -6999,34 +6999,53 @@ nonspec_scopal_xp_adverb_synsem := basic_scopal_adverb_synsem &
 
 ;--- 4.1.1. focus adverbs
 
-; e.g. especialmente bajo la escalera/aquí/simpático/estos chicos
 av_-_s_lex := nonspec-adverb-lex & norm-zero-arg &
   [ SYNSEM nonspec_scopal_xp_adverb_synsem &
            [ LOCAL.CAT [ POSTHEAD -,
                          HEAD.MOD < [ LOCAL.CAT [ HEAD +nvjrp,
                                                   VAL.COMPS < > ],
-                                      NON-LOCAL.REL 0-dlist ] > ] ] ].
+                                      NON-LOCAL.REL 0-dlist ] > ] ] ]
+"""
+; --- 4.1. Scopal adverbs
+;--- 4.1.1. focus adverbs
+; e.g. especialmente bajo la escalera/aquí/simpático/estos chicos
+""".
 
-; e.g. Los Colegios deben velar muy especialmente por el cumplimiento de estas normas.
+
 av_-_s-spd_lex := spec-adverb-lex & basic-one-arg & 
   [ SYNSEM scopal_xp_adverb_synsem &
            [ LOCAL.CAT [ POSTHEAD -,
                          HEAD.MOD < [ LOCAL.CAT [ HEAD +nvjrp,
-                                                  VAL.COMPS < > ] ] > ] ] ].
+                                                  VAL.COMPS < > ] ] > ] ] ]
+"""
+; --- 4.1. Scopal adverbs
+;--- 4.1.1. focus adverbs
+; e.g. Los Colegios deben velar muy especialmente por el cumplimiento de estas normas.
+""".
 
 ; e.g. mañana/en la mesa mismo; *mismo mañana/en la mesa
 av_-_s-psth_lex := nonspec-adverb-lex & norm-zero-arg &
   [ SYNSEM nonspec_scopal_xp_adverb_synsem & 
            [ LOCAL.CAT [ POSTHEAD +,
-                         HEAD.MOD < [ LOCAL.CAT.HEAD +vjrp ] > ] ] ].
+                         HEAD.MOD < [ LOCAL.CAT.HEAD +vjrp ] > ] ] ]
+"""
+; --- 4.1. Scopal adverbs
+;--- 4.1.1. focus adverbs
+; e.g. mañana/en la mesa mismo; *mismo mañana/en la mesa
+""".
 
-; e.g. e.g. también
 av_-_s-psth-n_lex := nonspec-adverb-lex & norm-zero-arg &
   [ SYNSEM nonspec_scopal_xp_adverb_synsem & 
            [ LOCAL.CAT [ POSTHEAD +,
                          HEAD.MOD < [ LOCAL [ CAT [ LASTNMOD -,
                                                     HEAD noun,
-                                                    VAL.SPR < > ] ] ] > ] ] ].
+                                                    VAL.SPR < > ] ] ] > ] ] ]
+"""
+; --- 4.1. Scopal adverbs
+;--- 4.1.1. focus adverbs
+; e.g. e.g. también
+"""
+.
 
 ; --- 4.1.2. modal adverbs
 
