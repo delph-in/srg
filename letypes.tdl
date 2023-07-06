@@ -10277,7 +10277,16 @@ zero-arg-slash := basic-zero-arg & zero-arg-nonrel & zero-arg-nonque
   e.g., resumptive pronouns in French.
   """.
 
+; Lexical threading types
 
+basic-one-arg := lex-item &
+  [ ARG-ST < [ NON-LOCAL [ SLASH #slash,
+                           REL #rel,
+                           QUE #que ] ] >,
+    SYNSEM.NON-LOCAL [ SLASH #slash,
+                       REL #rel,
+                       QUE #que ] ]
+"""
 ; These non-zero argument types only amalgamate the non-local
 ; feature values of their complements. They do not introduce any
 ; non-local values of their own, nor do they bind off any non-local
@@ -10289,20 +10298,26 @@ zero-arg-slash := basic-zero-arg & zero-arg-nonrel & zero-arg-nonque
 ; value. Elements which both introduce REL or QUE values and take one 
 ; or more arguments will require appropriate new types as well, which
 ; amalgamate everything but add a value in addition.
-
-basic-one-arg := lex-item &
-  [ ARG-ST < [ NON-LOCAL [ SLASH #slash,
-                           REL #rel,
-                           QUE #que ] ] >,
-    SYNSEM.NON-LOCAL [ SLASH #slash,
-                       REL #rel,
-                       QUE #que ] ].
+""".
 
 o_rais-one-arg := lex-item &
   [ ARG-ST < synsem >,
     SYNSEM.NON-LOCAL [ SLASH 0-dlist,
                        REL 0-dlist,
-                       QUE 0-dlist ] ].
+                       QUE 0-dlist ] ]
+"""
+; These non-zero argument types only amalgamate the non-local
+; feature values of their complements. They do not introduce any
+; non-local values of their own, nor do they bind off any non-local
+; feature values. This assumes that the bottom of most long-distance
+; dependencies is handled by a rule that constrains an argument 
+; (either on the ARG-ST list or a valence list) to be a synsem of 
+; type gap. Elements like English tough adjectives which bind off a 
+; slash value will need a new type that doesn't amalgamate that slash 
+; value. Elements which both introduce REL or QUE values and take one 
+; or more arguments will require appropriate new types as well, which
+; amalgamate everything but add a value in addition.
+""".
 
 basic-two-arg := lex-item &
   [ ARG-ST < [ NON-LOCAL [ SLASH [ LIST #smiddle,
@@ -10322,7 +10337,20 @@ basic-two-arg := lex-item &
                        REL [ LIST #rfirst,
                              LAST #rlast ],
                        QUE [ LIST #qfirst,
-                             LAST #qlast ] ] ].
+                             LAST #qlast ] ] ]
+"""
+; These non-zero argument types only amalgamate the non-local
+; feature values of their complements. They do not introduce any
+; non-local values of their own, nor do they bind off any non-local
+; feature values. This assumes that the bottom of most long-distance
+; dependencies is handled by a rule that constrains an argument 
+; (either on the ARG-ST list or a valence list) to be a synsem of 
+; type gap. Elements like English tough adjectives which bind off a 
+; slash value will need a new type that doesn't amalgamate that slash 
+; value. Elements which both introduce REL or QUE values and take one 
+; or more arguments will require appropriate new types as well, which
+; amalgamate everything but add a value in addition.
+""".
 
 cc-two-arg := lex-item &
   [ ARG-ST < [ NON-LOCAL [ SLASH [ LIST #smiddle,
@@ -10342,7 +10370,20 @@ cc-two-arg := lex-item &
                        REL [ LIST #rfirst,
                              LAST #rlast ],
                        QUE [ LIST #qfirst,
-                             LAST #qlast ] ] ].
+                             LAST #qlast ] ] ]
+"""
+; These non-zero argument types only amalgamate the non-local
+; feature values of their complements. They do not introduce any
+; non-local values of their own, nor do they bind off any non-local
+; feature values. This assumes that the bottom of most long-distance
+; dependencies is handled by a rule that constrains an argument 
+; (either on the ARG-ST list or a valence list) to be a synsem of 
+; type gap. Elements like English tough adjectives which bind off a 
+; slash value will need a new type that doesn't amalgamate that slash 
+; value. Elements which both introduce REL or QUE values and take one 
+; or more arguments will require appropriate new types as well, which
+; amalgamate everything but add a value in addition.
+""".
 
 o_rais-two-arg := lex-item &
   [ ARG-ST < [ NON-LOCAL [ SLASH #slash,
@@ -10351,7 +10392,20 @@ o_rais-two-arg := lex-item &
              synsem >,
     SYNSEM.NON-LOCAL [ SLASH #slash,
                        REL #rel,
-                       QUE #que ] ].
+                       QUE #que ] ]
+"""
+; These non-zero argument types only amalgamate the non-local
+; feature values of their complements. They do not introduce any
+; non-local values of their own, nor do they bind off any non-local
+; feature values. This assumes that the bottom of most long-distance
+; dependencies is handled by a rule that constrains an argument 
+; (either on the ARG-ST list or a valence list) to be a synsem of 
+; type gap. Elements like English tough adjectives which bind off a 
+; slash value will need a new type that doesn't amalgamate that slash 
+; value. Elements which both introduce REL or QUE values and take one 
+; or more arguments will require appropriate new types as well, which
+; amalgamate everything but add a value in addition.
+""".
 
 basic-three-arg := lex-item &
   [ ARG-ST < [ NON-LOCAL [ SLASH [ LIST #smiddle2,
@@ -10377,7 +10431,20 @@ basic-three-arg := lex-item &
                        REL [ LIST #rfirst,
                              LAST #rlast ],
                        QUE [ LIST #qfirst,
-                             LAST #qlast ] ] ].
+                             LAST #qlast ] ] ]
+"""
+; These non-zero argument types only amalgamate the non-local
+; feature values of their complements. They do not introduce any
+; non-local values of their own, nor do they bind off any non-local
+; feature values. This assumes that the bottom of most long-distance
+; dependencies is handled by a rule that constrains an argument 
+; (either on the ARG-ST list or a valence list) to be a synsem of 
+; type gap. Elements like English tough adjectives which bind off a 
+; slash value will need a new type that doesn't amalgamate that slash 
+; value. Elements which both introduce REL or QUE values and take one 
+; or more arguments will require appropriate new types as well, which
+; amalgamate everything but add a value in addition.
+""".
 
 cc-three-arg := lex-item &
   [ ARG-ST < [ NON-LOCAL [ SLASH [ LIST #smiddle,
@@ -10403,7 +10470,20 @@ cc-three-arg := lex-item &
                        REL [ LIST #rfirst,
                              LAST #rlast ],
                        QUE [ LIST #qfirst,
-                             LAST #qlast ] ] ].
+                             LAST #qlast ] ] ]
+"""
+; These non-zero argument types only amalgamate the non-local
+; feature values of their complements. They do not introduce any
+; non-local values of their own, nor do they bind off any non-local
+; feature values. This assumes that the bottom of most long-distance
+; dependencies is handled by a rule that constrains an argument 
+; (either on the ARG-ST list or a valence list) to be a synsem of 
+; type gap. Elements like English tough adjectives which bind off a 
+; slash value will need a new type that doesn't amalgamate that slash 
+; value. Elements which both introduce REL or QUE values and take one 
+; or more arguments will require appropriate new types as well, which
+; amalgamate everything but add a value in addition.
+""".
 
 basic-four-arg := lex-item &
   [ ARG-ST < [ NON-LOCAL [ SLASH [ LIST #smiddle3,
@@ -10435,7 +10515,20 @@ basic-four-arg := lex-item &
                        REL [ LIST #rfirst,
                              LAST #rlast ],
                        QUE [ LIST #qfirst,
-                             LAST #qlast ] ] ].
+                             LAST #qlast ] ] ]
+"""
+; These non-zero argument types only amalgamate the non-local
+; feature values of their complements. They do not introduce any
+; non-local values of their own, nor do they bind off any non-local
+; feature values. This assumes that the bottom of most long-distance
+; dependencies is handled by a rule that constrains an argument 
+; (either on the ARG-ST list or a valence list) to be a synsem of 
+; type gap. Elements like English tough adjectives which bind off a 
+; slash value will need a new type that doesn't amalgamate that slash 
+; value. Elements which both introduce REL or QUE values and take one 
+; or more arguments will require appropriate new types as well, which
+; amalgamate everything but add a value in addition.
+""".
 
 
 ; --- Subcategorization types
@@ -10462,6 +10555,11 @@ np_nom_local := np_local &
                       KEYS [ KEY nom_rel,
                              ALTKEY quant_or_wh_rel ] ] ].
 
+np_acc_local := np_local & acc_local &
+  [ COORD -,
+    CAT.HEAD [ CASE acc_or_obl, 
+               KEYS.KEY a_sel_or_indp_rel ] ]
+"""
 ; llevan el marcador "a": 
 ; - sust. individualizados (busco a María/al ayudante/ayudante), 
 ; - pron. tónicos referidos a personas (me miró a mí, no espero a nadie, a quién buscas),
@@ -10473,10 +10571,7 @@ np_nom_local := np_local &
 ; los verbos ditrans no llevan el marcador (presenté mi novia a mis padres)
 ; clitic doubling obligatory when the DO is realized by a strong personal pron
 ; (a mí me golpearon/*a mí golpearon)
-np_acc_local := np_local & acc_local &
-  [ COORD -,
-    CAT.HEAD [ CASE acc_or_obl, 
-               KEYS.KEY a_sel_or_indp_rel ] ]. 
+""". 
 
 np_acc_unmrkd_local := np_acc_local & 
   [ COORD -,
@@ -10814,1008 +10909,1503 @@ c_xp_eso-que_native_le := c_xp_eso-que_lex & native_le
 
 c_xp_eso-que_le := c_xp_eso-que_lex.
 
-;  <type val="v_-_nsbj_le">
-;  <description>Verb, no compl, no subj (weather verbs)
-;  <ex>Llueve.
-;  <todo>
-;  </type>
+
 v_-_nsbj_native_le := v_-_nsbj_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_-_nsbj_le">
+  <description>Verb, no compl, no subj (weather verbs)
+  <ex>Llueve.
+  <todo>
+  </type>
   """.
 
-v_-_nsbj_le := v_-_nsbj_lex.
 
-;  <type val="v_np_npsv-nsbj_le">
-;  <description>Verb, NP (don't passivize), no subj
-;  <ex>Hay libros.
-;  <todo>
-;  </type>
+v_-_nsbj_le := v_-_nsbj_lex
+  """
+  
+  """.
+
+
 v_np_npsv-nsbj_native_le := v_np_npsv-nsbj_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_np_npsv-nsbj_le">
+  <description>Verb, NP (don't passivize), no subj
+  <ex>Hay libros.
+  <todo>
+  </type>
   """.
 
-v_np_npsv-nsbj_le := v_np_npsv-nsbj_lex.
 
-;  <type val="v_cp_p-ind-nsbj_le">
-;  <description>Verb, Sent. (ind), no subj
-;  <ex>Resultó que Juan fue el ganador.
-;  <todo>
-;  </type>
+v_np_npsv-nsbj_le := v_np_npsv-nsbj_lex
+  """
+  
+  """.
+
+
 v_cp_p-ind-nsbj_native_le := v_cp_p-ind-nsbj_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_cp_p-ind-nsbj_le">
+  <description>Verb, Sent. (ind), no subj
+  <ex>Resultó que Juan fue el ganador.
+  <todo>
+  </type>
   """.
 
-v_cp_p-ind-nsbj_le := v_cp_p-ind-nsbj_lex.
 
-;  <type val="v_cp_p-sub-nsbj_le">
-;  <description>Verb, Sent. (subj), no subj
-;  <ex>Puede que mañana llueva.
-;  <todo>
-;  </type>
+v_cp_p-ind-nsbj_le := v_cp_p-ind-nsbj_lex
+  """
+  
+  """.
+
+
 v_cp_p-sub-nsbj_native_le := v_cp_p-sub-nsbj_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_cp_p-sub-nsbj_le">
+  <description>Verb, Sent. (subj), no subj
+  <ex>Puede que mañana llueva.
+  <todo>
+  </type>
   """.
 
-v_cp_p-sub-nsbj_le := v_cp_p-sub-nsbj_lex.
 
-;  <type val="v_cp_p-inf-nsbj_le">
-;  <description>Verb, VPinf, no subj
-;  <ex>Hay que trabajar más
-;  <todo>
-;  </type>
+v_cp_p-sub-nsbj_le := v_cp_p-sub-nsbj_lex
+  """
+  
+  """.
+
+
 v_cp_p-inf-nsbj_native_le := v_cp_p-inf-nsbj_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_cp_p-inf-nsbj_le">
+  <description>Verb, VPinf, no subj
+  <ex>Hay que trabajar más
+  <todo>
+  </type>
   """.
 
-v_cp_p-inf-nsbj_le := v_cp_p-inf-nsbj_lex.
 
-;  <type val="v_pp_e-nsbj-prn_le">
-;  <description>Verb (pron), PPsel, no subj
-;  <ex>Se trata de un goleador nato.
-;  <todo>
-;  </type>
+v_cp_p-inf-nsbj_le := v_cp_p-inf-nsbj_lex
+  """
+  
+  """.
+
+
 v_pp_e-nsbj-prn_native_le := v_pp_e-nsbj-prn_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e-nsbj-prn_le">
+  <description>Verb (pron), PPsel, no subj
+  <ex>Se trata de un goleador nato.
+  <todo>
+  </type>
   """.
 
-v_pp_e-nsbj-prn_le := v_pp_e-nsbj-prn_lex.
 
-;  <type val="v_pp_e-nsbj_le">
-;  <description>Verb, PPsel, no subj
-;  <ex>basta con 100 ptas.
-;  <todo>
-;  </type>
+v_pp_e-nsbj-prn_le := v_pp_e-nsbj-prn_lex
+  """
+  
+  """.
+
+
 v_pp_e-nsbj_native_le := v_pp_e-nsbj_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e-nsbj_le">
+  <description>Verb, PPsel, no subj
+  <ex>basta con 100 ptas.
+  <todo>
+  </type>
   """.
 
-v_pp_e-nsbj_le := v_pp_e-nsbj_lex.
 
-;  <type val="v_pp_e-cp-p-nsbj_le">
-;  <description>Verb, PPsel (sent), no subj
-;  <ex>basta con que vengas.
-;  <todo>
-;  </type>
+v_pp_e-nsbj_le := v_pp_e-nsbj_lex
+  """
+  
+  """.
+
+
 v_pp_e-cp-p-nsbj_native_le := v_pp_e-cp-p-nsbj_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e-cp-p-nsbj_le">
+  <description>Verb, PPsel (sent), no subj
+  <ex>basta con que vengas.
+  <todo>
+  </type>
   """.
 
-v_pp_e-cp-p-nsbj_le := v_pp_e-cp-p-nsbj_lex.
 
-;  <type val="v_pp_e-vp-nsbj_le">
-;  <description>Verb, PPsel (VPinf), no subj
-;  <ex>basta con verte
-;  <todo>
-;  </type>
+v_pp_e-cp-p-nsbj_le := v_pp_e-cp-p-nsbj_lex
+  """
+  
+  """.
+
+
 v_pp_e-vp-nsbj_native_le := v_pp_e-vp-nsbj_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e-vp-nsbj_le">
+  <description>Verb, PPsel (VPinf), no subj
+  <ex>basta con verte
+  <todo>
+  </type>
   """.
 
-v_pp_e-vp-nsbj_le := v_pp_e-vp-nsbj_lex.
 
-;  <type val="v_ppa-pp_e-nsbj_le">
-;  <description>Verb, PPa and PPsel, no subj
-;  <ex>Me sobra con 100 ptas.
-;  <todo>
-;  </type>
+v_pp_e-vp-nsbj_le := v_pp_e-vp-nsbj_lex
+  """
+  
+  """.
+
+
 v_ppa-pp_e-nsbj_native_le := v_ppa-pp_e-nsbj_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_ppa-pp_e-nsbj_le">
+  <description>Verb, PPa and PPsel, no subj
+  <ex>Me sobra con 100 ptas.
+  <todo>
+  </type>
   """.
 
-v_ppa-pp_e-nsbj_le := v_ppa-pp_e-nsbj_lex.
 
-;  <type val="v_ppa-pp_e-cp-p-nsbj_le">
-;  <description>Verb, PPa and PPsel (sent), no subj
-;  <ex>Me basta con que vengas.
-;  <todo>
-;  </type>
+v_ppa-pp_e-nsbj_le := v_ppa-pp_e-nsbj_lex
+  """
+  
+  """.
+
+
 v_ppa-pp_e-cp-p-nsbj_native_le := v_ppa-pp_e-cp-p-nsbj_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_ppa-pp_e-cp-p-nsbj_le">
+  <description>Verb, PPa and PPsel (sent), no subj
+  <ex>Me basta con que vengas.
+  <todo>
+  </type>
   """.
 
-v_ppa-pp_e-cp-p-nsbj_le := v_ppa-pp_e-cp-p-nsbj_lex.
 
-;  <type val="v_ppa-pp_e-vp-nsbj_le">
-;  <description>Verb, PPa and PPsel (VPinf), no subj
-;  <ex>Me basta con verte
-;  <todo>
-;  </type>
+v_ppa-pp_e-cp-p-nsbj_le := v_ppa-pp_e-cp-p-nsbj_lex
+  """
+  
+  """.
+
+
 v_ppa-pp_e-vp-nsbj_native_le := v_ppa-pp_e-vp-nsbj_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_ppa-pp_e-vp-nsbj_le">
+  <description>Verb, PPa and PPsel (VPinf), no subj
+  <ex>Me basta con verte
+  <todo>
+  </type>
   """.
 
-v_ppa-pp_e-vp-nsbj_le := v_ppa-pp_e-vp-nsbj_lex.
 
-;  <type val="v_-_sbj-cp-p_le">
-;  <description>Verb, no compl, Subj Sent
-;  <ex>En el contrato no figura que el acuerdo es/sea irreversible.
-;  <todo>
-;  </type>
+v_ppa-pp_e-vp-nsbj_le := v_ppa-pp_e-vp-nsbj_lex
+  """
+  
+  """.
+
+
 v_-_sbj-cp-p_native_le := v_-_sbj-cp-p_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_-_sbj-cp-p_le">
+  <description>Verb, no compl, Subj Sent
+  <ex>En el contrato no figura que el acuerdo es/sea irreversible.
+  <todo>
+  </type>
   """.
 
-v_-_sbj-cp-p_le := v_-_sbj-cp-p_lex.
 
-;  <type val="v_-_sbj-cp-p-prn_le">
-;  <description>Verb (pron), no compl, Subj Sent
-;  <ex>De ahí se desprende que la situación es/sea imposible.
-;  <todo>
-;  </type>
+v_-_sbj-cp-p_le := v_-_sbj-cp-p_lex
+  """
+  
+  """.
+
+
 v_-_sbj-cp-p-prn_native_le := v_-_sbj-cp-p-prn_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_-_sbj-cp-p-prn_le">
+  <description>Verb (pron), no compl, Subj Sent
+  <ex>De ahí se desprende que la situación es/sea imposible.
+  <todo>
+  </type>
   """.
 
-v_-_sbj-cp-p-prn_le := v_-_sbj-cp-p-prn_lex.
 
-;  <type val="v_ppa*_sbj-cp-p_le">
-;  <description>Verb, PPa (opt), Subj Sent
-;  <ex>(Le) ocurre que no hicieron lo que les había pedido
-;  <todo>
-;  </type>
+v_-_sbj-cp-p-prn_le := v_-_sbj-cp-p-prn_lex
+  """
+  
+  """.
+
+
 v_ppa*_sbj-cp-p_native_le := v_ppa*_sbj-cp-p_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_ppa*_sbj-cp-p_le">
+  <description>Verb, PPa (opt), Subj Sent
+  <ex>(Le) ocurre que no hicieron lo que les había pedido
+  <todo>
+  </type>
   """.
 
-v_ppa*_sbj-cp-p_le := v_ppa*_sbj-cp-p_lex.
 
-;  <type val="v_ppa*_sbj-cp-p-cv_le">
-;  <description>Verb, PPa (opt), Subj Sent/VPinf
-;  <ex>No (me) consta que estuviese aquí.
-;  <todo>
-;  </type>
+v_ppa*_sbj-cp-p_le := v_ppa*_sbj-cp-p_lex
+  """
+  
+  """.
+
+
 v_ppa*_sbj-cp-p-cv_native_le := v_ppa*_sbj-cp-p-cv_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_ppa*_sbj-cp-p-cv_le">
+  <description>Verb, PPa (opt), Subj Sent/VPinf
+  <ex>No (me) consta que estuviese aquí.
+  <todo>
+  </type>
   """.
 
-v_ppa*_sbj-cp-p-cv_le := v_ppa*_sbj-cp-p-cv_lex.
 
-;  <type val="v_ppa*_sbj-cp-p-sub-cv_le">
-;  <description>Verb, PPa (opt), Subj Sent subj/VPinf
-;  <ex>(Me) basta que vengas
-;  <todo>
-;  </type>
+v_ppa*_sbj-cp-p-cv_le := v_ppa*_sbj-cp-p-cv_lex
+  """
+  
+  """.
+
+
 v_ppa*_sbj-cp-p-sub-cv_native_le := v_ppa*_sbj-cp-p-sub-cv_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_ppa*_sbj-cp-p-sub-cv_le">
+  <description>Verb, PPa (opt), Subj Sent subj/VPinf
+  <ex>(Me) basta que vengas
+  <todo>
+  </type>
   """.
 
-v_ppa*_sbj-cp-p-sub-cv_le := v_ppa*_sbj-cp-p-sub-cv_lex.
 
-;  <type val="v_ppa*_sbj-cp-p-sub_le">
-;  <description>Verb, PPa (opt), Subj Sent subj/VPinf
-;  <ex>No (me) gusta que a los toros te pongas la minifalda.
-;  <todo>
-;  </type>
+v_ppa*_sbj-cp-p-sub-cv_le := v_ppa*_sbj-cp-p-sub-cv_lex
+  """
+  
+  """.
+
+
 v_ppa*_sbj-cp-p-sub_native_le := v_ppa*_sbj-cp-p-sub_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_ppa*_sbj-cp-p-sub_le">
+  <description>Verb, PPa (opt), Subj Sent subj/VPinf
+  <ex>No (me) gusta que a los toros te pongas la minifalda.
+  <todo>
+  </type>
   """.
 
-v_ppa*_sbj-cp-p-sub_le := v_ppa*_sbj-cp-p-sub_lex.
 
-;  <type val="v_ppa*_sbj-cp-p-sub-prn_le">
-;  <description>Verb (pron), PPa (opt), Subj Sent subj/VPinf
-;  <ex>se le antojó que vinieran.
-;  <todo>
-;  </type>
+v_ppa*_sbj-cp-p-sub_le := v_ppa*_sbj-cp-p-sub_lex
+  """
+  
+  """.
+
+
 v_ppa*_sbj-cp-p-sub-prn_native_le := v_ppa*_sbj-cp-p-sub-prn_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_ppa*_sbj-cp-p-sub-prn_le">
+  <description>Verb (pron), PPa (opt), Subj Sent subj/VPinf
+  <ex>se le antojó que vinieran.
+  <todo>
+  </type>
   """.
 
-v_ppa*_sbj-cp-p-sub-prn_le := v_ppa*_sbj-cp-p-sub-prn_lex.
 
-;  <type val="v_pp_e-sbj-cp-p-sub_le">
-;  <description>Verb, PPsel, Subj Sent subj/VPinf
-;  <ex>(el) que las clases sean malas repercute en los alumnos
-;  <todo>
-;  </type>
+v_ppa*_sbj-cp-p-sub-prn_le := v_ppa*_sbj-cp-p-sub-prn_lex
+  """
+  
+  """.
+
+
 v_pp_e-sbj-cp-p-sub_native_le := v_pp_e-sbj-cp-p-sub_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e-sbj-cp-p-sub_le">
+  <description>Verb, PPsel, Subj Sent subj/VPinf
+  <ex>(el) que las clases sean malas repercute en los alumnos
+  <todo>
+  </type>
   """.
 
-v_pp_e-sbj-cp-p-sub_le := v_pp_e-sbj-cp-p-sub_lex.
 
-;  <type val="v_pp_e-sbj-cp-p-sub-prn_le">
-;  <description>Verb (pron), PPsel, Subj Sent subj/VPinf
-;  <ex>(el) que las clases sean malas se traduce en un mal resultado
-;  <todo>
-;  </type>
+v_pp_e-sbj-cp-p-sub_le := v_pp_e-sbj-cp-p-sub_lex
+  """
+  
+  """.
+
+
 v_pp_e-sbj-cp-p-sub-prn_native_le := v_pp_e-sbj-cp-p-sub-prn_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e-sbj-cp-p-sub-prn_le">
+  <description>Verb (pron), PPsel, Subj Sent subj/VPinf
+  <ex>(el) que las clases sean malas se traduce en un mal resultado
+  <todo>
+  </type>
   """.
 
-v_pp_e-sbj-cp-p-sub-prn_le := v_pp_e-sbj-cp-p-sub-prn_lex.
 
-;  <type val="v_ppa*-pp_e-sbj-cp-p-sub_le">
-;  <description>Verb, PPa, PPsel, Subj Sent subj/VPinf
-;  <ex>de nada /le) sirve luchar que luchen/luchar
-;  <todo>
-;  </type>
+v_pp_e-sbj-cp-p-sub-prn_le := v_pp_e-sbj-cp-p-sub-prn_lex
+  """
+  
+  """.
+
+
 v_ppa*-pp_e-sbj-cp-p-sub_native_le := v_ppa*-pp_e-sbj-cp-p-sub_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_ppa*-pp_e-sbj-cp-p-sub_le">
+  <description>Verb, PPa, PPsel, Subj Sent subj/VPinf
+  <ex>de nada /le) sirve luchar que luchen/luchar
+  <todo>
+  </type>
   """.
 
-v_ppa*-pp_e-sbj-cp-p-sub_le := v_ppa*-pp_e-sbj-cp-p-sub_lex.
 
-;  <type val="v_np_sbj-cp-p-sub_le">
-;  <description>Verb, NP, Subj Sent subj/VPinf
-;  <ex>que el poder político se descomponga no significa necesariamente una decadencia.
-;  <todo>
-;  </type>
+v_ppa*-pp_e-sbj-cp-p-sub_le := v_ppa*-pp_e-sbj-cp-p-sub_lex
+  """
+  
+  """.
+
+
 v_np_sbj-cp-p-sub_native_le := v_np_sbj-cp-p-sub_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_np_sbj-cp-p-sub_le">
+  <description>Verb, NP, Subj Sent subj/VPinf
+  <ex>que el poder político se descomponga no significa necesariamente una decadencia.
+  <todo>
+  </type>
   """.
 
-v_np_sbj-cp-p-sub_le := v_np_sbj-cp-p-sub_lex.
 
-;  <type val="v_np_sbj-cp-p-sub-idm_le">
-;  <description>Verb, NP, Subj Sent subj/VPinf (idioms)
-;  <ex>Vale la pega que vengan/pagar tanto
-;  <todo>
-;  </type>
+v_np_sbj-cp-p-sub_le := v_np_sbj-cp-p-sub_lex
+  """
+  
+  """.
+
+
 v_np_sbj-cp-p-sub-idm_native_le := v_np_sbj-cp-p-sub-idm_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_np_sbj-cp-p-sub-idm_le">
+  <description>Verb, NP, Subj Sent subj/VPinf (idioms)
+  <ex>Vale la pega que vengan/pagar tanto
+  <todo>
+  </type>
   """.
 
-v_np_sbj-cp-p-sub-idm_le := v_np_sbj-cp-p-sub-idm_lex.
 
-;  <type val="v_np-pp_e-sbj-cp-p_-suble">
-;  <description>Verb, NP and PPsel, Subj Sent sub/VPinf
-;  <ex>que su partido haya perdido las elecciones lo apartará del poder
-;  <todo>
-;  </type>
+v_np_sbj-cp-p-sub-idm_le := v_np_sbj-cp-p-sub-idm_lex
+  """
+  
+  """.
+
+
 v_np-pp_e-sbj-cp-p-sub_native_le := v_np-pp_e-sbj-cp-p-sub_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_np-pp_e-sbj-cp-p_-suble">
+  <description>Verb, NP and PPsel, Subj Sent sub/VPinf
+  <ex>que su partido haya perdido las elecciones lo apartará del poder
+  <todo>
+  </type>
   """.
 
-v_np-pp_e-sbj-cp-p-sub_le := v_np-pp_e-sbj-cp-p-sub_lex.
 
-;  <type val="v_np-ppa*_sbj-cp-p-sub_le">
-;  <description>Verb, NP and PPa (opt), Subj Sent subj/VPinf
-;  <ex>que haya dicho esto le acarrea le acarrea muchos problemas (a María).
-;  <todo>
-;  </type>
+v_np-pp_e-sbj-cp-p-sub_le := v_np-pp_e-sbj-cp-p-sub_lex
+  """
+  
+  """.
+
+
 v_np-ppa*_sbj-cp-p-sub_native_le := v_np-ppa*_sbj-cp-p-sub_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_np-ppa*_sbj-cp-p-sub_le">
+  <description>Verb, NP and PPa (opt), Subj Sent subj/VPinf
+  <ex>que haya dicho esto le acarrea le acarrea muchos problemas (a María).
+  <todo>
+  </type>
   """.
 
-v_np-ppa*_sbj-cp-p-sub_le := v_np-ppa*_sbj-cp-p-sub_lex.
 
-;  <type val="v_cp_p-sbj-cp-p-sub_le">
-;  <description>Verb, Sent/VPinf, Subj Sent subj/VPinf
-;  <ex>que te haya aprobado no significa que no tengas que venir a clase
-;  <todo>
-;  </type>
+v_np-ppa*_sbj-cp-p-sub_le := v_np-ppa*_sbj-cp-p-sub_lex
+  """
+  
+  """.
+
+
 v_cp_p-sbj-cp-p-sub_native_le := v_cp_p-sbj-cp-p-sub_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_cp_p-sbj-cp-p-sub_le">
+  <description>Verb, Sent/VPinf, Subj Sent subj/VPinf
+  <ex>que te haya aprobado no significa que no tengas que venir a clase
+  <todo>
+  </type>
   """.
+
 
 v_cp_p-sbj-cp-p-sub_le := v_cp_p-sbj-cp-p-sub_lex.
 
-;  <type val="v_ppa*-cp_p-sbj-cp-p-sub_le">
-;  <description>Verb, PPa (opt) and Sent/VPinf, Subj Sent subj/VPinf
-;  <ex>oír música no (te) impide que trabajes
-;  <todo>
-;  </type>
+
 v_ppa*-cp_p-sbj-cp-p-sub_native_le := v_ppa*-cp_p-sbj-cp-p-sub_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_ppa*-cp_p-sbj-cp-p-sub_le">
+  <description>Verb, PPa (opt) and Sent/VPinf, Subj Sent subj/VPinf
+  <ex>oír música no (te) impide que trabajes
+  <todo>
+  </type>
   """.
 
-v_ppa*-cp_p-sbj-cp-p-sub_le := v_ppa*-cp_p-sbj-cp-p-sub_lex.
 
-;  <type val="v_ap_sbj-vp-inf-ser_le">
-;  <description> Verb (ser), AP, Subj VPinf
-;  <ex>es imposible vivir en el centro
-;  <todo>
-;  </type>
+v_ppa*-cp_p-sbj-cp-p-sub_le := v_ppa*-cp_p-sbj-cp-p-sub_lex
+  """
+  
+  """.
+
+
 v_ap_sbj-vp-inf-ser_native_le := v_ap_sbj-vp-inf-ser_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_ap_sbj-vp-inf-ser_le">
+  <description> Verb (ser), AP, Subj VPinf
+  <ex>es imposible vivir en el centro
+  <todo>
+  </type>
   """.
 
-v_ap_sbj-vp-inf-ser_le := v_ap_sbj-vp-inf-ser_lex.
 
-;  <type val="v_pp_e-sbj-vp-inf-ser_le">
-;  <description>Verb (ser), PPsel, Subj VPinf
-;  <ex>rectificar es de sabios 
-;  <todo>
-;  </type>
+v_ap_sbj-vp-inf-ser_le := v_ap_sbj-vp-inf-ser_lex
+  """
+  
+  """.
+
+
 v_pp_e-sbj-vp-inf-ser_native_le := v_pp_e-sbj-vp-inf-ser_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e-sbj-vp-inf-ser_le">
+  <description>Verb (ser), PPsel, Subj VPinf
+  <ex>rectificar es de sabios
+  <todo>
+  </type>
   """.
 
-v_pp_e-sbj-vp-inf-ser_le := v_pp_e-sbj-vp-inf-ser_lex.
 
-;  <type val="v_np_npsv-sbj-vp-inf-ser_le">
-;  <description>Verb (ser), NP, Subj VPinf
-;  <ex>regalar detalles es una cursilería 
-;  <todo>
-;  </type>
+v_pp_e-sbj-vp-inf-ser_le := v_pp_e-sbj-vp-inf-ser_lex
+  """
+  
+  """.
+
+
 v_np_npsv-sbj-vp-inf-ser_native_le := v_np_npsv-sbj-vp-inf-ser_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_np_npsv-sbj-vp-inf-ser_le">
+  <description>Verb (ser), NP, Subj VPinf
+  <ex>regalar detalles es una cursilería
+  <todo>
+  </type>
   """.
 
-v_np_npsv-sbj-vp-inf-ser_le := v_np_npsv-sbj-vp-inf-ser_lex.
 
-;  <type val="v_vp_sbj-vp-inf-ser_le">
-;  <description>>Verb (ser), VPinf, Subj VPinf
-;  <ex>Tolerar es simplemente reconocer que el otro existe.
-;  <todo>
-;  </type>
+v_np_npsv-sbj-vp-inf-ser_le := v_np_npsv-sbj-vp-inf-ser_lex
+  """
+  
+  """.
+
+
 v_vp_sbj-vp-inf-ser_native_le := v_vp_sbj-vp-inf-ser_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_vp_sbj-vp-inf-ser_le">
+  <description>>Verb (ser), VPinf, Subj VPinf
+  <ex>Tolerar es simplemente reconocer que el otro existe.
+  <todo>
+  </type>
   """.
 
-v_vp_sbj-vp-inf-ser_le := v_vp_sbj-vp-inf-ser_lex.
 
-;  <type val="v_ap_sbj-cp-p-ser_le">
-;  <description>Verb (ser), AP, Subj Sent
-;  <ex>es imposible que no venga
-;  <todo>
-;  </type>
+v_vp_sbj-vp-inf-ser_le := v_vp_sbj-vp-inf-ser_lex
+  """
+  
+  """.
+
+
 v_ap_sbj-cp-p-ser_native_le := v_ap_sbj-cp-p-ser_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_ap_sbj-cp-p-ser_le">
+  <description>Verb (ser), AP, Subj Sent
+  <ex>es imposible que no venga
+  <todo>
+  </type>
   """.
 
-v_ap_sbj-cp-p-ser_le := v_ap_sbj-cp-p-ser_lex.
 
-;  <type val="v_np_sbj-cp-p-ser_le">
-;  <description>Verb (ser), NP, Subj Sent
-;  <ex>
-;  <todo>
-;  </type>
+v_ap_sbj-cp-p-ser_le := v_ap_sbj-cp-p-ser_lex
+  """
+  
+  """.
+
+
 v_np_sbj-cp-p-ser_native_le := v_np_sbj-cp-p-ser_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_np_sbj-cp-p-ser_le">
+  <description>Verb (ser), NP, Subj Sent
+  <ex>
+  <todo>
+  </type>
   """.
 
-v_np_sbj-cp-p-ser_le := v_np_sbj-cp-p-ser_lex.
 
-;  <type val="v_ppart_sbj-vp-inf-estar_le">
-;  <description>Verb (estar), ppart, Subj VPinf
-;  <ex>está prohibido fumar aqui.
-;  <todo>
-;  </type>
+v_np_sbj-cp-p-ser_le := v_np_sbj-cp-p-ser_lex
+  """
+  
+  """.
+
+
 v_ppart_sbj-vp-inf-estar_native_le := v_ppart_sbj-vp-inf-estar_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_ppart_sbj-vp-inf-estar_le">
+  <description>Verb (estar), ppart, Subj VPinf
+  <ex>está prohibido fumar aqui.
+  <todo>
+  </type>
   """.
 
-v_ppart_sbj-vp-inf-estar_le := v_ppart_sbj-vp-inf-estar_lex.
 
-;  <type val="v_ap_sbj-cp-p-estar_le">
-;  <description>Verb (estar), AP, Subj Sent 
-;  <ex>no está claro que ha ocurrido
-;  <todo>
-;  </type>
+v_ppart_sbj-vp-inf-estar_le := v_ppart_sbj-vp-inf-estar_lex
+  """
+  
+  """.
+
+
 v_ap_sbj-cp-p-estar_native_le := v_ap_sbj-cp-p-estar_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_ap_sbj-cp-p-estar_le">
+  <description>Verb (estar), AP, Subj Sent
+  <ex>no está claro que ha ocurrido
+  <todo>
+  </type>
   """.
 
-v_ap_sbj-cp-p-estar_le := v_ap_sbj-cp-p-estar_lex.
 
-;  <type val="v_adv_sbj-cp-p-estar_le">
-;  <description>Verb (estar), ADV, Subj Sent
-;  <ex>está bien que Guillermo lo haga
-;  <todo>
-;  </type>
+v_ap_sbj-cp-p-estar_le := v_ap_sbj-cp-p-estar_lex
+  """
+  
+  """.
+
+
 v_adv_sbj-cp-p-estar_native_le := v_adv_sbj-cp-p-estar_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_adv_sbj-cp-p-estar_le">
+  <description>Verb (estar), ADV, Subj Sent
+  <ex>está bien que Guillermo lo haga
+  <todo>
+  </type>
   """.
 
-v_adv_sbj-cp-p-estar_le := v_adv_sbj-cp-p-estar_lex.
 
-;  <type val="v_-_psv_le">
-;  <description>Verb, no compl, (unacc, may appear in APC)
-;  <ex>floreció el rosal.
-; <todo>
-;  </type>
+v_adv_sbj-cp-p-estar_le := v_adv_sbj-cp-p-estar_lex
+  """
+  
+  """.
+
+
 v_-_psv_native_le := v_-_psv_lex & native_le
   """
-  This is a native lexical entry type, for words that are in the lexicon.
+   This is a native lexical entry type, for words that are in the lexicon.
+  
+   <type val="v_-_psv_le">
+   <description>Verb, no compl, (unacc, may appear in APC)
+   <ex>floreció el rosal.
+  <todo>
+   </type>
   """.
 
-v_-_psv_le := v_-_psv_lex.
 
-;  <type val="v_-_psv-prn_le">
-;  <description>Verb (pron), no compl, (unacc, may appear in APC)
-;  <ex>el jersey se encogió.
-; <todo>
-;  </type>
+v_-_psv_le := v_-_psv_lex
+  """
+  
+  """.
+
+
 v_-_psv-prn_native_le := v_-_psv-prn_lex & native_le
   """
-  This is a native lexical entry type, for words that are in the lexicon.
+   This is a native lexical entry type, for words that are in the lexicon.
+  
+   <type val="v_-_psv-prn_le">
+   <description>Verb (pron), no compl, (unacc, may appear in APC)
+   <ex>el jersey se encogió.
+  <todo>
+   </type>
   """.
 
-v_-_psv-prn_le := v_-_psv-prn_lex.
 
-;  <type val="v_pp_loc_le">
-;  <description>Verb, PPloc (unacc, don't appear in APC)
-;  <ex>vive
-;  <todo>
-;  </type>
+v_-_psv-prn_le := v_-_psv-prn_lex
+  """
+  
+  """.
+
+
 v_pp_loc_native_le := v_pp_loc_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_loc_le">
+  <description>Verb, PPloc (unacc, don't appear in APC)
+  <ex>vive
+  <todo>
+  </type>
   """.
 
-v_pp_loc_le := v_pp_loc_lex.
 
-;  <type val="v_pp*_loc_le">
-;  <description>Verb, PPloc (opt) (unacc, don't appear in APC)
-;  <ex>permaneció (en la ciudad).
-;  <todo>
-;  </type>
+v_pp_loc_le := v_pp_loc_lex
+  """
+  
+  """.
+
+
 v_pp*_loc_native_le := v_pp*_loc_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp*_loc_le">
+  <description>Verb, PPloc (opt) (unacc, don't appear in APC)
+  <ex>permaneció (en la ciudad).
+  <todo>
+  </type>
   """.
 
-v_pp*_loc_le := v_pp*_loc_lex.
 
-;  <type val="v_pp*_loc-psv_le">
-;  <description>Verb, PPloc (opt) (unacc, may appear in APC)
-;  <ex>aterrizó (en el aeropuerto de Barcelona).
-;  <todo>
-;  </type>
+v_pp*_loc_le := v_pp*_loc_lex
+  """
+  
+  """.
+
+
 v_pp*_loc-psv_native_le := v_pp*_loc-psv_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp*_loc-psv_le">
+  <description>Verb, PPloc (opt) (unacc, may appear in APC)
+  <ex>aterrizó (en el aeropuerto de Barcelona).
+  <todo>
+  </type>
   """.
 
-v_pp*_loc-psv_le := v_pp*_loc-psv_lex.
 
-;  <type val="v_pp_loc-prn_le">
-;  <description>Verb (pron), PPloc (unacc, don't appear in APC)
-;  <ex>se alojó en mi casa.
-;  <todo>
-;  </type>
+v_pp*_loc-psv_le := v_pp*_loc-psv_lex
+  """
+  
+  """.
+
+
 v_pp_loc-prn_native_le := v_pp_loc-prn_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_loc-prn_le">
+  <description>Verb (pron), PPloc (unacc, don't appear in APC)
+  <ex>se alojó en mi casa.
+  <todo>
+  </type>
   """.
 
-v_pp_loc-prn_le := v_pp_loc-prn_lex.
 
-;  <type val="v_pp*_loc-prn_le">
-;  <description>Verb (pron), PPloc (opt) (unacc, don't appear in APC)
-;  <ex>se presentó (en casa).
-;  <todo>
-;  </type>
+v_pp_loc-prn_le := v_pp_loc-prn_lex
+  """
+  
+  """.
+
+
 v_pp*_loc-prn_native_le := v_pp*_loc-prn_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp*_loc-prn_le">
+  <description>Verb (pron), PPloc (opt) (unacc, don't appear in APC)
+  <ex>se presentó (en casa).
+  <todo>
+  </type>
   """.
 
-v_pp*_loc-prn_le := v_pp*_loc-prn_lex.
 
-;  <type val="v_pp*_loc-psv-prn_le">
-;  <description>Verb (pron), PPloc (opt) (unacc, may appear in APC)
-;  <ex>se atrincheraron (en un bar).
-;  <todo>
-;  </type>
+v_pp*_loc-prn_le := v_pp*_loc-prn_lex
+  """
+  
+  """.
+
+
 v_pp*_loc-psv-prn_native_le := v_pp*_loc-psv-prn_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp*_loc-psv-prn_le">
+  <description>Verb (pron), PPloc (opt) (unacc, may appear in APC)
+  <ex>se atrincheraron (en un bar).
+  <todo>
+  </type>
   """.
 
-v_pp*_loc-psv-prn_le := v_pp*_loc-psv-prn_lex.
 
-;  <type val="v_pp_dir_le">
-;  <description>Verb, PPdir (unacc, don't appear in APC)
-;  <ex>Dolly se vuelve huracán y enfila hacia Texas.
-;  <todo>
-;  </type>
+v_pp*_loc-psv-prn_le := v_pp*_loc-psv-prn_lex
+  """
+  
+  """.
+
+
 v_pp_dir_native_le := v_pp_dir_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_dir_le">
+  <description>Verb, PPdir (unacc, don't appear in APC)
+  <ex>Dolly se vuelve huracán y enfila hacia Texas.
+  <todo>
+  </type>
   """.
 
-v_pp_dir_le := v_pp_dir_lex.
 
-;  <type val="v_pp*_dir_le">
-;  <description>Verb, PPdir (opt) (unacc, don't appear in APC)
-;  <ex>acudieron (a la reunión).
-;  <todo>
-;  </type>
+v_pp_dir_le := v_pp_dir_lex
+  """
+  
+  """.
+
+
 v_pp*_dir_native_le := v_pp*_dir_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp*_dir_le">
+  <description>Verb, PPdir (opt) (unacc, don't appear in APC)
+  <ex>acudieron (a la reunión).
+  <todo>
+  </type>
   """.
 
-v_pp*_dir_le := v_pp*_dir_lex.
 
-;  <type val="v_pp*_dir-psv_le">
-;  <description>Verb, PPdir (opt) (unacc, may appear in APC)
-;  <ex>partieron (hacia Nueva York).
-;  <todo>
-;  </type>
+v_pp*_dir_le := v_pp*_dir_lex
+  """
+  
+  """.
+
+
 v_pp*_dir-psv_native_le := v_pp*_dir-psv_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp*_dir-psv_le">
+  <description>Verb, PPdir (opt) (unacc, may appear in APC)
+  <ex>partieron (hacia Nueva York).
+  <todo>
+  </type>
   """.
 
-v_pp*_dir-psv_le := v_pp*_dir-psv_lex.
 
-;  <type val="v_pp*_dir-prn_le">
-;  <description>Verb (pron), PPdir (opt) (unacc, don't appear in APC)
-;  <ex>se extiende (hacia el sur).
-;  <todo>
-;  </type>
+v_pp*_dir-psv_le := v_pp*_dir-psv_lex
+  """
+  
+  """.
+
+
 v_pp*_dir-prn_native_le := v_pp*_dir-prn_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp*_dir-prn_le">
+  <description>Verb (pron), PPdir (opt) (unacc, don't appear in APC)
+  <ex>se extiende (hacia el sur).
+  <todo>
+  </type>
   """.
 
-v_pp*_dir-prn_le := v_pp*_dir-prn_lex.
 
-;  <type val="v_pp_dir-prn_le">
-;  <description>Verb (pron), PPdir (unacc, don't appear in APC)
-;  <ex>me dirigí al norte
-;  <todo>
-;  </type>
+v_pp*_dir-prn_le := v_pp*_dir-prn_lex
+  """
+  
+  """.
+
+
 v_pp_dir-prn_native_le := v_pp_dir-prn_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_dir-prn_le">
+  <description>Verb (pron), PPdir (unacc, don't appear in APC)
+  <ex>me dirigí al norte
+  <todo>
+  </type>
   """.
 
-v_pp_dir-prn_le := v_pp_dir-prn_lex.
 
-;  <type val="v_pp*_dir-psv-prn_le">
-;  <description>Verb (pron), PPdir (opt) (unacc, may appear in APC)
-;  <ex>se deslizó (hacia el otro lado).
-;  <todo>
-;  </type>
+v_pp_dir-prn_le := v_pp_dir-prn_lex
+  """
+  
+  """.
+
+
 v_pp*_dir-psv-prn_native_le := v_pp*_dir-psv-prn_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp*_dir-psv-prn_le">
+  <description>Verb (pron), PPdir (opt) (unacc, may appear in APC)
+  <ex>se deslizó (hacia el otro lado).
+  <todo>
+  </type>
   """.
 
-v_pp*_dir-psv-prn_le := v_pp*_dir-psv-prn_lex.
 
-;  <type val="v_-_le">
-;  <description>Verb, no compl
-;  <ex>esquía muy bien.
-;  <todo>
-;  </type>
+v_pp*_dir-psv-prn_le := v_pp*_dir-psv-prn_lex
+  """
+  
+  """.
+
+
 v_-_native_le := v_-_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_-_le">
+  <description>Verb, no compl
+  <ex>esquía muy bien.
+  <todo>
+  </type>
   """.
 
-v_-_le := v_-_lex.
 
-;  <type val="v_-_prn_le">
-;  <description>Verb (pron), no compl
-;  <ex>se suicidó.
-;  <todo>
-;  </type>
+v_-_le := v_-_lex
+  """
+  
+  """.
+
+
 v_-_prn_native_le := v_-_prn_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_-_prn_le">
+  <description>Verb (pron), no compl
+  <ex>se suicidó.
+  <todo>
+  </type>
   """.
 
-v_-_prn_le := v_-_prn_lex.
 
-;  <type val="v_pp_e_le">
-;  <description>Verb, PPsel
-;  <ex>sucumbió a la tentación.
-;  <todo>
-;  </type>
+v_-_prn_le := v_-_prn_lex
+  """
+  
+  """.
+
+
 v_pp_e_native_le := v_pp_e_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e_le">
+  <description>Verb, PPsel
+  <ex>sucumbió a la tentación.
+  <todo>
+  </type>
   """.
 
-v_pp_e_le := v_pp_e_lex.
 
-;  <type val="v_pp*_e_le">
-;  <description>Verb, PPsel (opt)
-;  <ex>desertó (del ejercito).
-;  <todo>
-;  </type>
+v_pp_e_le := v_pp_e_lex
+  """
+  
+  """.
+
+
 v_pp*_e_native_le := v_pp*_e_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp*_e_le">
+  <description>Verb, PPsel (opt)
+  <ex>desertó (del ejercito).
+  <todo>
+  </type>
   """.
 
-v_pp*_e_le := v_pp*_e_lex.
 
-;  <type val="v_pp_e-prn_le">
-;  <description>Verb (pron), PPsel
-;  <ex>se encapricho de/con aquella muchacha.
-;  <todo>
-;  </type>
+v_pp*_e_le := v_pp*_e_lex
+  """
+  
+  """.
+
+
 v_pp_e-prn_native_le := v_pp_e-prn_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e-prn_le">
+  <description>Verb (pron), PPsel
+  <ex>se encapricho de/con aquella muchacha.
+  <todo>
+  </type>
   """.
 
-v_pp_e-prn_le := v_pp_e-prn_lex.
 
-;  <type val="v_pp*_e-prn_le">
-;  <description>Verb (pron), PPsel (opt)
-;  <ex>no supo adaptarse (a la nueva situación)
-;  <todo>
-;  </type>
+v_pp_e-prn_le := v_pp_e-prn_lex
+  """
+  
+  """.
+
+
 v_pp*_e-prn_native_le := v_pp*_e-prn_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp*_e-prn_le">
+  <description>Verb (pron), PPsel (opt)
+  <ex>no supo adaptarse (a la nueva situación)
+  <todo>
+  </type>
   """.
 
-v_pp*_e-prn_le := v_pp*_e-prn_lex.
 
-;  <type val="v_pp_e-idm_le">
-;  <description>Verb, PPsel, idiom
-;  <ex>entrar en vigor
-;  <todo>
-;  </type>
+v_pp*_e-prn_le := v_pp*_e-prn_lex
+  """
+  
+  """.
+
+
 v_pp_e-idm_native_le := v_pp_e-idm_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e-idm_le">
+  <description>Verb, PPsel, idiom
+  <ex>entrar en vigor
+  <todo>
+  </type>
   """.
 
-v_pp_e-idm_le := v_pp_e-idm_lex.
 
-;  <type val="v_pp_e-prn-idm_le">
-;  <description>Verb (pron), PPsel, idiom
-;  <ex>encogerse de hombros
-;  <todo>
-;  </type>
+v_pp_e-idm_le := v_pp_e-idm_lex
+  """
+  
+  """.
+
+
 v_pp_e-prn-idm_native_le := v_pp_e-prn-idm_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e-prn-idm_le">
+  <description>Verb (pron), PPsel, idiom
+  <ex>encogerse de hombros
+  <todo>
+  </type>
   """.
 
-v_pp_e-prn-idm_le := v_pp_e-prn-idm_lex.
 
-;  <type val="v_pp_e-vp-sc_le">
-;  <description>Verb, PPsel (VPinf)
-;  <ex>aprendió a jugar a tenis
-;  <todo>
-;  </type>
+v_pp_e-prn-idm_le := v_pp_e-prn-idm_lex
+  """
+  
+  """.
+
+
 v_pp_e-vp-sc_native_le := v_pp_e-vp-sc_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e-vp-sc_le">
+  <description>Verb, PPsel (VPinf)
+  <ex>aprendió a jugar a tenis
+  <todo>
+  </type>
   """.
 
-v_pp_e-vp-sc_le := v_pp_e-vp-sc_lex.
 
-;  <type val="v_pp_e-vp-sc-prn_le">
-;  <description>Verb (pron), PPsel (VPinf)
-;  <ex>se comprometió a hacerlo.
-;  <todo>
-;  </type>
+v_pp_e-vp-sc_le := v_pp_e-vp-sc_lex
+  """
+  
+  """.
+
+
 v_pp_e-vp-sc-prn_native_le := v_pp_e-vp-sc-prn_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e-vp-sc-prn_le">
+  <description>Verb (pron), PPsel (VPinf)
+  <ex>se comprometió a hacerlo.
+  <todo>
+  </type>
   """.
 
-v_pp_e-vp-sc-prn_le := v_pp_e-vp-sc-prn_lex.
 
-;  <type val="v_pp_e-cp-p_le">
-;  <description>Verb, PPsel (Sent ind/subj)
-;  <ex>confío en que vengas/vendrás.
-;  <todo>
-;  </type>
+v_pp_e-vp-sc-prn_le := v_pp_e-vp-sc-prn_lex
+  """
+  
+  """.
+
+
 v_pp_e-cp-p_native_le := v_pp_e-cp-p_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e-cp-p_le">
+  <description>Verb, PPsel (Sent ind/subj)
+  <ex>confío en que vengas/vendrás.
+  <todo>
+  </type>
   """.
 
-v_pp_e-cp-p_le := v_pp_e-cp-p_lex.
 
-;  <type val="v_pp_e-cp-p-prn_le">
-;  <description>Verb (pron), PPsel (Sent ind/subj)
-;  <ex>se asustó de que lloviera tanto
-;  <todo>
-;  </type>
+v_pp_e-cp-p_le := v_pp_e-cp-p_lex
+  """
+  
+  """.
+
+
 v_pp_e-cp-p-prn_native_le := v_pp_e-cp-p-prn_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e-cp-p-prn_le">
+  <description>Verb (pron), PPsel (Sent ind/subj)
+  <ex>se asustó de que lloviera tanto
+  <todo>
+  </type>
   """.
 
-v_pp_e-cp-p-prn_le := v_pp_e-cp-p-prn_lex.
 
-;  <type val="v_pp*_e-cp-p_le">
-;  <description>Verb, PPsel (opt, Sent ind/subj)
-;  <ex>sueño con que vengas/irás
-;  <todo>
-;  </type>
-v_pp*_e-cp-p_le := v_pp*_e-cp-p_lex.
+v_pp_e-cp-p-prn_le := v_pp_e-cp-p-prn_lex
+  """
+  
+  """.
 
-;  <type val="v_pp*_e-cp-p-prn_le">
-;  <description>Verb (pron), PPsel (opt, Sent ind/subj)
-;  <ex>se queja de que no tomes/tomarás nuevas iniciativas
-;  <todo>
-;  </type>
-v_pp*_e-cp-p-prn_le := v_pp*_e-cp-p-prn_lex.
 
-;  <type val="v_pp_e*-cp-p_le">
-;  <description>Verb, PPsel (Sent ind/subj), opt prep
-;  <ex>sueño (con) que vendrán
-;  <todo>
-;  </type>
+v_pp*_e-cp-p_le := v_pp*_e-cp-p_lex
+  """
+  <type val="v_pp*_e-cp-p_le">
+  <description>Verb, PPsel (opt, Sent ind/subj)
+  <ex>sueño con que vengas/irás
+  <todo>
+  </type>
+  """.
+
+
+v_pp*_e-cp-p-prn_le := v_pp*_e-cp-p-prn_lex
+  """
+  <type val="v_pp*_e-cp-p-prn_le">
+  <description>Verb (pron), PPsel (opt, Sent ind/subj)
+  <ex>se queja de que no tomes/tomarás nuevas iniciativas
+  <todo>
+  </type>
+  """.
+
+
 v_pp_e*-cp-p_native_le := v_pp_e*-cp-p_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e*-cp-p_le">
+  <description>Verb, PPsel (Sent ind/subj), opt prep
+  <ex>sueño (con) que vendrán
+  <todo>
+  </type>
   """.
 
-v_pp_e*-cp-p_le := v_pp_e*-cp-p_lex.
 
-;  <type val="v_pp_e*-cp-p-prn_le">
-;  <description>Verb (pron), PPsel (Sent ind/subj), opt prep
-;  <ex>se enteró (de) que vendrán
-;  <todo>
-;  </type>
+v_pp_e*-cp-p_le := v_pp_e*-cp-p_lex
+  """
+  
+  """.
+
+
 v_pp_e*-cp-p-prn_native_le := v_pp_e*-cp-p-prn_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e*-cp-p-prn_le">
+  <description>Verb (pron), PPsel (Sent ind/subj), opt prep
+  <ex>se enteró (de) que vendrán
+  <todo>
+  </type>
   """.
 
-v_pp_e*-cp-p-prn_le := v_pp_e*-cp-p-prn_lex.
 
-;  <type val="v_pp_e-cp-p-ind_le">
-;  <description>Verb, PPsel (Sent ind)
-;  <ex>alardea de que es el mejor
-;  <todo>
-;  </type>
+v_pp_e*-cp-p-prn_le := v_pp_e*-cp-p-prn_lex
+  """
+  
+  """.
+
+
 v_pp_e-cp-p-ind_native_le := v_pp_e-cp-p-ind_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e-cp-p-ind_le">
+  <description>Verb, PPsel (Sent ind)
+  <ex>alardea de que es el mejor
+  <todo>
+  </type>
   """.
 
-v_pp_e-cp-p-ind_le := v_pp_e-cp-p-ind_lex.
 
-;  <type val="v_pp_e-cp-p-ind-prn_le">
-;  <description>Verb (pron), PPsel (Sent ind)
-;  <ex>el candidato se conforta con que hizo todo lo posible para obtener el puesto
-;  <todo>
-;  </type>
+v_pp_e-cp-p-ind_le := v_pp_e-cp-p-ind_lex
+  """
+  
+  """.
+
+
 v_pp_e-cp-p-ind-prn_native_le := v_pp_e-cp-p-ind-prn_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e-cp-p-ind-prn_le">
+  <description>Verb (pron), PPsel (Sent ind)
+  <ex>el candidato se conforta con que hizo todo lo posible para obtener el puesto
+  <todo>
+  </type>
   """.
 
-v_pp_e-cp-p-ind-prn_le := v_pp_e-cp-p-ind-prn_lex.
 
-;  <type val="v_pp_e-cp-p-sub_le">
-;  <description>Verb, PPsel (Sent subj)
-;  <ex>esperó a que llegase
-;  <todo>
-;  </type>
+v_pp_e-cp-p-ind-prn_le := v_pp_e-cp-p-ind-prn_lex
+  """
+  
+  """.
+
+
 v_pp_e-cp-p-sub_native_le := v_pp_e-cp-p-sub_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e-cp-p-sub_le">
+  <description>Verb, PPsel (Sent subj)
+  <ex>esperó a que llegase
+  <todo>
+  </type>
   """.
 
-v_pp_e-cp-p-sub_le := v_pp_e-cp-p-sub_lex.
 
-;  <type val="v_pp_e-cp-p-sub-prn_le">
-;  <description>Verb (pron), PPsel (Sent subj)
-;  <ex>se esfuerza por que todo salga bien
-;  <todo>
-;  </type>
+v_pp_e-cp-p-sub_le := v_pp_e-cp-p-sub_lex
+  """
+  
+  """.
+
+
 v_pp_e-cp-p-sub-prn_native_le := v_pp_e-cp-p-sub-prn_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e-cp-p-sub-prn_le">
+  <description>Verb (pron), PPsel (Sent subj)
+  <ex>se esfuerza por que todo salga bien
+  <todo>
+  </type>
   """.
 
-v_pp_e-cp-p-sub-prn_le := v_pp_e-cp-p-sub-prn_lex.
 
-;  <type val="v_pp*_e-cp-p-sub-prn_le">
-;  <description>Verb (pron), PPsel (opt, Sent subj)
-;  <ex>se contenta con que vengas.
-;  <todo>
-;  </type>
-v_pp*_e-cp-p-sub-prn_le := v_pp*_e-cp-p-sub-prn_lex.
+v_pp_e-cp-p-sub-prn_le := v_pp_e-cp-p-sub-prn_lex
+  """
+  
+  """.
 
-;  <type val="v_pp_e*-cp-p-sub-prn_le">
-;  <description>Verb (pron), PPsel (Sent subj), opt prep
-;  <ex>
-;  <todo>
-;  </type>
+
+v_pp*_e-cp-p-sub-prn_le := v_pp*_e-cp-p-sub-prn_lex
+  """
+  <type val="v_pp*_e-cp-p-sub-prn_le">
+  <description>Verb (pron), PPsel (opt, Sent subj)
+  <ex>se contenta con que vengas.
+  <todo>
+  </type>
+  """.
+
+
 v_pp_e*-cp-p-sub-prn_native_le := v_pp_e*-cp-p-sub-prn_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e*-cp-p-sub-prn_le">
+  <description>Verb (pron), PPsel (Sent subj), opt prep
+  <ex>
+  <todo>
+  </type>
   """.
 
-v_pp_e*-cp-p-sub-prn_le := v_pp_e*-cp-p-sub-prn_lex.
 
-;  <type val="v_pp_e-cp-q_le">
-;  <description>Verb, PPsel (Ques)
-;  <ex>depende de cómo lo hagas  
-;  <todo>
-;  </type>
+v_pp_e*-cp-p-sub-prn_le := v_pp_e*-cp-p-sub-prn_lex
+  """
+  
+  """.
+
+
 v_pp_e-cp-q_native_le := v_pp_e-cp-q_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e-cp-q_le">
+  <description>Verb, PPsel (Ques)
+  <ex>depende de cómo lo hagas
+  <todo>
+  </type>
   """.
 
-v_pp_e-cp-q_le := v_pp_e-cp-q_lex.
 
-;  <type val="v_pp_e-cp-q-prn_le">
-;  <description>Verb (pron), PPsel (Ques)
-;  <ex>se interesa por cómo lo hacen
-;  <todo>
-;  </type>
+v_pp_e-cp-q_le := v_pp_e-cp-q_lex
+  """
+  
+  """.
+
+
 v_pp_e-cp-q-prn_native_le := v_pp_e-cp-q-prn_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp_e-cp-q-prn_le">
+  <description>Verb (pron), PPsel (Ques)
+  <ex>se interesa por cómo lo hacen
+  <todo>
+  </type>
   """.
 
-v_pp_e-cp-q-prn_le := v_pp_e-cp-q-prn_lex.
 
-;  <type val="v_ppa_le">
-;  <description>Verb, PPa
-;  <ex>le consume la duda.
-;  <todo>
-;  </type>
+v_pp_e-cp-q-prn_le := v_pp_e-cp-q-prn_lex
+  """
+  
+  """.
+
+
 v_ppa_native_le := v_ppa_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_ppa_le">
+  <description>Verb, PPa
+  <ex>le consume la duda.
+  <todo>
+  </type>
   """.
 
-v_ppa_le := v_ppa_lex.
 
-;  <type val="v_ppa*_le">
-;  <description>Verb, PPa (opt)
-;  <ex>(me) gustan (las acelgas).
-;  <todo>
-;  </type>
+v_ppa_le := v_ppa_lex
+  """
+  
+  """.
+
+
 v_ppa*_native_le := v_ppa*_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_ppa*_le">
+  <description>Verb, PPa (opt)
+  <ex>(me) gustan (las acelgas).
+  <todo>
+  </type>
   """.
 
-v_ppa*_le := v_ppa*_lex.
 
-;  <type val="v_ppa_prn_le">
-;  <description>Verb (pron), PPa
-;  <ex>se le acercó.
-;  <todo>
-;  </type>
+v_ppa*_le := v_ppa*_lex
+  """
+  
+  """.
+
+
 v_ppa_prn_native_le := v_ppa_prn_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_ppa_prn_le">
+  <description>Verb (pron), PPa
+  <ex>se le acercó.
+  <todo>
+  </type>
   """.
 
-v_ppa_prn_le := v_ppa_prn_lex.
 
-;  <type val="v_ppa*_prn_le">
-;  <description>Verb (pron), PPa (opt)
-;  <ex>se le indigestó la comida.
-;  <todo>
-;  </type>
+v_ppa_prn_le := v_ppa_prn_lex
+  """
+  
+  """.
+
+
 v_ppa*_prn_native_le := v_ppa*_prn_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_ppa*_prn_le">
+  <description>Verb (pron), PPa (opt)
+  <ex>se le indigestó la comida.
+  <todo>
+  </type>
   """.
 
-v_ppa*_prn_le := v_ppa*_prn_lex.
 
-;  <type val="v_ppa-pp*_e_le">
-;  <description>Verb, PPa and PPsel (opt)
-;  <ex>le sucedió (en el trono)
-;  <todo>
-;  </type>
+v_ppa*_prn_le := v_ppa*_prn_lex
+  """
+  
+  """.
+
+
 v_ppa-pp*_e_native_le := v_ppa-pp*_e_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_ppa-pp*_e_le">
+  <description>Verb, PPa and PPsel (opt)
+  <ex>le sucedió (en el trono)
+  <todo>
+  </type>
   """.
 
-v_ppa-pp*_e_le := v_ppa-pp*_e_lex.
 
-;  <type val="v_ppa*-pp_e_le">
-;  <description>Verb, PPa (opt) and PPsel
-;  <ex>(le) preguntó por tí
-;  <todo>
-;  </type>
+v_ppa-pp*_e_le := v_ppa-pp*_e_lex
+  """
+  
+  """.
+
+
 v_ppa*-pp_e_native_le := v_ppa*-pp_e_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_ppa*-pp_e_le">
+  <description>Verb, PPa (opt) and PPsel
+  <ex>(le) preguntó por tí
+  <todo>
+  </type>
   """.
 
-v_ppa*-pp_e_le := v_ppa*-pp_e_lex.
 
-;  <type val="v_ppa*-pp*_e_le">
-;  <description>Verb, PPa (opt) and PPsel (opt)
-;  <ex>(le) hablé (de tí)
-;  <todo>
-;  </type>
+v_ppa*-pp_e_le := v_ppa*-pp_e_lex
+  """
+  
+  """.
+
+
 v_ppa*-pp*_e_native_le := v_ppa*-pp*_e_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_ppa*-pp*_e_le">
+  <description>Verb, PPa (opt) and PPsel (opt)
+  <ex>(le) hablé (de tí)
+  <todo>
+  </type>
   """.
 
-v_ppa*-pp*_e_le := v_ppa*-pp*_e_lex.
 
-;  <type val="v_ppa-pp_e-idm_le">
-;  <description>Verb, PPa and PPsel (idiom)
-;  <ex>le echaba en falta
-;  <todo>
-;  </type>
+v_ppa*-pp*_e_le := v_ppa*-pp*_e_lex
+  """
+  
+  """.
+
+
 v_ppa-pp_e-idm_native_le := v_ppa-pp_e-idm_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_ppa-pp_e-idm_le">
+  <description>Verb, PPa and PPsel (idiom)
+  <ex>le echaba en falta
+  <todo>
+  </type>
   """.
 
-v_ppa-pp_e-idm_le := v_ppa-pp_e-idm_lex.
 
-;  <type val="v_pp-pp_e-e-prn-idm_le">
-;  <description>Verb, PPsel and PPsel (idiom)
-;  <ex>ponerse en contacto con
-;  <todo>
-;  </type>
+v_ppa-pp_e-idm_le := v_ppa-pp_e-idm_lex
+  """
+  
+  """.
+
+
 v_pp-pp_e-e-prn-idm_native_le := v_pp-pp_e-e-prn-idm_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_pp-pp_e-e-prn-idm_le">
+  <description>Verb, PPsel and PPsel (idiom)
+  <ex>ponerse en contacto con
+  <todo>
+  </type>
   """.
 
-v_pp-pp_e-e-prn-idm_le := v_pp-pp_e-e-prn-idm_lex.
 
-;  <type val="v_vp_inf-ssr_le">
-;  <description>Verb, VPinf (subj-subj-raising)
-;  <ex>deberían hacerlo
-;  <todo>
-;  </type>
+v_pp-pp_e-e-prn-idm_le := v_pp-pp_e-e-prn-idm_lex
+  """
+  
+  """.
+
+
 v_vp_inf-ssr_native_le := v_vp_inf-ssr_lex & native_le
   """
   This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_vp_inf-ssr_le">
+  <description>Verb, VPinf (subj-subj-raising)
+  <ex>deberían hacerlo
+  <todo>
+  </type>
   """.
+
 
 v_vp_inf-ssr_le := v_vp_inf-ssr_lex.
 
