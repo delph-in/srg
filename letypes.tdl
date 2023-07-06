@@ -7051,16 +7051,24 @@ av_-_s-psth-n_lex := nonspec-adverb-lex & norm-zero-arg &
 
 ; --- verb modifiers
 
-; e.g. (*muy) quizás yo venga mañana
 av_-_s-vm_lex := nonspec-adverb-lex & norm-zero-arg &
   [ SYNSEM nonspec_scopal_xp_adverb_synsem & 
            [ LOCAL.CAT.HEAD [ PRD non-prd,
-                              MOD < [ LOCAL.CAT.HEAD verb ] > ] ] ].
+                              MOD < [ LOCAL.CAT.HEAD verb ] > ] ] ]
+"""
+; --- 4.1.2. modal adverbs
+; --- verb modifiers
+; e.g. (*muy) quizás yo venga mañana
+""".
 
-; e.g. (muy) probablemente iremos al cine
 av_-_s-vm-spd_lex := spec-adverb-lex & basic-one-arg &
   [ SYNSEM scopal_xp_adverb_synsem & 
-          [ LOCAL.CAT.HEAD.MOD < [ LOCAL.CAT.HEAD verb ] > ] ].
+          [ LOCAL.CAT.HEAD.MOD < [ LOCAL.CAT.HEAD verb ] > ] ]
+"""
+; --- 4.1.2. modal adverbs
+; --- verb modifiers
+; e.g. (muy) probablemente iremos al cine
+""".
 
 ; --- non-verb modifiers
 
