@@ -7713,6 +7713,7 @@ av_-_free-rel-mann_lex := free_rel_pro_lex &
 
 
 ; --- 4.4.4. Interrogative adverbs (cómo, (a)dónde, cuándo)
+
 wh_adverb_synsem := basic_np_adv_synsem & 
   [ LOCAL [ CAT.VAL.SPR < >,
             CONT.RELS <! noun-relation, relation !> ],
@@ -7783,7 +7784,10 @@ specfd_adposition_synsem := basic_adposition_synsem &
                                               XARG #arg0 ] ], 
                           NON-LOCAL.QUE 0-dlist ] >,
     LKEYS.KEYREL [ LBL #ltop, 
-                   ARG0 #arg0 ] ].
+                   ARG0 #arg0 ] ]
+"""
+; modifying prepositions may co-occur with degree adverbs (e.g. muy por debajo de esto)
+""".
 
 basic_nomod-adp_synsem := basic_adposition_synsem & 
   [ LOCAL.CAT [ HEAD.MOD < >,
@@ -7864,14 +7868,17 @@ p_vmod_synsem := basic_mod-adp_synsem &
                 VAL.COMPS < [ LOCAL.CONT.HOOK.INDEX #arg2 ],... > ],
     LKEYS.KEYREL.ARG2 #arg2 ].
 
-; !!! la en otros tiempos mujer del año, el último libro en aparecer,
-;                                           VAL.SPR < [ ] >
 p_nmod_synsem := basic_mod-adp_synsem &
   [ LOCAL.CAT [ POSTHEAD +, 
                 HEAD [ PRD prd,
                        MOD < [ LOCAL.CAT [ LASTNMOD -,
                                            HEAD noun ],
-                               NON-LOCAL.SLASH 0-dlist ] > ] ] ]. 
+                               NON-LOCAL.SLASH 0-dlist ] > ] ] ]
+"""
+OZ: Not sure whether this comment belongs here or was free-standing:
+; !!! la en otros tiempos mujer del año, el último libro en aparecer,
+;                                           VAL.SPR < [ ] >
+""". 
 
 p_amod_synsem := basic_mod-adp_synsem &
   [ LOCAL.CAT [ POSTHEAD +, 
@@ -7944,16 +7951,15 @@ p_cp_prop_or_ques_inf := p_cp_prop_or_ques &
                                                VAL.SUBJ < synsem & 
                                                           [ NON-LOCAL.SLASH 0-dlist & [ LIST < > ] ] > ] ] > ].
 
-; control modifying PPs
-p_cp_prop_inf_slash := o_rais-one-arg & 
+
+p_cp_prop_inf_slash := o_rais-one-arg &
   [ SYNSEM [ LOCAL [ CAT [ HEAD [ AUX -,
                                   TAM #tam ],
-                           VAL.COMPS < [ LOCAL vp_inf_local & 
-                                               [ CAT [ MC -,
-                                                       HEAD.TAM #tam,
-                                                       VAL.COMPS < > ],
-                                                 CONT.HOOK [ LTOP #larg,
-                                                             INDEX.SF prop ] ] ] > ],
+                           VAL.COMPS < [ LOCAL vp_inf_local & [ CAT [ MC -,
+                                                                      HEAD.TAM #tam,
+                                                                      VAL.COMPS < > ],
+                                                                CONT.HOOK [ LTOP #larg,
+                                                                            INDEX.SF prop ] ] ] > ],
                      CONT [ HOOK [ LTOP #ltop,
                                    INDEX #index & [ E #tam ] ],
                             RELS <! #keyrel & prep-relation !>,
@@ -7961,124 +7967,156 @@ p_cp_prop_inf_slash := o_rais-one-arg &
                                              LARG #larg ] !> ] ],
              LKEYS.KEYREL #keyrel & [ LBL #ltop,
                                       ARG0 #index,
-                                      ARG2 #harg ] ] ].  
+                                      ARG2 #harg ] ] ]
+  """
+  control modifying PPs
+  """.
 
-; prep + AP, for predicative complements
-; e.g. presume de valiente, lo tienen por tonto
-p_ap := basic-one-arg & 
+
+p_ap := basic-one-arg &
   [ SYNSEM.LOCAL.CAT [ MC na,
                        HEAD.KEYS.ALT2KEY non_free_relative_q_rel,
                        VAL [ COMPS < [ LOCAL.CAT [ MC na,
-				                   HEAD adj, 
-						   VAL [ SUBJ < >,
-						         COMPS < > ] ],
+                                                   HEAD adj,
+                                                   VAL [ SUBJ < >,
+                                                         COMPS < > ] ],
                                        NON-LOCAL [ SLASH 0-dlist,
                                                    REL 0-dlist,
                                                    QUE 0-dlist ] ] >,
-                             CLTS < > ] ] ].  
+                             CLTS < > ] ] ]
+  """
+  prep + AP, for predicative complements
+  e.g. presume de valiente, lo tienen por tonto
+  """.
 
-; prep + ADV
-; e.g. mira hacia atrás
-p_adv := basic-one-arg & 
+
+p_adv := basic-one-arg &
   [ SYNSEM.LOCAL.CAT [ MC na,
                        HEAD.KEYS.ALTKEY basic_adv_rel,
                        VAL [ COMPS < [ LOCAL.CAT [ HEAD +ro,
                                                    VAL.COMPS < > ] ] >,
-                             CLTS < > ] ] ]. 
+                             CLTS < > ] ] ]
+  """
+  prep + ADV
+  e.g. mira hacia atrás
+  """.
 
-; prep + MODNP
-; e.g. como ahora
-p_modnp := basic-one-arg & 
+
+p_modnp := basic-one-arg &
   [ SYNSEM.LOCAL.CAT [ MC na,
-                       HEAD.KEYS.ALTKEY prep_mod_rel, 
-                       VAL [ COMPS < [ LOCAL.CAT [ HEAD modnp & 
-                                                        [ MOD < [ LOCAL.CAT.HEAD verb ] > ],
+                       HEAD.KEYS.ALTKEY prep_mod_rel,
+                       VAL [ COMPS < [ LOCAL.CAT [ HEAD modnp & [ MOD < [ LOCAL.CAT.HEAD verb ] > ],
                                                    VAL.COMPS < > ] ] >,
-                             CLTS < > ] ] ]. 
+                             CLTS < > ] ] ]
+  """
+  prep + MODNP
+  e.g. como ahora
+  """.
 
-; non-locative preposition + locative PP
-; a)- "de" when, with the verb "ser" or with movement verbs, expresses origin, or when it heads a nominal 
-; complement, e.g. es de por ese barrio, salió de tras el matorral, el libro de sobre la mesa
-; b)- "desde" (origin), "hasta" (destination), "por" (path) + locative PP except "en"
-; e.g. se lanzó desde sobre el tejado
-; c)- Carpetazo en el Congreso hasta después de las elecciones europeas.
-p_pp := basic-one-arg & 
+
+p_pp := basic-one-arg &
   [ SYNSEM.LOCAL [ CAT [ MC na,
                          HEAD.KEYS.ALT2KEY non_free_relative_q_rel,
-                         VAL [ COMPS < [ LOCAL [ CAT [ HEAD adp & 
-                                                            [ KEYS.KEY prep_mod_rel,
-                                                              CASE none ],
+                         VAL [ COMPS < [ LOCAL [ CAT [ HEAD adp & [ KEYS.KEY prep_mod_rel,
+                                                                    CASE none ],
                                                        VAL.COMPS < > ],
                                                  CONT.HOOK.LTOP #ltop ] ] >,
                                CLTS < > ] ],
-                   CONT.HOOK.LTOP #ltop ] ]. 
+                   CONT.HOOK.LTOP #ltop ] ]
+  """
+  non-locative preposition + locative PP
+  a)- "de" when, with the verb "ser" or with movement verbs, expresses origin, or when it heads a nominal
+  complement, e.g. es de por ese barrio, salió de tras el matorral, el libro de sobre la mesa
+  b)- "desde" (origin), "hasta" (destination), "por" (path) + locative PP except "en"
+  e.g. se lanzó desde sobre el tejado
+  c)- Carpetazo en el Congreso hasta después de las elecciones europeas.
+  """.
 
-; "de/a" + marked NP_por, e.g. vengo de/a por agua
-p_mrkd_np := basic-one-arg & 
+
+p_mrkd_np := basic-one-arg &
   [ SYNSEM [ LOCAL [ CAT [ HEAD.KEYS.ALT2KEY non_free_relative_q_rel,
                            VAL [ COMPS < [ OPT -,
-                                           LOCAL mrkd_np_local & 
-                                                 [ CAT [ HEAD.KEYS.KEY #ckey,
-                                                         VAL.SPR < > ],
-                                                   CONT.HOOK.INDEX #arg2 ] ] >,
+                                           LOCAL mrkd_np_local & [ CAT [ HEAD.KEYS.KEY #ckey,
+                                                                         VAL.SPR < > ],
+                                                                   CONT.HOOK.INDEX #arg2 ] ] >,
                                  CLTS < > ] ],
                      CONT [ RELS <! prep-relation !>,
-                            HCONS <! !> ] ] ,
+                            HCONS <! !> ] ],
              LKEYS [ KEYREL.ARG2 #arg2,
-                     --COMPKEY #ckey ] ] ]. 
+                     --COMPKEY #ckey ] ] ]
+  """
+  "de/a" + marked NP_por, e.g. vengo de/a por agua
+  """.
 
-; for the ditransitive preposition "a" in "a... de..." expressing distance
-; e.g. Juan vive (a (3km) (de Madrid))/Juan vive a 3km/*Juan vive de Madrid
-p_ditrans := basic-two-arg & 
-  [ SYNSEM [ LOCAL [ CAT [ HEAD.KEYS.ALT2KEY non_free_relative_q_rel,
-                           VAL [ COMPS < [ OPT -,
-                                           LOCAL.CAT [ MC na,
-                                                       HEAD noun,
-                                                       VAL [ SUBJ < >,
-                                                             COMPS < >,
-                                                             SPR < > ] ] ],
-                                         [ OPT -,
-                                           LOCAL mrkd_np_local & 
-                                                 [ CAT.HEAD.KEYS.KEY #ockey,
-                                                   CONT.HOOK.INDEX #arg3 ] ] > ] ] ],
-             LKEYS [ KEYREL.ARG3 #arg3, 
-                     --OCOMPKEY #ockey & _de_p_sel_rel ] ] ]. 
+
+p_ditrans := basic-two-arg &
+  [ SYNSEM [ LOCAL.CAT [ HEAD.KEYS.ALT2KEY non_free_relative_q_rel,
+                         VAL.COMPS < [ OPT -,
+                                       LOCAL.CAT [ MC na,
+                                                   HEAD noun,
+                                                   VAL [ SUBJ < >,
+                                                         COMPS < >,
+                                                         SPR < > ] ] ],
+                                     [ OPT -,
+                                       LOCAL mrkd_np_local & [ CAT.HEAD.KEYS.KEY #ockey,
+                                                               CONT.HOOK.INDEX #arg3 ] ] > ],
+             LKEYS [ KEYREL.ARG3 #arg3,
+                     --OCOMPKEY #ockey & _de_p_sel_rel ] ] ]
+  """
+  for the ditransitive preposition "a" in "a... de..." expressing distance
+  e.g. Juan vive (a (3km) (de Madrid))/Juan vive a 3km/*Juan vive de Madrid
+  """.
+
 
 
 ; --- Marking prepositions
 
-; - marking NPs (a, como, con, contra, de, en, para, por)
-; e.g. sucumbió a la tentación, hay tantos niños como niñas, tan largo como eso, cumple con su deber, 
-; luchó contra el enemigo, depende de tí, creo en el destino, aptitud para la danza, fue hecho por mí
-p_np_ptcl_lex := mark-adp-lex & p_np & 
-  [ SYNSEM p_nmark_synsem & 
-           [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.VAL.SPR < > ] > ] ]. 
 
-p_nb_ptcl_lex := mark-adp-lex & p_np & 
-  [ SYNSEM p_nmark_synsem & 
-           [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.VAL.SPR < [ LOCAL.CONT.RELS <! relation !>,
-                                                           NON-LOCAL [ QUE 0-dlist,
-                                                                       REL 0-dlist ] ] > ] > ] ]. 
+p_np_ptcl_lex := mark-adp-lex & p_np &
+  [ SYNSEM p_nmark_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.VAL.SPR < > ] > ] ]
+  """
+  - marking NPs (a, como, con, contra, de, en, para, por)
+  e.g. sucumbió a la tentación, hay tantos niños como niñas, tan largo como eso, cumple con su deber,
+  luchó contra el enemigo, depende de tí, creo en el destino, aptitud para la danza, fue hecho por mí
+  """.
 
-p_np_ptcl-spd_lex := mark-adp-lex & p_np & 
-  [ SYNSEM p_nmark_synsem & 
-           [ LOCAL.CAT.VAL [ SPR < [ OPT -,
-                                     LOCAL.CAT.HEAD adv & [ KEYS.KEY comp_degree_rel ] ] >,
-                             COMPS < [ LOCAL.CAT.VAL.SPR < > ] > ] ] ]. 
 
-; - marking finite completive clauses/indirect questions (a, con, de, en, por)
-; e.g. esperó a que llegase, me conformo con que vengas, me preocupo de que comáis, confío en que vengan, 
-; voto por que vayamos al cine, depende de cómo lo hagas, pensaré en cómo lo haré/hizo
-p_cp_ptcl_lex := mark-adp-lex & p_cp_prop_or_ques_fin & 
-  [ SYNSEM p_vmark_synsem ].
+p_nb_ptcl_lex := mark-adp-lex & p_np &
+  [ SYNSEM p_nmark_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.VAL.SPR < [ LOCAL.CONT.RELS <! relation !>,
+                                                                            NON-LOCAL [ QUE 0-dlist,
+                                                                                        REL 0-dlist ] ] > ] > ] ]
+  """
+  
+  """.
 
-; - marking VPinf - subject & object control (a, con, de, en, para, por)
-; e.g. aspira a ganar, sueño con ganar, deja de molestar, confío en ganar, capacitado para hacerlo, 
-; voto por ir al cine
-p_vp_ptcl_lex := mark-adp-lex & p_cp_prop_or_ques_inf & 
-  [ SYNSEM p_vmark_synsem & 
-           [ LOCAL [ CAT.VAL.COMPS < [ LOCAL.CONT.HOOK.XARG #ctrl ] >,
-                     CONT.HOOK.XARG #ctrl ] ] ].
+
+p_np_ptcl-spd_lex := mark-adp-lex & p_np &
+  [ SYNSEM p_nmark_synsem & [ LOCAL.CAT.VAL [ SPR < [ OPT -,
+                                                      LOCAL.CAT.HEAD adv & [ KEYS.KEY comp_degree_rel ] ] >,
+                                              COMPS < [ LOCAL.CAT.VAL.SPR < > ] > ] ] ]
+  """
+  
+  """.
+
+
+p_cp_ptcl_lex := mark-adp-lex & p_cp_prop_or_ques_fin &
+  [ SYNSEM p_vmark_synsem ]
+  """
+  - marking finite completive clauses/indirect questions (a, con, de, en, por)
+  e.g. esperó a que llegase, me conformo con que vengas, me preocupo de que comáis, confío en que vengan,
+  voto por que vayamos al cine, depende de cómo lo hagas, pensaré en cómo lo haré/hizo
+  """.
+
+
+p_vp_ptcl_lex := mark-adp-lex & p_cp_prop_or_ques_inf &
+  [ SYNSEM p_vmark_synsem & [ LOCAL [ CAT.VAL.COMPS < [ LOCAL.CONT.HOOK.XARG #ctrl ] >,
+                                      CONT.HOOK.XARG #ctrl ] ] ]
+  """
+  - marking VPinf - subject & object control (a, con, de, en, para, por)
+  e.g. aspira a ganar, sueño con ganar, deja de molestar, confío en ganar, capacitado para hacerlo,
+  voto por ir al cine
+  """.
+
 
 ; - marking VPinf - subject & object raising (de)
 ; e.g. fácil de tocar 
