@@ -326,7 +326,7 @@ dt0cn0_ilr :=  dt_ilr
 
 ; -- exclamative det.
 
-de0ms0_ilr :=  de_ilr & masc_3sg_il
+de0ms0_ilr :=  de_ilr & masc_3sg_ilr
 """exclamative det""".
 de0mp0_ilr :=  de_ilr & masc_3pl_ilr
 """exclamative det""".
@@ -389,7 +389,7 @@ pi0fp00_ilr :=  pi_ilr & pl_ilr & fem_ilr
 """indefinite pron""". 
 pi0cs00_ilr :=  pi_ilr & sg_ilr
 """indefinite pron""".
-pi0cp00_ilr :=  pi_ilr & pl_il
+pi0cp00_ilr :=  pi_ilr & pl_ilr
 """indefinite pron""".
 pi0cc000_ilr :=  pi_ilr
 """indefinite pron""".
