@@ -587,9 +587,6 @@ v_pron_mrkd_cp_prop-or-ques_dlr := vintr_mrkd_cp_prop-or-ques_lex-rule &
   """.
 
 
-; b)- transitive verbs taking finite/infinitival completive clause (clit. climbing) or indirect questions
-; e.g. ¿has intentado que lo hagan? => ¿lo has intentado hacer tú?,
-;      A y B acordaron no hablar => que no hablarían
 #|
 v_trans_cp_prop-or-ques_dlr := vcomp_vfin_vinf-lex-rule & 
   [ SYNSEM v_trans_cp_prop-or-ques_inf_synsem &
@@ -609,6 +606,7 @@ v_trans_cp_prop-or-ques_dlr := vcomp_vfin_vinf-lex-rule &
           ARG-ST #arg-st ],
     ARG-ST < #arg-st . #clts >  ].
 |#
+
 v_trans_cp_prop-or-ques_dlr := vcomp_vfin_vinf-lex-rule & 
   [ SYNSEM v_trans_cp_prop-or-ques_inf_synsem &
            [ LOCAL [ AGR #agr,
@@ -625,206 +623,224 @@ v_trans_cp_prop-or-ques_dlr := vcomp_vfin_vinf-lex-rule &
                                              NON-LOCAL #nloc ] >,
                                    CLTS < > ] ],
           ARG-ST #arg-st ],
-    ARG-ST < #arg-st . #clts >  ].
+    ARG-ST < #arg-st . #clts >  ]
+"""
+; b)- transitive verbs taking finite/infinitival completive clause (clit. climbing) or indirect questions
+; e.g. ¿has intentado que lo hagan? => ¿lo has intentado hacer tú?,
+;      A y B acordaron no hablar => que no hablarían
+""".
 
-; c)- ditransitive verbs taking finite/infinitival completive clause or indirect questions
-; - si el verbo principal lleva un clítico: si el acusativo incrustado es personal, este no puede 
-; elevarse (*me la permitieron educar), si se trata de no animados, puede elevarse 
-; (me lo permitieron corregir)
-v_ditrans_cp_prop-or-ques_lex-rule := vcomp_vfin_vinf-lex-rule & 
-  [ SYNSEM v_ditrans_cp_prop-or-ques_inf_synsem &
-           [ LOCAL [ AGR #agr,
-                     CAT.VAL [ COMPS < [ LOCAL #local,
-                                         NON-LOCAL #nloc1 ],
-                                       [ OPT -,
-                                         LOCAL [ CAT [ HEAD.KEYS #keys, 
-                                                       VAL.CLTS #clts ],
-                                                 CONT.HOOK.INDEX.SF #sf ],
-                                         NON-LOCAL #nloc ] >,
-                               CLTS #clts ],
-                     CONT.HOOK.XARG #agr ] ],
-    DTR [ SYNSEM v_ditrans_cp_prop-or-ques_fin_synsem &
-                 [ LOCAL.CAT.VAL [ COMPS < [ LOCAL #local,
-                                             NON-LOCAL #nloc1 ],
-                                           [ LOCAL [ CAT.HEAD.KEYS #keys,
-                                                 CONT.HOOK.INDEX.SF #sf ],
-                                             NON-LOCAL #nloc ] >,
-                                   CLTS < > ] ],
+
+v_ditrans_cp_prop-or-ques_lex-rule := vcomp_vfin_vinf-lex-rule &
+  [ SYNSEM v_ditrans_cp_prop-or-ques_inf_synsem & [ LOCAL [ AGR #agr,
+                                                            CAT.VAL [ COMPS < [ LOCAL #local,
+                                                                                NON-LOCAL #nloc1 ],
+                                                                              [ OPT -,
+                                                                                LOCAL [ CAT [ HEAD.KEYS #keys,
+                                                                                              VAL.CLTS #clts ],
+                                                                                        CONT.HOOK.INDEX.SF #sf ],
+                                                                                NON-LOCAL #nloc ] >,
+                                                                      CLTS #clts ],
+                                                            CONT.HOOK.XARG #agr ] ],
+    DTR [ SYNSEM v_ditrans_cp_prop-or-ques_fin_synsem & [ LOCAL.CAT.VAL [ COMPS < [ LOCAL #local,
+                                                                                    NON-LOCAL #nloc1 ],
+                                                                                  [ LOCAL [ CAT.HEAD.KEYS #keys,
+                                                                                            CONT.HOOK.INDEX.SF #sf ],
+                                                                                    NON-LOCAL #nloc ] >,
+                                                                          CLTS < > ] ],
           ARG-ST #arg-st ],
-    ARG-ST < #arg-st . #clts > ].
+    ARG-ST < #arg-st . #clts > ]
+  """
+  c)- ditransitive verbs taking finite/infinitival completive clause or indirect questions
+  - si el verbo principal lleva un clítico: si el acusativo incrustado es personal, este no puede
+  elevarse (*me la permitieron educar), si se trata de no animados, puede elevarse
+  (me lo permitieron corregir)
+  """.
 
-; e.g. prometí a María que volverían temprano => prometí a María volver temprano
+
 v_ditrans_cp_prop-or-ques_sc_dlr := v_ditrans_cp_prop-or-ques_lex-rule &
-  [ SYNSEM.LOCAL.CAT.VAL [ SUBJ  < [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind1 ] >,
+  [ SYNSEM.LOCAL.CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind1 ] >,
                            COMPS < [ OPT #opt ],
                                    [ LOCAL.CONT.HOOK.XARG #ind1 ] > ],
     DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ OPT #opt ],
-                                     [ LOCAL.CAT.HEAD.TAM.MOOD ind ] > ].
+                                     [ LOCAL.CAT.HEAD.TAM.MOOD ind ] > ]
+  """
+  e.g. prometí a María que volverían temprano => prometí a María volver temprano
+  """.
 
-; e.g. ordené a María que volviesen temprano => ordené a María volver temprano
+
 v_ditrans_cp_prop-or-ques_oc_dlr := v_ditrans_cp_prop-or-ques_lex-rule &
   [ SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind2 ],
                                  [ LOCAL.CONT.HOOK.XARG #ind2 ] >,
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < synsem,
-                                     [ LOCAL.CAT.HEAD.TAM.MOOD sub ] > ].
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < synsem, [ LOCAL.CAT.HEAD.TAM.MOOD sub ] > ]
+  """
+  e.g. ordené a María que volviesen temprano => ordené a María volver temprano
+  """.
 
 
-; d)- transitive verbs taking DO and marked finite/infinitival completive clause (only verbs of movement)
-v_trans_np_mrkd_cp_prop_lex-rule := vcomp_vfin_vinf-lex-rule & 
-  [ SYNSEM v_trans_np_mrkd_vp_inf_synsem &
-           [ LOCAL.CAT.VAL.COMPS < [ NON-LOCAL #nloc1 ],
-                                   [ OPT -,
-                                     LOCAL.CAT.HEAD.KEYS.KEY #prep,
-                                     NON-LOCAL #nloc ] > ],
-    DTR.SYNSEM v_trans_np_mrkd_cp_prop_fin_sub_mov_synsem &
-               [ LOCAL.CAT.VAL.COMPS < [ NON-LOCAL #nloc1 ],
-                                       [ LOCAL.CAT.HEAD.KEYS.KEY #prep,
-                                         NON-LOCAL #nloc ] > ] ].
+v_trans_np_mrkd_cp_prop_lex-rule := vcomp_vfin_vinf-lex-rule &
+  [ SYNSEM v_trans_np_mrkd_vp_inf_synsem & [ LOCAL.CAT.VAL.COMPS < [ NON-LOCAL #nloc1 ],
+                                                                   [ OPT -,
+                                                                     LOCAL.CAT.HEAD.KEYS.KEY #prep,
+                                                                     NON-LOCAL #nloc ] > ],
+    DTR.SYNSEM v_trans_np_mrkd_cp_prop_fin_sub_mov_synsem & [ LOCAL.CAT.VAL.COMPS < [ NON-LOCAL #nloc1 ],
+                                                                                    [ LOCAL.CAT.HEAD.KEYS.KEY #prep,
+                                                                                      NON-LOCAL #nloc ] > ] ]
+  """
+  d)- transitive verbs taking DO and marked finite/infinitival completive clause (only verbs of movement)
+  """.
 
-; -- subject control (no clitic climbing)
-; e.g. la amenazó con ir a la policía
+
 v_trans_np_mrkd_cp_prop_sc_dlr := v_trans_np_mrkd_cp_prop_lex-rule &
-  [ SYNSEM.LOCAL.CAT.VAL [ SUBJ  < [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind1 ] >,
+  [ SYNSEM.LOCAL.CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind1 ] >,
                            COMPS < [ OPT + ],
                                    [ LOCAL [ CAT.VAL.CLTS < >,
                                              CONT.HOOK.XARG #ind1 ] ] >,
                            CLTS #clts ],
     DTR [ SYNSEM.LOCAL.CAT.VAL.CLTS #clts & < >,
           ARG-ST #arg-st ],
-    ARG-ST #arg-st ].
+    ARG-ST #arg-st ]
+  """
+  -- subject control (no clitic climbing)
+  e.g. la amenazó con ir a la policía
+  """.
 
-;; --- two-object control (with VPtrans sharing the same DO with the main clause) (ONLY IN LRs)
-; e.g. envía las camisas a planchar a madrid, llévala a arreglar.
+
 v_trans_np_mrkd_cp_prop_2oc_dlr := v_trans_np_mrkd_cp_prop_lex-rule &
-  [ SYNSEM.LOCAL.CAT.VAL [ COMPS < [ OPT -, LOCAL.CONT.HOOK.INDEX #ctrl ],
+  [ SYNSEM.LOCAL.CAT.VAL [ COMPS < [ OPT -,
+                                     LOCAL.CONT.HOOK.INDEX #ctrl ],
                                    [ LOCAL [ CAT.VAL.CLTS #clt,
-                                             CONT.RELS.LIST < arg12-ev-relation & [ ARG2 #ctrl ],... > ] ] >,
+                                             CONT.RELS.LIST < arg12-ev-relation & [ ARG2 #ctrl ], ... > ] ] >,
                            CLTS #clt ],
     DTR [ SYNSEM.LOCAL.CAT.VAL.CLTS < >,
           ARG-ST #arg-st ],
-    ARG-ST < #arg-st . #clt > ].
+    ARG-ST < #arg-st . #clt > ]
+  """
+  ; --- two-object control (with VPtrans sharing the same DO with the main clause) (ONLY IN LRs)
+   e.g. envía las camisas a planchar a madrid, llévala a arreglar.
+  """.
 
-; f)- transitive symmetric verbs taking marked NP and completive clause (inf/fin) (s_ctrl) / 
-;     pl. subject and completive clause 
-; e.g. A acordó con B no hablar/que no hablarían
-v_sym_trans_cp_prop_mrkd_np_dlr := vcomp_vfin_vinf-lex-rule & 
-  [ SYNSEM v_sym_trans_cp_prop_inf_mrkd_np_synsem &
-           [ LOCAL [ CAT.VAL [ COMPS < #synsem, 
-                                       [ OPT -,
-                                         LOCAL [ CAT.VAL.CLTS #clts ],
-                                         NON-LOCAL #nloc ] >,
-                               CLTS #clts ] ] ],
-    DTR [ SYNSEM v_sym_trans_cp_prop_fin_mrkd_np_synsem &
-                 [ LOCAL.CAT.VAL [ COMPS < #synsem, [ NON-LOCAL #nloc ] >,
-                                   CLTS < > ] ],
+
+v_sym_trans_cp_prop_mrkd_np_dlr := vcomp_vfin_vinf-lex-rule &
+  [ SYNSEM v_sym_trans_cp_prop_inf_mrkd_np_synsem & [ LOCAL.CAT.VAL [ COMPS < #synsem,
+                                                                              [ OPT -,
+                                                                                LOCAL.CAT.VAL.CLTS #clts,
+                                                                                NON-LOCAL #nloc ] >,
+                                                                      CLTS #clts ] ],
+    DTR [ SYNSEM v_sym_trans_cp_prop_fin_mrkd_np_synsem & [ LOCAL.CAT.VAL [ COMPS < #synsem,
+                                                                                    [ NON-LOCAL #nloc ] >,
+                                                                            CLTS < > ] ],
           ARG-ST #arg-st ],
-    ARG-ST < #arg-st . #clts > ].
+    ARG-ST < #arg-st . #clts > ]
+  """
+  f)- transitive symmetric verbs taking marked NP and completive clause (inf/fin) (s_ctrl) /
+      pl. subject and completive clause
+  e.g. A acordó con B no hablar/que no hablarían
+  """.
 
 
-; e)- intransitive symmetric verbs taking marked NP and marked completive clause (inf/fin) (s_ctrl) /
-; pl. subject and marked completive clause 
-; e.g. quedé con ella en ir al cine / quedamos en ir al cine
-v_sym_intr_mrkd_np_mrkd_cp_prop_dlr := vcomp_vfin_vinf-lex-rule & 
-   [ SYNSEM v_sym_intr_mrkd_np_mrkd_cp_prop_inf_synsem &
-            [ LOCAL [ CAT.VAL [ COMPS < #synsem, 
-                                        [ OPT -,
-                                          LOCAL.CAT.VAL.CLTS #clts,
-                                          NON-LOCAL #nloc ] >,
-                                CLTS #clts ] ] ],
-     DTR [ SYNSEM v_sym_intr_mrkd_np_mrkd_cp_prop_fin_synsem &
-                  [ LOCAL.CAT.VAL [ COMPS < #synsem, [ NON-LOCAL #nloc ] >,
-                                    CLTS < > ] ],
-           ARG-ST < #arg-st > ],
-     ARG-ST < #arg-st . #clts > ].
+v_sym_intr_mrkd_np_mrkd_cp_prop_dlr := vcomp_vfin_vinf-lex-rule &
+  [ SYNSEM v_sym_intr_mrkd_np_mrkd_cp_prop_inf_synsem & [ LOCAL.CAT.VAL [ COMPS < #synsem,
+                                                                                  [ OPT -,
+                                                                                    LOCAL.CAT.VAL.CLTS #clts,
+                                                                                    NON-LOCAL #nloc ] >,
+                                                                          CLTS #clts ] ],
+    DTR [ SYNSEM v_sym_intr_mrkd_np_mrkd_cp_prop_fin_synsem & [ LOCAL.CAT.VAL [ COMPS < #synsem,
+                                                                                        [ NON-LOCAL #nloc ] >,
+                                                                                CLTS < > ] ],
+          ARG-ST < #arg-st > ],
+    ARG-ST < #arg-st . #clts > ]
+  """
+  e)- intransitive symmetric verbs taking marked NP and marked completive clause (inf/fin) (s_ctrl) /
+  pl. subject and marked completive clause
+  e.g. quedé con ella en ir al cine / quedamos en ir al cine
+  """.
 
 
-; --- LR type for adjectives taking finite/infinitival completive clause or questions
-; e.g. es partidario (de) que cambien al entrenador/de cambiar al entrenador
-a_mrkd_prop-or-ques_dlr := vfin_vinf-lex-rule & 
-  [ SYNSEM a_mrkd_cp_prop-or-ques_inf_synsem &
-           [ LOCAL [ CAT [ VAL [ CLTS < >,
-                                 SUBJ #subj,
-                                 COMPS < [ OPT -,
-                                           LOCAL [ CAT.HEAD.KEYS #keys, 
-                                                   CONT.HOOK.LTOP #larg ],
-                                           NON-LOCAL #nlocal ] > ] ],
-                     CONT [ RELS <! adj-arg12-relation !>,
-                            HCONS <! qeq & [ HARG #harg,
-                                             LARG #larg ] !> ] ],
-             LKEYS.KEYREL #keyrel & [ ARG2 #harg ] ],
+a_mrkd_prop-or-ques_dlr := vfin_vinf-lex-rule &
+  [ SYNSEM a_mrkd_cp_prop-or-ques_inf_synsem & [ LOCAL [ CAT.VAL [ CLTS < >,
+                                                                   SUBJ #subj,
+                                                                   COMPS < [ OPT -,
+                                                                             LOCAL [ CAT.HEAD.KEYS #keys,
+                                                                                     CONT.HOOK.LTOP #larg ],
+                                                                             NON-LOCAL #nlocal ] > ],
+                                                         CONT [ RELS <! adj-arg12-relation !>,
+                                                                HCONS <! qeq & [ HARG #harg,
+                                                                                 LARG #larg ] !> ] ],
+                                                 LKEYS.KEYREL #keyrel & [ ARG2 #harg ] ],
     DTR [ INFLECTED -,
-          SYNSEM a_mrkd_cp_prop-or-ques_fin_synsem &
-                 [ LOCAL.CAT [ HEAD adj,
-                               VAL [ SUBJ #subj,
-                                     COMPS < [ LOCAL.CAT.HEAD.KEYS #keys,
-                                               NON-LOCAL #nlocal ] > ] ],
-                   LKEYS.KEYREL #keyrel ] ] ].
+          SYNSEM a_mrkd_cp_prop-or-ques_fin_synsem & [ LOCAL.CAT [ HEAD adj,
+                                                                   VAL [ SUBJ #subj,
+                                                                         COMPS < [ LOCAL.CAT.HEAD.KEYS #keys,
+                                                                                   NON-LOCAL #nlocal ] > ] ],
+                                                       LKEYS.KEYREL #keyrel ] ] ]
+  """
+  --- LR type for adjectives taking finite/infinitival completive clause or questions
+  e.g. es partidario (de) que cambien al entrenador/de cambiar al entrenador
+  """.
 
 
-; --- LR types for nouns 
-
-; a)- taking finite/infinitival completive clause & interrogative clauses 
-; e.g. una ventaja (de) que no llueva es que no hay ocasión de perder el paraguas => 
-;      otra ventaja de viajar en tren es que se pueden cargar más bultos   
-n_cp_inf_dlr := vfin_vinf-lex-rule & 
-  [ SYNSEM n_prop-or-ques_inf_synsem &
-           [ LOCAL [ CAT.VAL [ CLTS < >,
-                               SUBJ #subj,
-                               COMPS < [ OPT -,
-                                         LOCAL [ CAT.HEAD.KEYS #keys, 
-                                                 CONT.HOOK [ LTOP #larg,
-                                                             INDEX.SF #sf ] ],
-                                          NON-LOCAL #nlocal ] > ],
-                     CONT [ RELS #rels & <! noun-arg1-relation !>,
-                            HCONS <! qeq & [ HARG #harg,
-                                             LARG #larg ] !> ] ],
-             LKEYS.KEYREL #keyrel & [ ARG1 #harg ] ],
+n_cp_inf_dlr := vfin_vinf-lex-rule &
+  [ SYNSEM n_prop-or-ques_inf_synsem & [ LOCAL [ CAT.VAL [ CLTS < >,
+                                                           SUBJ #subj,
+                                                           COMPS < [ OPT -,
+                                                                     LOCAL [ CAT.HEAD.KEYS #keys,
+                                                                             CONT.HOOK [ LTOP #larg,
+                                                                                         INDEX.SF #sf ] ],
+                                                                     NON-LOCAL #nlocal ] > ],
+                                                 CONT [ RELS #rels & <! noun-arg1-relation !>,
+                                                        HCONS <! qeq & [ HARG #harg,
+                                                                         LARG #larg ] !> ] ],
+                                         LKEYS.KEYREL #keyrel & [ ARG1 #harg ] ],
     DTR [ INFLECTED -,
-          SYNSEM n_prop-or-ques_fin_synsem &
-                 [ LOCAL [ CAT [ HEAD noun,
-                                 VAL [ SUBJ #subj,
-                                       COMPS < [ LOCAL [ CAT.HEAD.KEYS #keys,
-                                                         CONT.HOOK.INDEX.SF #sf ],
-                                                 NON-LOCAL #nlocal ] > ] ],
-                           CONT.RELS #rels ],
-                   LKEYS.KEYREL #keyrel ] ] ].
+          SYNSEM n_prop-or-ques_fin_synsem & [ LOCAL [ CAT [ HEAD noun,
+                                                             VAL [ SUBJ #subj,
+                                                                   COMPS < [ LOCAL [ CAT.HEAD.KEYS #keys,
+                                                                                     CONT.HOOK.INDEX.SF #sf ],
+                                                                             NON-LOCAL #nlocal ] > ] ],
+                                                       CONT.RELS #rels ],
+                                               LKEYS.KEYREL #keyrel ] ] ]
+  """
+  --- LR types for nouns
+  a)- taking finite/infinitival completive clause & interrogative clauses
+  e.g. una ventaja (de) que no llueva es que no hay ocasión de perder el paraguas =>
+       otra ventaja de viajar en tren es que se pueden cargar más bultos
+  """.
 
-; b)- taking PPde + finite completive clause/VPinf_ctrl
-; e.g. la necesidad (de la empresa) (de) que lleguen a un acuerdo/de llegar a un acuerdo 
-n_pp-vp_dlr := vfin_vinf-lex-rule & 
-  [ SYNSEM n_ppde_prop-inf_synsem &
-           [ LOCAL [ CAT.VAL [ CLTS < >,
-                               SUBJ #subj,
-                               COMPS < #synsem & [ LOCAL.CONT.HOOK.INDEX #ctrl ],
-                                       [ OPT -,
-                                         LOCAL [ CAT.HEAD.KEYS #keys,
-                                                 CONT.HOOK [ LTOP #larg,
-                                                             XARG #ctrl,
-                                                             INDEX.SF #sf ] ],
-                                        NON-LOCAL #nlocal ] > ],
-                     CONT [ RELS #rels & <! noun-arg12-relation !>,
-                            HCONS <! qeq & [ HARG #harg,
-                                             LARG #larg ] !> ] ],
-             LKEYS.KEYREL #keyrel & [ ARG2 #harg ] ],
+
+n_pp-vp_dlr := vfin_vinf-lex-rule &
+  [ SYNSEM n_ppde_prop-inf_synsem & [ LOCAL [ CAT.VAL [ CLTS < >,
+                                                        SUBJ #subj,
+                                                        COMPS < #synsem & [ LOCAL.CONT.HOOK.INDEX #ctrl ],
+                                                                [ OPT -,
+                                                                  LOCAL [ CAT.HEAD.KEYS #keys,
+                                                                          CONT.HOOK [ LTOP #larg,
+                                                                                      XARG #ctrl,
+                                                                                      INDEX.SF #sf ] ],
+                                                                  NON-LOCAL #nlocal ] > ],
+                                              CONT [ RELS #rels & <! noun-arg12-relation !>,
+                                                     HCONS <! qeq & [ HARG #harg,
+                                                                      LARG #larg ] !> ] ],
+                                      LKEYS.KEYREL #keyrel & [ ARG2 #harg ] ],
     DTR [ INFLECTED -,
-          SYNSEM n_ppde_prop-fin_synsem & 
-                 [ LOCAL [ CAT [ HEAD noun,
-                                 VAL [ SUBJ #subj,
-                                       COMPS < #synsem,
-                                               [ LOCAL [ CAT.HEAD.KEYS #keys,
-                                                         CONT.HOOK.INDEX.SF #sf ],
-                                                 NON-LOCAL #nlocal ] > ] ],
-                           CONT.RELS #rels ],
-                   LKEYS.KEYREL #keyrel ] ] ].
+          SYNSEM n_ppde_prop-fin_synsem & [ LOCAL [ CAT [ HEAD noun,
+                                                          VAL [ SUBJ #subj,
+                                                                COMPS < #synsem,
+                                                                        [ LOCAL [ CAT.HEAD.KEYS #keys,
+                                                                                  CONT.HOOK.INDEX.SF #sf ],
+                                                                          NON-LOCAL #nlocal ] > ] ],
+                                                    CONT.RELS #rels ],
+                                            LKEYS.KEYREL #keyrel ] ] ]
+  """
+  b)- taking PPde + finite completive clause/VPinf_ctrl
+  e.g. la necesidad (de la empresa) (de) que lleguen a un acuerdo/de llegar a un acuerdo
+  """.
 
 
-; --- LR types for participles
-
-; -- LR type building pastparts for passive constructions
-ppart-lex-rule := const-ltol-rule & 
+ppart-lex-rule := const-ltol-rule &
   [ ALTS.PASS -,
     SYNSEM [ PUNCT #punct,
-             SLSHD #slshd, 
+             SLSHD #slshd,
              LOCAL [ CAT [ MC #mc,
                            HEAD verb & [ AUX -,
                                          VFORM part,
@@ -832,7 +848,7 @@ ppart-lex-rule := const-ltol-rule &
                                          TAM #tam & [ MOOD #mood ],
                                          KEYS.KEY #key,
                                          MOD < >,
-                                         LSYNSEM #lsynsem ], 
+                                         LSYNSEM #lsynsem ],
                            VAL.SPR < [ OPT +,
                                        LOCAL [ CAT [ HEAD.KEYS.KEY degree_rel,
                                                      MC na ],
@@ -846,20 +862,19 @@ ppart-lex-rule := const-ltol-rule &
                             HCONS #hcons,
                             RELS #rels & [ LIST < [ ARG0 #index & [ E.MOOD #mood ] ], ... > ] ],
                      CTXT #ctxt ],
-            LKEYS #lkeys,
-            NON-LOCAL #nonloc ],
+             LKEYS #lkeys,
+             NON-LOCAL #nonloc ],
     DTR [ INFLECTED +,
           ALTS.PASS +,
           SYNSEM [ PUNCT #punct & [ RPUNCT no_punct ],
-                   SLSHD #slshd, 
+                   SLSHD #slshd,
                    LOCAL [ CAT [ MC #mc,
-                                 HEAD verb &
-                                      [ PRD non-prd,
-                                        VFORM part,
-                                        VOICE active,
-                                        TAM #tam,
-                                        KEYS.KEY #key,
-                                        LSYNSEM #lsynsem ],
+                                 HEAD verb & [ PRD non-prd,
+                                               VFORM part,
+                                               VOICE active,
+                                               TAM #tam,
+                                               KEYS.KEY #key,
+                                               LSYNSEM #lsynsem ],
                                  VAL.SPR < > ],
                            CONT [ HOOK [ LTOP #hand,
                                          XARG #xarg ],
@@ -868,68 +883,75 @@ ppart-lex-rule := const-ltol-rule &
                            CTXT #ctxt ],
                    LKEYS #lkeys,
                    NON-LOCAL #nonloc ] ],
-    C-CONT.RELS <! !> ].
+    C-CONT.RELS <! !> ]
+  """
+  --- LR types for participles
+  -- LR type building pastparts for passive constructions
+  """.
 
-; -- with transitive verbs
+
 v_pastpart-trans_dlr := ppart-lex-rule &
   [ SYNSEM.LOCAL [ CAT [ HEAD [ INV -,
-                                PRD prd & [ COPV ser ] ],         
-                         VAL [ SUBJ < unexpressed & 
-                                      [ OPT +, 
-                                        LOCAL np_nom_local & 
-                                              [ CONT #objcont & [ HOOK.INDEX #arg2 ] ], 
-                                        NON-LOCAL #ononloc ] >,
+                                PRD prd & [ COPV ser ] ],
+                         VAL [ SUBJ < unexpressed & [ OPT +,
+                                                      LOCAL np_nom_local & [ CONT #objcont & [ HOOK.INDEX #arg2 ] ],
+                                                      NON-LOCAL #ononloc ] >,
                                COMPS < [ OPT +,
-                                         LOCAL mrkd_np_local & 
-                                               [ CAT.HEAD.KEYS.KEY _por_p_sel_rel, 
-                                                 CONT.HOOK.INDEX #subjind ],
-                                         NON-LOCAL #snonloc ]. #comps >,
+                                         LOCAL mrkd_np_local & [ CAT.HEAD.KEYS.KEY _por_p_sel_rel,
+                                                                 CONT.HOOK.INDEX #subjind ],
+                                         NON-LOCAL #snonloc ] . #comps >,
                                CLTS #clts ] ],
                    CONT.RELS.LIST < [ ARG2 #arg2 ], ... > ],
     DTR [ INFLECTED +,
           SYNSEM.LOCAL.CAT.VAL [ SUBJ < [ LOCAL np_nom_local & [ CONT.HOOK.INDEX #subjind ],
                                           NON-LOCAL #snonloc ] >,
                                  COMPS [ FIRST [ LOCAL np_acc_local & [ CONT #objcont ],
-                                                 NON-LOCAL #ononloc ], 
+                                                 NON-LOCAL #ononloc ],
                                          REST #comps ],
-                                 CLTS #clts ] ] ].
+                                 CLTS #clts ] ] ]
+  """
+  -- with transitive verbs
+  """.
 
-; For "construcciones de participio absoluto". Verb (transitive/unaccusative) passive participle + non-pronominal NP (subject)
-; e.g. acabada *ella/la reunión, todos se pusieron a trabajar. 
+
 v_pastpart-unacc_dlr := ppart-lex-rule &
   [ SYNSEM.LOCAL [ AGR #agr,
                    CAT [ HEAD [ INV +,
                                 PRD non-prd ],
-                         VAL [ SUBJ < [ OPT +, 
-                                        LOCAL #slocal & np_nom_local & 
-                                              [ AGR #agr & [ PRONTYPE not_pron ] ], 
+                         VAL [ SUBJ < [ OPT +,
+                                        LOCAL #slocal & np_nom_local & [ AGR #agr & [ PRONTYPE not_pron ] ],
                                         NON-LOCAL #snonloc & [ SLASH 0-dlist ] ] >,
                                COMPS #comps,
                                CLTS #clts ] ] ],
     DTR [ INFLECTED +,
-          SYNSEM unacc_lt & 
-                 [ LOCAL.CAT.VAL [ SUBJ < [ LOCAL #slocal,
-                                            NON-LOCAL #snonloc ] >,
-                                   COMPS #comps,
-                                   CLTS #clts ] ] ] ].
+          SYNSEM unacc_lt & [ LOCAL.CAT.VAL [ SUBJ < [ LOCAL #slocal,
+                                                       NON-LOCAL #snonloc ] >,
+                                              COMPS #comps,
+                                              CLTS #clts ] ] ] ]
+  """
+  For "construcciones de participio absoluto". Verb (transitive/unaccusative) passive participle + non-pronominal NP (subject)
+  e.g. acabada *ella/la reunión, todos se pusieron a trabajar.
+  """.
 
-; for intransitive pronominal verbs
+
 v_pastpart-pron_dlr := ppart-lex-rule &
   [ SYNSEM.LOCAL [ AGR #agr,
                    CAT [ HEAD [ INV +,
                                 PRD non-prd ],
-                         VAL [ SUBJ < [ OPT +, 
-                                        LOCAL #slocal & np_nom_local & 
-                                              [ AGR #agr & [ PRONTYPE not_pron ] ], 
+                         VAL [ SUBJ < [ OPT +,
+                                        LOCAL #slocal & np_nom_local & [ AGR #agr & [ PRONTYPE not_pron ] ],
                                         NON-LOCAL #snonloc & [ SLASH 0-dlist ] ] >,
                                COMPS #comps,
                                CLTS < > ] ] ],
     DTR [ INFLECTED +,
-          SYNSEM v_intrans_synsem &
-                 [ LOCAL.CAT.VAL [ SUBJ < [ LOCAL #slocal,
-                                            NON-LOCAL #snonloc ] >,
-                                   COMPS #comps,
-                                   CLTS < [ LOCAL.CAT.HEAD.CASE rflx ] > ] ] ] ].
+          SYNSEM v_intrans_synsem & [ LOCAL.CAT.VAL [ SUBJ < [ LOCAL #slocal,
+                                                               NON-LOCAL #snonloc ] >,
+                                                      COMPS #comps,
+                                                      CLTS < [ LOCAL.CAT.HEAD.CASE rflx ] > ] ] ] ]
+  """
+  for intransitive pronominal verbs
+  """.
+
 
 ; --- 2.2. LR type building pastpart in predicative position co-occuring with "estar"
 ; e.g. la sopa está comida (*por los chicos)
