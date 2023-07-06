@@ -8416,83 +8416,108 @@ pp_-_i-vm_lex := mod-pp-lex & norm-sem-lex-item &
   e.g. tengo que ser honesta conmigo
   """.
 
-
 ; --- Adjectival modifying prepositions (degree)
 
-; - taking NP (a, hasta)
-; e.g. (*muy) irritante al máximo, (*muy) fiel hasta la muerte
-p_np_i-am_lex := mod-adp-lex & p_np & norm-sem-lex-item & 
-  [ SYNSEM p_amod_synsem &
-           [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT.VAL.SPR < >,
-                                             CONT.HOOK.INDEX #arg2 & [ SORT non-loc ] ] ] >,
-             LKEYS.KEYREL.ARG2 #arg2 ] ]. 
+p_np_i-am_lex := mod-adp-lex & p_np & norm-sem-lex-item &
+  [ SYNSEM p_amod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT.VAL.SPR < >,
+                                                             CONT.HOOK.INDEX #arg2 & [ SORT non-loc ] ] ] >,
+                             LKEYS.KEYREL.ARG2 #arg2 ] ]
+  """
+  --- Adjectival modifying prepositions (degree)
+  - taking NP (a, hasta)
+  e.g. (*muy) irritante al máximo, (*muy) fiel hasta la muerte
+  """.
 
-; - taking temporal NP (desde)
-; e.g. la más alta desde 1945
-p_np_i-tmp-am_lex := mod-adp-lex & p_np & norm-sem-lex-item & 
-  [ SYNSEM p_amod_synsem &
-           [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT.VAL.SPR < >,
-                                             CONT.HOOK.INDEX.SORT tmp ] ] >,
-             LKEYS.KEYREL.PRED temp_loc_rel ] ]. 
 
-; - taking Nbar
-p_nb_i-am_lex := mod-adp-lex & p_np & norm-sem-lex-item & 
-  [ SYNSEM p_amod_synsem &
-           [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS [ KEY non_free_relative_nom_rel,
-                                                               ALTKEY explicit_q_rel ], 
-                                                   VAL.SPR < [ LOCAL.CONT.RELS <! relation !>,
-                                                               NON-LOCAL [ SLASH 0-dlist,
-                                                                           QUE 0-dlist,
-                                                                           REL 0-dlist ] ] > ],
-                                             CONT.HOOK.INDEX #arg2 & [ SORT non-temp ] ] ] >,
-             LKEYS.KEYREL.ARG2 #arg2 ] ]. 
+p_np_i-tmp-am_lex := mod-adp-lex & p_np & norm-sem-lex-item &
+  [ SYNSEM p_amod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT.VAL.SPR < >,
+                                                             CONT.HOOK.INDEX.SORT tmp ] ] >,
+                             LKEYS.KEYREL.PRED temp_loc_rel ] ]
+  """
+  --- Adjectival modifying prepositions (degree)
+  - taking temporal NP (desde)
+  e.g. la más alta desde 1945
+  """.
 
-; - taking NEs
-p_np_i-pn-am_lex := mod-adp-lex & p_np & norm-sem-lex-item & 
-  [ SYNSEM p_amod_synsem &
-           [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS.KEY named_rel,
-                                                   VAL.SPR < > ],
-                                             CONT.HOOK.INDEX #arg2 & [ PRONTYPE not_pron ] ] ] >,
-             LKEYS.KEYREL.ARG2 #arg2 ] ]. 
 
-; - Taking VPinf (a, hasta)
-; e.g. !!! (*muy) llenas a/hasta reventar de vino/lleno de vino a reventar.
-p_vp_i-ctrl-am_lex := mod-adp-lex & p_cp_prop_inf_slash & 
-  [ SYNSEM p_amod_synsem &
-           [ LOCAL.CAT [ HEAD.MOD < [ LOCAL.CONT.HOOK.XARG #ctrl ] >,
-                         VAL.COMPS < [ LOCAL [ CAT.HEAD.KEYS.ALTKEY prop,
-                                               CONT.HOOK.XARG #ctrl & ref-ind ],
-                                       NON-LOCAL.SLASH 0-dlist ] > ] ] ].
+p_nb_i-am_lex := mod-adp-lex & p_np & norm-sem-lex-item &
+  [ SYNSEM p_amod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS [ KEY non_free_relative_nom_rel,
+                                                                               ALTKEY explicit_q_rel ],
+                                                                   VAL.SPR < [ LOCAL.CONT.RELS <! relation !>,
+                                                                               NON-LOCAL [ SLASH 0-dlist,
+                                                                                           QUE 0-dlist,
+                                                                                           REL 0-dlist ] ] > ],
+                                                             CONT.HOOK.INDEX #arg2 & [ SORT non-temp ] ] ] >,
+                             LKEYS.KEYREL.ARG2 #arg2 ] ]
+  """
+  --- Adjectival modifying prepositions (degree)
+  - taking Nbar
+  """.
+
+
+p_np_i-pn-am_lex := mod-adp-lex & p_np & norm-sem-lex-item &
+  [ SYNSEM p_amod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS.KEY named_rel,
+                                                                   VAL.SPR < > ],
+                                                             CONT.HOOK.INDEX #arg2 & [ PRONTYPE not_pron ] ] ] >,
+                             LKEYS.KEYREL.ARG2 #arg2 ] ]
+  """
+  --- Adjectival modifying prepositions (degree)
+  - taking NEs
+  """.
+
+
+p_vp_i-ctrl-am_lex := mod-adp-lex & p_cp_prop_inf_slash &
+  [ SYNSEM p_amod_synsem & [ LOCAL.CAT [ HEAD.MOD < [ LOCAL.CONT.HOOK.XARG #ctrl ] >,
+                                         VAL.COMPS < [ LOCAL [ CAT.HEAD.KEYS.ALTKEY prop,
+                                                               CONT.HOOK.XARG #ctrl & ref-ind ],
+                                                       NON-LOCAL.SLASH 0-dlist ] > ] ] ]
+  """
+  --- Adjectival modifying prepositions (degree)
+  - Taking VPinf (a, hasta)
+  e.g. !!! (*muy) llenas a/hasta reventar de vino/lleno de vino a reventar.
+  """.
+
 
 
 ; --- Ordinal modifying prepositions (degree)
 
-; - taking NP (con)
-; e.g. Rusia, primera con tres puntos,...
 p_np_i-num_lex := mod-adp-lex & p_np & norm-sem-lex-item & 
   [ SYNSEM p_numod_synsem &
            [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT.VAL.SPR < >,
                                              CONT.HOOK.INDEX #arg2 & [ SORT non-loc ] ] ] >,
-             LKEYS.KEYREL.ARG2 #arg2 ] ]. 
+             LKEYS.KEYREL.ARG2 #arg2 ] ]
+"""
+; --- Ordinal modifying prepositions (degree)
+
+; - taking NP (con)
+; e.g. Rusia, primera con tres puntos,...
+""". 
 
 
 ; --- Prepositional modifying prepositions (PPmod + PPhd)
 
-; - the first expresses distance, the second includes a locative preposition (a, al)
-; e.g. a 20 metros sobre el nivel del mar, a mitad de camino entre Madrid y Cáceres
 p_np_i-pm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
   [ SYNSEM p_pmod_synsem &
            [ LOCAL.CAT [ HEAD.MOD < [ LOCAL [ CAT.HEAD.KEYS.KEY state_loc_rel,
                                               CONT.HOOK.INDEX.SORT location ] ] >,
-                         VAL.COMPS < [ LOCAL.CAT.VAL.SPR < > ] > ] ] ].
+                         VAL.COMPS < [ LOCAL.CAT.VAL.SPR < > ] > ] ] ]
+"""
+; --- Prepositional modifying prepositions (PPmod + PPhd)
+; - the first expresses distance, the second includes a locative preposition (a, al)
+; e.g. a 20 metros sobre el nivel del mar, a mitad de camino entre Madrid y Cáceres
 
-; - they express a distance / period of time (de, desde) 
-; e.g. corrió de un extremo al otro, voy de aquí para allá, duró desde las 4 hasta las 6
+""".
+
 p_np_i-orig-pm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
   [ SYNSEM p_pmod_synsem &
            [ LOCAL.CAT [ HEAD.MOD < [ LOCAL [ CAT.HEAD.KEYS.KEY period_rel,
                                               CONT.HOOK.INDEX.SORT #sort ] ] >,
-                         VAL.COMPS < [ LOCAL.CONT.HOOK.INDEX.SORT #sort & location ] > ] ] ].
+                         VAL.COMPS < [ LOCAL.CONT.HOOK.INDEX.SORT #sort & location ] > ] ] ]
+"""
+; --- Prepositional modifying prepositions (PPmod + PPhd)
+; - they express a distance / period of time (de, desde) 
+; e.g. corrió de un extremo al otro, voy de aquí para allá, duró desde las 4 hasta las 6
+""".
 
 
 
@@ -8517,7 +8542,13 @@ basic-det-lex := lex-item &
                      COORD-STRAT zero,
                      CAT [ HEAD det & [ KEYS.KEY quant_rel ],
                            VAL.COMPS #comps ] ] ],
-    ARG-ST #comps ].
+    ARG-ST #comps ]
+"""
+; --- 6. Determiners
+; !!! LOCAL.AGR checks full morpho-syntactic agreement within the NP, 
+; whereas CONT.HOOK.INDEX does not check 'NUMBER', with this we can deal 
+; with 'ad-sensum' agr. 
+""".
 
 basic_det_synsem := lex-synsem & 
   [ LOCAL [ COORD-STRAT zero,
@@ -8541,7 +8572,13 @@ basic_det_synsem := lex-synsem &
     LKEYS.KEYREL #keyrel & [ LBL #ltop,
                              ARG0 #index,
                              PRED #pred,
-                             RSTR #harg ] ].
+                             RSTR #harg ] ]
+"""
+; --- 6. Determiners
+; !!! LOCAL.AGR checks full morpho-syntactic agreement within the NP, 
+; whereas CONT.HOOK.INDEX does not check 'NUMBER', with this we can deal 
+; with 'ad-sensum' agr. 
+""".
 
 ; dets taking spr and building a DP
 specfd_det_synsem := basic_det_synsem &
