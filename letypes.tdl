@@ -7095,43 +7095,65 @@ av_-_s-xm-spd_lex := spec-adverb-lex & basic-one-arg &
 
 ; --- 4.2. Intersective adverbs
 
+; --- 4.2.1. S modifiers 
+
+av_-_i-sm_lex := nonspec-adverb-lex & norm-zero-arg &
+  [ SYNSEM nonspec_intersect_s_adverb_synsem & 
+           [ local.cat.posthead - ] ]
+"""
+; --- 4.2. Intersective adverbs
+
 ; --- 4.2.1. S modifiers (davant subject o parentetics -entre comes
 ; --- que no sempre apareixen- en qualsevol posició)
 ; e.g. 
-av_-_i-sm_lex := nonspec-adverb-lex & norm-zero-arg &
-  [ SYNSEM nonspec_intersect_s_adverb_synsem & 
-           [ local.cat.posthead - ] ].
+""".
 
 
 ; --- 4.2.2. VP modifiers (any position after the verb)
 
-; e.g. (*muy) mortalmente
 av_-_i-vm_lex := nonspec-adverb-lex & norm-zero-arg &
   [ synsem nonspec_intersect_vp_adverb_synsem & 
-           [ local.cat.posthead + ] ].
+           [ local.cat.posthead + ] ]
+"""
+; --- 4.2.2. VP modifiers (any position after the verb)
+; e.g. (*muy) mortalmente
 
-; e.g. (muy) negativamente
+""".
+
 av_-_i-vm-spd_lex := spec-adverb-lex & basic-one-arg &
   [ synsem intersect_vp_adverb_synsem & 
-           [ local.cat.posthead + ] ].
+           [ local.cat.posthead + ] ]
+"""
+; --- 4.2.2. VP modifiers (any position after the verb)
+; e.g. (muy) negativamente
 
-; e.g. (*muy) recien llegados
+""".
+
 av_-_i-vm-ppart_lex := nonspec-adverb-lex & norm-zero-arg &
   [ synsem nonspec_intersect_vp_adverb_synsem & 
            [ local.cat [ posthead -,
                          head [ keys.key adv_rel,
                                 mod < [ local.cat [ head.vform part,
-                                                    val.subj < [ ] > ] ] > ] ] ] ].
+                                                    val.subj < [ ] > ] ] > ] ] ] ]
+"""
+; --- 4.2.2. VP modifiers (any position after the verb)
+; e.g. (*muy) recien llegados
+
+""".
 
 
 ; --- 4.3. degree adverbs (modify adverbs/adjectives (& pastparts))
-; !!! missing: así de tonto, igual de extraño, cómo de pequeño (interrogativo); qué (exclamativo); 
-; doblemente bueno; (*muy) cortés hasta la adulación; (*muy) fiel a sus ideas hasta la muerte 
+
 basic_degree_spec_synsem := canonical-synsem &
   [ local local &
           [ cat [ head adv & [ prd non-prd,
                                mod < > ],
-                  val.subj < > ] ] ].
+                  val.subj < > ] ] ]
+"""
+; --- 4.3. degree adverbs (modify adverbs/adjectives (& pastparts))
+; !!! missing: así de tonto, igual de extraño, cómo de pequeño (interrogativo); qué (exclamativo); 
+; doblemente bueno; (*muy) cortés hasta la adulación; (*muy) fiel a sus ideas hasta la muerte 
+""".
 
 basic_lex_degree_spec_synsem := basic_degree_spec_synsem & lex-synsem &
   [ local [ cont [ hook.index #index,
@@ -7230,32 +7252,40 @@ spec_degree_spec_lex := basic_degree_spec_lex &
 
 
 ; --- 4.3.1. quant degree adverbs
-; modify adverbs, adjectives, pastparts, and quant. pronom adverbs (e.g. mucho más)
-; - mucho, bien, algo, bastante, demasiado, super, nada, medio: can't co-occur with "muy" 
-; - un poco, un tanto: can't co-occur with any degree adverb
+
 av_-_dg-qnt_lex := degree_spec_lex & norm-zero-arg &
   [ synsem lex_degree_spec_synsem &
            [ local [ cat [ posthead -,
                            head.keys.key quant_degree_rel,
-                           val.spec < [ local.cat.head +nvjr ] > ] ] ] ].
+                           val.spec < [ local.cat.head +nvjr ] > ] ] ] ]
+"""
+; --- 4.3.1. quant degree adverbs
+; modify adverbs, adjectives, pastparts, and quant. pronom adverbs (e.g. mucho más)
+; - mucho, bien, algo, bastante, demasiado, super, nada, medio: can't co-occur with "muy" 
+; - un poco, un tanto: can't co-occur with any degree adverb
+""".
 
-; - for 'casi' and 'muy', which may specify determiners; e.g. muy pocos/casi todos los chicos lloran
-; and also modify adverbs, adjectives, pastparts, and pps
-; also for tan (tan metafísicamente imposible)
 av_-_dg-muy-and-casi_lex := degree_spec_lex & norm-zero-arg &
   [ synsem lex_degree_spec_synsem &
            [ local.cat [ posthead -,
                          val.spec < [ local.cat [ head +vjrpd,
-                                                  val.comps < > ] ] > ] ] ].
+                                                  val.comps < > ] ] > ] ] ]
+"""
+; - for 'casi' and 'muy', which may specify determiners; e.g. muy pocos/casi todos los chicos lloran
+; and also modify adverbs, adjectives, pastparts, and pps
+; also for tan (tan metafísicamente imposible)
+""".
 
-; - for 'casi', which may specify pronouns; e.g. casi nadie/nada/ninguno
 av_-_dg-casi_lex := degree_spec_lex & norm-zero-arg &
   [ synsem lex_degree_spec_synsem &
            [ local.cat [ posthead -,
                          val.spec < [ local [ agr.prontype real_pron,
                                               cat [ head noun,
                                                     val [ comps < >,
-                                                          spr < [ local.cat.head.keys.key _casi_x_deg_rel ] > ] ] ] ] > ] ] ].
+                                                          spr < [ local.cat.head.keys.key _casi_x_deg_rel ] > ] ] ] ] > ] ] ]
+"""
+; - for 'casi', which may specify pronouns; e.g. casi nadie/nada/ninguno
+""".
 
 ;av_-_dg-un-tanto_lex := basic_degree_spec_lex & basic-one-arg &
 ;  [ synsem lex_degree_spec_synsem &
@@ -7269,15 +7299,20 @@ av_-_dg-casi_lex := degree_spec_lex & norm-zero-arg &
 ;    arg-st #spr ].
 
 ; --- 4.3.2. degree adverbs (ending in '-mente')
-; modify adjectives, adverbs and pastparts: they may have a degree adverbs "tan metafísicamente imposible"
+
 av_-_dg_lex := spec_degree_spec_lex & basic-one-arg & 
   [ synsem lex_degree_spec_synsem &
            [ local.cat [ posthead -,
                          head.keys.key non-quant_degree_rel,
-                         val [ spec < [ local.cat.head +vjr ] > ] ] ] ].
+                         val [ spec < [ local.cat.head +vjr ] > ] ] ] ]
+"""
+; --- 4.3.2. degree adverbs (ending in '-mente')
+; modify adjectives, adverbs and pastparts: they may have a degree adverbs "tan metafísicamente imposible"
+""".
 
 
 ; --- 4.3.3. comparative degree adverbs
+
 comp_degree_spec_lex := basic_degree_spec_lex & basic-two-arg &
   [ synsem basic_comp_degree_spec_synsem &
            [ local [ cat [ posthead -,
@@ -7286,21 +7321,31 @@ comp_degree_spec_lex := basic_degree_spec_lex & basic-two-arg &
                                  comps #comps ] ],
                      cont [ rels <! arg12-relation !>,
                             hcons <! !> ] ] ], 
-    arg-st < #spr . #comps > ].
+    arg-st < #spr . #comps > ]
+"""
+; --- 4.3.3. comparative degree adverbs
+""".
 
-; e.g. (mucho/poco/bastante) más/menos guapo que 
 av_-_dg-cmp_lex := comp_degree_spec_lex &
   [ synsem [ local.cat.val.spr < [ local.cat.head.keys.key basic_quant_degree_rel ] >,
-             lkeys.--compkey _que_p_comp_rel ] ].
+             lkeys.--compkey _que_p_comp_rel ] ]
+"""
+; --- 4.3.3. comparative degree adverbs
+; e.g. (mucho/poco/bastante) más/menos guapo que 
+""".
 
 ; e.g. (casi) tan guapo como
 av_-_dg-cmp-eq_lex := comp_degree_spec_lex &
   [ synsem [ local.cat.val.spr < [ local.cat.head.keys.key _casi_x_deg_rel ] >,
-             lkeys.--compkey _como_p_comp_rel ] ].
+             lkeys.--compkey _como_p_comp_rel ] ]
+"""
+; --- 4.3.3. comparative degree adverbs
+; e.g. (casi) tan guapo como
+""".
 
 
 ; --- 4.3.5. Superlative degree adverbs
-; e.g. la más/menos guapa de 
+
 av_-_dg-sup_lex := basic_degree_spec_lex & basic-one-arg &
   [ SYNSEM basic_sup_degree_spec_synsem &
            [ LOCAL [ CAT [ POSTHEAD -,
@@ -7310,7 +7355,11 @@ av_-_dg-sup_lex := basic_degree_spec_lex & basic-one-arg &
                             HCONS <! !> ] ], 
              LKEYS [ KEYREL.PRED superl,
                      --COMPKEY _de_p_sel_rel ] ],
-    ARG-ST #comps ].
+    ARG-ST #comps ]
+"""
+; --- 4.3.5. Superlative degree adverbs
+; e.g. la más/menos guapa de 
+""".
 
 
 ; --- 4.4. Ordinal adverbs
