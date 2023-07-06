@@ -96,6 +96,19 @@ def convert_comments_to_docstrings(tdl_file):
 #                 if i < len(lines):
 #                     i +=1
 
+def convert_all_comments_to_docstrings(tdl_file):
+    output = []
+    cur_comment = ''
+    for event, obj, lineno in tdl.iterparse(tdl_file):
+        if event == 'LineComment':
+            cur_comment = cur_comment + obj + '\n'
+        if event == 'TypeDefinition':
+            ds = cur_comment.strip('\n')
+            conj = copy.deepcopy(obj.conjunction)
+            new_type = tdl.TypeDefinition(obj.identifier, conj, ds)
+            output.append((event, new_type, lineno))
+            cur_comment = ''
+    save_tdl_objects(output, 'docstring_output.tdl')
 
 
 def find_period(start, lines):
@@ -104,5 +117,5 @@ def find_period(start, lines):
             continue
         return ln.find('.'), start + i +1 # return the index of the period and the index of the line it was found in
 
-#convert_comments_to_docstrings(sys.argv[1])
-plain_text_convert(sys.argv[1], sys.argv[2])
+convert_all_comments_to_docstrings(sys.argv[1])
+#plain_text_convert(sys.argv[1], sys.argv[2])

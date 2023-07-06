@@ -107,18 +107,24 @@ v_impers := basic-main-verb &
 
 ; --- 1.1.1. weather predicates
 
-; - llover (to rain), tronar (to thunder),...
 v_impers_strict_intr_synsem := v_impers_synsem & 
   [ LOCAL [ AGR.PNG.PN 3sg, 
             CAT [ HEAD.INV -,
                   VAL.COMPS < > ],
-            CONT.HCONS <! !> ] ].
+            CONT.HCONS <! !> ] ]
+"""; --- 1.1.1. weather predicates
+- llover (to rain), tronar (to thunder),...
+""".
 
 v_-_nsbj_lex := v_impers & main-verb-impers & norm-zero-arg & 
   [ SYNSEM v_impers_strict_intr_synsem &
            [ LOCAL.CAT.HEAD.LSYNSEM v_impers_strict_intr_synsem ] ].
 
 
+; --- 1.1.2. impersonal verbs taking nominal complements that don't passivize (haber)
+
+trans_impers_synsem := v_impers_synsem & transitive_verb_synsem
+"""
 ; - hacer + SN; e.g. hace calor/frío (it is hot/cold) =>> v_np_npsv-nsbj_lex
 
 ; - ser 3sg + PPde; e.g. en Islandia es de noche durante seis meses (Iceland is dark during six months)
@@ -137,8 +143,7 @@ v_-_nsbj_lex := v_impers & main-verb-impers & norm-zero-arg &
 ; algunos profesores/ there are some teachers)
 ; !!! hay 4 metros desde la mesa hasta la TV, hay bastante/suficiente con esto (there are four meters 
 ; from the table to the TV, it is enough with this)
-
-trans_impers_synsem := v_impers_synsem & transitive_verb_synsem.
+""".
 
 v_impers_np_ntr_synsem := trans_impers_synsem &
   [ LOCAL [ AGR.PNG.PN 3sg, 
@@ -156,8 +161,6 @@ v_np_npsv-nsbj_lex := v_impers & main-verb-impers & basic-one-arg &
 
 
 ; --- 1.1.3. impersonal verbs taking finite completive clauses (parecer, resultar, semejar, poder)
-; They also show a raising structure (e.g. parece que Juan trabaja mucho -> Juan parece trabajar mucho 
-; (it seems that John works a lot -> John seems to work a lot))
 
 v_impers_cp_prop_fin_synsem := v_impers_synsem &
   [ LOCAL [ AGR.PNG.PN 3sg, 
@@ -166,33 +169,39 @@ v_impers_cp_prop_fin_synsem := v_impers_synsem &
                                       [ CONT.HOOK.LTOP #larg ] ] > ],
             CONT.HCONS <! qeq & [ HARG #harg,
                                   LARG #larg ] !> ],
-    LKEYS.KEYREL arg2-ev-relation & [ ARG2 #harg ] ].
+    LKEYS.KEYREL arg2-ev-relation & [ ARG2 #harg ] ]
+    """; --- 1.1.3. impersonal verbs taking finite completive clauses (parecer, resultar, semejar, poder)
+; They also show a raising structure (e.g. parece que Juan trabaja mucho -> Juan parece trabajar mucho 
+; (it seems that John works a lot -> John seems to work a lot))
+""".
 
-; a)- taking indicative (parecer, resultar, semejar)
+v_cp_p-ind-nsbj_lex := v_impers & main-verb-impers & basic-one-arg & 
+  [ SYNSEM v_impers_cp_prop_fin_synsem & 
+           [ LOCAL.CAT [ HEAD.LSYNSEM v_impers_cp_prop_fin_synsem,
+                         VAL.COMPS < [ OPT -, 
+                                       LOCAL.CAT.HEAD.TAM.MOOD ind ] > ] ] ]
+"""; a)- taking indicative (parecer, resultar, semejar)
 ; e.g.- parece que Juan trabaja mucho -> Juan parece trabajar mucho 
 ;     (it seems that John works a lot -> John seems to work a lot)
 ;     - resultó que Juan fue el ganador -> Juan resultó ser el ganador (only with 'ser','estar' (to be) 
 ;     and 'tener' (to have))(it turned out that John was the winner -> John turned out to be the winner)
 ;     - semejaba que la curva continuaba -> la curva semejaba continuar (it seemed that the curve 
 ;     continued -> the curve seemed to continue)
-v_cp_p-ind-nsbj_lex := v_impers & main-verb-impers & basic-one-arg & 
-  [ SYNSEM v_impers_cp_prop_fin_synsem & 
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_impers_cp_prop_fin_synsem,
-                         VAL.COMPS < [ OPT -, 
-                                       LOCAL.CAT.HEAD.TAM.MOOD ind ] > ] ] ].
+""".
 
-; b)- taking subjunctive (poder)
-; e.g.  puede que mañana llueva -> mañana puede llover (it may be that tomorrow rains -> it may rain tomorrow)
 v_cp_p-sub-nsbj_lex := v_impers & main-verb-impers & basic-one-arg & 
   [ SYNSEM v_impers_cp_prop_fin_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_impers_cp_prop_fin_synsem,
                          VAL.COMPS < [ OPT -, 
-                                       LOCAL.CAT.HEAD.TAM.MOOD sub ] > ] ] ].
+                                       LOCAL.CAT.HEAD.TAM.MOOD sub ] > ] ] ]
+"""
+; b)- taking subjunctive (poder)
+; e.g.  puede que mañana llueva -> mañana puede llover (it may be that tomorrow rains -> it may rain tomorrow)
+""".
 
 
 ; --- 1.1.4. other impersonal contructions 
 
-; --- "haber que + inf" (hay que trabajar más) ("it is necessary to + inf" (it is necessary to work more))
 v_impers_cp_p_inf_synsem := v_impers_synsem & 
   [ LOCAL [ AGR.PNG.PN 3sg, 
             CAT [ HEAD.INV -, 
@@ -205,14 +214,17 @@ v_impers_cp_p_inf_synsem := v_impers_synsem &
             CONT.HCONS <! qeq & [ HARG #harg,
                                   LARG #larg ] !> ],
     LKEYS [ KEYREL arg2-ev-relation &  [ ARG2 #harg ] ,
-            --COMPKEY #ckey ] ].
+            --COMPKEY #ckey ] ]
+"""
+; --- 1.1.4. other impersonal contructions 
+
+; --- "haber que + inf" (hay que trabajar más) ("it is necessary to + inf" (it is necessary to work more))
+""".
 
 v_cp_p-inf-nsbj_lex := v_impers & main-verb-impers & basic-one-arg & 
   [ SYNSEM v_impers_cp_p_inf_synsem &
            [ LOCAL.CAT.HEAD.LSYNSEM v_impers_cp_p_inf_synsem ] ].
 
-; --- tratarse (to be about)
-; (e.g. se trata de un goleador nato (it is about (it is about a born goal scorer))
 v_impers_pron_intr_mrkd_np_synsem := v_impers_synsem &
   [ LOCAL [ AGR.PNG.PN 3sg, 
             CAT [ HEAD.INV -,
@@ -221,7 +233,11 @@ v_impers_pron_intr_mrkd_np_synsem := v_impers_synsem &
                                         CONT.HOOK.INDEX #ind2 ] ] > ],
             CONT.HCONS <! !> ],
     LKEYS [ KEYREL arg2-ev-relation & [ ARG2 #ind2 ],
-            --COMPKEY #ckey ] ].
+            --COMPKEY #ckey ] ]
+"""
+; --- tratarse (to be about)
+; (e.g. se trata de un goleador nato (it is about (it is about a born goal scorer))
+""".
 
 v_pp_e-nsbj-prn_lex := v_impers & impers-pronominal-verb & basic-two-arg & 
   [ SYNSEM v_impers_pron_intr_mrkd_np_synsem & 
@@ -231,27 +247,31 @@ v_pp_e-nsbj-prn_lex := v_impers & impers-pronominal-verb & basic-two-arg &
     ARG-ST < #comps . #clt > ].
 
 
-; --- sobrar, bastar (to be enough)
 v_impers_intr_mrkd_np-or-prop_synsem := v_impers_synsem &
   [ LOCAL [ AGR.PNG.PN 3sg, 
             CAT [ HEAD.INV -,
                   VAL [ COMPS < [ LOCAL.CAT.HEAD.KEYS.KEY #ckey & _con_p_sel_rel ] >,
                         CLTS < > ] ] ],
     LKEYS [ KEYREL arg2-ev-relation,
-            --COMPKEY #ckey ] ].
+            --COMPKEY #ckey ] ]
+"""
+; --- sobrar, bastar (to be enough)
+""".
 
 v_impers_intr_mrkd_np-or-prop := v_impers & 
   [ SYNSEM v_impers_intr_mrkd_np-or-prop_synsem & 
            [ LOCAL.CAT.VAL.COMPS #comps ],
     ARG-ST #comps ]. 
 
-; e.g. sobra/basta con 100 ptas (it is more than enough with 100 ptas)
 v_impers_intr_mrkd_np_synsem := v_impers_intr_mrkd_np-or-prop_synsem &
   [ LOCAL [ CAT.VAL.COMPS < [ LOCAL mrkd_np_local & 
                                     [ CAT.HEAD.KEYS.ALTKEY non_temp_nonpro_rel,
                                       CONT.HOOK.INDEX #arg2 & ref-ind ] ] >,
             CONT.HCONS <! !> ],
-    LKEYS.KEYREL.ARG2 #arg2 ].
+    LKEYS.KEYREL.ARG2 #arg2 ]
+"""
+; e.g. sobra/basta con 100 ptas (it is more than enough with 100 ptas)
+""".
 
 v_pp_e-nsbj_lex := v_impers_intr_mrkd_np-or-prop & basic-one-arg & 
   [ SYNSEM v_impers_intr_mrkd_np_synsem & 
@@ -259,14 +279,15 @@ v_pp_e-nsbj_lex := v_impers_intr_mrkd_np-or-prop & basic-one-arg &
                          VAL.COMPS <  [ OPT - ] > ] ] ].
 
 
-; e.g. sobra/basta con que vengas (it is more than enough that you come)
 v_impers_intr_mrkd_cp_fin_synsem := v_impers_intr_mrkd_np-or-prop_synsem &
   [ LOCAL [ CAT.VAL.COMPS < [ LOCAL mrkd_cp_prop_fin_local &
                                     [ CONT.HOOK [ LTOP #larg,
                                                   INDEX.SF prop ] ] ] >, 
             CONT.HCONS <! qeq & [ HARG #harg,
                                   LARG #larg ] !> ],
-    LKEYS.KEYREL.ARG2 #harg ].
+    LKEYS.KEYREL.ARG2 #harg ]
+"""; e.g. sobra/basta con que vengas (it is more than enough that you come)
+""".
 
 v_pp_e-cp-p-nsbj_lex := v_impers_intr_mrkd_np-or-prop & basic-one-arg & 
   [ SYNSEM v_impers_intr_mrkd_cp_fin_synsem & 
@@ -274,7 +295,6 @@ v_pp_e-cp-p-nsbj_lex := v_impers_intr_mrkd_np-or-prop & basic-one-arg &
                          VAL.COMPS <  [ OPT - ] > ] ] ].
 
 
-; e.g. sobra/basta con verte (it is more than enough seeing you)
 v_impers_intr_mrkd_vp_inf_synsem := v_impers_intr_mrkd_np-or-prop_synsem &
   [ LOCAL [ CAT.VAL.COMPS < [ LOCAL mrkd_cp_prop_inf_local &
                                     [ CAT.MC -,
@@ -282,7 +302,9 @@ v_impers_intr_mrkd_vp_inf_synsem := v_impers_intr_mrkd_np-or-prop_synsem &
                                                   INDEX.SF prop ] ] ] >, 
             CONT.HCONS <! qeq & [ HARG #harg,
                                   LARG #larg ] !> ],
-    LKEYS.KEYREL.ARG2 #harg ].
+    LKEYS.KEYREL.ARG2 #harg ]
+"""; e.g. sobra/basta con verte (it is more than enough seeing you)
+""".
 
 v_pp_e-vp-nsbj_lex :=  v_impers_intr_mrkd_np-or-prop & basic-one-arg & 
   [ SYNSEM v_impers_intr_mrkd_vp_inf_synsem & 
@@ -290,7 +312,6 @@ v_pp_e-vp-nsbj_lex :=  v_impers_intr_mrkd_np-or-prop & basic-one-arg &
                          VAL.COMPS <  [ OPT - ] > ] ] ].
 
 
-; --- sobrar, bastar (to be enough)
 v_impers_intr_io_mrkd_np-or-prop_synsem := v_impers_synsem &
   [ LOCAL [ AGR.PNG.PN 3sg, 
             CAT [ HEAD.INV -,
@@ -302,21 +323,24 @@ v_impers_intr_io_mrkd_np-or-prop_synsem := v_impers_synsem &
     LKEYS [ KEYREL arg23-ev-relation & 
                    [ ARG3 #arg3 ],
             --COMPKEY #ckey,
-            --OCOMPKEY #ockey ] ].
+            --OCOMPKEY #ockey ] ]
+"""; --- sobrar, bastar (to be enough)
+""".
 
 v_impers_intr_io_mrkd_np-or-prop := v_impers & 
   [ SYNSEM v_impers_intr_io_mrkd_np-or-prop_synsem & 
            [ LOCAL.CAT.VAL.COMPS #comps ],
     ARG-ST #comps ]. 
 
-; e.g. me sobra/basta con 100 ptas (for me it is more than enough with 100 ptas)
 v_impers_intr_io_mrkd_np_synsem := v_impers_intr_io_mrkd_np-or-prop_synsem &
   [ LOCAL [ CAT.VAL.COMPS < synsem,
                             [ LOCAL mrkd_np_local & 
                                     [ CAT.HEAD.KEYS.ALTKEY non_temp_nonpro_rel,
                                       CONT.HOOK.INDEX #arg2 & ref-ind ] ] >,
             CONT.HCONS <! !> ],
-    LKEYS.KEYREL.ARG2 #arg2 ].
+    LKEYS.KEYREL.ARG2 #arg2 ]
+"""; e.g. me sobra/basta con 100 ptas (for me it is more than enough with 100 ptas)
+""".
 
 v_ppa-pp_e-nsbj_lex := v_impers_intr_io_mrkd_np-or-prop & basic-two-arg & 
   [ SYNSEM v_impers_intr_io_mrkd_np_synsem & 
@@ -324,7 +348,6 @@ v_ppa-pp_e-nsbj_lex := v_impers_intr_io_mrkd_np-or-prop & basic-two-arg &
                          VAL.COMPS <  [ OPT - ], [ OPT - ] > ] ] ].
 
 
-; e.g. me sobra/basta con que vengas (for me it is more than enough that you come)
 v_impers_intr_io_mrkd_cp_fin_synsem := v_impers_intr_io_mrkd_np-or-prop_synsem &
   [ LOCAL [ CAT.VAL.COMPS < synsem,
                             [ LOCAL mrkd_cp_prop_fin_local &
@@ -332,7 +355,9 @@ v_impers_intr_io_mrkd_cp_fin_synsem := v_impers_intr_io_mrkd_np-or-prop_synsem &
                                                   INDEX.SF prop ] ] ] >, 
             CONT.HCONS <! qeq & [ HARG #harg,
                                   LARG #larg ] !> ],
-    LKEYS.KEYREL.ARG2 #harg ].
+    LKEYS.KEYREL.ARG2 #harg ]
+"""; e.g. me sobra/basta con que vengas (for me it is more than enough that you come)
+""".
 
 v_ppa-pp_e-cp-p-nsbj_lex := v_impers_intr_io_mrkd_np-or-prop & basic-two-arg & 
   [ SYNSEM v_impers_intr_io_mrkd_cp_fin_synsem & 
@@ -340,7 +365,6 @@ v_ppa-pp_e-cp-p-nsbj_lex := v_impers_intr_io_mrkd_np-or-prop & basic-two-arg &
                          VAL.COMPS <  [ OPT - ], [ OPT - ] > ] ] ].
 
 
-; e.g. me sobra/basta con verte (for me it is more than enough seeing you)
 v_impers_intr_io_mrkd_vp_inf_synsem := v_impers_intr_io_mrkd_np-or-prop_synsem &
   [ LOCAL [ CAT.VAL.COMPS < synsem,
                             [ LOCAL mrkd_cp_prop_inf_local &
@@ -349,13 +373,15 @@ v_impers_intr_io_mrkd_vp_inf_synsem := v_impers_intr_io_mrkd_np-or-prop_synsem &
                                                   INDEX.SF prop ] ] ] >, 
             CONT.HCONS <! qeq & [ HARG #harg,
                                   LARG #larg ] !> ],
-    LKEYS.KEYREL.ARG2 #harg ].
+    LKEYS.KEYREL.ARG2 #harg ]
+"""; e.g. me sobra/basta con verte (for me it is more than enough seeing you)
+""".
 
 v_ppa-pp_e-vp-nsbj_lex :=  v_impers_intr_io_mrkd_np-or-prop & basic-two-arg & 
   [ SYNSEM v_impers_intr_io_mrkd_vp_inf_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_impers_intr_io_mrkd_vp_inf_synsem, 
-                         VAL.COMPS <  [ OPT - ], [ OPT - ] > ] ] ].
-
+                         VAL.COMPS <  [ OPT - ], [ OPT - ] > ] ] ]
+"""
 ; se me hace tarde (it gets late),  
 ; me duele en este brazo (this arm hurts), me pica en el brazo (my arm itches)
 ; nos dio por reír (we started to laugh), no me da tiempo (I don't have enough time), 
@@ -363,6 +389,8 @@ v_ppa-pp_e-vp-nsbj_lex :=  v_impers_intr_io_mrkd_np-or-prop & basic-two-arg &
 ; (aquí) sobra/falta dinero (there is more than enough/ there is some money missing (here))
 ; aquí pone que se prohíbe fumar (here it says that smoking is not allowed)
 ; oler a pan (to smell of bread), saber a pan (to taste like bread), perception verbs (taking compl DIV +) 
+""".
+
 
 
 ; --- 1.2. Verbs taking verbal subjects
@@ -375,7 +403,10 @@ verbal-subj-synsem := lex-synsem &
                                        CAT.VAL.COMPS < >,
                                        CONT.HOOK.LTOP #xarg ] ] > ],
             CONT [ HOOK.XARG #xarg,
-                   HCONS.LIST < [ LARG #xarg ],... > ] ] ]. 
+                   HCONS.LIST < [ LARG #xarg ],... > ] ] ]
+"""
+; --- 1.2. Verbs taking verbal subjects
+""". 
 
 trans_vinf-subj-synsem := vinf-subj-synsem & transitive_verb_synsem.
 
@@ -398,6 +429,14 @@ vfin-subj-main-verb := basic-main-verb &
 
 
 
+v_subj_cp_prop_fin_unacc_synsem := vfin-subj-synsem &
+  [ LOCAL [ CAT [ HEAD.INV -,
+                  VAL [ SUBJ < [ LOCAL cp_fin_local ] >,
+                        COMPS <  > ] ],
+            CONT.HCONS <! [ HARG #harg ] !> ],
+    LKEYS.KEYREL arg2-ev-relation & 
+                 [ ARG2 #harg ] ]
+"""
 ; --- 1.2.1. Unaccusative verbs taking finite verbs as subjects
 ; The subject appears in post-verbal position. Occasionally, a locative complement, with literal meaning 
 ; (aparecer (to appear), figurar (to say), quedar (to stay)) or figurative meaning (desprenderse 
@@ -405,35 +444,29 @@ vfin-subj-main-verb := basic-main-verb &
 ; though it cannot be a physical entity (of first order) with 'desprenderse' (to follow). With NP subjects, 
 ; 'aparecer' (to appear) y 'quedar' and 'quedar' (to stay) can take an optional IO.
 ; canvio INV + a INV -
-v_subj_cp_prop_fin_unacc_synsem := vfin-subj-synsem &
-  [ LOCAL [ CAT [ HEAD.INV -,
-                  VAL [ SUBJ < [ LOCAL cp_fin_local ] >,
-                        COMPS <  > ] ],
-            CONT.HCONS <! [ HARG #harg ] !> ],
-    LKEYS.KEYREL arg2-ev-relation & 
-                 [ ARG2 #harg ] ].
+""".
 
 v_subj_cp_prop_fin_unacc := vfin-subj-main-verb & 
   [ ALTS.VCALT - ]. 
 
-; e.g. no figura en el contrato que el acuerdo es/sea irreversible (it does not appear in the 
-; contract that the agreement is irreversible)
 v_-_sbj-cp-p_lex := v_subj_cp_prop_fin_unacc & main-verb & basic-one-arg &
   [ SYNSEM v_subj_cp_prop_fin_unacc_synsem &
-           [ LOCAL.CAT.HEAD.LSYNSEM v_subj_cp_prop_fin_unacc_synsem ] ]. 
+           [ LOCAL.CAT.HEAD.LSYNSEM v_subj_cp_prop_fin_unacc_synsem ] ]
+"""; e.g. no figura en el contrato que el acuerdo es/sea irreversible (it does not appear in the 
+; contract that the agreement is irreversible)
+""". 
 
-; e.g. de ahí no se desprende que la situación sea/es imposible (from there it does not follow that the 
-; situation is impossible)
 v_-_sbj-cp-p-prn_lex := v_subj_cp_prop_fin_unacc & impers-pronominal-verb & basic-two-arg & 
   [ SYNSEM v_subj_cp_prop_fin_unacc_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_fin_unacc_synsem, 
                          VAL [ SUBJ < #subj >, 
                                CLTS #clt ] ] ],
-    ARG-ST < #subj . #clt > ]. 
+    ARG-ST < #subj . #clt > ]
+"""; e.g. de ahí no se desprende que la situación sea/es imposible (from there it does not follow that the 
+; situation is impossible)
+""". 
 
 
-; --- 1.2.2. Intransitive verbs taking Vfin subjects and IO
-; clitization/clitic doubling obligatory, that's why we specify the COMPS to be OPT -
 #|
 v_subj_cp_prop_intr_io_synsem := verbal-subj-synsem & 
   [ LOCAL [ CAT.VAL [ COMPS < [ LOCAL dative_local & 
@@ -454,9 +487,13 @@ v_subj_cp_prop_inf_io_synsem := v_subj_cp_prop_intr_io_synsem &
 v_subj_cp_prop_fin_intr_io*_synsem := v_subj_cp_prop_intr_io_synsem &
   [ LOCAL [ CAT.VAL.SUBJ < [ LOCAL s_local & 
                                    [ CAT.HEAD.VFORM fin ] ] >,
-            CONT.RELS <! relation !> ] ]. 
+            CONT.RELS <! relation !> ] ]
+"""; --- 1.2.2. Intransitive verbs taking Vfin subjects and IO
+; clitization/clitic doubling obligatory, that's why we specify the COMPS to be OPT -
+""". 
 
 |#
+
 v_subj_cp_prop_inf_io_synsem := vinf-subj-synsem & 
   [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL vp_inf_local ] >,
                       COMPS < [ LOCAL dative_local & 
@@ -484,24 +521,27 @@ v_subj_cp_prop_fin_intr_io*_synsem := vfin-subj-synsem &
 
 v_subj_cp_prop_fin_intr := vfin-subj-main-verb.
 
-; a)- event verbs (acaecer, acontecer, ocurrir, pasar, presentarse, sobrevenir, suceder (to happen, to occur, ...))
+v_subj_cp_prop_fin_io*_synsem := v_subj_cp_prop_fin_intr_io*_synsem & 
+  [ LOCAL.CAT.HEAD.INV - ]
+"""; a)- event verbs (acaecer, acontecer, ocurrir, pasar, presentarse, sobrevenir, suceder (to happen, to occur, ...))
 ; The subject must be postponed. The IO appears occasionally. The clause does not alternate with a VPinf. 
 ; Indicative/subjunctive alternate depending on whether the content is asserted or not (except for 'ocurrir'
 ; (to occur), which can alternate always). The clause can only take the determiner if the IO is present. 
 ; The clause alternates with an entity of second order.
 ; canvio INV + a INV -
-v_subj_cp_prop_fin_io*_synsem := v_subj_cp_prop_fin_intr_io*_synsem & 
-  [ LOCAL.CAT.HEAD.INV - ].
+""".
 
-; e.g. ocurrir ((le) ocurre que no hizo lo que le habían pedido ((to occur) it occurs that s/he didn't do what s/he was asked))
 v_ppa*_sbj-cp-p_lex := v_subj_cp_prop_fin_intr & main-verb & basic-two-arg &
   [ ALTS.VCALT -,
     SYNSEM v_subj_cp_prop_fin_io*_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_fin_io*_synsem, 
-                         VAL.COMPS < [ OPT + ] > ] ] ].
+                         VAL.COMPS < [ OPT + ] > ] ] ]
+"""; e.g. ocurrir ((le) ocurre que no hizo lo que le habían pedido ((to occur) it occurs that s/he didn't do what s/he was asked))
+""".
 
 
-; b)- "incumbencia" verbs (atañer (to concern), bastar (to be enough), caber (to fit), constar, convenir 
+v_subj_cp_prop_inf_or_fin_io*_synsem := v_subj_cp_prop_fin_intr_io*_synsem
+"""; b)- "incumbencia" verbs (atañer (to concern), bastar (to be enough), caber (to fit), constar, convenir 
 ; (to agree), faltar (to be missing), importar (to matter), parecer (to seem),...)
 ; The clause can alternate with abstract or eventive nouns ('caber' (to suit) is the only one that can 
 ; alternate with a first order entity). The clause can only take the determiner if the IO is present. 
@@ -509,47 +549,51 @@ v_ppa*_sbj-cp-p_lex := v_subj_cp_prop_fin_intr & main-verb & basic-two-arg &
 ; take only the subjunctive mood. The clause alternates with a VPinf and when the IO is present, it is 
 ; interpreted as the subject of the infinitive, when it is not, the construction has a generic 
 ; interpretation. "parecer" (to seem) demands the OI when it is constructed with a subject VPinf.
-v_subj_cp_prop_inf_or_fin_io*_synsem := v_subj_cp_prop_fin_intr_io*_synsem. 
+""". 
 
-; e.g. bastar (no (me) basta que me quieras/que me quieras no (me) basta) 
-; (to be enough (it is not enough (for me) that you love me/that you love me is not enough (for me))
 v_ppa*_sbj-cp-p-sub-cv_lex := v_subj_cp_prop_fin_intr & main-verb & basic-two-arg & 
   [ ALTS.VCALT +,
     SYNSEM v_subj_cp_prop_inf_or_fin_io*_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_inf_or_fin_io*_synsem, 
                          VAL [ SUBJ < [ LOCAL.CAT.HEAD.TAM.MOOD sub ] >,
-                               COMPS < [ OPT + ] > ] ] ] ].
+                               COMPS < [ OPT + ] > ] ] ] ]
+"""
+; e.g. bastar (no (me) basta que me quieras/que me quieras no (me) basta) 
+; (to be enough (it is not enough (for me) that you love me/that you love me is not enough (for me))
+""".
 
-; e.g. constar ((me) consta que estuvo aquí/no consta que supiese el día de su muerte hasta ese día)
-; (to be certain ((for me) it is certain that s/he was here/ it is not certain that s/he knew the day of 
-; his/her death till that day)
 v_ppa*_sbj-cp-p-cv_lex := v_subj_cp_prop_fin_intr & main-verb & basic-two-arg & 
   [ ALTS.VCALT +,
     SYNSEM v_subj_cp_prop_inf_or_fin_io*_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_inf_or_fin_io*_synsem, 
-                         VAL.COMPS < [ OPT + ] > ] ] ].
-
+                         VAL.COMPS < [ OPT + ] > ] ] ]
+"""
+; e.g. constar ((me) consta que estuvo aquí/no consta que supiese el día de su muerte hasta ese día)
+; (to be certain ((for me) it is certain that s/he was here/ it is not certain that s/he knew the day of 
+; his/her death till that day)
 
 ; - with "parecer" the IO is obligatory when it takes a VPinf subject 
 ; => removed
+""".
 
 
-; c)- Psychological verbs (admirar, agobiar, alegrar, apetecer, asombrar, asustar,... (to admire, 
+v_subj_cp_prop_fin_sub_io*_synsem := v_subj_cp_prop_fin_intr_io*_synsem &
+  [ LOCAL.CAT.VAL.SUBJ < [ LOCAL.CAT.HEAD.TAM.MOOD sub ] > ]
+"""; c)- Psychological verbs (admirar, agobiar, alegrar, apetecer, asombrar, asustar,... (to admire, 
 ; to overwhelm, to make happy, to long for, to surprise, to scare,...))
 ; The clause can take the determiner. The subject can be preposed or postposed. The IO is common (but not 
 ; always obligatory). They do not accept the indicative mood. The clause alternates with VPinf only 
 ; when the IO is interpreted as the subject of the infinitive, and with an animate or inanimate NP.
-v_subj_cp_prop_fin_sub_io*_synsem := v_subj_cp_prop_fin_intr_io*_synsem &
-  [ LOCAL.CAT.VAL.SUBJ < [ LOCAL.CAT.HEAD.TAM.MOOD sub ] > ].
+""".
 
-; e.g. gustar (no *(me) gusta que a los toros te pongas la minifalda)
 v_ppa*_sbj-cp-p-sub_lex := v_subj_cp_prop_fin_intr & main-verb & basic-two-arg & 
   [ ALTS.VCALT +,
     SYNSEM v_subj_cp_prop_fin_sub_io*_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_fin_sub_io*_synsem, 
-                         VAL.COMPS < [ OPT + ] > ] ] ].
+                         VAL.COMPS < [ OPT + ] > ] ] ]
+"""; e.g. gustar (no *(me) gusta que a los toros te pongas la minifalda)
+""".
 
-; e.g. antojarse (to fancy)
 v_ppa*_sbj-cp-p-sub-prn_lex := v_subj_cp_prop_fin_intr & impers-pronominal-verb & basic-three-arg & 
   [ ALTS.VCALT +,
     SYNSEM v_subj_cp_prop_fin_sub_io*_synsem & 
@@ -557,15 +601,12 @@ v_ppa*_sbj-cp-p-sub-prn_lex := v_subj_cp_prop_fin_intr & impers-pronominal-verb 
                          VAL [ SUBJ < #subj >, 
                                COMPS < #comps & [ OPT + ] >,
                                CLTS #clt ] ] ],
-    ARG-ST < #subj . < #comps . #clt > > ].
+    ARG-ST < #subj . < #comps . #clt > > ]
+"""; e.g. antojarse (to fancy)
+""".
 
 ; --- 1.2.3. Intransitive verbs taking Vfin subject and marked NP
-; Always in the subjunctive mood and it can alternate with a (non-controlled) VPinf. The unmarked order 
-; is SVC. The subject must take the determiner when nothing is intercalated between the latter and the verb.
-; (e.g. (el) que las clases sean malas repercute en los alumnos/repercute en los alumnos (el) que las 
-; clases sean malas/en los alumnos repercute *(el) que las clases sean malas (the fact that classes are 
-; bad has repercussions on the students/It has repercussions on the students the fact that classes are 
-; bad/on the students has repercusions the fact that classes are bad))
+
 v_subj_cp_prop_inf_intr_mrkd_np_synsem := vinf-subj-synsem & 
   [ LOCAL [ CAT.VAL.COMPS < [ LOCAL mrkd_np_local & 
                                     [ CAT.HEAD.KEYS.KEY #ckey,
@@ -574,7 +615,15 @@ v_subj_cp_prop_inf_intr_mrkd_np_synsem := vinf-subj-synsem &
     LKEYS [ KEYREL arg12-ev-relation & 
                    [ ARG1 #harg,
                      ARG2 #ind2 ],
-            --COMPKEY #ckey ] ].
+            --COMPKEY #ckey ] ]
+"""; --- 1.2.3. Intransitive verbs taking Vfin subject and marked NP
+; Always in the subjunctive mood and it can alternate with a (non-controlled) VPinf. The unmarked order 
+; is SVC. The subject must take the determiner when nothing is intercalated between the latter and the verb.
+; (e.g. (el) que las clases sean malas repercute en los alumnos/repercute en los alumnos (el) que las 
+; clases sean malas/en los alumnos repercute *(el) que las clases sean malas (the fact that classes are 
+; bad has repercussions on the students/It has repercussions on the students the fact that classes are 
+; bad/on the students has repercusions the fact that classes are bad))
+""".
 
 v_subj_cp_prop_fin_intr_mrkd_np_synsem := vfin-subj-synsem & 
   [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL cp_fin_local &
@@ -588,15 +637,16 @@ v_subj_cp_prop_fin_intr_mrkd_np_synsem := vfin-subj-synsem &
                      ARG2 #ind2 ],
             --COMPKEY #ckey ] ].
 
-; e.g. (el) que las clases sean malas repercute en los alumnos (the fact that classes are bad has 
-; repercussions on the students)
 v_pp_e-sbj-cp-p-sub_lex := v_subj_cp_prop_fin_intr & main-verb & basic-two-arg &
   [ ALTS.VCALT +,
     SYNSEM v_subj_cp_prop_fin_intr_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_fin_intr_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT - ] > ] ] ]
+"""
+; e.g. (el) que las clases sean malas repercute en los alumnos (the fact that classes are bad has 
+; repercussions on the students)
+""".
 
-; e.g. traducirse en (be translated into)
 v_pp_e-sbj-cp-p-sub-prn_lex := v_subj_cp_prop_fin_intr & impers-pronominal-verb & basic-three-arg & 
   [ ALTS.VCALT +,
     SYNSEM v_subj_cp_prop_fin_intr_mrkd_np_synsem &
@@ -604,12 +654,16 @@ v_pp_e-sbj-cp-p-sub-prn_lex := v_subj_cp_prop_fin_intr & impers-pronominal-verb 
                          VAL [ SUBJ < #subj >, 
                                COMPS < #comps & [ OPT - ] >,
                                CLTS #clt ] ] ],
-    ARG-ST < #subj . < #comps . #clt > >  ].
+    ARG-ST < #subj . < #comps . #clt > >  ]
+"""; e.g. traducirse en (be translated into)
+""".
 
-; --- 1.2.4. Intransitive verbs taking Vfin subject, IO and marked NP
 v_subj_cp_prop_inf_intr_io*_mrkd_np_synsem := vinf-subj-synsem & 
   [ LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local ], 
-                          [ LOCAL mrkd_np_local ] > ].
+                          [ LOCAL mrkd_np_local ] > ]
+"""
+; --- 1.2.4. Intransitive verbs taking Vfin subject, IO and marked NP
+""".
 
 v_subj_cp_prop_fin_intr_io*_mrkd_np_synsem := vfin-subj-synsem & 
   [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL cp_fin_local &
@@ -629,19 +683,19 @@ v_subj_cp_prop_fin_intr_io*_mrkd_np_synsem := vfin-subj-synsem &
             --OCOMPKEY #ockey ] ].
 
 
-; e.g. de nada le sirve luchar/que luchen
 v_ppa*-pp_e-sbj-cp-p-sub_lex := v_subj_cp_prop_fin_intr & main-verb & basic-three-arg & 
   [ ALTS.VCALT +,
     SYNSEM v_subj_cp_prop_fin_intr_io*_mrkd_np_synsem &
            [  LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_fin_intr_io*_mrkd_np_synsem, 
-                          VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ].
+                          VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ]
+"""; e.g. de nada le sirve luchar/que luchen
+""".
 
 
-; --- Transitive verbs taking Vfin
-; A determiner can be added to the subject. The subject alternates with the neutral pronoun and with 
-; abstract nouns. The majority accept a person as subject. The clause is always in the subjunctive mood.
 v_subj_cp_prop_inf_trans_np_synsem := trans_vinf-subj-synsem &
   [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local  ],... > ].
+
+; --- Transitive verbs taking Vfin
 
 v_subj_cp_prop_fin_trans_np_synsem := vfin-subj-synsem & transitive_verb_synsem &
   [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL cp_fin_local &
@@ -653,12 +707,23 @@ v_subj_cp_prop_fin_trans_np_synsem := vfin-subj-synsem & transitive_verb_synsem 
     LKEYS [ KEYREL arg12-ev-relation & 
                    [ ARG1 #harg,
                      ARG2 #ind ],
-            --COMPKEY #ckey ] ].
+            --COMPKEY #ckey ] ]
+"""; --- Transitive verbs taking Vfin
+; A determiner can be added to the subject. The subject alternates with the neutral pronoun and with 
+; abstract nouns. The majority accept a person as subject. The clause is always in the subjunctive mood.
+""".
 
 v_subj_cp_prop_trans_np := vfin-subj-main-verb & 
   [ ALTS.VCALT + ].
 
+; --- 1.2.4. Transitive verbs taking Vfin subject and DO
 
+v_np_sbj-cp-p-sub_lex := v_subj_cp_prop_trans_np & main-verb & basic-two-arg & 
+  [ SYNSEM v_subj_cp_prop_fin_trans_np_synsem & 
+           [ LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_fin_trans_np_synsem, 
+                         VAL.COMPS < [ OPT -, 
+                                       LOCAL np_acc_local ] > ] ] ]
+"""
 ; --- 1.2.4. Transitive verbs taking Vfin subject and DO
 
 ; a)- Implicative and evidencial verbs (e.g. implicar, evidenciar, denotar, destacar,... (to imply, 
@@ -676,31 +741,24 @@ v_subj_cp_prop_trans_np := vfin-subj-main-verb &
 
 ; e.g.que el poder político se descomponga no significa necesariamente una decadencia (the fact that the 
 ; political power decays does not mean necessarily a decadence)
-v_np_sbj-cp-p-sub_lex := v_subj_cp_prop_trans_np & main-verb & basic-two-arg & 
+""".
+
+v_np_sbj-cp-p-sub-idm_lex := v_subj_cp_prop_trans_np & main-verb & basic-two-arg & 
   [ SYNSEM v_subj_cp_prop_fin_trans_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_fin_trans_np_synsem, 
                          VAL.COMPS < [ OPT -, 
-                                       LOCAL np_acc_local ] > ] ] ].
-
-; b)- support verbs (e.g. dar pena, hacer falta, tener gracia,...)(to grieve, to be needed, to have charm)
+                                       LOCAL np_acc_local ] > ] ] ]
+"""; b)- support verbs (e.g. dar pena, hacer falta, tener gracia,...)(to grieve, to be needed, to have charm)
 ; The NP appears as a DO which generally does not take a determiner, but may take intensifiers,
 ; its inmediately postverbal position is fixed and the subject is likely to occupy the final position.
 ; In some cases the presence of a dative expected or implied (e.g. dar asco, lástima (to be disgusting, 
 ; to grieve)). With some others it is possible (e.g. hacer falta, ilusión (to be needed, to be looking 
 ; forward to something) but with others it is impossible (e.g. tener gracia, pena, rabia / to have charm, 
 ; pitty, to make furious))
-v_np_sbj-cp-p-sub-idm_lex := v_subj_cp_prop_trans_np & main-verb & basic-two-arg & 
-  [ SYNSEM v_subj_cp_prop_fin_trans_np_synsem & 
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_fin_trans_np_synsem, 
-                         VAL.COMPS < [ OPT -, 
-                                       LOCAL np_acc_local ] > ] ] ].
-
+""".
 
 ; --- 1.2.5. Transitive verbs taking Vfin subject, DO and marked NP
-; The clause alternates with a VPinf controlled by the DO (e.g. trabajar la obliga a madrugar (working 
-; obliges her to get up early). The DO cannot be sentential. The prepositional complement can be optional 
-; and can be substituted by a clitic dative when it's human and is introduced by "a" 
-; (cf. v_subj_cp_prop_ditrans*_le)
+
 v_subj_cp_prop_fin_trans_np_mrkd_np_synsem := v_subj_cp_prop_fin_trans_np_synsem &
 [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local ],
                         [ LOCAL mrkd_np_local & 
@@ -708,19 +766,26 @@ v_subj_cp_prop_fin_trans_np_mrkd_np_synsem := v_subj_cp_prop_fin_trans_np_synsem
                                   CONT.HOOK.INDEX #ind3 ] ] >,
     LKEYS [ KEYREL arg123-ev-relation & 
                    [ ARG3 #ind3 ],
-            --OCOMPKEY #ockey ] ].
+            --OCOMPKEY #ockey ] ]
+"""
+; --- 1.2.5. Transitive verbs taking Vfin subject, DO and marked NP
+
+; The clause alternates with a VPinf controlled by the DO (e.g. trabajar la obliga a madrugar (working 
+; obliges her to get up early). The DO cannot be sentential. The prepositional complement can be optional 
+; and can be substituted by a clitic dative when it's human and is introduced by "a" 
+; (cf. v_subj_cp_prop_ditrans*_le)
+""".
 
 
-; e.g. (el) que su partido haya perdido las elecciones lo apartará del poder
 v_np-pp_e-sbj-cp-p-sub_lex := v_subj_cp_prop_trans_np & main-verb & basic-three-arg &
   [ SYNSEM v_subj_cp_prop_fin_trans_np_mrkd_np_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_fin_trans_np_mrkd_np_synsem,
-                         VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ].
-
+                         VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ]
+"""; e.g. (el) que su partido haya perdido las elecciones lo apartará del poder
+""".
 
 ; --- 1.2.6. Ditransitive verbs taking Vfin subject
-; The clause alternates with a VPinf controlled by the IO (e.g. tener que aguantar los embotellamientos 
-; te estropea el día (having to put up with traffic jams spoils your day))
+
 v_subj_cp_prop_fin_ditrans_synsem := v_subj_cp_prop_fin_trans_np_synsem &
   [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_unmrkd_local ],
                           [ LOCAL dative_local & 
@@ -728,21 +793,30 @@ v_subj_cp_prop_fin_ditrans_synsem := v_subj_cp_prop_fin_trans_np_synsem &
                                     CONT.HOOK.INDEX #ind3 ] ] >,
     LKEYS [ KEYREL arg123-ev-relation & 
                    [ ARG3 #ind3 ],
-            --OCOMPKEY #ockey ] ].
+            --OCOMPKEY #ockey ] ]
+"""; --- 1.2.6. Ditransitive verbs taking Vfin subject
+
+; The clause alternates with a VPinf controlled by the IO (e.g. tener que aguantar los embotellamientos 
+; te estropea el día (having to put up with traffic jams spoils your day))
+""".
 
 
-; e.g. El que haya dicho esto le acarrea muchos problemas (a María) (the fact that he had 
-; said this causes many troubles (to María))
 v_np-ppa*_sbj-cp-p-sub_lex := v_subj_cp_prop_trans_np & main-verb & basic-three-arg & 
   [ SYNSEM v_subj_cp_prop_fin_ditrans_synsem &
            [  LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_fin_ditrans_synsem, 
-                          VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ].
-
+                          VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ]
+"""; e.g. El que haya dicho esto le acarrea muchos problemas (a María) (the fact that he had 
+; said this causes many troubles (to María))
+""".
 
 ; --- 1.2.7. Transitive verbs taking sentential subjects and finite completive clauses 
-; The subject must precede the main verb
+
 v_subj_cp_prop_inf_trans_cp_prop_fin_synsem := trans_vinf-subj-synsem & 
-  [ LOCAL.CAT.VAL.COMPS < [ LOCAL cp_fin_local ] > ].
+  [ LOCAL.CAT.VAL.COMPS < [ LOCAL cp_fin_local ] > ]
+"""; --- 1.2.7. Transitive verbs taking sentential subjects and finite completive clauses 
+
+; The subject must precede the main verb
+""".
 
 v_subj_cp_prop_fin_trans_cp_prop_fin_synsem := vfin-subj-synsem & transitive_verb_synsem &
   [ LOCAL [ CAT [ HEAD.INV -,
@@ -759,19 +833,22 @@ v_subj_cp_prop_fin_trans_cp_prop_fin_synsem := vfin-subj-synsem & transitive_ver
             --COMPKEY #ckey ] ].
 
 
-; e.g. que te haya aprobado no significa que no tengas que venir a clase (the fact that s/he has 
-; approved you/given you a passing grade doesn`t mean that you don't have to come to classes)
 v_cp_p-sbj-cp-p-sub_lex := vfin-subj-main-verb & main-verb & basic-two-arg & 
   [ ALTS.VCALT +,
     SYNSEM v_subj_cp_prop_fin_trans_cp_prop_fin_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_fin_trans_cp_prop_fin_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT - ] > ] ] ]
+"""; e.g. que te haya aprobado no significa que no tengas que venir a clase (the fact that s/he has 
+; approved you/given you a passing grade doesn`t mean that you don't have to come to classes)
+""".
 
 
 ; --- 1.2.8. Ditransitive verbs taking sentential subjects, IO and finite completive clauses 
 
 v_subj_cp_prop_inf_ditrans_cp_prop_fin_synsem := trans_vinf-subj-synsem &
-  [ LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local ], [ LOCAL cp_fin_local ] > ].
+  [ LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local ], [ LOCAL cp_fin_local ] > ]
+"""; --- 1.2.8. Ditransitive verbs taking sentential subjects, IO and finite completive clauses 
+""".
 
 v_subj_cp_prop_fin_ditrans_cp_prop_fin_synsem := vfin-subj-synsem & transitive_verb_synsem &
   [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL cp_fin_local &
@@ -791,22 +868,16 @@ v_subj_cp_prop_fin_ditrans_cp_prop_fin_synsem := vfin-subj-synsem & transitive_v
             --COMPKEY #ckey,
             --OCOMPKEY #ockey ] ].
 
-; e.g. oír música no (te) impide trabajar/que trabajes (listening to music doesn't prevents you from working)
 v_ppa*-cp_p-sbj-cp-p-sub_lex := vfin-subj-main-verb & main-verb & basic-three-arg & 
   [ ALTS.VCALT +,
     SYNSEM v_subj_cp_prop_fin_ditrans_cp_prop_fin_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_fin_ditrans_cp_prop_fin_synsem, 
-                         VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ]
+"""; e.g. oír música no (te) impide trabajar/que trabajes (listening to music doesn't prevents you from working)
+""".
 
 
-; --- 1.2.9. Attributive structures (ser & estar (to be), parecer (to seem), quedar (to stay), 
-; resultar (to result) y aparecer (to appear))
-; The unmarked order is VCS, but SVC and CVS are also possible. 
-; The mode of the clause depends on the attribute. The attributes that combine with the indicative mood 
-; do not admit a VPinf subject, as neither do the attributes VPinf. If there is a dative correferent with 
-; the subject of the subordinate clause, the latter tends to take a non-flexionate form (VPinf).
-; !!! sentential subjects with null verbs (e.g. ¡(Es) Lástima que no hayas ganado! ¡Qué pena (es) 
-; que no vengas!)
+; --- 1.2.9. Attributive structures
 
 ; --- 1.2.9.1. Copula verbs
 
@@ -820,7 +891,21 @@ v_cop_verbal_subject_synsem := v_copula_basic_synsem &
                                      CONT.HOOK.INDEX.SF prop ],
                              NON-LOCAL [ SLASH 0-dlist & [ LIST < > ],
                                          REL 0-dlist & [ LIST < > ],
-                                         QUE 0-dlist & [ LIST < > ] ] ] > ] ].
+                                         QUE 0-dlist & [ LIST < > ] ] ] > ] ]
+"""
+; --- 1.2.9. Attributive structures
+
+; (ser & estar (to be), parecer (to seem), quedar (to stay), 
+; resultar (to result) y aparecer (to appear))
+; The unmarked order is VCS, but SVC and CVS are also possible. 
+; The mode of the clause depends on the attribute. The attributes that combine with the indicative mood 
+; do not admit a VPinf subject, as neither do the attributes VPinf. If there is a dative correferent with 
+; the subject of the subordinate clause, the latter tends to take a non-flexionate form (VPinf).
+; !!! sentential subjects with null verbs (e.g. ¡(Es) Lástima que no hayas ganado! ¡Qué pena (es) 
+; que no vengas!)
+
+; --- 1.2.9.1. Copula verbs
+""".
 
 v_ap_cop_verbal_subject_synsem := v_cop_verbal_subject_synsem & 
   [ LOCAL [ CAT [ HEAD.TAM #tam,
@@ -875,10 +960,6 @@ v_adv_verbal_subject_synsem := v_cop_verbal_subject_synsem &
                    RELS <! arg2-ev-relation & 
                            [ ARG2 #xarg ] !> ] ] ].
 
-; a)- 'ser': if there is a finite clause, it accepts adjectives, NPs, the adverb "así" (like this), 
-; and "de + VPinf" (or an equivalent adjective ending in -ble); with subject VPinf it accepts 
-; NPs, adjectives, "de + NP" and VPinf
-
 v_cop-id_verbal_subject_synsem := lex-synsem &
   [ LOCAL [ AGR.PNG.PN 3sg,
             CAT [ HEAD.INV -,
@@ -890,7 +971,11 @@ v_cop-id_verbal_subject_synsem := lex-synsem &
                                              QUE 0-dlist & [ LIST < > ] ] ] >,
                         COMPS < [ OPT - ] > ] ],
             CONT.RELS <! arg12-ev-relation !> ],
-    LKEYS.KEYREL.PRED _be_v_id_rel ].
+    LKEYS.KEYREL.PRED _be_v_id_rel ]
+"""; a)- 'ser': if there is a finite clause, it accepts adjectives, NPs, the adverb "así" (like this), 
+; and "de + VPinf" (or an equivalent adjective ending in -ble); with subject VPinf it accepts 
+; NPs, adjectives, "de + NP" and VPinf
+""".
 
 v_np_npsv_cop-id_verbal_subject_synsem := v_cop-id_verbal_subject_synsem &
   [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL vp_inf_local & 
@@ -948,46 +1033,49 @@ v_cop_ser_cp_p_sbj := v_cop_ser_verb_sbj &
   [ SYNSEM.LOCAL.CAT.VAL.SUBJ < [ LOCAL s_local & 
                                         [ CAT.HEAD.VFORM fin ] ] > ].
 
-; e.g. es imposible vivir en el centro
 v_ap_sbj-vp-inf-ser_lex := v_cop_ser_vp-inf_sbj &
   [ SYNSEM v_ap_cop_verbal_subject_synsem & 
-           [ LOCAL.CAT.HEAD.LSYNSEM v_ap_cop_verbal_subject_synsem ] ].
+           [ LOCAL.CAT.HEAD.LSYNSEM v_ap_cop_verbal_subject_synsem ] ]
+"""; e.g. es imposible vivir en el centro
+""".
 
-; e.g. rectificar es de sabios 
 v_pp_e-sbj-vp-inf-ser_lex := v_cop_ser_vp-inf_sbj &
   [ SYNSEM v_pp_e_cop_verbal_subject_synsem & 
-           [ LOCAL.CAT.HEAD.LSYNSEM v_pp_e_cop_verbal_subject_synsem ] ]. 
+           [ LOCAL.CAT.HEAD.LSYNSEM v_pp_e_cop_verbal_subject_synsem ] ]
+"""; e.g. rectificar es de sabios 
+""". 
 
-; e.g. regalar detalles es una cursilería 
 v_np_npsv-sbj-vp-inf-ser_lex := v_cop-id_verb_sbj & 
   [ SYNSEM v_np_npsv_cop-id_verbal_subject_synsem &
-           [ LOCAL.CAT.HEAD.LSYNSEM v_np_npsv_cop-id_verbal_subject_synsem ] ]. 
+           [ LOCAL.CAT.HEAD.LSYNSEM v_np_npsv_cop-id_verbal_subject_synsem ] ]
+"""; e.g. regalar detalles es una cursilería 
+""". 
 
-; e.g. Tolerar es simplemente reconocer que el otro existe.
 v_vp_sbj-vp-inf-ser_lex := v_cop-id_verb_sbj & 
   [ SYNSEM v_vp_cop-id_verbal_subject_synsem &
-           [ LOCAL.CAT.HEAD.LSYNSEM v_vp_cop-id_verbal_subject_synsem ] ].
+           [ LOCAL.CAT.HEAD.LSYNSEM v_vp_cop-id_verbal_subject_synsem ] ]
+"""; e.g. Tolerar es simplemente reconocer que el otro existe.
+""".
 
-; e.g. es imposible que no venga
 v_ap_sbj-cp-p-ser_lex := v_cop_ser_cp_p_sbj &
   [ SYNSEM v_ap_cop_verbal_subject_synsem & 
-           [ LOCAL.CAT.HEAD.LSYNSEM v_ap_cop_verbal_subject_synsem ] ].
+           [ LOCAL.CAT.HEAD.LSYNSEM v_ap_cop_verbal_subject_synsem ] ]
+"""; e.g. es imposible que no venga
+""".
 
-; e.g. 
 v_np_sbj-cp-p-ser_lex := v_cop-id_verb_sbj & 
   [ SYNSEM v_np_cop-id_verbal_subject_synsem & 
-           [ LOCAL.CAT.HEAD.LSYNSEM v_np_cop-id_verbal_subject_synsem ] ].
-
-; e.g. es de agradecer que hayan descubierto una nueva vacuna
+           [ LOCAL.CAT.HEAD.LSYNSEM v_np_cop-id_verbal_subject_synsem ] ]
+"""; e.g. es de agradecer que hayan descubierto una nueva vacuna
 ; e.g. es así
-
-
-; b)- el verbo 'estar' combines with the adjective "claro" (clear) and with the adverbs "bien" (well) 
-; and "mal" (badly). The clause alternates with a VPinf only when the attribute is a participle.
-; e.g. no está claro/bien que ha ocurrido, está prohibido fumar aqui.
+""".
 
 v_cop_estar_verb_sbj := v_cop & 
-  [ SYNSEM v_cop_verbal_subject_synsem ]. 
+  [ SYNSEM v_cop_verbal_subject_synsem ]
+"""; b)- el verbo 'estar' combines with the adjective "claro" (clear) and with the adverbs "bien" (well) 
+; and "mal" (badly). The clause alternates with a VPinf only when the attribute is a participle.
+; e.g. no está claro/bien que ha ocurrido, está prohibido fumar aqui.
+""". 
 
 v_cop_estar_vp-inf_sbj := v_cop_estar_verb_sbj &
   [ SYNSEM.LOCAL.CAT.VAL.SUBJ < [ LOCAL vp_inf_local ] > ].
@@ -996,25 +1084,29 @@ v_cop_estar_cp_p_sbj := v_cop_estar_verb_sbj &
   [ SYNSEM.LOCAL.CAT.VAL.SUBJ < [ LOCAL s_local & 
                                         [ CAT.HEAD.VFORM fin ] ] > ].
 
-; e.g. está prohibido fumar aqui.
 v_ppart_sbj-vp-inf-estar_lex := v_cop_estar_vp-inf_sbj &
   [ SYNSEM v_ppart_cop_verbal_subject_synsem & 
-           [ LOCAL.CAT.HEAD.LSYNSEM v_ppart_cop_verbal_subject_synsem ] ].
+           [ LOCAL.CAT.HEAD.LSYNSEM v_ppart_cop_verbal_subject_synsem ] ]
+"""; e.g. está prohibido fumar aqui.
+""".
 
-; e.g. no está claro que ha ocurrido
 v_ap_sbj-cp-p-estar_lex := v_cop_estar_cp_p_sbj &
   [ SYNSEM v_ap_cop_verbal_subject_synsem & 
-           [ LOCAL.CAT.HEAD.LSYNSEM v_ap_cop_verbal_subject_synsem ] ].
+           [ LOCAL.CAT.HEAD.LSYNSEM v_ap_cop_verbal_subject_synsem ] ]
+"""; e.g. no está claro que ha ocurrido
+""".
 
-; e.g. está bien/mal que Guillermo lo haga
 v_adv_sbj-cp-p-estar_lex := v_cop_estar_cp_p_sbj & norm-hook-lex &
   [ SYNSEM v_adv_verbal_subject_synsem &
-           [ LOCAL.CAT.HEAD.LSYNSEM v_adv_verbal_subject_synsem ] ].
+           [ LOCAL.CAT.HEAD.LSYNSEM v_adv_verbal_subject_synsem ] ]
+"""; e.g. está bien/mal que Guillermo lo haga
+""".
 
 
 
 #|
 ; --- 1.2.9.2. verbs taking a predicative complement and IO
+
 v_subj_cp_prop_seq_ppa_synsem := lex-synsem &
   [ LOCAL [ AGR.PNG.PN 3sg,
             CAT [ VAL [ SUBJ < [ OPT -,
@@ -1041,7 +1133,9 @@ v_subj_cp_prop_seq_ppa_synsem := lex-synsem &
     LKEYS [ KEYREL arg123-ev-relation & #key & 
                    [ ARG3 #ind3 ],
             --COMPKEY #ckey,
-            --OCOMPKEY #ockey ] ].
+            --OCOMPKEY #ockey ] ]
+"""; --- 1.2.9.2. verbs taking a predicative complement and IO
+""".
 
 v_subj_cp_prop_inf_seq_ppa_synsem := v_subj_cp_prop_seq_ppa_synsem &
   [ LOCAL.CAT.VAL.SUBJ < [ LOCAL vp_inf_local & 
@@ -1117,7 +1211,6 @@ v_np-ap_sbj-cp-p-inf_sor_lex := main-verb & basic-three-arg &
 
 |#
 
-
 ; --- 1.3. Verbs taking nominal subject
 
 nom-subj-synsem := lex-synsem &
@@ -1125,9 +1218,14 @@ nom-subj-synsem := lex-synsem &
             CAT [ VAL.SUBJ < [ LOCAL np_nom_local & 
                                      [ AGR #agr,
                                        CONT.HOOK.INDEX #xarg ] ] > ],
-            CONT.HOOK.XARG #xarg & [ PNG #png ] ] ].
+            CONT.HOOK.XARG #xarg & [ PNG #png ] ] ]
+"""
+; --- 1.3. Verbs taking nominal subject
+
 ; LOCAL.CAT.VAL.SUBJ < [ LOCAL.CAT.HEAD.KEYS.ALTKEY def_or_proper_q_rel / explicit_q_rel 
 ; but: e.g. vecinos de la zona consultados por este diario aseguraron ayer que ...
+
+""".
 
 arg1_lt := nom-subj-synsem & 
   [ LOCAL.CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX #ind ] >,
@@ -1139,7 +1237,12 @@ unacc_lt := nom-subj-synsem &
     LKEYS.KEYREL arg2-ev-relation & 
                  [ ARG2 #ind ] ].
 
+; --- 1.3.1. Unaccusative verbs
 
+v_unacc_synsem := unacc_lt & 
+  [ LOCAL.CONT [ RELS <! relation !>,
+                 HCONS <! !> ] ]
+"""
 ; --- 1.3.1. Unaccusative verbs
 ; Their syntactic subject (their notional object (arg2)) can be a bare NP in postverbal position 
 ; (e.g. cae agua, entra frío, vienen mujeres, existen problemas). They can form absolute 
@@ -1147,17 +1250,19 @@ unacc_lt := nom-subj-synsem &
 ; rosal, el jardín parecía más alegre/*ardido el bosque, los animales lo abandonaron). Adjectival 
 ; participles can act as modifiers of a NP functioning as syntactic subject (e.g. un tesoro recientemente 
 ; aparecido)
-
-v_unacc_synsem := unacc_lt & 
-  [ LOCAL.CONT [ RELS <! relation !>,
-                 HCONS <! !> ] ].
+""".
 
 v_unacc:= basic-main-verb & 
   [ ALTS [ RCP -, 
            RFX -,
            VCALT - ] ].
 
+; --- 1.3.1.1. Unaccusative intransitive verbs (verbs of change of state due to internal cause and 
 
+v_unacc_intr_synsem := v_unacc_synsem &
+  [ LOCAL.CAT [ HEAD.INV -,
+                VAL.COMPS < > ] ]
+"""
 ; --- 1.3.1.1. Unaccusative intransitive verbs (verbs of change of state due to internal cause and 
 ; movements verbs denoting a non-agenitive way of moving. Many events due to internal cause can be 
 ; also classified as events of external cause depending on the selected argument: those of internal 
@@ -1165,28 +1270,26 @@ v_unacc:= basic-main-verb &
 ; ha aclarado el jersey)) 
 ; canvio INV + a INV -
 ; !!! pueden llevar un IO (e.g. les nacieron los gemelos)
-v_unacc_intr_synsem := v_unacc_synsem &
-  [ LOCAL.CAT [ HEAD.INV -,
-                VAL.COMPS < > ] ].
+""".
 
-; e.g. florecer (to flower), emerger (to emerge)
 v_-_psv_lex := v_unacc & main-verb & basic-one-arg & 
   [ ALTS [ PASS +,
            IMPERS + ],
     SYNSEM v_unacc_intr_synsem &
-           [ LOCAL.CAT.HEAD.LSYNSEM v_unacc_intr_synsem ] ].
+           [ LOCAL.CAT.HEAD.LSYNSEM v_unacc_intr_synsem ] ]
+"""
+; e.g. florecer (to flower), emerger (to emerge)
+""".
 
-; e.g. encogerse (to shrink), enquistarse (to encyst)
 v_-_psv-prn_lex := v_unacc & main-vprn-intr & basic-two-arg & 
   [ ALTS.PASS +,
     SYNSEM v_unacc_intr_synsem &
-           [ LOCAL.CAT.HEAD.LSYNSEM v_unacc_intr_synsem ] ].
+           [ LOCAL.CAT.HEAD.LSYNSEM v_unacc_intr_synsem ] ]
+"""; e.g. encogerse (to shrink), enquistarse (to encyst)
+""".
 
+; --- 1.3.1.2. Unaccusative verbs taking PP complement
 
-; --- 1.3.1.2. Unaccusative verbs taking PP complement (verbs of existence and state and 
-; verbs of movement and direction)
-; canvio INV + a INV -
-; !!! They can take an IO (e.g. se nos escaparon los ladrones, nos llegaron los víveres)
 v_unacc_pp_synsem := v_unacc_synsem &
   [ LOCAL [ CAT [ HEAD.INV -,
                   VAL.COMPS < [ LOCAL lcomp_local & 
@@ -1195,134 +1298,157 @@ v_unacc_pp_synsem := v_unacc_synsem &
                                                     XARG #index ] ] ] > ],
             CONT.HOOK [ LTOP #ltop,
                         INDEX #index ] ],
-    LKEYS.--COMPKEY #ckey & dir_or_state_nontemp_rel ].
+    LKEYS.--COMPKEY #ckey & dir_or_state_nontemp_rel ]
+"""; --- 1.3.1.2. Unaccusative verbs taking PP complement (verbs of existence and state and 
+; verbs of movement and direction)
+; canvio INV + a INV -
+; !!! They can take an IO (e.g. se nos escaparon los ladrones, nos llegaron los víveres)
+""".
 
-; e.g. En la Academia existe un autógrafo de Cervantes.
 v_pp_loc_lex := v_unacc & main-verb & basic-two-arg &
   [ ALTS [ PASS -,
            IMPERS + ],
     SYNSEM v_unacc_pp_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_unacc_pp_synsem, 
                          VAL.COMPS < [ OPT - ] > ],
-             LKEYS.--COMPKEY state_loc_rel ] ].
+             LKEYS.--COMPKEY state_loc_rel ] ]
+"""; e.g. En la Academia existe un autógrafo de Cervantes.
+""".
 
-; e.g. permanecer (to stay)
 v_pp*_loc_lex := v_unacc & main-verb & basic-two-arg &
   [ ALTS [ PASS -,
            IMPERS + ],
     SYNSEM v_unacc_pp_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_unacc_pp_synsem, 
                          VAL.COMPS < [ OPT + ] > ],
-             LKEYS.--COMPKEY state_loc_rel ] ].
+             LKEYS.--COMPKEY state_loc_rel ] ]
+"""; e.g. permanecer (to stay)
+""".
 
-; e.g. aterrizar (to land), emerger (to emerge)
 v_pp*_loc-psv_lex := v_unacc & main-verb & basic-two-arg &
   [ ALTS [ PASS +,
            IMPERS + ],
     SYNSEM v_unacc_pp_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_unacc_pp_synsem, 
                          VAL.COMPS < [ OPT + ] > ],
-             LKEYS.--COMPKEY state_loc_rel ] ].
+             LKEYS.--COMPKEY state_loc_rel ] ]
+"""; e.g. aterrizar (to land), emerger (to emerge)
+""".
 
-; e.g. alojarse (to lodge), enmarcarse (to frame), extenderse (to extend)
 v_pp_loc-prn_lex := v_unacc & main-vprn & basic-three-arg &
   [ ALTS.PASS -,
     SYNSEM v_unacc_pp_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_unacc_pp_synsem, 
                          VAL.COMPS < [ OPT - ] > ],
-             LKEYS.--COMPKEY state_loc_rel ] ].
+             LKEYS.--COMPKEY state_loc_rel ] ]
+"""; e.g. alojarse (to lodge), enmarcarse (to frame), extenderse (to extend)
+""".
 
-; e.g. encontrarse (to meet), manifestarse (to manifest)
 v_pp*_loc-prn_lex := v_unacc & main-vprn & basic-three-arg &
   [ ALTS.PASS -,
     SYNSEM v_unacc_pp_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_unacc_pp_synsem, 
                          VAL.COMPS < [ OPT + ] > ],
-             LKEYS.--COMPKEY state_loc_rel ] ].
+             LKEYS.--COMPKEY state_loc_rel ] ]
+"""; e.g. encontrarse (to meet), manifestarse (to manifest)
+""".
 
-; e.g. generarse (to generate), mantenerse (to mantain)
 v_pp*_loc-psv-prn_lex := v_unacc & main-vprn & basic-three-arg &
   [ ALTS.PASS +,
     SYNSEM v_unacc_pp_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_unacc_pp_synsem, 
                          VAL.COMPS < [ OPT + ] > ],
-             LKEYS.--COMPKEY state_loc_rel ] ].
+             LKEYS.--COMPKEY state_loc_rel ] ]
+"""; e.g. generarse (to generate), mantenerse (to mantain)
+""".
 
-; e.g. acudir
 v_pp_dir_lex := v_unacc & main-verb & basic-two-arg &
   [ ALTS [ PASS -,
            IMPERS + ],
     SYNSEM v_unacc_pp_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_unacc_pp_synsem, 
                          VAL.COMPS < [ OPT - ] > ],
-             LKEYS.--COMPKEY dir_rel ] ].
+             LKEYS.--COMPKEY dir_rel ] ]
+"""; e.g. acudir
+""".
 
-; e.g. volver (to return), migrar (to migrate), subir (to go up), 
 v_pp*_dir_lex := v_unacc & main-verb & basic-two-arg &
   [ ALTS [ PASS -,
            IMPERS + ],
     SYNSEM v_unacc_pp_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_unacc_pp_synsem, 
                          VAL.COMPS < [ OPT + ] > ],
-             LKEYS.--COMPKEY dir_rel ] ].
+             LKEYS.--COMPKEY dir_rel ] ]
+"""; e.g. volver (to return), migrar (to migrate), subir (to go up), 
+""".
 
-; e.g. presentarse (to present), desprenderse (to come off)
 v_pp*_dir-prn_lex := v_unacc & main-vprn & basic-three-arg &
   [ ALTS.PASS -,
     SYNSEM v_unacc_pp_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_unacc_pp_synsem, 
                          VAL.COMPS < [ OPT + ] > ],
-             LKEYS.--COMPKEY dir_rel ] ].
+             LKEYS.--COMPKEY dir_rel ] ]
+"""; e.g. presentarse (to present), desprenderse (to come off)
+""".
 
-; e.g. dirigirse (to go)
 v_pp_dir-prn_lex := v_unacc & main-vprn & basic-three-arg &
   [ ALTS.PASS -,
     SYNSEM v_unacc_pp_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_unacc_pp_synsem, 
                          VAL.COMPS < [ OPT - ] > ],
-             LKEYS.--COMPKEY dir_rel ] ].
+             LKEYS.--COMPKEY dir_rel ] ]
+"""; e.g. dirigirse (to go)
+""".
 
-; e.g. bajar (to go down), partir (to part)
 v_pp*_dir-psv_lex := v_unacc & main-verb & basic-two-arg &
   [ ALTS [ PASS +,
            IMPERS + ],
     SYNSEM v_unacc_pp_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_unacc_pp_synsem, 
                          VAL.COMPS < [ OPT + ] > ],
-             LKEYS.--COMPKEY dir_rel ] ].
+             LKEYS.--COMPKEY dir_rel ] ]
+"""; e.g. bajar (to go down), partir (to part)
+""".
 
-; e.g. asomarse (to lean out), deslizarse (to slide), escurrirse (to drain)
 v_pp*_dir-psv-prn_lex := v_unacc & main-vprn & basic-three-arg &
   [ ALTS.PASS +,
     SYNSEM v_unacc_pp_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_unacc_pp_synsem, 
                          VAL.COMPS < [ OPT + ] > ],
-             LKEYS.--COMPKEY dir_rel ] ].
+             LKEYS.--COMPKEY dir_rel ] ]
+"""; e.g. asomarse (to lean out), deslizarse (to slide), escurrirse (to drain)
+""".
 
 
 ; --- Locative + subject =>> locative subject + PPen (two lexical entries)
 ; e.g. aquí abundan los insectos =>> este lugar abunda en insectos
-
+;;; OZ: No entries for the above, I think?
 
 ; --- 1.3.2. Intransitive verbs
-; - They have typically agenitive subjects. They do not appear in absolute participle clauses. 
 
 v_intrans_synsem := arg1_lt & 
-  [ LOCAL.CONT.RELS <! relation !> ].
+  [ LOCAL.CONT.RELS <! relation !> ]
+"""
+; --- 1.3.2. Intransitive verbs
+; - They have typically agenitive subjects. They do not appear in absolute participle clauses. 
+""".
 
 v_intrans := basic-main-verb & 
   [ ALTS [ RCP -, 
            RFX - ] ].
 
 ; --- 1.3.2.1. Strict intransitive verbs
-; Subjects must take specifier. Some appear in "locative inversion constructions", but the locative 
-; complement must appear in pre-verbal position and the subject in postverbal position and without 
-; specifier (e.g. en este parque juegan niños)
 
 v_strict_intrans_synsem := v_intrans_synsem & 
   [ LOCAL [ CAT [ HEAD.INV -, 
                   VAL.COMPS < > ],
-            CONT.HCONS <! !> ] ].
+            CONT.HCONS <! !> ] ]
+"""
+; --- 1.3.2.1. Strict intransitive verbs
+; Subjects must take specifier. Some appear in "locative inversion constructions", but the locative 
+; complement must appear in pre-verbal position and the subject in postverbal position and without 
+; specifier (e.g. en este parque juegan niños)
+""".
 
 ;v_strict_intrans_prn_synsem := v_strict_intrans_synsem & 
 ;  [ LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX #affix ] >,
@@ -1336,22 +1462,23 @@ v_strict_intrans_prn_synsem := v_strict_intrans_synsem &
 v_strict_intrans := v_intrans & 
   [ ALTS.VCALT - ].
 
-; e.g. esquiar (to sky)
 v_-_lex := v_strict_intrans & main-verb & basic-one-arg &
   [ ALTS [ IMPERS +,
            PASS - ],
     SYNSEM v_strict_intrans_synsem & 
-           [ LOCAL.CAT.HEAD.LSYNSEM v_strict_intrans_synsem ] ].
+           [ LOCAL.CAT.HEAD.LSYNSEM v_strict_intrans_synsem ] ]
+"""; e.g. esquiar (to sky)
+""".
 
-; e.g. rebotarse (to bounce), suicidarse (to commit suicide)
 v_-_prn_lex := v_strict_intrans & main-vprn-intr & basic-two-arg &
   [ ALTS.PASS +,
     SYNSEM v_strict_intrans_prn_synsem & 
-           [ LOCAL.CAT.HEAD.LSYNSEM v_strict_intrans_prn_synsem ] ].
-
+           [ LOCAL.CAT.HEAD.LSYNSEM v_strict_intrans_prn_synsem ] ]
+"""; e.g. rebotarse (to bounce), suicidarse (to commit suicide)
+""".
 
 ; --- 1.3.2.2. Intransitive verbs taking marked NP complement 
-; !!! nos animaba a pensar en la muerte y sobre la conveniencia...
+
 v_intr_mrkd_np_synsem := v_intrans_synsem &
   [ LOCAL [ CAT [ HEAD.INV -,
                   VAL.COMPS < [ LOCAL mrkd_np_local &
@@ -1360,42 +1487,49 @@ v_intr_mrkd_np_synsem := v_intrans_synsem &
             CONT.HCONS <! !> ],
     LKEYS [ KEYREL arg12-ev-relation & 
                    [ ARG2 #ind2 ],
-            --COMPKEY #ckey ] ].
+            --COMPKEY #ckey ] ]
+"""
+; --- 1.3.2.2. Intransitive verbs taking marked NP complement 
+; !!! nos animaba a pensar en la muerte y sobre la conveniencia...
+""".
 
 v_intr_mrkd_np := v_intrans & 
   [ ALTS.VCALT - ].
 
-; e.g. sucumbir a, acertaron a/con
 v_pp_e_lex := v_intr_mrkd_np & main-verb & basic-two-arg &
   [ ALTS [ IMPERS +,
            PASS - ],
     SYNSEM v_intr_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT - ] > ] ] ]
+"""; e.g. sucumbir a, acertaron a/con
+""".
 
-;e.g. desertar (de), abusar (de)
 v_pp*_e_lex := v_intr_mrkd_np & main-verb & basic-two-arg &
   [ ALTS [ IMPERS +,
            PASS - ],
     SYNSEM v_intr_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT + ] > ] ] ].
+                         VAL.COMPS < [ OPT + ] > ] ] ]
+""";e.g. desertar (de), abusar (de)
+""".
 
-; e.g. meterse con, encapricharse de/con
 v_pp_e-prn_lex := v_intr_mrkd_np & main-vprn & basic-three-arg &
   [ ALTS.PASS +,
     SYNSEM v_intr_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT - ] > ] ] ]
+"""; e.g. meterse con, encapricharse de/con
+""".
 
-; e.g. adaptarse (a), quejarse (de/por)
 v_pp*_e-prn_lex := v_intr_mrkd_np & main-vprn & basic-three-arg &
   [ ALTS.PASS +,
     SYNSEM v_intr_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT + ] > ] ] ].
+                         VAL.COMPS < [ OPT + ] > ] ] ]
+"""; e.g. adaptarse (a), quejarse (de/por)
+""".
 
-; e.g. entrar en vigor
 v_pp_e-idm_lex := v_intr_mrkd_np & main-verb & basic-two-arg &
   [ ALTS.PASS -,
     SYNSEM v_intr_mrkd_np_synsem & 
@@ -1403,9 +1537,10 @@ v_pp_e-idm_lex := v_intr_mrkd_np & main-verb & basic-two-arg &
                          VAL.COMPS < [ OPT -,
                                        NON-LOCAL [ SLASH 0-dlist,
                                                    REL 0-dlist,
-                                                   QUE 0-dlist ] ] > ] ] ].
+                                                   QUE 0-dlist ] ] > ] ] ]
+"""; e.g. entrar en vigor
+""".
 
-; e.g. encogerse de hombros
 v_pp_e-prn-idm_lex := v_intr_mrkd_np & main-vprn & basic-three-arg &
   [ ALTS.PASS -,
     SYNSEM v_intr_mrkd_np_synsem & 
@@ -1413,7 +1548,9 @@ v_pp_e-prn-idm_lex := v_intr_mrkd_np & main-vprn & basic-three-arg &
                          VAL.COMPS < [ OPT -,
                                        NON-LOCAL [ SLASH 0-dlist,
                                                    REL 0-dlist,
-                                                   QUE 0-dlist ] ] > ] ] ].
+                                                   QUE 0-dlist ] ] > ] ] ]
+"""; e.g. encogerse de hombros
+""".
 
 
 ; --- 1.3.2.3. Intransitive verbs taking marked verbal complement
@@ -1426,7 +1563,9 @@ v_intr_mrkd_cp_prop-or-ques_synsem := v_intrans_synsem &
             CONT.HCONS <! qeq & [ HARG #harg,
                                   LARG #larg ] !> ],
     LKEYS [ KEYREL arg12-ev-relation & [ ARG2 #harg ],
-            --COMPKEY #ckey ] ].
+            --COMPKEY #ckey ] ]
+"""; --- 1.3.2.3. Intransitive verbs taking marked verbal complement
+""".
 
 v_intr_mrkd_cp_prop-or-ques_fin_synsem := v_intr_mrkd_cp_prop-or-ques_synsem & 
   [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CONT.HOOK.INDEX.E.TENSE tense ] > ].
@@ -1445,13 +1584,15 @@ v_intr_mrkd_cp_prop-or-ques := v_intrans &
 
 
 ; --- 1.3.2.3.1. Verbs taking marked VPinf (s_ctrl)
+
 v_intr_mrkd_cp_prop_inf_synsem := v_intr_mrkd_cp_prop-or-ques_inf_synsem &
-  [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD.KEYS.ALT2KEY prop ] > ].
+  [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD.KEYS.ALT2KEY prop ] > ]
+"""; --- 1.3.2.3.1. Verbs taking marked VPinf (s_ctrl)
+""".
 
 v_intr_mrkd_cp_prop_inf := v_intr_mrkd_cp_prop-or-ques &
   [ ALTS.VCALT - ].
 
-; e.g. aprender a (to learn to), desistir de
 v_pp_e-vp-sc_lex := v_intr_mrkd_cp_prop_inf & cc-two-arg & 
   [ ALTS.PASS -,
     SYNSEM v_intr_mrkd_cp_prop_inf_synsem &
@@ -1460,9 +1601,10 @@ v_pp_e-vp-sc_lex := v_intr_mrkd_cp_prop_inf & cc-two-arg &
                                COMPS < #comps & 
                                        [ OPT -, LOCAL.CAT.VAL.CLTS #clts ] >,
                                CLTS #clts ] ] ],
-    ARG-ST < #subj . < #comps . #clts > > ].
+    ARG-ST < #subj . < #comps . #clts > > ]
+"""; e.g. aprender a (to learn to), desistir de
+""".
 
-; e.g. dignarse a, abstenerse de 
 v_pp_e-vp-sc-prn_lex := v_intr_mrkd_cp_prop_inf & basic-three-arg & 
   [ ALTS.PASS +,
     SYNSEM v_intr_mrkd_cp_prop_inf_synsem &
@@ -1471,10 +1613,19 @@ v_pp_e-vp-sc-prn_lex := v_intr_mrkd_cp_prop_inf & basic-three-arg &
                                COMPS < #comps & 
                                        [ OPT -, LOCAL.CAT.VAL.CLTS #clts ] >,
                                CLTS < #clt . #clts > ] ] ],
-    ARG-ST < #subj . < #comps . < #clt . #clts > > > ].
+    ARG-ST < #subj . < #comps . < #clt . #clts > > > ]
+"""; e.g. dignarse a, abstenerse de 
+""".
 
 
 ; --- 1.3.2.3.2. Verbs taking marked finite completive clause 
+
+v_intr_mrkd_cp_prop_fin_synsem := v_intr_mrkd_cp_prop-or-ques_fin_synsem & 
+  [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT.HEAD.KEYS.ALT2KEY prop,
+                                    CONT.HOOK.INDEX.SF prop ] ] > ]
+"""
+; --- 1.3.2.3.2. Verbs taking marked finite completive clause 
+
 ; - those movement verbs that take the preposition 'a': perfective or telic mood; the subject must be human, the verb in the subordinate clause must refer to an action and it goes always in the subjunctive mood. It can appear in the infinitive (always ctrl) and does not accept negation or composed form; besides, some admit clitic climbing but others don't. The subordinate clause can alternate with a locative NP.
 ; - those verbs that take the preposition 'a'but are not movement verbs: the semantic restrictions of the subject depend upon each verb. The clause may appear in indicative or subjunctive mood, but some only accept the subjunctive,
 ; this can be substituted by a first or second order NP, or by a (control) VPinf.
@@ -1483,57 +1634,58 @@ v_pp_e-vp-sc-prn_lex := v_intr_mrkd_cp_prop_inf & basic-three-arg &
 ; - those verbs that take the preposition 'en': some verbs do not take the preposition. Most verbs, though not all, have a human subject.The clause can be in indicative or subjunctive and can alternate with a VPinf, if of control (except for apoyarse, centrarse, consistir, estribar, insistir, residir, which do not demand a ctrl VPinf).
 ; The clause also alternates with a non-human NP, though some accept a human one.
 ; - those verbs that take the preposition 'por': the clause, always subjunctive and with a human subject, alternates with a control VPinf whose subject is co-referent with that of the main clause and can be animate or inanimate (e.g. las palabras pugnaban por salir de su boca)
-v_intr_mrkd_cp_prop_fin_synsem := v_intr_mrkd_cp_prop-or-ques_fin_synsem & 
-  [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT.HEAD.KEYS.ALT2KEY prop,
-                                    CONT.HOOK.INDEX.SF prop ] ] > ].
+""".
 
 v_intr_mrkd_cp_prop_fin := v_intr_mrkd_cp_prop-or-ques & 
   [ ALTS.VCALT + ].
 
-; e.g. consistir en (to consist on), contribuir a (to contribute to)
 v_pp_e-cp-p_lex := v_intr_mrkd_cp_prop_fin & main-verb & basic-two-arg & 
   [ ALTS.PASS -,
     SYNSEM v_intr_mrkd_cp_prop_fin_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_mrkd_cp_prop_fin_synsem, 
-                         VAL.COMPS < [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ].
+                         VAL.COMPS < [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ]
+"""; e.g. consistir en (to consist on), contribuir a (to contribute to)
+""".
 
-; e.g. asustarse de, benecifiarse de
 v_pp_e-cp-p-prn_lex := v_intr_mrkd_cp_prop_fin & main-vprn & basic-three-arg & 
   [ ALTS.PASS +,
     SYNSEM v_intr_mrkd_cp_prop_fin_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_mrkd_cp_prop_fin_synsem, 
-                         VAL.COMPS < [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ].
+                         VAL.COMPS < [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ]
+"""; e.g. asustarse de, benecifiarse de
+""".
 
-; e.g. 
 v_pp*_e-cp-p_lex := v_intr_mrkd_cp_prop_fin & main-verb & basic-two-arg & 
   [ ALTS.PASS -,
     SYNSEM v_intr_mrkd_cp_prop_fin_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_mrkd_cp_prop_fin_synsem, 
                          VAL.COMPS < [ OPT +, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ].
 
-; e.g. quejarse de
 v_pp*_e-cp-p-prn_lex := v_intr_mrkd_cp_prop_fin & main-vprn & basic-three-arg & 
   [ ALTS.PASS +,
     SYNSEM v_intr_mrkd_cp_prop_fin_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_mrkd_cp_prop_fin_synsem, 
-                         VAL.COMPS < [ OPT +, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ].
+                         VAL.COMPS < [ OPT +, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ]
+"""; e.g. quejarse de
+""".
 
-; e.g. soñar con (sueño (con) que vendrán)
 v_pp_e*-cp-p_lex := v_intr_mrkd_cp_prop_fin & main-verb & basic-two-arg & 
   [ ALTS.PASS -,
     SYNSEM v_intr_mrkd_cp_prop_fin_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_mrkd_cp_prop_fin_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT - ] > ] ] ]
+"""; e.g. soñar con (sueño (con) que vendrán)
+""".
 
-; e.g. enterarse (de)
 v_pp_e*-cp-p-prn_lex := v_intr_mrkd_cp_prop_fin & main-vprn & basic-three-arg & 
   [ ALTS.PASS +,
     SYNSEM v_intr_mrkd_cp_prop_fin_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_mrkd_cp_prop_fin_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT - ] > ] ] ]
+"""; e.g. enterarse (de)
+""".
 
 
-; e.g. 
 v_pp_e-cp-p-ind_lex := v_intr_mrkd_cp_prop_fin & main-verb & basic-two-arg & 
   [ ALTS.PASS -,
     SYNSEM v_intr_mrkd_cp_prop_fin_synsem & 
@@ -1542,34 +1694,36 @@ v_pp_e-cp-p-ind_lex := v_intr_mrkd_cp_prop_fin & main-verb & basic-two-arg &
                                        LOCAL [ CAT.HEAD.KEYS.KEY selected_rel,
                                                CONT.HOOK.INDEX.E.MOOD ind ] ] > ] ] ].
 
-; e.g. el candidato se conforta con que hizo todo lo posible para obtener el puesto
 v_pp_e-cp-p-ind-prn_lex := v_intr_mrkd_cp_prop_fin & main-vprn & basic-three-arg & 
   [ ALTS.PASS +,
     SYNSEM v_intr_mrkd_cp_prop_fin_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_mrkd_cp_prop_fin_synsem, 
                          VAL.COMPS < [ OPT -, 
                                        LOCAL [ CAT.HEAD.KEYS.KEY selected_rel,
-                                               CONT.HOOK.INDEX.E.MOOD ind ] ] > ] ] ].
+                                               CONT.HOOK.INDEX.E.MOOD ind ] ] > ] ] ]
+"""; e.g. el candidato se conforta con que hizo todo lo posible para obtener el puesto
+""".
 
-; e.g. esperar a
 v_pp_e-cp-p-sub_lex := v_intr_mrkd_cp_prop_fin & main-verb & basic-two-arg & 
   [ ALTS.PASS -,
     SYNSEM v_intr_mrkd_cp_prop_fin_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_mrkd_cp_prop_fin_synsem, 
                          VAL.COMPS < [ OPT -, 
                                        LOCAL [ CAT.HEAD.KEYS.KEY selected_rel,
-                                               CONT.HOOK.INDEX.E.MOOD sub ] ] > ] ] ].
+                                               CONT.HOOK.INDEX.E.MOOD sub ] ] > ] ] ]
+"""; e.g. esperar a
+""".
 
-; e.g. esforzarse por
 v_pp_e-cp-p-sub-prn_lex := v_intr_mrkd_cp_prop_fin & main-vprn & basic-three-arg & 
   [ ALTS.PASS +,
     SYNSEM v_intr_mrkd_cp_prop_fin_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_mrkd_cp_prop_fin_synsem, 
                          VAL.COMPS < [ OPT -, 
                                        LOCAL [ CAT.HEAD.KEYS.KEY selected_rel,
-                                               CONT.HOOK.INDEX.E.MOOD sub ] ] > ] ] ].
+                                               CONT.HOOK.INDEX.E.MOOD sub ] ] > ] ] ]
+"""; e.g. esforzarse por
+""".
 
-; e.g. 
 v_pp*_e-cp-p-sub-prn_lex := v_intr_mrkd_cp_prop_fin & main-vprn & basic-three-arg & 
   [ ALTS.PASS +,
     SYNSEM v_intr_mrkd_cp_prop_fin_synsem & 
@@ -1578,47 +1732,54 @@ v_pp*_e-cp-p-sub-prn_lex := v_intr_mrkd_cp_prop_fin & main-vprn & basic-three-ar
                                        LOCAL [ CAT.HEAD.KEYS.KEY selected_rel,
                                                CONT.HOOK.INDEX.E.MOOD sub ] ] > ] ] ].
 
-; e.g. contentarse con
 v_pp_e*-cp-p-sub-prn_lex := v_intr_mrkd_cp_prop_fin & main-vprn & basic-three-arg & 
   [ ALTS.PASS +,
     SYNSEM v_intr_mrkd_cp_prop_fin_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_mrkd_cp_prop_fin_synsem, 
                          VAL.COMPS < [ OPT -, 
-                                       LOCAL.CONT.HOOK.INDEX.E.MOOD sub ] > ] ] ].
-
+                                       LOCAL.CONT.HOOK.INDEX.E.MOOD sub ] > ] ] ]
+"""; e.g. contentarse con
+""".
 
 ; --- 1.3.2.3.3. Verbs taking marked (semi) interrogative clause 
-; they are interpreted as assertions. Syntactically, they are not introduced by 'que'
+
 v_intr_mrkd_cp_semi_ques_synsem := v_intr_mrkd_cp_prop-or-ques_fin_synsem & 
   [ LOCAL.CAT.VAL.COMPS < [ LOCAL mrkd_cp_semi_ques_local &
                                   [ CAT.HEAD.KEYS.ALT2KEY ques,
-                                    CONT.HOOK.INDEX.SF prop ] ] > ].
+                                    CONT.HOOK.INDEX.SF prop ] ] > ]
+"""
+; --- 1.3.2.3.3. Verbs taking marked (semi) interrogative clause 
+; they are interpreted as assertions. Syntactically, they are not introduced by 'que'
+""".
 
 v_intr_mrkd_cp_semi_ques := v_intr_mrkd_cp_prop-or-ques & 
   [ ALTS.VCALT + ].
 
-; e.g. depender de
 v_pp_e-cp-q_lex := v_intr_mrkd_cp_semi_ques & main-verb & basic-two-arg & 
   [ ALTS.PASS -,
     SYNSEM v_intr_mrkd_cp_semi_ques_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_mrkd_cp_semi_ques_synsem,
-                         VAL.COMPS < [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT - ] > ] ] ]
+"""; e.g. depender de
+""".
 
-; e.g. interesarse por
 v_pp_e-cp-q-prn_lex := v_intr_mrkd_cp_semi_ques & main-vprn & basic-three-arg & 
   [ ALTS.PASS +,
     SYNSEM v_intr_mrkd_cp_semi_ques_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_mrkd_cp_semi_ques_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT - ] > ] ] ]
+"""; e.g. interesarse por
 
+OZ: Not sure if the following comment belongs here or it was a free-standing comment:
 
 ; ----- the verb "fijarse en" in imperative eliminates the preposition
 ; e.g. Fijaos qué cosas dice, Fíjate si será listo que ...
+""".
+
 
 
 ; --- 1.3.2.5. Intransitive verbs taking IO
-; canvio INV + a INV -
-; cliticization/clitic doubling obligatory
+
 v_intr_io_synsem := v_intrans_synsem & 
   [ LOCAL [ CAT [ HEAD.INV -,
                   VAL.COMPS < [ LOCAL dative_local & 
@@ -1627,39 +1788,48 @@ v_intr_io_synsem := v_intrans_synsem &
             CONT.HCONS <! !> ],
     LKEYS [ KEYREL arg12-ev-relation & 
                    [ ARG2 #arg2 ],
-            --COMPKEY #ckey ] ]. 
+            --COMPKEY #ckey ] ]
+"""
+; --- 1.3.2.5. Intransitive verbs taking IO
+; canvio INV + a INV -
+; cliticization/clitic doubling obligatory
+""". 
 
 v_intrans_io := v_intrans & 
   [ ALTS [ IMPERS -,
            VCALT - ] ].
 
-; e.g. le consume la duda, le pertenece a Juan
 v_ppa_lex := v_intrans_io & main-verb & basic-two-arg &
   [ ALTS.PASS -,
     SYNSEM v_intr_io_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_io_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ]. 
+                         VAL.COMPS < [ OPT - ] > ] ] ]
+"""; e.g. le consume la duda, le pertenece a Juan
+""". 
 
-; e.g. gustar (no *(me) gustan (las acelgas))
 v_ppa*_lex := v_intrans_io & main-verb & basic-two-arg &
   [ ALTS.PASS -,
     SYNSEM v_intr_io_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_io_synsem, 
-                         VAL.COMPS < [ OPT + ] > ] ] ]. 
+                         VAL.COMPS < [ OPT + ] > ] ] ]
+"""; e.g. gustar (no *(me) gustan (las acelgas))
+""". 
 
-; e.g. se le acercó
 v_ppa_prn_lex := v_intrans_io & main-vprn & basic-three-arg &
   [ ALTS.PASS +,
     SYNSEM v_intr_io_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_io_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ]. 
+                         VAL.COMPS < [ OPT - ] > ] ] ]
+"""; e.g. se le acercó
+""". 
 
-; e.g. se le declaró, se le indigestó la comida
 v_ppa*_prn_lex := v_intrans_io & main-vprn & basic-three-arg &
   [ ALTS.PASS +,
     SYNSEM v_intr_io_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_io_synsem, 
-                         VAL.COMPS < [ OPT + ] > ] ] ]. 
+                         VAL.COMPS < [ OPT + ] > ] ] ]
+"""; e.g. se le declaró, se le indigestó la comida
+""". 
 
 
 
@@ -1679,34 +1849,38 @@ v_intr_io_mrkd_np_synsem := v_intrans_synsem &
                    [ ARG2 #arg2,
                      ARG3 #arg3 ],
             --COMPKEY #ckey,
-            --OCOMPKEY #ockey ] ]. 
+            --OCOMPKEY #ockey ] ]
+"""; --- 1.3.2.6. Intransitive verbs taking IO and marked NP
+""". 
 
 v_intr_io_mrkd_np := v_intrans & 
   [ ALTS [ IMPERS +,
            VCALT - ] ].
 
-; e.g. le sucedió (en el trono)
 v_ppa-pp*_e_lex := v_intr_io_mrkd_np & main-verb & basic-three-arg & 
   [ ALTS.PASS -,
     SYNSEM v_intr_io_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_io_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ]. 
+                         VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ]
+"""; e.g. le sucedió (en el trono)
+""". 
 
-; e.g. (le) preguntó por tí
 v_ppa*-pp_e_lex := v_intr_io_mrkd_np & main-verb & basic-three-arg & 
   [ ALTS.PASS -,
     SYNSEM v_intr_io_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_io_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ]. 
+                         VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ]
+"""; e.g. (le) preguntó por tí
+""". 
 
-; e.g. (le) hablé (de tí)
 v_ppa*-pp*_e_lex := v_intr_io_mrkd_np & main-verb & basic-three-arg & 
   [ ALTS.PASS -,
     SYNSEM v_intr_io_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_io_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT + ], [ OPT + ] > ] ] ]. 
+                         VAL.COMPS < [ OPT + ], [ OPT + ] > ] ] ]
+"""; e.g. (le) hablé (de tí)
+""". 
 
-; e.g. le echaba en falta
 v_ppa-pp_e-idm_lex := v_intr_io_mrkd_np & main-verb & basic-three-arg & 
   [ ALTS.PASS -,
     SYNSEM v_intr_io_mrkd_np_synsem & 
@@ -1716,7 +1890,9 @@ v_ppa-pp_e-idm_lex := v_intr_io_mrkd_np & main-verb & basic-three-arg &
                                        LOCAL.CONT.RELS <! relation !>,
                                        NON-LOCAL [ SLASH 0-dlist,
                                                    REL 0-dlist,
-                                                   QUE 0-dlist ] ] > ] ] ]. 
+                                                   QUE 0-dlist ] ] > ] ] ]
+"""; e.g. le echaba en falta
+""". 
 
 
 
@@ -1743,13 +1919,14 @@ v_intr_two_mrkd_np_idm_synsem := v_intrans_synsem &
                    [ ARG2 #arg2,
                      ARG3 #arg3 ],
             --COMPKEY #ckey,
-            --OCOMPKEY #ockey ] ]. 
+            --OCOMPKEY #ockey ] ]
+"""; --- 1.3.2.7. Intransitive verbs taking two marked NPs
+""". 
 
 v_intr_two_mrkd_np_idm := v_intrans & 
   [ ALTS [ IMPERS -,
            VCALT - ] ].
 
-; e.g. ponerse en contacto con
 v_pp-pp_e-e-prn-idm_lex := v_intr_two_mrkd_np_idm & norm-pronominal-verb & 
   [ ALTS.PASS -,
     SYNSEM v_intr_two_mrkd_np_idm_synsem &
@@ -1758,12 +1935,11 @@ v_pp-pp_e-e-prn-idm_lex := v_intr_two_mrkd_np_idm & norm-pronominal-verb &
                                COMPS < #comp1 & [ OPT - ] , 
                                        #comp2 & [ OPT - ] >,
                                CLTS < #clt > ] ] ],
-    ARG-ST < #subj , #comp1 , #comp2 , #clt > ].
-
+    ARG-ST < #subj , #comp1 , #comp2 , #clt > ]
+"""; e.g. ponerse en contacto con
+""".
 
 ; --- 1.3.2.7. intransitive subject to subject raising verbs
-; - clitic climbing only with modal and aspectual auxiliaries (i.e. building infinitival 
-; and gerundive periphrasis (e.g. te lo puedo/debo dar))
 
 v_intr_ssr_synsem := lex-synsem & 
   [ LOCAL [ AGR #ind, 
@@ -1785,7 +1961,12 @@ v_intr_ssr_synsem := lex-synsem &
                    HCONS <! qeq & [ HARG #harg,
                                     LARG #larg ] !> ] ],
     LKEYS [ KEYREL #keyrel & arg1-ev-relation &  [ ARG1 #harg ] ,
-            --COMPKEY #ckey ] ].
+            --COMPKEY #ckey ] ]
+"""
+; --- 1.3.2.7. intransitive subject to subject raising verbs
+; - clitic climbing only with modal and aspectual auxiliaries (i.e. building infinitival 
+; and gerundive periphrasis (e.g. te lo puedo/debo dar))
+""".
 
 v_intr_ssr := basic-verb-lex & 
   [ ALTS [ RCP -, 
@@ -1809,52 +1990,61 @@ vprn_intr_ssr := norm-pronominal-verb &
                            CLTS < #clt & clitic-synsem . #clts > ],
     ARG-ST < #subj . < #comps. < #clt. #clts > > > ].
 
-; a)- taking VPinf
-; e.g. poder, soler, deber (deberían hacerlo (ellos), puede terminar ardiendo Troya)
 v_vp_inf-ssr_lex := v_intr_ssr & cc-two-arg & 
   [ SYNSEM v_intr_ssr_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_ssr_synsem, 
                          VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind ] >,
                                COMPS < [ LOCAL vp_inf_local & 
-                                               [ CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX #ind ] > ] ] > ] ] ] ]. 
+                                               [ CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX #ind ] > ] ] > ] ] ] ]
+"""; a)- taking VPinf
+; e.g. poder, soler, deber (deberían hacerlo (ellos), puede terminar ardiendo Troya)
+""". 
 
-; b)- taking marked VPinf
-; e.g. acostubrar a, deber de, haber de, ir a, ... (he de hacerlo)
-; !!! missing: estar a punto de, no tener/haber por qué
 v_pp_e-vp-inf-ssr_lex := v_intr_ssr & cc-two-arg & 
   [ SYNSEM v_intr_ssr_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_ssr_synsem, 
                          VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind ] >,
                                COMPS < [ LOCAL mrkd_cp_prop_inf_local & 
-                                               [ CONT.HOOK.XARG #ind ] ] > ] ] ] ]. 
+                                               [ CONT.HOOK.XARG #ind ] ] > ] ] ] ]
+"""
+; b)- taking marked VPinf
+; e.g. acostubrar a, deber de, haber de, ir a, ... (he de hacerlo)
+; !!! missing: estar a punto de, no tener/haber por qué
+""". 
 
-; e.g. echarse (se echó a llorar)
 v_pp_e-vp-inf-ssr-prn_lex := vprn_intr_ssr & cc-three-arg & 
   [ SYNSEM v_intr_ssr_synsem & 
            [ LOCAL [ CAT [ HEAD.LSYNSEM v_intr_ssr_synsem, 
                            VAL.COMPS < [ LOCAL mrkd_cp_prop_inf_local & 
                                                [ CONT.HOOK.XARG #ctrl ] ] > ],
-                     CONT.HOOK.XARG #ctrl ] ] ]. 
+                     CONT.HOOK.XARG #ctrl ] ] ]
+"""
+; e.g. echarse (se echó a llorar)
+""". 
 
-; c)- taking VPger
-; e.g. andar (anda cantando)
 v_vp_ger-ssr_lex := v_intr_ssr & cc-two-arg & 
   [ SYNSEM v_intr_ssr_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_ssr_synsem, 
                          VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind ] >,
                                COMPS < [ LOCAL vp_ger_local & 
-                                               [ CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX #ind ] > ] ] > ] ] ] ]. 
+                                               [ CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX #ind ] > ] ] > ] ] ] ]
+"""
+; c)- taking VPger
+; e.g. andar (anda cantando)
+""". 
 
-; e.g. quedarse (se quedó llorando)
 v_vp_ger-ssr-prn_lex := vprn_intr_ssr & cc-three-arg & 
   [ SYNSEM v_intr_ssr_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_ssr_synsem, 
                          VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind ] >,
                                COMPS < [ LOCAL vp_ger_local & 
-                                               [ CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX #ind ] > ] ] > ] ] ] ]. 
+                                               [ CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX #ind ] > ] ] > ] ] ] ]
+"""; e.g. quedarse (se quedó llorando)
+""". 
 
 
 ; --- 1.3.2.8. Intransitive verbs taking adverbial phrases
+
 v_intr_advp_synsem := v_intrans_synsem &
   [ LOCAL [ CAT [ HEAD.INV -,
                   VAL.COMPS < [ LOCAL [ CAT.HEAD adv & [ KEYS.KEY #ckey ],
@@ -1864,7 +2054,10 @@ v_intr_advp_synsem := v_intrans_synsem &
     LKEYS [ KEYREL arg1-ev-relation & 
                    [ LBL #ltop,
                      ARG0 #index ],
-            --COMPKEY #ckey ] ].
+            --COMPKEY #ckey ] ]
+"""
+; --- 1.3.2.8. Intransitive verbs taking adverbial phrases
+""".
 
 v_intr_advp_io_synsem := v_intr_advp_synsem &
   [ LOCAL.CAT.VAL.COMPS < [ ],
@@ -1891,27 +2084,32 @@ v_intr_advp := v_intrans &
            VCALT -,
            PASS - ] ].
 
-; e.g. hacer bien/mal
 v_adv_lex := v_intr_advp & main-verb & basic-two-arg & 
   [ SYNSEM v_intr_advp_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_advp_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT - ] > ] ] ]
+"""
+; e.g. hacer bien/mal
+""".
 
 
-; e.g. portarse (to behave) (el niño se porta bien)
 v_adv_prn_lex := v_intr_advp & main-vprn & basic-three-arg & 
   [ SYNSEM v_intr_advp_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_advp_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT - ] > ] ] ]
+"""
+; e.g. portarse (to behave) (el niño se porta bien)
+""".
 
-; e.g. conservarse 
 v_adv*_prn_lex := v_intr_advp & main-vprn & basic-three-arg & 
   [ SYNSEM v_intr_advp_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_advp_synsem, 
-                         VAL.COMPS < [ OPT + ] > ] ] ].
+                         VAL.COMPS < [ OPT + ] > ] ] ]
+"""
+; e.g. conservarse 
+""".
 
 
-; e.g. llevarse bien/mal con
 v_adv-pp_e-prn-idm_lex := v_intr_advp & norm-pronominal-verb & 
   [ SYNSEM v_intr_advp_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_advp_mrkd_np_synsem, 
@@ -1919,7 +2117,10 @@ v_adv-pp_e-prn-idm_lex := v_intr_advp & norm-pronominal-verb &
                                COMPS < #comp1 & [ OPT - ] , 
                                        #comp2 & [ OPT - ] >,
                                CLTS < #clt > ] ] ],
-    ARG-ST < #subj , #comp1 , #comp2 , #clt > ].
+    ARG-ST < #subj , #comp1 , #comp2 , #clt > ]
+"""
+; e.g. llevarse bien/mal con
+""".
 
 ;-- 
 
@@ -1953,17 +2154,21 @@ v_intr_io_modnp_synsem := v_intr_io_advp_synsem &
                      ARG0 #index ],
             --COMPKEY #ckey ] ].
 
-; e.g. salir, sentar, sonar (le) sentó bien
 v_adv-ppa*_lex := v_intr_advp & main-verb & basic-three-arg & 
   [ SYNSEM v_intr_io_adv_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_io_adv_synsem, 
-                         VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ]
+"""
+; e.g. salir, sentar, sonar (le) sentó bien
+""".
 
-; e.g. dar igual
 v_modnp-ppa*_idm_lex := v_intr_advp & main-verb & basic-three-arg & 
   [ SYNSEM v_intr_io_modnp_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_io_modnp_synsem,
-                         VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ]
+"""
+; e.g. dar igual
+""".
 
 
 ; --- 1.3.3. Transitive verbs
@@ -1971,15 +2176,22 @@ v_modnp-ppa*_idm_lex := v_intr_advp & main-verb & basic-three-arg &
 v_trans_synsem := arg1_lt & transitive_verb_synsem &
   [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD.KEYS.KEY #ckey ],... >,
     LKEYS [ KEYREL arg12-ev-relation,
-            --COMPKEY #ckey ] ].
+            --COMPKEY #ckey ] ]
+"""
+; --- 1.3.3. Transitive verbs
+""".
 
 
 ; --- 1.3.3.1. Transitive verbs taking NP
+
 v_trans_np_synsem := v_trans_synsem & 
   [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local & 
                                   [ CONT.HOOK.INDEX #ind2 ],
                             NON-LOCAL.REL 0-dlist & [ LIST < > ] ],... >,
-    LKEYS.KEYREL.ARG2 #ind2 ].
+    LKEYS.KEYREL.ARG2 #ind2 ]
+"""
+; --- 1.3.3.1. Transitive verbs taking NP
+""".
 
 v_trans_np := basic-main-verb & 
   [ ALTS.VCALT - ].
@@ -1991,7 +2203,11 @@ v_np_ntr_synsem := v_trans_np_synsem &
   [ LOCAL [ CAT [ HEAD.INV -,
                   VAL.COMPS < [ LOCAL np_acc_local ] > ],
             CONT [ RELS <! relation !>,
-                   HCONS <! !> ] ] ].
+                   HCONS <! !> ] ] ]
+"""
+; --- 1.3.3.1.1. Transitive verbs taking nominal complements that don't passivize 
+; (including verbs taking measure NPs)
+""".
 
 v_np_id_synsem := v_np_ntr_synsem.
 
@@ -2015,58 +2231,67 @@ v_np_ntr := v_trans_np &
            RFX -,
            PASS - ] ].
 
-; e.g. querer (to want) (¿quieres algo?), durar (to last) (la reunión duró tres horas)
 v_np_npsv_lex := v_np_ntr & main-verb & basic-two-arg &
   [ ALTS.IMPERS +,
     SYNSEM v_np_ntr_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_np_ntr_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT - ] > ] ] ]
+"""
+; e.g. querer (to want) (¿quieres algo?), durar (to last) (la reunión duró tres horas)
+""".
 
-; e.g. adelgazar (to lose weight)
 v_np*_npsv_lex := v_np_ntr & main-verb & basic-two-arg &
   [ ALTS.IMPERS +,
     SYNSEM v_np_ntr_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_np_ntr_synsem, 
-                         VAL.COMPS < [ OPT + ] > ] ] ].
+                         VAL.COMPS < [ OPT + ] > ] ] ]
+"""
+; e.g. adelgazar (to lose weight)
+""".
 
-; e.g. jugarse (to bet)
 v_np_npsv-prn_lex := v_np_ntr & main-vprn & basic-three-arg &
   [ SYNSEM v_np_ntr_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_np_ntr_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT - ] > ] ] ]
+"""
+; e.g. jugarse (to bet)
+""".
 
-; e.g. adelgazar (to lose weight)
 v_np*_npsv-prn_lex := v_np_ntr & main-vprn & basic-three-arg &
   [ SYNSEM v_np_ntr_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_np_ntr_synsem, 
-                         VAL.COMPS < [ OPT + ] > ] ] ].
+                         VAL.COMPS < [ OPT + ] > ] ] ]
+"""
+OZ: The below comment is a duplicate for the comment for v_np*_npsv_lex; not sure why.
+; e.g. adelgazar (to lose weight)
+""".
 
-; for locuciones verbales, e.g. tener lugar, tirar la toalla
 v_np_npsv-idm_lex := v_np_ntr & main-verb & basic-two-arg &
   [ ALTS.IMPERS -,
     SYNSEM v_np_ntr-idm_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_np_ntr-idm_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT - ] > ] ] ]
+"""; for locuciones verbales, e.g. tener lugar, tirar la toalla
+""".
 
-
-; e.g. devenir
 v_np_npsv-id_lex := v_np_ntr & main-verb & basic-two-arg &
   [ ALTS.IMPERS -,
     SYNSEM v_np_id_synsem & 
            [ LOCAL [ AGR.PNG #png,
                      CAT [ HEAD.LSYNSEM v_np_id_synsem, 
                            VAL.COMPS < [ OPT -,
-                                         LOCAL.AGR.PNG #png ] > ] ] ] ].
+                                         LOCAL.AGR.PNG #png ] > ] ] ] ]
+"""; e.g. devenir
+""".
 
-; e.g. me llamo Montserrat.
 v_np_npsv-id-prn_lex := v_np_ntr & main-vprn & basic-three-arg &
   [ ALTS.IMPERS -,
     SYNSEM v_np_id_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_np_id_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT - ] > ] ] ]
+"""; e.g. me llamo Montserrat.
+""".
 
-
-; e.g. ser
 v_np_npsv_id_synsem := v_trans_synsem &
   [ LOCAL [ AGR.PNG #png,
             CAT [ HEAD.INV -, 
@@ -2084,7 +2309,9 @@ v_np_npsv_id_synsem := v_trans_synsem &
                                   NON-LOCAL.REL 0-dlist ] > ] ],
             CONT [ RELS <! relation !>,
                    HCONS <! !> ] ],
-    LKEYS.KEYREL.ARG2 #ind2 ].
+    LKEYS.KEYREL.ARG2 #ind2 ]
+"""; e.g. ser
+""".
 
 v_np_npsv-id-ser_lex := v_np_ntr & main-verb & basic-two-arg &
   [ ALTS.IMPERS -,
@@ -2098,7 +2325,9 @@ v_trans_np_psv_synsem := v_trans_np_synsem &
   [ LOCAL [ CAT [ HEAD.INV -,
                   VAL.COMPS < [ LOCAL.CAT.HEAD.KEYS.KEY non_modable_rel ] > ],
             CONT [ RELS <! relation !>,
-                   HCONS <! !> ] ] ].
+                   HCONS <! !> ] ] ]
+"""; --- 1.3.3.1.2. Transitive verbs taking NP that can be passivized
+""".
 
 v_trans_np_psv := v_trans_np &
   [ ALTS [ PASS +,
@@ -2109,73 +2338,77 @@ vprn_trans_np_psv := v_trans_np &
            RCP -, 
            RFX - ] ].
 
-; e.g. pintar (Montse pintó la casa)
 v_np_lex := v_trans_np_psv & main-verb & basic-two-arg &
   [ ALTS [ RCP -, RFX - ],
     SYNSEM v_trans_np_psv_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_psv_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ]. 
+                         VAL.COMPS < [ OPT - ] > ] ] ]
+"""; e.g. pintar (Montse pintó la casa)
+""". 
 
-; e.g. comer (mañana comeré (paella) en casa de mis padres)
 v_np*_lex := v_trans_np_psv & main-verb & basic-two-arg & 
   [ ALTS [ RCP -, RFX - ],
     SYNSEM v_trans_np_psv_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_psv_synsem, 
-                         VAL.COMPS < [ OPT + ] > ] ] ]. 
+                         VAL.COMPS < [ OPT + ] > ] ] ]
+"""; e.g. comer (mañana comeré (paella) en casa de mis padres)
+""". 
 
-; e.g. secar (to dry)
 v_np_rfx_lex := v_trans_np_psv & main-verb & basic-two-arg & 
   [ ALTS [ RCP -, RFX + ],
     SYNSEM v_trans_np_psv_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_psv_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ]. 
+                         VAL.COMPS < [ OPT - ] > ] ] ]
+"""; e.g. secar (to dry)
+""". 
 
-; e.g. 
 v_np*_rfx_lex := v_trans_np_psv & main-verb & basic-two-arg & 
   [ ALTS [ RCP -, RFX + ],
     SYNSEM v_trans_np_psv_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_psv_synsem, 
                          VAL.COMPS < [ OPT + ] > ] ] ]. 
 
-; e.g. abrazar (to hug) (Juan y María se abrazan (Juan and María hug each other))
 v_np_rcp_lex := v_trans_np_psv & main-verb & basic-two-arg & 
   [ ALTS [ RCP +, RFX - ],
     SYNSEM v_trans_np_psv_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_psv_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ]. 
+                         VAL.COMPS < [ OPT - ] > ] ] ]
+"""; e.g. abrazar (to hug) (Juan y María se abrazan (Juan and María hug each other))
+""". 
 
-; e.g. desobedecer
 v_np*_rcp_lex := v_trans_np_psv & main-verb & basic-two-arg & 
   [ ALTS [ RCP +, RFX - ],
     SYNSEM v_trans_np_psv_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_psv_synsem, 
-                         VAL.COMPS < [ OPT + ] > ] ] ].
+                         VAL.COMPS < [ OPT + ] > ] ] ]
+"""; e.g. desobedecer
+""".
 
-; e.g. 
 v_np_rfx-rcp_lex := v_trans_np_psv & main-verb & basic-two-arg & 
   [ ALTS [ RCP +, RFX + ],
     SYNSEM v_trans_np_psv_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_psv_synsem, 
                          VAL.COMPS < [ OPT - ] > ] ] ]. 
 
-; e.g. 
 v_np*_rfx-rcp_lex := v_trans_np_psv & main-verb & basic-two-arg & 
   [ ALTS [ RCP +, RFX + ],
     SYNSEM v_trans_np_psv_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_psv_synsem, 
                          VAL.COMPS < [ OPT + ] > ] ] ].
 
-; e.g. saltarse (el alumno se saltó la clase)
 v_np_prn_lex := vprn_trans_np_psv & main-vprn & basic-three-arg & 
   [ SYNSEM v_trans_np_psv_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_psv_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ]. 
+                         VAL.COMPS < [ OPT - ] > ] ] ]
+"""; e.g. saltarse (el alumno se saltó la clase)
+""". 
 
-; e.g. peinarse (María se peina (el pelo))
 v_np*_prn_lex := vprn_trans_np_psv & main-vprn & basic-three-arg & 
   [ SYNSEM v_trans_np_psv_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_psv_synsem, 
-                         VAL.COMPS < [ OPT + ] > ] ] ]. 
+                         VAL.COMPS < [ OPT + ] > ] ] ]
+"""; e.g. peinarse (María se peina (el pelo))
+""". 
 
 ; --- transitive verbs that participate in 'causative alternation'
 ; May take adjunts like "él solo, por sí mismo, por sí solo (by itself,...) (e.g. las puertas se cerraron 
@@ -2195,10 +2428,8 @@ v_np*_prn_lex := vprn_trans_np_psv & main-vprn & basic-three-arg &
 ; (e.g. una vez hubiaron secado el río/el río fue secado;*una vez se secó el río). In the other cases, 
 ; there's an ambiguity between the unaccusative and the participle's passive transitive 
 
-
 ; --- 1.3.3.2. Transitive verbs taking DO and oblique nominal complements
-; --- régimen verbal de preposición fija (verbal government with fixed preposition) 
-; (a, de, en, con, por) & variable preposition (a/para, de/con, de/por, en/contra/sobre)
+
 v_trans_np_mrkd_np_synsem := v_trans_np_synsem & 
   [ LOCAL [ CAT [ HEAD.INV -, 
                   VAL.COMPS < [ ], 
@@ -2208,7 +2439,12 @@ v_trans_np_mrkd_np_synsem := v_trans_np_synsem &
             CONT [ RELS <! arg123-ev-relation !>,
                    HCONS <! !> ] ], 
     LKEYS [ KEYREL.ARG3 #ind3,
-            --OCOMPKEY #ockey ] ].
+            --OCOMPKEY #ockey ] ]
+"""
+; --- 1.3.3.2. Transitive verbs taking DO and oblique nominal complements
+; --- régimen verbal de preposición fija (verbal government with fixed preposition) 
+; (a, de, en, con, por) & variable preposition (a/para, de/con, de/por, en/contra/sobre)
+""".
 
 v_trans_np_mrkd_np := v_trans_np. 
 
@@ -2219,118 +2455,134 @@ vprn_trans_np_mrkd_np := v_trans_np & norm-pronominal-verb &
     ARG-ST < #subj , #comp1, #comp2,  #clt > ]. 
 
 
-; e.g. distar
 v_np-pp*_npsv-e_lex := v_trans_np_mrkd_np & main-verb & basic-three-arg &
   [ ALTS [ IMPERS +, PASS -, RCP -, RFX - ],
     SYNSEM v_trans_np_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ]. 
+                         VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ]
+"""; e.g. distar
+""". 
 
-; e.g. sé que esto me ha privado de una amplia gama de experiencias
 v_np-pp_e_lex := v_trans_np_mrkd_np & main-verb & basic-three-arg & 
   [ ALTS [ IMPERS +, PASS +, RCP -, RFX - ],
     SYNSEM v_trans_np_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ]. 
+                         VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ]
+"""; e.g. sé que esto me ha privado de una amplia gama de experiencias
+""". 
 
-; e.g. he roto (las relaciones) con mi novio
 v_np*-pp_e_lex := v_trans_np_mrkd_np & main-verb & basic-three-arg & 
   [ ALTS [ IMPERS +, PASS +, RCP -, RFX - ],
     SYNSEM v_trans_np_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ]. 
+                         VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ]
+"""; e.g. he roto (las relaciones) con mi novio
+""". 
 
-; e.g. incorporaremos todos los nombres (a la lista)
 v_np-pp*_e_lex := v_trans_np_mrkd_np & main-verb & basic-three-arg & 
   [ ALTS [ IMPERS +, PASS +, RCP -, RFX - ],
     SYNSEM v_trans_np_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ]. 
+                         VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ]
+"""; e.g. incorporaremos todos los nombres (a la lista)
+""". 
 
-; e.g. he invertido tres millones (en bolsa)/he invertido (tres millones) en bolsa
 v_np*-pp*_e_lex := v_trans_np_mrkd_np & main-verb & basic-three-arg & 
   [ ALTS [ IMPERS +, PASS +, RCP -, RFX - ],
     SYNSEM v_trans_np_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT + ], [ OPT + ] > ] ] ]. 
+                         VAL.COMPS < [ OPT + ], [ OPT + ] > ] ] ]
+"""; e.g. he invertido tres millones (en bolsa)/he invertido (tres millones) en bolsa
+""". 
 
-; e.g. turnarse ... con ...
 v_np*-pp_e-prn_lex := vprn_trans_np_mrkd_np & basic-four-arg & 
   [ ALTS [ PASS +, RCP -, RFX - ],
     SYNSEM v_trans_np_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ]. 
+                         VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ]
+"""; e.g. turnarse ... con ...
+""". 
 
-; e.g. atraer (to attrack)
 v_np-pp_e-rcp_lex := v_trans_np_mrkd_np & main-verb & basic-three-arg & 
   [ ALTS [ IMPERS +, PASS +, RCP +, RFX - ],
     SYNSEM v_trans_np_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ]
+"""; e.g. atraer (to attrack)
+""".
 
-; e.g. retar (to challenge)
 v_np*-pp_e-rcp_lex := v_trans_np_mrkd_np & main-verb & basic-three-arg & 
   [ ALTS [ IMPERS +, PASS +, RCP +, RFX - ],
     SYNSEM v_trans_np_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ]. 
+                         VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ]
+"""; e.g. retar (to challenge)
+""". 
 
-; e.g. recubrir
 v_np-pp*_e-rcp_lex := v_trans_np_mrkd_np & main-verb & basic-three-arg & 
   [ ALTS [ IMPERS +, PASS +, RCP +, RFX - ],
     SYNSEM v_trans_np_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ]. 
+                         VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ]
+"""; e.g. recubrir
+""". 
 
-; e.g. invitar (to invite)
 v_np*-pp*_e-rcp_lex := v_trans_np_mrkd_np & main-verb & basic-three-arg & 
   [ ALTS [ IMPERS +, PASS +, RCP +, RFX - ],
     SYNSEM v_trans_np_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT + ], [ OPT + ] > ] ] ]. 
+                         VAL.COMPS < [ OPT + ], [ OPT + ] > ] ] ]
+"""; e.g. invitar (to invite)
+""". 
 
-
-; e.g. acostumbrar(se) a
 v_np-pp_e-rfx_lex := v_trans_np_mrkd_np & main-verb & basic-three-arg & 
   [ ALTS [ IMPERS +, PASS +, RCP -, RFX + ],
     SYNSEM v_trans_np_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ]
+"""; e.g. acostumbrar(se) a
+""".
 
-; e.g. prevenir(se) de
 v_np*-pp_e-rfx_lex := v_trans_np_mrkd_np & main-verb & basic-three-arg & 
   [ ALTS [ IMPERS +, PASS +, RCP -, RFX + ],
     SYNSEM v_trans_np_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ]. 
+                         VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ]
+"""; e.g. prevenir(se) de
+""". 
 
-; e.g. convencer(se) de
 v_np-pp*_e-rfx_lex := v_trans_np_mrkd_np & main-verb & basic-three-arg & 
   [ ALTS [ IMPERS +, PASS +, RCP -, RFX + ],
     SYNSEM v_trans_np_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ]. 
+                         VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ]
+"""; e.g. convencer(se) de
+""". 
 
-; e.g. comparar(se) a
 v_np*-pp*_e-rfx_lex := v_trans_np_mrkd_np & main-verb & basic-three-arg & 
   [ ALTS [ IMPERS +, PASS +, RCP -, RFX + ],
     SYNSEM v_trans_np_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT + ], [ OPT + ] > ] ] ]. 
+                         VAL.COMPS < [ OPT + ], [ OPT + ] > ] ] ]
+"""; e.g. comparar(se) a
+""". 
 
-; e.g. informar(se) de
 v_np-pp_e-rfx-rcp_lex := v_trans_np_mrkd_np & main-verb & basic-three-arg & 
   [ ALTS [ IMPERS +, PASS +, RCP +, RFX + ],
     SYNSEM v_trans_np_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ]. 
+                         VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ]
+"""
+; e.g. informar(se) de
+""". 
 
-; e.g. atar(se) a
 v_np-pp*_e-rfx-rcp_lex := v_trans_np_mrkd_np & main-verb & basic-three-arg & 
   [ ALTS [ IMPERS +, PASS +, RCP +, RFX + ],
     SYNSEM v_trans_np_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ]. 
+                         VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ]
+"""; e.g. atar(se) a
+""". 
 
 v_np*-pp*_e-rfx-rcp_lex := v_trans_np_mrkd_np & main-verb & basic-three-arg & 
   [ ALTS [ IMPERS +, PASS +, RCP +, RFX + ],
@@ -2338,13 +2590,14 @@ v_np*-pp*_e-rfx-rcp_lex := v_trans_np_mrkd_np & main-verb & basic-three-arg &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_np_synsem, 
                          VAL.COMPS < [ OPT + ], [ OPT + ] > ] ] ]. 
 
-; --- locuciones verbales
-; e.g. dar a alguien de alta, echar a alguien de menos, tomar nota de algo. 
 v_trans_np_mrkd_np_idm_synsem := v_trans_np_mrkd_np_synsem &
   [ LOCAL.CAT.VAL.COMPS < [ ], 
                           [ NON-LOCAL [ SLASH 0-dlist,
                                         REL 0-dlist,
-                                        QUE 0-dlist ] ] > ]. 
+                                        QUE 0-dlist ] ] > ]
+"""; --- locuciones verbales
+; e.g. dar a alguien de alta, echar a alguien de menos, tomar nota de algo. 
+""". 
 
 v_np-pp_e-idm_lex := v_trans_np_mrkd_np & main-verb & basic-three-arg & 
   [ ALTS [ IMPERS +, PASS +, RCP -, RFX - ],
@@ -2352,20 +2605,20 @@ v_np-pp_e-idm_lex := v_trans_np_mrkd_np & main-verb & basic-three-arg &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_np_idm_synsem, 
                          VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ]. 
 
-; e.g. darse cuenta de algo
 v_np-pp*_e-npsv-prn-idm_lex := vprn_trans_np_mrkd_np & basic-four-arg & 
   [ ALTS [ IMPERS -, PASS -, RCP -, RFX - ],
     SYNSEM v_trans_np_mrkd_np_idm_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_np_idm_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ]. 
+                         VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ]
+"""; e.g. darse cuenta de algo
+""". 
 
 ; --- verbs that participate in 'locative alternation' (llenar (to fill), cargar (to load))
 ; e.g. cargó el carro de heno -> cargó heno en el carro.
 ; !!! now 2 entries
 
-
 ; --- 1.3.3.3. transitive verb taking DO and oblique verbal complement 
-; !!! repassar
+
 v_trans_np_mrkd_cp_synsem := v_trans_np_synsem & 
   [ LOCAL [ CAT [ HEAD.INV -,
                   VAL.COMPS < [ LOCAL.CAT.HEAD.KEYS.KEY non_modable_rel ], 
@@ -2376,182 +2629,207 @@ v_trans_np_mrkd_cp_synsem := v_trans_np_synsem &
                    HCONS <! qeq & [ HARG #harg,
                                     LARG #larg ] !> ] ],
     LKEYS [ KEYREL.ARG3 #harg,
-            --OCOMPKEY #ockey ] ].
+            --OCOMPKEY #ockey ] ]
+"""
+; --- 1.3.3.3. transitive verb taking DO and oblique verbal complement 
+; !!! repassar
+""".
 
 v_trans_np_mrkd_cp := basic-main-verb & 
   [ ALTS.IMPERS + ]. 
 
 
 ; --- 1.3.3.3.1. transitive verbs taking DO and marked finite completive clause
+
 v_trans_np_mrkd_cp_prop_fin_synsem := v_trans_np_mrkd_cp_synsem & 
   [ LOCAL.CAT.VAL.COMPS < synsem,
                           [ LOCAL [ CAT.MC -,
                                     CONT.HOOK.INDEX [ E.TENSE tense,
-                                                      SF prop ] ] ] > ].
+                                                      SF prop ] ] ] > ]
+"""; --- 1.3.3.3.1. transitive verbs taking DO and marked finite completive clause
+""".
 
-; -- a)- taking clauses in indicative/subjunctive
-; e.g. reducen el problema a que ...
 v_np-pp_e-cp-p_lex := v_trans_np_mrkd_cp & main-verb & basic-three-arg & 
   [ ALTS [ VCALT +, RCP -, RFX -, PASS + ],
     SYNSEM v_trans_np_mrkd_cp_prop_fin_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_cp_prop_fin_synsem, 
                          VAL.COMPS < [ OPT - ],
-                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ].
+                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ]
+"""; -- a)- taking clauses in indicative/subjunctive
+; e.g. reducen el problema a que ...
+""".
 
-; e.g. habrá que acostumbrar a esos niños a que su padre llegue/llega siempre tarde a casa; 
-;      los niños se acostumbraron a que su padre llegara tarde
 v_np-pp_e-cp-p-rfx_lex := v_trans_np_mrkd_cp & main-verb & basic-three-arg & 
   [ ALTS [ VCALT +, RCP -, RFX +, PASS + ],
     SYNSEM v_trans_np_mrkd_cp_prop_fin_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_cp_prop_fin_synsem, 
                          VAL.COMPS < [ OPT - ],
-                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ].
+                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ]
+"""; e.g. habrá que acostumbrar a esos niños a que su padre llegue/llega siempre tarde a casa; 
+;      los niños se acostumbraron a que su padre llegara tarde
+""".
 
-; e.g. prevenir, advertir
 v_np*-pp_e*-cp-p_lex := v_trans_np_mrkd_cp & main-verb & basic-three-arg & 
   [ ALTS [ VCALT +, RCP -, RFX -, PASS + ],
     SYNSEM v_trans_np_mrkd_cp_prop_fin_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_cp_prop_fin_synsem, 
-                         VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ]
+"""; e.g. prevenir, advertir
+""".
 
-; e.g. informar 
 v_np-pp_e*-cp-p-rfx-rcp_lex := v_trans_np_mrkd_cp & main-verb & basic-three-arg & 
   [ ALTS [ VCALT +, RCP +, RFX +, PASS + ],
     SYNSEM v_trans_np_mrkd_cp_prop_fin_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_cp_prop_fin_synsem, 
-                         VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ]
+"""; e.g. informar 
+""".
 
-; -- b)- taking clauses in indicative
 v_trans_np_mrkd_cp_prop_fin_ind_synsem := v_trans_np_mrkd_cp_prop_fin_synsem & 
   [ LOCAL.CAT.VAL.COMPS < synsem,
-                          [ LOCAL.CONT.HOOK.INDEX.E.MOOD ind ] > ].
+                          [ LOCAL.CONT.HOOK.INDEX.E.MOOD ind ] > ]
+"""; -- b)- taking clauses in indicative
+""".
 
-; e.g. basó su defensa/se basó en que no tenía testigos
 v_np-pp_e-cp-p-ind-rfx_lex := v_trans_np_mrkd_cp & main-verb & basic-three-arg & 
   [ ALTS [ VCALT +, RCP -,  RFX +, PASS + ],
     SYNSEM v_trans_np_mrkd_cp_prop_fin_ind_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_cp_prop_fin_ind_synsem, 
                          VAL.COMPS < [ OPT - ],
-                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ].
+                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ]
+"""; e.g. basó su defensa/se basó en que no tenía testigos
+""".
 
-; e.g. apostó conmigo una cena a que entraba/*entrara en la sala sin invitación.
 v_np-pp_npsv-e-cp-p-ind_lex := v_trans_np_mrkd_cp & main-verb & basic-three-arg & 
   [ ALTS [ VCALT +, RCP -, RFX -, PASS - ],
     SYNSEM v_trans_np_mrkd_cp_prop_fin_ind_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_cp_prop_fin_ind_synsem, 
                          VAL.COMPS < [ OPT - ],
-                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ].
+                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ]
+"""; e.g. apostó conmigo una cena a que entraba/*entrara en la sala sin invitación.
+""".
 
-; e.g. (los) avisó (de) que llegarán mañana
 v_np*-pp_e*-cp-p-ind_lex := v_trans_np_mrkd_cp & main-verb & basic-three-arg & 
   [ ALTS [ VCALT +, RCP -, RFX -, PASS + ],
     SYNSEM v_trans_np_mrkd_cp_prop_fin_ind_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_cp_prop_fin_ind_synsem, 
-                         VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT + ], [ OPT - ] > ] ] ]
+"""; e.g. (los) avisó (de) que llegarán mañana
+""".
 
 
-; c)- taking clauses in subjunctive
-; - they can appear with a VPinf when there is co-reference between the DO and the subject of the clause
 v_trans_np_mrkd_cp_prop_fin_sub_synsem := v_trans_np_mrkd_cp_prop_fin_synsem & 
   [ LOCAL.CAT.VAL.COMPS < synsem,
-                          [ LOCAL.CONT.HOOK.INDEX.E.MOOD sub ] > ].
+                          [ LOCAL.CONT.HOOK.INDEX.E.MOOD sub ] > ]
+"""; c)- taking clauses in subjunctive
+; - they can appear with a VPinf when there is co-reference between the DO and the subject of the clause
+""".
 
-; e.g. las prefiere a que ...
 v_np-pp_npsv-e-cp-p-sub_lex := v_trans_np_mrkd_cp & main-verb & basic-three-arg & 
   [ ALTS [ VCALT +, RCP -, RFX -, PASS - ],
     SYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem, 
                          VAL.COMPS < [ OPT - ],
-                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ].
+                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ]
+"""; e.g. las prefiere a que ...
+""".
 
-; e.g. (las) apremia a que vengan/*vienen/venir
 v_np*-pp_npsv-e-cp-p-sub_lex := v_trans_np_mrkd_cp & main-verb & basic-three-arg & 
   [ ALTS [ VCALT +, RCP -, RFX -, PASS - ],
     SYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem, 
                          VAL.COMPS < [ OPT + ],
-                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ].
+                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ]
+"""; e.g. (las) apremia a que vengan/*vienen/venir
+""".
 
-; e.g. la sentenció a que venga/*viene/venir
 v_np-pp_e-cp-p-sub_lex := v_trans_np_mrkd_cp & main-verb & basic-three-arg & 
   [ ALTS [ VCALT +, RCP -, RFX -, PASS + ],
     SYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem, 
                          VAL.COMPS < [ OPT - ],
-                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ].
+                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ]
+"""; e.g. la sentenció a que venga/*viene/venir
+""".
 
-; e.g. (los) alentó a que participaran
 v_np*-pp_e-cp-p-sub_lex := v_trans_np_mrkd_cp & main-verb & basic-three-arg & 
   [ ALTS [ VCALT +, RCP -, RFX -, PASS + ],
     SYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem, 
                          VAL.COMPS < [ OPT + ],
-                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ].
+                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ]
+"""; e.g. (los) alentó a que participaran
+""".
 
-; e.g. *(las) encargó de que fueran
 v_np-pp_e-cp-p-sub-rfx_lex := v_trans_np_mrkd_cp & main-verb & basic-three-arg & 
   [ ALTS [ VCALT +, RCP -,  RFX +, PASS + ],
     SYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem, 
                          VAL.COMPS < [ OPT - ],
-                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ].
+                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ]
+"""; e.g. *(las) encargó de que fueran
+""".
 
-; e.g. (los) animó a que participaran
 v_np*-pp_e-cp-p-sub-rfx_lex := v_trans_np_mrkd_cp & main-verb & basic-three-arg & 
   [ ALTS [ VCALT +, RCP -, RFX +, PASS + ],
     SYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem, 
                          VAL.COMPS < [ OPT + ],
-                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ].
+                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ]
+"""; e.g. (los) animó a que participaran
+""".
 
-; e.g. retar a
 v_np-pp_e-cp-p-sub-rcp_lex := v_trans_np_mrkd_cp & main-verb & basic-three-arg & 
   [ ALTS [ VCALT +, RCP +, RFX -, PASS + ],
     SYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem, 
                          VAL.COMPS < [ OPT - ],
-                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ].
+                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ]
+"""; e.g. retar a
+""".
 
-; e.g. invitar
 v_np*-pp_e-cp-p-sub-rcp_lex := v_trans_np_mrkd_cp & main-verb & basic-three-arg & 
   [ ALTS [ VCALT +, RCP +, RFX -, PASS + ],
     SYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem, 
                          VAL.COMPS < [ OPT + ],
-                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ].
+                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ]
+"""; e.g. invitar
+""".
 
-; e.g. responsabilizar
 v_np-pp_e-cp-p-sub-rfx-rcp_lex := v_trans_np_mrkd_cp & main-verb & basic-three-arg & 
   [ ALTS [ VCALT +, RCP +, RFX +, PASS + ],
     SYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem, 
                          VAL.COMPS < [ OPT - ], 
-                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ].
+                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ]
+"""; e.g. responsabilizar
+""".
 
-; e.g. culpar
 v_np*-pp_e-cp-p-sub-rfx-rcp_lex := v_trans_np_mrkd_cp & main-verb & basic-three-arg & 
   [ ALTS [ VCALT +, RCP +, RFX +, PASS + ],
     SYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem, 
-                         VAL.COMPS < [ OPT + ], [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ].
+                         VAL.COMPS < [ OPT + ], [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ]
+"""; e.g. culpar
+""".
 
-; e.g. persuadir
 v_np*-pp_e*-cp-p-sub_lex := v_trans_np_mrkd_cp & main-verb & basic-three-arg & 
   [ ALTS [ VCALT +, RCP -, RFX -, PASS + ],
     SYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem, 
-                         VAL.COMPS < [ OPT + ], [ OPT + ] > ] ] ].
+                         VAL.COMPS < [ OPT + ], [ OPT + ] > ] ] ]
+"""; e.g. persuadir
+""".
 
-; e.g. (nos) convenció (de) que vendiesemos la casa
 v_np*-pp_e*-cp-p-sub-rfx_lex := v_trans_np_mrkd_cp & main-verb & basic-three-arg & 
   [ ALTS [ VCALT +, RCP -, RFX +, PASS + ],
     SYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_cp_prop_fin_sub_synsem, 
-                         VAL.COMPS < [ OPT + ], [ OPT + ] > ] ] ].
+                         VAL.COMPS < [ OPT + ], [ OPT + ] > ] ] ]
+"""; e.g. (nos) convenció (de) que vendiesemos la casa
+""".
 
-; -- verbs of movement may also take VPinf subject control (e.g. la amenazó con ir a la policía) and 
-; object control in the sub. clause (e.g. envía las camisas a planchar a madrid, llévala a arreglar)
-; these entries are generated by LR
 v_trans_np_mrkd_cp_prop_fin_sub_mov_synsem := v_trans_np_mrkd_cp_synsem & 
   [ LOCAL [ CAT.VAL.COMPS < synsem,
                             [ LOCAL [ CAT.MC -,
@@ -2560,91 +2838,107 @@ v_trans_np_mrkd_cp_prop_fin_sub_mov_synsem := v_trans_np_mrkd_cp_synsem &
                                                           E [ TENSE tense, MOOD sub ] ] ] ] ] >, 
             CONT.HCONS <! qeq & [ HARG #harg,
                                   LARG #larg ] !> ],
-    LKEYS.KEYREL.ARG3 #harg ].
+    LKEYS.KEYREL.ARG3 #harg ]
+"""; -- verbs of movement may also take VPinf subject control (e.g. la amenazó con ir a la policía) and 
+; object control in the sub. clause (e.g. envía las camisas a planchar a madrid, llévala a arreglar)
+; these entries are generated by LR
+""".
 
-; e.g. (la) arrastra a pelear
 v_np*-pp_e-cp-p-sub-mv_lex := v_trans_np_mrkd_cp & main-verb & basic-three-arg & 
   [ ALTS [ VCALT +,  RCP -, RFX -, PASS + ],
     SYNSEM v_trans_np_mrkd_cp_prop_fin_sub_mov_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_cp_prop_fin_sub_mov_synsem, 
                          VAL.COMPS < [ OPT + ],
-                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ].
+                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ]
+"""; e.g. (la) arrastra a pelear
+""".
  
-; e.g. se/nos encaminó a luchar
 v_np*-pp_e-cp-p-sub-mv-rfx_lex := v_trans_np_mrkd_cp & main-verb & basic-three-arg & 
   [ ALTS [ VCALT +,  RCP -, RFX +, PASS + ],
     SYNSEM v_trans_np_mrkd_cp_prop_fin_sub_mov_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_cp_prop_fin_sub_mov_synsem, 
                          VAL.COMPS < [ OPT + ],
-                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ].
-
+                                     [ OPT -, LOCAL.CAT.HEAD.KEYS.KEY selected_rel ] > ] ] ]
+"""; e.g. se/nos encaminó a luchar
+""".
 
 
 ; ---- 1.3.3.3.2. transitive verbs taking DO and marked Vinf complement
+
 v_trans_np_mrkd_vp_inf_synsem := v_trans_np_mrkd_cp_synsem & 
   [ LOCAL.CAT.VAL.COMPS < synsem,
                           [ LOCAL mrkd_cp_prop_inf_local &
                                   [ CAT [ MC -,
                                           VAL.CLTS < > ],
-                                    CONT.HOOK.INDEX.SF prop ] ] > ].
+                                    CONT.HOOK.INDEX.SF prop ] ] > ]
+"""; ---- 1.3.3.3.2. transitive verbs taking DO and marked Vinf complement
+""".
 
 v_trans_np_mrkd_vp_inf := v_trans_np_mrkd_cp & main-verb & basic-three-arg & 
   [ ALTS.VCALT - ].
 
-; a)- subject control
 v_trans_np_mrkd_vp_inf_sc_synsem := v_trans_np_mrkd_vp_inf_synsem & 
   [ LOCAL.CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #ctrl ] >,
                     COMPS < synsem,
-                            [ LOCAL.CONT.HOOK.XARG #ctrl ] > ] ].
+                            [ LOCAL.CONT.HOOK.XARG #ctrl ] > ] ]
+"""; a)- subject control
+""".
 
-; e.g. preferir
 v_np-pp_e-vp-inf-sc_lex := v_trans_np_mrkd_vp_inf & 
   [ ALTS [ RCP -, RFX -, PASS - ],
     SYNSEM v_trans_np_mrkd_vp_inf_sc_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_vp_inf_sc_synsem,
-                         VAL.COMPS < [ OPT - ], synsem > ] ] ].
+                         VAL.COMPS < [ OPT - ], synsem > ] ] ]
+"""; e.g. preferir
+""".
 
-; e.g. (la) amenazó con ir a la policía
 v_np*-pp_e-vp-inf-sc_lex := v_trans_np_mrkd_vp_inf & 
   [ ALTS [ RCP -, RFX -, PASS + ],
     SYNSEM v_trans_np_mrkd_vp_inf_sc_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_vp_inf_sc_synsem,
-                         VAL.COMPS < [ OPT + ], synsem > ] ] ].
+                         VAL.COMPS < [ OPT + ], synsem > ] ] ]
+"""; e.g. (la) amenazó con ir a la policía
+""".
 
 
-; b)- object control (with VPtrans whose DO is different from that of the main clause, the agent 
-; of the VPinf is co-referent with the object of the main clause)
 v_trans_np_mrkd_vp_inf_oc_synsem := v_trans_np_mrkd_vp_inf_synsem & 
   [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CONT.HOOK.INDEX #ctrl ],
-                          [ LOCAL.CONT.HOOK.XARG #ctrl ] > ].
+                          [ LOCAL.CONT.HOOK.XARG #ctrl ] > ]
+"""; b)- object control (with VPtrans whose DO is different from that of the main clause, the agent 
+; of the VPinf is co-referent with the object of the main clause)
+""".
 
-; e.g. la culparon de causar el accidente 
 v_np-pp_e-vp-inf-oc_lex := v_trans_np_mrkd_vp_inf & 
   [ ALTS [ RCP -,  RFX -, PASS + ],
     SYNSEM v_trans_np_mrkd_vp_inf_oc_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_vp_inf_oc_synsem,
-                         VAL.COMPS < [ OPT - ], synsem > ] ] ].
+                         VAL.COMPS < [ OPT - ], synsem > ] ] ]
+"""; e.g. la culparon de causar el accidente 
+""".
 
-; e.g. nos retaron a jugar un partido
 v_np*-pp_e-vp-inf-oc_lex := v_trans_np_mrkd_vp_inf & 
   [ ALTS [ RCP -,  RFX -, PASS + ],
     SYNSEM v_trans_np_mrkd_vp_inf_oc_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_vp_inf_oc_synsem,
-                         VAL.COMPS < [ OPT + ], synsem > ] ] ].
+                         VAL.COMPS < [ OPT + ], synsem > ] ] ]
+"""; e.g. nos retaron a jugar un partido
+""".
 
-; e.g. todos se han comprometido a hacerlo
 v_np*-pp_e-vp-inf-oc-rfx_lex := v_trans_np_mrkd_vp_inf & 
   [ ALTS [ RCP -,  RFX +, PASS + ],
     SYNSEM v_trans_np_mrkd_vp_inf_oc_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_vp_inf_oc_synsem,
-                         VAL.COMPS < [ OPT + ], synsem > ] ] ].
+                         VAL.COMPS < [ OPT + ], synsem > ] ] ]
+"""; e.g. todos se han comprometido a hacerlo
+""".
 
-; e.g. relevar
 v_np-pp_e-vp-inf-oc-rcp_lex := v_trans_np_mrkd_vp_inf & 
   [ ALTS [ RCP +,  RFX -, PASS + ],
     SYNSEM v_trans_np_mrkd_vp_inf_oc_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_mrkd_vp_inf_oc_synsem,
-                         VAL.COMPS < [ OPT - ], synsem > ] ] ].
+                         VAL.COMPS < [ OPT - ], synsem > ] ] ]
+"""; e.g. relevar
+""".
 
 ; e.g. ayudar
 v_np*-pp_e-vp-inf-oc-rcp_lex := v_trans_np_mrkd_vp_inf & 
