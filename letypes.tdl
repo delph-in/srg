@@ -3731,71 +3731,87 @@ v_ppa-vp_inf-oc_lex := v_ditrans_cp_prop_inf & main-verb & basic-three-arg &
                                      [ LOCAL.CONT.HOOK.XARG #ind1 ] > ] ] ].
 |#
 
-; --- 1.3.3.7.3. ditransitive verbs taking interrogative clauses and IO 
-; (see transitive verbs taking interrogative clauses)
-v_ditrans_cp_ques_synsem := v_ditrans_cp_prop-or-ques_fin_synsem & 
+
+v_ditrans_cp_ques_synsem := v_ditrans_cp_prop-or-ques_fin_synsem &
   [ LOCAL.CAT.VAL.COMPS < synsem,
-                          [ LOCAL s_or_cp_fin_local & 
-                                  [ CAT.HEAD [ TAM.MOOD ind,
-                                               KEYS.ALT2KEY ques ] ] ] > ].
+                          [ LOCAL s_or_cp_fin_local & [ CAT.HEAD [ TAM.MOOD ind,
+                                                                   KEYS.ALT2KEY ques ] ] ] > ]
+  """
+  --- 1.3.3.7.3. ditransitive verbs taking interrogative clauses and IO
+  (see transitive verbs taking interrogative clauses)
+  """.
+
 
 v_ditrans_ques := v_ditrans_cp_prop-or-ques_fin &
-  [ ALTS.VCALT + ].
-
-; e.g. (me) preguntó (que) cómo lo habían hecho
-v_ppa*-cp_q-optcm_lex := v_ditrans_ques & main-verb & basic-three-arg & 
-  [ SYNSEM v_ditrans_cp_ques_synsem &
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_ditrans_cp_ques_synsem, 
-                         VAL.COMPS < [ OPT + ] , synsem > ] ] ].
-
-;v_ppa*-cp_q-optcm_lex := v_ditrans_ques & main-verb & basic-three-arg & 
-;  [ SYNSEM v_ditrans_cp_ques_synsem &
-;           [ LOCAL.CAT.VAL.COMPS < [ OPT + ],  
-;                                   [ LOCAL.CONT.HOOK.INDEX.SF ques ] > ] ].
-
-; e.g. (me) chillar que dónde lo podía
-v_ppa*-cp_q-cm_lex := v_ditrans_ques & main-verb & basic-three-arg & 
-  [ SYNSEM v_ditrans_cp_ques_synsem &
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_ditrans_cp_ques_synsem, 
-                         VAL.COMPS < [ OPT + ],  
-                                     [ LOCAL.CAT.HEAD comp & [ KEYS.ALTKEY prop ] ] > ] ] ].
-
-; e.g. (me) declaró *que cómo lo había hecho
-v_ppa*-cp_q_lex := v_ditrans_ques & main-verb & basic-three-arg & 
-  [ SYNSEM v_ditrans_cp_ques_synsem &
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_ditrans_cp_ques_synsem, 
-                         VAL.COMPS < [ OPT + ], 
-                                     [ LOCAL.CAT.HEAD.KEYS.ALTKEY ques ] > ] ] ].
+  [ ALTS.VCALT + ]
+  """
+  
+  """.
 
 
-; --- 1.3.3.8. Transitive verb object to subject raising verbs (verbos de percepción)
-v_perception_synsem := v_trans_synsem & 
+v_ppa*-cp_q-optcm_lex := v_ditrans_ques & main-verb & basic-three-arg &
+  [ SYNSEM v_ditrans_cp_ques_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_ditrans_cp_ques_synsem,
+                                                    VAL.COMPS < [ OPT + ],
+                                                                synsem > ] ] ]
+  """
+  e.g. (me) preguntó (que) cómo lo habían hecho
+  """.
+
+
+v_ppa*-cp_q-cm_lex := v_ditrans_ques & main-verb & basic-three-arg &
+  [ SYNSEM v_ditrans_cp_ques_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_ditrans_cp_ques_synsem,
+                                                    VAL.COMPS < [ OPT + ],
+                                                                [ LOCAL.CAT.HEAD comp & [ KEYS.ALTKEY prop ] ] > ] ] ]
+  """
+  v_ppa*-cp_q-optcm_lex := v_ditrans_ques & main-verb & basic-three-arg &
+    [ SYNSEM v_ditrans_cp_ques_synsem &
+             [ LOCAL.CAT.VAL.COMPS < [ OPT + ],
+                                     [ LOCAL.CONT.HOOK.INDEX.SF ques ] > ] ].
+   e.g. (me) chillar que dónde lo podía
+  """.
+
+
+v_ppa*-cp_q_lex := v_ditrans_ques & main-verb & basic-three-arg &
+  [ SYNSEM v_ditrans_cp_ques_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_ditrans_cp_ques_synsem,
+                                                    VAL.COMPS < [ OPT + ],
+                                                                [ LOCAL.CAT.HEAD.KEYS.ALTKEY ques ] > ] ] ]
+  """
+  e.g. (me) declaró *que cómo lo había hecho
+  """.
+
+
+v_perception_synsem := v_trans_synsem &
   [ LOCAL [ CAT [ HEAD.INV -,
-                  VAL [ COMPS < [ OPT -, 
-                                  LOCAL np_acc_local & 
-                                        [ CAT.HEAD.KEYS.KEY non_modable_rel,
-                                          CONT.HOOK.INDEX #ind2 ],
-                                  NON-LOCAL.REL 0-dlist & [ LIST < > ] ],
-                                [ OPT -, 
-                                  LOCAL vp_local &
-                                        [ CAT [ MC -, 
-                                                HEAD.KEYS.KEY #ockey ],
-                                          CONT.HOOK [ XARG #ind2,
-                                                      LTOP #larg,
-                                                      INDEX.SF prop ] ] ] > ] ],
+                  VAL.COMPS < [ OPT -,
+                                LOCAL np_acc_local & [ CAT.HEAD.KEYS.KEY non_modable_rel,
+                                                       CONT.HOOK.INDEX #ind2 ],
+                                NON-LOCAL.REL 0-dlist & [ LIST < > ] ],
+                              [ OPT -,
+                                LOCAL vp_local & [ CAT [ MC -,
+                                                         HEAD.KEYS.KEY #ockey ],
+                                                   CONT.HOOK [ XARG #ind2,
+                                                               LTOP #larg,
+                                                               INDEX.SF prop ] ] ] > ],
             CONT [ RELS <! arg12-ev-relation !>,
                    HCONS <! qeq & [ HARG #harg,
                                     LARG #larg ] !> ] ],
     LKEYS [ KEYREL.ARG2 #harg,
-            --OCOMPKEY #ockey ] ].
+            --OCOMPKEY #ockey ] ]
+  """
+  --- 1.3.3.8. Transitive verb object to subject raising verbs (verbos de percepción)
+  """.
 
-v_perception := basic-main-verb & 
+
+v_perception := basic-main-verb &
   [ ALTS [ RCP -,
-           RFX -,  
+           RFX -,
            PASS +,
-           IMPERS + ] ].
+           IMPERS + ] ]
+  """
+  
+  """.
 
-; e.g. ver (to see), oir (to hear) (e.g. casi te oí decir)
+
 v_np-vp_inf-osr_lex := v_perception & basic-four-arg & 
   [ SYNSEM v_perception_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_perception_synsem, 
@@ -3805,498 +3821,676 @@ v_np-vp_inf-osr_lex := v_perception & basic-four-arg &
                                                       LOCAL vp_inf_local & 
                                                             [ CAT.VAL.CLTS #clts ] ] > >,
                                CLTS < #clt . #clts > ] ] ],
-    ARG-ST < #subj . < #comp1. < #comp2 . < #clt . #clts > > > > ].
-
-; e.g. sorprender  (to take by surprise) (e.g. la sorprendí robando)
-v_np-vp_ger-osr_lex := v_perception & basic-three-arg & 
-  [ SYNSEM v_perception_synsem &
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_perception_synsem, 
-                         VAL.COMPS < [ OPT - ], 
-                                     [ OPT -, LOCAL vp_ger_local ] > ] ] ].
+    ARG-ST < #subj . < #comp1. < #comp2 . < #clt . #clts > > > > ]
+"""; e.g. ver (to see), oir (to hear) (e.g. casi te oí decir)
+""".
 
 
+v_np-vp_ger-osr_lex := v_perception & basic-three-arg &
+  [ SYNSEM v_perception_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_perception_synsem,
+                                               VAL.COMPS < [ OPT - ],
+                                                           [ OPT -,
+                                                             LOCAL vp_ger_local ] > ] ] ]
+  """
+  e.g. sorprender  (to take by surprise) (e.g. la sorprendí robando)
+  """.
 
-; --- 1.3.3.4. Symmetric verbs
 
-v_sym_synsem := arg1_lt & 
+v_sym_synsem := arg1_lt &
   [ LOCAL.CAT [ HEAD.INV -,
-                VAL.COMPS < [ LOCAL mrkd_np_local &
-                                    [ CAT.HEAD.KEYS [ KEY #ckey,
-                                                      ALTKEY non_modable_rel ] ] ],... > ],
-    LKEYS.--COMPKEY #ckey ].
+                VAL.COMPS < [ LOCAL mrkd_np_local & [ CAT.HEAD.KEYS [ KEY #ckey,
+                                                                      ALTKEY non_modable_rel ] ] ], ... > ],
+    LKEYS.--COMPKEY #ckey ]
+  """
+  --- 1.3.3.4. Symmetric verbs
+  """.
 
-v_sym := basic-main-verb & 
+
+v_sym := basic-main-verb &
   [ ALTS [ RCP -,
-           RFX - ] ].
+           RFX - ] ]
+  """
+  
+  """.
 
 
-; --- 1.3.3.4.1. Intransitive symmetric verbs taking marked NP / plural (or coord.) subject 
-v_sym_intr_mrkd_np_synsem := v_sym_synsem & 
+v_sym_intr_mrkd_np_synsem := v_sym_synsem &
   [ LOCAL [ CAT.VAL.COMPS < [ LOCAL.CONT.HOOK.INDEX #ind2 & ref-ind ] >,
             CONT [ RELS <! arg12-ev-relation !>,
                    HCONS <! !> ] ],
-    LKEYS.KEYREL.ARG2 #ind2 ].
+    LKEYS.KEYREL.ARG2 #ind2 ]
+  """
+  --- 1.3.3.4.1. Intransitive symmetric verbs taking marked NP / plural (or coord.) subject
+  """.
+
 
 v_sym_intr_mrkd_np := v_sym &
   [ ALTS [ PASS -,
-           VCALT - ] ].
+           VCALT - ] ]
+  """
+  
+  """.
 
-; e.g. conversar (to chat) (A conversa con B/A y B conversan); luchar (to fight) (A luchó con/contra B) 
-v_pp_e-sym_lex := v_sym_intr_mrkd_np & main-verb & basic-two-arg & 
+
+v_pp_e-sym_lex := v_sym_intr_mrkd_np & main-verb & basic-two-arg &
   [ ALTS.IMPERS +,
-    SYNSEM v_sym_intr_mrkd_np_synsem & 
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_sym_intr_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ].
+    SYNSEM v_sym_intr_mrkd_np_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_sym_intr_mrkd_np_synsem,
+                                                     VAL.COMPS < [ OPT - ] > ] ] ]
+  """
+  e.g. conversar (to chat) (A conversa con B/A y B conversan); luchar (to fight) (A luchó con/contra B)
+  """.
 
-; e.g. colaborar (to collaborate)
-v_pp*_e-sym_lex := v_sym_intr_mrkd_np & main-verb & basic-two-arg & 
+
+v_pp*_e-sym_lex := v_sym_intr_mrkd_np & main-verb & basic-two-arg &
   [ ALTS.IMPERS +,
-    SYNSEM v_sym_intr_mrkd_np_synsem & 
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_sym_intr_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT + ] > ] ] ].
+    SYNSEM v_sym_intr_mrkd_np_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_sym_intr_mrkd_np_synsem,
+                                                     VAL.COMPS < [ OPT + ] > ] ] ]
+  """
+  e.g. colaborar (to collaborate)
+  """.
 
-; e.g. A se pelea con B -> A y B se pelean; tu propuesta se adapta muy bien a la mía, 
+
 v_pp_e-sym-prn_lex := v_sym_intr_mrkd_np & main-vprn & basic-three-arg &
   [ ALTS.IMPERS -,
-    SYNSEM v_sym_intr_mrkd_np_synsem & 
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_sym_intr_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ].
+    SYNSEM v_sym_intr_mrkd_np_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_sym_intr_mrkd_np_synsem,
+                                                     VAL.COMPS < [ OPT - ] > ] ] ]
+  """
+  e.g. A se pelea con B -> A y B se pelean; tu propuesta se adapta muy bien a la mía,
+  """.
 
 
-; --- 1.3.3.4.2. Intransitive symmetric verbs taking marked NP and marked completive clause (inf/fin) 
-; (s_ctrl) / pl. subject and marked completive clause 
-v_sym_intr_mrkd_np_mrkd_cp_prop_synsem := v_sym_synsem & 
+v_sym_intr_mrkd_np_mrkd_cp_prop_synsem := v_sym_synsem &
   [ LOCAL [ CAT.VAL.COMPS < [ LOCAL.CONT.HOOK.INDEX #ind3 & ref-ind ],
-                            [ LOCAL mrkd_or_unmrkd_cp_prop_or_ques_local &
-                                    [ CAT.HEAD.KEYS.KEY #ockey,
-                                      CONT.HOOK [ INDEX.SF prop,
-                                                  LTOP #larg ] ] ] >,
+                            [ LOCAL mrkd_or_unmrkd_cp_prop_or_ques_local & [ CAT.HEAD.KEYS.KEY #ockey,
+                                                                             CONT.HOOK [ INDEX.SF prop,
+                                                                                         LTOP #larg ] ] ] >,
             CONT [ HCONS <! qeq & [ HARG #harg,
                                     LARG #larg ] !>,
                    RELS <! arg123-ev-relation !> ] ],
-    LKEYS [ KEYREL [ ARG2 #harg, 
+    LKEYS [ KEYREL [ ARG2 #harg,
                      ARG3 #ind3 ],
-            --OCOMPKEY #ockey ] ].
+            --OCOMPKEY #ockey ] ]
+  """
+  --- 1.3.3.4.2. Intransitive symmetric verbs taking marked NP and marked completive clause (inf/fin)
+  (s_ctrl) / pl. subject and marked completive clause
+  """.
+
 
 v_sym_intr_mrkd_np_mrkd_cp_prop_inf_synsem := v_sym_intr_mrkd_np_mrkd_cp_prop_synsem &
-  [ LOCAL.CAT.VAL.COMPS < synsem,
-                          [ LOCAL mrkd_cp_prop_inf_local ] > ].
+  [ LOCAL.CAT.VAL.COMPS < synsem, [ LOCAL mrkd_cp_prop_inf_local ] > ]
+  """
+  
+  """.
+
 
 v_sym_intr_mrkd_np_mrkd_cp_prop_fin_synsem := v_sym_intr_mrkd_np_mrkd_cp_prop_synsem &
-  [ LOCAL.CAT.VAL.COMPS < synsem,
-                          [ LOCAL mrkd_cp_prop_fin_local ] > ]. 
+  [ LOCAL.CAT.VAL.COMPS < synsem, [ LOCAL mrkd_cp_prop_fin_local ] > ]
+  """
+  
+  """.
 
-v_sym_intr_mrkd_np_mrkd_cp_prop_fin := basic-main-verb & 
+
+v_sym_intr_mrkd_np_mrkd_cp_prop_fin := basic-main-verb &
   [ ALTS [ PASS -,
            IMPERS -,
-           VCALT + ] ].
-
-; e.g. quedé con ella en ir al cine / quedamos en ir al cine
-v_pp-pp_e-e-cp-p-sym_lex := v_sym_intr_mrkd_np_mrkd_cp_prop_fin & main-verb & basic-three-arg & 
-  [ SYNSEM v_sym_intr_mrkd_np_mrkd_cp_prop_fin_synsem &
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_sym_intr_mrkd_np_mrkd_cp_prop_fin_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ].
+           VCALT + ] ]
+  """
+  
+  """.
 
 
-; --- 1.3.3.4.3. Transitive symmetric verbs taking marked NP and completive clause (inf/fin) (s_ctrl) / 
-;     pl. subject and completive clause 
-v_sym_trans_cp_prop_mrkd_np_synsem := v_sym_synsem & 
+v_pp-pp_e-e-cp-p-sym_lex := v_sym_intr_mrkd_np_mrkd_cp_prop_fin & main-verb & basic-three-arg &
+  [ SYNSEM v_sym_intr_mrkd_np_mrkd_cp_prop_fin_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_sym_intr_mrkd_np_mrkd_cp_prop_fin_synsem,
+                                                                      VAL.COMPS < [ OPT - ],
+                                                                                  [ OPT - ] > ] ] ]
+  """
+  e.g. quedé con ella en ir al cine / quedamos en ir al cine
+  """.
+
+
+v_sym_trans_cp_prop_mrkd_np_synsem := v_sym_synsem &
   [ LOCAL [ CAT.VAL.COMPS < [ LOCAL.CONT.HOOK.INDEX #ind3 & ref-ind ],
-                            [ LOCAL v_local &  
-                                    [ CAT.MC -,
-                                      CONT.HOOK [ INDEX.SF prop,
-                                                  LTOP #larg ] ] ] >,
+                            [ LOCAL v_local & [ CAT.MC -,
+                                                CONT.HOOK [ INDEX.SF prop,
+                                                            LTOP #larg ] ] ] >,
             CONT [ RELS <! arg123-ev-relation !>,
                    HCONS <! [ HARG #harg,
                               LARG #larg ] !> ] ],
-    LKEYS.KEYREL [ ARG2 #harg, 
-                   ARG3 #ind3 ] ].
+    LKEYS.KEYREL [ ARG2 #harg,
+                   ARG3 #ind3 ] ]
+  """
+  --- 1.3.3.4.3. Transitive symmetric verbs taking marked NP and completive clause (inf/fin) (s_ctrl) /
+      pl. subject and completive clause
+  """.
+
 
 v_sym_trans_cp_prop_inf_mrkd_np_synsem := v_sym_trans_cp_prop_mrkd_np_synsem &
   [ LOCAL.CAT.VAL.COMPS < synsem,
-                          [ LOCAL vp_inf_local & 
-                                  [ CAT.VAL.SUBJ < [ NON-LOCAL [ SLASH 0-dlist,
-                                                                 REL 0-dlist,
-                                                                 QUE 0-dlist ] ] > ] ] > ].
+                          [ LOCAL vp_inf_local & [ CAT.VAL.SUBJ < [ NON-LOCAL [ SLASH 0-dlist,
+                                                                                REL 0-dlist,
+                                                                                QUE 0-dlist ] ] > ] ] > ]
+  """
+  
+  """.
+
 
 v_sym_trans_cp_prop_fin_mrkd_np_synsem := v_sym_trans_cp_prop_mrkd_np_synsem &
-  [ LOCAL.CAT.VAL.COMPS < synsem,
-                          [ LOCAL s_or_cp_fin_local ] > ].
+  [ LOCAL.CAT.VAL.COMPS < synsem, [ LOCAL s_or_cp_fin_local ] > ]
+  """
+  
+  """.
+
 
 v_sym_trans_cp_prop_fin_mrkd_np := v_sym &
   [ ALTS [ PASS -,
            IMPERS -,
-           VCALT + ] ].
+           VCALT + ] ]
+  """
+  
+  """.
 
 
-; e.g. acordar (to agree) (A acordó con B no hablar/que no hablarían -> A y B acordaron no hablar/que no hablarían)
-v_pp-cp_e-p-sym_lex := v_sym_trans_cp_prop_fin_mrkd_np & main-verb & basic-three-arg & 
-  [ SYNSEM v_sym_trans_cp_prop_fin_mrkd_np_synsem & 
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_sym_trans_cp_prop_fin_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ].
+v_pp-cp_e-p-sym_lex := v_sym_trans_cp_prop_fin_mrkd_np & main-verb & basic-three-arg &
+  [ SYNSEM v_sym_trans_cp_prop_fin_mrkd_np_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_sym_trans_cp_prop_fin_mrkd_np_synsem,
+                                                                  VAL.COMPS < [ OPT - ],
+                                                                              [ OPT - ] > ] ] ]
+  """
+  e.g. acordar (to agree) (A acordó con B no hablar/que no hablarían -> A y B acordaron no hablar/que no hablarían)
+  """.
 
 
-; --- 1.3.3.4.4. Transitive symmetric verbs taking DO and marked NP / plural (or coord.) DO
-v_sym_trans_np_mrkd_np_synsem := v_trans_np_synsem & 
+v_sym_trans_np_mrkd_np_synsem := v_trans_np_synsem &
   [ LOCAL [ CAT [ HEAD.INV -,
                   VAL.COMPS < [ LOCAL.CAT.HEAD.KEYS.KEY non_modable_rel ],
-                              [ LOCAL mrkd_np_local &
-                                      [ CAT.HEAD.KEYS [ KEY #ockey,
-                                                        ALTKEY non_modable_rel ],
-                                        CONT.HOOK.INDEX ref-ind & #ind3 ] ] > ],
+                              [ LOCAL mrkd_np_local & [ CAT.HEAD.KEYS [ KEY #ockey,
+                                                                        ALTKEY non_modable_rel ],
+                                                        CONT.HOOK.INDEX ref-ind & #ind3 ] ] > ],
             CONT [ RELS <! arg123-ev-relation !>,
                    HCONS <! !> ] ],
     LKEYS [ KEYREL.ARG3 #ind3,
-            --OCOMPKEY #ockey ] ].
+            --OCOMPKEY #ockey ] ]
+  """
+  --- 1.3.3.4.4. Transitive symmetric verbs taking DO and marked NP / plural (or coord.) DO
+  """.
 
-v_sym_trans_np_mrkd_np_pl_do_synsem := v_sym_trans_np_mrkd_np_synsem.
-v_sym_trans_np_mrkd_np_pl_subj_synsem := v_sym_trans_np_mrkd_np_synsem.
+
+v_sym_trans_np_mrkd_np_pl_do_synsem := v_sym_trans_np_mrkd_np_synsem
+  """
+  
+  """.
+
+
+v_sym_trans_np_mrkd_np_pl_subj_synsem := v_sym_trans_np_mrkd_np_synsem
+  """
+  
+  """.
+
 
 v_sym_trans_np_mrkd_np := v_sym &
   [ ALTS [ PASS +,
            IMPERS +,
-           VCALT - ] ].
-
-; e.g. Ambos grupos comparten un fondo genético común.
-v_np-pp*_e-sym-sbj-pl_lex := v_sym_trans_np_mrkd_np & main-verb & basic-three-arg & 
-  [ SYNSEM v_sym_trans_np_mrkd_np_pl_subj_synsem &
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_sym_trans_np_mrkd_np_pl_subj_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ].
-
-; e.g. polarización que confrontará (la docencia a/con la investigación/la docencia y la investigación)
-v_np-pp_e-sym_lex := v_sym_trans_np_mrkd_np & main-verb & basic-three-arg & 
-  [ SYNSEM v_sym_trans_np_mrkd_np_pl_do_synsem &
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_sym_trans_np_mrkd_np_pl_do_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ].
-
-; e.g. compatibilizar
-v_np-pp*_e-sym_lex := v_sym_trans_np_mrkd_np & main-verb & basic-three-arg & 
-  [ SYNSEM v_sym_trans_np_mrkd_np_pl_do_synsem &
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_sym_trans_np_mrkd_np_pl_do_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ].
+           VCALT - ] ]
+  """
+  
+  """.
 
 
+v_np-pp*_e-sym-sbj-pl_lex := v_sym_trans_np_mrkd_np & main-verb & basic-three-arg &
+  [ SYNSEM v_sym_trans_np_mrkd_np_pl_subj_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_sym_trans_np_mrkd_np_pl_subj_synsem,
+                                                                 VAL.COMPS < [ OPT - ],
+                                                                             [ OPT + ] > ] ] ]
+  """
+  e.g. Ambos grupos comparten un fondo genético común.
+  """.
 
-; --- 1.3.3.5. Verbs taking predicative complements
 
-v_prd-comp_synsem := arg1_lt & 
+v_np-pp_e-sym_lex := v_sym_trans_np_mrkd_np & main-verb & basic-three-arg &
+  [ SYNSEM v_sym_trans_np_mrkd_np_pl_do_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_sym_trans_np_mrkd_np_pl_do_synsem,
+                                                               VAL.COMPS < [ OPT - ],
+                                                                           [ OPT - ] > ] ] ]
+  """
+  e.g. polarización que confrontará (la docencia a/con la investigación/la docencia y la investigación)
+  """.
+
+
+v_np-pp*_e-sym_lex := v_sym_trans_np_mrkd_np & main-verb & basic-three-arg &
+  [ SYNSEM v_sym_trans_np_mrkd_np_pl_do_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_sym_trans_np_mrkd_np_pl_do_synsem,
+                                                               VAL.COMPS < [ OPT - ],
+                                                                           [ OPT + ] > ] ] ]
+  """
+  e.g. compatibilizar
+  """.
+
+
+v_prd-comp_synsem := arg1_lt &
   [ LOCAL [ CAT.VAL.COMPS < [ LOCAL.CAT.HEAD.KEYS.KEY #ckey ], ... >,
             CONT [ RELS <! arg12-ev-relation !>,
-		   HCONS <! qeq !> ] ],
-    LKEYS.--COMPKEY #ckey ].
+                   HCONS <! qeq !> ] ],
+    LKEYS.--COMPKEY #ckey ]
+  """
+  --- 1.3.3.5. Verbs taking predicative complements
+  """.
 
 
-; --- 1.3.3.5.1. verbs taking a predicative complement
-
-v_seq_synsem := v_prd-comp_synsem & 
+v_seq_synsem := v_prd-comp_synsem &
   [ LOCAL [ CAT [ HEAD.INV -,
-                  VAL.COMPS < [ LOCAL prd_local & 
-                                      [ CONT.HOOK [ LTOP #larg,
-                                                    XARG #xarg ] ],
+                  VAL.COMPS < [ LOCAL prd_local & [ CONT.HOOK [ LTOP #larg,
+                                                                XARG #xarg ] ],
                                 NON-LOCAL [ REL 0-dlist,
                                             QUE 0-dlist ] ] > ],
-            CONT [ HCONS <! [ HARG #harg,
-                              LARG #larg ] !> ] ], 
-    LKEYS.KEYREL arg12-ev-relation & 
-                 [ ARG1 #xarg,
-                   ARG2 #harg ] ].
+            CONT.HCONS <! [ HARG #harg,
+                            LARG #larg ] !> ],
+    LKEYS.KEYREL arg12-ev-relation & [ ARG1 #xarg,
+                                       ARG2 #harg ] ]
+  """
+  --- 1.3.3.5.1. verbs taking a predicative complement
+  """.
+
 
 v_ap_seq_synsem := v_seq_synsem &
   [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD adj,
-                            NON-LOCAL.SLASH 0-dlist ] > ].
+                            NON-LOCAL.SLASH 0-dlist ] > ]
+  """
+  
+  """.
+
 
 v_pp_seq_synsem := v_seq_synsem &
   [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD adp & [ KEYS.ALTKEY non_modable_rel ],
-                            NON-LOCAL.SLASH 0-dlist ] > ].
+                            NON-LOCAL.SLASH 0-dlist ] > ]
+  """
+  
+  """.
+
 
 v_pp_aj-seq_synsem := v_seq_synsem &
   [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD adp & [ KEYS.ALTKEY basic_adj_rel ],
-                            NON-LOCAL.SLASH 0-dlist ] > ].
+                            NON-LOCAL.SLASH 0-dlist ] > ]
+  """
+  
+  """.
+
 
 v_pp_vp-inf-seq_synsem := v_seq_synsem &
-  [ LOCAL.CAT.VAL.COMPS < [  LOCAL [ CAT.HEAD adp & 
-                                              [ KEYS.ALTKEY v_event_rel,
-                                                MOD < [ LOCAL.CAT.HEAD noun ] > ],
-                                     CONT.HOOK.INDEX.SF prop ] ] > ].
+  [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT.HEAD adp & [ KEYS.ALTKEY v_event_rel,
+                                                     MOD < [ LOCAL.CAT.HEAD noun ] > ],
+                                    CONT.HOOK.INDEX.SF prop ] ] > ]
+  """
+  
+  """.
 
-v_xp_seq := basic-main-verb & 
-  [ ALTS [ RCP -, 
+
+v_xp_seq := basic-main-verb &
+  [ ALTS [ RCP -,
            RFX -,
            PASS -,
            IMPERS -,
-           VCALT - ], 
-    SYNSEM v_seq_synsem ].
+           VCALT - ],
+    SYNSEM v_seq_synsem ]
+  """
+  
+  """.
 
 
-; e.g. acabar, caer, permanecer, quedar, seguir, terminar (el anciano acabó/cayó/terminó enfermo)
-v_ap_seq_lex := v_xp_seq & main-verb & basic-two-arg & 
-  [ SYNSEM v_ap_seq_synsem &
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_ap_seq_synsem,
-                         VAL.COMPS < [ OPT - ] > ] ] ].
+v_ap_seq_lex := v_xp_seq & main-verb & basic-two-arg &
+  [ SYNSEM v_ap_seq_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_ap_seq_synsem,
+                                           VAL.COMPS < [ OPT - ] > ] ] ]
+  """
+  e.g. acabar, caer, permanecer, quedar, seguir, terminar (el anciano acabó/cayó/terminó enfermo)
+  """.
 
-; e.g. ejercer, pasar, trabajar (trabaja de/como camarera)
+
 v_pp_seq_lex := v_xp_seq & main-verb & basic-two-arg &
-  [ SYNSEM v_pp_seq_synsem &
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_pp_seq_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ].
+  [ SYNSEM v_pp_seq_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_pp_seq_synsem,
+                                           VAL.COMPS < [ OPT - ] > ] ] ]
+  """
+  e.g. ejercer, pasar, trabajar (trabaja de/como camarera)
+  """.
 
-; e.g. alardear, chulear, fardar, presumir (alardea de listo, presumía muy orgulloso de seductor con las mujeres) 
+
 v_pp_aj-seq_lex := v_xp_seq & main-verb & basic-two-arg &
-  [ SYNSEM v_pp_aj-seq_synsem &
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_pp_aj-seq_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ].
+  [ SYNSEM v_pp_aj-seq_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_pp_aj-seq_synsem,
+                                              VAL.COMPS < [ OPT - ] > ] ] ]
+  """
+  e.g. alardear, chulear, fardar, presumir (alardea de listo, presumía muy orgulloso de seductor con las mujeres)
+  """.
 
-; e.g. queda mucho por hacer
-v_pp_vp-inf-seq_lex := v_xp_seq & main-verb & basic-two-arg & 
-  [ SYNSEM v_pp_vp-inf-seq_synsem &
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_pp_vp-inf-seq_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ].
 
-; e.g. creerse, encontrarse,... (se cree muy listo)
-v_ap_seq-prn_lex := v_xp_seq & main-vprn & basic-three-arg & 
-  [ SYNSEM v_ap_seq_synsem &
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_ap_seq_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ].
+v_pp_vp-inf-seq_lex := v_xp_seq & main-verb & basic-two-arg &
+  [ SYNSEM v_pp_vp-inf-seq_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_pp_vp-inf-seq_synsem,
+                                                  VAL.COMPS < [ OPT - ] > ] ] ]
+  """
+  e.g. queda mucho por hacer
+  """.
 
-; e.g. se mostró muy crítico
-v_ap*_seq-prn_lex := v_xp_seq & main-vprn & basic-three-arg & 
-  [ SYNSEM v_ap_seq_synsem &
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_ap_seq_synsem, 
-                         VAL.COMPS < [ OPT + ] > ] ] ].
 
-; e.g. perfilarse,... (se perfila como campeón)
-v_pp_seq-prn_lex := v_xp_seq & main-vprn & basic-three-arg & 
-  [ SYNSEM v_pp_seq_synsem &
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_pp_seq_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ].
- 
+v_ap_seq-prn_lex := v_xp_seq & main-vprn & basic-three-arg &
+  [ SYNSEM v_ap_seq_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_ap_seq_synsem,
+                                           VAL.COMPS < [ OPT - ] > ] ] ]
+  """
+  e.g. creerse, encontrarse,... (se cree muy listo)
+  """.
 
-; --- 1.3.3.5.2. verbs taking a predicative complement and IO
 
-v_seq-ppa_synsem := v_prd-comp_synsem & 
-   [ LOCAL.CAT [ HEAD.INV -,
-                 VAL.COMPS < [ ],
-                             [ LOCAL dative_local & 
-                                     [ CAT.HEAD.KEYS.KEY #ockey,
-                                       CONT.HOOK.INDEX #arg3 ],
-                               NON-LOCAL.REL 0-dlist & [ LIST < > ] ] > ], 
-     LKEYS [ KEYREL arg123-ev-relation & 
-                    [ ARG3 #arg3 ],
-             --OCOMPKEY #ockey ] ].
+v_ap*_seq-prn_lex := v_xp_seq & main-vprn & basic-three-arg &
+  [ SYNSEM v_ap_seq_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_ap_seq_synsem,
+                                           VAL.COMPS < [ OPT + ] > ] ] ]
+  """
+  e.g. se mostró muy crítico
+  """.
+
+
+v_pp_seq-prn_lex := v_xp_seq & main-vprn & basic-three-arg &
+  [ SYNSEM v_pp_seq_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_pp_seq_synsem,
+                                           VAL.COMPS < [ OPT - ] > ] ] ]
+  """
+  e.g. perfilarse,... (se perfila como campeón)
+  """.
+
+
+v_seq-ppa_synsem := v_prd-comp_synsem &
+  [ LOCAL.CAT [ HEAD.INV -,
+                VAL.COMPS < [ ],
+                            [ LOCAL dative_local & [ CAT.HEAD.KEYS.KEY #ockey,
+                                                     CONT.HOOK.INDEX #arg3 ],
+                              NON-LOCAL.REL 0-dlist & [ LIST < > ] ] > ],
+    LKEYS [ KEYREL arg123-ev-relation & [ ARG3 #arg3 ],
+            --OCOMPKEY #ockey ] ]
+  """
+  --- 1.3.3.5.2. verbs taking a predicative complement and IO
+  """.
+
 
 v_ap-ppa_synsem := v_seq-ppa_synsem &
-   [ LOCAL [ CAT.VAL.COMPS < [ LOCAL prd_local & 
-                                     [ CAT.HEAD adj, 
-                                       CONT.HOOK [ LTOP #larg,
-                                                   XARG #xarg ] ] ],
-                               [ ] >,
-             CONT.HCONS <! [ HARG #harg,
-                             LARG #larg ] !> ], 
-     LKEYS.KEYREL arg123-ev-relation & 
-                  [ ARG1 #xarg,
-                    ARG2 #harg ] ].
+  [ LOCAL [ CAT.VAL.COMPS < [ LOCAL prd_local & [ CAT.HEAD adj,
+                                                  CONT.HOOK [ LTOP #larg,
+                                                              XARG #xarg ] ] ],
+                            [ ] >,
+            CONT.HCONS <! [ HARG #harg,
+                            LARG #larg ] !> ],
+    LKEYS.KEYREL arg123-ev-relation & [ ARG1 #xarg,
+                                        ARG2 #harg ] ]
+  """
+  
+  """.
+
 
 v_np-ppa_synsem := v_seq-ppa_synsem &
-   [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_unmrkd_local & 
-                                   [ CAT.HEAD.KEYS.KEY non_modable_rel,
-                                     CONT.HOOK.INDEX #arg2 & ref-ind ] ],
-                           [ ] >, 
-     LKEYS.KEYREL arg123-ev-relation & 
-                  [ ARG2 #arg2 ] ].
+  [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_unmrkd_local & [ CAT.HEAD.KEYS.KEY non_modable_rel,
+                                                          CONT.HOOK.INDEX #arg2 & ref-ind ] ],
+                          [ ] >,
+    LKEYS.KEYREL arg123-ev-relation & [ ARG2 #arg2 ] ]
+  """
+  
+  """.
 
-v_xp-ppa_seq := basic-main-verb & 
-  [ ALTS [ RCP -, 
+
+v_xp-ppa_seq := basic-main-verb &
+  [ ALTS [ RCP -,
            RFX -,
            PASS -,
            IMPERS -,
-           VCALT - ] ].
-
-; e.g. resultar ((le) resultaba incómodo)
-v_ap-ppa*_seq_lex := v_xp-ppa_seq & main-verb & basic-three-arg & 
-  [ SYNSEM v_ap-ppa_synsem & 
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_ap-ppa_synsem,
-                         VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ].
-
-; e.g. me parece un bombazo
-v_np-ppa*_seq_lex := v_xp-ppa_seq & main-verb & basic-three-arg & 
-  [ SYNSEM v_np-ppa_synsem & 
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_np-ppa_synsem,
-                         VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ].
+           VCALT - ] ]
+  """
+  
+  """.
 
 
-; --- 1.3.3.5.3. verbs taking a predicative complement and DO
-; Including verbs taking ´cláusulas mínimas' (in fact they form just one constituent)
-; e.g. eligieron [a Tomás director del departamento]/eligieron [director a Tomás]/eligieron [de director 
-; a Tomás] Tomás fue elegido director del departamento/a Tomás lo eligieron director del departamento.
-; Faltan verbos como considerar, percibir (v_cp_prop_ap) y esgrimir  (v_cp_prop_pp*)!!!
+v_ap-ppa*_seq_lex := v_xp-ppa_seq & main-verb & basic-three-arg &
+  [ SYNSEM v_ap-ppa_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_ap-ppa_synsem,
+                                           VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ]
+  """
+  e.g. resultar ((le) resultaba incómodo)
+  """.
 
-v_np-predxp_synsem := arg1_lt & 
+
+v_np-ppa*_seq_lex := v_xp-ppa_seq & main-verb & basic-three-arg &
+  [ SYNSEM v_np-ppa_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_np-ppa_synsem,
+                                           VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ]
+  """
+  e.g. me parece un bombazo
+  """.
+
+
+v_np-predxp_synsem := arg1_lt &
   [ LOCAL [ CAT [ HEAD.INV -,
-                  VAL.COMPS < [ LOCAL np_acc_local & 
-                                      [ CAT.HEAD.KEYS.KEY #ckey & non_modable_rel ],
+                  VAL.COMPS < [ LOCAL np_acc_local & [ CAT.HEAD.KEYS.KEY #ckey & non_modable_rel ],
                                 NON-LOCAL.REL 0-dlist & [ LIST < > ] ],
                               [ LOCAL.CAT.HEAD.KEYS.KEY #ockey ] > ],
-            CONT.RELS <! arg12-ev-relation !> ], 
+            CONT.RELS <! arg12-ev-relation !> ],
     LKEYS [ --COMPKEY #ckey,
-            --OCOMPKEY #ockey ] ].
+            --OCOMPKEY #ockey ] ]
+  """
+  --- 1.3.3.5.3. verbs taking a predicative complement and DO
+  Including verbs taking ´cláusulas mínimas' (in fact they form just one constituent)
+  e.g. eligieron [a Tomás director del departamento]/eligieron [director a Tomás]/eligieron [de director
+  a Tomás] Tomás fue elegido director del departamento/a Tomás lo eligieron director del departamento.
+  Faltan verbos como considerar, percibir (v_cp_prop_ap) y esgrimir  (v_cp_prop_pp*)!!!
+  """.
+
 
 v_np-np_synsem := v_np-predxp_synsem &
   [ LOCAL [ CAT.VAL.COMPS < [ LOCAL.CONT.HOOK.INDEX #ind2 ],
-                            [ LOCAL np_acc_unmrkd_local & 
-                                   [ CAT.HEAD.KEYS.KEY non_modable_rel,
-                                     CONT.HOOK.INDEX #arg3 & ref-ind ] ] >,
-            CONT.HCONS <! qeq !> ], 
-     LKEYS.KEYREL arg123-ev-relation & 
-                  [ ARG2 #ind2,
-                    ARG3 #arg3 ] ].
+                            [ LOCAL np_acc_unmrkd_local & [ CAT.HEAD.KEYS.KEY non_modable_rel,
+                                                            CONT.HOOK.INDEX #arg3 & ref-ind ] ] >,
+            CONT.HCONS <! qeq !> ],
+    LKEYS.KEYREL arg123-ev-relation & [ ARG2 #ind2,
+                                        ARG3 #arg3 ] ]
+  """
+  
+  """.
+
 
 v_np-xp_synsem := v_np-predxp_synsem &
   [ LOCAL [ CAT.VAL.COMPS < [ ],
-                            [ LOCAL prd_local & 
-                                    [ CONT.HOOK.LTOP #larg ] ] >,
-            CONT.HCONS <! [ LARG #larg ] !> ] ].
+                            [ LOCAL prd_local & [ CONT.HOOK.LTOP #larg ] ] >,
+            CONT.HCONS <! [ LARG #larg ] !> ] ]
+  """
+  
+  """.
 
 
-v_np-xp_oeq_synsem := v_np-xp_synsem & 
-   [ LOCAL [ CAT.VAL.COMPS < [ LOCAL.CONT.HOOK.INDEX #ind2 ],
-                             [ LOCAL.CONT.HOOK.XARG #ind2 ] >,
-             CONT.HCONS <! [ HARG #harg ] !> ], 
-     LKEYS.KEYREL arg123-ev-relation & 
-                  [ ARG2 #ind2,
-                    ARG3 #harg ] ].
+v_np-xp_oeq_synsem := v_np-xp_synsem &
+  [ LOCAL [ CAT.VAL.COMPS < [ LOCAL.CONT.HOOK.INDEX #ind2 ],
+                            [ LOCAL.CONT.HOOK.XARG #ind2 ] >,
+            CONT.HCONS <! [ HARG #harg ] !> ],
+    LKEYS.KEYREL arg123-ev-relation & [ ARG2 #ind2,
+                                        ARG3 #harg ] ]
+  """
+  
+  """.
 
-v_np-xp_sor_synsem := v_np-xp_synsem & 
+
+v_np-xp_sor_synsem := v_np-xp_synsem &
   [ LOCAL [ CAT.VAL.COMPS < [ LOCAL.CONT.HOOK.INDEX #ind ],
                             [ LOCAL.CONT.HOOK.XARG #ind ] >,
             CONT.HCONS <! [ HARG #harg ] !> ],
-    LKEYS.KEYREL.ARG2 #harg ].
+    LKEYS.KEYREL.ARG2 #harg ]
+  """
+  
+  """.
 
 
-v_np-ap_oeq_synsem := v_np-xp_oeq_synsem & 
-  [ LOCAL.CAT.VAL.COMPS < [ ], [ LOCAL.CAT.HEAD adj ] > ]. 
+v_np-ap_oeq_synsem := v_np-xp_oeq_synsem &
+  [ LOCAL.CAT.VAL.COMPS < [ ], [ LOCAL.CAT.HEAD adj ] > ]
+  """
+  
+  """.
 
-v_np-pp_oeq_synsem := v_np-xp_oeq_synsem & 
-  [ LOCAL.CAT.VAL.COMPS < [ ], [ LOCAL.CAT.HEAD adp & [ KEYS.ALTKEY non_modable_rel ] ] > ].
 
-v_np-pp_aj-oeq_synsem := v_np-xp_oeq_synsem & 
-  [ LOCAL.CAT.VAL.COMPS < [ ], [ LOCAL.CAT.HEAD adp & [ KEYS.ALTKEY basic_adj_rel ] ] > ].
+v_np-pp_oeq_synsem := v_np-xp_oeq_synsem &
+  [ LOCAL.CAT.VAL.COMPS < [ ],
+                          [ LOCAL.CAT.HEAD adp & [ KEYS.ALTKEY non_modable_rel ] ] > ]
+  """
+  
+  """.
+
+
+v_np-pp_aj-oeq_synsem := v_np-xp_oeq_synsem &
+  [ LOCAL.CAT.VAL.COMPS < [ ],
+                          [ LOCAL.CAT.HEAD adp & [ KEYS.ALTKEY basic_adj_rel ] ] > ]
+  """
+  
+  """.
 
 
 v_np-ap_sor_synsem := v_np-xp_sor_synsem &
-  [ LOCAL.CAT.VAL.COMPS < [ ], [ LOCAL.CAT.HEAD adj ] > ]. 
+  [ LOCAL.CAT.VAL.COMPS < [ ], [ LOCAL.CAT.HEAD adj ] > ]
+  """
+  
+  """.
+
 
 v_np-pp_sor_synsem := v_np-xp_sor_synsem &
-  [ LOCAL.CAT.VAL.COMPS < [ ], [ LOCAL.CAT.HEAD adp & [ KEYS.ALTKEY non_modable_rel ] ] > ].
+  [ LOCAL.CAT.VAL.COMPS < [ ],
+                          [ LOCAL.CAT.HEAD adp & [ KEYS.ALTKEY non_modable_rel ] ] > ]
+  """
+  
+  """.
+
 
 v_np-pp_aj-sor_synsem := v_np-xp_sor_synsem &
-  [ LOCAL.CAT.VAL.COMPS < [ ], [ LOCAL.CAT.HEAD adp & [ KEYS.ALTKEY basic_adj_rel ] ] > ].
+  [ LOCAL.CAT.VAL.COMPS < [ ],
+                          [ LOCAL.CAT.HEAD adp & [ KEYS.ALTKEY basic_adj_rel ] ] > ]
+  """
+  
+  """.
 
 
-v_np-xp := basic-main-verb & 
+v_np-xp := basic-main-verb &
   [ ALTS [ PASS +,
            IMPERS +,
            RCP -,
-           VCALT - ] ].
+           VCALT - ] ]
+  """
+  
+  """.
 
 
-; e.g. eso se considera plagio
-v_np-np_sor-rfx_lex := v_np-xp & main-verb & basic-three-arg & 
+v_np-np_sor-rfx_lex := v_np-xp & main-verb & basic-three-arg &
   [ ALTS.RFX -,
-    SYNSEM v_np-np_synsem & 
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_np-np_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ].
+    SYNSEM v_np-np_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_np-np_synsem,
+                                          VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ]
+  """
+  e.g. eso se considera plagio
+  """.
 
-; e.g. dejar (lo dejaron KO)
-v_np-ap_sor_lex := v_np-xp & main-verb & basic-three-arg & 
+
+v_np-ap_sor_lex := v_np-xp & main-verb & basic-three-arg &
   [ ALTS.RFX -,
-    SYNSEM v_np-ap_sor_synsem & 
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_np-ap_sor_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ].
+    SYNSEM v_np-ap_sor_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_np-ap_sor_synsem,
+                                              VAL.COMPS < [ OPT - ],
+                                                          [ OPT - ] > ] ] ]
+  """
+  e.g. dejar (lo dejaron KO)
+  """.
 
-; e.g. declarar, proclamar (lo declararon culpable)
-v_np-ap_sor-rfx_lex := v_np-xp & main-verb & basic-three-arg & 
+
+v_np-ap_sor-rfx_lex := v_np-xp & main-verb & basic-three-arg &
   [ ALTS.RFX +,
-    SYNSEM v_np-ap_sor_synsem & 
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_np-ap_sor_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ].
+    SYNSEM v_np-ap_sor_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_np-ap_sor_synsem,
+                                              VAL.COMPS < [ OPT - ],
+                                                          [ OPT - ] > ] ] ]
+  """
+  e.g. declarar, proclamar (lo declararon culpable)
+  """.
 
-; e.g. dar, calificar, tomar,... (e.g. me tomas por tonto?)
-v_np-pp_sor_lex := v_np-xp & main-verb & basic-three-arg & 
+
+v_np-pp_sor_lex := v_np-xp & main-verb & basic-three-arg &
   [ ALTS.RFX -,
-    SYNSEM v_np-pp_sor_synsem & 
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_np-pp_sor_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ].
+    SYNSEM v_np-pp_sor_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_np-pp_sor_synsem,
+                                              VAL.COMPS < [ OPT - ],
+                                                          [ OPT - ] > ] ] ]
+  """
+  e.g. dar, calificar, tomar,... (e.g. me tomas por tonto?)
+  """.
 
-; e.g. proclamar (lo proclamaron como...)
-v_np-pp_sor-rfx_lex := v_np-xp & main-verb & basic-three-arg & 
+
+v_np-pp_sor-rfx_lex := v_np-xp & main-verb & basic-three-arg &
   [ ALTS.RFX +,
-    SYNSEM v_np-pp_sor_synsem & 
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_np-pp_sor_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ].
+    SYNSEM v_np-pp_sor_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_np-pp_sor_synsem,
+                                              VAL.COMPS < [ OPT - ],
+                                                          [ OPT - ] > ] ] ]
+  """
+  e.g. proclamar (lo proclamaron como...)
+  """.
 
 
-; e.g. distrazar de
-v_np-pp*_oeq-rfx_lex := v_np-xp & main-verb & basic-three-arg & 
+v_np-pp*_oeq-rfx_lex := v_np-xp & main-verb & basic-three-arg &
   [ ALTS.RFX +,
-    SYNSEM v_np-pp_oeq_synsem &
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_np-pp_oeq_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ].
+    SYNSEM v_np-pp_oeq_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_np-pp_oeq_synsem,
+                                              VAL.COMPS < [ OPT - ],
+                                                          [ OPT + ] > ] ] ]
+  """
+  e.g. distrazar de
+  """.
 
-; e.g. la combinación se evalúa como ineficiente.
-v_np-pp_aj-oeq_lex := v_np-xp & main-verb & basic-three-arg & 
+
+v_np-pp_aj-oeq_lex := v_np-xp & main-verb & basic-three-arg &
   [ ALTS.RFX -,
-    SYNSEM v_np-pp_aj-oeq_synsem & 
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_np-pp_aj-oeq_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ].
+    SYNSEM v_np-pp_aj-oeq_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_np-pp_aj-oeq_synsem,
+                                                 VAL.COMPS < [ OPT - ],
+                                                             [ OPT - ] > ] ] ]
+  """
+  e.g. la combinación se evalúa como ineficiente.
+  """.
 
-; e.g. un libro que no vaciló en calificar de importante
-v_np-pp_aj-oeq-rfx_lex := v_np-xp & main-verb & basic-three-arg & 
+
+v_np-pp_aj-oeq-rfx_lex := v_np-xp & main-verb & basic-three-arg &
   [ ALTS.RFX +,
-    SYNSEM v_np-pp_aj-oeq_synsem &
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_np-pp_aj-oeq_synsem, 
-                         VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ].
+    SYNSEM v_np-pp_aj-oeq_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_np-pp_aj-oeq_synsem,
+                                                 VAL.COMPS < [ OPT - ],
+                                                             [ OPT - ] > ] ] ]
+  """
+  e.g. un libro que no vaciló en calificar de importante
+  """.
 
-
-
-
-; --- 1.5. Copula verbs
 
 v_copula_basic_synsem := lex-synsem &
   [ MODIFIED notmod,
-    LOCAL local &
-	  [ CAT [ MC -,
-                  HC-LIGHT -,
-                  HEAD verb & [ INV -,
-                                AUX -,
-                                KEYS.KEY _be_v_prd_rel ],
-		  VAL.COMPS < synsem & 
-                              [ LOCAL [ COORD -,
-                                        CAT [ HEAD.KEYS.KEY #ckey,
-                                              VAL.COMPS < > ] ],
-                                NON-LOCAL.REL 0-dlist ] > ] ],
+    LOCAL local & [ CAT [ MC -,
+                          HC-LIGHT -,
+                          HEAD verb & [ INV -,
+                                        AUX -,
+                                        KEYS.KEY _be_v_prd_rel ],
+                          VAL.COMPS < synsem & [ LOCAL [ COORD -,
+                                                         CAT [ HEAD.KEYS.KEY #ckey,
+                                                               VAL.COMPS < > ] ],
+                                                 NON-LOCAL.REL 0-dlist ] > ] ],
     LKEYS [ KEYREL.PRED _be_v_prd_rel,
-            --COMPKEY #ckey ] ].
+            --COMPKEY #ckey ] ]
+  """
+  --- 1.5. Copula verbs
+  """.
+
 
 v_copula_synsem := v_copula_basic_synsem &
   [ LOCAL [ CAT [ HEAD.TAM #tam,
-		  VAL [ SUBJ < [ OPT + ] >,
+                  VAL [ SUBJ < [ OPT + ] >,
                         COMPS < [ OPT -,
                                   LOCAL [ CAT.HEAD.TAM #tam,
                                           CONT.HOOK.INDEX #index ],
                                   NON-LOCAL.REL 0-dlist ] > ] ],
-	    CONT.HOOK.INDEX #index ] ].
+            CONT.HOOK.INDEX #index ] ]
+  """
+  
+  """.
+
 
 v_copula := basic-verb-lex &
-  [ ALTS [ RCP -, 
-           RFX -, 
+  [ ALTS [ RCP -,
+           RFX -,
            PASS -,
            IMPERS -,
-           VCALT - ] ].
+           VCALT - ] ]
+  """
+  
+  """.
+
 
 v_cop := v_copula &
   [ SYNSEM [ LOCAL.CAT.VAL [ SUBJ < #subj >,
-                             COMPS < #comps & 
-                                     [ LOCAL.CAT.VAL.CLTS #clts ] >,
+                             COMPS < #comps & [ LOCAL.CAT.VAL.CLTS #clts ] >,
                              CLTS #clts ],
              NON-LOCAL [ SLASH [ LIST #sfirst,
                                  LAST #slast ],
@@ -4307,232 +4501,307 @@ v_cop := v_copula &
                                            LAST #slast ],
                                    REL #rel & 0-dlist,
                                    QUE [ LIST #qmiddle,
-                                         LAST #qlast ] ] ].
-             < #comps & [ NON-LOCAL [ SLASH [ LIST #sfirst,
+                                         LAST #qlast ] ] ],
+             #comps & [ NON-LOCAL [ SLASH [ LIST #sfirst,
+                                            LAST #smiddle ],
+                                    QUE [ LIST #qfirst,
+                                          LAST #qmiddle ] ] ] . < #comps & [ NON-LOCAL [ SLASH [ LIST #sfirst,
                                               LAST #smiddle ],
                                       QUE [ LIST #qfirst,
-                                            LAST #qmiddle ] ] ]. #clts > > ].
+                                            LAST #qmiddle ] ] ] . #clts > > ]
+  """
+  
+  """.
+
 
 v_cop-np_sbj := v_cop &
   [ SYNSEM.LOCAL [ AGR.PNG #png,
-                   CAT [ VAL [ SUBJ < [ LOCAL np_nom_local & 
-                                              [ AGR.PNG #png ] ] >,
-                               COMPS < [ LOCAL.CONT.HOOK.LTOP #ltop ] > ] ],
-	           CONT [ HOOK.LTOP #ltop,
+                   CAT.VAL [ SUBJ < [ LOCAL np_nom_local & [ AGR.PNG #png ] ] >,
+                             COMPS < [ LOCAL.CONT.HOOK.LTOP #ltop ] > ],
+                   CONT [ HOOK.LTOP #ltop,
                           RELS <! !>,
-		          HCONS <! !> ] ] ].
+                          HCONS <! !> ] ] ]
+  """
+  
+  """.
+
 
 v_cop-nsbj := v_copula &
   [ SYNSEM [ LOCAL [ CAT [ HEAD.INV -,
                            VAL [ SUBJ < >,
-                                 COMPS #comps &
-                                       < [ LOCAL [ CAT.VAL.SUBJ < >,
-                                                   CONT.HOOK.LTOP #ltop ],
-                                           NON-LOCAL #nonlocal ] > ] ],
-	             CONT [ HOOK.LTOP #ltop,
+                                 COMPS #comps & < [ LOCAL [ CAT.VAL.SUBJ < >,
+                                                            CONT.HOOK.LTOP #ltop ],
+                                                    NON-LOCAL #nonlocal ] > ] ],
+                     CONT [ HOOK.LTOP #ltop,
                             RELS <! !>,
-		            HCONS <! !> ] ],
+                            HCONS <! !> ] ],
              NON-LOCAL #nonlocal ],
-    ARG-ST #comps ].
+    ARG-ST #comps ]
+  """
+  
+  """.
 
-; e.g. Juan es feo
-; removed LOCAL [ CAT.VAL COMPS < [ LOCAL [ CAT.HEAD [ KEYS.KEY basic_adj_rel ], to cover "será complicado"
-v_ap_ser_synsem :=  v_copula_synsem & 
+
+v_ap_ser_synsem := v_copula_synsem &
   [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
-                      COMPS < [ LOCAL [ CAT.HEAD adj &
-                                                [ MOD < [ LOCAL.CAT.HEAD noun ] >,
-                                                  PRD.COPV ser ],
+                      COMPS < [ LOCAL [ CAT.HEAD adj & [ MOD < [ LOCAL.CAT.HEAD noun ] >,
+                                                         PRD.COPV ser ],
                                         CONT.HOOK.XARG #sind ] ] > ],
-            CONT.HOOK.XARG #sind ] ].
+            CONT.HOOK.XARG #sind ] ]
+  """
+  e.g. Juan es feo
+  removed LOCAL [ CAT.VAL COMPS < [ LOCAL [ CAT.HEAD [ KEYS.KEY basic_adj_rel ], to cover "será complicado"
+  """.
+
 
 v_ap_ser_lex := v_cop-np_sbj &
-  [ SYNSEM v_ap_ser_synsem & 
-           [ LOCAL.CAT.HEAD.LSYNSEM v_ap_ser_synsem ] ].
+  [ SYNSEM v_ap_ser_synsem & [ LOCAL.CAT.HEAD.LSYNSEM v_ap_ser_synsem ] ]
+  """
+  
+  """.
 
 
-; e.g. Juan es de esta ciudad
 v_pp_ser_synsem := v_copula_synsem &
   [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
-                      COMPS < [ LOCAL [ CAT.HEAD adp &
-                                                 [ KEYS.ALT2KEY quant_or_deg_rel, 
-                                                   MOD < [ LOCAL.CAT.HEAD noun ] >,
-                                                   PRD.COPV ser ],
+                      COMPS < [ LOCAL [ CAT.HEAD adp & [ KEYS.ALT2KEY quant_or_deg_rel,
+                                                         MOD < [ LOCAL.CAT.HEAD noun ] >,
+                                                         PRD.COPV ser ],
                                         CONT.HOOK.XARG #sind ] ] > ],
-            CONT.HOOK.XARG #sind ] ].
+            CONT.HOOK.XARG #sind ] ]
+  """
+  e.g. Juan es de esta ciudad
+  """.
+
 
 v_pp_ser_lex := v_cop-np_sbj &
-  [ SYNSEM v_pp_ser_synsem & 
-           [ LOCAL.CAT.HEAD.LSYNSEM v_pp_ser_synsem ] ].
+  [ SYNSEM v_pp_ser_synsem & [ LOCAL.CAT.HEAD.LSYNSEM v_pp_ser_synsem ] ]
+  """
+  
+  """.
 
 
-; e.g. fue la semana pasada
-;; abans : COMPS < [ LOCAL.CAT.HEAD.KEYS.KEY prep_mod_rel ] >, but "Esto es al contado"... )
 v_modnp_ser_synsem := v_copula_synsem &
   [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
                       COMPS < [ LOCAL [ CAT.HEAD modnp & [ MOD < [ LOCAL.CAT.HEAD noun ] > ],
                                         CONT.HOOK.XARG #sind ] ] > ],
-            CONT.HOOK.XARG #sind ] ].
+            CONT.HOOK.XARG #sind ] ]
+  """
+   e.g. fue la semana pasada
+  ; abans : COMPS < [ LOCAL.CAT.HEAD.KEYS.KEY prep_mod_rel ] >, but "Esto es al contado"... )
+  """.
+
 
 v_modnp_ser_lex := v_cop-np_sbj &
-  [ SYNSEM v_modnp_ser_synsem & 
-           [ LOCAL.CAT.HEAD.LSYNSEM v_modnp_ser_synsem ] ].
+  [ SYNSEM v_modnp_ser_synsem & [ LOCAL.CAT.HEAD.LSYNSEM v_modnp_ser_synsem ] ]
+  """
+  
+  """.
 
 
-; e.g. Es como pulsar una tecla de un simple vistazo.
 v_pp_e-vp-inf_ser_synsem := v_copula_basic_synsem &
   [ LOCAL [ CAT [ HEAD.PRD non-prd,
                   VAL [ SUBJ < [ OPT +,
                                  LOCAL.CONT.HOOK.INDEX #sind ] >,
                         COMPS < [ OPT -,
-                                  LOCAL [ CAT.HEAD adp & 
-                                                   [ KEYS.ALT2KEY v_event_rel,
-                                                     MOD < [ LOCAL.CAT.HEAD noun ] >,
-                                                             PRD.COPV ser ],
+                                  LOCAL [ CAT.HEAD adp & [ KEYS.ALT2KEY v_event_rel,
+                                                           MOD < [ LOCAL.CAT.HEAD noun ] >,
+                                                           PRD.COPV ser ],
                                           CONT.HOOK [ INDEX.SF prop,
                                                       XARG #sind ] ],
                                   NON-LOCAL.REL 0-dlist ] > ] ],
-            CONT.HOOK.XARG #sind ] ].
+            CONT.HOOK.XARG #sind ] ]
+  """
+  e.g. Es como pulsar una tecla de un simple vistazo.
+  """.
+
 
 v_pp_e-vp-inf-ser_lex := v_cop-np_sbj &
-  [ SYNSEM v_pp_e-vp-inf_ser_synsem &
-           [ LOCAL.CAT.HEAD.LSYNSEM v_pp_e-vp-inf_ser_synsem ] ]. 
+  [ SYNSEM v_pp_e-vp-inf_ser_synsem & [ LOCAL.CAT.HEAD.LSYNSEM v_pp_e-vp-inf_ser_synsem ] ]
+  """
+  
+  """.
 
 
-; e.g. Juan fue atacado
 v_vp_ppart_ser_synsem := v_copula_synsem &
   [ LOCAL.CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #arg2 ] >,
                     COMPS < [ LOCAL [ CAT.HEAD verb & [ PRD.COPV ser ],
-                                      CONT.RELS.LIST < [ ARG2 #arg2 ],... > ] ] > ] ].
+                                      CONT.RELS.LIST < [ ARG2 #arg2 ], ... > ] ] > ] ]
+  """
+  e.g. Juan fue atacado
+  """.
+
+
 v_vp_ppart-ser_lex := v_cop-np_sbj &
-  [ SYNSEM v_vp_ppart_ser_synsem &
-           [ LOCAL.CAT.HEAD.LSYNSEM v_vp_ppart_ser_synsem ] ].
+  [ SYNSEM v_vp_ppart_ser_synsem & [ LOCAL.CAT.HEAD.LSYNSEM v_vp_ppart_ser_synsem ] ]
+  """
+  
+  """.
 
 
-; e.g. Juan está muerto
 v_vp_ppart_estar_synsem := v_copula_synsem &
   [ LOCAL.CAT [ HEAD.PRD non-prd,
                 VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #arg2 ] >,
-                      COMPS < [ LOCAL [ CAT.HEAD adj & 
-                                                 [ MOD < [ LOCAL [ AGR #arg2, CAT.HEAD noun ] ] >,
-                                                   PRD.COPV estar,
-                                                   KEYS.KEY v_event_rel ] ] ] > ] ] ].
-v_vp_ppart-estar_lex := v_cop-np_sbj &
-  [ SYNSEM v_vp_ppart_estar_synsem &
-           [ LOCAL.CAT.HEAD.LSYNSEM v_vp_ppart_estar_synsem ] ].
+                      COMPS < [ LOCAL.CAT.HEAD adj & [ MOD < [ LOCAL [ AGR #arg2,
+                                                                       CAT.HEAD noun ] ] >,
+                                                       PRD.COPV estar,
+                                                       KEYS.KEY v_event_rel ] ] > ] ] ]
+  """
+  e.g. Juan está muerto
+  """.
 
-; e.g. Juan está feo
+
+v_vp_ppart-estar_lex := v_cop-np_sbj &
+  [ SYNSEM v_vp_ppart_estar_synsem & [ LOCAL.CAT.HEAD.LSYNSEM v_vp_ppart_estar_synsem ] ]
+  """
+  
+  """.
+
+
 v_ap_estar_synsem := v_copula_synsem &
   [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
-                      COMPS < [ LOCAL [ CAT.HEAD adj &
-                                                 [ MOD < [ LOCAL.CAT.HEAD noun ] >,
-                                                           PRD.COPV estar,
-                                                           KEYS.KEY adj_rel ],
+                      COMPS < [ LOCAL [ CAT.HEAD adj & [ MOD < [ LOCAL.CAT.HEAD noun ] >,
+                                                         PRD.COPV estar,
+                                                         KEYS.KEY adj_rel ],
                                         CONT.HOOK.XARG #sind ] ] > ],
-            CONT.HOOK.XARG #sind ] ].
+            CONT.HOOK.XARG #sind ] ]
+  """
+  e.g. Juan está feo
+  """.
+
 
 v_ap_estar_lex := v_cop-np_sbj &
-  [ SYNSEM v_ap_estar_synsem &
-           [ LOCAL.CAT.HEAD.LSYNSEM v_ap_estar_synsem ] ].
+  [ SYNSEM v_ap_estar_synsem & [ LOCAL.CAT.HEAD.LSYNSEM v_ap_estar_synsem ] ]
+  """
+  
+  """.
 
-; e.g. Juan está en la ciudad
+
 v_pp_estar_synsem := v_copula_synsem &
   [ LOCAL [ CAT [ HEAD.PRD non-prd,
                   VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
-                        COMPS < [ LOCAL [ CAT.HEAD adp & 
-                                                   [ PRD predicative,
-                                                     KEYS.ALT2KEY quant_or_deg_rel, 
-                                                     MOD < [ LOCAL.CAT.HEAD noun ] > ],
+                        COMPS < [ LOCAL [ CAT.HEAD adp & [ PRD predicative,
+                                                           KEYS.ALT2KEY quant_or_deg_rel,
+                                                           MOD < [ LOCAL.CAT.HEAD noun ] > ],
                                           CONT.HOOK.XARG #sind ] ] > ] ],
-            CONT.HOOK.XARG #sind ] ].
+            CONT.HOOK.XARG #sind ] ]
+  """
+  e.g. Juan está en la ciudad
+  """.
+
 
 v_pp_estar_lex := v_cop-np_sbj &
-  [ SYNSEM v_pp_estar_synsem &
-           [ LOCAL.CAT.HEAD.LSYNSEM v_pp_estar_synsem ] ].
+  [ SYNSEM v_pp_estar_synsem & [ LOCAL.CAT.HEAD.LSYNSEM v_pp_estar_synsem ] ]
+  """
+  
+  """.
 
-; e.g. está muy bien
+
 v_adv_estar_synsem := v_copula_basic_synsem &
-           [ LOCAL [ CAT [ HEAD.PRD non-prd,
-                           VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
-                                 COMPS < [ OPT -,
-                                           LOCAL [ CAT.HEAD adv &
-                                                 [ MOD < [ LOCAL.CAT.HEAD verb ] > ],
-                                                   CONT.HOOK.XARG #sind ] ] > ] ],
-                     CONT.HOOK.XARG #sind ] ].
+  [ LOCAL [ CAT [ HEAD.PRD non-prd,
+                  VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
+                        COMPS < [ OPT -,
+                                  LOCAL [ CAT.HEAD adv & [ MOD < [ LOCAL.CAT.HEAD verb ] > ],
+                                          CONT.HOOK.XARG #sind ] ] > ] ],
+            CONT.HOOK.XARG #sind ] ]
+  """
+  e.g. está muy bien
+  """.
+
 
 v_adv_estar_lex := v_cop-np_sbj &
-  [ SYNSEM v_adv_estar_synsem &
-           [ LOCAL.CAT.HEAD.LSYNSEM v_adv_estar_synsem ] ].
+  [ SYNSEM v_adv_estar_synsem & [ LOCAL.CAT.HEAD.LSYNSEM v_adv_estar_synsem ] ]
+  """
+  
+  """.
 
 
-; e.g. ahí estamos; ¿Dónde/cómo está Juan?
 v_modnp_estar_synsem := v_copula_synsem &
   [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
-                      COMPS < [ LOCAL [ CAT.HEAD modnp &
-                                                 [ MOD < [ LOCAL.CAT.HEAD noun ] > ],
+                      COMPS < [ LOCAL [ CAT.HEAD modnp & [ MOD < [ LOCAL.CAT.HEAD noun ] > ],
                                         CONT.HOOK.XARG #sind ] ] > ],
-            CONT.HOOK.XARG #sind ] ].
+            CONT.HOOK.XARG #sind ] ]
+  """
+  e.g. ahí estamos; ¿Dónde/cómo está Juan?
+  """.
+
 
 v_modnp_estar_lex := v_cop-np_sbj &
-  [ SYNSEM v_modnp_estar_synsem & 
-           [ LOCAL.CAT.HEAD.LSYNSEM v_modnp_estar_synsem ] ].
+  [ SYNSEM v_modnp_estar_synsem & [ LOCAL.CAT.HEAD.LSYNSEM v_modnp_estar_synsem ] ]
+  """
+  
+  """.
 
-; e.g. todo está por organizar
+
 v_pp_e-vp-inf-estar_synsem := v_copula_basic_synsem &
-           [ LOCAL [ CAT [ HEAD.PRD non-prd,
-                           VAL [ SUBJ < [ OPT +,
-                                          LOCAL.CONT.HOOK.INDEX #sind ] >,
-                                 COMPS < [ OPT -,
-                                           LOCAL [ CAT.HEAD adp & 
-                                                            [ KEYS.ALTKEY v_event_rel,
-                                                              MOD < [ LOCAL.CAT.HEAD noun ] >,
-                                                              PRD.COPV estar ],
-                                                   CONT.HOOK [ INDEX.SF prop,
-                                                               XARG #sind ] ],
-                                           NON-LOCAL.REL 0-dlist ] > ] ],
-                     CONT.HOOK.XARG #sind ] ].
+  [ LOCAL [ CAT [ HEAD.PRD non-prd,
+                  VAL [ SUBJ < [ OPT +,
+                                 LOCAL.CONT.HOOK.INDEX #sind ] >,
+                        COMPS < [ OPT -,
+                                  LOCAL [ CAT.HEAD adp & [ KEYS.ALTKEY v_event_rel,
+                                                           MOD < [ LOCAL.CAT.HEAD noun ] >,
+                                                           PRD.COPV estar ],
+                                          CONT.HOOK [ INDEX.SF prop,
+                                                      XARG #sind ] ],
+                                  NON-LOCAL.REL 0-dlist ] > ] ],
+            CONT.HOOK.XARG #sind ] ]
+  """
+  e.g. todo está por organizar
+  """.
+
 
 v_pp_e-vp-inf-estar_lex := v_cop-np_sbj &
-  [ SYNSEM v_pp_e-vp-inf-estar_synsem &
-           [ LOCAL.CAT.HEAD.LSYNSEM v_pp_e-vp-inf-estar_synsem ] ].
+  [ SYNSEM v_pp_e-vp-inf-estar_synsem & [ LOCAL.CAT.HEAD.LSYNSEM v_pp_e-vp-inf-estar_synsem ] ]
+  """
+  
+  """.
 
 
-; e.g. Juan está cantando
 v_vp_ger-estar_synsem := v_copula_synsem &
-           [ LOCAL [ CAT [ HEAD.PRD non-prd,
-                           VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
-                                 COMPS < [ LOCAL [ CAT [ HEAD verb & 
-                                                              [ PRD.COPV estar,
-                                                                VOICE active,
-                                                                VFORM ger,
-                                                                MOD < > ],
-                                                         VAL.SUBJ < [ OPT + ] > ],
-                                                    CONT.HOOK.XARG #sind ] ] > ] ],
-                     CONT.HOOK.XARG #sind ] ].
+  [ LOCAL [ CAT [ HEAD.PRD non-prd,
+                  VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
+                        COMPS < [ LOCAL [ CAT [ HEAD verb & [ PRD.COPV estar,
+                                                              VOICE active,
+                                                              VFORM ger,
+                                                              MOD < > ],
+                                                VAL.SUBJ < [ OPT + ] > ],
+                                          CONT.HOOK.XARG #sind ] ] > ] ],
+            CONT.HOOK.XARG #sind ] ]
+  """
+  e.g. Juan está cantando
+  """.
+
 
 v_vp_ger-estar_lex := v_cop-np_sbj &
-  [ SYNSEM v_vp_ger-estar_synsem &
-           [ LOCAL.CAT.HEAD.LSYNSEM v_vp_ger-estar_synsem ] ].
+  [ SYNSEM v_vp_ger-estar_synsem & [ LOCAL.CAT.HEAD.LSYNSEM v_vp_ger-estar_synsem ] ]
+  """
+  
+  """.
 
 
-; e.g. está lloviendo
 v_vp_ger-nsbj-estar_synsem := v_copula_basic_synsem &
-           [ LOCAL [ AGR.PNG.PN 3sg, 
-                     CAT [ HEAD [ PRD non-prd,
-                                  TAM #tam ],
-                           VAL [ COMPS < [ OPT -,
-                                           LOCAL [ CAT [ HEAD verb & 
-                                                              [ PRD.COPV estar,
-                                                                VOICE active,
-                                                                VFORM ger,
-                                                                TAM #tam ],
-                                                         VAL.CLTS < > ],
-                                                   CONT.HOOK.INDEX #index ] ] >,
-                                 CLTS < > ] ],
-	             CONT.HOOK.INDEX #index ] ].
+  [ LOCAL [ AGR.PNG.PN 3sg,
+            CAT [ HEAD [ PRD non-prd,
+                         TAM #tam ],
+                  VAL [ COMPS < [ OPT -,
+                                  LOCAL [ CAT [ HEAD verb & [ PRD.COPV estar,
+                                                              VOICE active,
+                                                              VFORM ger,
+                                                              TAM #tam ],
+                                                VAL.CLTS < > ],
+                                          CONT.HOOK.INDEX #index ] ] >,
+                        CLTS < > ] ],
+            CONT.HOOK.INDEX #index ] ]
+  """
+  e.g. está lloviendo
+  """.
+
 
 v_vp_ger-nsbj-estar_lex := v_cop-nsbj &
-  [ SYNSEM v_vp_ger-nsbj-estar_synsem &
-           [ LOCAL.CAT.HEAD.LSYNSEM v_vp_ger-nsbj-estar_synsem ] ].
+  [ SYNSEM v_vp_ger-nsbj-estar_synsem & [ LOCAL.CAT.HEAD.LSYNSEM v_vp_ger-nsbj-estar_synsem ] ]
+  """
+  
+  """.
+
  
 
 
@@ -4560,9 +4829,14 @@ v_aux_haber_synsem := lex-synsem &
                           INDEX #index ],
 	       	   RELS <! !>,
 		   HCONS <! !> ] ],
-    LKEYS.--COMPKEY #ckey ].
-
+    LKEYS.--COMPKEY #ckey ]
+"""
+; --- Auxiliary verbs
+; the VOICE of the COMPS element used to be active, but in order to deal with 
+; passives such as "se ha resuelto el caso"
 ;   SYNSEM [ LOCAL.CAT [ HEAD [ TAM.ASPECT perf,
+""".
+
 
 v_aux_vp-part_synsem := v_aux_haber_synsem &
   [ LOCAL [ AGR #sind, 
@@ -4735,7 +5009,10 @@ n_intrans := basic-noun-lex & basic-one-arg & norm-hook-lex &
                          VAL [ SPR < [ OPT -] >,
                                COMPS < > ] ],
                    CONT [ RELS <! noun-arg0-relation !>,
-                          HCONS <! !> ] ] ]. 
+                          HCONS <! !> ] ] ]
+"""
+; -- subcategorization types
+""". 
 
 n_trans := basic-noun-lex & 
   [ SYNSEM [ LOCAL.CAT [ HEAD.KEYS.KEY non_temp_nonpro_rel & non_elliptical_n_rel,
@@ -4838,11 +5115,13 @@ n_quant := quant-common-noun-lex & basic-two-arg & norm-hook-lex &
                             HCONS <! !> ] ],
              LKEYS.--COMPKEY #ckey ] ].
 
-; fot LRs
 n_prop-or-ques_fin_synsem := basic-common-noun-synsem &
   [ LOCAL.CAT.VAL.COMPS < [ LOCAL mrkd_or_unmrkd_cp_prop_or_ques_local &
                                   [ CONT.HOOK.INDEX.E [ TENSE tense,
-                                                        MOOD ind_or_sub_mood ] ] ] > ].
+                                                        MOOD ind_or_sub_mood ] ] ] > ]
+"""
+; fot LRs
+""".
 
 n_prop-or-ques_inf_synsem := basic-common-noun-synsem &
   [ LOCAL.CAT.VAL.COMPS < [ LOCAL mrkd_or_unmrkd_cp_prop_or_ques_local &
@@ -4865,56 +5144,81 @@ n_ppde_prop-inf_synsem := basic-common-noun-synsem &
 
 ; --- 2.1. Common nouns
 
-; --- 2.1.1. Intrans common nouns
 
-; e.g. los/cualquier niños
-n_-_c_lex := n_intrans & 
-  [ SYNSEM.LOCAL.AGR.DIVISIBLE - ].
- 
-; e.g. las/*la arras
-n_-_c-pl_lex := n_intrans & 
+n_-_c_lex := n_intrans &
+  [ SYNSEM.LOCAL.AGR.DIVISIBLE - ]
+  """
+  --- 2.1.1. Intrans common nouns
+  e.g. los/cualquier niños
+  """.
+
+
+n_-_c-pl_lex := n_intrans &
   [ SYNSEM.LOCAL.AGR [ PNG.PN plur,
-                       DIVISIBLE + ] ].
+                       DIVISIBLE + ] ]
+  """
+  e.g. las/*la arras
+  """.
 
-; e.g. (bastante/un poco de/*cualquier) acidez
-n_-_m_lex := n_intrans & 
+
+n_-_m_lex := n_intrans &
   [ SYNSEM.LOCAL.AGR [ PNG.PN sing,
-                       DIVISIBLE + ] ].
+                       DIVISIBLE + ] ]
+  """
+  e.g. (bastante/un poco de/*cualquier) acidez
+  """.
 
-; e.g. e.g. tiene *tres/un poco de celos, *entre comestibles 
-n_-_m-pl_lex := n_intrans & 
+
+n_-_m-pl_lex := n_intrans &
   [ SYNSEM.LOCAL.AGR [ PNG.PN plur,
-                       DIVISIBLE + ] ].
+                       DIVISIBLE + ] ]
+  """
+  e.g. e.g. tiene *tres/un poco de celos, *entre comestibles
+  """.
 
-; e.g. bebió (cualquier/un/un poco de/una copa de) vino
-n_-_mc_lex := n_intrans.
 
-; e.g. *un poco de/bastante abogacía
-n_-_nc_lex := n_intrans.
+n_-_mc_lex := n_intrans
+  """
+  e.g. bebió (cualquier/un/un poco de/una copa de) vino
+  """.
 
-; e.g. ejército, manada,...
-n_-_col_lex := n_intrans.
 
-; e.g. lo vieron ese lunes/día/mes/año/...; iremos de vacaciones en enero, comeremos a las dos
-n_-_c-tmp_lex := basic-noun-lex & norm-sem-lex-item & basic-one-arg & 
+n_-_nc_lex := n_intrans
+  """
+  e.g. *un poco de/bastante abogacía
+  """.
+
+
+n_-_col_lex := n_intrans
+  """
+  e.g. ejército, manada,...
+  """.
+
+
+n_-_c-tmp_lex := basic-noun-lex & norm-sem-lex-item & basic-one-arg &
   [ SYNSEM.LOCAL [ CAT [ POSTHEAD +,
                          HEAD.KEYS.KEY time_n_rel,
                          VAL [ SPR < [ OPT + ] >,
                                COMPS < > ] ],
                    CONT [ HOOK.INDEX.SORT tmp,
-                          RELS <! date-relation & 
-                                  [ PRED time_n_rel ] !> ] ] ].
+                          RELS <! date-relation & [ PRED time_n_rel ] !> ] ] ]
+  """
+  e.g. lo vieron ese lunes/día/mes/año/...; iremos de vacaciones en enero, comeremos a las dos
+  """.
+
 
 n_-_c-qnt_lex := pronominal-lex & norm-zero-arg &
-  [ SYNSEM quant_pron_adverb_synsem & 
-           [ LOCAL [ AGR #agr,
-                     CAT.VAL.SPR < [ OPT -,
-                                     LOCAL local-min &
-                                           [ AGR #agr,
-                                             CAT [ HEAD.KEYS.KEY quant_or_deg_rel, 
-                                                   VAL.SUBJ < > ] ],
-                                     NON-LOCAL [ REL 0-dlist,
-                                                 SLASH 0-dlist ] ] >  ] ] ].
+  [ SYNSEM quant_pron_adverb_synsem & [ LOCAL [ AGR #agr,
+                                                CAT.VAL.SPR < [ OPT -,
+                                                                LOCAL local-min & [ AGR #agr,
+                                                                                    CAT [ HEAD.KEYS.KEY quant_or_deg_rel,
+                                                                                          VAL.SUBJ < > ] ],
+                                                                NON-LOCAL [ REL 0-dlist,
+                                                                            SLASH 0-dlist ] ] > ] ] ]
+  """
+  
+  """.
+
 
 ; --- appositional nouns (see ERG's tittle nouns)
 ; e.g. propuesta número 1234
@@ -4923,6 +5227,10 @@ n_-_c-qnt_lex := pronominal-lex & norm-zero-arg &
 
 ; --- 2.1.2. Argumental common nouns
 
+n_pp_c_lex := n_pp-de & 
+  [ SYNSEM basic-common-noun-synsem &
+           [ LOCAL.CONT.HOOK.INDEX.DIVISIBLE - ] ]
+"""
 ; --- Nouns taking a PPde (which may be replaced by the poss.)
 ; (i) non-derived nouns: relational nouns (e.g. el padre de la novia), los amigos de Peter), 
 ; body part nouns (e.g. brazo, pierna,...), constitutive (abstract) nouns (e.g. el color del dinero); 
@@ -4930,10 +5238,7 @@ n_-_c-qnt_lex := pronominal-lex & norm-zero-arg &
 ; measure verbs (e.g. el peso de la paja); (3) nouns derived from unaccusative verbs (e.g. la 
 ; muerte de Mikel); (4) nouns derived from unergative verbs (e.g. el silbido del tren); (5) subject 
 ; nominalizations (e.g. el traductor del Tractatus)
-
-n_pp_c_lex := n_pp-de & 
-  [ SYNSEM basic-common-noun-synsem &
-           [ LOCAL.CONT.HOOK.INDEX.DIVISIBLE - ] ].
+""".
 
 n_pp_m_lex := n_pp-de & 
   [ SYNSEM basic-common-noun-synsem &
@@ -4946,15 +5251,17 @@ n_pp_nc_lex := n_pp-de &
   [ SYNSEM basic-common-noun-synsem ]. 
 
 
+n_pp-pp_de-mc_lex := n_ppde_pp & 
+  [ SYNSEM basic-common-noun-synsem &
+           [ LOCAL.CONT.HOOK.INDEX.SORT abs ] ]
+"""
 ; --- Nouns taking two PPcomps (being the first one a PPde)
 ; (1) de-adjectival nouns (e.g. la adicción de Juan a los caramelos de menta); (2) deverbal 
 ; nouns from psicological, inchoative and perception verbs (e.g. el temor de Juan a las 
 ; enfermedades infecciosas, la preocupación de María por sus hijos); (3) deverbal nouns 
 ; derived by intrans verbs (e.g. la lucha de los kurdos contra el estado turco); (4) deverbal 
 ; nouns derived by trans verbs (e.g. el descubrimiento de) 
-n_pp-pp_de-mc_lex := n_ppde_pp & 
-  [ SYNSEM basic-common-noun-synsem &
-           [ LOCAL.CONT.HOOK.INDEX.SORT abs ] ].
+""".
 
 n_pp-pp_de-de-mc_lex := n_ppde_pp & 
   [ SYNSEM basic-common-noun-synsem &
@@ -4975,119 +5282,147 @@ n_pp-pp_de-de-mc_lex := n_ppde_pp &
 
 
 ; --- Nouns taking verbal complements
-; e.g. una ventaja ((de) que no llueva es que no hay ocasión de perder el paraguas)
+
 n_cp*_p-c_lex := n_cp_prop_fin & 
   [ SYNSEM n_prop-or-ques_fin_synsem & 
            [ LOCAL [ CAT.VAL.COMPS < [ OPT + ] >,
-                     CONT.HOOK.INDEX.DIVISIBLE - ] ] ]. 
+                     CONT.HOOK.INDEX.DIVISIBLE - ] ] ]
+"""
+; --- Nouns taking verbal complements
+; e.g. una ventaja ((de) que no llueva es que no hay ocasión de perder el paraguas)
+""". 
 
-n_cp_p-c_lex := n_cp_prop_fin & 
-  [ SYNSEM n_prop-or-ques_fin_synsem & 
-           [ LOCAL [ CAT.VAL.COMPS < [ OPT - ] >,
-                     CONT.HOOK.INDEX.DIVISIBLE - ] ] ]. 
 
-; e.g. no hay duda de que vendrá
-n_cp_p-mc_lex := n_cp_prop_fin & 
-  [ SYNSEM n_prop-or-ques_fin_synsem & 
-           [ LOCAL.CAT.VAL.COMPS < [ OPT - ] > ] ]. 
+n_cp_p-c_lex := n_cp_prop_fin &
+  [ SYNSEM n_prop-or-ques_fin_synsem & [ LOCAL [ CAT.VAL.COMPS < [ OPT - ] >,
+                                                 CONT.HOOK.INDEX.DIVISIBLE - ] ] ]
+  """
+  
+  """.
 
-; e.g. la incógnita (de si/cómo se ha utilizado el dinero público)
-n_cp_q-c_lex := n_cp_question & 
-  [ SYNSEM n_prop-or-ques_fin_synsem & 
-           [ LOCAL [ CAT.VAL.COMPS < [ OPT + ] >,
-                     CONT.HOOK.INDEX.DIVISIBLE - ] ] ].
 
-; e.g. el interés (de la empresa) (en/por que lleguen a un acuerdo/llegar a un acuerdo)
-n_pp-cp_p-mc_lex := n_ppde_cp_prop_fin & 
-  [ SYNSEM n_ppde_prop-fin_synsem & 
-           [ LOCAL.CAT.VAL.COMPS < [ OPT + ], [ OPT + ] > ] ]. 
+n_cp_p-mc_lex := n_cp_prop_fin &
+  [ SYNSEM n_prop-or-ques_fin_synsem & [ LOCAL.CAT.VAL.COMPS < [ OPT - ] > ] ]
+  """
+  e.g. no hay duda de que vendrá
+  """.
 
-; e.g. la estupidez (de Juan) (de votar a Ernesto)
+
+n_cp_q-c_lex := n_cp_question &
+  [ SYNSEM n_prop-or-ques_fin_synsem & [ LOCAL [ CAT.VAL.COMPS < [ OPT + ] >,
+                                                 CONT.HOOK.INDEX.DIVISIBLE - ] ] ]
+  """
+  e.g. la incógnita (de si/cómo se ha utilizado el dinero público)
+  """.
+
+
+n_pp-cp_p-mc_lex := n_ppde_cp_prop_fin &
+  [ SYNSEM n_ppde_prop-fin_synsem & [ LOCAL.CAT.VAL.COMPS < [ OPT + ],
+                                                            [ OPT + ] > ] ]
+  """
+  e.g. el interés (de la empresa) (en/por que lleguen a un acuerdo/llegar a un acuerdo)
+  """.
+
+
 n_pp-vp_mc_lex := n_ppde_cp_prop_inf &
-  [ SYNSEM.LOCAL.CAT.VAL.COMPS < [ OPT + ], [ OPT + ] > ]. 
-
+  [ SYNSEM.LOCAL.CAT.VAL.COMPS < [ OPT + ], [ OPT + ] > ]
+  """
+  e.g. la estupidez (de Juan) (de votar a Ernesto)
+  """.
 
 ; --- Quantifying nouns (we distinguish three classes)
 ; --- Partitive nouns
-; - may show "ad sensum" agreement; i.e. the verb agrees with either the head or its complement  
-; (e.g. la mayoría de senadores votaron/votó en contra). 
-; - If their complement is indefinite, they build pseudo-partitive constructions; i.e. the complement 
-; doesn't have referential properties, nor can it be topicalized (e.g. *de senadores, una mayoría 
-; votó en contra); if their complement is a definite NP, they build partitive constructions; i.e. 
-; both the complement and the whole NP are referential, and the complement may be topicalized 
-; (e.g. de los senadores, una mayoría votó en contra).
-; !!! NOTE that this distinction is not implemented yet.
-; --- Group nouns
-; - some of them are ambiguous with collective nouns, e.g. manada de cerdos
-; - ambiguous: descriptive vs pseudo-partitive reading, but they only have a pseudo-partitive reading 
-; when they do not co-occur with the definite article (e.g. *el/un grupo de senadores votaron en contra).
-; - If their complement is indefinite, they build pseudo-partitive constructions (see above) 
-; (e.g. ((un grupo minoritario) (de senadores)) votaron en contra), if their complement is a definite 
-; NP, they build partitive constructions (e.g. ((un grupo minoritario) (de los senadores)))
-; !!! NOTE that this distinction is not implemented yet.
-; - Some take plural/mass nouns (e.g. un haz (de luz/protones), un grupo (de gente/caminantes)) and 
-; some only plural nouns (e.g. racimo (de uvas), fajo (de billetes), hatajo (de idiotas))
-; --- Pseudo-partitive nouns
-; - This type includes: counter ('acotadores') nouns (e.g. tableta (de mantequilla/turrón), 
-; terrón (de azúcar), hilo (de azafrán), hoja (de papel), rebanada (de pan), grano (de 
-; uva/café/arena/trigo),...) and measure nouns (e.g. un montón (de libros), un puñado (de 
-; dólares), un manojo (de perejil), una pila (de libros), un kilo (de peras/harina), 
-; un litro (de leche), una libra (de azúcar/clavos)).
-; - ambiguous: descriptive vs pseudo-partitive reading, but they only have a pseudo-partitive reading 
-; when they do not co-occur with the definite article (e.g. *el/un montón (de libros)).
-n_pp_part_lex := n_quant & 
-  [ ALTS.PASS -,
-    SYNSEM basic-quantifying-nom-synsem & 
-           [ LOCAL.CAT.VAL.COMPS < [ OPT + ] > ] ].
 
-n_pp_grp_lex := n_quant & 
+n_pp_part_lex := n_quant &
   [ ALTS.PASS -,
-    SYNSEM n_group-or-pseudopart_synsem & 
-           [ LOCAL.CAT.VAL.COMPS < [ OPT + ] > ] ].
+    SYNSEM basic-quantifying-nom-synsem & [ LOCAL.CAT.VAL.COMPS < [ OPT + ] > ] ]
+  """
+  --- Quantifying nouns (we distinguish three classes)
+  --- Partitive nouns
+  - may show "ad sensum" agreement; i.e. the verb agrees with either the head or its complement
+  (e.g. la mayoría de senadores votaron/votó en contra).
+  - If their complement is indefinite, they build pseudo-partitive constructions; i.e. the complement
+  doesn't have referential properties, nor can it be topicalized (e.g. *de senadores, una mayoría
+  votó en contra); if their complement is a definite NP, they build partitive constructions; i.e.
+  both the complement and the whole NP are referential, and the complement may be topicalized
+  (e.g. de los senadores, una mayoría votó en contra).
+  !!! NOTE that this distinction is not implemented yet.
+  --- Group nouns
+  - some of them are ambiguous with collective nouns, e.g. manada de cerdos
+  - ambiguous: descriptive vs pseudo-partitive reading, but they only have a pseudo-partitive reading
+  when they do not co-occur with the definite article (e.g. *el/un grupo de senadores votaron en contra).
+  - If their complement is indefinite, they build pseudo-partitive constructions (see above)
+  (e.g. ((un grupo minoritario) (de senadores)) votaron en contra), if their complement is a definite
+  NP, they build partitive constructions (e.g. ((un grupo minoritario) (de los senadores)))
+  !!! NOTE that this distinction is not implemented yet.
+  - Some take plural/mass nouns (e.g. un haz (de luz/protones), un grupo (de gente/caminantes)) and
+  some only plural nouns (e.g. racimo (de uvas), fajo (de billetes), hatajo (de idiotas))
+  --- Pseudo-partitive nouns
+  - This type includes: counter ('acotadores') nouns (e.g. tableta (de mantequilla/turrón),
+  terrón (de azúcar), hilo (de azafrán), hoja (de papel), rebanada (de pan), grano (de
+  uva/café/arena/trigo),...) and measure nouns (e.g. un montón (de libros), un puñado (de
+  dólares), un manojo (de perejil), una pila (de libros), un kilo (de peras/harina),
+  un litro (de leche), una libra (de azúcar/clavos)).
+  - ambiguous: descriptive vs pseudo-partitive reading, but they only have a pseudo-partitive reading
+  when they do not co-occur with the definite article (e.g. *el/un montón (de libros)).
+  """.
 
-n_pp_psd-part_lex := n_quant & 
+
+n_pp_grp_lex := n_quant &
   [ ALTS.PASS -,
-    SYNSEM n_group-or-pseudopart_synsem &
-           [ LOCAL.CAT.VAL.COMPS < [ OPT + ] > ] ].
+    SYNSEM n_group-or-pseudopart_synsem & [ LOCAL.CAT.VAL.COMPS < [ OPT + ] > ] ]
+  """
+  
+  """.
 
-; --- temporal measure nouns (e.g. despues de años (de espera/disgustos) se divorciaron)
+
+n_pp_psd-part_lex := n_quant &
+  [ ALTS.PASS -,
+    SYNSEM n_group-or-pseudopart_synsem & [ LOCAL.CAT.VAL.COMPS < [ OPT + ] > ] ]
+  """
+  
+  """.
+
+
 n_pp_c-tmp_lex := n_ppcomp &
-  [ SYNSEM basic-common-noun-synsem &
-           [ LOCAL [ CAT [ HEAD.KEYS.KEY part_nom_rel,
-                           VAL.COMPS < [ OPT -, 
-                                         LOCAL [ CAT.HEAD.KEYS [ KEY _de_p_sel_rel,
-                                                                 ALT2KEY implicit_q_rel ],
-                                                 CONT.HOOK.INDEX.SORT non-temp ] ] > ],
-                     CONT.HOOK.INDEX [ DIVISIBLE -, 
-                                       SORT tmp ] ] ] ]. 
-
-
+  [ SYNSEM basic-common-noun-synsem & [ LOCAL [ CAT [ HEAD.KEYS.KEY part_nom_rel,
+                                                      VAL.COMPS < [ OPT -,
+                                                                    LOCAL [ CAT.HEAD.KEYS [ KEY _de_p_sel_rel,
+                                                                                            ALT2KEY implicit_q_rel ],
+                                                                            CONT.HOOK.INDEX.SORT non-temp ] ] > ],
+                                                CONT.HOOK.INDEX [ DIVISIBLE -,
+                                                                  SORT tmp ] ] ] ]
+  """
+  --- temporal measure nouns (e.g. despues de años (de espera/disgustos) se divorciaron)
+  """.
 
 ; --- 2.2. Proper names
-; If the proper name is modified, then it requires a def. article (e.g. (*el) manolo del otro día, 
-; la Rocío de la que te hablé). Some proper names may take the article (e.g. la Pantoja)
 
-n_-_pn_lex := basic-noun-lex & basic-one-arg & norm-sem-lex-item & 
+n_-_pn_lex := basic-noun-lex & basic-one-arg & norm-sem-lex-item &
   [ SYNSEM [ LOCAL [ AGR #agr & [ PNG.GEN #gen ],
                      CAT [ POSTHEAD +,
                            HEAD.KEYS [ KEY named_rel,
-                                       ALTKEY non_free_relative_q_rel ], 
-                           VAL [ SPR < [ LOCAL [ AGR.PNG.GEN #gen & masc_or_fem, 
-                                                 CAT.HEAD.KEYS.KEY quant_rel ], 
-                                         NON-LOCAL.QUE #que ] >, 
+                                       ALTKEY non_free_relative_q_rel ],
+                           VAL [ SPR < [ LOCAL [ AGR.PNG.GEN #gen & masc_or_fem,
+                                                 CAT.HEAD.KEYS.KEY quant_rel ],
+                                         NON-LOCAL.QUE #que ] >,
                                  COMPS < > ] ],
-                     CONT.HOOK [ INDEX #agr & 
-                                       [ DIVISIBLE -, 
-                                         PNG.PN 3per,
-                                         SORT non-temp,
-                                         PRONTYPE not_pron ],
+                     CONT.HOOK [ INDEX #agr & [ DIVISIBLE -,
+                                                PNG.PN 3per,
+                                                SORT non-temp,
+                                                PRONTYPE not_pron ],
                                  XARG #arg1 ] ],
              NON-LOCAL [ SLASH 0-dlist,
                          REL 0-dlist,
                          QUE #que ],
-             LKEYS [ KEYREL named-relation & 
-                            [ PRED named_rel, ARG1 #arg1 ],
-                     ALTKEYREL.PRED implicit_q_rel ] ] ].
+             LKEYS [ KEYREL named-relation & [ PRED named_rel,
+                                               ARG1 #arg1 ],
+                     ALTKEYREL.PRED implicit_q_rel ] ] ]
+  """
+  If the proper name is modified, then it requires a def. article (e.g. (*el) manolo del otro día,
+  la Rocío de la que te hablé). Some proper names may take the article (e.g. la Pantoja)
+  """.
+
 
 
 ; --- 2.3. Pronouns
@@ -5146,44 +5481,49 @@ personal_pron_synsem := norm-pronominal-synsem &
 
 ; --- 2.3.1.1. Personal pronouns
 
-; -- yo, tú
+
 n_-_pr-pers-n_lex := personal-pron-lex & basic-zero-arg &
-  [ SYNSEM personal_pron_synsem &
-           [ LOCAL.CAT [ HEAD.CASE nom,
-                         VAL.SPR < > ] ] ].
+  [ SYNSEM personal_pron_synsem & [ LOCAL.CAT [ HEAD.CASE nom,
+                                                VAL.SPR < > ] ] ]
+  """
+  -- yo, tú
+  """.
 
-; -- (todo) él, ella, vos
+
 n_-_pr-pers-no-sg_lex := personal-pron-lex & basic-one-arg &
-  [ SYNSEM personal_pron_synsem &
-           [ LOCAL [ AGR.PNG.PN sing,
-                     CAT [ HEAD.CASE nom_or_obl,
-                           VAL.SPR < [ OPT +,
-                                       LOCAL.CAT.HEAD.KEYS.KEY todo_def_q_rel,
-                                       NON-LOCAL [ QUE 0-dlist,
-                                                    REL 0-dlist ] ] > ] ] ] ].
+  [ SYNSEM personal_pron_synsem & [ LOCAL [ AGR.PNG.PN sing,
+                                            CAT [ HEAD.CASE nom_or_obl,
+                                                  VAL.SPR < [ OPT +,
+                                                              LOCAL.CAT.HEAD.KEYS.KEY todo_def_q_rel,
+                                                              NON-LOCAL [ QUE 0-dlist,
+                                                                          REL 0-dlist ] ] > ] ] ] ]
+  """
+  -- (todo) él, ella, vos
+  """.
 
-; -- (todos) nosotros, vosotros, ellos/as, usted/es
+
 n_-_pr-pers-no-pl_lex := personal-pron-lex & basic-one-arg &
-  [ SYNSEM personal_pron_synsem &
-           [ LOCAL [ AGR.PNG.PN plur,
-                     CAT [ HEAD.CASE nom_or_obl,
-                           VAL.SPR < [ OPT +,
-                                       LOCAL.CAT.HEAD.KEYS.KEY todo_def_q_rel,
-                                       NON-LOCAL [ QUE 0-dlist,
-                                                    REL 0-dlist ] ] > ] ] ] ].
+  [ SYNSEM personal_pron_synsem & [ LOCAL [ AGR.PNG.PN plur,
+                                            CAT [ HEAD.CASE nom_or_obl,
+                                                  VAL.SPR < [ OPT +,
+                                                              LOCAL.CAT.HEAD.KEYS.KEY todo_def_q_rel,
+                                                              NON-LOCAL [ QUE 0-dlist,
+                                                                          REL 0-dlist ] ] > ] ] ] ]
+  """
+  -- (todos) nosotros, vosotros, ellos/as, usted/es
+  """.
 
-; -- mí, tí, sí, conmigo, contigo, consigo
+
 n_-_pr-pers-o_lex := personal-pron-lex & basic-zero-arg &
-  [ SYNSEM personal_pron_synsem &
-           [ LOCAL.CAT [ HEAD.CASE obl,
-                         VAL.SPR < > ] ] ].
+  [ SYNSEM personal_pron_synsem & [ LOCAL.CAT [ HEAD.CASE obl,
+                                                VAL.SPR < > ] ] ]
+  """
+  -- mí, tí, sí, conmigo, contigo, consigo
+  """.
+
 
 
 ; --- 2.3.1.2. Clitics
-; - depend phonologically on the verb and can't appear alone; can't appear in a coordination nor be 
-; selected by identity (e.g. *Juan lo y la trajo; *Juan la lavó y regaló); may produce phonological 
-; processes in the verb (e.g. sentad+os => sentaos); when appear in a sequence, this can't be interrupted 
-; (e.g. *lo puede darme)
 
 clitic-lex := norm-zero-arg &
   [ INFLECTED -,
@@ -5191,7 +5531,14 @@ clitic-lex := norm-zero-arg &
                      RPUNCT no_punct ],
              LOCAL [ COORD -,
                      COORD-STRAT zero,
-                     CAT.HEAD noun ] ] ].
+                     CAT.HEAD noun ] ] ]
+"""
+; --- 2.3.1.2. Clitics
+; - depend phonologically on the verb and can't appear alone; can't appear in a coordination nor be 
+; selected by identity (e.g. *Juan lo y la trajo; *Juan la lavó y regaló); may produce phonological 
+; processes in the verb (e.g. sentad+os => sentaos); when appear in a sequence, this can't be interrupted 
+; (e.g. *lo puede darme)
+""".
 
 ; clitic-synsem := lex-synsem &
 clitic-synsem := non-canonical &
@@ -5350,143 +5697,181 @@ spec_norm_indefinite_pron_synsem := norm_indefinite_pron_synsem &
              ALT2KEYREL.LBL #khand ] ].
 
 
-; e.g. (*casi) alguien llamó
+
 n_-_pr-idf-alguien_lex := indefinite-pron-lex & norm-zero-arg &
-  [ SYNSEM norm_indefinite_pron_synsem & 
-           [ LOCAL [ AGR.PNG.PN 3per,
-                     CAT.VAL.SPR < >,
-                     CONT [ HOOK.INDEX.SORT hum,
-                            RELS.LIST < [ PRED person_rel ],... > ] ],
-             LKEYS.ALTKEYREL.PRED undef_quant_q_rel & _alguno_q_rel ] ].
+  [ SYNSEM norm_indefinite_pron_synsem & [ LOCAL [ AGR.PNG.PN 3per,
+                                                   CAT.VAL.SPR < >,
+                                                   CONT [ HOOK.INDEX.SORT hum,
+                                                          RELS.LIST < [ PRED person_rel ], ... > ] ],
+                                           LKEYS.ALTKEYREL.PRED undef_quant_q_rel & _alguno_q_rel ] ]
+  """
+  e.g. (*casi) alguien llamó
+  """.
 
-; e.g. (casi) nadie vino
+
 n_-_pr-idf-nadie_lex := spec-indefinite-pron-lex &
-  [ SYNSEM spec_norm_indefinite_pron_synsem & 
-           [ LOCAL [ AGR.PNG.PN 3per,
-                     CAT.VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY _casi_x_deg_rel ] >,
-                     CONT [ HOOK.INDEX.SORT hum,
-                            RELS <! [ PRED person_rel ], relation !> ] ],
-             LKEYS.ALTKEYREL.PRED _ninguno_q_rel ] ].
+  [ SYNSEM spec_norm_indefinite_pron_synsem & [ LOCAL [ AGR.PNG.PN 3per,
+                                                        CAT.VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY _casi_x_deg_rel ] >,
+                                                        CONT [ HOOK.INDEX.SORT hum,
+                                                               RELS <! [ PRED person_rel ],
+                                                                       relation !> ] ],
+                                                LKEYS.ALTKEYREL.PRED _ninguno_q_rel ] ]
+  """
+  e.g. (casi) nadie vino
+  """.
 
-; e.g. (casi) todos fueron
+
 n_-_pr-idf-todo_lex := spec-indefinite-pron-lex &
-  [ SYNSEM spec_norm_indefinite_pron_synsem & 
-           [ LOCAL [ CAT.VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY _casi_x_deg_rel ] >,
-                     CONT.RELS <! [ PRED generic_entity_rel ], relation !> ],
-             LKEYS.ALTKEYREL.PRED undef_quant_q_rel & _todo_q_rel ] ].
+  [ SYNSEM spec_norm_indefinite_pron_synsem & [ LOCAL [ CAT.VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY _casi_x_deg_rel ] >,
+                                                        CONT.RELS <! [ PRED generic_entity_rel ],
+                                                                     relation !> ],
+                                                LKEYS.ALTKEYREL.PRED undef_quant_q_rel & _todo_q_rel ] ]
+  """
+  e.g. (casi) todos fueron
+  """.
 
-; e.g. vinieron Pedro, Juan y (los) demás
+
 n_-_pr-idf-demas_lex := spec-indefinite-pron-lex &
-  [ SYNSEM indefinite_pron_synsem & 
-           [ LOCAL [ CAT.VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY _el_q_rel ] >,
-                     CONT.RELS <! [ PRED generic_entity_rel ] !> ] ] ].
+  [ SYNSEM indefinite_pron_synsem & [ LOCAL [ CAT.VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY _el_q_rel ] >,
+                                              CONT.RELS <! [ PRED generic_entity_rel ] !> ] ] ]
+  """
+  e.g. vinieron Pedro, Juan y (los) demás
+  """.
 
-; e.g. cada cual mantuvo su posición
+
 n_-_pr-idf-cual_lex := spec-indefinite-pron-lex &
-  [ SYNSEM indefinite_pron_synsem & 
-           [ LOCAL [ CAT.VAL.SPR < [ OPT -, 
-                                     LOCAL.CAT.HEAD.KEYS.KEY _cada_q_rel ] >,
-                     CONT.RELS <! [ PRED generic_entity_rel ] !> ] ] ].
+  [ SYNSEM indefinite_pron_synsem & [ LOCAL [ CAT.VAL.SPR < [ OPT -,
+                                                              LOCAL.CAT.HEAD.KEYS.KEY _cada_q_rel ] >,
+                                              CONT.RELS <! [ PRED generic_entity_rel ] !> ] ] ]
+  """
+  e.g. cada cual mantuvo su posición
+  """.
 
 
-; --- 2.3.4. (Pseudo)partitive pronouns
-basic-partitive-pron-synsem := lex-synsem & 
+basic-partitive-pron-synsem := lex-synsem &
   [ LOCAL [ CAT [ MC na,
-                  HEAD partn & 
-                       [ MOD < >,
-                         KEYS [ KEY #key & non_modable_rel,
-                                ALTKEY non_free_relative_q_rel ] ], 
-                  VAL [ SUBJ < >, 
-                        SPEC < >, 
-                        COMPS < [ LOCAL mrkd_np_local & 
-                                        [ CAT.HEAD.KEYS [ KEY #ckey, 
-                                                          ALTKEY #key ],
-                                          CONT.HOOK [ INDEX #arg & [ SORT #sort ] ] ],
+                  HEAD partn & [ MOD < >,
+                                 KEYS [ KEY #key & non_modable_rel,
+                                        ALTKEY non_free_relative_q_rel ] ],
+                  VAL [ SUBJ < >,
+                        SPEC < >,
+                        COMPS < [ LOCAL mrkd_np_local & [ CAT.HEAD.KEYS [ KEY #ckey,
+                                                                          ALTKEY #key ],
+                                                          CONT.HOOK.INDEX #arg & [ SORT #sort ] ],
                                   NON-LOCAL [ REL #rel,
                                               QUE 0-dlist,
-                                              SLASH 0-dlist ] ] > ] ], 
+                                              SLASH 0-dlist ] ] > ] ],
             CONT [ RELS.LIST < #keyrel, ... >,
                    HOOK [ LTOP #nhand,
-                          INDEX #index & 
-                                [ SORT non-temp, 
-                                  PRONTYPE real_pron ] ] ] ], 
-    NON-LOCAL [ REL #rel,
-                REL 0-dlist ],
-    LKEYS [ KEYREL #keyrel & 
-                   [ PRED part_of_rel,
-                     LBL #nhand,
-                     ARG0 #index & ref-ind & [ SORT #sort ], 
-                     ARG1 #arg & ref-ind ],
-            --COMPKEY #ckey & _de_p_sel_rel ] ]. 
+                          INDEX #index & [ SORT non-temp,
+                                           PRONTYPE real_pron ] ] ] ],
+    NON-LOCAL.REL 0-dlist,
+    LKEYS [ KEYREL #keyrel & [ PRED part_of_rel,
+                               LBL #nhand,
+                               ARG0 #index & ref-ind & [ SORT #sort ],
+                               ARG1 #arg & ref-ind ],
+            --COMPKEY #ckey & _de_p_sel_rel ] ]
+  """
+  --- 2.3.4. (Pseudo)partitive pronouns
+  """.
+
 
 norm-basic-partitive-pron-synsem := basic-partitive-pron-synsem &
   [ LOCAL [ CAT.HEAD.KEYS.ALTKEY #altkeypred,
             CONT [ HOOK [ LTOP #nhand,
                           INDEX #index,
                           XARG #nhand ],
-                   RELS <! #keyrel & noun-relation & 
-                           [ ARG0 #index,
-                             LBL #nhand ],
-                           #altkey & 
-                           [ PRED #altkeypred,
-                             ARG0 #index,
-                             RSTR #phand ] !>,
+                   RELS <! #keyrel & noun-relation & [ ARG0 #index,
+                                                       LBL #nhand ],
+                           #altkey & [ PRED #altkeypred,
+                                       ARG0 #index,
+                                       RSTR #phand ] !>,
                    HCONS <! qeq & [ HARG #phand,
-                                    LARG #nhand ] !> ] ], 
+                                    LARG #nhand ] !> ] ],
     NON-LOCAL.SLASH 0-dlist,
-    LKEYS [ KEYREL #keyrel, 
-            ALTKEYREL #altkey ] ]. 
+    LKEYS [ KEYREL #keyrel,
+            ALTKEYREL #altkey ] ]
+  """
+  
+  """.
 
-partitive-pron-lex := basic-nominal-lex & 
+
+partitive-pron-lex := basic-nominal-lex &
   [ SYNSEM.LOCAL.CAT.VAL [ SPR < >,
                            COMPS #comps ],
-    ARG-ST #comps ].
+    ARG-ST #comps ]
+  """
+  
+  """.
 
-spec-partitive-pron-lex := basic-nominal-lex & 
+
+spec-partitive-pron-lex := basic-nominal-lex &
   [ SYNSEM.LOCAL.CAT.VAL [ SPR #spr & < [ NON-LOCAL [ QUE 0-dlist,
                                                       REL 0-dlist ] ] >,
-                          COMPS #comps ],
-    ARG-ST < #spr. #comps > ].
+                           COMPS #comps ],
+    ARG-ST < #spr . #comps > ]
+  """
+  
+  """.
 
-; --- 2.3.4.1. pseudo-partitive pronouns (i.e. un poco/algo/nada + de Mass_N)
-; e.g. no he comido algo/nada/un poco + de sopa
-basic-pseudo-part-pron-synsem := lex-synsem & 
-  [ LOCAL [ AGR #agr & [ PNG.PN 3sg, 
+
+basic-pseudo-part-pron-synsem := lex-synsem &
+  [ LOCAL [ AGR #agr & [ PNG.PN 3sg,
                          DIVISIBLE + ],
             CAT.VAL.COMPS < [ OPT +,
                               LOCAL [ CAT.HEAD.KEYS.ALT2KEY udef_q_rel,
                                       CONT.HOOK.INDEX [ PNG.PN sing,
                                                         DIVISIBLE + ] ] ] >,
-            CONT.HOOK.INDEX #agr ], 
-    NON-LOCAL.QUE 0-dlist ].
+            CONT.HOOK.INDEX #agr ],
+    NON-LOCAL.QUE 0-dlist ]
+  """
+  --- 2.3.4.1. pseudo-partitive pronouns (i.e. un poco/algo/nada + de Mass_N)
+  e.g. no he comido algo/nada/un poco + de sopa
+  """.
 
-norm_pseudo-partitive_synsem := basic-pseudo-part-pron-synsem & norm-basic-partitive-pron-synsem.
-basic_pseudo-partitive_synsem := basic-pseudo-part-pron-synsem & basic-partitive-pron-synsem.
 
-; e.g. he comido (*casi) algo (de sopa)
+norm_pseudo-partitive_synsem := basic-pseudo-part-pron-synsem & norm-basic-partitive-pron-synsem
+  """
+  
+  """.
+
+
+basic_pseudo-partitive_synsem := basic-pseudo-part-pron-synsem & basic-partitive-pron-synsem
+  """
+  
+  """.
+
+
 n_pp_pr-part-algo_lex := partitive-pron-lex &
-  [ SYNSEM norm-basic-partitive-pron-synsem &
-           [ LOCAL.CONT.RELS <! relation, 
-                                [ PRED _alguno_q_rel ] !> ] ].
+  [ SYNSEM norm-basic-partitive-pron-synsem & [ LOCAL.CONT.RELS <! relation,
+                                                                   [ PRED _alguno_q_rel ] !> ] ]
+  """
+  e.g. he comido (*casi) algo (de sopa)
+  """.
 
-; e.g. no he comido (casi) nada (de sopa)
+
 n_pp_pr-part-nada_lex := spec-partitive-pron-lex &
-  [ SYNSEM norm-basic-partitive-pron-synsem &
-           [ LOCAL [ CAT.VAL.SPR < [ OPT +,
-                                     LOCAL [ CAT.HEAD.KEYS.KEY _casi_x_deg_rel,
-                                             CONT.HOOK [ XARG #index,
-                                                         LTOP #alt2hand ] ] ] >,
-                     CONT [ HOOK.INDEX #index,
-                            RELS <! relation, 
-                                    [ LBL #alt2hand, 
-                                      PRED _ninguno_q_rel ] !> ] ],
-             LKEYS.ALT2KEYREL.LBL #alt2hand ] ].
+  [ SYNSEM norm-basic-partitive-pron-synsem & [ LOCAL [ CAT.VAL.SPR < [ OPT +,
+                                                                        LOCAL [ CAT.HEAD.KEYS.KEY _casi_x_deg_rel,
+                                                                                CONT.HOOK [ XARG #index,
+                                                                                            LTOP #alt2hand ] ] ] >,
+                                                        CONT [ HOOK.INDEX #index,
+                                                               RELS <! relation,
+                                                                       [ LBL #alt2hand,
+                                                                         PRED _ninguno_q_rel ] !> ] ],
+                                                LKEYS.ALT2KEYREL.LBL #alt2hand ] ]
+  """
+  e.g. no he comido (casi) nada (de sopa)
+  """.
 
-; e.g. he comido (un) poco de sopa, *(un) poco
+
 n_pp_pr-part-un-poco_lex := partitive-pron-lex &
-  [ SYNSEM basic_pseudo-partitive_synsem &
-           [ LOCAL.CONT.RELS <! relation, 
-                                [ PRED _un_poco_part_of_rel ] !>  ] ].
+  [ SYNSEM basic_pseudo-partitive_synsem & [ LOCAL.CONT.RELS <! relation,
+                                                                [ PRED _un_poco_part_of_rel ] !> ] ]
+  """
+  e.g. he comido (un) poco de sopa, *(un) poco
+  """.
+
 #|
 actually...
 n_pp_pr-part-poco_lex := spec-partitive-pron-lex &
@@ -5498,99 +5883,132 @@ n_pp_pr-part-poco_lex := spec-partitive-pron-lex &
 |#
 
 ; --- 2.3.4.2. partitive pronouns
+
 basic-part-pron-synsem := lex-synsem &
   [ LOCAL [ AGR.PNG.GEN #gender,
             CAT.VAL.COMPS < [ OPT -, 
                               LOCAL [ CAT.HEAD.KEYS.ALT2KEY def_quant_q_rel,
                                       CONT.HOOK.INDEX.PNG [ PN plur, 
                                                             GEN #gender ] ] ] > ], 
-    NON-LOCAL.QUE 0-dlist ].
+    NON-LOCAL.QUE 0-dlist ]
+"""
+; --- 2.3.4.2. partitive pronouns
+""".
 
 norm_partitive_synsem := basic-part-pron-synsem & norm-basic-partitive-pron-synsem.
 basic_partitive_synsem := basic-part-pron-synsem & basic-partitive-pron-synsem.
 
-; e.g. (*casi) alguno/bastantes/muchos/demasiados... de *(los) chicos
+
 n_pp_pr-part-alguno_lex := partitive-pron-lex &
-  [ SYNSEM norm_partitive_synsem &
-           [ LKEYS.ALTKEYREL.PRED _alguno_q_rel ] ].
+  [ SYNSEM norm_partitive_synsem & [ LKEYS.ALTKEYREL.PRED _alguno_q_rel ] ]
+  """
+  e.g. (*casi) alguno/bastantes/muchos/demasiados... de *(los) chicos
+  """.
+
 
 n_pp_pr-part-bastante_lex := partitive-pron-lex &
-  [ SYNSEM norm_partitive_synsem &
-           [ LKEYS.ALTKEYREL.PRED _bastante_q_rel ] ].
+  [ SYNSEM norm_partitive_synsem & [ LKEYS.ALTKEYREL.PRED _bastante_q_rel ] ]
+  """
+  
+  """.
+
 
 n_pp_pr-part-cualquiera_lex := partitive-pron-lex &
-  [ SYNSEM norm_partitive_synsem &
-           [ LKEYS.ALTKEYREL.PRED _cualquiera_q_rel ] ].
+  [ SYNSEM norm_partitive_synsem & [ LKEYS.ALTKEYREL.PRED _cualquiera_q_rel ] ]
+  """
+  
+  """.
+
 
 n_pp_pr-part-demasiado_lex := partitive-pron-lex &
-  [ SYNSEM norm_partitive_synsem &
-           [ LKEYS.ALTKEYREL.PRED _demasiado_q_rel ] ].
+  [ SYNSEM norm_partitive_synsem & [ LKEYS.ALTKEYREL.PRED _demasiado_q_rel ] ]
+  """
+  
+  """.
+
 
 n_pp_pr-part-quienquiera_lex := partitive-pron-lex &
-  [ SYNSEM norm_partitive_synsem &
-           [ LKEYS.ALTKEYREL.PRED _quienquiera_q_rel ] ].
+  [ SYNSEM norm_partitive_synsem & [ LKEYS.ALTKEYREL.PRED _quienquiera_q_rel ] ]
+  """
+  
+  """.
+
 
 n_pp_pr-part-varios_lex := partitive-pron-lex &
-  [ SYNSEM norm_partitive_synsem &
-           [ LKEYS.ALTKEYREL.PRED _varios_q_rel ] ].
+  [ SYNSEM norm_partitive_synsem & [ LKEYS.ALTKEYREL.PRED _varios_q_rel ] ]
+  """
+  
+  """.
 
-; e.g. otras muchas/pocos volvieron a su lugar de origen
+
 n_pp_pr-part-mucho_lex := spec-partitive-pron-lex &
-  [ SYNSEM basic_partitive_synsem &
-           [ LOCAL [ CAT.VAL.SPR < [ OPT +,
-                                     LOCAL.CAT.HEAD.KEYS.KEY #altkey ] >,
-                     CONT.RELS <! relation & [ PRED _mucho_part_of_rel ] !> ],
-             LKEYS.ALTKEYREL.PRED #altkey ] ].
+  [ SYNSEM basic_partitive_synsem & [ LOCAL [ CAT.VAL.SPR < [ OPT +,
+                                                              LOCAL.CAT.HEAD.KEYS.KEY #altkey ] >,
+                                              CONT.RELS <! relation & [ PRED _mucho_part_of_rel ] !> ],
+                                      LKEYS.ALTKEYREL.PRED #altkey ] ]
+  """
+  e.g. otras muchas/pocos volvieron a su lugar de origen
+  """.
+
 
 n_pp_pr-part-poco_lex := spec-partitive-pron-lex &
-  [ SYNSEM basic_partitive_synsem &
-           [ LOCAL [ CAT.VAL.SPR < [ OPT +,
-                                     LOCAL.CAT.HEAD.KEYS.KEY #altkey ] >,
-                     CONT.RELS <! relation & [ PRED _poco_part_of_rel ] !> ],
-             LKEYS.ALTKEYREL.PRED #altkey ] ].
+  [ SYNSEM basic_partitive_synsem & [ LOCAL [ CAT.VAL.SPR < [ OPT +,
+                                                              LOCAL.CAT.HEAD.KEYS.KEY #altkey ] >,
+                                              CONT.RELS <! relation & [ PRED _poco_part_of_rel ] !> ],
+                                      LKEYS.ALTKEYREL.PRED #altkey ] ]
+  """
+  
+  """.
 
-; e.g. esta no es una guerra diferente a las otras
+
 n_pp_pr-part-otro_lex := spec-partitive-pron-lex &
-  [ SYNSEM basic_partitive_synsem &
-           [ LOCAL [ CAT.VAL.SPR < [ OPT +,
-                                     LOCAL.CAT.HEAD.KEYS.KEY #altkey ] >,
-                     CONT.RELS <! relation & [ PRED _otro_part_of_rel ] !> ],
-             LKEYS.ALTKEYREL.PRED #altkey ] ].
+  [ SYNSEM basic_partitive_synsem & [ LOCAL [ CAT.VAL.SPR < [ OPT +,
+                                                              LOCAL.CAT.HEAD.KEYS.KEY #altkey ] >,
+                                              CONT.RELS <! relation & [ PRED _otro_part_of_rel ] !> ],
+                                      LKEYS.ALTKEYREL.PRED #altkey ] ]
+  """
+  e.g. esta no es una guerra diferente a las otras
+  """.
 
-; e.g. (casi) ninguno (de los chicos)
+
 n_pp_pr-part-ninguno_lex := spec-partitive-pron-lex &
-  [ SYNSEM basic_partitive_synsem &
-           [ LOCAL [ CAT.VAL.SPR < [ OPT +,
-                                     LOCAL [ CAT.HEAD.KEYS.KEY _casi_x_deg_rel,
-                                             CONT.HOOK [ LTOP #alt2hand,
-                                                         XARG #index ] ],
-                                     NON-LOCAL [ QUE 0-dlist,
-                                                 REL 0-dlist ] ] >,
-                     CONT [ HOOK.INDEX #index,
-                            RELS <! relation, [ LBL #alt2hand ] !> ] ],
-             LKEYS.ALT2KEYREL.LBL #alt2hand ] ].
+  [ SYNSEM basic_partitive_synsem & [ LOCAL [ CAT.VAL.SPR < [ OPT +,
+                                                              LOCAL [ CAT.HEAD.KEYS.KEY _casi_x_deg_rel,
+                                                                      CONT.HOOK [ LTOP #alt2hand,
+                                                                                  XARG #index ] ],
+                                                              NON-LOCAL [ QUE 0-dlist,
+                                                                          REL 0-dlist ] ] >,
+                                              CONT [ HOOK.INDEX #index,
+                                                     RELS <! relation,
+                                                             [ LBL #alt2hand ] !> ] ],
+                                      LKEYS.ALT2KEYREL.LBL #alt2hand ] ]
+  """
+  e.g. (casi) ninguno (de los chicos)
+  """.
 
-; e.g. (cada) uno (de los chicos)
+
 n_pp_pr-part-uno_lex := spec-partitive-pron-lex &
-  [ SYNSEM basic_partitive_synsem &
-           [ LOCAL [ CAT.VAL.SPR < [ OPT +, 
-                                     LOCAL.CAT.HEAD.KEYS.KEY cada_q_rel ] >,  
-                     CONT.RELS <! relation & [ PRED card_rel ] !> ],
-             LKEYS.ALTKEYREL.PRED cada_q_rel ] ].
+  [ SYNSEM basic_partitive_synsem & [ LOCAL [ CAT.VAL.SPR < [ OPT +,
+                                                              LOCAL.CAT.HEAD.KEYS.KEY cada_q_rel ] >,
+                                              CONT.RELS <! relation & [ PRED card_rel ] !> ],
+                                      LKEYS.ALTKEYREL.PRED cada_q_rel ] ]
+  """
+  e.g. (cada) uno (de los chicos)
+  """.
 
-; e.g. *(unos) cuantos (de los chicos)
+
 n_pp_pr-part-cuantos_lex := spec-partitive-pron-lex &
-  [ SYNSEM basic_partitive_synsem &
-           [ LOCAL [ CAT.VAL.SPR < [ OPT -, 
-                                     LOCAL.CAT.HEAD.KEYS.KEY art_indef_q_rel ] >,
-                     CONT.RELS <! relation !> ],
-             LKEYS.ALTKEYREL.PRED art_indef_q_rel ] ].
+  [ SYNSEM basic_partitive_synsem & [ LOCAL [ CAT.VAL.SPR < [ OPT -,
+                                                              LOCAL.CAT.HEAD.KEYS.KEY art_indef_q_rel ] >,
+                                              CONT.RELS <! relation !> ],
+                                      LKEYS.ALTKEYREL.PRED art_indef_q_rel ] ]
+  """
+  e.g. *(unos) cuantos (de los chicos)
+  """.
 
 
 ; --- 2.3.5. Relative pronouns
-; - they don't inflect when they function as subjects, so its predicate agrees with its antecedent  
-; (e.g. yo, que me porté bien, pude salir temprano). 
-; NOTE: more in Bosque pp. 458-463
+
 rel_pronominal_synsem := lex-synsem &
   [ LOCAL [ AGR #index,
             CAT [ MC na,
@@ -5610,143 +6028,156 @@ rel_pronominal_synsem := lex-synsem &
                                XARG #xarg ] > ] ],
     LKEYS [ KEYREL [ PRED non_free_relative_nom_rel, 
                      LBL #hand ], 
-            ALTKEYREL relation ] ].
-;LKEYS [ KEYREL [ PRED non_temp_nom_rel,
+            ALTKEYREL relation ] ]
+"""
+; --- 2.3.5. Relative pronouns
+; - they don't inflect when they function as subjects, so its predicate agrees with its antecedent  
+; (e.g. yo, que me porté bien, pude salir temprano). 
+; NOTE: more in Bosque pp. 458-463
 
-; Free relatives have a non-empty QUE value whose single list element is an index 
-; (rather than the handle which is employed for ordinary question WH-words).
-; They encode the constraints for their S/XP sister in the free-relative construction, 
-; in their SLASH attribute.
-;free_rel_pro_lex := pronominal-lex &
+;LKEYS [ KEYREL [ PRED non_temp_nom_rel,
+""".
+
+
+
 free_rel_pro_lex := basic-nominal-lex &
   [ SYNSEM [ LOCAL [ AGR #ind,
-		     CAT [ HC-LIGHT -,
+                     CAT [ HC-LIGHT -,
                            MC na,
                            VAL [ SUBJ < >,
-			         COMPS < > ] ],
-		     CONT [ HOOK [ INDEX ref-ind & #ind,
+                                 COMPS < > ] ],
+                     CONT [ HOOK [ INDEX ref-ind & #ind,
                                    XARG #nhand ],
-			    RELS.LIST < [ ARG0 #ind,
-                                          RSTR #rhand ], 
+                            RELS.LIST < [ ARG0 #ind,
+                                          RSTR #rhand ],
                                         [ LBL #nhand,
                                           ARG0 #ind ], ... >,
-			    HCONS <! qeq &
-				    [ HARG #rhand,
-				      LARG #nhand ] !> ]],
-	     NON-LOCAL [ REL 0-dlist,
+                            HCONS <! qeq & [ HARG #rhand,
+                                             LARG #nhand ] !> ] ],
+             NON-LOCAL [ REL 0-dlist,
                          QUE 1-dlist & <! #ind !>,
-                         SLASH 1-dlist &
-                               <! [ CAT.VAL.COMPS < > ] !> ] ],
-    ARG-ST < > ].
+                         SLASH 1-dlist & <! [ CAT.VAL.COMPS < > ] !> ] ],
+    ARG-ST < > ]
+  """
+   Free relatives have a non-empty QUE value whose single list element is an index
+   (rather than the handle which is employed for ordinary question WH-words).
+   They encode the constraints for their S/XP sister in the free-relative construction,
+   in their SLASH attribute.
+  free_rel_pro_lex := pronominal-lex &
+  """.
 
-; a)- The pronoun "que":
-; - May occur in non-restrictive and restrictive RC, taking any syntactic funcion. It also   
-; occur in predicative and semi-free relatives (together with the quantifier), but they never occur 
-; in free relatvs.
-; - Must be preceeded by the article when functioning as a preposition's complement (and, obviously, when 
-; they occur in a semi-free relative, where we find other quantifiers (e.g. los estudiantes que faltaron 
-; fueron más que los/aquellos que asistieron))
-; e.g. el escritor al que premiaron anoche vendrá a nuestra tertulia.
-; - Never co-occur with the article in a non-oblique rel. explicativa
-;   - may function as DO without the prep. "a"
-;   e.g. el escritor que premiaron anoche vendrá a nuestra tertulia.
-;   - In oblique relatives the determiner may be absent when the antecedent has a 'caracter predicativo', and: 
-;     - the phrase including the relative is definite
-;     e.g. le regalé *una/la pluma con que había escrito mis novelas
-;     - the polarity of the subordinate clause can't be negative 
-;     e.g. me prestó el dinero *de/del que yo no disponía
-;     - only with the propositions "con", "de", "en", "por" and "a" (if it is not accusative nor dative)
-;     - que no sea explicativa (la empresa, *en que/en la que trabajo hace años, se dedica a ...)
-n_-_pr-rel-que_lex := pron_relat & 
-  [ SYNSEM rel_pronominal_synsem &
-           [ LOCAL [ CAT [ HEAD.KEYS [ KEY que_pron_rel, 
-                                     ALTKEY def_q_rel ],
-                           VAL.SPR #spr & 
-                                   < [ OPT -,
-                                       LOCAL [ CAT.HEAD det & [ KEYS.KEY def_q_rel ],
-                                               CONT.RELS <! relation !> ] ] > ] ] ],
-    ARG-ST #spr ]. 
 
-n_-_pr-free-rel-que_lex := free_rel_pro_lex & 
-  [ SYNSEM [ LOCAL [ CAT [ HEAD noun &
-                                [ MOD < >,
-                                  PRD non-prd,
-                                  KEYS [ KEY #pred,
-                                         ALTKEY semi-free_relative_q_rel ] ],
+n_-_pr-rel-que_lex := pron_relat &
+  [ SYNSEM rel_pronominal_synsem & [ LOCAL.CAT [ HEAD.KEYS [ KEY que_pron_rel,
+                                                             ALTKEY def_q_rel ],
+                                                 VAL.SPR #spr & < [ OPT -,
+                                                                    LOCAL [ CAT.HEAD det & [ KEYS.KEY def_q_rel ],
+                                                                            CONT.RELS <! relation !> ] ] > ] ],
+    ARG-ST #spr ]
+  """
+  a)- The pronoun "que":
+  - May occur in non-restrictive and restrictive RC, taking any syntactic funcion. It also
+  occur in predicative and semi-free relatives (together with the quantifier), but they never occur
+  in free relatvs.
+  - Must be preceeded by the article when functioning as a preposition's complement (and, obviously, when
+  they occur in a semi-free relative, where we find other quantifiers (e.g. los estudiantes que faltaron
+  fueron más que los/aquellos que asistieron))
+  e.g. el escritor al que premiaron anoche vendrá a nuestra tertulia.
+  - Never co-occur with the article in a non-oblique rel. explicativa
+    - may function as DO without the prep. "a"
+    e.g. el escritor que premiaron anoche vendrá a nuestra tertulia.
+    - In oblique relatives the determiner may be absent when the antecedent has a 'caracter predicativo', and:
+      - the phrase including the relative is definite
+      e.g. le regalé *una/la pluma con que había escrito mis novelas
+      - the polarity of the subordinate clause can't be negative
+      e.g. me prestó el dinero *de/del que yo no disponía
+      - only with the propositions "con", "de", "en", "por" and "a" (if it is not accusative nor dative)
+      - que no sea explicativa (la empresa, *en que/en la que trabajo hace años, se dedica a ...)
+  """.
+
+
+n_-_pr-free-rel-que_lex := free_rel_pro_lex &
+  [ SYNSEM [ LOCAL [ CAT [ HEAD noun & [ MOD < >,
+                                         PRD non-prd,
+                                         KEYS [ KEY #pred,
+                                                ALTKEY semi-free_relative_q_rel ] ],
                            VAL.SPR < [ OPT -,
-                                       LOCAL.CAT.HEAD det & [ KEYS.KEY art_def_q_rel ] ]> ],
+                                       LOCAL.CAT.HEAD det & [ KEYS.KEY art_def_q_rel ] ] > ],
                      CONT [ HOOK.INDEX #ind,
                             RELS <! #altkey, #key !> ] ],
-	     NON-LOCAL [ SLASH 1-dlist &
-                               <! [ AGR ref-ind,
-                                    CAT.HEAD [ MOD < >,
-                                               PRD non-prd ],
-                                    CONT.HOOK.INDEX #ind ] !> ],
+             NON-LOCAL.SLASH 1-dlist & <! [ AGR ref-ind,
+                                            CAT.HEAD [ MOD < >,
+                                                       PRD non-prd ],
+                                            CONT.HOOK.INDEX #ind ] !>,
              LKEYS [ KEYREL #key & [ PRED #pred & free_que_pron_rel ],
-                     ALTKEYREL #altkey & [ PRED semi-free_relative_q_rel ] ] ] ].
-;            LKEYS [ KEYREL #key & [ PRED #pred & nom_rel ],
+                     ALTKEYREL #altkey & [ PRED semi-free_relative_q_rel ] ] ] ]
+  """
+  
+  """.
 
-; b)- La forma "quien"
-; - puede aparecer en rel. especificativas, explicativas, predicativas y libres.
-; - sólo puede aparecer en las especificativas cuando actúa como término de preposición, 
-; i.e. no puede desempeñar la función de sujeto (*los congresistas quienes llegaron anoche 
-; fueron alojados provisionalmente)
-; - en las explicativas puede aparecer sin restricción alguna (los congresistas, quienes 
-; llegaron anoche, fueron alojados provisionalmente)
-; - cuando actúa de OD debe llevar la prep."a" (*el hombre quien vimos ayer...)
-n_-_pr-rel-quien_lex := pron_relat & 
-  [ SYNSEM rel_pronominal_synsem &
-           [ LOCAL [ CAT [ HEAD [ MOD < >,
-                                  KEYS [ KEY non_que_pron_rel, 
-                                         ALTKEY def_q_rel ] ],
-                           VAL.SPR < > ], 
-                     CONT.HOOK.INDEX.SORT hum ] ] ]. 
 
-n_-_pr-free-rel-quien_lex := free_rel_pro_lex & 
-  [ SYNSEM [ LOCAL [ CAT [ HEAD noun &
-                                [ MOD < >,
-                                  PRD non-prd,
-                                  KEYS [ KEY nom_rel & #pred,
-                                         ALTKEY free_relative_q_rel ] ],
+n_-_pr-rel-quien_lex := pron_relat &
+  [ SYNSEM rel_pronominal_synsem & [ LOCAL [ CAT [ HEAD [ MOD < >,
+                                                          KEYS [ KEY non_que_pron_rel,
+                                                                 ALTKEY def_q_rel ] ],
+                                                   VAL.SPR < > ],
+                                             CONT.HOOK.INDEX.SORT hum ] ] ]
+  """
+             LKEYS [ KEYREL #key & [ PRED #pred & nom_rel ],
+  b)- La forma "quien"
+  - puede aparecer en rel. especificativas, explicativas, predicativas y libres.
+  - sólo puede aparecer en las especificativas cuando actúa como término de preposición,
+  i.e. no puede desempeñar la función de sujeto (*los congresistas quienes llegaron anoche
+  fueron alojados provisionalmente)
+  - en las explicativas puede aparecer sin restricción alguna (los congresistas, quienes
+  llegaron anoche, fueron alojados provisionalmente)
+  - cuando actúa de OD debe llevar la prep."a" (*el hombre quien vimos ayer...)
+  """.
+
+
+n_-_pr-free-rel-quien_lex := free_rel_pro_lex &
+  [ SYNSEM [ LOCAL [ CAT [ HEAD noun & [ MOD < >,
+                                         PRD non-prd,
+                                         KEYS [ KEY nom_rel & #pred,
+                                                ALTKEY free_relative_q_rel ] ],
                            VAL.SPR < > ],
                      CONT [ HOOK.INDEX #ind & [ SORT hum ],
-                            RELS <! #altkey,  #key !> ] ],
-	     NON-LOCAL [ SLASH 1-dlist &
-                               <! [ AGR ref-ind,
-                                    CAT.HEAD [ MOD < >,
-                                               PRD non-prd ],
-                                    CONT.HOOK.INDEX #ind ] !> ],
+                            RELS <! #altkey, #key !> ] ],
+             NON-LOCAL.SLASH 1-dlist & <! [ AGR ref-ind,
+                                            CAT.HEAD [ MOD < >,
+                                                       PRD non-prd ],
+                                            CONT.HOOK.INDEX #ind ] !>,
              LKEYS [ KEYREL #key & [ PRED #pred ],
-                     ALTKEYREL #altkey & [ PRED free_relative_q_rel ] ] ] ].
-
-; c)- La forma "el cual"
-; - no puede aparecer en rel. libres o semilibres
-; - sólo puede aparecer en las especificativas cuando actúa como término de preposición, 
-; e.g. *ese es un tema el cual ha estudiado a fondo/sobre el cual tiene varios artículos
-; - es el único rel. que puede aparecer al final de un grupo fónico: 
-;   - c. genitivo no extrapuesto de sintagmas partitivos
-;   e.g. los estudiantes, la mayoría de los cuales apoyó la propuesta, se manifestaron.
-;   - suj. de cláusulas absolutas , e.g. dicho lo cual
-;   - término de locuciones prepositivas( a consecuencia de, en torno a,...) 
-; - aparece con frecuencia al frente de la rel. yustapuestas, o cuando el antecedentes es
-; un SN complejo de cuyo núcleo queda distanciado el rel.
-; e.g. la columna de humo que causó la explosión, el cual se propagó a otros edificios
-n_-_pr-rel-cual_lex := pron_relat & 
-  [ SYNSEM rel_pronominal_synsem &
-           [ LOCAL.CAT [ HEAD [ MOD < >,
-                                KEYS [ KEY non_que_pron_rel, 
-                                     ALTKEY def_q_rel ] ],
-                         VAL.SPR #spr & < [ OPT -,
-                                            LOCAL.CAT.HEAD det & [ KEYS.KEY art_def_q_rel ] ] > ] ], 
-    ARG-ST #spr ]. 
+                     ALTKEYREL #altkey & [ PRED free_relative_q_rel ] ] ] ]
+  """
+  
+  """.
 
 
-; d)- cuantos le oían le admiraban
+n_-_pr-rel-cual_lex := pron_relat &
+  [ SYNSEM rel_pronominal_synsem & [ LOCAL.CAT [ HEAD [ MOD < >,
+                                                        KEYS [ KEY non_que_pron_rel,
+                                                               ALTKEY def_q_rel ] ],
+                                                 VAL.SPR #spr & < [ OPT -,
+                                                                    LOCAL.CAT.HEAD det & [ KEYS.KEY art_def_q_rel ] ] > ] ],
+    ARG-ST #spr ]
+  """
+  c)- La forma "el cual"
+  - no puede aparecer en rel. libres o semilibres
+  - sólo puede aparecer en las especificativas cuando actúa como término de preposición,
+  e.g. *ese es un tema el cual ha estudiado a fondo/sobre el cual tiene varios artículos
+  - es el único rel. que puede aparecer al final de un grupo fónico:
+    - c. genitivo no extrapuesto de sintagmas partitivos
+    e.g. los estudiantes, la mayoría de los cuales apoyó la propuesta, se manifestaron.
+    - suj. de cláusulas absolutas , e.g. dicho lo cual
+    - término de locuciones prepositivas( a consecuencia de, en torno a,...)
+  - aparece con frecuencia al frente de la rel. yustapuestas, o cuando el antecedentes es
+  un SN complejo de cuyo núcleo queda distanciado el rel.
+  e.g. la columna de humo que causó la explosión, el cual se propagó a otros edificios
+  """.
 
-; --- 2.3.6. Interrogative pronouns (qué, quién/es, cuál/es, cuánto/s)
-; - quién, cuál y cuánto pueden tomar un PP_de partitivo
-; e.g. ¿Quién/cuál/cuántos de tus amigos es diputado?
-basic_wh_pron_lex := pronominal-lex & 
+
+basic_wh_pron_lex := pronominal-lex &
   [ SYNSEM [ LOCAL [ AGR #index,
                      CAT [ MC na,
                            HC-LIGHT -,
@@ -5757,46 +6188,71 @@ basic_wh_pron_lex := pronominal-lex &
                                       ARG0 #index ],
                                     [ ARG0 #index,
                                       RSTR #rhand ] !>,
-			    HCONS <! qeq &
-				     [ HARG #rhand,
-				       LARG #nhand ] !> ] ],
-	     NON-LOCAL [ REL 0-dlist,
-                         QUE 1-dlist & [ LIST < param > ] ] ] ].
+                            HCONS <! qeq & [ HARG #rhand,
+                                             LARG #nhand ] !> ] ],
+             NON-LOCAL [ REL 0-dlist,
+                         QUE 1-dlist & [ LIST < param > ] ] ] ]
+  """
+  d)- cuantos le oían le admiraban
+  --- 2.3.6. Interrogative pronouns (qué, quién/es, cuál/es, cuánto/s)
+  - quién, cuál y cuánto pueden tomar un PP_de partitivo
+  e.g. ¿Quién/cuál/cuántos de tus amigos es diputado?
+  """.
 
-pron_wh_lex := basic_wh_pron_lex & 
+
+pron_wh_lex := basic_wh_pron_lex &
   [ SYNSEM.LOCAL [ AGR #index,
-                   CAT.VAL.COMPS < >, 
+                   CAT.VAL.COMPS < >,
                    CONT.HOOK.INDEX #index ],
-    ARG-ST < > ].
+    ARG-ST < > ]
+  """
+  
+  """.
+
 
 pron_wh_part_lex := basic_wh_pron_lex &
-  [ SYNSEM basic-partitive-pron-synsem & 
-           [ LOCAL [ AGR.PNG.GEN #gender,
-                     CAT.VAL.COMPS #comps &  
-                                   < [ OPT +,
-                                       LOCAL.CONT.HOOK.INDEX.PNG [ PN plur, GEN #gender ] ] >,
-                     CONT.HOOK.INDEX.SORT non-temp ] ],
-    ARG-ST #comps ].
+  [ SYNSEM basic-partitive-pron-synsem & [ LOCAL [ AGR.PNG.GEN #gender,
+                                                   CAT.VAL.COMPS #comps & < [ OPT +,
+                                                                              LOCAL.CONT.HOOK.INDEX.PNG [ PN plur,
+                                                                                                          GEN #gender ] ] >,
+                                                   CONT.HOOK.INDEX.SORT non-temp ] ],
+    ARG-ST #comps ]
+  """
+  
+  """.
+
 
 n_-_pr-wh-que_lex := pron_wh_lex &
-  [ SYNSEM [ LOCAL [ CONT [ HOOK.INDEX.SORT non-hum_non-temp,
-                            RELS <! relation, 
-                                    [ PRED que_q_rel ] !> ] ],
-             LKEYS.KEYREL.PRED thing_rel ] ].
+  [ SYNSEM [ LOCAL.CONT [ HOOK.INDEX.SORT non-hum_non-temp,
+                          RELS <! relation, [ PRED que_q_rel ] !> ],
+             LKEYS.KEYREL.PRED thing_rel ] ]
+  """
+  
+  """.
 
-n_pp_pr-wh-quien_lex := pron_wh_part_lex & 
-  [ SYNSEM [ LOCAL [ CAT.HEAD.CASE nom,
-                     CONT [ HOOK.INDEX.SORT hum,
-                            RELS <! relation, 
-                                    [ PRED que_q_rel ] !> ] ] ] ].
 
-n_pp_pr-wh-cual_lex := pron_wh_part_lex & 
-  [ SYNSEM [ LOCAL.CONT.RELS <! relation, 
-                                [ PRED que_q_rel ] !> ] ].
+n_pp_pr-wh-quien_lex := pron_wh_part_lex &
+  [ SYNSEM.LOCAL [ CAT.HEAD.CASE nom,
+                   CONT [ HOOK.INDEX.SORT hum,
+                          RELS <! relation, [ PRED que_q_rel ] !> ] ] ]
+  """
+  
+  """.
 
-n_pp_pr-wh-cuanto_lex := pron_wh_part_lex & 
-  [ SYNSEM [ LOCAL.CONT.RELS <! relation, 
-                                [ PRED que_q_rel ] !> ] ].
+
+n_pp_pr-wh-cual_lex := pron_wh_part_lex &
+  [ SYNSEM.LOCAL.CONT.RELS <! relation, [ PRED que_q_rel ] !> ]
+  """
+  
+  """.
+
+
+n_pp_pr-wh-cuanto_lex := pron_wh_part_lex &
+  [ SYNSEM.LOCAL.CONT.RELS <! relation, [ PRED que_q_rel ] !> ]
+  """
+  
+  """.
+
 
 
 
