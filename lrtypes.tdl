@@ -1090,28 +1090,22 @@ v_pastpart-attr-intr_dlr := const-ltol-rule  &
     C-CONT.RELS <! !> ].
 |#
 
-; --- LR types building indef. adjectives
-; for "evaluativos" quantifiers (otro, mucho/poco, bastante,...). These may co-occur in 
-; predicative constructions (e.g. sus problemas eran demasiados) or as pre-nominal adjectives 
-; (e.g. sus demasiados problemas).
-indef-adj-lex-rule := tmt-lex-rule & phrase-or-lexrule & 
+
+indef-adj-lex-rule := tmt-lex-rule & phrase-or-lexrule &
   [ STEM #stem,
     INFLECTED #infl,
     SYNSEM [ PUNCT #punct,
-             SLSHD #slshd, 
+             SLSHD #slshd,
              LOCAL [ AGR #agr,
                      CAT [ POSTHEAD -,
                            MC na,
-                           HEAD adj &
-                                [ KEYS.KEY #pred,
-                                  TAM #tam,
-                                  MOD < [ LOCAL intersective-mod & 
-                                           [ CAT [ HEAD noun & [ KEYS.KEY non_elliptical_n_rel ],
-                                                   VAL [ SPR < expressed-synsem & 
-                                                               [ LOCAL.CAT.HEAD.KEYS.KEY quant_or_deg_rel ] >,
-                                                         SUBJ < >,
-                                                         SPEC < > ] ],
-                                             CONT.HOOK.INDEX #agr ] ] > ],
+                           HEAD adj & [ KEYS.KEY #pred,
+                                        TAM #tam,
+                                        MOD < [ LOCAL intersective-mod & [ CAT [ HEAD noun & [ KEYS.KEY non_elliptical_n_rel ],
+                                                                                 VAL [ SPR < expressed-synsem & [ LOCAL.CAT.HEAD.KEYS.KEY quant_or_deg_rel ] >,
+                                                                                       SUBJ < >,
+                                                                                       SPEC < > ] ],
+                                                                           CONT.HOOK.INDEX #agr ] ] > ],
                            VAL [ SPR < >,
                                  SUBJ < >,
                                  COMPS < >,
@@ -1119,63 +1113,81 @@ indef-adj-lex-rule := tmt-lex-rule & phrase-or-lexrule &
                      CONT [ HOOK [ LTOP #ltop,
                                    INDEX #arg0,
                                    XARG #agr ],
-                            RELS <! #key & adj-arg1-relation & 
-                                    [ ARG0.E #tam ] !> ] ],
-            LKEYS.KEYREL #key & [ PRED #pred,
-                                  LBL #ltop,
-                                  ARG0 #arg0,
-                                  ARG1 #agr ],
-            NON-LOCAL #nonloc ],
+                            RELS <! #key & adj-arg1-relation & [ ARG0.E #tam ] !> ] ],
+             LKEYS.KEYREL #key & [ PRED #pred,
+                                   LBL #ltop,
+                                   ARG0 #arg0,
+                                   ARG1 #agr ],
+             NON-LOCAL #nonloc ],
     DTR [ STEM #stem,
           INFLECTED #infl,
-          SYNSEM [ SLSHD #slshd, 
+          SYNSEM [ SLSHD #slshd,
                    PUNCT #punct & [ RPUNCT no_punct ],
                    LOCAL [ AGR #agr,
                            CAT.HEAD det,
                            CONT.RELS <! relation, relation !> ],
                    LKEYS.ALTKEYREL.PRED card_or_undef_q_rel & #pred,
                    NON-LOCAL #nonloc & non-local-none ] ],
-    C-CONT.RELS <! !> ].
+    C-CONT.RELS <! !> ]
+  """
+  --- LR types building indef. adjectives
+  for "evaluativos" quantifiers (otro, mucho/poco, bastante,...). These may co-occur in
+  predicative constructions (e.g. sus problemas eran demasiados) or as pre-nominal adjectives
+  (e.g. sus demasiados problemas).
+  """.
 
 
-; otro
 a_indef-otro_dlr := indef-adj-lex-rule &
   [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL.CAT [ HEAD.KEYS.ALTKEY pre_otro_q_rel,
                                               VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY pre_otro_q_rel ] > ] ] >,
-    DTR.SYNSEM.LKEYS.ALTKEYREL.PRED otro_q_rel ].
+    DTR.SYNSEM.LKEYS.ALTKEYREL.PRED otro_q_rel ]
+  """
+  otro
+  """.
 
-; mucho
+
 a_indef-mucho_dlr := indef-adj-lex-rule &
-  [ SYNSEM.LOCAL.CAT.HEAD.MOD < [LOCAL.CAT [ HEAD.KEYS.ALTKEY pre_otro_q_rel,
-                                             VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY pre_much_or_poc_q_rel ] > ] ] >,
-    DTR.SYNSEM.LKEYS.ALTKEYREL.PRED mucho_q_rel ].
+  [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL.CAT [ HEAD.KEYS.ALTKEY pre_otro_q_rel,
+                                              VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY pre_much_or_poc_q_rel ] > ] ] >,
+    DTR.SYNSEM.LKEYS.ALTKEYREL.PRED mucho_q_rel ]
+  """
+  mucho
+  """.
 
-; poco
+
 a_indef-poco_dlr := indef-adj-lex-rule &
-  [ SYNSEM.LOCAL.CAT.HEAD.MOD < [LOCAL.CAT [ HEAD.KEYS.ALTKEY pre_otro_q_rel,
-                                             VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY pre_much_or_poc_q_rel ] > ] ] >,
-    DTR.SYNSEM.LKEYS.ALTKEYREL.PRED poco_q_rel ].
+  [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL.CAT [ HEAD.KEYS.ALTKEY pre_otro_q_rel,
+                                              VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY pre_much_or_poc_q_rel ] > ] ] >,
+    DTR.SYNSEM.LKEYS.ALTKEYREL.PRED poco_q_rel ]
+  """
+  poco
+  """.
 
-; varios, bastante, demasiado, numeroso, determinado, distinto, diverso, escaso, cierto, raro
+
 a_indef-undf-q_dlr := indef-adj-lex-rule &
   [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL.CAT [ HEAD.KEYS.ALTKEY pre_otro_q_rel,
                                               VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY def_q_rel ] > ] ] >,
-    DTR.SYNSEM.LKEYS.ALTKEYREL.PRED undef_q_rel ].
+    DTR.SYNSEM.LKEYS.ALTKEYREL.PRED undef_q_rel ]
+  """
+  varios, bastante, demasiado, numeroso, determinado, distinto, diverso, escaso, cierto, raro
+  """.
 
-; cardinals
+
 a_indef-nu-card_dlr := indef-adj-lex-rule &
   [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL.CAT [ HEAD.KEYS.ALTKEY pre_otro_q_rel,
                                               VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY pre_card_q_rel ] > ] ] >,
     DTR [ INFLECTED -,
-          SYNSEM.LKEYS.ALTKEYREL.PRED card_q_rel ] ].
+          SYNSEM.LKEYS.ALTKEYREL.PRED card_q_rel ] ]
+  """
+  cardinals
+  """.
 
 
-; --- LR types for determiners/quantifiers following the noun
-quant-or-det_postn_lex-rule := tmt-lex-rule & phrase-or-lexrule & 
+quant-or-det_postn_lex-rule := tmt-lex-rule & phrase-or-lexrule &
   [ STEM #stem,
     INFLECTED #infl,
     ALTS #alts,
-    SYNSEM [ SLSHD #slshd, 
+    SYNSEM [ SLSHD #slshd,
              MODIFIED #modified,
              PUNCT #punct,
              LOCAL [ COORD #coord,
@@ -1187,11 +1199,11 @@ quant-or-det_postn_lex-rule := tmt-lex-rule & phrase-or-lexrule &
                                  SUBJ < >,
                                  COMPS < >,
                                  CLTS < > ] ] ],
-            NON-LOCAL #nonloc ],
+             NON-LOCAL #nonloc ],
     DTR [ STEM #stem,
           INFLECTED #infl & +,
           ALTS #alts,
-          SYNSEM [ SLSHD #slshd, 
+          SYNSEM [ SLSHD #slshd,
                    MODIFIED #modified,
                    PUNCT #punct,
                    LOCAL [ COORD #coord,
@@ -1199,29 +1211,34 @@ quant-or-det_postn_lex-rule := tmt-lex-rule & phrase-or-lexrule &
                            COORD-STRAT #coord-strat,
                            CAT.HEAD det ],
                    NON-LOCAL #nonloc & non-local-none ] ],
-    C-CONT.RELS <! !> ].
+    C-CONT.RELS <! !> ]
+  """
+  --- LR types for determiners/quantifiers following the noun
+  """.
+
 
 det_postn_lex-rule := quant-or-det_postn_lex-rule &
   [ SYNSEM [ LOCAL [ AGR #agr,
                      CAT [ MC na,
-                           HEAD adj &
-                              [ TAM #tam,
-                                KEYS.KEY #pred,
-                                MOD < [ LOCAL intersective-mod & 
-                                              [ CAT [ HEAD noun,
-                                                      VAL [ SUBJ < >,
-                                                            SPEC < > ] ],
-                                                CONT.HOOK.INDEX #agr ] ] > ] ],
+                           HEAD adj & [ TAM #tam,
+                                        KEYS.KEY #pred,
+                                        MOD < [ LOCAL intersective-mod & [ CAT [ HEAD noun,
+                                                                                 VAL [ SUBJ < >,
+                                                                                       SPEC < > ] ],
+                                                                           CONT.HOOK.INDEX #agr ] ] > ] ],
                      CONT [ HOOK [ INDEX #arg0,
                                    LTOP #ltop,
                                    XARG #agr ],
-                            RELS <! #key & adj-arg1-relation & 
-                                    [ ARG0.E #tam ] !> ] ],
-            LKEYS.KEYREL #key & [ PRED #pred,
-                                  ARG0 #arg0,
-                                  LBL #ltop,
-                                  ARG1 #agr ] ],
-    DTR.SYNSEM.LOCAL.AGR #agr ].
+                            RELS <! #key & adj-arg1-relation & [ ARG0.E #tam ] !> ] ],
+             LKEYS.KEYREL #key & [ PRED #pred,
+                                   ARG0 #arg0,
+                                   LBL #ltop,
+                                   ARG1 #agr ] ],
+    DTR.SYNSEM.LOCAL.AGR #agr ]
+  """
+  
+  """.
+
 
 quant_postn_lex-rule := quant-or-det_postn_lex-rule &
   [ SYNSEM [ LOCAL [ AGR #agr,
@@ -1232,24 +1249,38 @@ quant_postn_lex-rule := quant-or-det_postn_lex-rule &
                          CAT [ POSTHEAD -,
                                HEAD #head ],
                          CONT #cont ],
-                 LKEYS #lkey ] ].
+                 LKEYS #lkey ] ]
+  """
+  
+  """.
 
-; - demonstratives: when they follow the noun, they are modifiers and they require 
-; the definite article (e.g. la canción esa me gustó)
+
 d_pstn-demons_dlr := det_postn_lex-rule &
   [ SYNSEM [ LOCAL.CAT.HEAD.MOD < [ LOCAL.CAT [ HEAD.KEYS.ALTKEY _el_q_rel,
                                                 VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY quant_rel ] > ] ] >,
              LKEYS.KEYREL.PRED dem_adj_rel ],
     DTR.SYNSEM [ LOCAL.CAT.POSTHEAD -,
-                 LKEYS.KEYREL.PRED dem_q_rel ] ].
+                 LKEYS.KEYREL.PRED dem_q_rel ] ]
+  """
+  - demonstratives: when they follow the noun, they are modifiers and they require
+  the definite article (e.g. la canción esa me gustó)
+  """.
 
-; - alguno/ninguno always follow the noun (e.g. no tengo miedo alguno) and 
-; alguna/os/as, ninguna may precede and follow the noun
+
 d_pstn-idf-algun_dlr := quant_postn_lex-rule &
-  [ DTR.SYNSEM.LKEYS.KEYREL.PRED _alguno_q_rel ].
+  [ DTR.SYNSEM.LKEYS.KEYREL.PRED _alguno_q_rel ]
+  """
+  - alguno/ninguno always follow the noun (e.g. no tengo miedo alguno) and
+  alguna/os/as, ninguna may precede and follow the noun
+  """.
+
 
 d_pstn-idf-ningun_dlr := quant_postn_lex-rule &
-  [ DTR.SYNSEM.LKEYS.KEYREL.PRED _ninguno_q_rel ].
+  [ DTR.SYNSEM.LKEYS.KEYREL.PRED _ninguno_q_rel ]
+  """
+  
+  """.
+
 
 
 ; --- LR types for partitive pronouns/quantifying nouns
@@ -1515,70 +1546,88 @@ comp-enclt-lex-rule := basic-comp-clt-lex-rule &
 
 ; -- accusative complement cliticization
 
-; transitive verbs taking NPs (e.g. lo come, lo invierte (en bolsa), los amenaza con llorar, los pone 
-; en el tren,...) and finite completive clauses and/or VPinf (e.g. lo quiere) or interrogative clauses 
-; (e.g. lo sabe) and for impersonal transitive verbs 
-; With ditransitive verbs, you can't cliticize only the DO (e.g. *lo di a María, *lo dije a Juan). 
-; !!! indefinite DO can't be cliticized (e.g. ¿compraste flores? *Sí, las compré; *¿A quién lo viste?), 
-; but I can't control this.
-v_acc-cmp-clt_dlr := comp-clt-lex-rule & 
-  [ ALTS [ RCP -, RFX -, PASS - ],
+
+v_acc-cmp-clt_dlr := comp-clt-lex-rule &
+  [ ALTS [ RCP -,
+           RFX -,
+           PASS - ],
     SYNSEM.LOCAL [ CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE acc_or_dat,
                                             CONT.HOOK.INDEX #ind2 ] ] >,
                    CONT.RELS.LIST.FIRST.ARG2 #ind2 ],
-    DTR.SYNSEM transitive_verb_synsem  & 
-               [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD.CASE acc ],... > ] ].
+    DTR.SYNSEM transitive_verb_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD.CASE acc ], ... > ] ]
+  """
+  transitive verbs taking NPs (e.g. lo come, lo invierte (en bolsa), los amenaza con llorar, los pone
+  en el tren,...) and finite completive clauses and/or VPinf (e.g. lo quiere) or interrogative clauses
+  (e.g. lo sabe) and for impersonal transitive verbs
+  With ditransitive verbs, you can't cliticize only the DO (e.g. *lo di a María, *lo dije a Juan).
+  !!! indefinite DO can't be cliticized (e.g. ¿compraste flores? *Sí, las compré; *¿A quién lo viste?),
+  but I can't control this.
+  """.
 
-; predicative complements, e.g. la considero muy capaz
-v_acc-cmp-clt-vprd_dlr := comp-clt-lex-rule & 
-  [ ALTS [ RCP -, RFX -, PASS - ],
+
+v_acc-cmp-clt-vprd_dlr := comp-clt-lex-rule &
+  [ ALTS [ RCP -,
+           RFX -,
+           PASS - ],
     SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE acc_or_dat,
                                           CONT.HOOK.INDEX #ind2 ] ] >,
-    DTR.SYNSEM v_np-xp_synsem & 
-               [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD.CASE acc ], 
-                                       [ LOCAL.CONT.HOOK.XARG #ind2 ] > ] ].
+    DTR.SYNSEM v_np-xp_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD.CASE acc ],
+                                                        [ LOCAL.CONT.HOOK.XARG #ind2 ] > ] ]
+  """
+  predicative complements, e.g. la considero muy capaz
+  """.
 
-; reciprocal verbs
- v_recip_dlr := comp-clt-lex-rule & 
-   [ ALTS [ RCP -, RFX -, PASS - ],
-     SYNSEM.LOCAL [ AGR.PNG #agr & [ PN plur ],
-                    CAT.VAL [ SUBJ < [ LOCAL.AGR.PNG #agr ] >,
-                              CLTS < [ LOCAL [ CAT.HEAD.CASE rcp,
-                                               CONT.HOOK.INDEX #ind2 & 
-                                                               [ PNG #agr,
-                                                                 PRONTYPE std_or_recip_or_refl_pron ] ] ] > ],
-                    CONT.RELS.LIST.FIRST.ARG2 #ind2 ],
-     DTR [ ALTS.RCP +,
-           SYNSEM transitive_verb_synsem &
-                  [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local ],... > ] ] ].
 
-; reflexive verbs
- v_reflex_dlr := comp-clt-lex-rule & 
-   [ ALTS [ RCP -, RFX -, PASS - ],
-     SYNSEM.LOCAL [ AGR.PNG #agr,
-                    CAT.VAL [ SUBJ < [ LOCAL.AGR.PNG #agr ] >,
-                              CLTS < [ LOCAL [ CAT.HEAD.CASE rflx,
-                                               CONT.HOOK.INDEX #ind2 & 
-                                                               [ PNG #agr,
-                                                                 PRONTYPE std_or_recip_or_refl_pron ] ] ] > ],
-                    CONT.RELS.LIST.FIRST.ARG2 #ind2 ],
-     DTR [ ALTS.RFX +,
-           SYNSEM transitive_verb_synsem &
-                  [ LOCAL [ CAT.VAL.COMPS < [ LOCAL np_acc_local ],... > ] ] ] ].
+v_recip_dlr := comp-clt-lex-rule &
+  [ ALTS [ RCP -,
+           RFX -,
+           PASS - ],
+    SYNSEM.LOCAL [ AGR.PNG #agr & [ PN plur ],
+                   CAT.VAL [ SUBJ < [ LOCAL.AGR.PNG #agr ] >,
+                             CLTS < [ LOCAL [ CAT.HEAD.CASE rcp,
+                                              CONT.HOOK.INDEX #ind2 & [ PNG #agr,
+                                                                        PRONTYPE std_or_recip_or_refl_pron ] ] ] > ],
+                   CONT.RELS.LIST.FIRST.ARG2 #ind2 ],
+    DTR [ ALTS.RCP +,
+          SYNSEM transitive_verb_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local ], ... > ] ] ]
+  """
+  reciprocal verbs
+  """.
 
-; reflexive verbs with predicative complements, e.g. se considero muy capaz
-v_reflex-vprd_dlr := comp-clt-lex-rule & 
-   [ ALTS [ RCP -, RFX -, PASS - ],
-     SYNSEM.LOCAL [ AGR.PNG #agr,
-                    CAT.VAL [ SUBJ < [ LOCAL.AGR.PNG #agr ] >,
-                              CLTS < [ LOCAL [ CAT.HEAD.CASE rflx,
-                                               CONT.HOOK.INDEX #ind2 & 
-                                                               [ PNG #agr,
-                                                                 PRONTYPE std_or_recip_or_refl_pron ] ] ] > ] ],
-     DTR [ ALTS.RFX +,
-           SYNSEM v_np-xp_synsem & 
-                  [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local ], 
-                                       [ LOCAL.CONT.HOOK.XARG #ind2 ] > ] ] ].
+
+v_reflex_dlr := comp-clt-lex-rule &
+  [ ALTS [ RCP -,
+           RFX -,
+           PASS - ],
+    SYNSEM.LOCAL [ AGR.PNG #agr,
+                   CAT.VAL [ SUBJ < [ LOCAL.AGR.PNG #agr ] >,
+                             CLTS < [ LOCAL [ CAT.HEAD.CASE rflx,
+                                              CONT.HOOK.INDEX #ind2 & [ PNG #agr,
+                                                                        PRONTYPE std_or_recip_or_refl_pron ] ] ] > ],
+                   CONT.RELS.LIST.FIRST.ARG2 #ind2 ],
+    DTR [ ALTS.RFX +,
+          SYNSEM transitive_verb_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local ], ... > ] ] ]
+  """
+  reflexive verbs
+  """.
+
+
+v_reflex-vprd_dlr := comp-clt-lex-rule &
+  [ ALTS [ RCP -,
+           RFX -,
+           PASS - ],
+    SYNSEM.LOCAL [ AGR.PNG #agr,
+                   CAT.VAL [ SUBJ < [ LOCAL.AGR.PNG #agr ] >,
+                             CLTS < [ LOCAL [ CAT.HEAD.CASE rflx,
+                                              CONT.HOOK.INDEX #ind2 & [ PNG #agr,
+                                                                        PRONTYPE std_or_recip_or_refl_pron ] ] ] > ] ],
+    DTR [ ALTS.RFX +,
+          SYNSEM v_np-xp_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local ],
+                                                          [ LOCAL.CONT.HOOK.XARG #ind2 ] > ] ] ]
+  """
+  reflexive verbs with predicative complements, e.g. se considero muy capaz
+  """.
+
 
 
 ; -- dative complement cliticization
