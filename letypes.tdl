@@ -8123,222 +8123,299 @@ p_vp_ptcl_lex := mark-adp-lex & p_cp_prop_or_ques_inf &
 
 
 ; - comparatives
-; e.g. tan distantes como antes
 p_rg_ptcl_lex := mark-adp-lex & p_adv & 
   [ SYNSEM basic_mark-adp_synsem & 
-           [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD.KEYS.KEY adv_rel ] > ] ].
+           [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD.KEYS.KEY adv_rel ] > ] ]
+"""
+; - comparatives
+; e.g. tan distantes como antes
+""".
 
-; e.g. igual que en una película, contará con más funciones que en la anterior
 p_pp_ptcl_lex := mark-adp-lex & p_pp & 
   [ SYNSEM basic_mark-adp_synsem & 
            [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT [ MC na,
-                                                 HEAD.MOD < [ LOCAL.CAT.HEAD noun ] > ] ]> ] ].  
+                                                 HEAD.MOD < [ LOCAL.CAT.HEAD noun ] > ] ]> ] ]
+"""
+; - comparatives
+; e.g. igual que en una película, contará con más funciones que en la anterior
+""".  
 
-; e.g. tan maravillada como rutinatia
 p_ap_ptcl_lex := mark-adp-lex & p_ap & 
   [ SYNSEM basic_mark-adp_synsem & 
-           [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.MC na ] > ] ].
+           [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.MC na ] > ] ]
+"""
+; - comparatives
+; e.g. tan maravillada como rutinatia
+""".
+
+; --- Nominal modifying prepositions
+
+p_np_i-nm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
+  [ SYNSEM p_nmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS [ KEY non_free_relative_nom_rel,
+                                                                               ALTKEY explicit_q_rel ],
+                                                                   VAL.SPR < > ],
+                                                             CONT.HOOK.INDEX #arg2 & [ SORT non-temp ] ] ] >,
+                             LKEYS.KEYREL.ARG2 #arg2 ] ]
+  """
+  --- Nominal modifying prepositions
+  - taking NPs
+  """.
 
 
-
-; --- Nominal modifying prepositions   
-
-; - taking NPs
-p_np_i-nm_lex := mod-adp-lex & p_np & norm-sem-lex-item & 
-  [ SYNSEM p_nmod_synsem &
-           [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS [ KEY non_free_relative_nom_rel,
-                                                               ALTKEY explicit_q_rel ], 
-                                                   VAL.SPR < > ],
-                                             CONT.HOOK.INDEX #arg2 & [ SORT non-temp ] ] ] >,
-             LKEYS.KEYREL.ARG2 #arg2 ] ]. 
-
-; - taking Nbar
-p_nb_i-nm_lex := mod-adp-lex & p_np & norm-sem-lex-item & 
-  [ SYNSEM p_nmod_synsem &
-           [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS [ KEY non_free_relative_nom_rel,
-                                                               ALTKEY explicit_q_rel ], 
-                                                   VAL.SPR < [ LOCAL.CONT.RELS <! relation !>,
-                                                               NON-LOCAL [ SLASH 0-dlist,
-                                                                           QUE 0-dlist,
-                                                                           REL 0-dlist ] ] > ],
-                                             CONT.HOOK.INDEX #arg2 ] ] >,
-             LKEYS.KEYREL.ARG2 #arg2 ] ]. 
-
-; - taking NEs
-p_np_i-pn-nm_lex := mod-adp-lex & p_np & norm-sem-lex-item & 
-  [ SYNSEM p_nmod_synsem &
-           [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS.KEY named_rel,
-                                                   VAL.SPR < > ],
-                                             CONT.HOOK.INDEX #arg2 & [ PRONTYPE not_pron ] ] ] >,
-             LKEYS.KEYREL.ARG2 #arg2 ] ]. 
-
-; - taking temporal NPs (de, hasta, para)
-; e.g. el concierto del otro día/de ayer, tengo entradas para el jueves/mañana
-p_np_i-tmp-nm_lex := mod-adp-lex & p_np & norm-sem-lex-item & 
-  [ SYNSEM p_nmod_synsem &
-           [ LOCAL.CAT [ HEAD.MOD < [ LOCAL.CAT.HEAD.KEYS.KEY non_modable_rel ] >, 
-                         VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS [ KEY non_free_relative_nom_rel,
-                                                                 ALTKEY explicit_q_rel ],
-                                                     VAL.SPR < > ],
-                                               CONT.HOOK.INDEX #arg2 & [ SORT tmp ] ] ] > ],
-             LKEYS.KEYREL.ARG2 #arg2 ] ].  
+p_nb_i-nm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
+  [ SYNSEM p_nmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS [ KEY non_free_relative_nom_rel,
+                                                                               ALTKEY explicit_q_rel ],
+                                                                   VAL.SPR < [ LOCAL.CONT.RELS <! relation !>,
+                                                                               NON-LOCAL [ SLASH 0-dlist,
+                                                                                           QUE 0-dlist,
+                                                                                           REL 0-dlist ] ] > ],
+                                                             CONT.HOOK.INDEX #arg2 ] ] >,
+                             LKEYS.KEYREL.ARG2 #arg2 ] ]
+  """
+  --- Nominal modifying prepositions
+  - taking Nbar
+  """.
 
 
-; - taking verbal complements (por, sin)
-; e.g. pan por cocer
-p_vp_i-ctrl-nm_lex := mod-adp-lex & p_cp_prop_inf_slash & 
-  [ SYNSEM p_nmod_synsem &
-           [ LOCAL [ CAT [ HEAD.MOD #mod & < [ LOCAL.CAT.HEAD.KEYS.KEY non_modable_rel ] >,
-                           VAL.COMPS < [ NON-LOCAL.SLASH <! np_acc_local &
-                                                            [ CAT.HEAD.MOD #mod,
-                                                              CONT.HOOK.INDEX #ctrl ] !> ] > ],
-                     CONT.HOOK.XARG #ctrl & ref-ind ] ] ].
-
-; e.g. satisfacción por estar aquí
-p_vp_i-nm_lex := mod-adp-lex & p_cp_prop_inf_slash & 
-  [ SYNSEM p_nmod_synsem &
-           [ LOCAL.CAT [ HEAD.MOD < [ LOCAL.CAT.HEAD.KEYS.KEY non_modable_rel ] >,
-                         VAL.COMPS < [ LOCAL.CAT.HEAD.KEYS.ALTKEY prop,
-                                       NON-LOCAL.SLASH 0-dlist ] > ] ] ].
-
-; Taking ADV
-; e.g. tengo las ganas de siempre
-p_adv_i-nm_lex := mod-adp-lex & p_adv & norm-sem-lex-item & 
-  [ SYNSEM p_nmod_synsem &
-           [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD.KEYS.KEY adv_rel ] > ] ].
-
-; - taking PPs (de (orig) + PP (loc))
-; e.g. el libro de sobre la mesa
-p_pp_i-nm_lex := mod-adp-lex & p_pp & norm-sem-lex-item & 
-  [ SYNSEM p_nmod_synsem &
-           [ LOCAL.CAT [ HEAD.MOD < [ LOCAL.CAT [ HEAD noun & [ KEYS.KEY non_modable_rel ],
-                                                  VAL.COMPS < > ] ] >,
-                         VAL.COMPS < [ LOCAL [ CAT.HEAD.MOD < [ LOCAL.CAT.HEAD noun ] >,
-                                               CONT.HOOK.INDEX #arg2 ] ] > ],
-             LKEYS.KEYREL.ARG2 #arg2 ] ]. 
-
-; non-temporal lexical PPs 
-; e.g. seis horas más, un nombré así.
-pp_-_i-nm_lex := mod-pp-lex & norm-sem-lex-item & 
-  [ SYNSEM pp_nmod_synsem ]. 
-
-; temporal lexical PPs: antes, después
-; e.g. Los agentes sospechan de la mujer rescatada bajo un sofá nueve horas después.
-pp_-_i-nm-tmp_lex := mod-pp-lex & norm-sem-lex-item & 
-  [ SYNSEM pp_nmod_synsem &
-           [ LOCAL.CAT.HEAD.MOD < [ LOCAL.CONT.HOOK.INDEX.SORT tmp ] > ] ]. 
-
-; - taking APs (de, por)
-; e.g. presume de valiente, lo acusó de traidor, ¿me tomas por tonto?
-p_ap_i-nm_lex := mod-adp-lex & p_ap & norm-sem-lex-item & 
-  [ SYNSEM p_nmod_synsem &
-         [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CONT.HOOK.INDEX #arg2 ] >,
-           LKEYS.KEYREL.ARG2 #arg2 ] ].
+p_np_i-pn-nm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
+  [ SYNSEM p_nmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS.KEY named_rel,
+                                                                   VAL.SPR < > ],
+                                                             CONT.HOOK.INDEX #arg2 & [ PRONTYPE not_pron ] ] ] >,
+                             LKEYS.KEYREL.ARG2 #arg2 ] ]
+  """
+  --- Nominal modifying prepositions
+  - taking NEs
+  """.
 
 
-; --- Verbal modifying prepositions 
+p_np_i-tmp-nm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
+  [ SYNSEM p_nmod_synsem & [ LOCAL.CAT [ HEAD.MOD < [ LOCAL.CAT.HEAD.KEYS.KEY non_modable_rel ] >,
+                                         VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS [ KEY non_free_relative_nom_rel,
+                                                                                 ALTKEY explicit_q_rel ],
+                                                                     VAL.SPR < > ],
+                                                               CONT.HOOK.INDEX #arg2 & [ SORT tmp ] ] ] > ],
+                             LKEYS.KEYREL.ARG2 #arg2 ] ]
+  """
+  --- Nominal modifying prepositions
+  - taking temporal NPs (de, hasta, para)
+  e.g. el concierto del otro día/de ayer, tengo entradas para el jueves/mañana
+  """.
 
-; - taking Nbar
-p_nb_i-vm_lex := mod-adp-lex & p_np & norm-sem-lex-item & 
-  [ SYNSEM p_vmod_synsem &
-           [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS [ KEY common_nom_rel,
-                                                               ALTKEY explicit_q_rel ], 
-                                                   VAL.SPR < [ LOCAL.CONT.RELS <! relation !>,
-                                                               NON-LOCAL [ QUE 0-dlist,
-                                                                           REL 0-dlist ] ] > ],
-                                             CONT.HOOK.INDEX.SORT non-temp ] ] >,
-             LKEYS.KEYREL.PRED prep_mod_rel ] ].  
 
-; - taking NPs
-p_np_i-vm_lex := mod-adp-lex & p_np & norm-sem-lex-item & 
-  [ SYNSEM p_vmod_synsem &
-           [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS [ KEY non_named_non_modable_rel,
-                                                               ALTKEY explicit_q_rel ], 
-                                                   VAL.SPR < > ],
-                                             CONT.HOOK.INDEX.SORT non-temp ] ] >,
-             LKEYS.KEYREL.PRED prep_mod_rel ] ]. 
+p_vp_i-ctrl-nm_lex := mod-adp-lex & p_cp_prop_inf_slash &
+  [ SYNSEM p_nmod_synsem & [ LOCAL [ CAT [ HEAD.MOD #mod & < [ LOCAL.CAT.HEAD.KEYS.KEY non_modable_rel ] >,
+                                           VAL.COMPS < [ NON-LOCAL.SLASH <! np_acc_local & [ CAT.HEAD.MOD #mod,
+                                                                                             CONT.HOOK.INDEX #ctrl ] !> ] > ],
+                                     CONT.HOOK.XARG #ctrl & ref-ind ] ] ]
+  """
+  --- Nominal modifying prepositions
+  - taking verbal complements (por, sin)
+  e.g. pan por cocer
+  """.
 
-; - taking NEs
-p_np_i-pn-vm_lex := mod-adp-lex & p_np & norm-sem-lex-item & 
-  [ SYNSEM p_vmod_synsem &
-           [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS.KEY named_rel, 
-                                                   VAL.SPR < > ],
-                                             CONT.HOOK.INDEX.PRONTYPE not_pron ],
-                                     NON-LOCAL.QUE 0-dlist ] >,
-             LKEYS.KEYREL.PRED prep_mod_rel ] ].  
 
-; - taking temporal NPs (a, desde, en, entre, hace, hacia, hasta, para, por, sobre, tras)
-; e.g. te espero a las cinco; no he vuelto desde el mes pasado/ayer; nací en 1967; 
-; quedamos entre las 9 y las 10 de la mañana; vino hace un mes; ¿quedamos hacia las dos? 
-; se despidió hasta la noche/mañana; lo dejaremos para el jueves; trabajaremos por la mañana;
-; lo dejaremos para la noche/mañana; el tren llegará sobre las diez
-p_np_i-tmp-vm_lex := mod-adp-lex & p_np & norm-sem-lex-item & 
-  [ SYNSEM p_vmod_synsem &
-           [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT.VAL.SPR < >,
-                                             CONT.HOOK.INDEX.SORT tmp ] ] >,
-             LKEYS.KEYREL.PRED temp_loc_rel ] ].
+p_vp_i-nm_lex := mod-adp-lex & p_cp_prop_inf_slash &
+  [ SYNSEM p_nmod_synsem & [ LOCAL.CAT [ HEAD.MOD < [ LOCAL.CAT.HEAD.KEYS.KEY non_modable_rel ] >,
+                                         VAL.COMPS < [ LOCAL.CAT.HEAD.KEYS.ALTKEY prop,
+                                                       NON-LOCAL.SLASH 0-dlist ] > ] ] ]
+  """
+  --- Nominal modifying prepositions
+  e.g. satisfacción por estar aquí
+  """.
 
-; durante
-p_np_i-tmp-durante-vm_lex := mod-adp-lex & p_np & norm-sem-lex-item & 
-  [ SYNSEM p_vmod_synsem &
-           [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.VAL.SPR < > ] >,
-             LKEYS.KEYREL.PRED temp_loc_rel ] ].
 
-; -- ditransitive preposition "a" in "a... de..." expressing distance
-; e.g. Juan vive (a (3km) (de Madrid))/Juan vive a 3km/*Juan vive de Madrid
-p_np-pp_i-vm_lex := mod-adp-lex & p_ditrans & norm-sem-lex-item & 
-  [ SYNSEM p_vmod_synsem &
-           [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS.ALTKEY non_free_relative_q_rel,
-                                                   VAL.SPR < > ],
-                                             CONT.HOOK.INDEX.SORT mea ] ], 
-                                   [ LOCAL.CONT.HOOK.INDEX.SORT loc  ] >,
-             LKEYS.KEYREL.PRED state_loc_rel ] ]. 
+p_adv_i-nm_lex := mod-adp-lex & p_adv & norm-sem-lex-item &
+  [ SYNSEM p_nmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD.KEYS.KEY adv_rel ] > ] ]
+  """
+  --- Nominal modifying prepositions
+  Taking ADV
+  e.g. tengo las ganas de siempre
+  """.
 
-; - taking APs (por, de)
-; e.g. lloró por tonto/de impotencia
-p_ap_i-vm_lex := mod-adp-lex & p_ap & norm-sem-lex-item & 
-  [ SYNSEM p_vmod_synsem & 
-          [ LOCAL.CAT [ HEAD.MOD < [ LOCAL.CONT.HOOK.XARG #ctrl ] >,
-                         VAL.COMPS < [ LOCAL.CONT.HOOK.XARG #ctrl ] > ],
-             LKEYS.KEYREL.PRED prep_mod_rel ] ].
 
-; Taking ADV
-; e.g. mira hacia atrás
-p_adv_i-vm_lex := mod-adp-lex & p_adv & norm-sem-lex-item & 
-  [ SYNSEM p_vmod_synsem &
-           [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CONT.HOOK.INDEX.SORT non-temp ] >,
-             LKEYS.KEYREL.PRED prep_mod_rel ] ].
+p_pp_i-nm_lex := mod-adp-lex & p_pp & norm-sem-lex-item &
+  [ SYNSEM p_nmod_synsem & [ LOCAL.CAT [ HEAD.MOD < [ LOCAL.CAT [ HEAD noun & [ KEYS.KEY non_modable_rel ],
+                                                                  VAL.COMPS < > ] ] >,
+                                         VAL.COMPS < [ LOCAL [ CAT.HEAD.MOD < [ LOCAL.CAT.HEAD noun ] >,
+                                                               CONT.HOOK.INDEX #arg2 ] ] > ],
+                             LKEYS.KEYREL.ARG2 #arg2 ] ]
+  """
+  --- Nominal modifying prepositions
+  - taking PPs (de (orig) + PP (loc))
+  e.g. el libro de sobre la mesa
+  """.
 
-; Taking MODNP
-; e.g. Como ahora
-p_modnp_i-vm_lex := mod-adp-lex & p_modnp & norm-sem-lex-item & 
-  [ SYNSEM p_vmod_synsem &
-           [ LKEYS.KEYREL.PRED prep_mod_rel ] ].
 
-; - taking PPs, there are two types:
-; a)- "de" when, with the verb "ser" or with movement verbs, expresses origin, or when it heads a nominal 
-; complement; e.g. es de por ese barrio, salió de tras el matorral, el libro de sobre la mesa
-; b)- "desde" (origin), "hasta" (destination), "por" (path) + locative PP except "en"
-; e.g. se lanzó desde sobre el tejado
-p_pp_i-vm_lex := mod-adp-lex & p_pp & norm-sem-lex-item & 
+pp_-_i-nm_lex := mod-pp-lex & norm-sem-lex-item &
+  [ SYNSEM pp_nmod_synsem ]
+  """
+  --- Nominal modifying prepositions
+  non-temporal lexical PPs
+  e.g. seis horas más, un nombré así.
+  """.
+
+
+pp_-_i-nm-tmp_lex := mod-pp-lex & norm-sem-lex-item &
+  [ SYNSEM pp_nmod_synsem & [ LOCAL.CAT.HEAD.MOD < [ LOCAL.CONT.HOOK.INDEX.SORT tmp ] > ] ]
+  """
+  --- Nominal modifying prepositions
+  temporal lexical PPs: antes, después
+  e.g. Los agentes sospechan de la mujer rescatada bajo un sofá nueve horas después.
+  """.
+
+
+p_ap_i-nm_lex := mod-adp-lex & p_ap & norm-sem-lex-item &
+  [ SYNSEM p_nmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CONT.HOOK.INDEX #arg2 ] >,
+                             LKEYS.KEYREL.ARG2 #arg2 ] ]
+  """
+  --- Nominal modifying prepositions
+  - taking APs (de, por)
+  e.g. presume de valiente, lo acusó de traidor, ¿me tomas por tonto?
+  """.
+
+
+; --- Verbal modifying prepositions
+  
+
+p_nb_i-vm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
+  [ SYNSEM p_vmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS [ KEY common_nom_rel,
+                                                                               ALTKEY explicit_q_rel ],
+                                                                   VAL.SPR < [ LOCAL.CONT.RELS <! relation !>,
+                                                                               NON-LOCAL [ QUE 0-dlist,
+                                                                                           REL 0-dlist ] ] > ],
+                                                             CONT.HOOK.INDEX.SORT non-temp ] ] >,
+                             LKEYS.KEYREL.PRED prep_mod_rel ] ]
+  """
+  --- Verbal modifying prepositions
+  - taking Nbar
+  """.
+
+
+p_np_i-vm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
+  [ SYNSEM p_vmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS [ KEY non_named_non_modable_rel,
+                                                                               ALTKEY explicit_q_rel ],
+                                                                   VAL.SPR < > ],
+                                                             CONT.HOOK.INDEX.SORT non-temp ] ] >,
+                             LKEYS.KEYREL.PRED prep_mod_rel ] ]
+  """
+  --- Verbal modifying prepositions
+  - taking NPs
+  """.
+
+
+p_np_i-pn-vm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
+  [ SYNSEM p_vmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS.KEY named_rel,
+                                                                   VAL.SPR < > ],
+                                                             CONT.HOOK.INDEX.PRONTYPE not_pron ],
+                                                     NON-LOCAL.QUE 0-dlist ] >,
+                             LKEYS.KEYREL.PRED prep_mod_rel ] ]
+  """
+  --- Verbal modifying prepositions
+  - taking NEs
+  """.
+
+
+p_np_i-tmp-vm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
+  [ SYNSEM p_vmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT.VAL.SPR < >,
+                                                             CONT.HOOK.INDEX.SORT tmp ] ] >,
+                             LKEYS.KEYREL.PRED temp_loc_rel ] ]
+  """
+  --- Verbal modifying prepositions
+  - taking temporal NPs (a, desde, en, entre, hace, hacia, hasta, para, por, sobre, tras)
+  e.g. te espero a las cinco; no he vuelto desde el mes pasado/ayer; nací en 1967;
+  quedamos entre las 9 y las 10 de la mañana; vino hace un mes; ¿quedamos hacia las dos?
+  se despidió hasta la noche/mañana; lo dejaremos para el jueves; trabajaremos por la mañana;
+  lo dejaremos para la noche/mañana; el tren llegará sobre las diez
+  """.
+
+
+p_np_i-tmp-durante-vm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
+  [ SYNSEM p_vmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.VAL.SPR < > ] >,
+                             LKEYS.KEYREL.PRED temp_loc_rel ] ]
+  """
+  --- Verbal modifying prepositions
+  durante
+  """.
+
+
+p_np-pp_i-vm_lex := mod-adp-lex & p_ditrans & norm-sem-lex-item &
+  [ SYNSEM p_vmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS.ALTKEY non_free_relative_q_rel,
+                                                                   VAL.SPR < > ],
+                                                             CONT.HOOK.INDEX.SORT mea ] ],
+                                                   [ LOCAL.CONT.HOOK.INDEX.SORT loc ] >,
+                             LKEYS.KEYREL.PRED state_loc_rel ] ]
+  """
+  --- Verbal modifying prepositions
+  -- ditransitive preposition "a" in "a... de..." expressing distance
+  e.g. Juan vive (a (3km) (de Madrid))/Juan vive a 3km/*Juan vive de Madrid
+  """.
+
+
+p_ap_i-vm_lex := mod-adp-lex & p_ap & norm-sem-lex-item &
+  [ SYNSEM p_vmod_synsem & [ LOCAL.CAT [ HEAD.MOD < [ LOCAL.CONT.HOOK.XARG #ctrl ] >,
+                                         VAL.COMPS < [ LOCAL.CONT.HOOK.XARG #ctrl ] > ],
+                             LKEYS.KEYREL.PRED prep_mod_rel ] ]
+  """
+  --- Verbal modifying prepositions
+  - taking APs (por, de)
+  e.g. lloró por tonto/de impotencia
+  """.
+
+
+p_adv_i-vm_lex := mod-adp-lex & p_adv & norm-sem-lex-item &
+  [ SYNSEM p_vmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CONT.HOOK.INDEX.SORT non-temp ] >,
+                             LKEYS.KEYREL.PRED prep_mod_rel ] ]
+  """
+  --- Verbal modifying prepositions
+  Taking ADV
+  e.g. mira hacia atrás
+  """.
+
+
+p_modnp_i-vm_lex := mod-adp-lex & p_modnp & norm-sem-lex-item &
+  [ SYNSEM p_vmod_synsem & [ LKEYS.KEYREL.PRED prep_mod_rel ] ]
+  """
+  --- Verbal modifying prepositions
+  Taking MODNP
+  e.g. Como ahora
+  """.
+
+
+p_pp_i-vm_lex := mod-adp-lex & p_pp & norm-sem-lex-item &
   [ SYNSEM [ LOCAL.CAT [ HEAD [ PRD non-prd,
                                 MOD < [ LOCAL [ CAT.HEAD verb & [ AUX - ],
                                                 CONT.HOOK.INDEX.SF prop ] ] > ],
                          VAL.COMPS < [ LOCAL [ CAT.HEAD.MOD < [ LOCAL.CAT.HEAD verb ] >,
-                                               CONT.HOOK.INDEX #arg2 ] ],... > ],
-             LKEYS.KEYREL.ARG2 #arg2 ] ].
+                                               CONT.HOOK.INDEX #arg2 ] ], ... > ],
+             LKEYS.KEYREL.ARG2 #arg2 ] ]
+  """
+  --- Verbal modifying prepositions
+  - taking PPs, there are two types:
+  a)- "de" when, with the verb "ser" or with movement verbs, expresses origin, or when it heads a nominal
+  complement; e.g. es de por ese barrio, salió de tras el matorral, el libro de sobre la mesa
+  b)- "desde" (origin), "hasta" (destination), "por" (path) + locative PP except "en"
+  e.g. se lanzó desde sobre el tejado
+  """.
 
-; - taking marked NPs
-; !!! in fact, only with with movement verbs: "de/a" + PP_por, e.g. vengo de/a por agua
-p_pp_i-e-vm_lex := mod-adp-lex & p_mrkd_np & norm-sem-lex-item & 
-  [ SYNSEM p_vmod_synsem &
-           [ LOCAL.CAT.MC na,
-             LKEYS [ KEYREL.PRED dir_rel,
-                     --COMPKEY  _por_p_sel_rel ] ] ].  
 
-; e.g. tengo que ser honesta conmigo
-pp_-_i-vm_lex := mod-pp-lex & norm-sem-lex-item & 
-  [ SYNSEM pp_vmod_synsem ]. 
+p_pp_i-e-vm_lex := mod-adp-lex & p_mrkd_np & norm-sem-lex-item &
+  [ SYNSEM p_vmod_synsem & [ LOCAL.CAT.MC na,
+                             LKEYS [ KEYREL.PRED dir_rel,
+                                     --COMPKEY _por_p_sel_rel ] ] ]
+  """
+  --- Verbal modifying prepositions
+  - taking marked NPs
+  !!! in fact, only with with movement verbs: "de/a" + PP_por, e.g. vengo de/a por agua
+  """.
+
+
+pp_-_i-vm_lex := mod-pp-lex & norm-sem-lex-item &
+  [ SYNSEM pp_vmod_synsem ]
+  """
+  --- Verbal modifying prepositions
+  e.g. tengo que ser honesta conmigo
+  """.
+
 
 ; --- Adjectival modifying prepositions (degree)
 
