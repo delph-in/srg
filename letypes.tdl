@@ -9389,16 +9389,19 @@ n_pp_psd-part-nu-card_lex := n_quant &
 
 
 ; --- 7.2. Ordinals (Adjectives)
+
+aj_-_i-nu-ord_lex := non-modfied-adj-lex & a_mrkd_np & basic-one-arg &
+  [ SYNSEM intersective_adjective_synsem &
+            [ LOCAL.CAT [ HEAD.PRD prd,
+                          VAL.COMPS < [ OPT +,
+                                        LOCAL.CAT.HEAD.KEYS.KEY _de_p_sel_rel ] > ] ] ]
+"""
 ; NOTA: los ordinales precedidos de 'lo' pueden desempeñar funciones típica de 
 ; sustantivos (e.g. me propuso ir al cine o tomar una copa, y elegí lo segundo) y de 
 ; adverbios (e.g. lo rechazaron por dos razones: lo primero, porque...; lo segundo, porque...)
 ; e.g. los/sus/estos/dos primeros pasos. *su segundo/el segundo suyo.
 ; NOTA: in the ERG there is the feature CARG to specify the numeral
-aj_-_i-nu-ord_lex := non-modfied-adj-lex & a_mrkd_np & basic-one-arg &
-  [ SYNSEM intersective_adjective_synsem &
-            [ LOCAL.CAT [ HEAD.PRD prd,
-                          VAL.COMPS < [ OPT +,
-                                        LOCAL.CAT.HEAD.KEYS.KEY _de_p_sel_rel ] > ] ] ].
+""".
 
 aj_-_i-nu-ord-ms_lex := non-modfied-adj-lex & a_mrkd_np & basic-one-arg &
   [ SYNSEM intersective_adjective_synsem &
@@ -9408,55 +9411,66 @@ aj_-_i-nu-ord-ms_lex := non-modfied-adj-lex & a_mrkd_np & basic-one-arg &
                             VAL.COMPS < [ OPT +,
                                           LOCAL.CAT.HEAD.KEYS.KEY _de_p_sel_rel ] > ] ] ] ].
 
-
 ; --- 7.3. Partitives
+  
 
-; a)- se combinan con cardinales; e.g. un tercio (de (los) alumnos)
-; b)- card + ord + "parte"; e.g. dos terceras partes
-; !!! also for percentage!!!
-n_pp_part-nu_lex := n_pp_part_lex.
+n_pp_part-nu_lex := n_pp_part_lex
+  """
+  --- 7.3. Partitives
+  a)- se combinan con cardinales; e.g. un tercio (de (los) alumnos)
+  b)- card + ord + "parte"; e.g. dos terceras partes
+  !!! also for percentage!!!
+  """.
 
-; c)- el sustantivo "mitad" puede dar lugar a una construcción comparativa
-;     e.g. la mitad (de (los) asistentes), gana la mitad (de dinero) (que su hermana)
 
-; d)- el adjetivo medio se combina con cualquier sustantivo, incluso los sust. cardinales
-;     e.g. medio pollo, medio millar/centenar de personas.
-aj_-_i-nu-part_lex := non-modfied-adj-lex & a_intrans & norm-zero-arg & 
-  [ SYNSEM intersective_adjective_synsem &
-           [ LOCAL.CAT [ POSTHEAD -,
-                         HEAD.PRD non-prd ] ] ].
-
+aj_-_i-nu-part_lex := non-modfied-adj-lex & a_intrans & norm-zero-arg &
+  [ SYNSEM intersective_adjective_synsem & [ LOCAL.CAT [ POSTHEAD -,
+                                                         HEAD.PRD non-prd ] ] ]
+  """
+  --- 7.3. Partitives
+  c)- el sustantivo "mitad" puede dar lugar a una construcción comparativa
+      e.g. la mitad (de (los) asistentes), gana la mitad (de dinero) (que su hermana)
+  d)- el adjetivo medio se combina con cualquier sustantivo, incluso los sust. cardinales
+      e.g. medio pollo, medio millar/centenar de personas.
+  """.
 
 ; --- 7.4. Multiplicative (doble, triple, duplo, triplo, cuádruplo)
-
-; a)- quantitive reading (pronoun)
-; e.g. comió el doble/triple (de pan) (que su hermana)
-;      es el doble de bueno (que yo)
+  
 n_pp_pr-part-nu-mult_lex := spec-partitive-pron-lex &
-  [ SYNSEM norm-basic-partitive-pron-synsem & 
-           [ LOCAL.CAT.VAL.SPR < [ OPT  -, 
-                                   LOCAL.CAT.HEAD.KEYS.KEY art_def_q_rel ] >, 
-             NON-LOCAL.SLASH 0-dlist ] ].
+  [ SYNSEM norm-basic-partitive-pron-synsem & [ LOCAL.CAT.VAL.SPR < [ OPT -,
+                                                                      LOCAL.CAT.HEAD.KEYS.KEY art_def_q_rel ] >,
+                                                NON-LOCAL.SLASH 0-dlist ] ]
+  """
+  --- 7.4. Multiplicative (doble, triple, duplo, triplo, cuádruplo)
+  a)- quantitive reading (pronoun)
+  e.g. comió el doble/triple (de pan) (que su hermana)
+       es el doble de bueno (que yo)
+  """.
 
-; b)- qualificative reading (adjective)
-; e.g. tiene (una) doble personalidad/personalidad doble
+
 aj_-_i-nu-mult_lex := non-modfied-adj-lex & a_intrans & norm-zero-arg &
-  [ SYNSEM intersective_adjective_synsem &
-           [ LOCAL [ CAT.HEAD.PRD prd,
-                     CONT.HCONS <! !> ] ] ].
+  [ SYNSEM intersective_adjective_synsem & [ LOCAL [ CAT.HEAD.PRD prd,
+                                                     CONT.HCONS <! !> ] ] ]
+  """
+  --- 7.4. Multiplicative (doble, triple, duplo, triplo, cuádruplo)
+  b)- qualificative reading (adjective)
+  e.g. tiene (una) doble personalidad/personalidad doble
+  """.
 
-; c)- adverbial reading 
-; e.g. tuvo que estudiar el triple, pagó doble
-;av_-_nu-mult_lex := 
 
-
-; --- 7.5. Distributive
-
-; - cardinal + 'de' + 'cada' + cardinal + N' (Zp)
-; e.g. íbamos al cine tres de cada dos domingos
 d_-_q-nu-distr_lex := det_quant_indef &
   [ SYNSEM [ LOCAL.CAT.VAL.SPR < >,
-             LKEYS.KEYREL.PRED distr_numb_q_rel ] ].
+             LKEYS.KEYREL.PRED distr_numb_q_rel ] ]
+  """
+  --- 7.4. Multiplicative (doble, triple, duplo, triplo, cuádruplo)
+   c)- adverbial reading
+   e.g. tuvo que estudiar el triple, pagó doble
+  av_-_nu-mult_lex :=
+   --- 7.5. Distributive
+   - cardinal + 'de' + 'cada' + cardinal + N' (Zp)
+   e.g. íbamos al cine tres de cada dos domingos
+  """.
+
 
 
 
@@ -9556,17 +9570,30 @@ vp_inf_ques_comp_synsem := ques_comp_synsem &
                       CLTS < > ] ] ]. 
 
 
-; e.g. no me gusta que a los toros te pongas la minifalda; gritó que dónde habíamos puesto el dinero 
-cm_s_lex := basic-comp-lex & basic-one-arg & 
-  [ SYNSEM s_fin_prop-or-ques_comp_synsem ].
 
-; e.g. no sé si vendrá
-cm_s_q_lex := basic-comp-lex & basic-one-arg & 
-  [ SYNSEM s_fin_ques_comp_synsem ].
+cm_s_lex := basic-comp-lex & basic-one-arg &
+  [ SYNSEM s_fin_prop-or-ques_comp_synsem ]
+  """
+  --- 8. Complementizers
+  e.g. no me gusta que a los toros te pongas la minifalda; gritó que dónde habíamos puesto el dinero
+  """.
 
-; e.g. no sé si ir
-cm_vp_q_lex := basic-comp-lex & basic-one-arg & 
-  [ SYNSEM vp_inf_ques_comp_synsem ].
+
+cm_s_q_lex := basic-comp-lex & basic-one-arg &
+  [ SYNSEM s_fin_ques_comp_synsem ]
+  """
+  --- 8. Complementizers
+  e.g. no sé si vendrá
+  """.
+
+
+cm_vp_q_lex := basic-comp-lex & basic-one-arg &
+  [ SYNSEM vp_inf_ques_comp_synsem ]
+  """
+  --- 8. Complementizers
+  e.g. no sé si ir
+  """.
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -9651,29 +9678,44 @@ subconj_inf_synsem := basic_onearg_subconj_synsem &
 
 
 
-; e.g. aunque se disculpe, no volveré; mientras siga allí, no lo conseguirá; lo compré porque quise
+
 p_cl_vm_lex := basic-subconj-lex & basic-one-arg &
-  [ SYNSEM subconj_s_synsem & 
-           [ LOCAL.CAT [ HEAD.MOD < [ LOCAL.CAT.VAL.COMPS < > ] >,
-                         VAL.COMPS < [ LOCAL.CAT.HEAD verb ] > ] ] ].
+  [ SYNSEM subconj_s_synsem & [ LOCAL.CAT [ HEAD.MOD < [ LOCAL.CAT.VAL.COMPS < > ] >,
+                                            VAL.COMPS < [ LOCAL.CAT.HEAD verb ] > ] ] ]
+  """
+  Subordinating conjunctions
+  e.g. aunque se disculpe, no volveré; mientras siga allí, no lo conseguirá; lo compré porque quise
+  """.
 
-; locative prep. and 'durante' can't take cp_prop_fin or vp_inf
-; e.g. con que vengan, no arreglas nada (modal); no he vuelto desde que se fueron (tmp); no cejó hasta 
-; que lo consiguió (tmp); lo repito para que no te olvides (purpose); lo he aprendido sin que me hayan 
-; ayudado (mode) 
+
 p_cp_vm_lex := basic-subconj-lex & basic-one-arg &
-  [ SYNSEM subconj_s_synsem & 
-           [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD comp ] > ] ].
+  [ SYNSEM subconj_s_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD comp ] > ] ]
+  """
+  Subordinating conjunctions
+  locative prep. and 'durante' can't take cp_prop_fin or vp_inf
+  e.g. con que vengan, no arreglas nada (modal); no he vuelto desde que se fueron (tmp); no cejó hasta
+  que lo consiguió (tmp); lo repito para que no te olvides (purpose); lo he aprendido sin que me hayan
+  ayudado (mode)
+  """.
 
-; e.g. al terminar la función, nos despedimos
-p_vp_vm_lex :=  basic-subconj-lex & basic-one-arg &
-  [ SYNSEM subconj_inf_synsem ].
 
-; e.g. disparaban a matar (purpose), con no comer no arreglas nada (modal), no paró hasta conseguirlo 
-; (tmp), le llamó para quedar con él (purpose), enfermó por no comer (cause), trabaja sin cesar (mode), 
-; tras venderlo se arrepintió (tmp)
-p_vp_ctrl-vm_lex :=  basic-subconj-lex & basic-one-arg &
-  [ SYNSEM subconj_inf_ctrl_synsem ].
+p_vp_vm_lex := basic-subconj-lex & basic-one-arg &
+  [ SYNSEM subconj_inf_synsem ]
+  """
+  Subordinating conjunctions
+  e.g. al terminar la función, nos despedimos
+  """.
+
+
+p_vp_ctrl-vm_lex := basic-subconj-lex & basic-one-arg &
+  [ SYNSEM subconj_inf_ctrl_synsem ]
+  """
+  Subordinating conjunctions
+  e.g. disparaban a matar (purpose), con no comer no arreglas nada (modal), no paró hasta conseguirlo
+  (tmp), le llamó para quedar con él (purpose), enfermó por no comer (cause), trabaja sin cesar (mode),
+  tras venderlo se arrepintió (tmp)
+  """.
+
 
 
 
