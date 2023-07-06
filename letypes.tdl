@@ -7072,18 +7072,25 @@ av_-_s-vm-spd_lex := spec-adverb-lex & basic-one-arg &
 
 ; --- non-verb modifiers
 
-; e.g. (*muy) quizás yo
 av_-_s-xm_lex := nonspec-adverb-lex & norm-zero-arg &
   [ SYNSEM nonspec_scopal_xp_adverb_synsem & 
            [ LOCAL.CAT.HEAD [ PRD non-prd,
                               MOD < [ LOCAL.CAT [ HEAD +njrp,
-                                                  VAL.COMPS < > ] ] > ] ] ].
+                                                  VAL.COMPS < > ] ] > ] ] ]
+"""
+; --- non-verb modifiers
+; e.g. (*muy) quizás yo
+""".
 
 ; e.g. (muy) probablemente yo
 av_-_s-xm-spd_lex := spec-adverb-lex & basic-one-arg &
   [ SYNSEM scopal_xp_adverb_synsem & 
           [ LOCAL.CAT.HEAD.MOD < [ LOCAL.CAT [ HEAD +njrp,
-                                               VAL.COMPS < > ] ] > ] ].
+                                               VAL.COMPS < > ] ] > ] ]
+"""
+; --- non-verb modifiers
+; e.g. (*muy) quizás yo
+""".
 
 
 ; --- 4.2. Intersective adverbs
