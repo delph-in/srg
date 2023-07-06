@@ -9948,46 +9948,63 @@ c_xp_ora-nrel_lex := basic-coordconj-lex & basic-one-arg &
 ;           [ LOCAL.CAT.HEAD.LEFT < _siquera_c_rel >,
 ;             LKEYS.KEYREL.PRED _siquera_c_rel ] ]. 
 
-; - complex conjunctions (tanto...como, no solo... sino, así como) (e.g. tanto el vino como la 
-; cerveza/no sólo el vino, sino la cerveza,/el vino, así como la cerveza, contienen alcohol)
-; May co-occur with the same categories as 'y' except with finite and non-finite main sentences 
-; (e.g. *tanto el padre trabaja como el hijo estudia); subordinated clauses may be coordinated 
-; (e.g. espero tanto que Ana estudie filología como que Rosa estudie veterinaria; espero que tanto 
-; Ana estudie filología como que/*que como Rosa estudie veterinaria)
+
 c_xp_tanto_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norm_coordconj_synsem &
-           [ LKEYS.KEYREL.PRED _tanto_c_rel ] ].
+  [ SYNSEM norm_coordconj_synsem & [ LKEYS.KEYREL.PRED _tanto_c_rel ] ]
+  """
+  - complex conjunctions (tanto...como, no solo... sino, así como) (e.g. tanto el vino como la
+  cerveza/no sólo el vino, sino la cerveza,/el vino, así como la cerveza, contienen alcohol)
+  May co-occur with the same categories as 'y' except with finite and non-finite main sentences
+  (e.g. *tanto el padre trabaja como el hijo estudia); subordinated clauses may be coordinated
+  (e.g. espero tanto que Ana estudie filología como que Rosa estudie veterinaria; espero que tanto
+  Ana estudie filología como que/*que como Rosa estudie veterinaria)
+  """.
+
 
 c_xp_como-nrel_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norel_coordconj_synsem &
-           [ LOCAL.CAT.HEAD.LEFT < _tanto_c_rel >,
-             LKEYS.KEYREL.PRED _como_c_rel ] ].
+  [ SYNSEM norel_coordconj_synsem & [ LOCAL.CAT.HEAD.LEFT < _tanto_c_rel >,
+                                      LKEYS.KEYREL.PRED _como_c_rel ] ]
+  """
+  
+  """.
+
 
 c_xp_no-sólo_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norm_coordconj_synsem &
-           [ LOCAL.COORD-STRAT two,
-             LKEYS.KEYREL.PRED _no_sólo_c_rel ] ].
+  [ SYNSEM norm_coordconj_synsem & [ LOCAL.COORD-STRAT two,
+                                     LKEYS.KEYREL.PRED _no_sólo_c_rel ] ]
+  """
+  
+  """.
+
 
 c_xp_sino-nrel_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norel_coordconj_synsem &
-           [ LOCAL.CAT.HEAD.LEFT < _no_sólo_c_rel >,
-             LKEYS.KEYREL.PRED _sino_c_rel ] ].
+  [ SYNSEM norel_coordconj_synsem & [ LOCAL.CAT.HEAD.LEFT < _no_sólo_c_rel >,
+                                      LKEYS.KEYREL.PRED _sino_c_rel ] ]
+  """
+  
+  """.
+
 
 c_xp_así-como_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norm_coordconj_synsem &
-           [ LKEYS.KEYREL.PRED _así_como_c_rel ] ].
+  [ SYNSEM norm_coordconj_synsem & [ LKEYS.KEYREL.PRED _así_como_c_rel ] ]
+  """
+  
+  """.
 
-; - adversative conjunctions 'pero', 'mas', 'sino' (but), 'aunque', 'siquiera' (though), 
-; (e.g. el miércoles iremos a ver a Pepe, pero el jueves volveremos aquí (*,pero el viernes nos vamos)). 
-; 'aunque','siquiera', 'pero' and 'mas' do not co-occur with nouns unless the second one is negated 
-; (e.g. vino con mi hermano, pero/aunque/mas no con mi hermana), or the noun is modified (only with 'pero' 
-; (e.g. vimos conejos enormes, *aunque/pero liebres pequeñitas.)
-; 'sino' exige la presencia de la negación (e.g. no recogímos a Rosa sino a Elena), no puede aparecer 
-; como sujeto (e.g. *no Rosa sino Ana vino) a menos que haya pausa (e.g. No Rosa, sino Ana vino).
+
 c_xp_aunque_lex := basic-coordconj-lex & basic-one-arg &
-  [ SYNSEM norm_coordconj_synsem &
-           [ LOCAL.COORD-STRAT one,
-             LKEYS.KEYREL.PRED _aunque_c_rel ] ].
+  [ SYNSEM norm_coordconj_synsem & [ LOCAL.COORD-STRAT one,
+                                     LKEYS.KEYREL.PRED _aunque_c_rel ] ]
+  """
+  - adversative conjunctions 'pero', 'mas', 'sino' (but), 'aunque', 'siquiera' (though),
+  (e.g. el miércoles iremos a ver a Pepe, pero el jueves volveremos aquí (*,pero el viernes nos vamos)).
+  'aunque','siquiera', 'pero' and 'mas' do not co-occur with nouns unless the second one is negated
+  (e.g. vino con mi hermano, pero/aunque/mas no con mi hermana), or the noun is modified (only with 'pero'
+  (e.g. vimos conejos enormes, *aunque/pero liebres pequeñitas.)
+  'sino' exige la presencia de la negación (e.g. no recogímos a Rosa sino a Elena), no puede aparecer
+  como sujeto (e.g. *no Rosa sino Ana vino) a menos que haya pausa (e.g. No Rosa, sino Ana vino).
+  """.
+
 
 c_xp_siquiera_lex := basic-coordconj-lex & basic-one-arg &
   [ SYNSEM norm_coordconj_synsem &
@@ -10193,43 +10210,73 @@ single-rel-lex := lex-item &
 no-hcons-lex := lex-item & 
   [ SYNSEM.LOCAL.CONT.HCONS <! !> ].
 
-; most lexical items contribute only one relation, and have empty HCONS values.
-norm-sem-lex-item := norm-hook-lex & single-rel-lex & no-hcons-lex.
-norm-sem-lex := norm-hook-lex & single-rel-lex.
+
+norm-sem-lex-item := norm-hook-lex & single-rel-lex & no-hcons-lex
+  """
+  most lexical items contribute only one relation, and have empty HCONS values.
+  """.
 
 
-; --- NON-LOCAL feature values and amalgamation
+norm-sem-lex := norm-hook-lex & single-rel-lex
+  """
+  
+  """.
 
-; basic_zero_arg lexical items have empty ARG-ST lists.  They may
-; introduce a non-empty value for one of the non-local features.
+
 basic-zero-arg := lex-item &
-  [ ARG-ST < > ].
+  [ ARG-ST < > ]
+  """
+  --- NON-LOCAL feature values and amalgamation
+  basic_zero_arg lexical items have empty ARG-ST lists.  They may
+  introduce a non-empty value for one of the non-local features.
+  """.
+
 
 zero-arg-nonslash := lex-item &
-  [ SYNSEM.NON-LOCAL.SLASH 0-dlist ].
+  [ SYNSEM.NON-LOCAL.SLASH 0-dlist ]
+  """
+  
+  """.
+
 
 zero-arg-nonrel := lex-item &
-  [ SYNSEM.NON-LOCAL.REL 0-dlist ].
+  [ SYNSEM.NON-LOCAL.REL 0-dlist ]
+  """
+  
+  """.
+
 
 zero-arg-nonque := lex-item &
-  [ SYNSEM.NON-LOCAL.QUE 0-dlist ].
+  [ SYNSEM.NON-LOCAL.QUE 0-dlist ]
+  """
+  
+  """.
 
-; Non-argument taking items which introduce no non-local values.
-norm-zero-arg := basic-zero-arg & zero-arg-nonslash & 
-                 zero-arg-nonrel & zero-arg-nonque.
 
-; Non-argument taking items introducing a rel value.
-zero-arg-rel := basic-zero-arg & zero-arg-nonslash & 
-                zero-arg-nonque.
+norm-zero-arg := basic-zero-arg & zero-arg-nonslash & zero-arg-nonrel & zero-arg-nonque
+  """
+  Non-argument taking items which introduce no non-local values.
+  """.
 
-; Non-argument taking items introducing a que value.
-zero-arg-que := basic-zero-arg & zero-arg-nonslash & 
-                zero-arg-nonrel.
 
-; Non-argument taking items introducing a slash value, 
-; e.g., resumptive pronouns in French.
-zero-arg-slash := basic-zero-arg & zero-arg-nonrel & 
-                  zero-arg-nonque.
+zero-arg-rel := basic-zero-arg & zero-arg-nonslash & zero-arg-nonque
+  """
+  Non-argument taking items introducing a rel value.
+  """.
+
+
+zero-arg-que := basic-zero-arg & zero-arg-nonslash & zero-arg-nonrel
+  """
+  Non-argument taking items introducing a que value.
+  """.
+
+
+zero-arg-slash := basic-zero-arg & zero-arg-nonrel & zero-arg-nonque
+  """
+  Non-argument taking items introducing a slash value,
+  e.g., resumptive pronouns in French.
+  """.
+
 
 ; These non-zero argument types only amalgamate the non-local
 ; feature values of their complements. They do not introduce any
