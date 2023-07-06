@@ -58,7 +58,18 @@ lexeme-to-word-rule := lex-rule &
     DTR [ INFLECTED -,
           KEY-ARG #keyarg,   
           SYNSEM #synsem ],
-    C-CONT.RELS <! !> ].
+    C-CONT.RELS <! !> ]
+    """; Lexical rules vary on two dimensions: whether they are lexeme-to-lexeme
+; or lexeme-to-word and whether or not they involve spelling changes.
+; Accordingly, we define four subtypes of lex-rule, which have
+; four cross-classified glb subtypes. Note that the lexeme/word distinction 
+; is represented via a feature [INFLECTED bool] rather than as a type.  
+; We find this more convenient, as it allows certain words to be [INFLECTED +] 
+; from the start without having to twist the hierarchy too much (especially 
+; if one makes use of defaults).
+
+; Lexeme-to-word rules are hypothesized to monotonically add synsem information.
+""".
 
 non_cann-lexeme-to-word-rule := non_cann-lex-rule & 
   [ INFLECTED +,
@@ -68,14 +79,14 @@ non_cann-lexeme-to-word-rule := non_cann-lex-rule &
           KEY-ARG #keyarg,   
           SYNSEM #synsem ] ].
 
-; Lexeme-to-lexeme rules can make more radical changes to the SYNSEM value.
 lexeme-to-lexeme-rule := lex-rule & 
   [ INFLECTED #infl,
     SYNSEM.LOCAL.CAT.MC #mc,
     DTR [ INFLECTED #infl,
-          SYNSEM.LOCAL.CAT.MC #mc ] ].
+          SYNSEM.LOCAL.CAT.MC #mc ] ]
+          """; Lexeme-to-lexeme rules can make more radical changes to the SYNSEM value.
+""".
 
-; Spelling changing rules. The LKB identifies these rules based on the NEEDS-AFFIX value. 
 inflecting-lex-rule := lex-rule &
   [ NEEDS-AFFIX +,
     SYNSEM.SLSHD #slshd, 
@@ -83,15 +94,19 @@ inflecting-lex-rule := lex-rule &
     DTR [ SYNSEM.SLSHD #slshd, 
           ALTS #alts,
           ARG-ST #arg-st ],
-    ALTS #alts ].
+    ALTS #alts ]
+    """; Spelling changing rules. The LKB identifies these rules based on the NEEDS-AFFIX value. 
+""".
 
-; Spelling-preserving rules copy up the STEM (orthography) of the daughter.
 constant-lex-rule := lex-rule &
   [ STEM #stem,
-    DTR.STEM #stem ].
+    DTR.STEM #stem ]
+    """; Spelling-preserving rules copy up the STEM (orthography) of the daughter.
+""".
 
 
 ; Cross-classified glb types
+
 infl-ltol-rule := lexeme-to-lexeme-rule & inflecting-lex-rule.
 infl-ltow-rule := lexeme-to-word-rule & inflecting-lex-rule.
 non_cann-infl-ltow-rule := non_cann-lexeme-to-word-rule & inflecting-lex-rule.
@@ -109,20 +124,23 @@ const-ltol-rule-noncont := basic-lex-rule & phrase-or-lexrule &
 
 ; --- inflectional lexical rule types
 
-; -- FL tags which have no lexical entry
 no_ilr :=  infl-ltow-rule &
-  [ SYNSEM.LOCAL.CAT.HEAD no-head ].
+  [ SYNSEM.LOCAL.CAT.HEAD no-head ]
+  """; -- FL tags which have no lexical entry
+""".
 
-; -- non-inflecting categories
 rg_ilr := infl-ltow-rule & 
-  [ SYNSEM.LOCAL.CAT.HEAD +nr ].
+  [ SYNSEM.LOCAL.CAT.HEAD +nr ]
+  """; -- non-inflecting categories
+""".
 
 nc00000_ilr :=  infl-ltow-rule & 
   [ SYNSEM.LOCAL.CAT.HEAD noun ].
 
-; foreign words sometimes get this tag.  
 np00v00_ilr := infl-ltow-rule & 
-  [ SYNSEM.LOCAL.CAT.HEAD noun ].
+  [ SYNSEM.LOCAL.CAT.HEAD noun ]
+  """; foreign words sometimes get this tag.  
+""".
 
 i_ilr := infl-ltow-rule & 
   [ SYNSEM.LOCAL.CAT.HEAD interj ].
@@ -136,9 +154,10 @@ cs_ilr :=  infl-ltow-rule &
 cc_ilr :=  infl-ltow-rule & 
   [ SYNSEM.LOCAL.CAT.HEAD conj ].
 
-; -- named entities
 np00sp0_ilr :=  infl-ltow-rule & 
-  [ SYNSEM.LOCAL.CAT.HEAD noun & [ KEYS.KEY named_rel ] ].
+  [ SYNSEM.LOCAL.CAT.HEAD noun & [ KEYS.KEY named_rel ] ]
+  """; -- named entities
+""".
 
 ne_ilr :=  infl-ltow-rule & 
   [ SYNSEM.LOCAL.CAT.HEAD head ].
@@ -215,67 +234,122 @@ dr_ilr :=  d_ilr &
   [ SYNSEM.NON-LOCAL.REL 1-dlist ].
 
 ; -- definite articles
-da0ms0_ilr := da_ilr & masc_3sg_ilr.
-da0mp0_ilr := da_ilr & masc_3pl_ilr.
-da0fs0_ilr := da_ilr & fem_3sg_ilr.
-da0fp0_ilr := da_ilr & fem_3pl_ilr.
-da00s0_ilr := da_ilr & 3sg_ilr.
+
+da0ms0_ilr := da_ilr & masc_3sg_ilr
+"""definite article""".
+da0mp0_ilr := da_ilr & masc_3pl_ilr
+"""definite article""".
+da0fs0_ilr := da_ilr & fem_3sg_ilr
+"""definite article""".
+da0fp0_ilr := da_ilr & fem_3pl_ilr
+"""definite article""".
+da00s0_ilr := da_ilr & 3sg_ilr
+"""definite article""".
 
 ; -- demonstrative det.
-dd0ms0_ilr := dd_ilr & masc_3sg_ilr.
-dd0mp0_ilr := dd_ilr & masc_3pl_ilr.
-dd0fs0_ilr := dd_ilr & fem_3sg_ilr.
-dd0fp0_ilr := dd_ilr & fem_3pl_ilr.
-dd0cs0_ilr := d_ilr & 3sg_ilr.
-dd0cp0_ilr := d_ilr & 3pl_ilr.
+
+dd0ms0_ilr := dd_ilr & masc_3sg_ilr
+"""demonstrative det""".
+dd0mp0_ilr := dd_ilr & masc_3pl_ilr
+"""demonstrative det""".
+dd0fs0_ilr := dd_ilr & fem_3sg_ilr
+"""demonstrative det""".
+dd0fp0_ilr := dd_ilr & fem_3pl_ilr
+"""demonstrative det""".
+dd0cs0_ilr := d_ilr & 3sg_ilr
+"""demonstrative det""".
+dd0cp0_ilr := d_ilr & 3pl_ilr
+"""demonstrative det""".
 
 ; -- possessive det.
-dp1css_ilr :=  dp_ilr & 3sg_ilr.
-dp1cps_ilr :=  dp_ilr & 3pl_ilr.
-ap0ms1p_ilr :=  dp_ilr & masc_3sg_ilr.
-ap0mp1p_ilr :=  dp_ilr & masc_3pl_ilr.
-ap0fs1p_ilr :=  dp_ilr & fem_3sg_ilr.
-ap0fp1p_ilr :=  dp_ilr & fem_3pl_ilr.
-dp2css_ilr :=  dp_ilr & 3sg_ilr.
-dp2cps_ilr :=  dp_ilr & 3pl_ilr.
-ap0ms2p_ilr :=  dp_ilr & masc_3sg_ilr.
-ap0mp2p_ilr :=  dp_ilr & masc_3pl_ilr.
-ap0fs2p_ilr :=  dp_ilr & fem_3sg_ilr.
-ap0fp2p_ilr :=  dp_ilr & fem_3pl_ilr.
-dp3csn_ilr :=  dp_ilr & 3sg_ilr.
-dp3cpn_ilr :=  dp_ilr & 3pl_ilr.
+
+dp1css_ilr :=  dp_ilr & 3sg_ilr
+"""possessive det""".
+dp1cps_ilr := dp_ilr & 3pl_ilr
+"""possessive det""".
+ap0ms1p_ilr := dp_ilr & masc_3sg_ilr
+"""possessive det""".
+ap0mp1p_ilr := dp_ilr & masc_3pl_ilr
+"""possessive det""".
+ap0fs1p_ilr := dp_ilr & fem_3sg_ilr
+"""possessive det""".
+ap0fp1p_ilr := dp_ilr & fem_3pl_ilr
+"""possessive det""".
+dp2css_ilr := dp_ilr & 3sg_ilr
+"""possessive det""".
+dp2cps_ilr := dp_ilr & 3pl_ilr
+"""possessive det""".
+ap0ms2p_ilr := dp_ilr & masc_3sg_ilr
+"""possessive det""".
+ap0mp2p_ilr := dp_ilr & masc_3pl_ilr
+"""possessive det""".
+ap0fs2p_ilr := dp_ilr & fem_3sg_ilr
+"""possessive det""".
+ap0fp2p_ilr := dp_ilr & fem_3pl_ilr
+"""possessive det""".
+dp3csn_ilr := dp_ilr & 3sg_ilr
+"""possessive det""".
+dp3cpn_ilr := dp_ilr & 3pl_ilr
+"""possessive det""".
 
 ; -- indefinite det. 
-di0ms0_ilr :=  d_ilr & masc_3sg_ilr.
-di0mp0_ilr :=  d_ilr & masc_3pl_ilr.
-di0fs0_ilr :=  d_ilr & fem_3sg_ilr.
-di0fp0_ilr :=  d_ilr & fem_3pl_ilr.
-di0cs0_ilr :=  d_ilr & 3sg_ilr.
-di0cp0_ilr :=  d_ilr & 3pl_ilr.
+
+di0ms0_ilr :=  d_ilr & masc_3sg_ilr
+"""indefinite det""".
+di0mp0_ilr :=  d_ilr & masc_3pl_ilr
+"""indefinite det""".
+di0fs0_ilr :=  d_ilr & fem_3sg_ilr
+"""indefinite det""".
+di0fp0_ilr :=  d_ilr & fem_3pl_ilr
+"""indefinite det""".
+di0cs0_ilr :=  d_ilr & 3sg_ilr
+"""indefinite det""".
+di0cp0_ilr :=  d_ilr & 3pl_ilr
+"""indefinite det""".
 
 ; -- interrogative det.
-dt0ms0_ilr :=  dt_ilr & masc_3sg_ilr.
-dt0mp0_ilr :=  dt_ilr & masc_3pl_ilr.
-dt0fs0_ilr :=  dt_ilr & fem_3sg_ilr.
-dt0fp0_ilr :=  dt_ilr & fem_3pl_ilr.
-dt0cs0_ilr :=  dt_ilr & 3sg_ilr.
-dt0cp0_ilr :=  dt_ilr & 3pl_ilr.
-dt0cn0_ilr :=  dt_ilr.
+
+dt0ms0_ilr :=  dt_ilr & masc_3sg_ilr
+"""interrogative det""".
+dt0mp0_ilr :=  dt_ilr & masc_3pl_ilr
+"""interrogative det""".
+dt0fs0_ilr :=  dt_ilr & fem_3sg_ilr
+"""interrogative det""".
+dt0fp0_ilr :=  dt_ilr & fem_3pl_ilr
+"""interrogative det""".
+dt0cs0_ilr :=  dt_ilr & 3sg_ilr
+"""interrogative det""".
+dt0cp0_ilr :=  dt_ilr & 3pl_ilr
+"""interrogative det""".
+dt0cn0_ilr :=  dt_ilr
+"""interrogative det""".
 
 ; -- exclamative det.
-de0ms0_ilr :=  de_ilr & masc_3sg_ilr.
-de0mp0_ilr :=  de_ilr & masc_3pl_ilr.
-de0fs0_ilr :=  de_ilr & fem_3sg_ilr.
-de0fp0_ilr :=  de_ilr & fem_3pl_ilr.
-de0cs0_ilr :=  de_ilr & 3sg_ilr.
-de0cp0_ilr :=  de_ilr & 3pl_ilr.
-de0cn0_ilr :=  de_ilr.
+
+de0ms0_ilr :=  de_ilr & masc_3sg_il
+"""exclamative det""".
+de0mp0_ilr :=  de_ilr & masc_3pl_ilr
+"""exclamative det""".
+de0fs0_ilr :=  de_ilr & fem_3sg_ilr
+"""exclamative det""".
+de0fp0_ilr :=  de_ilr & fem_3pl_ilr
+"""exclamative det""".
+de0cs0_ilr :=  de_ilr & 3sg_ilr
+"""exclamative det""".
+de0cp0_ilr :=  de_ilr & 3pl_ilr
+"""exclamative det""".
+de0cn0_ilr :=  de_ilr
+"""exclamative det""".
 
 ; -- relative det.
-dr0ms0_ilr :=  dr_ilr & masc_3sg_ilr.
-dr0mp0_ilr :=  dr_ilr & masc_3pl_ilr.
-dr0fs0_ilr :=  dr_ilr & fem_3sg_ilr.
-dr0fp0_ilr :=  dr_ilr & fem_3pl_ilr.
+dr0ms0_ilr :=  dr_ilr & masc_3sg_ilr
+"""relative det""".
+dr0mp0_ilr :=  dr_ilr & masc_3pl_ilr
+"""relative det""".
+dr0fs0_ilr :=  dr_ilr & fem_3sg_ilr
+"""relative det""".
+dr0fp0_ilr :=  dr_ilr & fem_3pl_ilr
+"""relative det""".
 
 ; --- pronouns
 
@@ -305,78 +379,134 @@ pd_ilr :=  pr_ilr &
 pp_ilr :=  infl-ltow-rule.
 
 ; -- indefinite pron.
-pi0ms00_ilr :=  pi_ilr & sg_ilr & masc_ilr. 
-pi0mp00_ilr :=  pi_ilr & pl_ilr & masc_ilr. 
-pi0fs00_ilr :=  pi_ilr & sg_ilr & fem_ilr. 
-pi0fp00_ilr :=  pi_ilr & pl_ilr & fem_ilr. 
-pi0cs00_ilr :=  pi_ilr & sg_ilr.
-pi0cp00_ilr :=  pi_ilr & pl_ilr.
-pi0cc000_ilr :=  pi_ilr.
+pi0ms00_ilr :=  pi_ilr & sg_ilr & masc_ilr
+"""indefinite pron""". 
+pi0mp00_ilr :=  pi_ilr & pl_ilr & masc_ilr
+"""indefinite pron""". 
+pi0fs00_ilr :=  pi_ilr & sg_ilr & fem_ilr
+"""indefinite pron""". 
+pi0fp00_ilr :=  pi_ilr & pl_ilr & fem_ilr
+"""indefinite pron""". 
+pi0cs00_ilr :=  pi_ilr & sg_ilr
+"""indefinite pron""".
+pi0cp00_ilr :=  pi_ilr & pl_il
+"""indefinite pron""".
+pi0cc000_ilr :=  pi_ilr
+"""indefinite pron""".
 
 ; -- interrogative pron.
-pt0ms00_ilr :=  pt_ilr & sg_ilr & masc_ilr. 
-pt0mp00_ilr :=  pt_ilr & pl_ilr & masc_ilr. 
-pt0fs00_ilr :=  pt_ilr & sg_ilr & fem_ilr. 
-pt0fp00_ilr :=  pt_ilr & pl_ilr & fem_ilr. 
-pt0cs00_ilr :=  pt_ilr & sg_ilr.
-pt0cp00_ilr :=  pt_ilr & pl_ilr.
-pt00000_ilr :=  pt_ilr.
+pt0ms00_ilr :=  pt_ilr & sg_ilr & masc_ilr
+"""interrogative pron""". 
+pt0mp00_ilr :=  pt_ilr & pl_ilr & masc_ilr
+"""interrogative pron""". 
+pt0fs00_ilr :=  pt_ilr & sg_ilr & fem_ilr
+"""interrogative pron""". 
+pt0fp00_ilr :=  pt_ilr & pl_ilr & fem_ilr
+"""interrogative pron""". 
+pt0cs00_ilr :=  pt_ilr & sg_ilr
+"""interrogative pron""".
+pt0cp00_ilr :=  pt_ilr & pl_ilr
+"""interrogative pron""".
+pt00000_ilr :=  pt_ilr
+"""interrogative pron""".
 
 ; -- exclamative pron.
-pe0ms00_ilr :=  pe_ilr & sg_ilr & masc_ilr. 
-pe0mp00_ilr :=  pe_ilr & pl_ilr & masc_ilr. 
-pe0fs00_ilr :=  pe_ilr & sg_ilr & fem_ilr. 
-pe0fp00_ilr :=  pe_ilr & pl_ilr & fem_ilr. 
-pe0cs00_ilr :=  pe_ilr & sg_ilr.
-pe0cp00_ilr :=  pe_ilr & pl_ilr.
-pe00000_ilr :=  pe_ilr.
+pe0ms00_ilr :=  pe_ilr & sg_ilr & masc_ilr
+"""exclamative pron""". 
+pe0mp00_ilr :=  pe_ilr & pl_ilr & masc_ilr
+"""exclamative pron""". 
+pe0fs00_ilr :=  pe_ilr & sg_ilr & fem_ilr
+"""exclamative pron""". 
+pe0fp00_ilr :=  pe_ilr & pl_ilr & fem_ilr
+"""exclamative pron""". 
+pe0cs00_ilr :=  pe_ilr & sg_ilr
+"""exclamative pron""".
+pe0cp00_ilr :=  pe_ilr & pl_ilr
+"""exclamative pron""".
+pe00000_ilr :=  pe_ilr
+"""exclamative pron""".
 
 ; -- demonstrative pron.
-pd0ms00_ilr :=  pd_ilr & sg_ilr & masc_ilr. 
-pd0mp00_ilr :=  pd_ilr & pl_ilr & masc_ilr. 
-pd0fs00_ilr :=  pd_ilr & sg_ilr & fem_ilr. 
-pd0fp00_ilr :=  pd_ilr & pl_ilr & fem_ilr. 
-pd00s00_ilr :=  pd_ilr & sg_ilr & neut_ilr. 
-pd0cs00_ilr :=  pd_ilr & sg_ilr.
-pd0cp00_ilr :=  pd_ilr & pl_ilr.
+pd0ms00_ilr :=  pd_ilr & sg_ilr & masc_ilr
+"""demonstrative pron""". 
+pd0mp00_ilr :=  pd_ilr & pl_ilr & masc_ilr
+"""demonstrative pron""". 
+pd0fs00_ilr :=  pd_ilr & sg_ilr & fem_ilr
+"""demonstrative pron""". 
+pd0fp00_ilr :=  pd_ilr & pl_ilr & fem_ilr
+"""demonstrative pron""". 
+pd00s00_ilr :=  pd_ilr & sg_ilr & neut_ilr
+"""demonstrative pron""". 
+pd0cs00_ilr :=  pd_ilr & sg_ilr
+"""demonstrative pron""".
+pd0cp00_ilr :=  pd_ilr & pl_ilr
+"""demonstrative pron""".
 
 ; -- relative pron.
-pr0cs00_ilr := pr_sg_ilr.
-pr0cp00_ilr := pr_pl_ilr.
-pr0cn00_ilr := pr_ilr.
-pr00000_ilr := pr_ilr.
+pr0cs00_ilr := pr_sg_ilr
+"""relative pron""".
+pr0cp00_ilr := pr_pl_ilr
+"""relative pron""".
+pr0cn00_ilr := pr_ilr
+"""relative pron""".
+pr00000_ilr := pr_ilr
+"""relative pron""".
 
 ; -- personal pron.
-pp1csn0_ilr :=  pp_ilr & 1sg_ilr.
-pp2csn0_ilr :=  pp_ilr & 2sg_ilr.
-pp3fs00_ilr :=  pp_ilr & 3sg_ilr & fem_ilr. 
-pp3ms00_ilr :=  pp_ilr & 3sg_ilr & masc_ilr. 
-pp3ns000_ilr :=  pp_ilr & 3sg_ilr & neut_ilr. 
-pp1fp00_ilr :=  pp_ilr & 1pl_ilr & fem_ilr. 
-pp1mp00_ilr :=  pp_ilr & 1pl_ilr & masc_ilr. 
-pp2fp00_ilr :=  pp_ilr & 2pl_ilr & fem_ilr. 
-pp2mp00_ilr :=  pp_ilr & 2pl_ilr & masc_ilr. 
-pp3fp00_ilr :=  pp_ilr & 3pl_ilr & fem_ilr. 
-pp3mp00_ilr :=  pp_ilr & 3pl_ilr & masc_ilr. 
-pp2cs0p_ilr :=  pp_ilr & 3sg_ilr. 
-pp2cp0p_ilr :=  pp_ilr & 3pl_ilr. 
-pp1cso0_ilr :=  pp_ilr & 1sg_ilr.
-pp2cso0_ilr :=  pp_ilr & 2sg_ilr.
+pp1csn0_ilr :=  pp_ilr & 1sg_ilr
+"""personal pron""".
+pp2csn0_ilr :=  pp_ilr & 2sg_ilr
+"""personal pron""".
+pp3fs00_ilr :=  pp_ilr & 3sg_ilr & fem_ilr
+"""personal pron""". 
+pp3ms00_ilr :=  pp_ilr & 3sg_ilr & masc_ilr
+"""personal pron""". 
+pp3ns000_ilr :=  pp_ilr & 3sg_ilr & neut_ilr
+"""personal pron""". 
+pp1fp00_ilr :=  pp_ilr & 1pl_ilr & fem_ilr
+"""personal pron""". 
+pp1mp00_ilr :=  pp_ilr & 1pl_ilr & masc_ilr
+"""personal pron""". 
+pp2fp00_ilr :=  pp_ilr & 2pl_ilr & fem_ilr
+"""personal pron""". 
+pp2mp00_ilr :=  pp_ilr & 2pl_ilr & masc_ilr
+"""personal pron""". 
+pp3fp00_ilr :=  pp_ilr & 3pl_ilr & fem_ilr
+"""personal pron""". 
+pp3mp00_ilr :=  pp_ilr & 3pl_ilr & masc_ilr
+"""personal pron""". 
+pp2cs0p_ilr :=  pp_ilr & 3sg_ilr
+"""personal pron""". 
+pp2cp0p_ilr :=  pp_ilr & 3pl_ilr
+"""personal pron""". 
+pp1cso0_ilr :=  pp_ilr & 1sg_ilr
+"""personal pron""".
+pp2cso0_ilr :=  pp_ilr & 2sg_ilr
+"""personal pron""".
 pp3cno0_ilr :=  pp_ilr & 3per_ilr & 
-  [ SYNSEM.LOCAL.CAT.HEAD.MOD < > ]. 
+  [ SYNSEM.LOCAL.CAT.HEAD.MOD < > ]
+  """personal pron""". 
 
 
 ; -- adjectives
+
 a_ilr :=  infl-ltow-rule & 
   [ SYNSEM.LOCAL.CAT.HEAD adj ].
 
-a_sg_ilr :=  a_ilr & 3sg_ilr.
-a_pl_ilr :=  a_ilr & 3pl_ilr.
-a_fem-sg_ilr :=  a_ilr & fem_3sg_ilr.
-a_fem-pl_ilr :=  a_ilr & fem_3pl_ilr.
-a_masc-sg_ilr :=  a_ilr & masc_3sg_ilr.
-a_masc-pl_ilr :=  a_ilr & masc_3pl_ilr.
-a_neut-sg_ilr :=  a_ilr & neut_3sg_ilr.
+a_sg_ilr :=  a_ilr & 3sg_ilr
+"""adjective""".
+a_pl_ilr :=  a_ilr & 3pl_ilr
+"""adjective""".
+a_fem-sg_ilr :=  a_ilr & fem_3sg_ilr
+"""adjective""".
+a_fem-pl_ilr :=  a_ilr & fem_3pl_ilr
+"""adjective""".
+a_masc-sg_ilr :=  a_ilr & masc_3sg_ilr
+"""adjective""".
+a_masc-pl_ilr :=  a_ilr & masc_3pl_ilr
+"""adjective""".
+a_neut-sg_ilr :=  a_ilr & neut_3sg_ilr
+"""adjective""".
 
 
 ; -- clitics
@@ -437,6 +567,7 @@ pp1cs00_ilr := affx_1sg_ilr.
 p01cs00_ilr := affx_1sg_ilr.
 
 ; --- Common Nouns
+
 n_ilr :=  tmt-lex-rule & phrase-or-lexrule & 
   [ NEEDS-AFFIX +,
     INFLECTED +,
@@ -717,6 +848,7 @@ vppart_ilr :=  inflecting-lex-rule &
 
 
 ; --- enclitics (with infinitives, imperatives and gerunds)
+
 enclt_ilr := lex-rule & 
   [ NEEDS-AFFIX +,
     INFLECTED +,
