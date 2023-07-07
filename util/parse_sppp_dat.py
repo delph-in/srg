@@ -10,7 +10,8 @@ def parse_sppp(filepath):
     for i,ln in enumerate(lines):
         if not ln.startswith('#'):
             if ln.strip() == '<NoDisambiguate>':
-                pass
+                end_nodiambiguate = find_concluding_line(lines, i, '<NoDisambiguate>')
+                no_disambiguate = parse_nodisambiguate(lines[i+1:end_nodiambiguate])
             elif ln.strip() == '<ReplaceAll>':
                 end_replace = find_concluding_line(lines, i, '<ReplaceAll>')
                 replace = parse_replace(lines[i+1:end_replace])
@@ -27,6 +28,13 @@ def find_concluding_line(lines, start, opening):
         if lines[i].strip() == closing:
             return i
     return None
+
+def parse_nodisambiguate(lines):
+    nodisambiguate = {}
+    for ln in lines:
+        word, position = ln.strip().split()
+        nodisambiguate[word] = position
+    return nodisambiguate
 
 def parse_fusion(lines):
     fuse = {}

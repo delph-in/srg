@@ -17,11 +17,13 @@ def report_stats(treebanks_path):
         for response in items:
             all_sentences.append(response['i-input'])
             sentences.append(response['i-input'])
+            # In a thinned parsed forest, results will be empty if the item was not accepted as correct in treebanking.
             if len(response['results']) > 0:
                 accepted.append(response['i-input'])
                 all_accepted.append(response['i-input'])
                 #deriv = response.result(0).derivation()
             else:
+                #print('Rejected: {}'.format(response['i-input']))
                 rejected.append(response['i-input'])
                 all_rejected.append(response['i-input'])
         acc = len(accepted)/len(sentences)

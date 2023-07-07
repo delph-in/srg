@@ -4,6 +4,13 @@ from freeling_api.python_API import pyfreeling_api
 import sys, os, string
 
 class Freeling_tok_tagger:
+    '''
+    NB: There are numerous ways to configure the Freeling modules (the morphological analyzer, the splitter, the tagger).
+    Each small difference may result in the grammar no longer parsing things or parsing them differently,
+    because some of the tags will be different, and the tokenization may be different.
+    In principle, all the possibilities are described well in the Freeling docs: https://freeling-tutorial.readthedocs.io/
+    but they are vast and it is not always trivial to find the relevant pieces.
+    '''
     def __init__(self):
         os.environ["FREELINGDIR"] = '/usr'
         if not os.path.exists(os.environ["FREELINGDIR"]+"/share/freeling") :
@@ -13,7 +20,7 @@ class Freeling_tok_tagger:
            sys.exit(1)
 
         # Location of FreeLing configuration files.
-        self.DATA = os.environ["FREELINGDIR"]+"/share/freeling/"
+        self.DATA = os.environ["FREELINGDIR"]+"/share/freeling/" #usermap; currently empty
         self.CUSTOM_DATA = "/home/olga/delphin/SRG/grammar/srg/util/freeling_api/srg-freeling-debug.dat"
         # Init locales
         pyfreeling_api.util_init_locale("default")
@@ -21,12 +28,12 @@ class Freeling_tok_tagger:
         # but ignored (after, it is assumed language is LANG)
         self.la=pyfreeling_api.lang_ident(self.DATA+"common/lang_ident/ident-few.dat")
         # create options set for maco analyzer. Default values are Ok, except for data files.
-        self.LANG="es"
+        self.LANG="es" # This means the file es.cfg will be used (located in the freeling installation location)
         self.op= pyfreeling_api.maco_options(self.LANG)
         self.op.set_data_files( self.CUSTOM_DATA,
                            self.DATA + "common/punct.dat",
                            self.DATA + self.LANG + "/dicc.src",
-                           self.DATA + self.LANG + "/afixos.dat",
+                           self.DATA + self.LANG + "/afixos.dat", # important for the clitics!
                            "",
                            self.DATA + self.LANG + "/locucions.dat",
                            self.DATA + self.LANG + "/nerc/nerc/nerc.dat",
@@ -39,21 +46,23 @@ class Freeling_tok_tagger:
         self.mf=pyfreeling_api.maco(self.op)
 
         # activate mmorpho odules to be used in next call
-        self.mf.set_active_options(umap=True, num=True, pun=True, dat=False,  # select which among created
-                              dic=True, aff=True, comp=False, rtk=True,  # submodules are to be used.
-                              mw=True, ner=True, qt=False, prb=True )  # default: all created submodules are used
+        # These are crucial for the specific output.
+        self.mf.set_active_options(umap=True, num=True, pun=True, dat=False,  # no time and date detection (dat=False)
+                              dic=True, aff=True, comp=False, rtk=True,
+                              mw=True, ner=True, qt=False, prb=True )  # No quantities detection (qt=False)
 
+        # The tagger is instantiated with RETOKENIZATION SET TO FALSE (second parameter). This is crucial to get
+        # sequences of tags such as VMN00000 +PP3MSA0, for words like "creerlo" which will not be tokenized into two
         self.tg=pyfreeling_api.hmm_tagger(self.DATA+self.LANG+"/tagger.dat",False,0)
-        #self.tg = pyfreeling_api.relax_tagger(self.DATA+self.LANG+"/constr_gram-B.dat",500,670.0,0.001,True,1)
 
-    def tokenize_and_tag(self, sentence_list):
+    def tokenize_and_tag(self, sentence_list, override_dicts):
         output = []
         sid=self.sp.open_session()
         # process input text
         for i,lin in enumerate(sentence_list):
             output.append({'sentence': lin, 'tokens':[]})
-            #if "aburrido" in lin:
-            #    print("debug")
+            if "tanto" in lin:
+                print("debug")
             # With the basic NER Freeling module, may need this, as it will assume that
             # all uppercased items are all named entities.
             #s = self.tk.tokenize(lin.lower().capitalize()) if lin.isupper() else self.tk.tokenize(lin)
@@ -69,13 +78,21 @@ class Freeling_tok_tagger:
                 s = s[0]
                 ws = s.get_words()
                 for j,w in enumerate(ws) :
-                    tags_probs = self.get_selected_tags(w)
+                    tags_probs, additional_arcs = self.get_selected_tags(w, override_dicts)
+                    additional = len(additional_arcs) > 0
                     tag = '" "+'.join([tp['tag'] for tp in tags_probs])
                     prob = tags_probs[-1]['prob']
                     #print("lemma: {}, form: {}, start: {}, end: {}, tag: {}".format(w.get_lemma(), w.get_form(), w.get_span_start(), w.get_span_finish(), w.get_tag()))
                     output[i]['tokens'].append({'lemma':w.get_lemma(), 'form': w.get_form(),
                                                 'start':w.get_span_start(), 'end': w.get_span_finish(),
-                                                'selected-tag': tag, 'selected-prob': prob})
+                                                'tag': tag, 'prob': prob, 'additional': additional})
+                    for k,arc in enumerate(additional_arcs):
+                        entry = {'lemma': arc['lemma'], 'form': w.get_form(),
+                                                    'start': w.get_span_start(), 'end': w.get_span_finish(),
+                                                    'tag': arc['tag'], 'prob': prob, 'additional': True}
+                        if k == len(additional_arcs) - 1:
+                            entry['last'] = True
+                        output[i]['tokens'].append(entry)
         # clean up
         self.sp.close_session(sid)
         return output
@@ -87,8 +104,9 @@ class Freeling_tok_tagger:
         s = self.tg.analyze(s)
         return s
 
-    def get_selected_tags(self, w):
+    def get_selected_tags(self, w, override_dicts):
         tags = []
+        additional_arcs = []
         for a in w:
             if a.is_selected():
                 if a.is_retokenizable():
@@ -96,7 +114,21 @@ class Freeling_tok_tagger:
                     for tk in tks:
                         tags.append(({'tag': tk.get_tag(), 'prob': a.get_prob()}))
                 else:
-                    tags.append(({'tag': a.get_tag(), 'prob': a.get_prob()}))
-            #else:
-            #    print("Non-selected analysis: {}".format(a.get_tag()))
-        return tags
+                    if not w.get_form().lower() in override_dicts['replace']:
+                        tags.append(({'additional':False, 'tag': a.get_tag(), 'prob': a.get_prob()}))
+                    else:
+                        for i, additional_tag in enumerate(override_dicts['replace'][w.get_form().lower()]['tag']):
+                            additional_lemma = override_dicts['replace'][w.get_form().lower()]['lemma'][i]
+                            if i == 0:
+                                tags.append(({'additional':True, 'tag': additional_tag, 'prob': -1, 'lemma': additional_lemma}))
+                            else:
+                                additional_arcs.append(({'additional':True, 'tag': additional_tag, 'prob': -1, 'lemma': additional_lemma}))
+            else:
+                # There are words for which Freeling selected analysis should be ignored (no analysis discarded).
+                # In principle, there is also one tag for which it should be done if the word is in the first position:
+                # NP00000 @begin
+                # This is not yet implemented and will lead to mismatches with the old treebanks, especially with proper names.
+                if w.get_form().lower() in override_dicts['no_disambiguate']:
+                    additional_arcs.append(({'additional': True, 'tag': a.get_tag(), 'prob': a.get_prob(), 'lemma': a.get_lemma()}))
+                    #print("Non-selected analysis: {}".format(a.get_tag()))
+        return tags, additional_arcs

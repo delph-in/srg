@@ -35,7 +35,7 @@ def override_tag(selected, word, lemma, override_dicts):
                     return {'tags': [tags[0][:-3]], 'prob': -1 }
             else:
                 print("More than two tags in Freeling output: {}".format(selected['tag']))
-    if lemma in override_dicts['replace']:
+    if lemma in override_dicts['replace'] and len(override_dicts['replace'][lemma]['lemma']) == 1:
         return {'tags': override_dicts['replace'][lemma]['tag'], 'prob': -1 }
     return {'tags': [selected['tag']], 'prob': selected['prob']}
     #raise Exception("selected tag not in tag list")
@@ -53,19 +53,23 @@ def override_lemma(lemma, tag, override_dicts):
 def convert_sentences(sentences, override_dicts):
     yy_sentences = []
     for i, sent in enumerate(sentences):
-        if i == 149:
-            print("stop")
         output = ""
         _num = 0       # lattice ID
-        _from = 0      # lattice from
+        _from = 0
+        _to = 1
+        _keep_from = 0
+        _keep_to = 1
         if not sent['tokens']:
             output = '(1,0,1, <0:{}>,1,"{}" "{}",0, "np00v00", "np00v00" 1.0)'.format(len(sent['sentence']),
                                                                                       sent['sentence'].replace('"','\\"'),
                                                                                       sent['sentence'].replace('"','\\"'))
         else:
             for j,tok in enumerate(sent['tokens']):
+                is_additional = tok['additional']
                 surface = tok['form']
-                tag_prob = {'tag': tok['selected-tag'], 'prob':tok['selected-prob']}
+                #if tok['lemma'] == 'más':
+                #    print('debug')
+                tag_prob = {'tag': tok['tag'], 'prob':tok['prob']}
                 pos_conf = override_tag(tag_prob, surface.lower(), tok['lemma'], override_dicts)
                 if len(pos_conf['tags']) > 1:
                     print("Warning: more than one tag for token: {}".format(tok['form']))
@@ -78,8 +82,10 @@ def convert_sentences(sentences, override_dicts):
                 output += ', '
                 output += str(_from)
                 output += ', '
-                _from += 1
-                output += str(_from)
+                output += str(_to)
+                if not is_additional or ('last' in tok and tok['last']):
+                    _to += 1
+                    _from += 1
                 output += ', <'
                 output += str(int(tok['start'])) # - subtract)
                 output += ':'

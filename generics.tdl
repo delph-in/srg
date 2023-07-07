@@ -13,12 +13,13 @@
 
 ;n_-_mc_ge := n_-_mc_le &
 ;[ STEM < "n_-_mc_le" >,
-;  SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel".
-;  TRAITS generic_token_list ].
+;  SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel",
+;  TOKENS.+LIST generic_token_list ].
 
 ;n_pp_mc_ge := n_pp_mc_le &
 ;[ STEM < *top* >,
-;  SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ].
+;  SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel",
+;  TOKENS.+LIST generic_token_list ].
 
 ;;; Generic lexical entries for noun tags
 

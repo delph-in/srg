@@ -9,38 +9,49 @@
 ; --- non-inflecting categories
 
 ; -- adverbs 
+
 rg := 
 %suffix (rg rg) 
-rg_ilr.
+rg_ilr
+"""adverb""".
 
 rn :=
 %suffix (rn rn) 
-rg_ilr.
+rg_ilr
+"""adverb""".
 
 ; (-- advnp)
+
 nc00000 := 
 %suffix (nc00000 nc00000)
-nc00000_ilr.
+nc00000_ilr
+"""advnp (? OZ: not sure what this means...)""".
 
 ; (-- interj).
 i :=
 %suffix (i i)
-i_ilr.
+i_ilr
+"""interj""".
 
 ; -- prepositions
+
 sp := 
 %suffix (sp sp)
-sp_ilr.
+sp_ilr
+"""preposition""".
 
 ; -- sub. conjunctions
+
 cs := 
 %suffix (cs cs) 
-cs_ilr.
+cs_ilr
+"""sub. conjunction""".
 
 ; -- coord. conjunctions
 cc := 
 %suffix (cc cc) 
-cc_ilr.
+cc_ilr
+"""coord. conjunction""".
 
 
 ; --- named entities
@@ -48,163 +59,177 @@ cc_ilr.
 ; -- proper names
 np00sp0 :=
 %suffix (np00sp0 np00sp0)
-np00sp0_ilr.
+np00sp0_ilr
+"""proper name""".
 
-; OZ: Is there anything special about np00g00, compared to np00sp0?
+
 np00g00 :=
 %suffix (np00g00 np00g00)
-np00sp0_ilr.
+np00sp0_ilr
+"""OZ: Is there anything special about np00g00, compared to np00sp0?""".
 
-; OZ: Freeling returns this tag for some named entities.
+
 np00o00 := 
 %suffix (np00o00 np00o00)
-np00sp0_ilr.
+np00sp0_ilr
+"""OZ: Freeling returns this tag for some named entities.""".
 
-; OZ: I will use this for various cases which cause Freeling to not return an analysis
 np00v00 :=
 %suffix (np00v00 np00v00)
-np00v00_ilr.
+np00v00_ilr
+"""OZ: I will use this for various cases which cause Freeling to not return an analysis""".
 
 ; -- numbers
+
 z := 
 %suffix (z z)
-ne_ilr. 
+ne_ilr
+"""number""". 
 
 zp := 
 %suffix (zp zp)
-ne_ilr. 
+ne_ilr
+"""number""". 
 
 ; -- currencies
+
 zm := 
 %suffix (zm zm)
-ne_ilr. 
+ne_ilr
+"""currency""". 
 
 zd := 
 %suffix (zd zd)
-ne_ilr. 
+ne_ilr
+"""currency""". 
 
 ; -- measures
+
 zu := 
 %suffix (zu zu)
-ne_ilr. 
+ne_ilr
+"""measure""". 
 
 ; -- dates
+
 w := 
 %suffix (w w)
-ne_ilr. 
+ne_ilr
+"""date""". 
 
 
 ; --- punctuation marks
 
-; -- semi colon ;
+
 fx := 
 %suffix (fx fx)
-infl-ltow-rule.
+infl-ltow-rule
+""" -- semi colon ;""".
 
-; -- colon :
 fd := 
 %suffix (fd fd)
-infl-ltow-rule.
+infl-ltow-rule
+"""-- colon :""".
 
-; -- full-stop .
 fp := 
 %suffix (fp fp)
-infl-ltow-rule.
+infl-ltow-rule
+""" -- full-stop .""".
 
-; -- 3dots ...
 fs := 
 %suffix (fs fs)
-infl-ltow-rule.
+infl-ltow-rule
+"""-- 3dots ...""".
 
-; -- comma ,
 fc := 
 %suffix (fc fc)
-infl-ltow-rule.
+infl-ltow-rule
+""" -- comma ,""".
 
-; -- quotes "
 fe := 
 %suffix (fe fe)
-infl-ltow-rule.
+infl-ltow-rule
+"""; -- quotes " """.
 
-; -- hyphen -
 fg := 
 %suffix (fg fg)
-infl-ltow-rule.
+infl-ltow-rule
+"""; -- hyphen -""".
 
-; -- question mark open ¿
 fia := 
 %suffix (fia fia)
-infl-ltow-rule.
+infl-ltow-rule
+"""; -- question mark open ¿""".
 
-; -- question mark close ?
 fit := 
 %suffix (fit fit)
-infl-ltow-rule.
+infl-ltow-rule
+"""; -- question mark close ?""".
 
-; -- exclamative open ¡
 faa := 
 %suffix (faa faa)
-infl-ltow-rule.
+infl-ltow-rule
+"""; -- exclamative open ¡""".
 
-; -- exclamative close !
 fat := 
 %suffix (fat fat)
-infl-ltow-rule.
+infl-ltow-rule
+"""; -- exclamative close !""".
 
-; -- bracket open (
 fpa := 
 %suffix (fpa fpa)
-infl-ltow-rule.
+infl-ltow-rule
+"""; -- bracket open (""".
 
-; -- bracket close )
 fpt := 
 %suffix (fpt fpt)
-infl-ltow-rule.
+infl-ltow-rule
+"""; -- bracket close )""".
 
-; -- <<
 fra := 
 %suffix (fra fra)
-infl-ltow-rule.
+infl-ltow-rule
+"""; -- <<""".
 
-; -- >>
 frc := 
 %suffix (frc frc)
-infl-ltow-rule.
+infl-ltow-rule
+"""; -- >>""".
 
-; -- square bracket open [
 fca := 
 %suffix (fca fca)
-infl-ltow-rule.
+infl-ltow-rule
+"""; -- square bracket open [""".
 
-; -- square bracket close ]
 fct := 
 %suffix (fct fct)
-infl-ltow-rule.
+infl-ltow-rule
+"""; -- square bracket close ]""".
 
-; -- {
 fla := 
 %suffix (fla fla)
-infl-ltow-rule.
+infl-ltow-rule
+"""; -- {""".
 
-; -- }
 flt := 
 %suffix (flt flt)
-infl-ltow-rule.
+infl-ltow-rule
+"""; -- }""".
 
-; -- percentage %
 ft := 
 %suffix (ft ft)
-infl-ltow-rule.
+infl-ltow-rule
+"""; -- percentage %""".
 
-; -- mathematical symbols (+, -, =)
 fz := 
 %suffix (fz fz)
-infl-ltow-rule.
+infl-ltow-rule
+"""; -- mathematical symbols (+, -, =)""".
 
-; -- /
 fh := 
 %suffix (fh fh)
-infl-ltow-rule.
+infl-ltow-rule
+"""; -- /""".
 
 
 ; --- inflecting categories
@@ -212,608 +237,704 @@ infl-ltow-rule.
 ; --- determiners
 
 ; --- definite articles (el, los, la, las, lo)
+
 da0ms0 := 
 %suffix (da0ms0 da0ms0)
-da0ms0_ilr.
+da0ms0_ilr
+"""definite article (el)""".
 
 da0mp0 := 
 %suffix (da0mp0 da0mp0)
-da0mp0_ilr.
+da0mp0_ilr
+"""definite article (los)""".
 
 da0fs0 := 
 %suffix (da0fs0 da0fs0)
-da0fs0_ilr.
+da0fs0_ilr
+"""definite article (la)""".
 
 da0fp0 := 
 %suffix (da0fp0 da0fp0)
-da0fp0_ilr.
+da0fp0_ilr
+"""definite article (las)""".
 
 da00s0 := 
 %suffix (da00s0 da00s0)
-da00s0_ilr.
+da00s0_ilr
+"""definite article (lo)""".
 
 
 ; --- demonstrative determiners
-; este, ese, aquel
+
+
 dd0ms0 := 
 %suffix (dd0ms0 dd0ms0)
-dd0ms0_ilr.
+dd0ms0_ilr
+"""; este, ese, aquel""".
 
-; estos, esos, aquellos
 dd0mp0 := 
 %suffix (dd0mp0 dd0mp0)
-dd0mp0_ilr.
+dd0mp0_ilr
+"""; estos, esos, aquellos""".
 
-; esta, esa, aquella
 dd0fs0 := 
 %suffix (dd0fs0 dd0fs0)
-dd0fs0_ilr.
+dd0fs0_ilr
+"""; esta, esa, aquella""".
 
-; estas, esas, aquellas
 dd0fp0 := 
 %suffix (dd0fp0 dd0fp0)
-dd0fp0_ilr.
+dd0fp0_ilr
+"""; estas, esas, aquellas""".
 
-; tal, semejante
 dd0cs0 := 
 %suffix (dd0cs0 dd0cs0)
-dd0cs0_ilr.
+dd0cs0_ilr
+"""; tal, semejante""".
 
-; tales, semejantes
 dd0cp0 := 
 %suffix (dd0cp0 dd0cp0)
-dd0cp0_ilr.
+dd0cp0_ilr
+"""; tales, semejantes""".
 
 
 ; -- possessive determiners
-; mi
+
 dp1css := 
 %suffix (dp1css dp1css)
-dp1css_ilr.
+dp1css_ilr
+"""; mi""".
 
-; mis
 dp1cps := 
 %suffix (dp1cps dp1cps)
-dp1cps_ilr.
+dp1cps_ilr
+"""; mis""".
 
-; OZ: It is not clear to me at the moment why mi/mis get a dp tag while the rest get the ap ones.
-; If this changes, then the TAGS dictionary in util/override_freeling.py will need to be modified.
-; nuestros
 ;dp1mpp := 
 ;%suffix (dp1mpp dp1mpp)
-;ap0mp1p_ilr.
+;ap0mp1p_ilr
+;"""; nuestros""".
 
-
-; nuestro
 ap0ms1p := 
 %suffix (ap0ms1p ap0ms1p)
-ap0ms1p_ilr.
+ap0ms1p_ilr
+"""; nuestro""".
 
-; nuestros
 ap0mp1p := 
 %suffix (ap0mp1p ap0mp1p)
-ap0mp1p_ilr.
+ap0mp1p_ilr
+"""; nuestros""".
 
-
-; nuestra
 ap0fs1p := 
 %suffix (ap0fs1p ap0fs1p)
-ap0fs1p_ilr.
+ap0fs1p_ilr
+"""; nuestra""".
 
-; nuestras
 ap0fp1p := 
 %suffix (ap0fp1p ap0fp1p)
-ap0fp1p_ilr.
+ap0fp1p_ilr
+"""; nuestras""".
 
-; tu
 dp2css := 
 %suffix (dp2css dp2css)
-dp2css_ilr.
+dp2css_ilr
+"""; tu""".
 
-; tus
 dp2cps := 
 %suffix (dp2cps dp2cps)
-dp2cps_ilr.
+dp2cps_ilr
+"""; tus""".
 
-; vuestro
 ap0ms2p := 
 %suffix (ap0ms2p ap0ms2p)
-ap0ms2p_ilr.
+ap0ms2p_ilr
+"""; vuestro""".
 
-; vuestros
 ap0mp2p := 
 %suffix (ap0mp2p ap0mp2p)
-ap0mp2p_ilr.
+ap0mp2p_ilr
+"""; vuestros""".
 
-; vuestra
 ap0fs2p := 
 %suffix (ap0fs2p ap0fs2p)
-ap0fs2p_ilr.
+ap0fs2p_ilr
+"""; vuestra""".
 
-; vuestras
 ap0fp2p := 
 %suffix (ap0fp2p ap0fp2p)
-ap0fp2p_ilr.
+ap0fp2p_ilr
+"""; vuestras""".
 
-; su
 dp3csn := 
 %suffix (dp3csn dp3csn)
-dp3csn_ilr.
+dp3csn_ilr
+"""; su""".
 
-; sus
 dp3cpn := 
 %suffix (dp3cpn dp3cp0)
-dp3cpn_ilr.
+dp3cpn_ilr
+"""; sus""".
 
 
 ; -- indefinite determiners
-; algún
+
 di0ms0 := 
 %suffix (di0ms0 di0ms0)
-di0ms0_ilr.
+di0ms0_ilr
+"""; algún""".
 
-; algunos
 di0mp0 := 
 %suffix (di0mp0 di0mp0)
-di0mp0_ilr.
+di0mp0_ilr
+"""; algunos""".
 
-; alguna
 di0fs0 := 
 %suffix (di0fs0 di0fs0)
-di0fs0_ilr.
+di0fs0_ilr
+"""; alguna""".
 
-; algunas
 di0fp0 := 
 %suffix (di0fp0 di0fp0)
-di0fp0_ilr.
+di0fp0_ilr
+"""; algunas""".
 
-; bastante
 di0cs0 := 
 %suffix (di0cs0 di0cs0)
-di0cs0_ilr.
+di0cs0_ilr
+"""; bastante""".
 
-; bastantes
 di0cp0 := 
 %suffix (di0cp0 di0cp0)
-di0cp0_ilr.
+di0cp0_ilr
+"""; bastantes""".
 
 
 ; -- interrogative determiners
-; cuánto
+
 dt0ms0 := 
 %suffix (dt0ms0 dt0ms0)
-dt0ms0_ilr.
+dt0ms0_ilr
+"""; cuánto""".
 
-; cuántos
 dt0mp0 := 
 %suffix (dt0mp0 dt0mp0)
-dt0mp0_ilr.
+dt0mp0_ilr
+"""; cuántos""".
 
-; cuánta
 dt0fs0 := 
 %suffix (dt0fs0 dt0fs0)
-dt0fs0_ilr.
+dt0fs0_ilr
+"""; cuánta""".
 
-; cuántas
 dt0fp0 := 
 %suffix (dt0fp0 dt0fp0)
-dt0fp0_ilr.
+dt0fp0_ilr
+"""; cuántas""".
 
-; cuál
 dt0cs0 := 
 %suffix (dt0cs0 dt0cs0)
-dt0cs0_ilr.
+dt0cs0_ilr
+"""; cuál""".
 
-; cuáles
 dt0cp0 := 
 %suffix (dt0cp0 dt0cp0)
-dt0cp0_ilr.
+dt0cp0_ilr
+"""; cuáles""".
 
-; qué
 dt0cn0 := 
 %suffix (dt0cn0 dt0cn0)
-dt0cn0_ilr.
+dt0cn0_ilr
+"""; qué""".
 
 ; -- exclamative determiners
-; cuánto
+
 de0ms0 := 
 %suffix (de0ms0 de0ms0)
-de0ms0_ilr.
+de0ms0_ilr
+"""; cuánto
+""".
 
-; cuántos
 de0mp0 := 
 %suffix (de0mp0 de0mp0)
-de0mp0_ilr.
+de0mp0_ilr
+"""; cuántos""".
 
-; cuánta
 de0fs0 := 
 %suffix (de0fs0 de0fs0)
-de0fs0_ilr.
+de0fs0_ilr
+"""; cuánta""".
 
-; cuántas
 de0fp0 := 
 %suffix (de0fp0 de0fp0)
-de0fp0_ilr.
+de0fp0_ilr
+"""; cuántas""".
 
-; cuál
 de0cs0 := 
 %suffix (de0cs0 de0cs0)
-de0cs0_ilr.
+de0cs0_ilr
+"""; cuál""".
 
-; cuáles
 de0cp0 := 
 %suffix (de0cp0 de0cp0)
-de0cp0_ilr.
+de0cp0_ilr
+"""; cuáles""".
 
-; qué
 de0cn0 := 
 %suffix (de0cn0 de0cn0)
-de0cn0_ilr.
+de0cn0_ilr
+"""; qué""".
 
 
 ; --- pronouns 
 
 ; -- demonstrative pronouns
-; este, ese, aquel, estotro, esotro, ello
+
 pd0ms00 := 
 %suffix (pd0ms00 pd0ms00)
-pd0ms00_ilr.
+pd0ms00_ilr
+"""; este, ese, aquel, estotro, esotro, ello
+""".
 
-; estos, esos, aquellos
 pd0mp00 := 
 %suffix (pd0mp00 pd0mp00)
-pd0mp00_ilr.
+pd0mp00_ilr
+"""; estos, esos, aquellos
+""".
 
-; esta, esa, aquella, estotra, esotra
 pd0fs00 := 
 %suffix (pd0fs00 pd0fs00)
-pd0fs00_ilr.
+pd0fs00_ilr
+"""; esta, esa, aquella, estotra, esotra
+""".
 
-; estas, esas, aquellas
 pd0fp00 := 
 %suffix (pd0fp00 pd0fp00)
-pd0fp00_ilr.
+pd0fp00_ilr
+"""; estas, esas, aquellas
+""".
 
-; esto, eso, aquello
 pd00s00 := 
 %suffix (pd00s00 pd00s00)
-pd00s00_ilr.
+pd00s00_ilr
+"""; esto, eso, aquello
+""".
 
-; tal
 pd0cs00 := 
 %suffix (pd0cs00 pd0cs00)
-pd0cs00_ilr.
+pd0cs00_ilr
+"""; tal
+""".
 
-; tales
 pd0cp00 := 
 %suffix (pd0cp00 pd0cp00)
-pd0cp00_ilr.
+pd0cp00_ilr
+"""; tales
+""".
 
 
 ; -- indefinite pronouns
-; alguno
+
 pi0ms00 := 
 %suffix (pi0ms00 pi0ms00)
-pi0ms00_ilr.
+pi0ms00_ilr
+"""; alguno
+""".
 
-; algunos
 pi0mp00 := 
 %suffix (pi0mp00 pi0mp00)
-pi0mp00_ilr.
+pi0mp00_ilr
+"""; algunos
+""".
 
-; alguna
 pi0fs00 := 
 %suffix (pi0fs00 pi0fs00)
-pi0fs00_ilr.
+pi0fs00_ilr
+"""; alguna
+""".
 
-; algunas
 pi0fp00 := 
 %suffix (pi0fp00 pi0fp00)
-pi0fp00_ilr.
+pi0fp00_ilr
+"""; algunas
+""".
 
-; bastante
 pi0cs00 := 
 %suffix (pi0cs00 pi0cs00)
-pi0cs00_ilr.
+pi0cs00_ilr
+"""; bastante
+""".
 
-; bastantes
 pi0cp00 := 
 %suffix (pi0cp00 pi0cp00)
-pi0cp00_ilr.
+pi0cp00_ilr
+"""; bastantes
+""".
 
-; lo/los/las demás
 pi0cc000 := 
 %suffix (pi0cc000 pi0cc000)
-pi0cc000_ilr.
+pi0cc000_ilr
+"""; lo/los/las demás
+""".
 
 
 ; -- relative pronouns 
-; cuanto, cuyo
+
 pr0ms00 := 
 %suffix (pr0ms00 pr0ms00)
-dr0ms0_ilr.
+dr0ms0_ilr
+"""; relative: cuanto, cuyo
+""".
 
-; cuantos, cuyos
 pr0mp00 := 
 %suffix (pr0mp00 pr0mp00)
-dr0mp0_ilr.
+dr0mp0_ilr
+"""; relative: cuantos, cuyos
+""".
 
-; cuanta, cuya
 pr0fs00 := 
 %suffix (pr0fs00 pr0fs00)
-dr0fs0_ilr.
+dr0fs0_ilr
+"""; relative: cuanta, cuya
+""".
 
-; cuantas, cuyas
 pr0fp00 := 
 %suffix (pr0fp00 pr0fp00)
-dr0fp0_ilr.
+dr0fp0_ilr
+"""; relative: cuantas, cuyas
+""".
 
-; quien, cual
 pr0cs00 := 
 %suffix (pr0cs00 pr0cs00)
-pr0cs00_ilr.
+pr0cs00_ilr
+""" ; relative: quien, cual
+""".
 
-; quienes, cuales
 pr0cp00 := 
 %suffix (pr0cp00 pr0cp00)
-pr0cp00_ilr.
+pr0cp00_ilr
+""" ; relative quienes, cuales
+""".
 
-; que
 pr0cn00 := 
 %suffix (pr0cn00 pr0cn00)
-pr0cn00_ilr.
+pr0cn00_ilr
+"""; relative: que
+""".
 
-; (a)donde, como, cuando
 pr00000 := 
 %suffix (pr00000 pr00000)
-pr00000_ilr.
+pr00000_ilr
+"""; relative: (a)donde, como, cuando
+""".
 
 
 ; -- interrogative pronouns
-; cuánto
+
 pt0ms00 := 
 %suffix (pt0ms00 pt0ms00)
-pt0ms00_ilr.
+pt0ms00_ilr
+"""; interrogative: cuánto
+""".
 
-; cuántos
 pt0mp00 := 
 %suffix (pt0mp00 pt0mp00)
-pt0mp00_ilr.
+pt0mp00_ilr
+"""; interrogative: cuántos
+""".
 
-; cuánta
 pt0fs00 := 
 %suffix (pt0fs00 pt0fs00)
-pt0fs00_ilr.
+pt0fs00_ilr
+"""; interrogative: cuánta
+""".
 
-; cuántas
 pt0fp00 := 
 %suffix (pt0fp00 pt0fp00)
-pt0fp00_ilr.
+pt0fp00_ilr
+"""; interrogative: cuántas
+""".
 
-; cuál, quién
 pt0cs00 := 
 %suffix (pt0cs00 pt0cs00)
-pt0cs00_ilr.
+pt0cs00_ilr
+"""; interrogative: cuál, quién
+""".
 
-; cuáles, quiénes
 pt0cp00 := 
 %suffix (pt0cp00 pt0cp00)
-pt0cp00_ilr.
+pt0cp00_ilr
+"""; interrogative: cuáles, quiénes
+""".
 
-; qué
-; (a)dónde, cómo, cuándo
 pt00000 := 
 %suffix (pt00000 pt00000)
-pt00000_ilr.
+pt00000_ilr
+"""; interrogative: qué
+; (a)dónde, cómo, cuándo
+""".
 
 ; -- exclamative pronouns
-; cuánto
+
+
 pe0ms00 := 
 %suffix (pe0ms00 pe0ms00)
-pe0ms00_ilr.
+pe0ms00_ilr
+""" exclamative pronoun: ; cuánto
+""".
 
-; cuántos
 pe0mp00 := 
 %suffix (pe0mp00 pe0mp00)
-pe0mp00_ilr.
+pe0mp00_ilr
+""" exclamative pronoun: ; cuántos
+""".
 
-; cuánta
 pe0fs00 := 
 %suffix (pe0fs00 pe0fs00)
-pe0fs00_ilr.
+pe0fs00_ilr
+""" exclamative pronoun: ; cuánta
+""".
 
-; cuántas
 pe0fp00 := 
 %suffix (pe0fp00 pe0fp00)
-pe0fp00_ilr.
+pe0fp00_ilr
+""" exclamative pronoun: ; cuántas
+""".
 
-; cuál, quién
 pe0cs00 := 
 %suffix (pe0cs00 pe0cs00)
-pe0cs00_ilr.
+pe0cs00_ilr
+""" exclamative pronoun: ; cuál, quién
+""".
 
-; cuáles, quiénes
 pe0cp00 := 
 %suffix (pe0cp00 pe0cp00)
-pe0cp00_ilr.
+pe0cp00_ilr
+""" exclamative pronoun: ; cuáles, quiénes
+""".
 
-; qué, (a)dónde, cómo, cuándo
 pe00000 := 
 %suffix (pe00000 pe00000)
-pe00000_ilr.
+pe00000_ilr
+""" exclamative pronoun: ; qué, (a)dónde, cómo, cuándo
+""".
 
 ; -- personal pronouns
-; yo
+
 pp1csn0 :=
 %suffix (pp1csn0 pp1csn0) 
-pp1csn0_ilr.
+pp1csn0_ilr
+""" ; yo
+""".
 
-; tú
 pp2csn0 :=
 %suffix (pp2csn0 pp2csn0) 
-pp2csn0_ilr.
+pp2csn0_ilr
+""" ; tú
+""".
 
-; él
 pp3ms00 :=
 %suffix (pp3ms00 pp3ms00) 
-pp3ms00_ilr.
+pp3ms00_ilr
+""" ; él
+""".
 
-; ella
 pp3fs00 :=
 %suffix (pp3fs00 pp3fs00) 
-pp3fs00_ilr.
+pp3fs00_ilr
+""" ; ella
+""".
 
-; ello
 pp3ns000 :=
 %suffix (pp3ns000 pp3ns000) 
-pp3ns000_ilr.
+pp3ns000_ilr
+""" ; ello
+""".
 
-; nosotros
 pp1mp00 :=
 %suffix (pp1mp00 pp1mp00) 
-pp1mp00_ilr.
+pp1mp00_ilr
+""" ; nosotros
+""".
 
-; nosotras
 pp1fp00 :=
 %suffix (pp1fp00 pp1fp00) 
-pp1fp00_ilr.
+pp1fp00_ilr
+""" ; nosotras
+""".
 
-; vosotros
 pp2mp00 :=
 %suffix (pp2mp00 pp2mp00) 
-pp2mp00_ilr.
+pp2mp00_ilr
+""" ; vosotros
+""".
 
-; vosotras
 pp2fp00 :=
 %suffix (pp2fp00 pp2fp00) 
-pp2fp00_ilr.
+pp2fp00_ilr
+""" ; vosotras
+""".
 
-; ellos
 pp3mp00 :=
 %suffix (pp3mp00 pp3mp00) 
-pp3mp00_ilr.
+pp3mp00_ilr
+"""; ellos
+""".
 
-; ellas
 pp3fp00 :=
 %suffix (pp3fp00 pp3fp00) 
-pp3fp00_ilr.
+pp3fp00_ilr
+"""; ellas
+""".
 
-; usted
 pp2cs0p :=
 %suffix (pp2cs0p pp2cs0p) 
-pp2cs0p_ilr.
+pp2cs0p_ilr
+"""; usted
+""".
 
-; ustedes
 pp2cp0p :=
 %suffix (pp2cp0p pp2cp0p) 
-pp2cp0p_ilr.
+pp2cp0p_ilr
+"""; ustedes
+""".
 
 
-; mí, conmigo
 pp1cso0 := 
 %suffix (pp1cso0 pp1cso0) 
-pp1cso0_ilr.
+pp1cso0_ilr
+"""; mí, conmigo
+""".
 
-; tí, contigo,
 pp2cso0 := 
 %suffix (pp2cso0 pp2cso0) 
-pp2cso0_ilr.
+pp2cso0_ilr
+"""; tí, contigo,
+""".
 
-; sí, consigo
 pp3cno0 := 
 %suffix (pp3cno0 pp3cno0) 
-pp3cno0_ilr.
+pp3cno0_ilr
+"""; sí, consigo
+""".
 
 
 ; --- clitics (affixes)
-; la
+
 pp3fsa0 := 
 %suffix (pp3fsa0 pp3fsa0) 
-affx_3sg-fem_ilr.
+affx_3sg-fem_ilr
+""" clitics (affixes): ; la
+""".
 
-; las
 pp3fpa0 := 
 %suffix (pp3fpa0 pp3fpa0) 
-affx_3pl-fem_ilr.
+affx_3pl-fem_ilr
+""" clitics (affixes): ; las
+""".
 
-; lo
 pp3cna00 := 
 %suffix (pp3cna00 pp3cna00) 
-affx_3sg-masc_ilr.
+affx_3sg-masc_ilr
+""" clitics (affixes): ; lo
+""".
 
-; lo
 pp3msa0 := 
 %suffix (pp3msa0 pp3msa0) 
-affx_3sg-masc_ilr.
+affx_3sg-masc_ilr
+""" clitics (affixes): ; lo
+""".
 
-; los
 pp3mpa0 := 
 %suffix (pp3mpa0 pp3mpa0) 
-affx_3pl-masc_ilr.
+affx_3pl-masc_ilr
+""" clitics (affixes): ; los
+""".
 
-; me
 pp1cs00 := 
 %suffix (pp1cs00 pp1cs00) 
-pp1cs00_ilr.
+pp1cs00_ilr
+""" clitics (affixes): ; me
+""".
 
 p01cs00 := 
 %suffix (p01cs00 p01cs00) 
-p01cs00_ilr.
+p01cs00_ilr
+""" clitics (affixes)
 ;no_ilr.
+""".
 
-; nos
 pp1cp00 := 
 %suffix (pp1cp00 pp1cp00)
-affx_1pl_ilr. 
+affx_1pl_ilr
+""" clitics (affixes): ; nos
+""". 
 
 p01cp00 := 
 %suffix (p01cp00 p01cp00) 
-affx_1pl_ilr. 
+affx_1pl_ilr
+""" clitics (affixes)
 ;no_ilr.
+""". 
 
-; te
 pp2cs00 := 
 %suffix (pp2cs00 pp2cs00) 
-affx_2sg_ilr.
+affx_2sg_ilr
+""" clitics (affixes):
+; te
+""".
 
 p02cs00 := 
 %suffix (p02cs00 p02cs00) 
-affx_2sg_ilr.
+affx_2sg_ilr
+""" clitics (affixes)
 ;no_ilr.
+""".
 
-; os
+
 pp2cp00 := 
 %suffix (pp2cp00 pp2cp00) 
-affx_2pl_ilr.
+affx_2pl_ilr
+""" clitics (affixes): ; os
+""".
 
 p02cp00 := 
 %suffix (p02cp00 p02cp00) 
-affx_2pl_ilr.
+affx_2pl_ilr
+""" clitics (affixes)
 ;no_ilr.
+""".
 
-; se
 pp3cn00 := 
 %suffix (pp3cn00 pp3cn00) 
-affx_3per_ilr.
+affx_3per_ilr
+""" clitics (affixes): ; se
+""".
 
 p03cn00 := 
 %suffix (p03cn00 p03cn00) 
-affx_3per_ilr.
+affx_3per_ilr
+""" clitics (affixes)
+""".
 
 p00cn00 := 
 %suffix (p00cn00 p00cn00) 
-affx_3per_ilr.
+affx_3per_ilr
+""" clitics (affixes):
 ;no_ilr. 
+""".
 
-; le
 pp3csd0 := 
 %suffix (pp3csd0 pp3csd0) 
-affx_3sg_ilr.
+affx_3sg_ilr
+""" clitics (affixes):
+; le
+""".
 
-; les
 pp3cpd0 := 
 %suffix (pp3cpd0 pp3cpd0) 
-affx_3pl_ilr.
+affx_3pl_ilr
+""" clitics (affixes): ; les
+""".
 
 
 ; --- common nouns
@@ -923,152 +1044,183 @@ n_com_ilr.
 ; --- adjectives
 
 ; -- ordinals
-; primera
+
 ao0fs00 := 
 %suffix (ao0fs00 ao0fs00)
-a_fem-sg_ilr.
+a_fem-sg_ilr
+"""; ordinals: primera
+""".
 
-; primeras
 ao0fp00 := 
 %suffix (ao0fp00 ao0fp00)
-a_fem-pl_ilr.
+a_fem-pl_ilr
+"""; ordinals: ; primeras
+""".
 
-; primer, primero
 ao0ms00 := 
 %suffix (ao0ms00 ao0ms00) 
-infl-ltow-rule.
+infl-ltow-rule
+"""; ordinals: ; primer, primero
 ;a_masc-sg_ilr.
+""".
 
-; primeros
 ao0mp00 := 
 %suffix (ao0mp00 ao0mp00)
-a_masc-pl_ilr.
+a_masc-pl_ilr
+"""; ordinals: ; primeros
+""".
 
 ; -- possessives
-; mía
+
 ap0fs1s := 
 %suffix (ap0fs1s ap0fs1s) 
-a_fem-sg_ilr.
+a_fem-sg_ilr
+"""; mía
+""".
 
-; mías
 ap0fp1s := 
 %suffix (ap0fp1s ap0fp1s) 
-a_fem-pl_ilr.
+a_fem-pl_ilr
+"""; mías
+""".
 
-; mío
 ap0ms1s := 
 %suffix (ap0ms1s ap0ms1s) 
-a_masc-sg_ilr.
+a_masc-sg_ilr
+"""; mío
+""".
 
-; mío
 px1ns0s0 := 
 %suffix (px1ns0s0 px1ns0s0) 
-a_neut-sg_ilr.
+a_neut-sg_ilr
+"""; mío
+""".
 
-; míos
 ap0mp1s := 
 %suffix (ap0mp1s ap0mp1s) 
-a_masc-pl_ilr.
+a_masc-pl_ilr
+"""; míos
+""".
 
-; nuestra
 px1fs0p0 := 
 %suffix (px1fs0p0 px1fs0p0) 
-a_fem-sg_ilr.
+a_fem-sg_ilr
+"""; nuestra
+""".
 
-; nuestras
 px1fp0p0 := 
 %suffix (px1fp0p0 px1fp0p0) 
-a_fem-pl_ilr.
+a_fem-pl_ilr
+"""; nuestras
+""".
 
-; nuestro
 px1ms0p0 := 
 %suffix (px1ms0p0 px1ms0p0) 
-a_masc-sg_ilr.
+a_masc-sg_ilr
+"""; nuestro
+""".
 
-; nuestro
 px1ns0p0 := 
 %suffix (px1ns0p0 px1ns0p0) 
-a_neut-sg_ilr.
+a_neut-sg_ilr
+"""; nuestro
+""".
 
-; nuestros
 px1mp0p0 := 
 %suffix (px1mp0p0 px1mp0p0)
-a_masc-pl_ilr. 
+a_masc-pl_ilr
+"""; nuestros
+""". 
 
-; tuya
 ap0fs2s := 
 %suffix (ap0fs2s ap0fs2s)  
-a_fem-sg_ilr.
+a_fem-sg_ilr
+"""; tuya
+""".
 
-; tuyas
 ap0fp2s := 
 %suffix (ap0fp2s ap0fp2s) 
-a_fem-pl_ilr.
+a_fem-pl_ilr
+"""; tuyas
+""".
 
-; tuyo
 ap0ms2s := 
 %suffix (ap0ms2s ap0ms2s) 
-a_masc-sg_ilr.
+a_masc-sg_ilr
+"""; tuyo
+""".
 
-; tuyo
 px2ns0s0 := 
 %suffix (px2ns0s0 px2ns0s0) 
-a_neut-sg_ilr.
+a_neut-sg_ilr
+"""; tuyo
+""".
 
-; tuyos 
 ap0mp2s := 
 %suffix (ap0mp2s ap0mp2s) 
-a_masc-pl_ilr.
+a_masc-pl_ilr
+"""; tuyos 
+""".
 
-; vuestra
 px2fs0p0 := 
 %suffix (px2fs0p0 px2fs0p0)  
-a_fem-sg_ilr.
+a_fem-sg_ilr
+"""; vuestra
+""".
 
-; vuestras
 px2fp0p0 := 
 %suffix (px2fp0p0 px2fp0p0) 
-a_fem-pl_ilr.
+a_fem-pl_ilr
+"""; vuestras
+""".
 
-; vuestro
 px2ms0p0 := 
 %suffix (px2ms0p0 px2ms0p0) 
-a_masc-sg_ilr.
+a_masc-sg_ilr
+"""; vuestro
+""".
 
-; vuestro
 px2ns0p0 := 
 %suffix (px2ns0p0 px2ns0p0) 
-a_neut-sg_ilr.
+a_neut-sg_ilr
+"""; vuestro
+""".
 
-; vuestros
 px2mp0p0 := 
 %suffix (px2mp0p0 px2mp0p0) 
-a_masc-pl_ilr.
+a_masc-pl_ilr
+"""; vuestros
+""".
 
-; suya
 ap0fs3n := 
 %suffix (ap0fs3n ap0fs3n) 
-a_fem-sg_ilr.
+a_fem-sg_ilr
+"""; suya
+""".
 
-; suyas
 ap0fp3n := 
 %suffix (ap0fp3n ap0fp3n) 
-a_fem-pl_ilr.
+a_fem-pl_ilr
+"""; suyas
+""".
 
-; suyo
 ap0ms3n := 
 %suffix (ap0ms3n ap0ms3n) 
-a_masc-sg_ilr.
+a_masc-sg_ilr
+"""; suyo
+""".
 
-; suyo
 px3ns0c0 := 
 %suffix (px3ns0c0 px3ns0c0) 
-a_neut-sg_ilr.
+a_neut-sg_ilr
+"""; suyo
+""".
 
-; suyos
 ap0mp3n := 
 %suffix (ap0ms3n pap0ms3n) 
-a_masc-pl_ilr.
+a_masc-pl_ilr
+"""; suyos
+""".
 
 ; -- qualitatives
 
@@ -1076,98 +1228,118 @@ a_masc-pl_ilr.
 ;%suffix (aq00000 aq00000)
 ;a_masc-sg_ilr.
 
-; bonito
 aq0ms00 := 
 %suffix (aq0ms00 aq0ms00) 
-a_masc-sg_ilr.
+a_masc-sg_ilr
+"""; bonito
+""".
 
-; bonitos
 aq0mp00 := 
 %suffix (aq0mp00 aq0mp00)
-a_masc-pl_ilr.
+a_masc-pl_ilr
+"""; bonitos
+""".
 
 ; pequeñitos
 ;aqvmp00 := 
 ;%suffix (aqvmp00 aqvmp00)
 ;a_masc-pl_ilr.
 
-; bonita
 aq0fs00 := 
 %suffix (aq0fs00 aq0fs00)
-a_fem-sg_ilr.
+a_fem-sg_ilr
+"""; bonita
+""".
 
-; bonitas
 aq0fp00 := 
 %suffix (aq0fp00 aq0fp00)
-a_fem-pl_ilr.
+a_fem-pl_ilr
+"""; bonitas
+""".
 
-; alegre
 aq0cs00 := 
 %suffix (aq0cs00 aq0cs00)
-a_sg_ilr.
+a_sg_ilr
+"""; alegre
+""".
 
-; alegres
 aq0cp00 := 
 %suffix (aq0cp00 aq0cp00) 
-a_pl_ilr.
+a_pl_ilr
+"""; alegres
+""".
 
-; antiarrugas
 aq0cn00 := 
 %suffix (aq0cn00 aq0cn00) 
-a_ilr.
+a_ilr
+"""; antiarrugas
+""".
 
 ; -- comparatives
-; e.g. mejor
+
 aqccs00 := 
 %suffix (aqccs00 aqccs00)
-a_sg_ilr.
+a_sg_ilr
+"""; e.g. mejor
+""".
 
-; e.g. mejores
 aqccp00 := 
 %suffix (aqccp00 aqccp00) 
-a_pl_ilr.
+a_pl_ilr
+"""; e.g. mejores
+""".
 
 ; -- superlatives
-; e.g. dificilísimo 
+
 aqsms00 := 
 %suffix (aqsms00 aqsms00)
-a_masc-sg_ilr.
+a_masc-sg_ilr
+"""; e.g. dificilísimo 
+""".
 
-; e.g. dificilísimos
 aqsmp00 := 
 %suffix (aqsmp00 aqsmp00)
-a_masc-pl_ilr.
+a_masc-pl_ilr
+"""; e.g. dificilísimos
+""".
 
-; e.g. dificilísima 
 aqsfs00 := 
 %suffix (aqsfs00 aqsfs00)
-a_fem-sg_ilr.
+a_fem-sg_ilr
+"""; e.g. dificilísima 
+""".
 
-; e.g. dificilísimas
 aqsfp00 := 
 %suffix (aqsfp00 aqsfp00)
-a_fem-pl_ilr.
+a_fem-pl_ilr
+"""; e.g. dificilísimas
+""".
 
 ; -- diminutives
-; e.g. pequeñísimo
+
 aqdms00 := 
 %suffix (aqdms00 aqdms00)
-a_masc-sg_ilr.
+a_masc-sg_ilr
+"""; e.g. pequeñísimo
+""".
 
-; e.g. pequeñísimos
 aqdmp00 := 
 %suffix (aqdmp00 aqdmp00)
-a_masc-pl_ilr.
+a_masc-pl_ilr
+"""; e.g. pequeñísimos
+""".
 
-; e.g. pequeñísima
 aqdfs00 := 
 %suffix (aqdfs00 aqdfs00)
-a_fem-sg_ilr.
+a_fem-sg_ilr
+"""; e.g. pequeñísima
+""".
 
-; e.g. pequeñísimos
 aqdfp00 := 
 %suffix (aqdfp00 aqdfp00)
-a_fem-pl_ilr.
+a_fem-pl_ilr
+"""; e.g. pequeñísimos
+""".
 
 aq00000 := 
 %suffix (aq00000 aq00000)
@@ -1175,25 +1347,35 @@ no_ilr.
 
 
 ; -- pastpart (only for 3 verbs)
-; desnudo, sujeto, inadvertido
+
 aq0msp := 
 %suffix (aq0msp aq0msp) 
-a_masc-sg_ilr.
+a_masc-sg_ilr
+"""
+; -- pastpart (only for 3 verbs)
+; desnudo, sujeto, inadvertido
+""".
 
-; desnudos, sujetos, inadvertido
 aq0mpp := 
 %suffix (aq0mpp aq0mpp)
-a_masc-pl_ilr.
+a_masc-pl_ilr
+"""; -- pastpart (only for 3 verbs)
+; desnudos, sujetos, inadvertido
+""".
 
-; desnuda, sujeta, inadvertida
 aq0fsp := 
 %suffix (aq0fsp aq0fsp)
-a_fem-sg_ilr.
+a_fem-sg_ilr
+"""; -- pastpart (only for 3 verbs)
+; desnuda, sujeta, inadvertida
+""".
 
-; desnudas, sujetas, inadvertidas
 aq0fpp := 
 %suffix (aq0fpp aq0fpp)
-a_fem-pl_ilr.
+a_fem-pl_ilr
+"""; -- pastpart (only for 3 verbs)
+; desnudas, sujetas, inadvertidas
+""".
 
 
 ; --- verbal inflection rules
