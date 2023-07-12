@@ -53,7 +53,7 @@ np00o00_ge := n_-_pn_le &
 
 ; ncms000, ncmp000, ncfs000, ncfp000, ncms00a, ncmp00a, ncfs00a, ncfp00a, ncms00d, ncmp00d, ncfs00d, ncfp00d, ncms00x, ncmp00x, ncfs00x, ncfp00x, nccs000, nccp000, ncmn000, ncfn000, nccn000
 
-ncms000_ge := n_cp*_p-c_le &
+ncms000_ge := n_-_mc_le &
   [ STEM < "n_cp*_p-c_le" >,
     TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ncms000" > ] >,
     SYNSEM.LKEYS.KEYREL.PRED "_generic_n_rel" ]
