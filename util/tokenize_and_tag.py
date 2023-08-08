@@ -1,7 +1,7 @@
 #! /usr/bin/python3
 
 from freeling_api.python_API import pyfreeling_api
-import sys, os, string
+import sys, os
 
 class Freeling_tok_tagger:
     '''
@@ -54,6 +54,7 @@ class Freeling_tok_tagger:
         # The tagger is instantiated with RETOKENIZATION SET TO FALSE (second parameter). This is crucial to get
         # sequences of tags such as VMN00000 +PP3MSA0, for words like "creerlo" which will not be tokenized into two
         self.tg=pyfreeling_api.hmm_tagger(self.DATA+self.LANG+"/tagger.dat",False,0)
+        self.tg_rtk = pyfreeling_api.hmm_tagger(self.DATA + self.LANG + "/tagger.dat", True, 0)
 
     def tokenize_and_tag(self, sentence_list, override_dicts):
         output = []
@@ -98,7 +99,10 @@ class Freeling_tok_tagger:
         return output
 
     def freeling_analyze(self, lin, sid):
-        s = self.tk.tokenize(lin)
+        if not 'por qué' in lin:
+            s = self.tk_rtk.tokenize(lin)
+        else:
+            s = self.tk.tokenize(lin)
         s = self.sp.split(sid, s, True)
         s = self.mf.analyze(s)
         s = self.tg.analyze(s)
