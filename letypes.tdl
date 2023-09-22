@@ -5758,7 +5758,7 @@ basic-partitive-pron-synsem := lex-synsem &
                         COMPS < [ LOCAL mrkd_np_local & [ CAT.HEAD.KEYS [ KEY #ckey,
                                                                           ALTKEY #key ],
                                                           CONT.HOOK.INDEX #arg & [ SORT #sort ] ],
-                                  NON-LOCAL [ REL #rel,
+                                  NON-LOCAL [ ; REL #rel,
                                               QUE 0-dlist,
                                               SLASH 0-dlist ] ] > ] ],
             CONT [ RELS.LIST < #keyrel, ... >,
