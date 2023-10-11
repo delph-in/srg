@@ -1,7 +1,7 @@
 ;;; files to load
 
 grammar-top               := "../srg.tdl".
-;variable-property-mapping := "../semi.vpm".
+variable-property-mapping := "../semi.vpm".
 maxent-model              := "../tibidabo.mem".
 preprocessor              := "../rpp/tokenizer.rpp".
 ;preprocessor-modules      := ../rpp/xml.rpp ../rpp/ascii.rpp ../rpp/lgt.rpp ../rpp/quotes.rpp ../rpp/wiki.rpp ../rpp/gml.rpp ../rpp/html.rpp.

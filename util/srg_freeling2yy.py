@@ -33,8 +33,12 @@ def override_tag(selected, word, lemma, override_dicts):
             if len(tags) == 2:
                 if tags[0][:-3] == tags[1]: # The first tag will have a trailing space followed by an extra quote mark, e.g. 'VMN0000 "'
                     return {'tags': [tags[0][:-3]], 'prob': -1 }
-            else:
-                print("More than two tags in Freeling output: {}".format(selected['tag']))
+            elif len(tags) == 4:
+                # If the tag sequence is two repeated pairs, keep only one pair
+                if tags[0] == tags[2] and tags[1] == tags[3] + '" "':
+                    return {'tags': [tags[0]+'+'+tags[1][:-3]], 'prob': -1 }
+                else:
+                    print("More than four tags in Freeling output: {}".format(selected['tag']))
     if lemma in override_dicts['replace'] and len(override_dicts['replace'][lemma]['lemma']) == 1:
         return {'tags': override_dicts['replace'][lemma]['tag'], 'prob': -1 }
     return {'tags': [selected['tag']], 'prob': selected['prob']}

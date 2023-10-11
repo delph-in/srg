@@ -2,6 +2,7 @@
 ## be ignored (no analysis discarded) when found at the specified @position
 <NoDisambiguate>
 NP00000 @begin
+qué @any
 que @any
 hasta @any
 tanto @any
@@ -26,6 +27,16 @@ algun @any
 da @any
 di @any
 con @any
+trabajo @any
+calla @any
+figura @any
+falta @any
+alguno @any
+algun @any
+alguna @any
+algunos @any
+algunas @any
+rueda @any
 </NoDisambiguate>
 
 ## List of words for which the list of output analysis given
@@ -107,7 +118,7 @@ mejor mejor AQ0CS00
 off-line off-line AQ0CN00
 on-line on-line AQ0CN00
 peor peor AQ0CS00
-
+no_sólo no_sólo CC no_sólo RG
 </ReplaceAll>
 
 ## List of tag fusions to perform. 
@@ -178,8 +189,8 @@ P03CN00 P00CN00 => P03CN00
 ##
 ##  Rules are applied in order, until a match is found, thus, a last default
 ##  rule "* * *" is needed.
-<Output>
-*             *  !(Z|W|NP|AO)  =>  L  T  F   ## stem=lema per tots excepte numeros, dates, NPs i AOs.
-(un|una|uno)  *  Z             =>  F  T  FL  ## lema="un/o/a" per "un/o/a" amb tag Z (tenien lema="1")
-*             *  *             =>  T  T  FL  ## stem=tag per la resta (numeros!="un/o/a", dates, NPs, AOs)
-</Output>
+##<Output>
+##*             *  !(Z|W|NP|AO)  =>  L  T  F   ## stem=lema per tots excepte numeros, dates, NPs i AOs.
+##(un|una|uno)  *  Z             =>  F  T  FL  ## lema="un/o/a" per "un/o/a" amb tag Z (tenien lema="1")
+##*             *  *             =>  T  T  FL  ## stem=tag per la resta (numeros!="un/o/a", dates, NPs, AOs)
+##</Output>

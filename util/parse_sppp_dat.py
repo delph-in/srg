@@ -39,8 +39,10 @@ def parse_nodisambiguate(lines):
 def parse_fusion(lines):
     fuse = {}
     for ln in lines:
+        #tags_to_fuse, fused_tag = ln.strip().split('=>')
         tag1, tag2, arrow, fused_tag = ln.strip().split()
         fuse[tag1 + '" "+' + tag2] = fused_tag
+        #fuse[tags_to_fuse.strip()] = fused_tag
     return fuse
 
 def parse_replace(lines):
