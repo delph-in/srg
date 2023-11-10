@@ -178,5 +178,11 @@ parsing-packing-restrictor := RELS HCONS ICONS RNAME.
 generation-packing-restrictor := 
   RELS HCONS ICONS RNAME.
 
+mrs-deleted-roles := 
+  IDIOMP WLINK CFROM CTO --PSV
+;; starting here, mrs deleted roles left over from old ACE config file
+  WLINK PARAMS.
+
+
 ;;; SRG hsd LABEL-NAME as the path for tree node labels; ACE's default is LNAME, so, need to specify.
 label-path := LABEL-NAME.
