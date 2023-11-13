@@ -420,12 +420,12 @@ head := head-min &
 ; - for integrated tags which have no entry
 no-head := head.
 
-predicative :< sort.
-non-prd :< predicative.
+predicative := sort.
+non-prd := predicative.
 prd := predicative &
   [ COPV copv ].
 
-copv :< sort.
+copv := sort.
 ser := copv.
 estar := copv. 
 
@@ -564,9 +564,9 @@ verb :+
     LSYNSEM synsem-min,
     LPRED predsort ]. 
 
-voice :< sort.
-active :< voice.
-passive :< voice.
+voice := sort.
+active := voice.
+passive := voice.
 
 partn := noun.
 
@@ -693,7 +693,7 @@ qeq := avm &
 
 ; ERG: Values in the feature QUE and in PARAMS, used to distinguish ordinary
 ; WH-questions from in-situ WH.
-param :< sort.
+param := sort.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; semarg types    
@@ -720,17 +720,17 @@ index := individual &
     PRONTYPE prontype,
     DEF bool ].
 
-prontype :< sort.
-real_pron :< prontype.
-demon :< real_pron.
-std_pron :< real_pron.
-recip :< real_pron.
-refl :< real_pron.
+prontype := sort.
+real_pron := prontype.
+demon := real_pron.
+std_pron := real_pron.
+recip := real_pron.
+refl := real_pron.
 std_or_refl_pron := std_pron & refl.
 std_or_recip_or_refl_pron := std_or_refl_pron & recip.
-impers :< real_pron.
-zero_pron :< real_pron.
-not_pron :< prontype.
+impers := real_pron.
+zero_pron := real_pron.
+not_pron := prontype.
 
 ; This is the type of the index of the phrase modified by predicative
 ; PPs, which can either modify a ref-ind nominal or an event VP.
@@ -763,23 +763,23 @@ png := avm &
   [ PN pernum,
     GEN gender ].
 
-pernum :< sort.
-  sing :< pernum.
-  non-2sg :< pernum.
+pernum := sort.
+  sing := pernum.
+  non-2sg := pernum.
   2sg := sing & 2per.
   1or3sg := non-2sg & sing.
-  non-1sg :< non-2sg.
-  3per :< non-1sg & non-1per & non-2per.
-  1per :< non-2per & non-3per.
-  2per :< non-1per & non-3per.
-  plur :< non-1sg.
+  non-1sg := non-2sg.
+  3per := non-1sg & non-1per & non-2per.
+  1per := non-2per & non-3per.
+  2per := non-1per & non-3per.
+  plur := non-1sg.
   1sg := 1or3sg & 1per. 
   3sg := 1or3sg & 3per.
   ;3pl := plur & 3per. 
   ;1pl := plur & 1per.
   ;2pl := plur & 2per.  
-  1or3pl :< pernum.
-  2or3pl :< pernum.
+  1or3pl := pernum.
+  2or3pl := pernum.
   3pl := plur & 1or3pl & 2or3pl & 3per. 
   1pl := plur & 1or3pl & 1per.
   2pl := plur & 2or3pl & 2per.  
@@ -1058,41 +1058,41 @@ basic_prep_mod_rel := prep_rel & event_arg_dim_rel & independent_rel.
 ; marking preps
 prep_rel := event_dim_rel. 
 selected_prep_rel := selected_rel & prep_rel.
-que_or_a_p_comp_rel :< selected_prep_rel.
-a_or_con_p_sel_rel :< selected_prep_rel.
-a_or_con_or_contra_p_sel_rel :< selected_prep_rel.
-a_or_contra_p_sel_rel :< selected_prep_rel.
-a_or_de_or_en_p_sel_rel :< selected_prep_rel.
-a_or_de_p_sel_rel :< a_or_de_or_en_p_sel_rel. 
-a_or_en_p_sel_rel :< a_or_de_or_en_p_sel_rel. 
-a_or_hacia_p_sel_rel  :< selected_prep_rel.
-a_or_hasta_p_sel_rel  :< selected_prep_rel.
-a_or_para_p_sel_rel :< selected_prep_rel.
-a_or_por_p_sel_rel :< selected_prep_rel.
-como_or_de_or_para_p_sel_rel :< selected_prep_rel.
-como_or_de_p_sel_rel :< como_or_de_or_para_p_sel_rel.
-como_or_por_p_sel_rel :< selected_prep_rel.
-con_or_contra_p_sel_rel :< selected_prep_rel.
-con_or_de_or_en_p_sel_rel :< selected_prep_rel.
-con_or_de_p_sel_rel :< selected_prep_rel.
-con_or_en_p_sel_rel :< selected_prep_rel.
-con_or_por_p_sel_rel :< selected_prep_rel.
-contra_or_de_p_sel_rel :< selected_prep_rel.
-de_or_en_or_sobre_p_sel_rel :< selected_prep_rel.
-de_or_en_p_sel_rel :< a_or_de_or_en_p_sel_rel & de_or_en_or_sobre_p_sel_rel.
-de_or_materia_p_sel_rel :< selected_prep_rel.
-de_or_para_p_sel_rel :< como_or_de_or_para_p_sel_rel. 
-de_or_por_p_sel_rel :< selected_prep_rel.
-en_or_entre_p_sel_rel :< selected_prep_rel.
-en_or_para_or_por_p_sel_rel :< selected_prep_rel.
-en_or_por_p_sel_rel :< selected_prep_rel.
-en_or_sobre_p_sel_rel :< de_or_en_or_sobre_p_sel_rel.
-en_or_materia_p_sel_rel :< selected_prep_rel.
-para_or_por_p_sel_rel :< selected_prep_rel.
-contra_or_para_or_por_p_sel_rel :< selected_prep_rel.
-por_or_materia_p_sel_rel :< selected_prep_rel.
-por_or_a_favor_de_p_sel_rel :< selected_prep_rel.
-por_or_sin_p_sel_rel :< selected_prep_rel.
+que_or_a_p_comp_rel := selected_prep_rel.
+a_or_con_p_sel_rel := selected_prep_rel.
+a_or_con_or_contra_p_sel_rel := selected_prep_rel.
+a_or_contra_p_sel_rel := selected_prep_rel.
+a_or_de_or_en_p_sel_rel := selected_prep_rel.
+a_or_de_p_sel_rel := a_or_de_or_en_p_sel_rel. 
+a_or_en_p_sel_rel := a_or_de_or_en_p_sel_rel. 
+a_or_hacia_p_sel_rel  := selected_prep_rel.
+a_or_hasta_p_sel_rel  := selected_prep_rel.
+a_or_para_p_sel_rel := selected_prep_rel.
+a_or_por_p_sel_rel := selected_prep_rel.
+como_or_de_or_para_p_sel_rel := selected_prep_rel.
+como_or_de_p_sel_rel := como_or_de_or_para_p_sel_rel.
+como_or_por_p_sel_rel := selected_prep_rel.
+con_or_contra_p_sel_rel := selected_prep_rel.
+con_or_de_or_en_p_sel_rel := selected_prep_rel.
+con_or_de_p_sel_rel := selected_prep_rel.
+con_or_en_p_sel_rel := selected_prep_rel.
+con_or_por_p_sel_rel := selected_prep_rel.
+contra_or_de_p_sel_rel := selected_prep_rel.
+de_or_en_or_sobre_p_sel_rel := selected_prep_rel.
+de_or_en_p_sel_rel := a_or_de_or_en_p_sel_rel & de_or_en_or_sobre_p_sel_rel.
+de_or_materia_p_sel_rel := selected_prep_rel.
+de_or_para_p_sel_rel := como_or_de_or_para_p_sel_rel. 
+de_or_por_p_sel_rel := selected_prep_rel.
+en_or_entre_p_sel_rel := selected_prep_rel.
+en_or_para_or_por_p_sel_rel := selected_prep_rel.
+en_or_por_p_sel_rel := selected_prep_rel.
+en_or_sobre_p_sel_rel := de_or_en_or_sobre_p_sel_rel.
+en_or_materia_p_sel_rel := selected_prep_rel.
+para_or_por_p_sel_rel := selected_prep_rel.
+contra_or_para_or_por_p_sel_rel := selected_prep_rel.
+por_or_materia_p_sel_rel := selected_prep_rel.
+por_or_a_favor_de_p_sel_rel := selected_prep_rel.
+por_or_sin_p_sel_rel := selected_prep_rel.
 materia_p_sel_rel := de_or_materia_p_sel_rel & en_or_materia_p_sel_rel & por_or_materia_p_sel_rel.
 ; modifying preps
 prep_mod_rel := basic_prep_mod_rel.
@@ -1111,7 +1111,7 @@ period_rel := dir_rel.
 orig_rel := dir_rel.
 state_loc_rel := dir_or_state_nontemp_rel & modable_rel.
 loc_rel := dir_or_state_rel.
-dir_or_unsp_loc_rel :< prep_mod_rel.
+dir_or_unsp_loc_rel := prep_mod_rel.
 unspec_loc_rel := loc_rel & dir_or_unsp_loc_rel.
 unspec_loc_temp_rel := unspec_loc_rel & temp_loc_abstr_rel.
 unspec_loc_nontemp_rel := unspec_loc_rel & nontemp_rel.
@@ -1194,11 +1194,11 @@ basic_adj_rel := event_dim_rel & nontemp_rel.
 abstr_adj_rel := basic_adj_rel & event_arg_dim_rel.
 adj_rel := abstr_adj_rel & independent_mod_rel.
 compar_adj_rel := abstr_adj_rel & independent_rel & non_modable_rel.
-norm_adj_rel :< adj_rel.
-poss_adj_rel :< norm_adj_rel.
-dem_adj_rel :< norm_adj_rel.
-cualq_adj_rel :< norm_adj_rel.
-ord_rel :< adj_rel.
+norm_adj_rel := adj_rel.
+poss_adj_rel := norm_adj_rel.
+dem_adj_rel := norm_adj_rel.
+cualq_adj_rel := norm_adj_rel.
+ord_rel := adj_rel.
 _doble_a_rel := norm_adj_rel.
 _triple_a_rel := norm_adj_rel.
 ; verbs
@@ -1228,8 +1228,8 @@ tanto_degree_rel := degree_rel.
 basic_adv_rel := non_event_rel & nontemp_rel & event_or_degree_rel.
 abstr_adv_rel := basic_adv_rel & independent_mod_rel.
 abstr_adv_dim_rel := abstr_adv_rel & non_event_dim_rel.
-adv_rel :< abstr_adv_dim_rel.
-neg_rel :< abstr_adv_rel.
+adv_rel := abstr_adv_dim_rel.
+neg_rel := abstr_adv_rel.
 ; nouns
 impers_pron_rel := predsort.
 free_relative_nom_rel := predsort.
@@ -1293,40 +1293,40 @@ non_advers_coord_rel := basic_coord_rel.
 null_coord_rel := basic_coord_rel & non_implicit_coord_rel.
 implicit_coord_rel := coord_rel & non_advers_coord_rel.
 mult_coord_rel := coord_rel & non_advers_coord_rel & non_implicit_coord_rel.
-_comma_c_rel :< mult_coord_rel.
-_semi-cln_c_rel :< mult_coord_rel.
-_full-stop_c_rel :< mult_coord_rel.
-_y_c_rel :< mult_coord_rel.
-_o_c_rel :< mult_coord_rel.
-_ni_c_rel :< mult_coord_rel.
-_sea_c_rel :< mult_coord_rel.
-_o_sea_c_rel :< mult_coord_rel.
-_bien_c_rel :< mult_coord_rel.
-_o_bien_c_rel :< mult_coord_rel.
-_tanto_c_rel :< mult_coord_rel.
-_como_c_rel :< mult_coord_rel.
-_no_sólo_c_rel :< mult_coord_rel.
-_así_como_c_rel :< mult_coord_rel.
+_comma_c_rel := mult_coord_rel.
+_semi-cln_c_rel := mult_coord_rel.
+_full-stop_c_rel := mult_coord_rel.
+_y_c_rel := mult_coord_rel.
+_o_c_rel := mult_coord_rel.
+_ni_c_rel := mult_coord_rel.
+_sea_c_rel := mult_coord_rel.
+_o_sea_c_rel := mult_coord_rel.
+_bien_c_rel := mult_coord_rel.
+_o_bien_c_rel := mult_coord_rel.
+_tanto_c_rel := mult_coord_rel.
+_como_c_rel := mult_coord_rel.
+_no_sólo_c_rel := mult_coord_rel.
+_así_como_c_rel := mult_coord_rel.
 _sino_c_rel := coord_rel & non_advers_coord_rel.
 _sino_que_c_rel := coord_rel & non_advers_coord_rel.
 advers_coord_rel := coord_rel & non_implicit_coord_rel.
-_aunque_c_rel :< advers_coord_rel.
-_con_todo_c_rel :< advers_coord_rel.
-_mas_c_rel :< advers_coord_rel.
-_pero_c_rel :< advers_coord_rel.
-_empero_c_rel :< advers_coord_rel.
-_ora_c_rel :< mult_coord_rel.
-_siquier_c_rel :<  advers_coord_rel.
-_siquiera_c_rel :< advers_coord_rel.
-_sin_embargo_c_rel :< advers_coord_rel.
-_eso_que_c_rel :< advers_coord_rel.
+_aunque_c_rel := advers_coord_rel.
+_con_todo_c_rel := advers_coord_rel.
+_mas_c_rel := advers_coord_rel.
+_pero_c_rel := advers_coord_rel.
+_empero_c_rel := advers_coord_rel.
+_ora_c_rel := mult_coord_rel.
+_siquier_c_rel :=  advers_coord_rel.
+_siquiera_c_rel := advers_coord_rel.
+_sin_embargo_c_rel := advers_coord_rel.
+_eso_que_c_rel := advers_coord_rel.
 
 
 
 ; marking prepositions
 _que_p_comp_rel := que_or_a_p_comp_rel.
-;_que_p_sel_rel :< que_or_a_p_comp_rel..
-_que_p_sel_rel :< _que_p_comp_rel. 
+;_que_p_sel_rel := que_or_a_p_comp_rel..
+_que_p_sel_rel := _que_p_comp_rel. 
 _como_p_comp_rel := selected_prep_rel.
 _como_p_sel_rel := como_or_de_p_sel_rel & como_or_por_p_sel_rel.
 _a_p_sel_rel := non_modable_rel & a_sel_or_indp_rel & que_or_a_p_comp_rel & a_or_con_p_sel_rel & a_or_con_or_contra_p_sel_rel & a_or_contra_p_sel_rel & a_or_de_p_sel_rel & a_or_en_p_sel_rel & a_or_hacia_p_sel_rel & a_or_hasta_p_sel_rel & a_or_para_p_sel_rel & a_or_por_p_sel_rel.
@@ -1349,285 +1349,285 @@ comp_or_superl_rel := miscprep_rel.
 compar := comp_or_superl_rel.
 superl := comp_or_superl_rel.
 comp_equal_rel := miscprep_rel.
-_a_p_rel :< dir_state_modable_rel.
+_a_p_rel := dir_state_modable_rel.
 _a_p_dir_rel := _a_p_rel & period_rel.
 _a_p_state_rel := _a_p_rel & state_loc_rel.
 _a_p_temp_rel := temp_loc_rel.
-_ante_p_rel :< state_loc_rel.
-_antes_p_rel :< temp_loc_rel.
-_así_p_rel :< miscprep_rel.
-_bajo_p_rel :< state_loc_rel.
-_cabe_p_rel :< state_loc_rel.
-_como_p_rel :< miscprep_rel.
+_ante_p_rel := state_loc_rel.
+_antes_p_rel := temp_loc_rel.
+_así_p_rel := miscprep_rel.
+_bajo_p_rel := state_loc_rel.
+_cabe_p_rel := state_loc_rel.
+_como_p_rel := miscprep_rel.
 _con_p_temp_rel := temp_loc_rel.
-_con_p_rel :< miscprep_rel.
-_conmigo_p_rel :< miscprep_rel.
-_contigo_p_rel :< miscprep_rel.
-_consigo_p_rel :< miscprep_rel.
-_contra_p_rel :< state_loc_rel.
-_de_p_rel :< orig_rel.
-_de_p_temp_rel :< temp_loc_rel.
-_desde_p_rel :< orig_rel.
-_desde_p_temp_rel :< temp_loc_rel.
-_después_p_rel :< temp_loc_rel.
-_después_de_p_temp_rel :< temp_loc_rel.
-_durante_p_temp_rel :< temp_loc_rel.
+_con_p_rel := miscprep_rel.
+_conmigo_p_rel := miscprep_rel.
+_contigo_p_rel := miscprep_rel.
+_consigo_p_rel := miscprep_rel.
+_contra_p_rel := state_loc_rel.
+_de_p_rel := orig_rel.
+_de_p_temp_rel := temp_loc_rel.
+_desde_p_rel := orig_rel.
+_desde_p_temp_rel := temp_loc_rel.
+_después_p_rel := temp_loc_rel.
+_después_de_p_temp_rel := temp_loc_rel.
+_durante_p_temp_rel := temp_loc_rel.
 _en_p_rel := state_loc_rel.
-_en_p_temp_rel :< temp_loc_rel.
-_en_menos_de_p_temp_rel :< temp_loc_rel.
+_en_p_temp_rel := temp_loc_rel.
+_en_menos_de_p_temp_rel := temp_loc_rel.
 _entre_p_rel := state_loc_rel.
-_entre_p_temp_rel :< temp_loc_rel.
-_excepto_p_rel :< miscprep_rel.
-_fuera_de_p_rel :< state_loc_rel.
-_hacia_p_rel :< period_rel.
-_hacia_p_temp_rel :< temp_loc_rel.
-_hasta_p_rel :< period_rel.
-_hasta_p_temp_rel :< temp_loc_rel.
-_mediante_p_rel :< miscprep_rel.
-_más_p_rel :< miscprep_rel.
-_menos_p_rel :< miscprep_rel.
-_para_p_rel :< period_rel.
-_para_p_temp_rel :< temp_loc_rel.
-_por_p_rel :< state_loc_rel.
-_por_p_temp_rel :< temp_loc_rel.
-_pro_p_rel :< miscprep_rel.
-_salvo_p_rel :< miscprep_rel.
-_según_p_rel :< miscprep_rel.
-_sin_p_rel :< miscprep_rel.
-_so_p_rel :<  miscprep_rel.
-_sobre_p_rel :< state_loc_rel.
-_sobre_p_temp_rel :< temp_loc_rel.
-_tras_p_rel :< state_loc_rel.
-_tras_p_temp_rel :< temp_loc_rel.
-_vía_p_rel :< miscprep_rel.
-_versus_p_rel :< miscprep_rel.
-_a_base_de_p_rel :<  miscprep_rel.
-_a_bordo_de_p_rel :<  miscprep_rel.
-_a_cambio_de_p_rel :<  miscprep_rel.
-_a_cargo_de_p_rel :<  miscprep_rel.
-_a_causa_de_p_rel :<  miscprep_rel.
-_a_cerca_de_p_rel :<  miscprep_rel.
-_acerca_de_p_rel :<  miscprep_rel.
-_a_consecuencia_de_p_rel :<  miscprep_rel.
-_a_continuación_de_p_rel :<  miscprep_rel.
-_a_cuenta_de_p_rel :<  miscprep_rel.
-_además_de_p_rel :<  miscprep_rel.
-_a_despecho_de_p_rel :<  miscprep_rel.
-_a_diferencia_de_p_rel :<  miscprep_rel.
-_a_distinción_de_p_rel :<  miscprep_rel.
-_a_dos_dedos_de_p_rel :<  miscprep_rel.
-_a_efecto_de_p_rel :<  miscprep_rel.
-_a_efectos_de_p_rel :<  miscprep_rel.
-_a_eso_de_p_rel :<  miscprep_rel.
-_a_espaldas_de_p_rel :<  miscprep_rel.
-_a_excepción_de_p_rel :<  miscprep_rel.
-_a_expensas_de_p_rel :<  miscprep_rel.
-_a_favor_de_p_rel :<  miscprep_rel.
-_a_fin_de_p_rel :<  miscprep_rel.
-_a_fines_de_p_rel :<  miscprep_rel.
-_a_finales_de_p_temp_rel :< temp_loc_rel.
-_a_fuerza_de_p_rel :<  miscprep_rel.
-_a_guisa_de_p_rel :<  miscprep_rel.
-_a_juzgar_por_p_rel :<  miscprep_rel.
-_al_abrigo_de_p_rel :<  miscprep_rel.
-_a_la_busca_de_p_rel :<  miscprep_rel.
-_a_la_espera_de_p_rel :<  miscprep_rel.
-_a_la_manera_de_p_rel :<  miscprep_rel.
-_a_la_mitad_de_p_rel :<  miscprep_rel.
-_a_la_siga_de_p_rel :<  miscprep_rel.
-_a_la_usanza_de_p_rel :<  miscprep_rel.
-_a_la_vuelta_de_p_rel :<  miscprep_rel.
-_a_la_zona_de_p_rel :<  miscprep_rel.
-_al_cabo_de_p_rel :<  miscprep_rel.
-_al_calor_de_p_rel :<  miscprep_rel.
-_al_cargo_de_p_rel :<  miscprep_rel.
-_al_centro_de_p_rel :<  miscprep_rel.
-_al_compás_de_p_rel :<  miscprep_rel.
-_al_conjuro_de_p_rel :<  miscprep_rel.
-_al_decir_de_p_rel :<  miscprep_rel.
-_al_derredor_de_p_rel :<  miscprep_rel.
-_al_filo_de_p_rel :<  miscprep_rel.
-_al_frente_de_p_rel :<  miscprep_rel.
-_al_gusto_de_p_rel :<  miscprep_rel.
-_al_interior_de_p_rel :<  miscprep_rel.
-_allende_de_p_rel :<  miscprep_rel.
-_al_modo_de_p_rel :<  miscprep_rel.
-_a_lo_ancho_de_p_rel :<  miscprep_rel.
-_al_objeto_de_p_rel :<  miscprep_rel.
-_a_lo_largo_de_p_rel :<  miscprep_rel.
-_a_lo_largo_y_ancho_de_p_rel :<  miscprep_rel.
-_al_olor_de_p_rel :<  miscprep_rel.
-_al_socaire_de_p_rel :<  miscprep_rel.
-_al_tanto_de_p_rel :<  miscprep_rel.
-_al_tenor_de_p_rel :<  miscprep_rel.
-_a_manera_de_p_rel :<  miscprep_rel.
-_a_mediados_de_p_temp_rel :< temp_loc_rel.
-_a_mitad_de_p_rel :<  miscprep_rel.
-_a_modo_de_p_rel :<  miscprep_rel.
-_a_nombre_de_p_rel :<  miscprep_rel.
-_a_todo_lo_largo_de_p_rel :<  miscprep_rel.
-_aparte_de_p_rel :<  miscprep_rel.
-_a_partir_de_p_rel :<  miscprep_rel.
-_a_partir_de_p_temp_rel :< temp_loc_rel.
-_a_pesar_de_p_rel :<  miscprep_rel.
-_a_petición_de_p_rel :<  miscprep_rel.
-_a_primeros_de_p_temp_rel :<  temp_loc_rel.
-_a_principios_de_p_temp_rel :<  temp_loc_rel.
-_a_propósito_de_p_rel :<  miscprep_rel.
-_a_prueba_de_p_rel :<  miscprep_rel.
-_a_punto_de_p_rel :<  miscprep_rel.
-_a_raíz_de_p_rel :<  miscprep_rel.
-_a_ras_de_p_rel :<  miscprep_rel.
-_a_razón_de_p_rel :<  miscprep_rel.
-_a_reserva_de_p_rel :<  miscprep_rel.
-_a_retaguardia_de_p_rel :<  miscprep_rel.
-_a_riesgo_de_p_rel :<  miscprep_rel.
-_a_semejanza_de_p_rel :<  miscprep_rel.
-_a_suplicación_de_p_rel :<  miscprep_rel.
-_a_súplica_de_p_rel :<  miscprep_rel.
-_a_tenor_de_p_rel :<  miscprep_rel.
-_a_título_de_p_rel :<  miscprep_rel.
-_a_través_de_p_rel :<  miscprep_rel.
-_a_trueco_de_p_rel :<  miscprep_rel.
-_a_usanza_de_p_rel :<  miscprep_rel.
-_a_vuelta_de_p_rel :<  miscprep_rel.
-_con_carácter_de_p_rel :<  miscprep_rel.
-_con_efecto_desde_p_rel :<  miscprep_rel.
-_con_excepción_de_p_rel :<  miscprep_rel.
-_conforme_a_p_rel :<  miscprep_rel.
-_con_honores_de_p_rel :<  miscprep_rel.
-_con_la_condición_de_p_rel :<  miscprep_rel.
-_con_lo_que_respecta_a_p_rel :<  miscprep_rel.
-_con_miras_a_p_rel :<  miscprep_rel.
-_con_objeto_de_p_rel :<  miscprep_rel.
-_con_ocasión_de_p_rel :<  miscprep_rel.
-_con_relación_a_p_rel :<  miscprep_rel.
-_con_respecto_a_p_rel :<  miscprep_rel.
-_con_respecto_de_p_rel :<  miscprep_rel.
-_con_tal_de_p_rel :<  miscprep_rel.
-_con_valor_de_p_rel :<  miscprep_rel.
-_con_vistas_a_p_rel :<  miscprep_rel.
-_de_acuerdo_con_p_rel :<  miscprep_rel.
-_de_al_lado_de_p_rel :<  miscprep_rel.
-_debajo_de_p_rel :<  miscprep_rel.
-_debido_a_p_rel :<  miscprep_rel.
-_de_cara_a_p_rel :<  miscprep_rel.
-_de_la_mano_de_p_rel :<  miscprep_rel.
-_delante_de_p_rel :<  miscprep_rel.
-_detrás_de_p_rel :<  miscprep_rel.
-_dirección_a_p_rel :<  miscprep_rel.
-_en_aras_de_p_rel :<  miscprep_rel.
-_en_atención_a_p_rel :<  miscprep_rel.
-_en_base_a_p_rel :<  miscprep_rel.
-_en_busca_de_p_rel :<  miscprep_rel.
-_en_calidad_de_p_rel :<  miscprep_rel.
-_en_cambio_de_p_rel :<  miscprep_rel.
-_en_caso_de_p_rel :<  miscprep_rel.
-_encima_de_p_rel :<  miscprep_rel.
-_en_compañía_de_p_rel :<  miscprep_rel.
-_en_compensación_de_p_rel :<  miscprep_rel.
-_en_concepto_de_p_rel :<  miscprep_rel.
-_en_contra_de_p_rel :<  miscprep_rel.
-_en_cuanto_a_p_rel :<  miscprep_rel.
-_en_cuestión_de_p_rel :<  miscprep_rel.
-_en_cuestión_de_p_temp_rel :< temp_loc_rel.
-_en_defecto_de_p_rel :<  miscprep_rel.
-_en_demanda_de_p_rel :<  miscprep_rel.
-_en_derredor_de_p_rel :<  miscprep_rel.
-_en_dirección_a_p_rel :<  miscprep_rel.
-_en_el_centro_de_p_rel :<  miscprep_rel.
-_en_el_entorno_de_p_rel :<  miscprep_rel.
-_en_el_interior_de_p_rel :<  miscprep_rel.
-_en_el_otro_lado_de_p_rel :<  miscprep_rel.
-_en_el_plazo_de_p_rel :<  miscprep_rel.
-_en_el_puesto_de_p_rel :<  miscprep_rel.
-_en_espera_de_p_rel :<  miscprep_rel.
-_en_evitación_de_p_rel :<  miscprep_rel.
-_en_favor_de_p_rel :<  miscprep_rel.
-_en_función_de_p_rel :<  miscprep_rel.
-_enfrente_de_p_rel :<  miscprep_rel.
-_en_gracia_a_p_rel :<  miscprep_rel.
-_en_guisa_de_p_rel :<  miscprep_rel.
-_en_la_línea_de_p_rel :<  miscprep_rel.
-_en_las_cercanías_de_p_rel :<  miscprep_rel.
-_en_las_proximidades_de_p_rel :<  miscprep_rel.
-_en_la_temporada_de_p_rel :<  miscprep_rel.
-_en_la_zona_de_p_rel :<  miscprep_rel.
-_en_lo_concerniente_a_p_rel :<  miscprep_rel.
-_en_lugar_de_p_rel :<  miscprep_rel.
-_en_manos_de_p_rel :<  miscprep_rel.
-_en_materia_de_p_rel :<  miscprep_rel.
-_en_medio_de_p_rel :<  miscprep_rel.
-_en_memoria_de_p_rel :<  miscprep_rel.
-_en_menos_de_p_rel :<  miscprep_rel.
-_en_mitad_de_p_rel :<  miscprep_rel.
-_en_obligación_de_p_rel :<  miscprep_rel.
-_en_obsequio_a_p_rel :<  miscprep_rel.
-_en_obsequio_de_p_rel :<  miscprep_rel.
-_en_oposición_a_p_rel :<  miscprep_rel.
-_en_orden_a_p_rel :<  miscprep_rel.
-_en_parte_por_p_rel :<  miscprep_rel.
-_en_plan_de_p_rel :<  miscprep_rel.
-_en_pos_de_p_rel :<  miscprep_rel.
-_en_pro_de_p_rel :<  miscprep_rel.
-_en_prueba_de_p_rel :<  miscprep_rel.
-_en_razón_de_p_rel :<  miscprep_rel.
-_en_recuerdo_de_p_rel :<  miscprep_rel.
-_en_representación_de_p_rel :<  miscprep_rel.
-_en_señal_de_p_rel :<  miscprep_rel.
-_en_tiempo_de_p_rel :<  miscprep_rel.
-_en_torno_a_p_rel :<  miscprep_rel.
-_en_torno_de_p_rel :<  miscprep_rel.
-_en_vez_de_p_rel :<  miscprep_rel.
-_en_vías_de_p_rel :<  miscprep_rel.
-_en_virtud_de_p_rel :<  miscprep_rel.
-_en_vista_de_p_rel :<  miscprep_rel.
-_gracias_a_p_rel :<  miscprep_rel.
-_hacia_mediados_de_p_rel :<  miscprep_rel.
-_junto_a_p_rel :<  miscprep_rel.
-_junto_con_p_rel :<  miscprep_rel.
-_lejos_de_p_rel :<  miscprep_rel.
-_más_allá_de_p_rel :<  miscprep_rel.
-;_más_allá_de_p_rel :<  period_rel.
-_pese_a_p_rel :<  miscprep_rel.
-_por_al_lado_de_p_rel :<  miscprep_rel.
-_por_causa_de_p_rel :<  miscprep_rel.
-_por_cuenta_de_p_rel :<  miscprep_rel.
-_por_el_centro_de_p_rel :<  miscprep_rel.
-_por_el_otro_lado_de_p_rel :<  miscprep_rel.
-_por_este_lado_de_p_rel :<  miscprep_rel.
-_por_medio_de_p_rel :<  miscprep_rel.
-_por_motivo_de_p_rel :<  miscprep_rel.
-_por_obra_de_p_rel :<  miscprep_rel.
-_por_obra_y_gracia_de_p_rel :<  miscprep_rel.
-_por_razón_de_p_rel :<  miscprep_rel.
-_por_virtud_de_p_rel :<  miscprep_rel.
-_respecto_a_p_rel :<  miscprep_rel.
-_respecto_a_p_temp_rel :<  temp_loc_rel.
-_respecto_de_p_rel :<  miscprep_rel.
-_según_el_decir_de_p_rel :<  miscprep_rel.
-_sin_contar_con_p_rel :<  miscprep_rel.
-_sin_necesidad_de_p_rel :<  miscprep_rel.
-_si_no_es_por_p_rel :<  miscprep_rel.
-_sin_perjuicio_de_p_rel :<  miscprep_rel.
-_so_pena_de_p_rel :<  miscprep_rel.
-_frente_a_p_rel :<  miscprep_rel.
-_frente_al_p_rel :<  miscprep_rel.
-_alrededor_de_p_rel :<  miscprep_rel.
-_anteriormente_a_p_rel :<  miscprep_rel.
-_antes_de_p_rel :<  miscprep_rel.
-_arriba_de_p_rel :<  miscprep_rel.
-_cerca_de_p_rel :<  state_loc_rel. 
-_dentro_de_p_rel :<  miscprep_rel.
-_dentro_de_p_temp_rel :< temp_loc_rel.
-_después_de_p_rel :<  miscprep_rel.
-_por_encima_de_p_rel :<  miscprep_rel.
-_por_debajo_de_p_rel :<  state_loc_rel.
-_por_delante_de_p_rel :<  state_loc_rel.
-_por_parte_de_p_rel :<  miscprep_rel.
-_luego_de_p_rel :<  miscprep_rel.
-_posteriormente_a_p_rel :<  miscprep_rel.
-_precedentemente_a_p_rel :<  miscprep_rel.
+_entre_p_temp_rel := temp_loc_rel.
+_excepto_p_rel := miscprep_rel.
+_fuera_de_p_rel := state_loc_rel.
+_hacia_p_rel := period_rel.
+_hacia_p_temp_rel := temp_loc_rel.
+_hasta_p_rel := period_rel.
+_hasta_p_temp_rel := temp_loc_rel.
+_mediante_p_rel := miscprep_rel.
+_más_p_rel := miscprep_rel.
+_menos_p_rel := miscprep_rel.
+_para_p_rel := period_rel.
+_para_p_temp_rel := temp_loc_rel.
+_por_p_rel := state_loc_rel.
+_por_p_temp_rel := temp_loc_rel.
+_pro_p_rel := miscprep_rel.
+_salvo_p_rel := miscprep_rel.
+_según_p_rel := miscprep_rel.
+_sin_p_rel := miscprep_rel.
+_so_p_rel :=  miscprep_rel.
+_sobre_p_rel := state_loc_rel.
+_sobre_p_temp_rel := temp_loc_rel.
+_tras_p_rel := state_loc_rel.
+_tras_p_temp_rel := temp_loc_rel.
+_vía_p_rel := miscprep_rel.
+_versus_p_rel := miscprep_rel.
+_a_base_de_p_rel :=  miscprep_rel.
+_a_bordo_de_p_rel :=  miscprep_rel.
+_a_cambio_de_p_rel :=  miscprep_rel.
+_a_cargo_de_p_rel :=  miscprep_rel.
+_a_causa_de_p_rel :=  miscprep_rel.
+_a_cerca_de_p_rel :=  miscprep_rel.
+_acerca_de_p_rel :=  miscprep_rel.
+_a_consecuencia_de_p_rel :=  miscprep_rel.
+_a_continuación_de_p_rel :=  miscprep_rel.
+_a_cuenta_de_p_rel :=  miscprep_rel.
+_además_de_p_rel :=  miscprep_rel.
+_a_despecho_de_p_rel :=  miscprep_rel.
+_a_diferencia_de_p_rel :=  miscprep_rel.
+_a_distinción_de_p_rel :=  miscprep_rel.
+_a_dos_dedos_de_p_rel :=  miscprep_rel.
+_a_efecto_de_p_rel :=  miscprep_rel.
+_a_efectos_de_p_rel :=  miscprep_rel.
+_a_eso_de_p_rel :=  miscprep_rel.
+_a_espaldas_de_p_rel :=  miscprep_rel.
+_a_excepción_de_p_rel :=  miscprep_rel.
+_a_expensas_de_p_rel :=  miscprep_rel.
+_a_favor_de_p_rel :=  miscprep_rel.
+_a_fin_de_p_rel :=  miscprep_rel.
+_a_fines_de_p_rel :=  miscprep_rel.
+_a_finales_de_p_temp_rel := temp_loc_rel.
+_a_fuerza_de_p_rel :=  miscprep_rel.
+_a_guisa_de_p_rel :=  miscprep_rel.
+_a_juzgar_por_p_rel :=  miscprep_rel.
+_al_abrigo_de_p_rel :=  miscprep_rel.
+_a_la_busca_de_p_rel :=  miscprep_rel.
+_a_la_espera_de_p_rel :=  miscprep_rel.
+_a_la_manera_de_p_rel :=  miscprep_rel.
+_a_la_mitad_de_p_rel :=  miscprep_rel.
+_a_la_siga_de_p_rel :=  miscprep_rel.
+_a_la_usanza_de_p_rel :=  miscprep_rel.
+_a_la_vuelta_de_p_rel :=  miscprep_rel.
+_a_la_zona_de_p_rel :=  miscprep_rel.
+_al_cabo_de_p_rel :=  miscprep_rel.
+_al_calor_de_p_rel :=  miscprep_rel.
+_al_cargo_de_p_rel :=  miscprep_rel.
+_al_centro_de_p_rel :=  miscprep_rel.
+_al_compás_de_p_rel :=  miscprep_rel.
+_al_conjuro_de_p_rel :=  miscprep_rel.
+_al_decir_de_p_rel :=  miscprep_rel.
+_al_derredor_de_p_rel :=  miscprep_rel.
+_al_filo_de_p_rel :=  miscprep_rel.
+_al_frente_de_p_rel :=  miscprep_rel.
+_al_gusto_de_p_rel :=  miscprep_rel.
+_al_interior_de_p_rel :=  miscprep_rel.
+_allende_de_p_rel :=  miscprep_rel.
+_al_modo_de_p_rel :=  miscprep_rel.
+_a_lo_ancho_de_p_rel :=  miscprep_rel.
+_al_objeto_de_p_rel :=  miscprep_rel.
+_a_lo_largo_de_p_rel :=  miscprep_rel.
+_a_lo_largo_y_ancho_de_p_rel :=  miscprep_rel.
+_al_olor_de_p_rel :=  miscprep_rel.
+_al_socaire_de_p_rel :=  miscprep_rel.
+_al_tanto_de_p_rel :=  miscprep_rel.
+_al_tenor_de_p_rel :=  miscprep_rel.
+_a_manera_de_p_rel :=  miscprep_rel.
+_a_mediados_de_p_temp_rel := temp_loc_rel.
+_a_mitad_de_p_rel :=  miscprep_rel.
+_a_modo_de_p_rel :=  miscprep_rel.
+_a_nombre_de_p_rel :=  miscprep_rel.
+_a_todo_lo_largo_de_p_rel :=  miscprep_rel.
+_aparte_de_p_rel :=  miscprep_rel.
+_a_partir_de_p_rel :=  miscprep_rel.
+_a_partir_de_p_temp_rel := temp_loc_rel.
+_a_pesar_de_p_rel :=  miscprep_rel.
+_a_petición_de_p_rel :=  miscprep_rel.
+_a_primeros_de_p_temp_rel :=  temp_loc_rel.
+_a_principios_de_p_temp_rel :=  temp_loc_rel.
+_a_propósito_de_p_rel :=  miscprep_rel.
+_a_prueba_de_p_rel :=  miscprep_rel.
+_a_punto_de_p_rel :=  miscprep_rel.
+_a_raíz_de_p_rel :=  miscprep_rel.
+_a_ras_de_p_rel :=  miscprep_rel.
+_a_razón_de_p_rel :=  miscprep_rel.
+_a_reserva_de_p_rel :=  miscprep_rel.
+_a_retaguardia_de_p_rel :=  miscprep_rel.
+_a_riesgo_de_p_rel :=  miscprep_rel.
+_a_semejanza_de_p_rel :=  miscprep_rel.
+_a_suplicación_de_p_rel :=  miscprep_rel.
+_a_súplica_de_p_rel :=  miscprep_rel.
+_a_tenor_de_p_rel :=  miscprep_rel.
+_a_título_de_p_rel :=  miscprep_rel.
+_a_través_de_p_rel :=  miscprep_rel.
+_a_trueco_de_p_rel :=  miscprep_rel.
+_a_usanza_de_p_rel :=  miscprep_rel.
+_a_vuelta_de_p_rel :=  miscprep_rel.
+_con_carácter_de_p_rel :=  miscprep_rel.
+_con_efecto_desde_p_rel :=  miscprep_rel.
+_con_excepción_de_p_rel :=  miscprep_rel.
+_conforme_a_p_rel :=  miscprep_rel.
+_con_honores_de_p_rel :=  miscprep_rel.
+_con_la_condición_de_p_rel :=  miscprep_rel.
+_con_lo_que_respecta_a_p_rel :=  miscprep_rel.
+_con_miras_a_p_rel :=  miscprep_rel.
+_con_objeto_de_p_rel :=  miscprep_rel.
+_con_ocasión_de_p_rel :=  miscprep_rel.
+_con_relación_a_p_rel :=  miscprep_rel.
+_con_respecto_a_p_rel :=  miscprep_rel.
+_con_respecto_de_p_rel :=  miscprep_rel.
+_con_tal_de_p_rel :=  miscprep_rel.
+_con_valor_de_p_rel :=  miscprep_rel.
+_con_vistas_a_p_rel :=  miscprep_rel.
+_de_acuerdo_con_p_rel :=  miscprep_rel.
+_de_al_lado_de_p_rel :=  miscprep_rel.
+_debajo_de_p_rel :=  miscprep_rel.
+_debido_a_p_rel :=  miscprep_rel.
+_de_cara_a_p_rel :=  miscprep_rel.
+_de_la_mano_de_p_rel :=  miscprep_rel.
+_delante_de_p_rel :=  miscprep_rel.
+_detrás_de_p_rel :=  miscprep_rel.
+_dirección_a_p_rel :=  miscprep_rel.
+_en_aras_de_p_rel :=  miscprep_rel.
+_en_atención_a_p_rel :=  miscprep_rel.
+_en_base_a_p_rel :=  miscprep_rel.
+_en_busca_de_p_rel :=  miscprep_rel.
+_en_calidad_de_p_rel :=  miscprep_rel.
+_en_cambio_de_p_rel :=  miscprep_rel.
+_en_caso_de_p_rel :=  miscprep_rel.
+_encima_de_p_rel :=  miscprep_rel.
+_en_compañía_de_p_rel :=  miscprep_rel.
+_en_compensación_de_p_rel :=  miscprep_rel.
+_en_concepto_de_p_rel :=  miscprep_rel.
+_en_contra_de_p_rel :=  miscprep_rel.
+_en_cuanto_a_p_rel :=  miscprep_rel.
+_en_cuestión_de_p_rel :=  miscprep_rel.
+_en_cuestión_de_p_temp_rel := temp_loc_rel.
+_en_defecto_de_p_rel :=  miscprep_rel.
+_en_demanda_de_p_rel :=  miscprep_rel.
+_en_derredor_de_p_rel :=  miscprep_rel.
+_en_dirección_a_p_rel :=  miscprep_rel.
+_en_el_centro_de_p_rel :=  miscprep_rel.
+_en_el_entorno_de_p_rel :=  miscprep_rel.
+_en_el_interior_de_p_rel :=  miscprep_rel.
+_en_el_otro_lado_de_p_rel :=  miscprep_rel.
+_en_el_plazo_de_p_rel :=  miscprep_rel.
+_en_el_puesto_de_p_rel :=  miscprep_rel.
+_en_espera_de_p_rel :=  miscprep_rel.
+_en_evitación_de_p_rel :=  miscprep_rel.
+_en_favor_de_p_rel :=  miscprep_rel.
+_en_función_de_p_rel :=  miscprep_rel.
+_enfrente_de_p_rel :=  miscprep_rel.
+_en_gracia_a_p_rel :=  miscprep_rel.
+_en_guisa_de_p_rel :=  miscprep_rel.
+_en_la_línea_de_p_rel :=  miscprep_rel.
+_en_las_cercanías_de_p_rel :=  miscprep_rel.
+_en_las_proximidades_de_p_rel :=  miscprep_rel.
+_en_la_temporada_de_p_rel :=  miscprep_rel.
+_en_la_zona_de_p_rel :=  miscprep_rel.
+_en_lo_concerniente_a_p_rel :=  miscprep_rel.
+_en_lugar_de_p_rel :=  miscprep_rel.
+_en_manos_de_p_rel :=  miscprep_rel.
+_en_materia_de_p_rel :=  miscprep_rel.
+_en_medio_de_p_rel :=  miscprep_rel.
+_en_memoria_de_p_rel :=  miscprep_rel.
+_en_menos_de_p_rel :=  miscprep_rel.
+_en_mitad_de_p_rel :=  miscprep_rel.
+_en_obligación_de_p_rel :=  miscprep_rel.
+_en_obsequio_a_p_rel :=  miscprep_rel.
+_en_obsequio_de_p_rel :=  miscprep_rel.
+_en_oposición_a_p_rel :=  miscprep_rel.
+_en_orden_a_p_rel :=  miscprep_rel.
+_en_parte_por_p_rel :=  miscprep_rel.
+_en_plan_de_p_rel :=  miscprep_rel.
+_en_pos_de_p_rel :=  miscprep_rel.
+_en_pro_de_p_rel :=  miscprep_rel.
+_en_prueba_de_p_rel :=  miscprep_rel.
+_en_razón_de_p_rel :=  miscprep_rel.
+_en_recuerdo_de_p_rel :=  miscprep_rel.
+_en_representación_de_p_rel :=  miscprep_rel.
+_en_señal_de_p_rel :=  miscprep_rel.
+_en_tiempo_de_p_rel :=  miscprep_rel.
+_en_torno_a_p_rel :=  miscprep_rel.
+_en_torno_de_p_rel :=  miscprep_rel.
+_en_vez_de_p_rel :=  miscprep_rel.
+_en_vías_de_p_rel :=  miscprep_rel.
+_en_virtud_de_p_rel :=  miscprep_rel.
+_en_vista_de_p_rel :=  miscprep_rel.
+_gracias_a_p_rel :=  miscprep_rel.
+_hacia_mediados_de_p_rel :=  miscprep_rel.
+_junto_a_p_rel :=  miscprep_rel.
+_junto_con_p_rel :=  miscprep_rel.
+_lejos_de_p_rel :=  miscprep_rel.
+_más_allá_de_p_rel :=  miscprep_rel.
+;_más_allá_de_p_rel :=  period_rel.
+_pese_a_p_rel :=  miscprep_rel.
+_por_al_lado_de_p_rel :=  miscprep_rel.
+_por_causa_de_p_rel :=  miscprep_rel.
+_por_cuenta_de_p_rel :=  miscprep_rel.
+_por_el_centro_de_p_rel :=  miscprep_rel.
+_por_el_otro_lado_de_p_rel :=  miscprep_rel.
+_por_este_lado_de_p_rel :=  miscprep_rel.
+_por_medio_de_p_rel :=  miscprep_rel.
+_por_motivo_de_p_rel :=  miscprep_rel.
+_por_obra_de_p_rel :=  miscprep_rel.
+_por_obra_y_gracia_de_p_rel :=  miscprep_rel.
+_por_razón_de_p_rel :=  miscprep_rel.
+_por_virtud_de_p_rel :=  miscprep_rel.
+_respecto_a_p_rel :=  miscprep_rel.
+_respecto_a_p_temp_rel :=  temp_loc_rel.
+_respecto_de_p_rel :=  miscprep_rel.
+_según_el_decir_de_p_rel :=  miscprep_rel.
+_sin_contar_con_p_rel :=  miscprep_rel.
+_sin_necesidad_de_p_rel :=  miscprep_rel.
+_si_no_es_por_p_rel :=  miscprep_rel.
+_sin_perjuicio_de_p_rel :=  miscprep_rel.
+_so_pena_de_p_rel :=  miscprep_rel.
+_frente_a_p_rel :=  miscprep_rel.
+_frente_al_p_rel :=  miscprep_rel.
+_alrededor_de_p_rel :=  miscprep_rel.
+_anteriormente_a_p_rel :=  miscprep_rel.
+_antes_de_p_rel :=  miscprep_rel.
+_arriba_de_p_rel :=  miscprep_rel.
+_cerca_de_p_rel :=  state_loc_rel. 
+_dentro_de_p_rel :=  miscprep_rel.
+_dentro_de_p_temp_rel := temp_loc_rel.
+_después_de_p_rel :=  miscprep_rel.
+_por_encima_de_p_rel :=  miscprep_rel.
+_por_debajo_de_p_rel :=  state_loc_rel.
+_por_delante_de_p_rel :=  state_loc_rel.
+_por_parte_de_p_rel :=  miscprep_rel.
+_luego_de_p_rel :=  miscprep_rel.
+_posteriormente_a_p_rel :=  miscprep_rel.
+_precedentemente_a_p_rel :=  miscprep_rel.
 ; determiners & pronouns
 _el_q_rel := art_def_q_rel.
 _un_q_rel := art_indef_q_rel.
@@ -1685,7 +1685,7 @@ _siglo_partn_rel := part_of_rel.
 
 ; Punctuation marks
 
-punctuation_min :< avm.
+punctuation_min := avm.
 
 punctuation := punctuation_min &
  [ LPUNCT basic_punct_mark,

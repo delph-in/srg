@@ -1,7 +1,7 @@
 ;;; files to load
 
 grammar-top               := "../srg.tdl".
-;variable-property-mapping := "../semi.vpm".
+variable-property-mapping := "../semi.vpm".
 maxent-model              := "../tibidabo.mem".
 preprocessor              := "../rpp/tokenizer.rpp".
 ;preprocessor-modules      := ../rpp/xml.rpp ../rpp/ascii.rpp ../rpp/lgt.rpp ../rpp/quotes.rpp ../rpp/wiki.rpp ../rpp/gml.rpp ../rpp/html.rpp.
@@ -177,6 +177,12 @@ parsing-packing-restrictor := RELS HCONS ICONS RNAME.
 
 generation-packing-restrictor := 
   RELS HCONS ICONS RNAME.
+
+mrs-deleted-roles := 
+  IDIOMP WLINK CFROM CTO --PSV
+;; starting here, mrs deleted roles left over from old ACE config file
+  WLINK PARAMS.
+
 
 ;;; SRG hsd LABEL-NAME as the path for tree node labels; ACE's default is LNAME, so, need to specify.
 label-path := LABEL-NAME.

@@ -1777,32 +1777,50 @@ vpart_ilr &
 vaip1s0 :=
 %suffix (vaip1s vaip1s)
 pres-ind_ilr & 
-  [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ].
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1sg ] ]
+"""
+e.g. estoy pasando
+""".
 
 vaip2s0 :=
 %suffix (vaip2s vaip2s)
 pres-ind_ilr & 
-  [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ].
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 2sg ] ]
+"""
+e.g. eres pasando
+""".
 
 vaip3s0 :=
 %suffix (vaip3s vaip3s)
 pres-ind_ilr &
-  [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ].
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 3sg ] ]
+"""
+e.g. esta pasando
+""".
 
 vaip1p0 :=
 %suffix (vaip1p vaip1p)
 pres-ind_ilr & 
-  [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ].
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 1pl ] ]
+"""
+e.g. estamos pasando
+""".
 
 vaip2p0 :=
 %suffix (vaip2p vaip2p)
 pres-ind_ilr & 
-  [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ].
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 2pl ] ]
+"""
+e.g. estais pasando
+""".
 
 vaip3p0 := 
 %suffix (vaip3p vaip3p)
 pres-ind_ilr & 
-  [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ].
+  [ SYNSEM.LOCAL [ AGR.PNG.PN 3pl ] ]
+"""
+e.g. estan pasando
+""".
 
 vaii4s0 := 
 %suffix (vaii13s vaii13s)
@@ -2444,6 +2462,11 @@ dat_enclt_ilr &
 %suffix (vmme vmme)
 acc_or_dat_or_rflx_enclt_ilr & 
   [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG.PN 1sg ],... > ].
+
++VMM02S0 := 
+%suffix (vmte vmte)
+acc_or_dat_or_rflx_enclt_ilr & 
+  [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG.PN 2sg ],... > ].
 
 +PP2CS00 := 
 %suffix (vmte vmte)

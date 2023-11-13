@@ -457,6 +457,8 @@ pp1csn0_ilr :=  pp_ilr & 1sg_ilr
 """personal pron""".
 pp2csn0_ilr :=  pp_ilr & 2sg_ilr
 """personal pron""".
+vmm02s0_ilr :=  pp_ilr & 2sg_ilr
+"""personal pron""".
 pp3fs00_ilr :=  pp_ilr & 3sg_ilr & fem_ilr
 """personal pron""". 
 pp3ms00_ilr :=  pp_ilr & 3sg_ilr & masc_ilr

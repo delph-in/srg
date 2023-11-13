@@ -21,7 +21,7 @@ class Freeling_tok_tagger:
 
         # Location of FreeLing configuration files.
         self.DATA = os.environ["FREELINGDIR"]+"/share/freeling/" #usermap; currently empty
-        self.CUSTOM_DATA = "/home/olga/delphin/SRG/grammar/srg/util/freeling_api/srg-freeling-debug.dat"
+        self.CUSTOM_DATA = "/home/olga/delphin/SRG/grammar/srg/util/freeling_api/srg-freeling.dat"
         # Init locales
         pyfreeling_api.util_init_locale("default")
         # create language detector. Used just to show it. Results are printed
@@ -42,8 +42,10 @@ class Freeling_tok_tagger:
 
         # create analyzers
         self.tk=pyfreeling_api.tokenizer(self.DATA+self.LANG+"/tokenizer.dat")
+        self.tk_rtk = pyfreeling_api.tokenizer(self.DATA + self.LANG + "/tokenizer.dat")
         self.sp=pyfreeling_api.splitter(self.DATA+self.LANG+"/splitter.dat")
         self.mf=pyfreeling_api.maco(self.op)
+        self.mf_alt= pyfreeling_api.maco(self.op)
 
         # activate mmorpho odules to be used in next call
         # These are crucial for the specific output.
@@ -51,18 +53,25 @@ class Freeling_tok_tagger:
                               dic=True, aff=True, comp=False, rtk=True,
                               mw=True, ner=True, qt=False, prb=True )  # No quantities detection (qt=False)
 
+        # Alternative freeling setup with no multiword detection
+        self.mf_alt.set_active_options(umap=True, num=True, pun=True, dat=False,  # no time and date detection (dat=False)
+                                   dic=True, aff=True, comp=False, rtk=True,
+                                   mw=False, ner=True, qt=False, prb=True)  # No quantities detection (qt=False)
+
         # The tagger is instantiated with RETOKENIZATION SET TO FALSE (second parameter). This is crucial to get
         # sequences of tags such as VMN00000 +PP3MSA0, for words like "creerlo" which will not be tokenized into two
         self.tg=pyfreeling_api.hmm_tagger(self.DATA+self.LANG+"/tagger.dat",False,0)
-        self.tg_rtk = pyfreeling_api.hmm_tagger(self.DATA + self.LANG + "/tagger.dat", True, 0)
+        self.tg_rtk = pyfreeling_api.hmm_tagger(self.DATA + self.LANG + "/tagger.dat", True, 1)
 
     def tokenize_and_tag(self, sentence_list, override_dicts):
         output = []
         sid=self.sp.open_session()
         # process input text
         for i,lin in enumerate(sentence_list):
+            sys.stdout.write("{}/{} sentences processed\r".format(i+1, len(sentence_list)))
+            sys.stdout.flush()
             output.append({'sentence': lin, 'tokens':[]})
-            #if "tanto" in lin:
+            #if "no sólo es" in lin:
             #    print("debug")
             # With the basic NER Freeling module, may need this, as it will assume that
             # all uppercased items are all named entities.
@@ -99,10 +108,11 @@ class Freeling_tok_tagger:
         return output
 
     def freeling_analyze(self, lin, sid):
-        if not 'por qué' in lin:
-            s = self.tk_rtk.tokenize(lin)
-        else:
+        #print(lin)
+        if not 'por qué' in lin.lower():
             s = self.tk.tokenize(lin)
+        else:
+            s = self.tk_rtk.tokenize(lin)
         s = self.sp.split(sid, s, True)
         s = self.mf.analyze(s)
         s = self.tg.analyze(s)
