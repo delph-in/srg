@@ -7,6 +7,7 @@
 
 import sys
 from override_freeling import TAGS, DO_NOT_OVERRIDE, STEM_EQUALS_TAG, REPLACE_LEMMA_AND_TAG
+from tokenize_and_tag import Freeling_tok_tagger
 import parse_sppp_dat
 
 '''
@@ -57,6 +58,7 @@ def override_lemma(lemma, tag, override_dicts):
 def convert_sentences(sentences, override_dicts):
     yy_sentences = []
     for i, sent in enumerate(sentences):
+        print(sent)
         output = ""
         _num = 0       # lattice ID
         _from = 0
@@ -108,6 +110,7 @@ def convert_sentences(sentences, override_dicts):
 if __name__ == "__main__":
     fuse, replace, no_disambiguate, output = parse_sppp_dat.parse_sppp('./freeling_api/srg-freeling.dat')
     override_dicts = {'fuse': fuse, 'replace': replace, 'no_disambiguate': no_disambiguate, 'output': output}
+    ftt = Freeling_tok_tagger()
     # read FreeLing output from file or standard input; sentences are separated by one
     # or more blank lines
     if len(sys.argv) < 2 or sys.argv[1] == "-":
@@ -118,12 +121,14 @@ if __name__ == "__main__":
     for ln in f:
         if ln.strip() == "": # inter-sentence blank line?
             if sent != "":
-                print(convert_sentences([sent], override_dicts)[0])
+                freeling_str = ftt.tokenize_and_tag([sent], override_dicts)
+                print(convert_sentences(freeling_str, override_dicts)[0])
                 sent = ""
         else:
             sent += ln
     if sent != "":
-        print(convert_sentences([sent], override_dicts)[0])
+        freeling_str = ftt.tokenize_and_tag([sent], override_dicts)
+        print(convert_sentences(freeling_str, override_dicts)[0])
     if f is not sys.stdin:
         f.close()
 

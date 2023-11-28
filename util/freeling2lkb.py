@@ -20,6 +20,6 @@ if __name__ == "__main__":
             print("")
         else:
             freeling_s = ftok.tokenize_and_tag([sent], override_dicts)
-            print(convert_sentences([freeling_s[0]],override_dicts)[0])
+            print(convert_sentences(freeling_s,override_dicts)[0])
     if f is not sys.stdin:
         f.close()
