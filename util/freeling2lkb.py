@@ -5,7 +5,7 @@ import parse_sppp_dat
 
 
 if __name__ == "__main__":
-    fuse, replace, no_disambiguate, output = parse_sppp_dat.parse_sppp('/home/olga/delphin/SRG/grammar/srg/util/freeling_api/srg-freeling.dat')
+    fuse, replace, no_disambiguate, output = parse_sppp_dat.parse_sppp('/home/olzama/delphin/srg/util/freeling_api/srg-freeling.dat')
     override_dicts = {'fuse': fuse, 'replace': replace, 'no_disambiguate': no_disambiguate, 'output': output}
 
     # read input from file or standard input, one sentence per line. Put each
@@ -20,6 +20,6 @@ if __name__ == "__main__":
             print("")
         else:
             freeling_s = ftok.tokenize_and_tag([sent], override_dicts)
-            print(convert_sentences([freeling_s[0]],override_dicts)[0])
+            print(convert_sentences(freeling_s,override_dicts)[0])
     if f is not sys.stdin:
         f.close()

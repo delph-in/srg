@@ -150,5 +150,5 @@
 ;;; Start up FreeLing as preprocessor (in this setup, REPP and token mapping
 ;;; rules are bypassed).
 ;;;
-(fl-initialize)
+(initialize-yy)
 

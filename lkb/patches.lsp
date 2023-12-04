@@ -47,3 +47,6 @@
 (progn
  (setf lkb::*tree-discriminants-mode* :classic)
  (setf tsdb::*process-raw-print-trace-p* t))
+ 
+ ;; related to freeling-yy interface
+ (defun token-edge-match (edge existing-edges) nil)
