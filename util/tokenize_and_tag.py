@@ -21,7 +21,7 @@ class Freeling_tok_tagger:
 
         # Location of FreeLing configuration files.
         self.DATA = os.environ["FREELINGDIR"]+"/share/freeling/" #usermap; currently empty
-        self.CUSTOM_DATA = "/home/olzama/delphin/srg/util/freeling_api/srg-freeling.dat"
+        self.CUSTOM_DATA = "~/delphin/SRG/grammar/srg/util/freeling_api/srg-freeling.dat"
         # Init locales
         pyfreeling_api.util_init_locale("default")
         # create language detector. Used just to show it. Results are printed
