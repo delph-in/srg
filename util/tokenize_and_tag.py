@@ -3,6 +3,8 @@
 from freeling_api.python_API import pyfreeling_api
 import sys, os
 
+PATH_TO_SPPP_DAT = '/home/olga/delphin/SRG/grammar/srg/util/freeling_api/srg-freeling.dat'
+
 class Freeling_tok_tagger:
     '''
     NB: There are numerous ways to configure the Freeling modules (the morphological analyzer, the splitter, the tagger).
@@ -21,7 +23,7 @@ class Freeling_tok_tagger:
 
         # Location of FreeLing configuration files.
         self.DATA = os.environ["FREELINGDIR"]+"/share/freeling/" #usermap; currently empty
-        self.CUSTOM_DATA = "~/delphin/SRG/grammar/srg/util/freeling_api/srg-freeling.dat"
+        self.CUSTOM_DATA = PATH_TO_SPPP_DAT
         # Init locales
         pyfreeling_api.util_init_locale("default")
         # create language detector. Used just to show it. Results are printed

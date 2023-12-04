@@ -146,6 +146,9 @@
 (when (and (listp *last-parses*) (= (length *last-parses*) 1))
   (setf *last-parses* '("Mi perro duerme." "La ventana se abrió.")))
 
+;;; Initialize LUI visualization
+(lui-initialize)
+
 ;;;
 ;;; Start up FreeLing as preprocessor (in this setup, REPP and token mapping
 ;;; rules are bypassed).

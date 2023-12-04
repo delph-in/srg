@@ -1,11 +1,11 @@
 import sys
-from tokenize_and_tag import Freeling_tok_tagger
+from tokenize_and_tag import Freeling_tok_tagger, PATH_TO_SPPP_DAT
 from srg_freeling2yy import convert_sentences
 import parse_sppp_dat
 
 
 if __name__ == "__main__":
-    fuse, replace, no_disambiguate, output = parse_sppp_dat.parse_sppp('~/delphin/SRG/grammar/srg/util/freeling_api/srg-freeling.dat')
+    fuse, replace, no_disambiguate, output = parse_sppp_dat.parse_sppp(PATH_TO_SPPP_DAT)
     override_dicts = {'fuse': fuse, 'replace': replace, 'no_disambiguate': no_disambiguate, 'output': output}
 
     # read input from file or standard input, one sentence per line. Put each
