@@ -21,7 +21,7 @@ class Freeling_tok_tagger:
 
         # Location of FreeLing configuration files.
         self.DATA = os.environ["FREELINGDIR"]+"/share/freeling/" #usermap; currently empty
-        self.CUSTOM_DATA = "/home/olga/delphin/SRG/grammar/srg/util/freeling_api/srg-freeling.dat"
+        self.CUSTOM_DATA = "/home/olzama/delphin/srg/util/freeling_api/srg-freeling.dat"
         # Init locales
         pyfreeling_api.util_init_locale("default")
         # create language detector. Used just to show it. Results are printed
@@ -68,8 +68,8 @@ class Freeling_tok_tagger:
         sid=self.sp.open_session()
         # process input text
         for i,lin in enumerate(sentence_list):
-            sys.stdout.write("{}/{} sentences processed\r".format(i+1, len(sentence_list)))
-            sys.stdout.flush()
+            sys.stderr.write("{}/{} sentences processed\r".format(i+1, len(sentence_list)))
+            sys.stderr.flush()
             output.append({'sentence': lin, 'tokens':[]})
             #if "no sólo es" in lin:
             #    print("debug")
@@ -79,9 +79,9 @@ class Freeling_tok_tagger:
             s = self.freeling_analyze(lin, sid)
             if len(s) == 0 or len(s) > 1:
                 if len(s) == 0:
-                    print("No Freeling analysis for {}".format(lin))
+                    print("No Freeling analysis for {}".format(lin),file=stderr)
                 else:
-                    print("Line {} seems to contain more than one sentence and was not tokenized properly. Skipping it.".format(lin))
+                    print("Line {} seems to contain more than one sentence and was not tokenized properly. Skipping it.".format(lin),file=stderr)
                 output[i]['sentence'] = lin
                 output[i]['tokens'] = None
             else:

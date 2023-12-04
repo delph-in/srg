@@ -11,7 +11,7 @@
 
 MYPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-echo $MYPATH
+echo $MYPATH>&2
 
 # if one of the commands below fails then set the script exit status $? accordingly
 set -o pipefail

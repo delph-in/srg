@@ -58,17 +58,18 @@ def override_lemma(lemma, tag, override_dicts):
 def convert_sentences(sentences, override_dicts):
     yy_sentences = []
     for i, sent in enumerate(sentences):
-        print(sent)
+        print(sent,file=sys.stderr)
         output = ""
         _num = 0       # lattice ID
         _from = 0
         _to = 1
         _keep_from = 0
         _keep_to = 1
-        if not sent['tokens']:
-            output = '(1,0,1, <0:{}>,1,"{}" "{}",0, "np00v00", "np00v00" 1.0)'.format(len(sent['sentence']),
-                                                                                      sent['sentence'].replace('"','\\"'),
-                                                                                      sent['sentence'].replace('"','\\"'))
+        if not sent['tokens']: # something Freeling could not handle; possibly a foreign phrase.
+            sentence = sent['sentence'].rstrip('\n')
+            output = '(1,0,1, <0:{}>,1,"{}" "{}",0, "np00v00", "np00v00" 1.0)'.format(sentence,
+                                                                                    sentence.replace('"','\\"'),
+                                                                                      sentence.replace('"','\\"'))
         else:
             for j,tok in enumerate(sent['tokens']):
                 is_additional = tok['additional']
