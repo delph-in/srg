@@ -4544,7 +4544,7 @@ v_cop-nsbj := v_copula &
 
 v_ap_ser_synsem := v_copula_synsem &
   [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
-                      COMPS < [ LOCAL [ CAT.HEAD adj & [ MOD < [ LOCAL.CAT.HEAD noun ] >,
+                      COMPS < [ LOCAL [ CAT.HEAD adj & [ MOD < [ LOCAL [ CAT.HEAD noun, AGR #sind ] ] >,
                                                          PRD.COPV ser ],
                                         CONT.HOOK.XARG #sind ] ] > ],
             CONT.HOOK.XARG #sind ] ]
