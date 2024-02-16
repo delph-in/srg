@@ -210,6 +210,14 @@ fem_3sg_ilr :=  fem_ilr & 3sg_ilr.
 fem_3pl_ilr :=  fem_ilr & 3pl_ilr.
 neut_3sg_ilr :=  neut_ilr & 3sg_ilr.
 
+masc_sg_ilr := masc_ilr & sg_ilr.
+fem_sg_ilr := fem_ilr & sg_ilr.
+masc_pl_ilr := masc_ilr & pl_ilr.
+fem_pl_ilr := fem_ilr & pl_ilr.
+neut_sg_ilr := neut_ilr & sg_ilr.
+neut_pl_ilr := neut_ilr & sg_ilr.
+
+
 ; -- determiners
 
 d_ilr :=  infl-ltow-rule & 
@@ -235,120 +243,120 @@ dr_ilr :=  d_ilr &
 
 ; -- definite articles
 
-da0ms0_ilr := da_ilr & masc_3sg_ilr
+da0ms0_ilr := da_ilr & masc_sg_ilr
 """definite article""".
-da0mp0_ilr := da_ilr & masc_3pl_ilr
+da0mp0_ilr := da_ilr & masc_pl_ilr
 """definite article""".
-da0fs0_ilr := da_ilr & fem_3sg_ilr
+da0fs0_ilr := da_ilr & fem_sg_ilr
 """definite article""".
-da0fp0_ilr := da_ilr & fem_3pl_ilr
+da0fp0_ilr := da_ilr & fem_pl_ilr
 """definite article""".
-da00s0_ilr := da_ilr & 3sg_ilr
+da00s0_ilr := da_ilr & sg_ilr
 """definite article""".
 
 ; -- demonstrative det.
 
-dd0ms0_ilr := dd_ilr & masc_3sg_ilr
+dd0ms0_ilr := dd_ilr & masc_sg_ilr
 """demonstrative det""".
-dd0mp0_ilr := dd_ilr & masc_3pl_ilr
+dd0mp0_ilr := dd_ilr & masc_pl_ilr
 """demonstrative det""".
-dd0fs0_ilr := dd_ilr & fem_3sg_ilr
+dd0fs0_ilr := dd_ilr & fem_sg_ilr
 """demonstrative det""".
-dd0fp0_ilr := dd_ilr & fem_3pl_ilr
+dd0fp0_ilr := dd_ilr & fem_pl_ilr
 """demonstrative det""".
-dd0cs0_ilr := d_ilr & 3sg_ilr
+dd0cs0_ilr := d_ilr & sg_ilr
 """demonstrative det""".
-dd0cp0_ilr := d_ilr & 3pl_ilr
+dd0cp0_ilr := d_ilr & pl_ilr
 """demonstrative det""".
 
 ; -- possessive det.
 
-dp1css_ilr :=  dp_ilr & 3sg_ilr
+dp1css_ilr :=  dp_ilr & sg_ilr
 """possessive det""".
-dp1cps_ilr := dp_ilr & 3pl_ilr
+dp1cps_ilr := dp_ilr & pl_ilr
 """possessive det""".
-ap0ms1p_ilr := dp_ilr & masc_3sg_ilr
+ap0ms1p_ilr := dp_ilr & masc_sg_ilr
 """possessive det""".
-ap0mp1p_ilr := dp_ilr & masc_3pl_ilr
+ap0mp1p_ilr := dp_ilr & masc_pl_ilr
 """possessive det""".
-ap0fs1p_ilr := dp_ilr & fem_3sg_ilr
+ap0fs1p_ilr := dp_ilr & fem_sg_ilr
 """possessive det""".
-ap0fp1p_ilr := dp_ilr & fem_3pl_ilr
+ap0fp1p_ilr := dp_ilr & fem_pl_ilr
 """possessive det""".
-dp2css_ilr := dp_ilr & 3sg_ilr
+dp2css_ilr := dp_ilr & sg_ilr
 """possessive det""".
-dp2cps_ilr := dp_ilr & 3pl_ilr
+dp2cps_ilr := dp_ilr & pl_ilr
 """possessive det""".
-ap0ms2p_ilr := dp_ilr & masc_3sg_ilr
+ap0ms2p_ilr := dp_ilr & masc_sg_ilr
 """possessive det""".
-ap0mp2p_ilr := dp_ilr & masc_3pl_ilr
+ap0mp2p_ilr := dp_ilr & masc_pl_ilr
 """possessive det""".
-ap0fs2p_ilr := dp_ilr & fem_3sg_ilr
+ap0fs2p_ilr := dp_ilr & fem_sg_ilr
 """possessive det""".
-ap0fp2p_ilr := dp_ilr & fem_3pl_ilr
+ap0fp2p_ilr := dp_ilr & fem_pl_ilr
 """possessive det""".
-dp3csn_ilr := dp_ilr & 3sg_ilr
+dp3csn_ilr := dp_ilr & sg_ilr
 """possessive det""".
-dp3cpn_ilr := dp_ilr & 3pl_ilr
+dp3cpn_ilr := dp_ilr & pl_ilr
 """possessive det""".
 
 ; -- indefinite det. 
 
-di0ms0_ilr :=  d_ilr & masc_3sg_ilr
+di0ms0_ilr :=  d_ilr & masc_sg_ilr
 """indefinite det""".
-di0mp0_ilr :=  d_ilr & masc_3pl_ilr
+di0mp0_ilr :=  d_ilr & masc_pl_ilr
 """indefinite det""".
-di0fs0_ilr :=  d_ilr & fem_3sg_ilr
+di0fs0_ilr :=  d_ilr & fem_sg_ilr
 """indefinite det""".
-di0fp0_ilr :=  d_ilr & fem_3pl_ilr
+di0fp0_ilr :=  d_ilr & fem_pl_ilr
 """indefinite det""".
-di0cs0_ilr :=  d_ilr & 3sg_ilr
+di0cs0_ilr :=  d_ilr & sg_ilr
 """indefinite det""".
-di0cp0_ilr :=  d_ilr & 3pl_ilr
+di0cp0_ilr :=  d_ilr & pl_ilr
 """indefinite det""".
 
 ; -- interrogative det.
 
-dt0ms0_ilr :=  dt_ilr & masc_3sg_ilr
+dt0ms0_ilr :=  dt_ilr & masc_sg_ilr
 """interrogative det""".
-dt0mp0_ilr :=  dt_ilr & masc_3pl_ilr
+dt0mp0_ilr :=  dt_ilr & masc_pl_ilr
 """interrogative det""".
-dt0fs0_ilr :=  dt_ilr & fem_3sg_ilr
+dt0fs0_ilr :=  dt_ilr & fem_sg_ilr
 """interrogative det""".
-dt0fp0_ilr :=  dt_ilr & fem_3pl_ilr
+dt0fp0_ilr :=  dt_ilr & fem_pl_ilr
 """interrogative det""".
-dt0cs0_ilr :=  dt_ilr & 3sg_ilr
+dt0cs0_ilr :=  dt_ilr & sg_ilr
 """interrogative det""".
-dt0cp0_ilr :=  dt_ilr & 3pl_ilr
+dt0cp0_ilr :=  dt_ilr & pl_ilr
 """interrogative det""".
 dt0cn0_ilr :=  dt_ilr
 """interrogative det""".
 
 ; -- exclamative det.
 
-de0ms0_ilr :=  de_ilr & masc_3sg_ilr
+de0ms0_ilr :=  de_ilr & masc_sg_ilr
 """exclamative det""".
-de0mp0_ilr :=  de_ilr & masc_3pl_ilr
+de0mp0_ilr :=  de_ilr & masc_pl_ilr
 """exclamative det""".
-de0fs0_ilr :=  de_ilr & fem_3sg_ilr
+de0fs0_ilr :=  de_ilr & fem_sg_ilr
 """exclamative det""".
-de0fp0_ilr :=  de_ilr & fem_3pl_ilr
+de0fp0_ilr :=  de_ilr & fem_pl_ilr
 """exclamative det""".
-de0cs0_ilr :=  de_ilr & 3sg_ilr
+de0cs0_ilr :=  de_ilr & sg_ilr
 """exclamative det""".
-de0cp0_ilr :=  de_ilr & 3pl_ilr
+de0cp0_ilr :=  de_ilr & pl_ilr
 """exclamative det""".
 de0cn0_ilr :=  de_ilr
 """exclamative det""".
 
 ; -- relative det.
-dr0ms0_ilr :=  dr_ilr & masc_3sg_ilr
+dr0ms0_ilr :=  dr_ilr & masc_sg_ilr
 """relative det""".
-dr0mp0_ilr :=  dr_ilr & masc_3pl_ilr
+dr0mp0_ilr :=  dr_ilr & masc_pl_ilr
 """relative det""".
-dr0fs0_ilr :=  dr_ilr & fem_3sg_ilr
+dr0fs0_ilr :=  dr_ilr & fem_sg_ilr
 """relative det""".
-dr0fp0_ilr :=  dr_ilr & fem_3pl_ilr
+dr0fp0_ilr :=  dr_ilr & fem_pl_ilr
 """relative det""".
 
 ; --- pronouns
@@ -495,19 +503,19 @@ pp3cno0_ilr :=  pp_ilr & 3per_ilr &
 a_ilr :=  infl-ltow-rule & 
   [ SYNSEM.LOCAL.CAT.HEAD adj ].
 
-a_sg_ilr :=  a_ilr & 3sg_ilr
+a_sg_ilr :=  a_ilr & sg_ilr
 """adjective""".
-a_pl_ilr :=  a_ilr & 3pl_ilr
+a_pl_ilr :=  a_ilr & pl_ilr
 """adjective""".
-a_fem-sg_ilr :=  a_ilr & fem_3sg_ilr
+a_fem-sg_ilr :=  a_ilr & fem_sg_ilr
 """adjective""".
-a_fem-pl_ilr :=  a_ilr & fem_3pl_ilr
+a_fem-pl_ilr :=  a_ilr & fem_pl_ilr
 """adjective""".
-a_masc-sg_ilr :=  a_ilr & masc_3sg_ilr
+a_masc-sg_ilr :=  a_ilr & masc_sg_ilr
 """adjective""".
-a_masc-pl_ilr :=  a_ilr & masc_3pl_ilr
+a_masc-pl_ilr :=  a_ilr & masc_pl_ilr
 """adjective""".
-a_neut-sg_ilr :=  a_ilr & neut_3sg_ilr
+a_neut-sg_ilr :=  a_ilr & neut_sg_ilr
 """adjective""".
 
 
