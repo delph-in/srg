@@ -1637,11 +1637,13 @@ optcomp-v_phrase := optcomp-phrase &
 """. 
 
 optcomp-n_phrase := optcomp-phrase &
-  [ SYNSEM.LOCAL [ CAT [ POSTHEAD #ph,
-                         VAL.COMPS #comps ],
+  [ SYNSEM.LOCAL [ AGR #agr,
+                   CAT [ POSTHEAD #ph,
+                   VAL.COMPS #comps ],
 		   CONT.HOOK.INDEX.SORT non-mod ],
     HEAD-DTR.SYNSEM [ MODIFIED notmod,
-                      LOCAL [ STR.HEADED solely,
+                      LOCAL [ AGR #agr,
+                              STR.HEADED solely,
                               CAT [ POSTHEAD #ph, 
                                     HEAD noun,
                                     VAL.COMPS < [ NON-LOCAL.SLASH 0-dlist ]. #comps > ] ] ] ]. 
