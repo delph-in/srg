@@ -1990,19 +1990,20 @@ npadv_modn_phrase := basic-npadv-phrase &
 
 
 
-pp_npadv_phrase := basic-npadv-phrase &
-  [  SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL.CAT.HEAD verb ] >,
-     ARGS < [ SYNSEM.LOCAL [ CAT [ HEAD verb & 
-                                        [ VFORM fin ] ],
-			     CONT [ HOOK.INDEX event,
-                                    RELS.LIST.FIRST arg2-ev-relation & 
-                                                    [ PRED "_hacer_v_rel",
-                                                      ARG2 #arg2 & [ SORT tmp ] ] ] ] ] >,
-    C-CONT.RELS <! prep-relation &
-                   [ ARG2 #arg2 ] !> ]
-"""
-; hace tres semanas ...
-""".
+;pp_npadv_phrase := basic-npadv-phrase &
+;  [  SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL.CAT.HEAD verb ] >,
+;     ARGS < [ SYNSEM.LOCAL [ CAT [ HEAD verb & 
+;                                        [ VFORM fin ] ],
+;			     CONT [ HOOK.INDEX event,
+;                                    RELS.LIST.FIRST arg2-ev-relation & 
+;                                                    [ PRED "_hacer_v_rel",
+;                                                      ARG2 #arg2 & [ SORT tmp ] ] ] ] ] >,
+;    C-CONT.RELS <! prep-relation &
+;                   [ ARG2 #arg2 ] !> ]
+;"""
+;; hace tres semanas ...
+;OZ 2024-03-01 Commenting this rule out, as it does not work as intended and instead applies to all VPs.
+;""".
 
 
 vocative_np_phrase := basic-unary-phrase & phrasal & 
@@ -3669,9 +3670,10 @@ extcomp-n-df_phrase := head-only & head-compositional &
 """.
 
 basic-extracted-adj-phrase := head-mod-phrase & head-only & phrasal & 
-  [ SYNSEM [ LOCAL.CAT [ POSTHEAD #ph,
+  [ SYNSEM [ LOCAL [ CAT [ POSTHEAD #ph,
                          MC #mc,
                          VAL.SPR #spr ],
+                     CONT #cont ],
 	     NON-LOCAL.SLASH 1-dlist &
                              <! [ COORD -,
                                   CAT [ HEAD.MOD < [ LOCAL intersective-mod &
@@ -3688,7 +3690,7 @@ basic-extracted-adj-phrase := head-mod-phrase & head-only & phrasal &
                                     MC #mc,
                                     HEAD #head,
                                     VAL #val & [ SPR #spr ] ],
-                              CONT.HOOK #hook,
+                              CONT #cont & [ HOOK #hook ],
                               CTXT #ctxt ],
                       NON-LOCAL.SLASH 0-dlist ],
     C-CONT [ HOOK #hook,
@@ -5224,7 +5226,7 @@ adjpart_constr := adjpart_phrase & rule.
 prdp_constr := prdp_phrase & rule.
 npadv_constr := npadv_phrase & rule.
 npadv_modn_constr := npadv_modn_phrase & rule.
-npadv_pp_constr := pp_npadv_phrase & rule.
+;npadv_pp_constr := pp_npadv_phrase & rule.
 vocnp_prh_constr := vocative_np_prh_phrase & rule.
 vocnp_psth_constr := vocative_np_psth_phrase & rule.
 part_num_constr := partitive_num_phrase & rule.
