@@ -1989,23 +1989,6 @@ npadv_modn_phrase := basic-npadv-phrase &
                    [ ARG2 #index ] !> ].
 
 
-
-;pp_npadv_phrase := basic-npadv-phrase &
-;  [  SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL.CAT.HEAD verb ] >,
-;     ARGS < [ SYNSEM.LOCAL [ CAT [ HEAD verb & 
-;                                        [ VFORM fin ] ],
-;			     CONT [ HOOK.INDEX event,
-;                                    RELS.LIST.FIRST arg2-ev-relation & 
-;                                                    [ PRED "_hacer_v_rel",
-;                                                      ARG2 #arg2 & [ SORT tmp ] ] ] ] ] >,
-;    C-CONT.RELS <! prep-relation &
-;                   [ ARG2 #arg2 ] !> ]
-;"""
-;; hace tres semanas ...
-;OZ 2024-03-01 Commenting this rule out, as it does not work as intended and instead applies to all VPs.
-;""".
-
-
 vocative_np_phrase := basic-unary-phrase & phrasal & 
   [ INFLECTED +,
     SYNSEM [ PUNCT #punct,

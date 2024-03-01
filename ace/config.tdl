@@ -170,8 +170,8 @@ lattice-mapping-context-path := +CONTEXT.
 lattice-mapping-position-path := +POSITION.
 
 
-;deleted-daughters := 
-;  ARGS HEAD-DTR NON-HEAD-DTR.
+deleted-daughters := 
+  ARGS HEAD-DTR NON-HEAD-DTR.
 
 parsing-packing-restrictor := RELS HCONS ICONS RNAME.
 
