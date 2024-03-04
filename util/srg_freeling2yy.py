@@ -58,7 +58,7 @@ def override_lemma(lemma, tag, override_dicts):
 def convert_sentences(sentences, override_dicts):
     yy_sentences = []
     for i, sent in enumerate(sentences):
-        print(sent,file=sys.stderr)
+        #print(sent,file=sys.stderr)
         output = ""
         _num = 0       # lattice ID
         _from = 0
