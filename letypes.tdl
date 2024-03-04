@@ -2316,7 +2316,8 @@ v_np_npsv_id_synsem := v_trans_synsem &
 v_np_npsv-id-ser_lex := v_np_ntr & main-verb & basic-two-arg &
   [ ALTS.IMPERS -,
     SYNSEM v_np_npsv_id_synsem &
-           [ LOCAL.CAT.HEAD.LSYNSEM v_np_npsv_id_synsem ] ].
+           [ LOCAL.CAT [ HEAD.LSYNSEM v_np_npsv_id_synsem,
+                         VAL.COMPS < [ LOCAL.CAT.VAL.SPR < > ] > ] ] ].
 
 
 ; --- 1.3.3.1.2. Transitive verbs taking NP that can be passivized
@@ -7950,7 +7951,6 @@ p_cp_prop_or_ques_inf := p_cp_prop_or_ques &
   [ SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT [ HEAD.VFORM inf,
                                                VAL.SUBJ < synsem & 
                                                           [ NON-LOCAL.SLASH 0-dlist & [ LIST < > ] ] > ] ] > ].
-
 
 p_cp_prop_inf_slash := o_rais-one-arg &
   [ SYNSEM [ LOCAL [ CAT [ HEAD [ AUX -,
