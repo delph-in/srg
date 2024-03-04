@@ -84,7 +84,6 @@ class Freeling_tok_tagger:
                     print("No Freeling analysis for {}".format(lin),file=sys.stderr)
                 else:
                     print("Line {} seems to contain more than one sentence and was not tokenized properly. Skipping it.".format(lin),file=sys.stderr)
-                sys.stderr.flush()
                 output[i]['sentence'] = lin
                 output[i]['tokens'] = None
             else:
