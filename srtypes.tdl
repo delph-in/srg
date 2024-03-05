@@ -2756,7 +2756,8 @@ filler-head-non_wh_focus-phrase := filler-head-non_wh-phrase &
 filler-head_nonwh_phrase := filler-head-non_wh_focus-phrase & filler-head-phrase-fin & 
   [ ARGS < [ INFLECTED + ],
            [ SYNSEM [ SLSHD +, 
-                      LOCAL.CAT.HEAD.VFORM fin ] ] > ].       
+                      LOCAL.CAT [ HEAD.VFORM fin,
+                                  VAL.SPR < > ] ] ] > ].       
 
 filler-head_nonwh-nfin_phrase := filler-head-non_wh_focus-phrase & filler-head-phrase-nonfin & 
   [ ARGS < [ INFLECTED + ],
