@@ -72,7 +72,6 @@ def update_testsuite(ts, override_dicts):
     output = ftt.tokenize_and_tag(sentence_list, override_dicts)
     yy = convert_sentences(output, override_dicts)
     assert len(yy) == len(ts['item'])
-    print('{} items in the corpus'.format(len(yy)))
     for i, row in enumerate(ts['item']):
         ts['item'].update(i, {'i-tokens': yy[i]})
     ts.commit()

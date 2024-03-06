@@ -67,8 +67,11 @@ def convert_sentences(sentences, override_dicts):
         _keep_to = 1
         if not sent['tokens']: # something Freeling could not handle; possibly a foreign phrase.
             sentence = sent['sentence'].rstrip('\n')
-            output = '(1,0,1, <0:{}>,1,"{}" "{}",0, "np00v00", "np00v00" 1.0)'.format(sentence,
-                                                                                    sentence.replace('"','\\"'),
+            #output = '(1,0,1, <0:{}>,1,"{}" "{}",0, "np00v00", "np00v00" 1.0)'.format(sentence,
+            #                                                                        sentence.replace('"','\\"'),
+            #                                                                          sentence.replace('"','\\"'))
+            output = '(1,0,1, <0:{}>,1,"{}" "{}",0, "np00v00", "np00v00" 1.0)'.format(len(sentence),
+                                                                                      sentence.replace('"', '\\"'),
                                                                                       sentence.replace('"','\\"'))
         else:
             for j,tok in enumerate(sent['tokens']):
