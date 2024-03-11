@@ -1,5 +1,7 @@
 ;;; patches.lsp file to make YY input mode work properly with generic lexical entries
 ;;; Only use with LKB-FOS version of 20-Jun-2023
+;;;
+;;; Version 2 of 5-Mar-2024
 
 (in-package :tsdb)
 
@@ -80,7 +82,7 @@
                        (read-from-string string nil nil :start i :end rest)
                        (setf i rest))))))
              (read-token ()
-               (progn ; JAC 19-Jun-2023: was ignore-errors
+               (progn ; JAC 19-Jun-2023: was ignore-errors, which masked some incorrect behaviour
                 (let (id start end from to form surface inflection tags)
                   (when (read-character #\()
                     (setf id (read-integer))
@@ -168,7 +170,7 @@
 
 (in-package :lkb)
 
-(defmacro token-edge-partial-tree (e) ; *** repurpose unused maf-id field
+(defmacro token-edge-partial-tree (e) ; _fix_me_ just for now repurpose unused maf-id field
   `(token-edge-maf-id ,e))
 
 (defun yy-setup-morphs (tokens)
@@ -186,8 +188,10 @@
       for stem = (string-upcase (rest (assoc :form token)))
       for rule = (rest (assoc :inflection token))
       for partial-tree
-        = (loop for r in (if (consp rule) rule (list rule)) ; was originally a singleton
-              collect (list (intern (string-upcase r) :lkb) surface))
+        = (if (member rule '("null" ("null")) :test #'equal)
+              nil ; activate built-in morphology mode
+              (loop for r in (if (consp rule) rule (list rule)) ; was originally a singleton
+                collect (list (intern (string-upcase r) :lkb) surface)))
       for edge
         = (add-token-edge surface (string-upcase surface) start end from to)
       do
@@ -228,8 +232,10 @@
          (cfrom (token-edge-cfrom tedge))
          (cto (token-edge-cto tedge))
          (pt (token-edge-partial-tree tedge)) ; only applicable for YY mode
-         (stem-and-pt-list 
-           (let ((*lexicon* 'identity)) (get-morph-analyses word)))
+         (stem-and-pt-list
+           (if pt ; e.g. from YY format preprocessor analysis
+               (list (cons word pt))
+               (let ((*lexicon* 'identity)) (get-morph-analyses word))))
          (glex (lex "gle")))
     ;; Most grammars that perform token mapping also define a generic lexical entry file.
     ;; Therefore check that the file has been loaded correctly (i.e. as a _sub-lexicon_)
@@ -245,7 +251,7 @@
             (let ((*lexical-entries-used* nil))
               (add-stem-edge stem string
                              from to cfrom cto
-                             (if pt (append partial-tree pt) partial-tree)
+                             partial-tree
                              entry (list tedge)))))))
 
 (defun add-stem-edge (edge-stem edge-string
@@ -284,5 +290,5 @@
               (format t
 "~&Adding edge ~D for lexical entry ~(~A~) `~A'~@[ requiring ~{~(~A~)~^, ~}~]~%"
                 (edge-id new-edge) (lex-entry-id entry) edge-string
-                partial-tree #+nil (mapcar #'car partial-tree)))
+                (mapcar #'car partial-tree)))
             (push new-edge (aref *chart* from to))))))))
