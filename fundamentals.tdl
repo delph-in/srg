@@ -137,8 +137,10 @@ word-or-lexrule-min := sign-min.
 ; lexical items (words or lexical rules), not on phrases.
 
 word-or-lexrule := word-or-lexrule-min & sign &
-  [ ALTS alts-min,
-    ARG-ST list ].
+  [ SYNSEM.PUNCT.+NEEDRPUNCT #needrpunct, 
+    ALTS alts-min,
+    ARG-ST list, 
+    TOKENS [ +LIST < [ +TRAIT.NEEDRPUNCT #needrpunct ] > ] ].
 
 #|
 word-or-lexrule :+
@@ -1689,7 +1691,8 @@ punctuation_min := avm.
 
 punctuation := punctuation_min &
  [ LPUNCT basic_punct_mark,
-   RPUNCT basic_punct_mark ].
+   RPUNCT basic_punct_mark,
+   +NEEDRPUNCT bool ].
 
 lpunct := basic_punct_mark.
 excl_op_punct := lpunct.

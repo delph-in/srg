@@ -88,6 +88,7 @@
 ; (read-token-mapping-file-aux (lkb-pathname (parent-directory) "tmr/prelude.tdl"))
 ; (read-token-mapping-file-aux (lkb-pathname (parent-directory) "tmr/pos.tdl"))
 ;(read-token-mapping-file-aux (lkb-pathname (parent-directory) "tmr/finis.tdl"))
+(read-token-mapping-file-aux (lkb-pathname (parent-directory) "tmr/punc.tdl"))
 
 (read-lexical-filtering-file-aux (lkb-pathname (parent-directory) "lfr.tdl"))
 )

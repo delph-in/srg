@@ -108,7 +108,8 @@ token := token_min &
   +TO    string,
   +POS   pos ].
 
-token_trait := sort.
+token_trait := sort & 
+[ NEEDRPUNCT bool ].
 anti_trait := token_trait.
 native_trait := token_trait.
 generic_trait := token_trait.
@@ -327,6 +328,14 @@ one_two_all_form_tmt := one_two_tmt &
               +PRED #pred, +CARG #carg, +POS #pos ],
             [ +TRAIT #trait, +CLASS #class,
               +PRED #pred, +CARG #carg, +POS #pos ] > ].
+
+two_two_tmt := token_mapping_rule &
+[ +INPUT < [ +ID #id, +FROM #from, +TO #to ], 
+           [ +ID #id2, +FROM #from2, +TO #to2 ] >,
+  +OUTPUT < [ +ID #id, +FROM #from, +TO #to ], 
+            [ +ID #id2, +FROM #from2, +TO #to2 ] >,
+  +POSITION "I1<I2, O1@I1, O2@I2" ]. 
+
 
 
 ;;;

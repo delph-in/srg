@@ -21,6 +21,7 @@
    ;:include "tmr/prelude".
    ;:include "tmr/pos".
    :include "tmr/finis".
+   :include "tmr/punc".
 :end :instance.
 
 
