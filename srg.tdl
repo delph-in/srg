@@ -20,8 +20,8 @@
 :begin :instance :status token-mapping-rule.
    ;:include "tmr/prelude".
    ;:include "tmr/pos".
+   ;:include "tmr/punc".
    :include "tmr/finis".
-   :include "tmr/punc".
 :end :instance.
 
 
