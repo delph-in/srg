@@ -1,0 +1,23 @@
+;; Comment from the ERG, doesn't fully apply:
+;; Add brackets to ensure immediate attachment of right punctuation mark,
+;; Exclude colon, which also has non-punct lexical entry
+;; DPF 2021-03-24 - Separated this rule into two, forcing alphanumerics to
+;; combine with following punct before combining punct-punct, as in (X86),
+;; where we need X86 and ) to undergo the rule before ) and , since if ),
+;; happens first, it blocks application to X86)
+;; It happened to work in the desired order for (cats), but not for (X86),
+;; where alphanumeric_identifier_ne_1_tmr previously fired.
+;; The two rules are the same except for the +INPUT..+FORM value.
+;;
+punct_suffix_clitic_tmr := two_two_tmt &
+[ +INPUT < [ +FORM ^([[:alnum:],\.⌊/⌋]+)$, +CLASS #class,
+             +PRED #pred, +CARG #carg ],
+	   [ +FORM ^([,⸴\.~\?!;”\)\]]+)$, +CLASS #classp,
+             +PRED #predp, +CARG #cargp ]>,
+  +OUTPUT < [ +FORM "${I1:+FORM:1}", +CLASS #class,
+              +TRAIT [ NEEDRPUNCT + ],
+              +PRED #pred, +CARG #carg ],
+            [ +FORM "${I2:+FORM:1}", +CLASS #classp,
+              +PRED #predp, +CARG #cargp ] >,
+  +CONTEXT < > ].
+
