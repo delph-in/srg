@@ -48,6 +48,7 @@ d_-_pstn-alg_dlr := d_pstn-idf-algun_dlr.
 d_-_pstn-ning_dlr := d_pstn-idf-ningun_dlr.
 
 v_ppart-t_dlr := v_pastpart-trans_dlr.
+v_ppart-pp_dlr := v_pastpart-presperf_dlr.
 v_ppart-unacc_dlr := v_pastpart-unacc_dlr.
 v_ppart-prn_dlr := v_pastpart-pron_dlr.
 ;v_ppart-attr_dlr := v_pastpart-attr_dlr.

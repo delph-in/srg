@@ -2170,11 +2170,12 @@ vger_phrase := unary-phrase &
 adjpart_phrase := unary-phrase & 
   [ SYNSEM [ LIGHT -,
              SLSHD #slshd,
-             LOCAL [ AGR #ind,
+             LOCAL [ ;AGR #ind,
                      COORD #coord & -,
                      COORD-STRAT #coord-strat & zero,
                      CAT [ HEAD adj &
-                               [ MOD < synsem &
+                               [ PRD #prd,
+                                 MOD < synsem &
                                        [ LOCAL intersective-mod &
                                                [ AGR #ind,
                                                  CAT [ LASTNMOD -,
@@ -2195,12 +2196,14 @@ adjpart_phrase := unary-phrase &
                       LOCAL [ COORD #coord,
                               COORD-STRAT #coord-strat,
                               CAT [ HEAD verb &
-                                         [ AUX -,
+                                         [ PRD #prd,
+                                           AUX -,
                                            VFORM part,
                                            VOICE passive,
                                            MOD < >,
                                            KEYS.KEY v_event_rel ],
-			   	    VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #ind ] >,
+			   	    VAL [ SUBJ < [ LOCAL [ CONT.HOOK.INDEX #ind,
+			   	                           AGR #ind ] ] >,
                                           COMPS #comps & < >,
                                           CLTS #clts & < > ] ],
                               CONT #cont & [ HOOK #hook ],
@@ -2219,15 +2222,15 @@ prdp_phrase := unary-phrase &
 	     MODIFIED #hasmod,
 ;	     LIGHT #light,
              SLSHD #slshd,
-             LOCAL [ AGR #agr,
-                     COORD #coord,
+             LOCAL [ COORD #coord,
                      COORD-STRAT #coord-strat,
                      COORD-REL #crel,
                      CAT [ MC na,
                            HEAD adp &
 				[ KEYS #keys,
                                   MOD < [ LOCAL intersective-mod &
-                                                [ COORD -,
+                                                [ AGR #agr,
+                                                  COORD -,
                                                   CAT.HEAD verb,
                                                   CONT.HOOK.LTOP #modltop ] ] > ],
                            VAL [ SUBJ < >,
@@ -2239,15 +2242,15 @@ prdp_phrase := unary-phrase &
     ARGS < [ SYNSEM [ MODIFIED #hasmod,
 ;                     LIGHT #light,
                       SLSHD #slshd,
-                      LOCAL [ AGR #agr,
-                              COORD #coord & -,
+                      LOCAL [ COORD #coord & -,
                               COORD-STRAT #coord-strat,
                               COORD-REL #crel,
                               CAT [ MC na,
                                     HEAD adj & 
                                          [ KEYS #keys,
                                            MOD < [ LOCAL intersective-mod & 
-                                                         [ CAT.HEAD noun ] ] > ],
+                                                         [ AGR #agr,
+                                                           CAT.HEAD noun ] ] > ],
                                     VAL [ SUBJ < >,
                                           COMPS < >,
                                           SPEC < >,

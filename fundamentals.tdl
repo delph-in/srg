@@ -421,7 +421,8 @@ head := head-min &
 no-head := head.
 
 predicative := sort.
-non-prd := predicative.
+non-prd := predicative & 
+[ HABER bool ].
 prd := predicative &
   [ COPV copv ].
 

@@ -4623,8 +4623,9 @@ v_pp_e-vp-inf-ser_lex := v_cop-np_sbj &
 
 
 v_vp_ppart_ser_synsem := v_copula_synsem &
-  [ LOCAL.CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #arg2 ] >,
-                    COMPS < [ LOCAL [ CAT.HEAD verb & [ PRD.COPV ser ],
+  [ LOCAL.CAT.VAL [ SUBJ < [ LOCAL [ CONT.HOOK.INDEX #arg2, AGR #agr ] ] >,
+                    COMPS < [ LOCAL [ CAT [ HEAD verb & [ PRD.COPV ser ],
+                                      VAL.SUBJ < [ LOCAL.AGR #agr ] > ],
                                       CONT.RELS.LIST < [ ARG2 #arg2 ], ... > ] ] > ] ]
   """
   e.g. Juan fue atacado
