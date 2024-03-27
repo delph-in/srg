@@ -1748,8 +1748,8 @@ vger_ilr &
 
 vmp0000 := 
 %suffix (vmp vmp)
-vpart_ilr.; & 
-;  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
+vpart_ilr & 
+  [ SYNSEM.LOCAL [ CAT.HEAD.AUX -,
                    AGR.PNG [ PN sing, GEN masc ] ] ].
 
 vmp00sm := 
