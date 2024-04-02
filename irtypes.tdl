@@ -754,6 +754,12 @@ ind-vfin_ilr :=  vfin_ilr &
 pres-ind_ilr :=  ind-vfin_ilr & 
 [ SYNSEM.LOCAL.CAT.HEAD.TAM.TENSE pres ].
 
+pres-ind-aux_ilr :=  pres-ind_ilr & 
+ [ SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD verb ] > ]
+"""
+e.g. esta pasando, ha dormido
+""".
+
 ppast-ind_ilr :=  ind-vfin_ilr & 
 [ SYNSEM.LOCAL.CAT.HEAD.TAM.TENSE ppast ].
 
