@@ -891,9 +891,9 @@ ppart-lex-rule := const-ltol-rule &
 
 
 v_pastpart-trans_dlr := ppart-lex-rule &
-  [ SYNSEM.LOCAL [ ;AGR #agr,
+  [ SYNSEM.LOCAL [ AGR #agr,
   		    CAT [ HEAD [ INV -,
-                                PRD prd & [ COPV ser ] ],
+                                PRD prd & [ COPV ser, HABER #haber & - ] ],
                          VAL [ SUBJ < unexpressed & [ OPT +,
                                                       LOCAL np_nom_local & [ CONT #objcont & [ HOOK.INDEX #arg2 ], AGR #agr ],
                                                       NON-LOCAL #ononloc ] >,
@@ -904,40 +904,17 @@ v_pastpart-trans_dlr := ppart-lex-rule &
                                CLTS #clts ] ],
                    CONT.RELS.LIST < [ ARG2 #arg2 ], ... > ],
     DTR [ INFLECTED +,
-          SYNSEM.LOCAL [ ;AGR #agr,
-                         CAT.VAL [ SUBJ < [ LOCAL np_nom_local & [ CONT.HOOK.INDEX #subjind ],
+          SYNSEM.LOCAL [ AGR #agr,
+                         CAT [ VAL [ SUBJ < [ LOCAL np_nom_local & [ CONT.HOOK.INDEX #subjind ],
                                           NON-LOCAL #snonloc ] >,
                                  COMPS [ FIRST [ LOCAL np_acc_local & [ CONT #objcont, AGR #agr ],
                                                  NON-LOCAL #ononloc ],
                                          REST #comps ],
-                                 CLTS #clts ] ] ] ]
+                                 CLTS #clts ],
+                               HEAD.PRD.HABER #haber ] ] ] ]
   """
   -- with transitive verbs
   """.
-
-v_pastpart-presperf_dlr := ppart-lex-rule &
-  [ SYNSEM.LOCAL [ CAT [ HEAD [ INV -,
-                                PRD non-prd & [ HABER + ] ],
-                         VAL [ SUBJ < unexpressed & [ OPT +,
-                                                      LOCAL np_nom_local & [ CONT #objcont & [ HOOK.INDEX #arg2 ] ],
-                                                      NON-LOCAL #ononloc ] >,
-                               COMPS < [ OPT +,
-                                         LOCAL mrkd_np_local & [ CAT.HEAD.KEYS.KEY _por_p_sel_rel,
-                                                                 CONT.HOOK.INDEX #subjind ],
-                                         NON-LOCAL #snonloc ] . #comps >,
-                               CLTS #clts ] ],
-                   CONT.RELS.LIST < [ ARG2 #arg2 ], ... > ],
-    DTR [ INFLECTED +,
-          SYNSEM.LOCAL [ CAT.VAL [ SUBJ < [ LOCAL np_nom_local & [ CONT.HOOK.INDEX #subjind ],
-                                          NON-LOCAL #snonloc ] >,
-                                 COMPS [ FIRST [ LOCAL np_acc_local & [ CONT #objcont, AGR.PNG [ PN sing, GEN masc ] ],
-                                                 NON-LOCAL #ononloc ],
-                                         REST #comps ],
-                                 CLTS #clts ] ] ] ]
-  """
-  -- with transitive verbs
-  """.
-
 
 
 v_pastpart-unacc_dlr := ppart-lex-rule &

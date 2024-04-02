@@ -3,6 +3,8 @@
 from freeling_api.python_API import pyfreeling_api
 import sys, os
 
+from override_freeling import ADD_TAGS
+
 PATH_TO_SPPP_DAT = '/home/olga/delphin/SRG/grammar/srg/util/freeling_api/srg-freeling.dat'
 
 class Freeling_tok_tagger:
@@ -151,4 +153,10 @@ class Freeling_tok_tagger:
                 if w.get_form().lower() in override_dicts['no_disambiguate']:
                     additional_arcs.append(({'additional': True, 'tag': a.get_tag(), 'prob': a.get_prob(), 'lemma': a.get_lemma()}))
                     #print("Non-selected analysis: {}".format(a.get_tag()))
+            # Add additional tags e.g. for past participles:
+            if a.get_tag() in ADD_TAGS and (a.is_selected() or w.get_form().lower() in override_dicts['no_disambiguate']):
+                add_tags = ADD_TAGS[a.get_tag()].split(',')
+                for mt in add_tags:
+                    additional_arcs.append(({'additional': True, 'tag': mt.strip(), 'prob': -1, 'lemma': a.get_lemma()}))
+
         return tags, additional_arcs

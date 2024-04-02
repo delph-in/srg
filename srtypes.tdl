@@ -2170,11 +2170,11 @@ vger_phrase := unary-phrase &
 adjpart_phrase := unary-phrase & 
   [ SYNSEM [ LIGHT -,
              SLSHD #slshd,
-             LOCAL [ ;AGR #ind,
+             LOCAL [ AGR #ind,
                      COORD #coord & -,
                      COORD-STRAT #coord-strat & zero,
                      CAT [ HEAD adj &
-                               [ PRD #prd,
+                               [ PRD.HABER #haber & -,
                                  MOD < synsem &
                                        [ LOCAL intersective-mod &
                                                [ AGR #ind,
@@ -2196,7 +2196,7 @@ adjpart_phrase := unary-phrase &
                       LOCAL [ COORD #coord,
                               COORD-STRAT #coord-strat,
                               CAT [ HEAD verb &
-                                         [ PRD #prd,
+                                         [ PRD.HABER #haber,
                                            AUX -,
                                            VFORM part,
                                            VOICE passive,

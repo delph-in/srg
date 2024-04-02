@@ -420,9 +420,9 @@ head := head-min &
 ; - for integrated tags which have no entry
 no-head := head.
 
-predicative := sort.
-non-prd := predicative & 
+predicative := sort & 
 [ HABER bool ].
+non-prd := predicative.
 prd := predicative &
   [ COPV copv ].
 
