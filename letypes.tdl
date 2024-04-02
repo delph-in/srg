@@ -4659,7 +4659,8 @@ v_vp_ppart-estar_lex := v_cop-np_sbj &
 
 v_ap_estar_synsem := v_copula_synsem &
   [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
-                      COMPS < [ LOCAL [ CAT.HEAD adj & [ MOD < [ LOCAL.CAT.HEAD noun ] >,
+                      COMPS < [ LOCAL [ CAT.HEAD adj & [ MOD < [ LOCAL [ CAT.HEAD noun,
+                                                                         AGR #sind ] ] >,
                                                          PRD.COPV estar,
                                                          KEYS.KEY adj_rel ],
                                         CONT.HOOK.XARG #sind ] ] > ],
