@@ -848,7 +848,8 @@ ppart-lex-rule := const-ltol-rule &
                                          TAM #tam & [ MOOD #mood ],
                                          KEYS.KEY #key,
                                          MOD < >,
-                                         LSYNSEM #lsynsem ],
+                                         LSYNSEM #lsynsem,
+                                         PRD.HABER - ],
                            VAL.SPR < [ OPT +,
                                        LOCAL [ CAT [ HEAD.KEYS.KEY degree_rel,
                                                      MC na ],
@@ -869,7 +870,7 @@ ppart-lex-rule := const-ltol-rule &
           SYNSEM [ PUNCT #punct & [ RPUNCT no_punct ],
                    SLSHD #slshd,
                    LOCAL [ CAT [ MC #mc,
-                                 HEAD verb & [ PRD non-prd,
+                                 HEAD verb & [ PRD non-prd & [ HABER - ],
                                                VFORM part,
                                                VOICE active,
                                                TAM #tam,
@@ -893,7 +894,7 @@ ppart-lex-rule := const-ltol-rule &
 v_pastpart-trans_dlr := ppart-lex-rule &
   [ SYNSEM.LOCAL [ AGR #agr,
   		    CAT [ HEAD [ INV -,
-                                PRD prd & [ COPV ser, HABER #haber & - ] ],
+                                PRD prd & [ COPV ser ] ],
                          VAL [ SUBJ < unexpressed & [ OPT +,
                                                       LOCAL np_nom_local & [ CONT #objcont & [ HOOK.INDEX #arg2 ], AGR #agr ],
                                                       NON-LOCAL #ononloc ] >,
@@ -905,13 +906,12 @@ v_pastpart-trans_dlr := ppart-lex-rule &
                    CONT.RELS.LIST < [ ARG2 #arg2 ], ... > ],
     DTR [ INFLECTED +,
           SYNSEM.LOCAL [ AGR #agr,
-                         CAT [ VAL [ SUBJ < [ LOCAL np_nom_local & [ CONT.HOOK.INDEX #subjind ],
+                         CAT.VAL [ SUBJ < [ LOCAL np_nom_local & [ CONT.HOOK.INDEX #subjind ],
                                           NON-LOCAL #snonloc ] >,
                                  COMPS [ FIRST [ LOCAL np_acc_local & [ CONT #objcont, AGR #agr ],
                                                  NON-LOCAL #ononloc ],
                                          REST #comps ],
-                                 CLTS #clts ],
-                               HEAD.PRD.HABER #haber ] ] ] ]
+                                 CLTS #clts] ] ] ]
   """
   -- with transitive verbs
   """.
