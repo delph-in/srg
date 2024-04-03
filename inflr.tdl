@@ -1279,8 +1279,11 @@ a_ilr
 
 aqccs00 := 
 %suffix (aqccs00 aqccs00)
-a_sg_ilr
+a_ilr
 """; e.g. mejor
+OZ: changing a_sg_ilr to a_ilr to avoid problems with agreement.
+Currently, phrases like "lo oyen mejor" are analyzed via the same prdp phrase as the one that can form 
+the ungrammatical "la gata es negro" by modifying the mother of the filler head rule "la gata es".
 """.
 
 aqccp00 := 

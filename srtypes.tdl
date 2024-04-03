@@ -1069,7 +1069,8 @@ head-adj-int-v-xp-phrase := head-adj-phrase & isect-mod-phrase &
   [ SYNSEM.LOCAL.CAT.VAL.SPR #spr,
     HEAD-DTR.SYNSEM [ LOCAL.CAT [ HEAD verb,
                                   VAL.SPR #spr ],
-                      NON-LOCAL.REL 0-dlist ],
+                      NON-LOCAL.REL 0-dlist,
+                      SLSHD - ],
 ;   NON-HEAD-DTR.SYNSEM [ LOCAl.CAT.POSTHEAD +, 
     NON-HEAD-DTR.SYNSEM.NON-LOCAL [ SLASH 0-dlist,
                                     REL 0-dlist & [ LIST < > ] ] ]
