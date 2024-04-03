@@ -1761,40 +1761,30 @@ Not sure why the agreement features are specified on this one.
 vmp00sm-pp := 
 %suffix (vmpsm-pp vmpsm-pp)
 vpart_ilr & 
-;  [ SYNSEM.LOCAL [ CAT [ HEAD.AUX -,
-;                         VAL.COMPS < [ LOCAL.AGR.PNG [ PN sing, GEN masc ] ] > ] ] ].
   [ SYNSEM.LOCAL [ CAT.HEAD [ AUX -, PRD.HABER + ] ] ].
 
 
 vmp00sm := 
 %suffix (vmpsm vmpsm)
 vpart_ilr & 
-;  [ SYNSEM.LOCAL [ CAT [ HEAD.AUX -,
-;                         VAL.COMPS < [ LOCAL.AGR.PNG [ PN sing, GEN masc ] ] > ] ] ].
   [ SYNSEM.LOCAL [ CAT.HEAD [ AUX -, PRD.HABER - ],
                    AGR.PNG [ PN sing, GEN masc ] ] ].
 
 vmp00pm := 
 %suffix (vmppm vmppm)
 vpart_ilr & 
-;  [ SYNSEM.LOCAL [ CAT [ HEAD [ AUX -, PRD.HABER - ],
-;                         VAL.COMPS < [ LOCAL.AGR.PNG [ PN plur, GEN masc ] ] > ] ] ].
   [ SYNSEM.LOCAL [ CAT.HEAD [ AUX -, PRD.HABER - ],
                    AGR.PNG [ PN plur, GEN masc ] ] ].
 
 vmp00sf := 
 %suffix (vmpsf vmpsf)
 vpart_ilr & 
-;  [ SYNSEM.LOCAL [ CAT [ HEAD [ AUX -, PRD.HABER - ],
-;                         VAL.COMPS < [ LOCAL.AGR.PNG [ PN sing, GEN fem ] ] > ] ] ].
   [ SYNSEM.LOCAL [ CAT.HEAD [ AUX -, PRD.HABER - ],
                    AGR.PNG [ PN sing, GEN fem ] ] ].
 
 vmp00pf := 
 %suffix (vmppf vmppf)
 vpart_ilr& 
-;  [ SYNSEM.LOCAL [ CAT [ HEAD [ AUX -, PRD.HABER - ],
-;                         VAL.COMPS < [ LOCAL.AGR.PNG [ PN plur, GEN fem ] ] > ] ] ].
   [ SYNSEM.LOCAL [ CAT.HEAD [ AUX -, PRD.HABER - ],
                    AGR.PNG [ PN plur, GEN fem ] ] ].
 
