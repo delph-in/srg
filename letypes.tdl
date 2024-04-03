@@ -4839,53 +4839,6 @@ v_aux_haber_synsem := lex-synsem &
 ;   SYNSEM [ LOCAL.CAT [ HEAD [ TAM.ASPECT perf,
 """.
 
-
-v_aux_vp-part_synsem-wip := v_aux_haber_synsem &
-  [ LOCAL [ ;AGR #agr, 
-            CAT.VAL [ SUBJ < [ LOCAL np_nom_local & [ AGR [ PNG.PN #pn,
-                                                            SORT #sort,
-                                                            INSTLOC #instloc,
-                                                            PRONTYPE #prontype,
-                                                            DEF #def,
-                                                            DIVISIBLE #div ], 
-                                                      STR #str,
-                                                      CAT #cat,
-                                                      CONT [RELS #rels, 
-                                                            HCONS #hcons,
-                                                            HOOK [LTOP #ltop,
-                                                                  XARG #xarg,
-                                                                  INDEX #sind ] ],
-                                                      COORD #coord,
-                                                      COORD-REL #coord-rel,
-                                                      COORD-STRAT #coord-strat,
-                                                      CTXT #ctxt ] ] >,
-                      COMPS < [ LOCAL.CAT vp_cat &
-                                          [ HEAD.VOICE active,
-                                            VAL [ SUBJ < [ LOCAL [ AGR [ PNG.PN #pn,
-                                                            SORT #sort,
-                                                            INSTLOC #instloc,
-                                                            PRONTYPE #prontype,
-                                                            DEF #def,
-                                                            DIVISIBLE #div ], 
-                                                      STR #str,
-                                                      CAT #cat,
-                                                      CONT [RELS #rels, 
-                                                            HCONS #hcons,
-                                                            HOOK [LTOP #ltop,
-                                                                  XARG #xarg ] ],
-                                                      COORD #coord,
-                                                      COORD-REL #coord-rel,
-                                                      COORD-STRAT #coord-strat,
-                                                      CTXT #ctxt ] ] >,
-                                                  CLTS #clts ] ] ] >,
-                      CLTS #clts ],
-	    CONT.HOOK.XARG #sind
-	     ] ]
-"""
-We cannot copy gender values from the complement's subject to the copula's subject, because of
-"La gata ha dormido."
-""".
-
 v_aux_vp-part_synsem := v_aux_haber_synsem &
   [ LOCAL [ AGR #agr, 
             CAT.VAL [ SUBJ < [ LOCAL np_nom_local & #subject & [ AGR #agr ] ] >,
