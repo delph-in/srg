@@ -7134,8 +7134,10 @@ av_-_i-vm-spd_lex := spec-adverb-lex & basic-one-arg &
 
 av_-_i-vm-cmp_lex := spec-adverb-lex & basic-two-arg &
   [ synsem intersect_vp_adverb_synsem & 
-           [ local.cat [ posthead +,
-                         VAL.COMPS < [ LOCAL.CAT.HEAD.KEYS.KEY _que_p_comp_rel ] > ] ] ]
+           [ local [ cat [ posthead +,
+                         VAL.COMPS < [ LOCAL [ CAT.HEAD.KEYS.KEY _que_p_comp_rel,
+                                               CONT.HOOK.INDEX #arg ] ] > ] ],
+             LKEYS.KEYREL.ARG2 #arg ] ]
 """
 ; --- 4.2.2. VP modifiers (any position after the verb)
 ; e.g. "Lo oyen mejor que nosotros."
