@@ -6931,8 +6931,7 @@ basic_int_adverb_synsem := basic_adverb_synsem &
   [ LOCAL [ CAT [ HEAD [ KEYS.KEY adv_rel,
                          MOD < [ LOCAL intersective-mod & 
                                        [ CONT.HOOK.INDEX #index ],
-                                 NON-LOCAL.REL 0-dlist ] > ],
-                  VAL.COMPS < > ],
+                                 NON-LOCAL.REL 0-dlist ] > ] ],
 	    CONT.HOOK [ LTOP #hand,
                         INDEX #arg0 ] ],
     LKEYS.KEYREL [ LBL #hand,
@@ -6974,8 +6973,7 @@ basic_scopal_adverb_synsem := basic_adverb_synsem &
                          MOD < [ LOCAL scopal-mod &
 			    	       [ COORD -,
                                          CONT.HOOK [ LTOP #mhand,
-                                                     INDEX #index ] ] ] > ],
-                  VAL.COMPS < > ],
+                                                     INDEX #index ] ] ] > ] ],
 	    CONT [ HOOK [ LTOP #ltop,
                           INDEX #index ],
                    RELS <! relation !>,
@@ -7116,25 +7114,39 @@ av_-_i-sm_lex := nonspec-adverb-lex & norm-zero-arg &
 
 av_-_i-vm_lex := nonspec-adverb-lex & norm-zero-arg &
   [ synsem nonspec_intersect_vp_adverb_synsem & 
-           [ local.cat.posthead + ] ]
+           [ local.cat [ posthead +,
+                         VAL.COMPS < > ] ] ]
 """
 ; --- 4.2.2. VP modifiers (any position after the verb)
 ; e.g. (*muy) mortalmente
 
 """.
 
-av_-_i-vm-spd_lex := spec-adverb-lex & basic-one-arg &
+av_-_i-vm-spd_lex := spec-adverb-lex & basic--arg &
   [ synsem intersect_vp_adverb_synsem & 
-           [ local.cat.posthead + ] ]
+           [ local.cat [ posthead +,
+                         VAL.COMPS < > ] ] ]
 """
 ; --- 4.2.2. VP modifiers (any position after the verb)
 ; e.g. (muy) negativamente
 
 """.
 
+av_-_i-vm-cmp_lex := spec-adverb-lex & basic-two-arg &
+  [ synsem intersect_vp_adverb_synsem & 
+           [ local.cat [ posthead +,
+                         VAL.COMPS < [ LOCAL.CAT.HEAD.KEYS.KEY _que_p_comp_rel ] > ] ] ]
+"""
+; --- 4.2.2. VP modifiers (any position after the verb)
+; e.g. "Lo oyen mejor que nosotros."
+
+""".
+
+
 av_-_i-vm-ppart_lex := nonspec-adverb-lex & norm-zero-arg &
   [ synsem nonspec_intersect_vp_adverb_synsem & 
-           [ local.cat [ posthead -,
+           [ local.cat [ VAL.COMPS < >,
+                         posthead -,
                          head [ keys.key adv_rel,
                                 mod < [ local.cat [ head.vform part,
                                                     val.subj < [ ] > ] ] > ] ] ] ]
@@ -16720,6 +16732,16 @@ av_-_i-sm_native_le := av_-_i-sm_lex & native_le
 av_-_i-sm_le := av_-_i-sm_lex
   """
   
+  """.
+
+av_-_i-vm-cmp_native_le := av_-_i-vm-cmp_lex & native_le
+  """
+  This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="av_-_i-vm-spd_le">
+  <description>Adverb, intersec, Vmod
+  <ex>le ha influido muy negativamente
+  <todo>
   """.
 
 
