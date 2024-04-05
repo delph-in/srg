@@ -4544,7 +4544,8 @@ v_cop-nsbj := v_copula &
 
 v_ap_ser_synsem := v_copula_synsem &
   [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
-                      COMPS < [ LOCAL [ CAT.HEAD adj & [ MOD < [ LOCAL [ CAT.HEAD noun, AGR #sind ] ] >,
+                      COMPS < [ LOCAL [ CAT.HEAD adj & [ MOD < [ LOCAL [ CAT.HEAD noun, 
+                                                                         AGR #sind ] ] >,
                                                          PRD.COPV ser ],
                                         CONT.HOOK.XARG #sind ] ] > ],
             CONT.HOOK.XARG #sind ] ]
@@ -4623,9 +4624,10 @@ v_pp_e-vp-inf-ser_lex := v_cop-np_sbj &
 
 
 v_vp_ppart_ser_synsem := v_copula_synsem &
-  [ LOCAL.CAT.VAL [ SUBJ < [ LOCAL [ CONT.HOOK.INDEX #arg2, AGR #agr ] ] >,
+  [ LOCAL.CAT.VAL [ SUBJ < [ LOCAL [ CONT.HOOK.INDEX #arg2, 
+                                     AGR #agr ] ] >,
                     COMPS < [ LOCAL [ CAT [ HEAD verb & [ PRD.COPV ser ],
-                                      VAL.SUBJ < [ LOCAL.AGR #agr ] > ],
+                                            VAL.SUBJ < [ LOCAL.AGR #agr ] > ],
                                       CONT.RELS.LIST < [ ARG2 #arg2 ], ... > ] ] > ] ]
   """
   e.g. Juan fue atacado
@@ -4839,16 +4841,19 @@ v_aux_haber_synsem := lex-synsem &
 ;   SYNSEM [ LOCAL.CAT [ HEAD [ TAM.ASPECT perf,
 """.
 
+
 v_aux_vp-part_synsem := v_aux_haber_synsem &
-  [ LOCAL [ AGR #agr, 
-            CAT.VAL [ SUBJ < [ LOCAL np_nom_local & #subject & [ AGR #agr ] ] >,
+  [ LOCAL [ AGR #sind, 
+            CAT.VAL [ SUBJ < [ LOCAL np_nom_local & #subject & [ AGR #sind ] ] >,
                       COMPS < [ LOCAL.CAT vp_cat &
                                           [ HEAD [ VOICE active, PRD non-prd & [ HABER + ] ],
                                             VAL [ SUBJ < [ LOCAL #subject ] >,
                                                   CLTS #clts ] ] ] >,
                       CLTS #clts ],
-	    CONT.HOOK.XARG #agr ] ]
+	    CONT.HOOK.XARG #sind ] ]
 """
+The feature HABER ensures that this participle only occurs in perfective constructions,
+e.g. "Las gatas han salido."
 """.
 
 v_aux_vp-ppart_synsem := v_aux_haber_synsem & 
@@ -16742,7 +16747,7 @@ av_-_i-vm-cmp_native_le := av_-_i-vm-cmp_lex & native_le
   
   <type val="av_-_i-vm-spd_le">
   <description>Adverb, intersec, Vmod
-  <ex>le ha influido muy negativamente
+  <ex>Lo oyen mejor que nosotros.
   <todo>
   """.
 
