@@ -7122,7 +7122,7 @@ av_-_i-vm_lex := nonspec-adverb-lex & norm-zero-arg &
 
 """.
 
-av_-_i-vm-spd_lex := spec-adverb-lex & basic--arg &
+av_-_i-vm-spd_lex := spec-adverb-lex & basic-one-arg &
   [ synsem intersect_vp_adverb_synsem & 
            [ local.cat [ posthead +,
                          VAL.COMPS < > ] ] ]
