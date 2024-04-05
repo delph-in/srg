@@ -1201,7 +1201,8 @@ quant-or-det_postn_lex-rule := tmt-lex-rule & phrase-or-lexrule &
                            VAL [ SPR < >,
                                  SUBJ < >,
                                  COMPS < >,
-                                 CLTS < > ] ] ],
+                                 CLTS < >,
+                                 SPEC #spec ] ] ],
              NON-LOCAL #nonloc ],
     DTR [ STEM #stem,
           INFLECTED #infl & +,
@@ -1212,7 +1213,8 @@ quant-or-det_postn_lex-rule := tmt-lex-rule & phrase-or-lexrule &
                    LOCAL [ COORD #coord,
                            COORD-REL #coord-rel,
                            COORD-STRAT #coord-strat,
-                           CAT.HEAD det ],
+                           CAT [ HEAD det,
+                                 VAL.SPEC #spec ] ],
                    NON-LOCAL #nonloc & non-local-none ] ],
     C-CONT.RELS <! !> ]
   """
