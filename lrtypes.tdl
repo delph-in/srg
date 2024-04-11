@@ -892,11 +892,12 @@ ppart-lex-rule := const-ltol-rule &
 
 
 v_pastpart-trans_dlr := ppart-lex-rule &
-  [ SYNSEM.LOCAL [ AGR #agr,
-  		    CAT [ HEAD [ INV -,
+  [ SYNSEM.LOCAL [ AGR #arg2,
+  		   CAT [ HEAD [ INV -,
                                 PRD prd & [ COPV ser ] ],
                          VAL [ SUBJ < unexpressed & [ OPT +,
-                                                      LOCAL np_nom_local & [ CONT #objcont & [ HOOK.INDEX #arg2 ], AGR #agr ],
+                                                      LOCAL np_nom_local & [ CONT #objcont,
+                                                                             AGR #arg2 ],
                                                       NON-LOCAL #ononloc ] >,
                                COMPS < [ OPT +,
                                          LOCAL mrkd_np_local & [ CAT.HEAD.KEYS.KEY _por_p_sel_rel,
@@ -905,10 +906,11 @@ v_pastpart-trans_dlr := ppart-lex-rule &
                                CLTS #clts ] ],
                    CONT.RELS.LIST < [ ARG2 #arg2 ], ... > ],
     DTR [ INFLECTED +,
-          SYNSEM.LOCAL [ AGR #agr,
+          SYNSEM.LOCAL [ AGR #arg2,
                          CAT.VAL [ SUBJ < [ LOCAL np_nom_local & [ CONT.HOOK.INDEX #subjind ],
                                           NON-LOCAL #snonloc ] >,
-                                 COMPS [ FIRST [ LOCAL np_acc_local & [ CONT #objcont, AGR #agr ],
+                                 COMPS [ FIRST [ LOCAL np_acc_local & [ CONT #objcont & [ HOOK.INDEX #arg2 ],
+                                                                        AGR #arg2 ],
                                                  NON-LOCAL #ononloc ],
                                          REST #comps ],
                                  CLTS #clts] ] ] ]
