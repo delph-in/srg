@@ -851,7 +851,7 @@ vppart_ilr :=  inflecting-lex-rule &
                                        SUBJ < [ LOCAL np_nom_local & 
                                                       [ CONT.HOOK.INDEX #subjind ],
                                                 NON-LOCAL #snonloc ] >,
-                                       COMPS [ FIRST [ LOCAL [ CONT #objcont, AGR #agr ],
+                                       COMPS [ FIRST [ LOCAL [ CONT #objcont ],
                                                        NON-LOCAL #ononloc ], 
                                                REST #comps ],
                                        CLTS < > ] ],
