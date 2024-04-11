@@ -811,7 +811,7 @@ vpart_ilr :=  verb_ilr &
 
 vppart_ilr :=  inflecting-lex-rule & 
   [ INFLECTED +,
-    SYNSEM [ LOCAL [ ;AGR #agr,
+    SYNSEM [ LOCAL [ AGR #agr,
                      CAT [ HEAD verb & [ AUX -,
                                          PRD prd, 
                                          VFORM part,
