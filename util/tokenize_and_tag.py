@@ -129,6 +129,8 @@ class Freeling_tok_tagger:
     def get_selected_tags(self, w, override_dicts):
         tags = []
         additional_arcs = []
+        #if w.get_form().lower() == "piqué":
+        #    print("debug")
         for a in w:
             if a.is_selected():
                 if a.is_retokenizable():

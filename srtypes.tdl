@@ -1011,7 +1011,8 @@ adj-head_int-pp-vp_phrase := adj-head-phrase & isect-mod-phrase &
   [ HEAD-DTR.SYNSEM [ LOCAL.CAT [ HEAD verb & [ VFORM fin ],
                                   VAL [ COMPS < > ] ] ],
 ;                     NON-LOCAL.SLASH <! [ ] !> ], 
-    NON-HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD adp & [ KEYS.ALT2KEY non_free_relative_q_rel ] ].
+    NON-HEAD-DTR.SYNSEM.LOCAL.CAT [ HEAD adp & [ KEYS.ALT2KEY non_free_relative_q_rel ],
+                                    POSTHEAD - ] ].
 
 head-adj_scop-xp-cl_phrase := head-adj-phrase & scopal-mod-phrase & 
   [ SYNSEM.LOCAL.CAT [ POSTHEAD #ph, 
@@ -2203,8 +2204,7 @@ adjpart_phrase := unary-phrase &
                                            VOICE passive,
                                            MOD < >,
                                            KEYS.KEY v_event_rel ],
-			   	    VAL [ SUBJ < [ LOCAL [ CONT.HOOK.INDEX #ind,
-			   	                           AGR #ind ] ] >,
+			   	    VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #ind ] >,
                                           COMPS #comps & < >,
                                           CLTS #clts & < > ] ],
                               CONT #cont & [ HOOK #hook ],
@@ -2227,12 +2227,13 @@ prdp_phrase := unary-phrase &
                      COORD-STRAT #coord-strat,
                      COORD-REL #crel,
                      CAT [ MC na,
+                           POSTHEAD +,
                            HEAD adp &
 				[ KEYS #keys,
                                   MOD < [ LOCAL intersective-mod &
-                                                [ AGR #agr,
-                                                  COORD -,
-                                                  CAT.HEAD verb,
+                                                [ COORD -,
+                                                  CAT [ HEAD verb,
+                                                        VAL.SUBJ < [ LOCAL.AGR #agr ] > ],
                                                   CONT.HOOK.LTOP #modltop ] ] > ],
                            VAL [ SUBJ < >,
                                  COMPS < >,
