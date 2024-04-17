@@ -6282,6 +6282,24 @@ basic-adjective-lex := lex-item &
                            VAL [ SUBJ < >,
                                  CLTS < > ] ] ] ] ].
 
+basic-ord-num-lex := lex-item &
+  [ INFLECTED -,
+    ALTS [ RCP -, 
+           RFX -,
+           PASS -,
+           IMPERS - ],
+    SYNSEM [ PUNCT [ LPUNCT no_punct,
+                     RPUNCT no_punct ],
+             MODIFIED notmod,
+             LOCAL [ COORD -,
+                     COORD-STRAT zero,
+                     COORD-REL.PRED null_coord_rel,
+                     CAT [ HEAD adj & 
+                                [ KEYS.KEY ord_rel ],
+                           VAL [ SUBJ < >,
+                                 CLTS < > ] ] ] ] ].
+
+
 non-agr_basic_adjective_synsem := lex-synsem &
   [ LOCAL [ AGR.PNG.GEN #gen,
             CAT [ MC na,
@@ -6343,10 +6361,28 @@ intersective_adjective_synsem := basic_adjective_synsem &
                    ARG0 #arg0,
                    ARG1 #ind ] ].
 
+ordinal_number_synsem := basic_adjective_synsem &
+  [ LOCAL [ CAT.HEAD.MOD < canonical-synsem & 
+                           [ LOCAL intersective-mod & [ CONT.HOOK.INDEX #ind ] ] >,
+            CONT.HOOK [ LTOP #ltop,
+                        INDEX #arg0,
+                        XARG #ind ] ],
+    LKEYS.KEYREL [ LBL #ltop,
+                   ARG0 #arg0,
+                   ARG1 #ind ] ]
+"""
+""".
+
 non-modfied-adj-lex := basic-adjective-lex & 
   [ SYNSEM.LOCAL.CAT.VAL [ SPR < >, 
                            COMPS #comps ], 
     ARG-ST #comps ].
+
+non-modfied-ord-num-lex := basic-ord-num-lex & 
+  [ SYNSEM.LOCAL.CAT.VAL [ SPR < >, 
+                           COMPS #comps ], 
+    ARG-ST #comps ].
+
 
 modfied-adj-lex := basic-adjective-lex & 
   [ SYNSEM [ LOCAL.CAT.VAL [ SPR < #spr & 
@@ -6377,6 +6413,11 @@ a_trans := basic-adjective-lex &
                          HEAD.KEYS.KEY norm_adj_rel ], 
                    CONT.RELS.LIST < adj-relation, ... > ] ]. 
 
+ord_num := basic-ord-num-lex & 
+  [ SYNSEM.LOCAL [ CAT [ POSTHEAD +,
+                         HEAD.KEYS.KEY ord_rel ], 
+                   CONT.RELS.LIST < ord-relation, ... > ] ]. 
+
 a_mrkd_np := a_trans & 
   [ SYNSEM [ LOCAL [ CAT.VAL.COMPS < [ LOCAL mrkd_np_local & 
                                              [ CAT.HEAD.KEYS.KEY #ckey & selected_rel,
@@ -6384,6 +6425,15 @@ a_mrkd_np := a_trans &
                      CONT [ RELS <! adj-arg12-relation !>,
                             HCONS <! !> ] ], 
              LKEYS [ KEYREL.ARG2 #arg2,
+                     --COMPKEY #ckey ] ] ]. 
+
+a_mrkd-ord-num_np := ord_num & 
+  [ SYNSEM [ LOCAL [ CAT.VAL.COMPS < [ LOCAL mrkd_np_local & 
+                                             [ CAT.HEAD.KEYS.KEY #ckey & selected_rel,
+                                               CONT.HOOK.INDEX #arg1 ] ] >,
+                     CONT [ RELS <! ord-relation !>,
+                            HCONS <! !> ] ], 
+             LKEYS [ KEYREL.ARG1 #arg1,
                      --COMPKEY #ckey ] ] ]. 
 
 a_cp_prop_or_ques := a_trans &
@@ -9413,11 +9463,10 @@ n_pp_psd-part-nu-card_lex := n_quant &
 
 ; --- 7.2. Ordinals (Adjectives)
 
-aj_-_i-nu-ord_lex := non-modfied-adj-lex & a_mrkd_np & basic-one-arg &
-  [ SYNSEM intersective_adjective_synsem &
+aj_-_i-nu-ord_lex := non-modfied-ord-num-lex & a_mrkd-ord-num_np & basic-one-arg &
+  [ SYNSEM ordinal_number_synsem &
             [ LOCAL.CAT [ HEAD.PRD prd,
-                          VAL.COMPS < [ OPT +,
-                                        LOCAL.CAT.HEAD.KEYS.KEY _de_p_sel_rel ] > ] ] ]
+                          VAL.COMPS < [ OPT + ] > ] ] ]
 """
 ; NOTA: los ordinales precedidos de 'lo' pueden desempeñar funciones típica de 
 ; sustantivos (e.g. me propuso ir al cine o tomar una copa, y elegí lo segundo) y de 
@@ -9426,8 +9475,8 @@ aj_-_i-nu-ord_lex := non-modfied-adj-lex & a_mrkd_np & basic-one-arg &
 ; NOTA: in the ERG there is the feature CARG to specify the numeral
 """.
 
-aj_-_i-nu-ord-ms_lex := non-modfied-adj-lex & a_mrkd_np & basic-one-arg &
-  [ SYNSEM intersective_adjective_synsem &
+aj_-_i-nu-ord-ms_lex := non-modfied-ord-num-lex & a_mrkd-ord-num_np & basic-one-arg &
+  [ SYNSEM ordinal_number_synsem &
             [ LOCAL [ AGR [ PNG [ GEN masc,
                                   PN 3sg ] ],
                       CAT [ HEAD.PRD prd,

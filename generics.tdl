@@ -990,8 +990,8 @@ aq0000_ge := aj_pp*_i_le &
 
 ao0ms00_ge := aj_-_i-nu-ord_le &
   [ STEM < "aj_-_i-nu-ord_le" >,
-    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ao0ms00" > ] >,
-    SYNSEM.LKEYS.KEYREL [ PRED "_generic_a_rel" ] ]
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ao0ms00" >, +FORM #form ] >,
+    SYNSEM.LKEYS.KEYREL [ PRED ord_rel, CARG #form ] ]
   """
   Generic lexical entry that will be triggered by tag ao0ms00.
   """.

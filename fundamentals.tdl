@@ -959,6 +959,10 @@ named-relation := noun-arg1-relation & carg-relation &
 date-relation := noun-arg1-relation & carg-relation &
   [ PRED time_n_rel ].
 
+; Ordinal numbers
+
+ord-relation := adj-arg1-relation & carg-relation.
+
 ; pronouns
 
 pron_relation := noun-relation &
