@@ -972,21 +972,21 @@ aq0000_ge := aj_pp*_i_le &
   
   ; Generic lexical entries for numbers
   
-;ao0fs00 := aj_-_i-nu-ord_le &
-;  [ STEM < "ao0fs00" >,
-;    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ao0fs00" >, +FORM #form ] >,
-;    SYNSEM.LKEYS.KEYREL [ PRED ord_rel, CARG #form ] ]
-;  """
-;  Generic lexical entry that will be triggered by tag ao0fs00.
-;  """.
+ao0fs00 := aj_-_i-nu-ord_le &
+  [ STEM < "aj_-_i-nu-ord_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ao0fs00" >, +FORM #form ] >,
+    SYNSEM.LKEYS.KEYREL [ PRED ord_rel, CARG #form ] ]
+  """
+  Generic lexical entry that will be triggered by tag ao0fs00.
+  """.
 
-;ao0fp00 := aj_-_i-nu-ord_le &
-;  [ STEM < "ao0fp00" >,
-;    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ao0fp00" >, +FORM #form ] >,
-;    SYNSEM.LKEYS.KEYREL [ PRED ord_rel, CARG #form ] ]
-;  """
-;  Generic lexical entry that will be triggered by tag ao0fp00.
-;  """.
+ao0fp00 := aj_-_i-nu-ord_le &
+  [ STEM < "aj_-_i-nu-ord_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ao0fp00" >, +FORM #form ] >,
+    SYNSEM.LKEYS.KEYREL [ PRED ord_rel, CARG #form ] ]
+  """
+  Generic lexical entry that will be triggered by tag ao0fp00.
+  """.
 
 ao0ms00_ge := aj_-_i-nu-ord_le &
   [ STEM < "aj_-_i-nu-ord_le" >,
@@ -996,13 +996,13 @@ ao0ms00_ge := aj_-_i-nu-ord_le &
   Generic lexical entry that will be triggered by tag ao0ms00.
   """.
 
-;ao0mp00 := aj_-_i-nu-ord_le &
-;  [ STEM < "ao0mp00" >,
-;    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ao0mp00" >, +FORM #form ] >,
-;    SYNSEM.LKEYS.KEYREL [ PRED ord_rel, CARG #form ] ]
-;  """
-;  Generic lexical entry that will be triggered by tag ao0mp00.
-;  """.
+ao0mp00 := aj_-_i-nu-ord_le &
+  [ STEM < "aj_-_i-nu-ord_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "ao0mp00" >, +FORM #form ] >,
+    SYNSEM.LKEYS.KEYREL [ PRED ord_rel, CARG #form ] ]
+  """
+  Generic lexical entry that will be triggered by tag ao0mp00.
+  """.
   
 
   
