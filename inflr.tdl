@@ -1059,9 +1059,9 @@ a_fem-pl_ilr
 
 ao0ms00 := 
 %suffix (ao0ms00 ao0ms00) 
-infl-ltow-rule
+a_masc-sg_ilr
+;infl-ltow-rule
 """; ordinals: ; primer, primero
-;a_masc-sg_ilr.
 """.
 
 ao0mp00 := 

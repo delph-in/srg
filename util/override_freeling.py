@@ -14,4 +14,6 @@ DO_NOT_OVERRIDE = {'uf', 'je', 'ja', 'oh', 'todo_lo_contrario', 'ojalá'}
 
 STEM_EQUALS_TAG = {'Z', 'W'}
 
+ORDINALS = {'AO0'} #first three letters of the tag
+
 ADD_TAGS = {'VMP00SM':'VMP00SM-PP'}
