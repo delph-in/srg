@@ -9408,7 +9408,7 @@ d_-_excl-cual_lex := det_excl &
 
 
 d_-_q-nu-card_lex := det_quant_eval &
-  [ SYNSEM [ LOCAL [ ;AGR.PNG.PN 3pl,
+  [ SYNSEM [ LOCAL [ AGR.PNG.PN 3pl,
                      CAT.VAL.SPR < > ],
              LKEYS.ALTKEYREL.PRED card_q_rel ] ]
   """
@@ -9416,9 +9416,7 @@ d_-_q-nu-card_lex := det_quant_eval &
   !!! num + sust pueden formar una unidad inseparable, e.g. esas tristes dos pesetas,
   esas famosas tres tardes con Teresa
   e.g. (los) tres hermanos
-  OZ: I am really not sure why this should be 3pl. Something like "nosotros dos" would be 1pl, and I think
-  even just number one falls into this category.
-  Originally, also ordinal numbers, primero, segundo, etc., although that perhaps needs to change. 
+  OZ: I am really not sure why this should be 3pl. Something like "nosotros dos" would be 1pl, and I think? But PL is to exclude un/una from this. Maybe just PL but not 3PL? 
   """.
 
 
