@@ -134,6 +134,17 @@ rg_ilr := infl-ltow-rule &
   """; -- non-inflecting categories
 """.
 
+
+fd_ilr := infl-ltow-rule & 
+[ SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.VAL [ SUBJ < >,
+                                                 COMPS < >,
+                                                 SPR < >,
+                                                 SPEC < > ] ] > ]
+"""
+Colon.
+"Precio: 1000 pesetas."
+""".
+
 nc00000_ilr :=  infl-ltow-rule & 
   [ SYNSEM.LOCAL.CAT.HEAD noun ].
 
@@ -202,7 +213,11 @@ fem_ilr :=  infl-ltow-rule &
   [ SYNSEM.LOCAL.AGR.PNG.GEN fem ].
 
 neut_ilr :=  infl-ltow-rule & 
-  [ SYNSEM.LOCAL.AGR.PNG.GEN neut ].
+  [ SYNSEM.LOCAL.AGR.PNG.GEN masc ] ; neut ]
+  """
+  OZ: I don't see the point of the neut GEN value for now; it blocks constructions like "Esto es cierto" etc.,
+  and I don't see what it is adding.
+  """.
 
 masc_3sg_ilr :=  masc_ilr & 3sg_ilr.
 masc_3pl_ilr :=  masc_ilr & 3pl_ilr.

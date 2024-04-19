@@ -128,7 +128,7 @@ infl-ltow-rule
 
 fd := 
 %suffix (fd fd)
-infl-ltow-rule
+fd_ilr
 """-- colon :""".
 
 fp := 
