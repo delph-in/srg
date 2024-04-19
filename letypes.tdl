@@ -51,14 +51,14 @@ basic-main-verb := basic-verb-lex &
 norm-pronominal-verb := basic-verb-lex & 
   [ ALTS.IMPERS -,
     SYNSEM.LOCAL.CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX.PNG #ind ] >, 
-                           CLTS < clitic-synsem & 
+                           CLTS < rfx-clitic-synsem & 
 				  [ OPT -,
                                     LOCAL [ CAT.HEAD.CASE rflx,
                                             CONT.HOOK.INDEX.PNG #ind ] ] > ] ].
 
 impers-pronominal-verb := basic-verb-lex & 
   [ ALTS.IMPERS -,
-    SYNSEM.LOCAL.CAT.VAL.CLTS < clitic-synsem & 
+    SYNSEM.LOCAL.CAT.VAL.CLTS < impers-clitic-synsem & 
                                 [ OPT -,
                                   LOCAL [ CAT.HEAD.CASE none,
                                           AGR.PRONTYPE impers ] ] > ].
@@ -1990,7 +1990,7 @@ vprn_intr_ssr := norm-pronominal-verb &
            VCALT - ],
     SYNSEM.LOCAL.CAT.VAL [ SUBJ < #subj >,
                            COMPS < #comps & [ LOCAL.CAT.VAL.CLTS #clts ] >,
-                           CLTS < #clt & clitic-synsem . #clts > ],
+                           CLTS < #clt & basic-clitic-synsem . #clts > ],
     ARG-ST < #subj . < #comps. < #clt. #clts > > > ].
 
 v_vp_inf-ssr_lex := v_intr_ssr & cc-two-arg & 
@@ -2196,6 +2196,25 @@ v_trans_np_synsem := v_trans_synsem &
 ; --- 1.3.3.1. Transitive verbs taking NP
 """.
 
+v_trans_rcp_np_synsem := v_trans_synsem & 
+  [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local & 
+                                  [ CONT.HOOK.INDEX #ind2 ],
+                            NON-LOCAL.REL 0-dlist & [ LIST < > ] ],... >,
+    LKEYS.KEYREL.ARG2 #ind2 ]
+"""
+; --- 1.3.3.1. Transitive verbs taking NP
+""".
+
+v_trans_rfx_np_synsem := v_trans_synsem & 
+  [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local & 
+                                  [ CONT.HOOK.INDEX #ind2 ],
+                            NON-LOCAL.REL 0-dlist & [ LIST < > ] ],... >,
+    LKEYS.KEYREL [ ARG1 #ind2, 
+                   ARG2 #ind2 ] ]
+"""
+; --- 1.3.3.1. Transitive verbs taking NP
+""".
+
 v_trans_np-noagr_synsem := v_trans_synsem & 
   [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local & 
                                   [ CONT.HOOK.INDEX #ind2 ],
@@ -2205,7 +2224,6 @@ v_trans_np-noagr_synsem := v_trans_synsem &
 ; "Precio: 1000 pesetas."
 (Precio is singular, 1000 pesetas is plural).
 """.
-
 
 v_trans_np := basic-main-verb & 
   [ ALTS.VCALT - ].
@@ -2387,15 +2405,15 @@ v_np_rfx_lex := v_trans_np_psv & main-verb & basic-two-arg &
 
 v_np*_rfx_lex := v_trans_np_psv & main-verb & basic-two-arg & 
   [ ALTS [ RCP -, RFX + ],
-    SYNSEM v_trans_np_psv_synsem & 
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_psv_synsem, 
-                         VAL.COMPS < [ OPT + ] > ] ] ]. 
+    SYNSEM v_trans_rfx_np_synsem & 
+           [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_rfx_np_synsem, 
+                         VAL [ COMPS < [ OPT + ] > ] ] ] ]. 
 
 v_np_rcp_lex := v_trans_np_psv & main-verb & basic-two-arg & 
   [ ALTS [ RCP +, RFX - ],
     SYNSEM v_trans_np_psv_synsem & 
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_np_psv_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ]
+           [ LOCAL [ CAT [ HEAD.LSYNSEM v_trans_np_psv_synsem, 
+                         VAL.COMPS < [ OPT - ] > ] ] ] ]
 """; e.g. abrazar (to hug) (Juan y María se abrazan (Juan and María hug each other))
 """. 
 
@@ -4885,7 +4903,7 @@ v_aux_vp-ppart_synsem := v_aux_haber_synsem &
                                           [ HEAD [ INV +,
                                                    VOICE passive ],
                                             VAL [ SUBJ < [ LOCAL #subject ] >,
-                                                  CLTS #clts & < clitic-synsem & 
+                                                  CLTS #clts & < impers-clitic-synsem & 
                                                          [ OPT -,
                                                            LOCAL [ AGR.PRONTYPE impers,
                                                                    CAT.HEAD.CASE none,
@@ -5571,7 +5589,62 @@ clitic-lex := norm-zero-arg &
 """.
 
 ; clitic-synsem := lex-synsem &
-clitic-synsem := non-canonical &
+
+basic-clitic-synsem := non-canonical &
+  [ LOCAL.CAT [ MC na,
+                  HEAD noun &
+                      [ PRD non-prd,
+                        MOD < > ],
+	          VAL [ SUBJ < >,
+                        COMPS < >,
+                        SPEC < >,
+                        SPR < >,
+                        CLTS < > ] ],
+    NON-LOCAL [ SLASH 0-dlist,
+                REL 0-dlist,
+                QUE 0-dlist ] ]
+"""
+This one does not add any relations.
+More fine-grained clitic synsem types should be used in most cases.
+""". 
+
+
+impers-clitic-synsem := basic-clitic-synsem & 
+[ LOCAL.CONT [ RELS <! !>,
+               HCONS <! !> ] ]
+"""
+For the impersonal "se" which should not add anything to the semantics.
+""".
+
+pers-clitic-synsem := basic-clitic-synsem &
+  [ LOCAL [ AGR #index,
+            CAT [ MC na,
+                  HEAD noun &
+                      [ PRD non-prd,
+                        MOD < >,
+                        KEYS [ KEY pron_rel,
+                               ALT2KEY #alt2key ] ],
+	          VAL [ SUBJ < >,
+                        COMPS < >,
+                        SPEC < >,
+                        SPR < >,
+                        CLTS < > ] ] ,
+            CONT [ HOOK [ LTOP #nhand,
+                          INDEX #index,
+                          XARG #nhand ],
+                   RELS <! [ PRED pron_rel,
+                             ARG0 #index,
+                             LBL #nhand ], 
+                           [ PRED #alt2key & pronoun_q_rel,
+                             ARG0 #index,
+                             RSTR #phand ] !>,
+                   HCONS <! qeq & [ HARG #phand,
+                                    LARG #nhand ] !> ] ],
+    NON-LOCAL [ SLASH 0-dlist,
+                REL 0-dlist,
+                QUE 0-dlist ] ]. 
+
+rfx-clitic-synsem := basic-clitic-synsem &
   [ LOCAL [ AGR #index,
             CAT [ MC na,
                   HEAD noun &
@@ -5601,42 +5674,47 @@ clitic-synsem := non-canonical &
 
 
 n_-_pr-pers-lo_lex := clitic-lex & 
-  [ SYNSEM clitic-synsem & 
+  [ SYNSEM pers-clitic-synsem & 
            [ LOCAL [ AGR.PRONTYPE std_pron,
                      CAT.HEAD.CASE acc ] ] ].
 
 n_-_pr-pers-le_lex := clitic-lex & 
-  [ SYNSEM clitic-synsem & 
+  [ SYNSEM pers-clitic-synsem & 
            [ LOCAL [ AGR.PRONTYPE std_pron,
                      CAT.HEAD.CASE only_dat ] ] ].
 
 n_-_pr-pers-me_lex := clitic-lex & 
-  [ SYNSEM clitic-synsem & 
-           [ LOCAL [ AGR.PRONTYPE std_or_refl_pron,
+  [ SYNSEM pers-clitic-synsem & 
+           [ LOCAL [ AGR.PRONTYPE std_pron,
                      CAT.HEAD.CASE acc_or_rflx_or_dat ] ] ].
 
 n_-_pr-pers-te_lex := clitic-lex & 
-  [ SYNSEM clitic-synsem & 
-           [ LOCAL [ AGR.PRONTYPE std_or_refl_pron,
+  [ SYNSEM pers-clitic-synsem & 
+           [ LOCAL [ AGR.PRONTYPE std_pron,
                      CAT.HEAD.CASE acc_or_rflx_or_dat ] ] ].
 
 n_-_pr-pers-nos_lex := clitic-lex & 
-  [ SYNSEM clitic-synsem & 
-           [ LOCAL [ AGR.PRONTYPE std_or_recip_or_refl_pron,
+  [ SYNSEM pers-clitic-synsem & 
+           [ LOCAL [ AGR.PRONTYPE std_or_recip_pron,
                      CAT.HEAD.CASE acc_or_rflx_or_rcp_or_dat ] ] ].
 
 n_-_pr-pers-os_lex := clitic-lex & 
-  [ SYNSEM clitic-synsem & 
-           [ LOCAL [ AGR.PRONTYPE std_or_recip_or_refl_pron,
+  [ SYNSEM pers-clitic-synsem & 
+           [ LOCAL [ AGR.PRONTYPE std_or_recip_pron,
                      CAT.HEAD.CASE acc_or_rflx_or_rcp_or_dat ] ] ].
 
 n_-_pr-pers-se_lex := clitic-lex & 
-  [ SYNSEM clitic-synsem & 
-           [ LOCAL [ AGR.PRONTYPE std_or_recip_or_refl_pron,
+  [ SYNSEM pers-clitic-synsem & 
+           [ LOCAL [ AGR.PRONTYPE std_or_recip_pron,
                      CAT.HEAD.CASE rflx_or_rcp_or_dat ] ] ].
 
+n_-_pr-rfx-se_lex := clitic-lex & 
+  [ SYNSEM rfx-clitic-synsem & 
+           [ LOCAL [ AGR.PRONTYPE refl,
+                     CAT.HEAD.CASE rflx ] ] ].
+
 n_-_pr-impers-se_lex := clitic-lex & 
-  [ SYNSEM clitic-synsem & 
+  [ SYNSEM impers-clitic-synsem & 
            [ LOCAL [ AGR.PRONTYPE impers,
                      CAT.HEAD.CASE none ] ] ].
 
@@ -15999,6 +16077,16 @@ n_-_pr-pers-se_native_le := n_-_pr-pers-se_lex & native_le
   <type val="n_-_pr-pers-se_le">
   <description>Pronoun, pers, dative ("se")
   <ex>se la compró
+  <todo>
+  """.
+
+n_-_pr-rfx-se_native_le := n_-_pr-rfx-se_lex & native_le
+  """
+  This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="n_-_pr-pers-se_le">
+  <description>Pronoun, personal, reflexive, accusative ("se")
+  <ex>se persigue
   <todo>
   """.
 

@@ -374,7 +374,7 @@ punct-head_clt_phrase := phrase-or-lexrule &
              HCONS #hcons ],
     ARGS < [ SYNSEM punct_synsem & 
                     [ LOCAL.CAT.HEAD.PUNCT-MK #lpunct & lpunct ] ], 
-           [ SYNSEM clitic-synsem & 
+           [ SYNSEM basic-clitic-synsem & 
                     [ SLSHD #slshd,
                       PUNCT.RPUNCT #rpunct,
                       LOCAL [ STR.HEADING right,
@@ -663,7 +663,6 @@ clit-head_phrase_basic := head-valence-phrase & head-compositional & head-final 
              LOCAL [ CAT [ MC #mc,
                            VAL [ SUBJ #subj,
                                  SPR #spr,
-                                 COMPS #comps,
                                  SPEC #spec,
                                  CLTS #clts ] ] ] ],
     HEAD-DTR.SYNSEM [ MODIFIED #modif,
@@ -673,15 +672,29 @@ clit-head_phrase_basic := head-valence-phrase & head-compositional & head-final 
                                   VAL [ SUBJ #subj,
                                         SPR #spr,
                                         SPEC #spec,
-                                        COMPS #comps,
                                         CLTS < #synsem . #clts > ] ] ],
-    NON-HEAD-DTR.SYNSEM #synsem & clitic-synsem & 
+    NON-HEAD-DTR.SYNSEM #synsem & 
                         [ LOCAL.CONT.HOOK.INDEX ref-ind ],
     C-CONT [ RELS <! !>,
              HCONS <! !> ] ].
 
-clit-head_phrase := clit-head_phrase_basic & 
-  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < > ].
+pers-clit-head_phrase := clit-head_phrase_basic & 
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < >,
+    NON-HEAD-DTR.SYNSEM pers-clitic-synsem ].
+
+impers-clit-head_phrase := clit-head_phrase_basic & 
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < >,
+    NON-HEAD-DTR.SYNSEM impers-clitic-synsem ].
+
+rfx-clit-head_phrase := clit-head_phrase_basic & 
+  [ SYNSEM.LOCAL.CAT.VAL [ COMPS < >,
+                           SUBJ < [ LOCAL.CONT.HOOK.INDEX #ind ] > ],
+    HEAD-DTR.SYNSEM v_trans_rfx_np_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CONT.HOOK.INDEX #ind ] > ],
+    NON-HEAD-DTR.SYNSEM rfx-clitic-synsem ].
+
+;rcp-clit-head_phrase := clit-head_phrase_basic & 
+;  [ HEAD-DTR.SYNSEM v_trans_rcp_np_synsem,
+;    NON-HEAD-DTR.SYNSEM rcp-clitic-synsem ].
 
 clit-head_phrase_cl := clit-head_phrase_basic & 
   [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.SUBJ < > ].
@@ -1971,6 +1984,7 @@ npadv_phrase := basic-npadv-phrase &
     ARGS < [ SYNSEM.LOCAL [ CAT [ HEAD noun & 
                                        [ KEYS.KEY modable_rel & #argkey,
                                          CASE #case ] ],
+                            AGR.PRONTYPE not_pron,
 		            CONT.HOOK.INDEX #index & [ SORT #sort & mod ] ] ] >,
     C-CONT.RELS <! prep-relation &
                    [ ARG2 #index ] !> ].
@@ -5347,8 +5361,11 @@ flr-hd_frel-inf-pp-arg_constr := filler-head_free-rel-inf-pp-arg_phrase & binary
 flr-hd_frel-fin-pp-adj_constr := filler-head_free-rel-fin-pp-adj_phrase & binary-rule-left-to-right.
 flr-hd_frel-inf-pp-adj_constr := filler-head_free-rel-inf-pp-adj_phrase & binary-rule-left-to-right.
 
-ct-hd_constr := clit-head_phrase & binary-rule-left-to-right. ; ***
+p-ct-hd_constr := pers-clit-head_phrase & binary-rule-left-to-right. ; ***
 ct-hd_cl_constr := clit-head_phrase_cl & binary-rule-left-to-right. ; ***
+ip-ct-hd_constr := impers-clit-head_phrase & binary-rule-left-to-right. ; ***
+rfx-ct-hd_constr := rfx-clit-head_phrase & binary-rule-left-to-right. ; ***
+;rcp-ct-hd_constr := rcp-clit-head_phrase & binary-rule-left-to-right. ; ***
 
 interj_constr := interj-phrase & rule. 
 interj_improp_constr := interj-impropias-phrase & rule. 

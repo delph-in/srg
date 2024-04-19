@@ -42,7 +42,12 @@ hd-pt_c := hd-pt_constr & [ RNAME "hdpt" ].
 pt-hd_c := pt-hd_constr & [ RNAME "pthd" ].
 pt-hd_clt_c := pt-hd_clt_constr & [ RNAME "pthd" ].
 
-ct-hd_c := ct-hd_constr & [ RNAME "cthd" ].
+p-ct-hd_c := p-ct-hd_constr & [ RNAME "pcthd" ].
+ip-ct-hd_c := ip-ct-hd_constr & [ RNAME "pcthd" ].
+rfx-ct-hd_c := rfx-ct-hd_constr & [ RNAME "pcthd" ].
+;rcp-ct-hd_c := rcp-ct-hd_constr & [ RNAME "pcthd" ].
+
+
 ct-hd_cl_c := ct-hd_cl_constr & [ RNAME "cthd" ].
 
 n-n_cpd_c := n_n_cmpnd_constr & [ RNAME "nn" ].

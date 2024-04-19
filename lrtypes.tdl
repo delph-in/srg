@@ -207,7 +207,7 @@ v_impers-se_dlr := basic-se-constructions-lex-rule &
                                   CLIT #case ],
                            VAL [ SUBJ #subj & < unexpressed >,
                                  COMPS #comps,
-                                 CLTS < #clt & clitic-synsem & [ LOCAL [ AGR.PRONTYPE impers,
+                                 CLTS < #clt & impers-clitic-synsem & [ LOCAL [ AGR.PRONTYPE impers,
                                                                          CAT.HEAD.CASE #case & none ] ] > ] ] ] ],
     DTR [ INFLECTED -,
           ALTS.IMPERS +,
@@ -245,7 +245,7 @@ passive-lex-rule := basic-se-constructions-lex-rule &
                                          VFORM #vform,
                                          TAM.MOOD #mood,
                                          CLIT #case ],
-                           VAL.CLTS #clt & < clitic-synsem & [ OPT -,
+                           VAL.CLTS #clt & < impers-clitic-synsem & [ OPT -,
                                                                LOCAL [ AGR.PRONTYPE impers,
                                                                        CAT.HEAD.CASE #case & none,
                                                                        CONT.HOOK.INDEX ref-ind ] ] > ],
@@ -1500,7 +1500,7 @@ basic-comp-clt-lex-rule := cliticization-lex-rule &
 
 comp-clt-lex-rule := basic-comp-clt-lex-rule &
   [ SYNSEM.LOCAL.CAT [ HEAD.CLIT #case,
-                       VAL.CLTS < #clt & clitic-synsem & 
+                       VAL.CLTS < #clt & basic-clitic-synsem & 
                                   [ OPT -,
                                     LOCAL.CAT.HEAD.CASE #case ] 
                                   . #clts > ],
@@ -1511,7 +1511,7 @@ comp-clt-lex-rule := basic-comp-clt-lex-rule &
 comp-enclt-lex-rule := basic-comp-clt-lex-rule &
   [ SYNSEM.LOCAL.CAT [ HEAD.CLIT #case,
                        VAL.CLTS < #clts, 
-                                  #clt & clitic-synsem & 
+                                  #clt & basic-clitic-synsem & 
                                   [ OPT -,
                                     LOCAL.CAT.HEAD.CASE #case ] > ],
     ARG-ST < #argst . < #clt > >,
@@ -1522,7 +1522,7 @@ comp-enclt-lex-rule := basic-comp-clt-lex-rule &
   [ SYNSEM.LOCAL [ CAT [ HEAD.CLIT #case,
                          VAL [ COMPS < #comp >,
                                CLTS < #clts, 
-                                      #clt & clitic-synsem & 
+                                      #clt & basic-clitic-synsem & 
                                       [ OPT -,
                                         LOCAL [ CAT.HEAD.CASE #case,
                                                 CONT.HOOK.INDEX.PNG #aff ] ] > ] ] ],
@@ -1537,7 +1537,7 @@ comp-enclt-lex-rule := basic-comp-clt-lex-rule &
 2nd-comp-clt-lex-rule := cliticization-lex-rule & 
   [ SYNSEM.LOCAL [ CAT [ HEAD.CLIT #case,
                          VAL [ COMPS < #comp >,
-                               CLTS < #clt & clitic-synsem & 
+                               CLTS < #clt & basic-clitic-synsem & 
                                       [ OPT -,
                                         LOCAL [ CAT.HEAD.CASE #case,
                                                 CONT.HOOK.INDEX.PNG #aff ] ]
@@ -1799,7 +1799,7 @@ basic-1st-clt-doubl-lex-rule := cliticization-lex-rule &
 
 1st-clt-doubl-lex-rule := basic-1st-clt-doubl-lex-rule &
   [ SYNSEM.LOCAL.CAT [ HEAD.CLIT #case,
-                       VAL.CLTS < #clt & clitic-synsem & [ OPT -,
+                       VAL.CLTS < #clt & basic-clitic-synsem & [ OPT -,
                                                            LOCAL.CAT.HEAD.CASE #case ] . #clts > ],
     ARG-ST < #argst, #clt . < #clt > >,
     DTR [ SYNSEM.LOCAL.CAT.VAL.CLTS #clts,
@@ -1812,7 +1812,7 @@ basic-1st-clt-doubl-lex-rule := cliticization-lex-rule &
 1st-enclt-doubl-lex-rule := basic-1st-clt-doubl-lex-rule &
   [ SYNSEM.LOCAL.CAT [ HEAD.CLIT #case,
                        VAL.CLTS < #clts,
-                                  #clt & clitic-synsem & [ OPT -,
+                                  #clt & basic-clitic-synsem & [ OPT -,
                                                            LOCAL.CAT.HEAD.CASE #case ] > ],
     ARG-ST < #argst, #clt . < #clt > >,
     DTR [ SYNSEM.LOCAL.CAT.VAL.CLTS < #clts >,
@@ -1829,7 +1829,7 @@ basic-1st-clt-doubl-lex-rule := cliticization-lex-rule &
                                          CLTCZD -,
                                          LOCAL #local,
                                          NON-LOCAL #nonloc ] >,
-                               CLTS < #clt & clitic-synsem & [ OPT -,
+                               CLTS < #clt & basic-clitic-synsem & [ OPT -,
                                                                LOCAL [ CAT.HEAD.CASE #case,
                                                                        CONT.HOOK.INDEX.PNG #aff ] ] . #clts > ] ],
                    CONT #cont ],

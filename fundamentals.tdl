@@ -732,6 +732,7 @@ std_pron := real_pron.
 recip := real_pron.
 refl := real_pron.
 std_or_refl_pron := std_pron & refl.
+std_or_recip_pron := std_pron & recip.
 std_or_recip_or_refl_pron := std_or_refl_pron & recip.
 impers := real_pron.
 zero_pron := real_pron.
