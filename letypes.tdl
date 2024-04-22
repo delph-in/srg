@@ -5571,19 +5571,26 @@ clitic-lex := norm-zero-arg &
 """.
 
 ; clitic-synsem := lex-synsem &
-clitic-synsem := non-canonical &
-  [ LOCAL [ AGR #index,
-            CAT [ MC na,
+basic-clitic-synsem := non-canonical &
+  [ LOCAL [ CAT [ MC na,
                   HEAD noun &
                       [ PRD non-prd,
-                        MOD < >,
-                        KEYS [ KEY pron_rel,
-                               ALT2KEY #alt2key ] ],
+                        MOD < > ],
 	          VAL [ SUBJ < >,
                         COMPS < >,
                         SPEC < >,
                         SPR < >,
-                        CLTS < > ] ] ,
+                        CLTS < > ] ] ],
+    NON-LOCAL [ SLASH 0-dlist,
+                REL 0-dlist,
+                QUE 0-dlist ] ]. 
+
+
+
+clitic-synsem := basic-clitic-synsem &
+  [ LOCAL [ AGR #index,
+            CAT [ HEAD [ KEYS [ KEY pron_rel,
+                               ALT2KEY #alt2key ] ] ],
             CONT [ HOOK [ LTOP #nhand,
                           INDEX #index,
                           XARG #nhand ],
@@ -5594,10 +5601,7 @@ clitic-synsem := non-canonical &
                              ARG0 #index,
                              RSTR #phand ] !>,
                    HCONS <! qeq & [ HARG #phand,
-                                    LARG #nhand ] !> ] ],
-    NON-LOCAL [ SLASH 0-dlist,
-                REL 0-dlist,
-                QUE 0-dlist ] ]. 
+                                    LARG #nhand ] !> ] ] ]. 
 
 
 n_-_pr-pers-lo_lex := clitic-lex & 
@@ -5632,13 +5636,21 @@ n_-_pr-pers-os_lex := clitic-lex &
 
 n_-_pr-pers-se_lex := clitic-lex & 
   [ SYNSEM clitic-synsem & 
-           [ LOCAL [ AGR.PRONTYPE std_or_recip_or_refl_pron,
-                     CAT.HEAD.CASE rflx_or_rcp_or_dat ] ] ].
+           [ LOCAL [ AGR.PRONTYPE std_pron,
+                     CAT.HEAD.CASE dat ] ] ].
+
+n_-_pr-rcp-or-rfx-se_lex := clitic-lex & 
+  [ SYNSEM clitic-synsem & 
+           [ LOCAL [ AGR.PRONTYPE recip_or_refl,
+                     CAT.HEAD.CASE rflx_or_rcp ] ] ].
+
 
 n_-_pr-impers-se_lex := clitic-lex & 
-  [ SYNSEM clitic-synsem & 
+  [ SYNSEM basic-clitic-synsem & 
            [ LOCAL [ AGR.PRONTYPE impers,
-                     CAT.HEAD.CASE none ] ] ].
+                     CAT.HEAD.CASE none,
+                     CONT [ RELS <! !>,
+                            HCONS <! !> ] ] ] ].
 
 
 ; --- 2.3.2. Definite pronouns 
@@ -16024,6 +16036,8 @@ n_-_pr-impers-se_le := n_-_pr-impers-se_lex
   """
   
   """.
+
+n_-_pr-rcp-or-rfx-se_native_le := n_-_pr-rcp-or-rfx-se_lex & native_le.
 
 
 n_-_pr-df-ambos_native_le := n_-_pr-df-ambos_lex & native_le

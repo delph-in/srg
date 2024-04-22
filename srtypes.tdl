@@ -675,7 +675,7 @@ clit-head_phrase_basic := head-valence-phrase & head-compositional & head-final 
                                         SPEC #spec,
                                         COMPS #comps,
                                         CLTS < #synsem . #clts > ] ] ],
-    NON-HEAD-DTR.SYNSEM #synsem & clitic-synsem & 
+    NON-HEAD-DTR.SYNSEM #synsem & basic-clitic-synsem & 
                         [ LOCAL.CONT.HOOK.INDEX ref-ind ],
     C-CONT [ RELS <! !>,
              HCONS <! !> ] ].
@@ -1962,7 +1962,7 @@ basic-npadv-phrase := basic-unary-phrase & phrasal &
 	     HCONS <! !> ] ].
 
 npadv_phrase := basic-npadv-phrase &
-  [ SYNSEM.LOCAL [ AGR #ind,
+  [ SYNSEM.LOCAL [ AGR #ind & [ PRONTYPE not_pron ],
                    CAT.HEAD [ MOD < [ LOCAL [ CAT.HEAD +nv,
                                               CONT.HOOK.INDEX #ind ] ] >,
                               CASE #case,
