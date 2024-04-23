@@ -27,9 +27,9 @@ def report_stats(treebanks_path):
                 rejected.append(response['i-input'])
                 all_rejected.append(response['i-input'])
         acc = len(accepted)/len(sentences)
-        print('Corpus {} accuracy {} out of {} ({:.2f})'.format(ts.path.stem, len(accepted), len(sentences), acc))
+        print('Corpus {} accuracy {} out of {} ({:.4f})'.format(ts.path.stem, len(accepted), len(sentences), acc))
     acc = len(all_accepted) / len(all_sentences)
-    print('Total accuracy: {} out of {} ({:.2f})'.format(len(all_accepted), len(all_sentences), acc))
+    print('Total accuracy: {} out of {} ({:.4f})'.format(len(all_accepted), len(all_sentences), acc))
 
 
 if __name__ == '__main__':
