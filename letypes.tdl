@@ -4109,15 +4109,15 @@ v_seq_synsem := v_prd-comp_synsem &
   --- 1.3.3.5.1. verbs taking a predicative complement
   """.
 
-basic_v_seq_synsem := lex-synsem &
+basic_v_seq_synsem := v_prd-comp_synsem &
   [ LOCAL [ CAT [ HEAD.INV -,
-                  VAL.COMPS < [ LOCAL [ CONT.HOOK [ LTOP #larg,
-                                                    XARG #xarg ] ],
+                  VAL [ COMPS < [ LOCAL local & [ CONT.HOOK [ LTOP #larg ] ],
                                 NON-LOCAL [ REL 0-dlist,
-                                            QUE 0-dlist ] ] > ],
+                                            QUE 0-dlist ] ] >,
+                        SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] > ] ],
             CONT.HCONS <! [ HARG #harg,
                             LARG #larg ] !> ],
-    LKEYS.KEYREL arg12-ev-relation & [ ARG1 #xarg,
+    LKEYS.KEYREL arg12-ev-relation & [ ARG1 #sind,
                                        ARG2 #harg ] ]
   """
   --- 1.3.3.5.1. verbs taking a predicative complement

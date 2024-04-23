@@ -661,7 +661,7 @@ clit-head_phrase_basic := head-valence-phrase & head-compositional & head-final 
              MODIFIED #modif,
              SLSHD #slshd,
              LOCAL [ CAT [ MC #mc,
-                           VAL [ SUBJ #subj,
+                           VAL [ ;SUBJ #subj,
                                  SPR #spr,
                                  COMPS #comps,
                                  SPEC #spec,
@@ -670,7 +670,7 @@ clit-head_phrase_basic := head-valence-phrase & head-compositional & head-final 
                       SLSHD #slshd,
                       LOCAL.CAT [ MC #mc,
                                   HEAD verb & [ TAM.MOOD ind_or_sub_mood ], 
-                                  VAL [ SUBJ #subj,
+                                  VAL [ ;SUBJ #subj,
                                         SPR #spr,
                                         SPEC #spec,
                                         COMPS #comps,
@@ -681,7 +681,19 @@ clit-head_phrase_basic := head-valence-phrase & head-compositional & head-final 
              HCONS <! !> ] ].
 
 clit-head_phrase := clit-head_phrase_basic & 
-  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < > ].
+  [ SYNSEM.LOCAL.CAT.VAL.SUBJ #subj & < [ LOCAL.AGR.PRONTYPE not_pron ] >,
+    HEAD-DTR.SYNSEM.LOCAL.CAT.VAL [ COMPS < >,
+                                    SUBJ #subj ] ].
+
+sbct-hd_constr := subj-clit-head_phrase & binary-rule-left-to-right. ; ***.
+
+subj-clit-head_phrase := clit-head_phrase_basic & 
+  [ SYNSEM.LOCAL.CAT.VAL [ SUBJ < > ],
+    HEAD-DTR.SYNSEM.LOCAL.CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #ind ] >,
+                                    COMPS < > ],
+    NON-HEAD-DTR.SYNSEM.LOCAL.CONT.HOOK.INDEX #ind ].
+
+
 
 clit-head_phrase_cl := clit-head_phrase_basic & 
   [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.SUBJ < > ].
