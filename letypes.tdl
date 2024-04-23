@@ -4109,9 +4109,30 @@ v_seq_synsem := v_prd-comp_synsem &
   --- 1.3.3.5.1. verbs taking a predicative complement
   """.
 
+basic_v_seq_synsem := lex-synsem &
+  [ LOCAL [ CAT [ HEAD.INV -,
+                  VAL.COMPS < [ LOCAL [ CONT.HOOK [ LTOP #larg,
+                                                    XARG #xarg ] ],
+                                NON-LOCAL [ REL 0-dlist,
+                                            QUE 0-dlist ] ] > ],
+            CONT.HCONS <! [ HARG #harg,
+                            LARG #larg ] !> ],
+    LKEYS.KEYREL arg12-ev-relation & [ ARG1 #xarg,
+                                       ARG2 #harg ] ]
+  """
+  --- 1.3.3.5.1. verbs taking a predicative complement
+  """.
+
 
 v_ap_seq_synsem := v_seq_synsem &
   [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD adj,
+                            NON-LOCAL.SLASH 0-dlist ] > ]
+  """
+  
+  """.
+
+v_np_seq_synsem := basic_v_seq_synsem &
+  [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD noun,
                             NON-LOCAL.SLASH 0-dlist ] > ]
   """
   
@@ -4150,6 +4171,17 @@ v_xp_seq := basic-main-verb &
            IMPERS -,
            VCALT - ],
     SYNSEM v_seq_synsem ]
+  """
+  
+  """.
+
+basic_v_xp_seq := basic-main-verb &
+  [ ALTS [ RCP -,
+           RFX -,
+           PASS -,
+           IMPERS -,
+           VCALT - ],
+    SYNSEM basic_v_seq_synsem ]
   """
   
   """.
@@ -4200,6 +4232,13 @@ v_ap*_seq-prn_lex := v_xp_seq & main-vprn & basic-three-arg &
                                            VAL.COMPS < [ OPT + ] > ] ] ]
   """
   e.g. se mostró muy crítico
+  """.
+
+v_np_seq-prn_lex := basic_v_xp_seq & main-vprn & basic-three-arg &
+  [ SYNSEM v_np_seq_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_np_seq_synsem,
+                                           VAL.COMPS < [ OPT - ] > ] ] ]
+  """
+  e.g. sentirse (me siento un desgraciado)
   """.
 
 
@@ -14856,6 +14895,17 @@ v_ap_seq-prn_native_le := v_ap_seq-prn_lex & native_le
   <type val="v_ap_seq-prn_le">
   <description>Verb (pron), AP (predicative)
   <ex>se cree muy listo
+  <todo>
+  </type>
+  """.
+
+v_np_seq-prn_native_le := v_np_seq-prn_lex & native_le
+  """
+  This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_np_seq-prn_le">
+  <description>Verb (pron), NP 
+  <ex>me siento un desgraciado
   <todo>
   </type>
   """.
