@@ -44,7 +44,7 @@ pt-hd_clt_c := pt-hd_clt_constr & [ RNAME "pthd" ].
 
 ct-hd_c := ct-hd_constr & [ RNAME "cthd" ].
 ct-hd_cl_c := ct-hd_cl_constr & [ RNAME "cthd" ].
-sbct-hd_cl_c := sbct-hd_constr & [ RNAME "sbcthd" ].
+;sbct-hd_cl_c := sbct-hd_constr & [ RNAME "sbcthd" ].
 
 n-n_cpd_c := n_n_cmpnd_constr & [ RNAME "nn" ].
 n-n_nu-cpd_c := n_n-nu_cmpnd_constr & [ RNAME "nn" ].
