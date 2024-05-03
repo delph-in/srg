@@ -1760,7 +1760,7 @@ Not sure why the agreement features are specified on this one.
 
 vmp00sm-pp := 
 %suffix (vmpsm-pp vmpsm-pp)
-vpart_ilr & 
+vpart-haber_ilr & 
   [ SYNSEM.LOCAL [ CAT.HEAD [ AUX -, PRD.HABER + ] ] ].
 
 

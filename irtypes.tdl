@@ -817,29 +817,22 @@ vger_ilr :=  verb_ilr &
                             PRD prd & [ COPV estar ] ] ] ].
 ;                     VAL.SUBJ < unexpressed & [ OPT - ] > ] ].
 
-;vpart_ilr :=  infl-ltow-rule & 
-;vpart_ilr :=  inflecting-lex-rule &
-;vpart_ilr :=  verb_ilr & 
-;[ INFLECTED +,
-;  KEY-ARG #keyarg,
-;  SYNSEM.LOCAL.CAT.HEAD verb & [ TAM.MOOD ind_or_sub_mood,
-;                          VFORM part,
-;                          VOICE active,
-;                          PRD non-prd ],
-;  DTR [ INFLECTED -,
-;        SYNSEM.LOCAL.CAT.HEAD verb,
-;        KEY-ARG #keyarg ],
-;    C-CONT.RELS <! !>  ].
 
-
+vpart-haber_ilr :=  verb_ilr & 
+[ SYNSEM.LOCAL.CAT.HEAD [ TAM.MOOD ind_or_sub_mood,
+                          VFORM part,
+                          VOICE active,
+                          PRD non-prd & [ HABER + ] ] ].
+                          
 vpart_ilr :=  inflecting-lex-rule & 
   [ INFLECTED +,
     SYNSEM [ LOCAL [ ;AGR #agr,
-                     CAT [ HEAD verb & [ AUX -,
-                                         PRD non-prd, 
+                     CAT [ MC #mc,
+                           HEAD verb & [ AUX -,
+                                         PRD non-prd & [ HABER #haber ], 
                                          VFORM part,
                                          VOICE active,
-                                         TAM.MOOD ind_or_sub_mood,
+                                         TAM.MOOD ind_or_sub_mood & #mood,
                                          KEYS.KEY #key ], 
                            VAL [ SPR #spr,
                                  SUBJ < synsem &
@@ -855,12 +848,12 @@ vpart_ilr :=  inflecting-lex-rule &
             LKEYS #lkeys,
             NON-LOCAL #nonloc ],
     DTR [ INFLECTED -,
-          SYNSEM [ LOCAL [ CAT [ HEAD verb &
+          SYNSEM [ LOCAL [ CAT [ MC #mc,
+                                 HEAD verb &
                                       [ VFORM part,
-                                        ;VOICE passive,
-                                        ;TAM [ TENSE #tense,
-                                        ;      MOOD #mood ],
-                                        KEYS.KEY #key ],
+                                        TAM.MOOD #mood,
+                                        KEYS.KEY #key,
+                                        PRD.HABER #haber ],
                                  VAL [ SPR #spr,
                                        SUBJ < [ LOCAL np_nom_local ] >,
                                        COMPS #comps,
