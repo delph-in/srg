@@ -926,12 +926,14 @@ adj-head-phrase := basic-head-mod-phrase-simple & head-final &
   [ SYNSEM [ LIGHT -,
              MODIFIED lmod & [ PERIPH #periph ],
              LOCAL.CAT [ POSTHEAD #ph,
-                         VAL.SPR #spr ] ],
+                         VAL.SPR #spr,
+                         HEAD.PRD.HABER #haber ] ],
     HEAD-DTR.SYNSEM.LOCAL.CAT [ POSTHEAD #ph,
                                 VAL [ SPR #spr,
                                       CLTS < > ] ],
     NON-HEAD-DTR.SYNSEM [ MODIFIED.PERIPH #periph,
-                          LOCAL.CAT.VAL.COMPS < >,
+                          LOCAL.CAT [ HEAD.PRD.HABER #haber,
+                                      VAL.COMPS < > ],
                           NON-LOCAL [ SLASH 0-dlist,
                                       REL 0-dlist ] ] ].
 
@@ -967,17 +969,25 @@ isect-mod-phrase := head-mod-phrase-simple & head-compositional &
     C-CONT.HCONS <! !> ].
 
 adj-head_scop_phrase := adj-head-phrase & scopal-mod-phrase &
-  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < >,
-    NON-HEAD-DTR.SYNSEM.LOCAL.CAT.POSTHEAD - ]
+  [ SYNSEM.LOCAL.CAT.HEAD [ MOD < [ LOCAL.AGR #agr ] >,
+                            PRD.HABER #haber ],
+    HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < >,
+    NON-HEAD-DTR.SYNSEM.LOCAL [ AGR #agr,
+                                CAT [ POSTHEAD -,
+                                      HEAD.PRD.HABER #haber ] ] ]
 """
 ; scopal adjunct + head
 """.
                                     
 adj-head_int-xp-xp_phrase :=  adj-head-phrase & isect-mod-phrase &
-  [ HEAD-DTR.SYNSEM [ LOCAL.CAT [ HEAD +jrp,
-                                  VAL.COMPS < > ],
+  [ SYNSEM.LOCAL.CAT.HEAD [ PRD #prd,
+                            MOD < [ LOCAL.AGR #agr ] > ],
+    HEAD-DTR.SYNSEM [ LOCAL [ CAT [ HEAD +jrp,
+                                    VAL.COMPS < > ] ],
                       NON-LOCAL.REL 0-dlist ],
-    NON-HEAD-DTR.SYNSEM.LOCAL.CAT.POSTHEAD - ]
+    NON-HEAD-DTR.SYNSEM.LOCAL [ AGR #agr,
+                                CAT [ POSTHEAD -,
+                                      HEAD.PRD #prd ] ] ]
 """
 ; intersective adjunct + head
 """.
@@ -1101,7 +1111,9 @@ head-adj_int-s-xp_phrase := head-adj-int-v-xp-phrase &
 """.
 
 head-adj_int-v-pp_phrase := head-adj-int-v-xp-phrase &
-  [ HEAD-DTR.SYNSEM [ LOCAL.CAT.POSTHEAD -,
+  [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL.AGR #agr ] >,
+    HEAD-DTR.SYNSEM [ LOCAL [ CAT.POSTHEAD -,
+                              AGR #agr ],
                       MODIFIED notmod-or-rmod ],
     NON-HEAD-DTR.SYNSEM.LOCAl.CAT.HEAD adp ].
 
@@ -1648,11 +1660,12 @@ optcomp-phrase := head-valence-phrase & head-only & head-compositional &
 
 optcomp-v_phrase := optcomp-phrase &
   [ SYNSEM.LOCAL.CAT [ POSTHEAD #ph,
-                       VAL.COMPS #comps ],
+                       VAL [ SUBJ.FIRST.LOCAL.AGR #agr,
+                             COMPS #comps ] ],
     HEAD-DTR.SYNSEM.LOCAL [ STR.HEADED solely,
                             CAT [ POSTHEAD #ph, 
                                   HEAD verb & [ KEYS.KEY v_event_rel ],
-                                  VAL [ SUBJ < [ ] >,
+                                  VAL [ SUBJ < [ LOCAL.AGR #agr ] >,
                                         COMPS < [ NON-LOCAL.SLASH 0-dlist ]. #comps > ] ] ] ]
 """; si diem que el subjecte no s'ha cancel·lat, no podem analitzar
 ; "volvió el hindú su rostro"

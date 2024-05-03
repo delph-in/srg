@@ -4606,7 +4606,7 @@ v_ap_ser_synsem := v_copula_synsem &
   [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
                       COMPS < [ LOCAL [ CAT.HEAD adj & [ MOD < [ LOCAL [ CAT.HEAD noun, 
                                                                          AGR #sind ] ] >,
-                                                         PRD.COPV ser ],
+                                                         PRD [ COPV ser, HABER - ] ],
                                         CONT.HOOK.XARG #sind ] ] > ],
             CONT.HOOK.XARG #sind ] ]
   """
@@ -4625,8 +4625,9 @@ v_ap_ser_lex := v_cop-np_sbj &
 v_pp_ser_synsem := v_copula_synsem &
   [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
                       COMPS < [ LOCAL [ CAT.HEAD adp & [ KEYS.ALT2KEY quant_or_deg_rel,
-                                                         MOD < [ LOCAL.CAT.HEAD noun ] >,
-                                                         PRD.COPV ser ],
+                                                         MOD < [ LOCAL [ CAT.HEAD noun,
+                                                                         AGR #sind ] ] >,
+                                                         PRD [ COPV ser, HABER - ] ],
                                         CONT.HOOK.XARG #sind ] ] > ],
             CONT.HOOK.XARG #sind ] ]
   """
@@ -4684,8 +4685,10 @@ v_pp_e-vp-inf-ser_lex := v_cop-np_sbj &
 
 
 v_vp_ppart_ser_synsem := v_copula_synsem &
-  [ LOCAL.CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #arg2 ] >,
-                    COMPS < [ LOCAL [ CAT [ HEAD verb & [ PRD.COPV ser ],
+  [ LOCAL.CAT.VAL [ SUBJ < [ LOCAL [ ;AGR #agr,
+                                     CONT.HOOK.INDEX #arg2 ] ] >,
+                    COMPS < [ LOCAL [ ;AGR #agr,
+                                      CAT [ HEAD verb & [ PRD.COPV ser ],
                                             VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX #arg2 ] > ],
                                       CONT.RELS.LIST < [ ARG2 #arg2 ], ... > ] ] > ] ]
   """

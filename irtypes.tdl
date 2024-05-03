@@ -818,11 +818,63 @@ vger_ilr :=  verb_ilr &
 ;                     VAL.SUBJ < unexpressed & [ OPT - ] > ] ].
 
 ;vpart_ilr :=  infl-ltow-rule & 
-vpart_ilr :=  verb_ilr & 
-[ SYNSEM.LOCAL.CAT.HEAD [ TAM.MOOD ind_or_sub_mood,
-                          VFORM part,
-                          VOICE active,
-                          PRD non-prd ] ].
+;vpart_ilr :=  inflecting-lex-rule &
+;vpart_ilr :=  verb_ilr & 
+;[ INFLECTED +,
+;  KEY-ARG #keyarg,
+;  SYNSEM.LOCAL.CAT.HEAD verb & [ TAM.MOOD ind_or_sub_mood,
+;                          VFORM part,
+;                          VOICE active,
+;                          PRD non-prd ],
+;  DTR [ INFLECTED -,
+;        SYNSEM.LOCAL.CAT.HEAD verb,
+;        KEY-ARG #keyarg ],
+;    C-CONT.RELS <! !>  ].
+
+
+vpart_ilr :=  inflecting-lex-rule & 
+  [ INFLECTED +,
+    SYNSEM [ LOCAL [ ;AGR #agr,
+                     CAT [ HEAD verb & [ AUX -,
+                                         PRD non-prd, 
+                                         VFORM part,
+                                         VOICE active,
+                                         TAM.MOOD ind_or_sub_mood,
+                                         KEYS.KEY #key ], 
+                           VAL [ SPR #spr,
+                                 SUBJ < synsem &
+                                        [ NON-LOCAL.SLASH 0-dlist ] >,
+                                 CLTS #clt,
+                                 COMPS #comps,
+                                 SPEC #spec ] ],
+                     CONT [ HOOK [ INDEX #arg0,
+                                   LTOP #hand ],
+                            RELS #rels,
+                            HCONS #hcons ],
+                     CTXT #ctxt ],
+            LKEYS #lkeys,
+            NON-LOCAL #nonloc ],
+    DTR [ INFLECTED -,
+          SYNSEM [ LOCAL [ CAT [ HEAD verb &
+                                      [ VFORM part,
+                                        ;VOICE passive,
+                                        ;TAM [ TENSE #tense,
+                                        ;      MOOD #mood ],
+                                        KEYS.KEY #key ],
+                                 VAL [ SPR #spr,
+                                       SUBJ < [ LOCAL np_nom_local ] >,
+                                       COMPS #comps,
+                                       CLTS #clt,
+                                       SPEC #spec ] ],
+                           CONT [ HOOK [ INDEX #arg0,
+                                         LTOP #hand ],
+                                  RELS #rels,
+                                  HCONS #hcons ],
+                           CTXT #ctxt ],
+                   LKEYS #lkeys,
+                   NON-LOCAL #nonloc ] ],
+    C-CONT.RELS <! !>  ].
+
 
 vppart_ilr :=  inflecting-lex-rule & 
   [ INFLECTED +,
@@ -848,7 +900,7 @@ vppart_ilr :=  inflecting-lex-rule &
                                                                INDEX #subjind ] ],
                                            NON-LOCAL #snonloc ]. #comps >,
                                  CLTS < > ] ],
-                     CONT [ HOOK [ INDEX.E.MOOD #mood,
+                     CONT [ HOOK [ INDEX #arg0 & [ E.MOOD #mood ],
                                    LTOP #hand ],
                             RELS #rels,
                             HCONS #hcons ],
@@ -870,7 +922,8 @@ vppart_ilr :=  inflecting-lex-rule &
                                                        NON-LOCAL #ononloc ], 
                                                REST #comps ],
                                        CLTS < > ] ],
-                           CONT [ HOOK.LTOP #hand,
+                           CONT [ HOOK [ INDEX #arg0,
+                                         LTOP #hand ],
                                   RELS #rels,
                                   HCONS #hcons ],
                            CTXT #ctxt ],

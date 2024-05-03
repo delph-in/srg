@@ -837,6 +837,60 @@ n_pp-vp_dlr := vfin_vinf-lex-rule &
   """.
 
 
+ppart-lex-rule :=  const-ltol-rule & 
+  [ SYNSEM [ LOCAL [ AGR #agr,
+                     CAT [ HEAD verb & [ AUX -,
+                                         PRD.HABER -, 
+                                         VFORM part,
+                                         VOICE passive,
+                                         TAM [ TENSE #tense,
+                                               MOOD #mood ],
+                                         KEYS.KEY #key,
+                                         MOD < > ], 
+                           VAL [ SPR #spr,
+                                 SUBJ < synsem &
+                                        [ LOCAL np_nom_local & 
+                                                [ AGR #agr,
+                                                  CONT #objcont & [ HOOK.INDEX #agr ] ], 
+                                          NON-LOCAL #ononloc & [ SLASH 0-dlist ] ] >,
+                                 COMPS < [ OPT +,
+                                           LOCAL mrkd_np_local &
+                                                 [ CAT.HEAD.KEYS.KEY _por_p_sel_rel,
+                                                   CONT.HOOK [ LTOP #hand, 
+                                                               INDEX #subjind ] ],
+                                           NON-LOCAL #snonloc ]. #comps > ] ],
+                     CONT [ HOOK [ INDEX #arg0 & [ E.MOOD #mood ],
+                                   LTOP #hand ],
+                            RELS #rels,
+                            HCONS #hcons ],
+                     CTXT #ctxt ],
+            LKEYS #lkeys,
+            NON-LOCAL #nonloc ],
+    DTR [ INFLECTED +,
+          SYNSEM [ LOCAL [ CAT [ HEAD verb &
+                                      [ PRD.HABER -,
+                                        VFORM part,
+                                        VOICE active,
+                                        TAM [ TENSE #tense,
+                                              MOOD #mood ],
+                                        KEYS.KEY #key ],
+                                 VAL [ SPR #spr,
+                                       SUBJ < [ LOCAL np_nom_local & 
+                                                      [ CONT.HOOK.INDEX #subjind ],
+                                                NON-LOCAL #snonloc ] >,
+                                       COMPS [ FIRST [ LOCAL [ CONT #objcont ],
+                                                       NON-LOCAL #ononloc ], 
+                                               REST #comps ] ] ],
+                           CONT [ HOOK [ INDEX #arg0,
+                                         LTOP #hand ],
+                                  RELS #rels,
+                                  HCONS #hcons ],
+                           CTXT #ctxt ],
+                   LKEYS #lkeys,
+                   NON-LOCAL #nonloc ] ] ].
+
+
+#|
 ppart-lex-rule := const-ltol-rule &
   [ ALTS.PASS -,
     SYNSEM [ PUNCT #punct,
@@ -889,7 +943,7 @@ ppart-lex-rule := const-ltol-rule &
   --- LR types for participles
   -- LR type building pastparts for passive constructions
   """.
-
+|#
 
 v_pastpart-trans_dlr := ppart-lex-rule &
   [ SYNSEM.LOCAL [ AGR #arg2,
@@ -904,7 +958,8 @@ v_pastpart-trans_dlr := ppart-lex-rule &
                                                                  CONT.HOOK.INDEX #subjind ],
                                          NON-LOCAL #snonloc ] . #comps >,
                                CLTS #clts ] ],
-                   CONT.RELS.LIST < [ ARG2 #arg2 ], ... > ],
+                   CONT.RELS.LIST < [ ARG1 #subjind,
+                                      ARG2 #arg2 ], ... > ],
     DTR [ INFLECTED +,
           SYNSEM.LOCAL [ AGR #arg2,
                          CAT.VAL [ SUBJ < [ LOCAL np_nom_local & [ CONT.HOOK.INDEX #subjind ],
@@ -917,7 +972,6 @@ v_pastpart-trans_dlr := ppart-lex-rule &
   """
   -- with transitive verbs
   """.
-
 
 v_pastpart-unacc_dlr := ppart-lex-rule &
   [ SYNSEM.LOCAL [ AGR #agr,

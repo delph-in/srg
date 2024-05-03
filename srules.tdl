@@ -18,7 +18,7 @@ hd_nbar-rel_c := nbar-rel_constr & [ RNAME "nbar" ].
 
 hd_xsb_c := extsbj_constr & [ RNAME "xsb" ].
 hd_xcmp-a_c := extcmp_a_constr & [ RNAME "xcmp" ].
-hd_xcmp-v_c := extcmp_v_constr & [ RNAME "xcmp" ].
+;hd_xcmp-v_c := extcmp_v_constr & [ RNAME "xcmp" ].
 ;hd_xcmp-n_c := extcmp_n_constr & [ RNAME "xcmp" ].
 ;hd_xcmp-n-df_c := extcmp_n-df_constr & [ RNAME "xcmp" ].
 hd_xad-v_c := extad_v_constr & [ RNAME "xad" ].

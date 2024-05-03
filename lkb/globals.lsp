@@ -72,6 +72,7 @@
 (defparameter *chart-packing-p* t)
 
 (defparameter *packing-restrictor*
+  ;'(HCONS ICONS RNAME)
   '(RELS HCONS ICONS RNAME)
   "restrictor used when parsing with ambiguity packing")
 
