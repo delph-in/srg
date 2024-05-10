@@ -826,6 +826,7 @@ vpart-haber_ilr :=  verb_ilr &
                           
 vpart_ilr :=  inflecting-lex-rule & 
   [ INFLECTED +,
+    ;KEY-ARG #keyarg,
     SYNSEM [ LOCAL [ ;AGR #agr,
                      CAT [ MC #mc,
                            HEAD verb & [ AUX -,
@@ -844,10 +845,13 @@ vpart_ilr :=  inflecting-lex-rule &
                                    LTOP #hand ],
                             RELS #rels,
                             HCONS #hcons ],
-                     CTXT #ctxt ],
+                     CTXT #ctxt,
+                     COORD #coord,
+                     COORD-STRAT #coord-strat ],
             LKEYS #lkeys,
             NON-LOCAL #nonloc ],
     DTR [ INFLECTED -,
+          ;KEY-ARG #keyarg,
           SYNSEM [ LOCAL [ CAT [ MC #mc,
                                  HEAD verb &
                                       [ VFORM part,
@@ -863,7 +867,9 @@ vpart_ilr :=  inflecting-lex-rule &
                                          LTOP #hand ],
                                   RELS #rels,
                                   HCONS #hcons ],
-                           CTXT #ctxt ],
+                           CTXT #ctxt,
+                           COORD #coord,
+                           COORD-STRAT #coord-strat ],
                    LKEYS #lkeys,
                    NON-LOCAL #nonloc ] ],
     C-CONT.RELS <! !>  ].

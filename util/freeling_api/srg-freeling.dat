@@ -39,6 +39,7 @@ algunas @any
 rueda @any
 peor @any
 mejor @any
+divertido @any
 </NoDisambiguate>
 
 ## List of words for which the list of output analysis given
@@ -120,6 +121,7 @@ off-line off-line AQ0CN00
 on-line on-line AQ0CN00
 no_sólo no_sólo CC no_sólo RG
 hace hace SP hacer VMIP3S0
+hacía hacía SP hacer VMII3S0
 </ReplaceAll>
 
 ## List of tag fusions to perform. 

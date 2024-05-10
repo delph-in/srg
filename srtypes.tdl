@@ -969,9 +969,10 @@ isect-mod-phrase := head-mod-phrase-simple & head-compositional &
     C-CONT.HCONS <! !> ].
 
 adj-head_scop_phrase := adj-head-phrase & scopal-mod-phrase &
-  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < >,
+  [ SYNSEM.LOCAL.CAT.HEAD.PRD.HABER #haber,
+    HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < >,
     NON-HEAD-DTR.SYNSEM.LOCAL [ CAT [ POSTHEAD -,
-                                      HEAD adv ] ] ]
+                                      HEAD +jrp & [ PRD.HABER #haber ] ] ] ]
 """
 ; scopal adjunct + head
 """.
@@ -1087,8 +1088,7 @@ head-adj-int-v-xp-phrase := head-adj-phrase & isect-mod-phrase &
   [ SYNSEM.LOCAL.CAT.VAL.SPR #spr,
     HEAD-DTR.SYNSEM [ LOCAL.CAT [ HEAD verb,
                                   VAL.SPR #spr ],
-                      NON-LOCAL.REL 0-dlist,
-                      SLSHD - ],
+                      NON-LOCAL.REL 0-dlist ],
 ;   NON-HEAD-DTR.SYNSEM [ LOCAl.CAT.POSTHEAD +, 
     NON-HEAD-DTR.SYNSEM.NON-LOCAL [ SLASH 0-dlist,
                                     REL 0-dlist & [ LIST < > ] ] ]

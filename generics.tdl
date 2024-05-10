@@ -738,6 +738,15 @@ vmp00sm_ge := v_np*_le &
   Generic lexical entry that will be triggered by tag vmp00sm.
   """.
 
+vmp00sm-pp_ge := v_np*_le &
+  [ STEM < "v_np*_le" >,
+    TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmp00sm-pp" > ] >,
+    SYNSEM.LKEYS.KEYREL.PRED "_generic_v_rel" ]
+  """
+  Generic lexical entry that will be triggered by tag vmp00sm-pp.
+  """.
+
+
 vmp00pm_ge := v_np*_le &
   [ STEM < "v_np*_le" >,
     TOKENS.+LIST generic_token_list & < [ +POS.+TAGS < "vmp00pm" > ] >,
