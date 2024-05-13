@@ -30,6 +30,7 @@ def report_stats(treebanks_path):
                     overgenerated.append(response['i-input'])
                     all_overgenerated.append(response['i-input'])
                     illformed.append(response['i-input'])
+                    all_illformed.append(response['i-input'])
                 #deriv = response.result(0).derivation()
             else:
                 #print('Rejected: {}'.format(response['i-input']))
@@ -41,11 +42,11 @@ def report_stats(treebanks_path):
         acc = len(accepted)/(len(sentences) - len(illformed))
         overgen = len(overgenerated)/len(illformed) if len(illformed) > 0 else 0
         print('Corpus {} accuracy {} out of {} ({:.4f})'.format(ts.path.stem, len(accepted), len(sentences)-len(illformed), acc))
-        #print('Corpus {} overgeneration {} out of {} ({:.4f})'.format(ts.path.stem, len(overgenerated), len(illformed), overgen))
+        print('Corpus {} overgeneration {} out of {} ({:.4f})'.format(ts.path.stem, len(overgenerated), len(illformed), overgen))
     acc = len(all_accepted) / (len(all_sentences) - len(all_illformed))
     overgen = len(all_overgenerated) / len(all_illformed) if len(all_illformed) > 0 else 0
     print('Total accuracy: {} out of {} ({:.4f})'.format(len(all_accepted), len(all_sentences)-len(all_illformed), acc))
-    #print('Total overgeneration: {} out of {} ({:.4f})'.format(len(all_overgenerated), len(all_illformed), overgen))
+    print('Total overgeneration: {} out of {} ({:.4f})'.format(len(all_overgenerated), len(all_illformed), overgen))
 
 
 if __name__ == '__main__':
