@@ -36,7 +36,7 @@ def compare_treebanks(old_path, new_path):
                             if n_deriv not in n_derivs:
                                 n_derivs.append(n_deriv)
                             if o_deriv != n_deriv:
-                                print('Differences found in item {}: {}'.format(o['parse-id'], old_response['i-input']))
+                                print('Differences found in item {}: {}'.format(old_response['i-id'], old_response['i-input']))
                                 identical = False
                         if len(orr) != len(nrr):
                             identical = False
