@@ -5,4 +5,4 @@
 
 profile="$1"
 
-delphin process --options="-y --yy-rules -1" -g ~/delphin/SRG/grammar/srg/ace/srg.dat --full-forest --select i-tokens ~/delphin/SRG/treebanks/dev/all/$profile
+delphin process --options="-1 -p -y --yy-rules --max-chart-megabytes=48000 --max-unpack-megabytes=56000" -g ~/delphin/SRG/grammar/srg/ace/srg.dat --full-forest --select i-tokens $profile

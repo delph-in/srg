@@ -232,7 +232,6 @@ fem_pl_ilr := fem_ilr & pl_ilr.
 neut_sg_ilr := neut_ilr & sg_ilr.
 neut_pl_ilr := neut_ilr & sg_ilr.
 
-
 ; -- determiners
 
 d_ilr :=  infl-ltow-rule & 

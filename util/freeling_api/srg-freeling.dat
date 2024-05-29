@@ -37,9 +37,8 @@ alguna @any
 algunos @any
 algunas @any
 rueda @any
-peor @any
-mejor @any
 divertido @any
+pasado @any
 </NoDisambiguate>
 
 ## List of words for which the list of output analysis given
@@ -106,6 +105,7 @@ escasa escaso AQ0FS00 escaso DI0FS0
 escasas escaso AQ0FP00 escaso DI0FP0
 escaso escaso AQ0MS00 escaso DI0MS0
 escasos escaso AQ0MP00 escaso DI0MP0
+helado helado NCMS000 helado VMP00SM
 numerosa numeroso AQ0FS00 numeroso DI0FS0
 numerosas numeroso AQ0FP00 numeroso DI0FP0
 numeroso numeroso AQ0MS00 numeroso DI0MS0
@@ -117,11 +117,24 @@ raros raro AQ0MP00 raro DI0MP0
 cientos ciento Zd
 millares millar Zd
 miles mil Zd
+mejor mejor AQ0CS00 mejor RG
+mejores mejor AQ0CP00
+peor peor AQ0CS00 peor RG
+peores peor AQ0CP00
+mayor mayor AQ0CS00
+mayores mayor AQ0CP00
+menor menor AQ0CS00
+menores menor AQ0CP00
 off-line off-line AQ0CN00
 on-line on-line AQ0CN00
 no_sólo no_sólo CC no_sólo RG
 hace hace SP hacer VMIP3S0
 hacía hacía SP hacer VMII3S0
+cerca cerca RG cercar VMIP3S0
+mar. marzo NCMS000 mar NCMS000
+favorito favorito AQ0MS00 favorito NCMS000
+favoritos favorito AQ0MP00 favorito NCMP000
+
 </ReplaceAll>
 
 ## List of tag fusions to perform. 

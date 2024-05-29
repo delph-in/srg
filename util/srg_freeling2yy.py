@@ -40,8 +40,8 @@ def override_tag(selected, word, lemma, tag, override_dicts):
                     return {'tags': [tags[0]+'+'+tags[1][:-3]], 'prob': -1 }
                 else:
                     print("More than four tags in Freeling output: {}".format(selected['tag']))
-    if lemma in override_dicts['replace'] and len(override_dicts['replace'][lemma]['lemma']) == 1:
-        return {'tags': override_dicts['replace'][lemma]['tag'], 'prob': -1 }
+    if word in override_dicts['replace'] and len(override_dicts['replace'][word]['lemma']) == 1:
+        return {'tags': override_dicts['replace'][word]['tag'], 'prob': -1 }
     return {'tags': [selected['tag']], 'prob': selected['prob']}
     #raise Exception("selected tag not in tag list")
 
@@ -77,8 +77,8 @@ def convert_sentences(sentences, override_dicts):
             for j,tok in enumerate(sent['tokens']):
                 is_additional = tok['additional']
                 surface = tok['form']
-                #if surface == 'primer':
-                #    print('debug')
+                if surface == 'mar.':
+                    print('debug')
                 tag_prob = {'tag': tok['tag'], 'prob':tok['prob']}
                 pos_conf = override_tag(tag_prob, surface.lower(), tok['lemma'], tok['tag'], override_dicts)
                 if len(pos_conf['tags']) > 1:

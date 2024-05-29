@@ -7,6 +7,6 @@ directory="$1"
 
 for profile in "$directory"/*; do
   echo $profile
-  delphin process --options="-y --yy-rules --max-chart-megabytes=24000 --max-unpack-megabytes=24000" -g ~/delphin/SRG/grammar/srg/ace/srg.dat --full-forest --select i-tokens "$profile"
+  delphin process --options="-1 -p -y --yy-rules --max-chart-megabytes=48000 --max-unpack-megabytes=56000" -g ~/delphin/SRG/grammar/srg/ace/srg.dat --full-forest --select i-tokens "$profile"
 done
 

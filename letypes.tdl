@@ -1229,7 +1229,6 @@ nom-subj-synsem := lex-synsem &
 
 """.
 
-
 arg1_lt := nom-subj-synsem & 
   [ LOCAL.CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX #ind ] >,
     LKEYS.KEYREL arg1-ev-relation & 
@@ -4612,6 +4611,7 @@ v_ap_ser_synsem := v_copula_synsem &
   """
   e.g. Juan es feo
   removed LOCAL [ CAT.VAL COMPS < [ LOCAL [ CAT.HEAD [ KEYS.KEY basic_adj_rel ], to cover "será complicado"
+  OZ 2024-01-31: Added AGR #sind in MOD to rule out "Ella es bueno"
   """.
 
 
