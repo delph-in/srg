@@ -1216,11 +1216,11 @@ v_np-ap_sbj-cp-p-inf_sor_lex := main-verb & basic-three-arg &
 ; --- 1.3. Verbs taking nominal subject
 
 nom-subj-synsem := lex-synsem &
-  [ LOCAL [ AGR #agr & [ PNG #png ], 
+  [ LOCAL [ AGR #agr, 
             CAT [ VAL.SUBJ < [ LOCAL np_nom_local & 
                                      [ AGR #agr,
                                        CONT.HOOK.INDEX #xarg ] ] > ],
-            CONT.HOOK.XARG #xarg & [ PNG #png ] ] ]
+            CONT.HOOK.XARG #xarg ] ]
 """
 ; --- 1.3. Verbs taking nominal subject
 
@@ -1944,11 +1944,12 @@ v_pp-pp_e-e-prn-idm_lex := v_intr_two_mrkd_np_idm & norm-pronominal-verb &
 ; --- 1.3.2.7. intransitive subject to subject raising verbs
 
 v_intr_ssr_synsem := lex-synsem & 
-  [ LOCAL [ AGR #ind, 
+  [ LOCAL [ AGR #agr, 
             CAT [ MC bool,
                   HEAD [ AUX -, INV #inv ],
                   VAL [ SUBJ < [ LOCAL np_nom_local & 
-                                       [ CONT.HOOK.INDEX ref-ind & #ind ] ] >,
+                                       [ AGR #agr,
+                                         CONT.HOOK.INDEX ref-ind & #ind ] ] >,
                         COMPS < [ OPT -,
                                   LOCAL [ CAT [ MC -,
                                                 HEAD [ INV #inv, 
@@ -1962,7 +1963,7 @@ v_intr_ssr_synsem := lex-synsem &
                              LBL #hand ] !>, 
                    HCONS <! qeq & [ HARG #harg,
                                     LARG #larg ] !> ] ],
-    LKEYS [ KEYREL #keyrel & arg1-ev-relation &  [ ARG1 #harg ] ,
+    LKEYS [ KEYREL #keyrel & arg1-ev-relation &  [ ARG1 #harg & [ INDEX #ind ] ] ,
             --COMPKEY #ckey ] ]
 """
 ; --- 1.3.2.7. intransitive subject to subject raising verbs
