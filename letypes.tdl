@@ -4910,8 +4910,9 @@ v_aux_haber_synsem := lex-synsem &
 
 
 v_aux_vp-part_synsem := v_aux_haber_synsem &
-  [ LOCAL [ AGR #sind, 
-            CAT.VAL [ SUBJ < [ LOCAL np_nom_local & #subject & [ AGR #sind ] ] >,
+  [ LOCAL [ AGR #agr, 
+            CAT.VAL [ SUBJ < [ LOCAL np_nom_local & #subject & [ AGR #agr,
+                                                                 CONT.HOOK.INDEX #sind ] ] >,
                       COMPS < [ LOCAL.CAT vp_cat &
                                           [ HEAD.VOICE active,
                                             VAL [ SUBJ < [ LOCAL #subject ] >,
@@ -4924,8 +4925,9 @@ e.g. "Las gatas han salido."
 """.
 
 v_aux_vp-ppart_synsem := v_aux_haber_synsem &
-  [ LOCAL [ AGR #sind, 
-            CAT.VAL [ SUBJ < [ LOCAL #subject & [ AGR #sind ] ] >,
+  [ LOCAL [ AGR #agr, 
+            CAT.VAL [ SUBJ < [ LOCAL #subject & [ AGR #agr,
+                                                  CONT.HOOK.INDEX #sind ] ] >,
                       COMPS < [ LOCAL.CAT vp_cat &
                                           [ HEAD [ INV +,
                                                    VOICE passive ],
@@ -5503,9 +5505,7 @@ n_-_pn_lex := basic-noun-lex & basic-one-arg & norm-sem-lex-item &
 ; --- 2.3. Pronouns
 
 pronominal-lex := basic-nominal-lex &
-  [ SYNSEM.LOCAL [ AGR #agr,
-                   CONT.HOOK.INDEX #agr & 
-                                   [ PRONTYPE real_pron ] ] ].
+  [ SYNSEM.LOCAL.CONT.HOOK.INDEX.PRONTYPE real_pron ].
 
 norm-pronominal-synsem := lex-synsem &
   [ LOCAL [ CAT.MC na,
@@ -5617,8 +5617,7 @@ clitic-lex := norm-zero-arg &
 
 ; clitic-synsem := lex-synsem &
 clitic-synsem := non-canonical &
-  [ LOCAL [ AGR #index,
-            CAT [ MC na,
+  [ LOCAL [ CAT [ MC na,
                   HEAD noun &
                       [ PRD non-prd,
                         MOD < >,
@@ -5891,13 +5890,12 @@ spec-partitive-pron-lex := basic-nominal-lex &
 
 
 basic-pseudo-part-pron-synsem := lex-synsem &
-  [ LOCAL [ AGR #agr & [ PNG.PN 3sg,
+  [ LOCAL [ AGR [ PNG.PN 3sg,
                          DIVISIBLE + ],
             CAT.VAL.COMPS < [ OPT +,
                               LOCAL [ CAT.HEAD.KEYS.ALT2KEY udef_q_rel,
                                       CONT.HOOK.INDEX [ PNG.PN sing,
-                                                        DIVISIBLE + ] ] ] >,
-            CONT.HOOK.INDEX #agr ],
+                                                        DIVISIBLE + ] ] ] > ],
     NON-LOCAL.QUE 0-dlist ]
   """
   --- 2.3.4.1. pseudo-partitive pronouns (i.e. un poco/algo/nada + de Mass_N)
@@ -6085,8 +6083,7 @@ n_pp_pr-part-cuantos_lex := spec-partitive-pron-lex &
 ; --- 2.3.5. Relative pronouns
 
 rel_pronominal_synsem := lex-synsem &
-  [ LOCAL [ AGR #index,
-            CAT [ MC na,
+  [ LOCAL [ CAT [ MC na,
                   HEAD noun & 
                        [ PRD non-prd,
                          KEYS.ALTKEY norm_rel ],
@@ -6116,8 +6113,7 @@ rel_pronominal_synsem := lex-synsem &
 
 
 free_rel_pro_lex := basic-nominal-lex &
-  [ SYNSEM [ LOCAL [ AGR #ind,
-                     CAT [ HC-LIGHT -,
+  [ SYNSEM [ LOCAL [ CAT [ HC-LIGHT -,
                            MC na,
                            VAL [ SUBJ < >,
                                  COMPS < > ] ],
@@ -6253,8 +6249,7 @@ n_-_pr-rel-cual_lex := pron_relat &
 
 
 basic_wh_pron_lex := pronominal-lex &
-  [ SYNSEM [ LOCAL [ AGR #index,
-                     CAT [ MC na,
+  [ SYNSEM [ LOCAL [ CAT [ MC na,
                            HC-LIGHT -,
                            HEAD.KEYS.KEY non_modable_rel,
                            VAL.SPR < > ],
@@ -6276,9 +6271,7 @@ basic_wh_pron_lex := pronominal-lex &
 
 
 pron_wh_lex := basic_wh_pron_lex &
-  [ SYNSEM.LOCAL [ AGR #index,
-                   CAT.VAL.COMPS < >,
-                   CONT.HOOK.INDEX #index ],
+  [ SYNSEM.LOCAL.CAT.VAL.COMPS < >,
     ARG-ST < > ]
   """
   
@@ -6288,8 +6281,8 @@ pron_wh_lex := basic_wh_pron_lex &
 pron_wh_part_lex := basic_wh_pron_lex &
   [ SYNSEM basic-partitive-pron-synsem & [ LOCAL [ AGR.PNG.GEN #gender,
                                                    CAT.VAL.COMPS #comps & < [ OPT +,
-                                                                              LOCAL.CONT.HOOK.INDEX.PNG [ PN plur,
-                                                                                                          GEN #gender ] ] >,
+                                                                              LOCAL [ CONT.HOOK.INDEX.PNG.PN plur,
+                                                                                      AGR.PNG.GEN #gender ] ] >,
                                                    CONT.HOOK.INDEX.SORT non-temp ] ],
     ARG-ST #comps ]
   """
@@ -7509,8 +7502,7 @@ av_-_dg-sup_lex := basic_degree_spec_lex & basic-one-arg &
 ; --- 4.4. Pronominal adverbs
 
 basic_np_adv_synsem := lex-synsem & 
-  [ LOCAL [ AGR #ind,
-            CAT [ HC-LIGHT -,
+  [ LOCAL [ CAT [ HC-LIGHT -,
                   HEAD noun & 
                        [ CASE none,
                          KEYS keys_norm & 
@@ -9505,12 +9497,10 @@ n_pp_pr-part-nu-card_lex := partitive-pron-lex &
 
 
 n_pp_pr-psd-part-nu-card_lex := basic-nominal-lex &
-  [ SYNSEM norm-basic-partitive-pron-synsem & [ LOCAL [ AGR #agr,
-                                                        CAT.VAL [ SPR #spr & < [ OPT + ] >,
+  [ SYNSEM norm-basic-partitive-pron-synsem & [ LOCAL.CAT.VAL [ SPR #spr & < [ OPT + ] >,
                                                                   COMPS #comps & < [ OPT -,
                                                                                      LOCAL [ CAT.HEAD.KEYS.ALT2KEY udef_q_rel,
-                                                                                             CONT.HOOK.INDEX.DIVISIBLE + ] ] > ],
-                                                        CONT.HOOK.INDEX #agr ] ],
+                                                                                             CONT.HOOK.INDEX.DIVISIBLE + ] ] > ] ],
     ARG-ST < #spr . #comps > ]
   """
   c)- pseudo-partitive pronouns (Zd): decena, docena, centenar, millar, millón

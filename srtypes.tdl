@@ -20,7 +20,7 @@ headed-phrase := basic-headed-phrase &
   [ SYNSEM.LOCAL [ AGR #agr,
                    CAT.HEAD #head ],
     HEAD-DTR.SYNSEM.LOCAL [ CAT.HEAD #head,
-                            CONT.HOOK.INDEX #agr ] ].
+                            AGR #agr ] ].
 
 non-headed-phrase := phrase.
 
@@ -713,7 +713,8 @@ basic-head-spec-phrase := head-valence-phrase & phrasal & very-basic-binary-phra
              MODIFIED #modif ],
     HEAD-DTR [ INFLECTED +,
                SYNSEM [ SLSHD #slshd,
-                        LOCAL [ COORD -,
+                        LOCAL [ AGR #agr,
+                                COORD -,
                                 COORD-STRAT #coord-strat,
                                 CAT [ MC #mc,
                                       POSTHEAD #hdph,
@@ -721,10 +722,11 @@ basic-head-spec-phrase := head-valence-phrase & phrasal & very-basic-binary-phra
                                             COMPS #comps & < >,
                                             SPEC #spec,
                                             CLTS #clit & < > ] ],
-                                CONT.HOOK #hdhook & [ INDEX #agr ] ],
+                                CONT.HOOK #hdhook ],
                         MODIFIED #hmodif ] ],
     NON-HEAD-DTR.SYNSEM [ LOCAL [ COORD -,
-                                  CAT [ VAL [ SPEC < [ LOCAL [ CAT.VAL.COMPS #comps,
+                                  CAT [ VAL [ SPEC < [ LOCAL [ AGR #agr,
+                                                               CAT.VAL.COMPS #comps,
                                                                CONT.HOOK #hdhook ],
                                                        MODIFIED #hmodif ] >,
                                               COMPS #spcomps ] ] ],
@@ -1938,11 +1940,12 @@ basic-npadv-phrase := basic-unary-phrase & phrasal &
              LOCAL [ COORD #coord,
                      COORD-STRAT #coord-strat,
                      COORD-REL #crel,
-                     AGR #ind,
+                     AGR #agr,
                      CAT [ POSTHEAD +, 
                            HEAD modnp &
 				[ MOD < [ LOCAL intersective-mod &
-				 	        [ COORD -,
+				 	        [  AGR #agr,
+				 	           COORD -,
                                                   CAT.MC #mc,
                                                   CONT.HOOK [ INDEX #ind,
                                                               LTOP #ltop ] ],
@@ -1980,9 +1983,9 @@ basic-npadv-phrase := basic-unary-phrase & phrasal &
 	     HCONS <! !> ] ].
 
 npadv_phrase := basic-npadv-phrase &
-  [ SYNSEM.LOCAL [ AGR #ind,
-                   CAT.HEAD [ MOD < [ LOCAL [ CAT.HEAD +nv,
-                                              CONT.HOOK.INDEX #ind ] ] >,
+  [ SYNSEM.LOCAL [ AGR #agr,
+                   CAT.HEAD [ MOD < [ LOCAL [ AGR #agr,
+                                              CAT.HEAD +nv ] ] >,
                               CASE #case,
                               KEYS.ALTKEY #argkey ],
                    CONT.HOOK.INDEX.SORT #sort ],
@@ -1994,10 +1997,10 @@ npadv_phrase := basic-npadv-phrase &
                    [ ARG2 #index ] !> ].
 
 npadv_modn_phrase := basic-npadv-phrase &
-  [ SYNSEM.LOCAL [ AGR #ind,
-                   CAT.HEAD [ MOD < [ LOCAL [ CAT [ HEAD noun,
-                                                    POSTHEAD + ],
-                                              CONT.HOOK.INDEX #ind ] ] >,
+  [ SYNSEM.LOCAL [ AGR #agr,
+                   CAT.HEAD [ MOD < [ LOCAL [ AGR #agr,
+                                              CAT [ HEAD noun,
+                                                    POSTHEAD + ] ] ] >,
                               CASE #case,
                               KEYS.ALTKEY #argkey ],
                    CONT.HOOK.INDEX.SORT #sort ],
@@ -2016,7 +2019,6 @@ vocative_np_phrase := basic-unary-phrase & phrasal &
              LOCAL [ COORD #coord,
                      COORD-STRAT #coord-strat,
                      COORD-REL #crel,
-                     AGR #ind,
                      CAT [ HEAD modnp &
 				[ MOD < [ LOCAL scopal-mod &
                                                 [ COORD -,
@@ -2033,7 +2035,8 @@ vocative_np_phrase := basic-unary-phrase & phrasal &
                                  SPR < >,
                                  COMPS < > ],
 			   MC #mc ],
-		     CONT.HOOK [ LTOP #ltop,
+		     CONT.HOOK [ INDEX #ind,
+		                 LTOP #ltop,
                                  XARG #ind ],
                      CTXT #ctxt ],
               NON-LOCAL #nonloc ],
@@ -2130,7 +2133,7 @@ vger_phrase := unary-phrase &
 	     SLSHD #slshd,
              MODIFIED #hasmod,
              PUNCT #punct,
-             LOCAL [ AGR #ind,
+             LOCAL [ AGR #arg,
                      COORD #coord,
                      COORD-STRAT #coord-strat,
                      COORD-REL #crel,
@@ -2153,7 +2156,7 @@ vger_phrase := unary-phrase &
     ARGS < [ SYNSEM [ SLSHD #slshd,
                       MODIFIED #hasmod,
                       PUNCT #punct, 
-                      LOCAL [ AGR #ind,
+                      LOCAL [ AGR #arg,
                               COORD #coord & -,
                               COORD-STRAT #coord-strat,
                               COORD-REL #crel,
@@ -2190,14 +2193,14 @@ vger_phrase := unary-phrase &
 adjpart_phrase := unary-phrase & 
   [ SYNSEM [ LIGHT -,
              SLSHD #slshd,
-             LOCAL [ AGR #ind,
+             LOCAL [ AGR #agr,
                      COORD #coord & -,
                      COORD-STRAT #coord-strat & zero,
                      CAT [ HEAD adj &
                                [ PRD.HABER #haber & -,
                                  MOD < synsem &
                                        [ LOCAL intersective-mod &
-                                               [ AGR #ind,
+                                               [ AGR #agr,
                                                  CAT [ LASTNMOD -,
                                                        HEAD noun & [ KEYS.KEY nom_rel ],
                                                        VAL [ SUBJ < >,
@@ -2222,7 +2225,7 @@ adjpart_phrase := unary-phrase &
                                            VOICE passive,
                                            MOD < >,
                                            KEYS.KEY v_event_rel ],
-			   	    VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #ind ] >,
+			   	    VAL [ SUBJ < [ LOCAL.AGR #agr ] >,
                                           COMPS #comps & < >,
                                           CLTS #clts & < > ] ],
                               CONT #cont & [ HOOK #hook ],
@@ -2300,7 +2303,7 @@ prdp_phrase := unary-phrase &
 cpa_phrase := unary-phrase & phrasal &
   [ SYNSEM [ PUNCT.RPUNCT comma_punct,
              SLSHD #slshd,
-             LOCAL [ AGR #ind,
+             LOCAL [ AGR #agr,
                      COORD #coord,
                      COORD-STRAT #coord-strat,
                      CAT [ MC -,
@@ -2326,7 +2329,7 @@ cpa_phrase := unary-phrase & phrasal &
 	    NON-LOCAL #non-local ],
    ARGS < [ INFLECTED +,
             SYNSEM [ SLSHD #slshd,
-                     LOCAL [ AGR #ind,
+                     LOCAL [ AGR #agr,
                              COORD #coord,
                              COORD-STRAT #coord-strat,
                              CAT [ HEAD verb &
@@ -2470,7 +2473,8 @@ basic-ellipis-phrase := basic-headed-phrase & phrasal & basic-binary-phrase &
                                 STR.HEADING right,
                                 CAT [ POSTHEAD #hdph,
                                       HEAD [ MOD < [ NON-LOCAL.REL 0-dlist,
-                                                     LOCAL [ CAT [ MC na,
+                                                     LOCAL [  AGR #agr,
+                                                              CAT [ MC na,
                                                                    HEAD noun & 
                                                                         [ MOD < >,
                                                                           PRD #prd,
@@ -2482,7 +2486,7 @@ basic-ellipis-phrase := basic-headed-phrase & phrasal & basic-binary-phrase &
                                                                           SPEC < >,
                                                                           SPR < #synsem . #spr >, 
                                                                           CLTS < > ] ],
-                                                             CONT.HOOK #hdhook & [ INDEX #agr ] ] ] > ],
+                                                             CONT.HOOK #hdhook ] ] > ],
                                       VAL [ SUBJ #subj & < >,
                                             COMPS < >,
                                             SPEC #spec & < >,
@@ -2498,7 +2502,8 @@ basic-ellipis-phrase := basic-headed-phrase & phrasal & basic-binary-phrase &
                                     CAT [ POSTHEAD -,
                                           HEAD det,
                                           VAL [ SPEC < [ MODIFIED #hmodif,
-                                                         LOCAL.CONT.HOOK #hdhook & [ LTOP #larg ] ] >,
+                                                         LOCAL [ CONT.HOOK #hdhook & [ LTOP #larg ],
+                                                                 AGR #agr ] ] >,
                                                 COMPS #spcomps ] ],
                                     CONT [ HOOK #hook,
                                            HCONS.LIST < qeq & [ LARG #larg ], ... > ] ] ] ],
@@ -2843,7 +2848,8 @@ filler-head_nonwh-nfin_phrase := filler-head-non_wh_focus-phrase & filler-head-p
 
 filler-head-rel-phrase := filler-head-phrase & relative-clause &
   [ INFLECTED +,
-    SYNSEM [ LOCAL [ STR [ HEADED right,
+    SYNSEM [ LOCAL [ AGR #agr,
+                     STR [ HEADED right,
                            HEADING no ],
                      CAT [  MC na,
                             HEAD verb & 
@@ -2855,9 +2861,8 @@ filler-head-rel-phrase := filler-head-phrase & relative-clause &
                                    KEYS.KEY #key,
                                    LSYNSEM #lsynsem,
                                    MOD < [ LOCAL intersective-mod &
-                                                 [ AGR #ind,
-                                                   CONT.HOOK [ LTOP #rhand,
-                                                               INDEX #ind ] ] ] > ] ] ],
+                                                 [ AGR #agr,
+                                                   CONT.HOOK [ LTOP #rhand ] ] ] > ] ] ],
              NON-LOCAL.REL 1-dlist ],
     ARGS < [ SYNSEM.NON-LOCAL [ QUE 0-dlist,
                                 REL 1-dlist & 
@@ -3139,7 +3144,8 @@ filler-head_rel-fin-pp-mr_phrase := filler-head-rel-pp-mr-phrase.
 filler-head-nonrestr-rel-phrase := binary-phrase & relative-clause &
   [ SYNSEM phr-synsem & 
            [ SLSHD #slshd,
-             LOCAL [ STR [ HEADED right,
+             LOCAL [ AGR #agr,
+                     STR [ HEADED right,
                            HEADING no ],
                      CAT [ POSTHEAD +,
                            MC na,
@@ -3154,11 +3160,10 @@ filler-head-nonrestr-rel-phrase := binary-phrase & relative-clause &
                                          ALTKEY appos-able_rel ],
                                   MOD < [ PUNCT.RPUNCT comma_punct, 
                                           LOCAL intersective-mod &
-                                                [ AGR #ind,
+                                                [ AGR #agr,
                                                   CAT.VAL [ SUBJ < >,
                                                             COMPS < > ],
-                                                  CONT.HOOK [ LTOP #rhand,
-                                                              INDEX #ind  ] ] ] > ],
+                                                  CONT.HOOK [ LTOP #rhand ] ] ] > ],
                            VAL [ SUBJ #subj,
                                  SPR < >,
                                  COMPS #comps,
@@ -3353,14 +3358,13 @@ filler-head-free-rel-phrase := binary-phrase & phrasal &
   [ SYNSEM [ SLSHD #slshd,
              LOCAL [ COORD #coord,
                      COORD-STRAT #coord-strat,
-                     AGR #agr,
                      STR.HEADING no,
                      CAT [ MC na,
                            VAL [ SUBJ < >,
                                  COMPS < >,
                                  SPR < >,
                                  CLTS #clit ] ],
-                     CONT.HOOK #hook & [ INDEX ref-ind & #agr ] ],
+                     CONT.HOOK #hook & [ INDEX ref-ind ] ],
              NON-LOCAL [ SLASH 0-dlist,
                          QUE 0-dlist,
                          REL 0-dlist ],

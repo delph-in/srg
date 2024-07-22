@@ -73,8 +73,8 @@ sym_pred_pl_subj-lex-rule := basic-sym_pred-lex-rule &
                      CAT.VAL [ SUBJ < [ LOCAL np_nom_local & [ AGR #agr & [ PNG.PN plur ] ],
                                         NON-LOCAL #nlocal ] >,
                                COMPS #rest ],
-                     CONT.HOOK.XARG #agr ],
-             LKEYS.KEYREL.ARG1 #agr ],
+                     CONT.HOOK.XARG #arg1 ],
+             LKEYS.KEYREL.ARG1 #arg1 ],
     DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL mrkd_np_local,
                                        NON-LOCAL #nlocal & [ SLASH 0-dlist,
                                                              REL 0-dlist,
@@ -124,11 +124,12 @@ v_np_subj-plur-sym_dlr := basic-sym_pred-lex-rule &
            VCALT -,
            IMPERS + ],
     SYNSEM v_trans_np_synsem & [ LOCAL [ AGR #agr,
-                                         CAT.VAL [ SUBJ < [ LOCAL np_nom_local & [ AGR #agr & [ PNG.PN plur ] ],
+                                         CAT.VAL [ SUBJ < [ LOCAL np_nom_local & [ AGR #agr & [ PNG.PN plur ],
+                                                                                   CONT.HOOK.INDEX #arg1 ],
                                                             NON-LOCAL #nlocal ] >,
                                                    COMPS < #comp > ],
-                                         CONT.HOOK.XARG #agr ],
-                                 LKEYS.KEYREL.ARG1 #agr ],
+                                         CONT.HOOK.XARG #arg1 ],
+                                 LKEYS.KEYREL.ARG1 #arg1 ],
     DTR.SYNSEM v_sym_trans_np_mrkd_np_pl_subj_synsem & [ LOCAL [ AGR #agr,
                                                                  CAT.VAL.COMPS < #comp,
                                                                                  [ LOCAL mrkd_np_local,
@@ -151,7 +152,7 @@ v_np_plur-sym_dlr := basic-sym_pred-lex-rule &
                                                    COMPS < [ OPT -,
                                                              LOCAL np_acc_local & [ CONT.HOOK.INDEX ref-ind & #arg2 & [ PNG.PN plur ] ],
                                                              NON-LOCAL #nlocal ] > ],
-                                         CONT.HOOK.XARG #agr ],
+                                         CONT.HOOK.XARG #arg2 ],
                                  LKEYS.KEYREL.ARG2 #arg2 ],
     DTR.SYNSEM v_sym_trans_np_mrkd_np_pl_do_synsem & [ LOCAL [ AGR #agr,
                                                                CAT.VAL [ SUBJ #subj,
@@ -300,8 +301,8 @@ v_trans-passive-lex-rule := passive-lex-rule &
 
 
 v_np_passive-se_dlr := v_trans-passive-lex-rule &
-  [ SYNSEM.LOCAL [ AGR #ind,
-                   CAT.VAL [ SUBJ < [ LOCAL np_nom_local & [ AGR #ind,
+  [ SYNSEM.LOCAL [ AGR #agr,
+                   CAT.VAL [ SUBJ < [ LOCAL np_nom_local & [ AGR #agr,
                                                              CAT.HEAD.KEYS.KEY nom_rel,
                                                              CONT.HOOK.INDEX ref-ind ] ] >,
                              COMPS #comps ] ],
@@ -552,11 +553,12 @@ vcomp_vfin_vinf-lex-rule := vfin_vinf-lex-rule &
 vintr_mrkd_cp_prop-or-ques_lex-rule := vcomp_vfin_vinf-lex-rule &
   [ SYNSEM v_intr_mrkd_cp_prop-or-ques_inf_synsem & [ LOCAL [ AGR #agr,
                                                               CAT.VAL.COMPS < [ OPT -,
-                                                                                LOCAL [ CAT.HEAD.KEYS #keys,
+                                                                                LOCAL [ AGR #agr,
+                                                                                        CAT.HEAD.KEYS #keys,
                                                                                         CONT.HOOK [ INDEX.SF #sf,
-                                                                                                    XARG #agr ] ],
+                                                                                                    XARG #xarg ] ],
                                                                                 NON-LOCAL #nloc ] >,
-                                                              CONT.HOOK.XARG #agr ] ],
+                                                              CONT.HOOK.XARG #xarg ] ],
     DTR.SYNSEM v_intr_mrkd_cp_prop-or-ques_fin_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT.HEAD.KEYS #keys,
                                                                                           CONT.HOOK.INDEX.SF #sf ],
                                                                                   NON-LOCAL #nloc ] > ] ]
@@ -899,7 +901,7 @@ ppart-lex-rule :=  ppart-basic-lex-rule &
                      CAT [ VAL [ SUBJ < synsem &
                                         [ LOCAL np_nom_local & 
                                                 [ AGR #agr,
-                                                  CONT #objcont & [ HOOK.INDEX #agr ] ], 
+                                                  CONT #objcont ], 
                                           NON-LOCAL #ononloc & [ SLASH 0-dlist ] ] >,
                                  COMPS < [ OPT +,
                                            LOCAL mrkd_np_local &
@@ -929,16 +931,17 @@ ppart-intran-lex-rule := ppart-basic-lex-rule &
   """.
 
 v_pastpart-trans_dlr := ppart-lex-rule &
-  [ SYNSEM.LOCAL [ CAT [ HEAD [ INV -,
+  [ SYNSEM.LOCAL [ AGR #agr,
+                   CAT [ HEAD [ INV -,
                                 PRD prd & [ COPV ser ] ],
                          VAL [ SUBJ < unexpressed & [ OPT + ] > ] ],
                    CONT.RELS.LIST < [ ARG1 #subjind,
                                       ARG2 #arg2 ], ... > ],
     DTR [ INFLECTED +,
-          SYNSEM.LOCAL [ AGR #arg2,
+          SYNSEM.LOCAL [ AGR #agr,
                          CAT.VAL [ SUBJ < [ LOCAL np_nom_local & [ CONT.HOOK.INDEX #subjind ] ] >,
                                  COMPS.FIRST [ LOCAL np_acc_local & [ CONT.HOOK.INDEX #arg2,
-                                                                      AGR #arg2 ] ] ] ] ] ]
+                                                                      AGR #agr ] ] ] ] ] ]
   """
   -- with transitive verbs
   """.
@@ -1130,24 +1133,25 @@ indef-adj-lex-rule := tmt-lex-rule & phrase-or-lexrule &
                            MC na,
                            HEAD adj & [ KEYS.KEY #pred,
                                         TAM #tam,
-                                        MOD < [ LOCAL intersective-mod & [ CAT [ HEAD noun & [ KEYS.KEY non_elliptical_n_rel ],
+                                        MOD < [ LOCAL intersective-mod & [ AGR #agr,
+                                                                           CAT [ HEAD noun & [ KEYS.KEY non_elliptical_n_rel ],
                                                                                  VAL [ SPR < expressed-synsem & [ LOCAL.CAT.HEAD.KEYS.KEY quant_or_deg_rel ] >,
                                                                                        SUBJ < >,
                                                                                        SPEC < > ] ],
-                                                                           CONT.HOOK.INDEX #agr ] ] > ],
+                                                                           CONT.HOOK.INDEX #ind ] ] > ],
                            VAL [ SPR < >,
                                  SUBJ < >,
                                  COMPS < >,
                                  CLTS < > ] ],
                      CONT [ HOOK [ LTOP #ltop,
                                    INDEX #arg0,
-                                   XARG #agr ],
+                                   XARG #ind ],
                             RELS <! #key & adj-arg1-relation & [ ARG0.E #tam ] !>,
                             HCONS #hcons ] ],
              LKEYS.KEYREL #key & [ PRED #pred,
                                    LBL #ltop,
                                    ARG0 #arg0,
-                                   ARG1 #agr ],
+                                   ARG1 #ind ],
              NON-LOCAL #nonloc ],
     DTR [ STEM #stem,
           INFLECTED #infl,
@@ -1255,18 +1259,19 @@ det_postn_lex-rule := quant-or-det_postn_lex-rule &
                      CAT [ MC na,
                            HEAD adj & [ TAM #tam,
                                         KEYS.KEY #pred,
-                                        MOD < [ LOCAL intersective-mod & [ CAT [ HEAD noun,
+                                        MOD < [ LOCAL intersective-mod & [ AGR #agr,
+                                                                           CAT [ HEAD noun,
                                                                                  VAL [ SUBJ < >,
                                                                                        SPEC < > ] ],
-                                                                           CONT.HOOK.INDEX #agr ] ] > ] ],
+                                                                           CONT.HOOK.INDEX #arg1 ] ] > ] ],
                      CONT [ HOOK [ INDEX #arg0,
                                    LTOP #ltop,
-                                   XARG #agr ],
+                                   XARG #arg1 ],
                             RELS <! #key & adj-arg1-relation & [ ARG0.E #tam ] !> ] ],
              LKEYS.KEYREL #key & [ PRED #pred,
                                    ARG0 #arg0,
                                    LBL #ltop,
-                                   ARG1 #agr ] ],
+                                   ARG1 #arg1 ] ],
     DTR.SYNSEM.LOCAL.AGR #agr ]
   """
   
@@ -1363,13 +1368,13 @@ n_part-noun_dlr := partitive-lex-rule &
                                                               VAL.SUBJ < > ] ] ] > ] ],
                      CONT [ HCONS #hcons, 
                             HOOK [ LTOP #ltop,
-                                   INDEX #agr ],
+                                   INDEX #ind ],
 			    RELS.LIST.FIRST #keyrel ] ],
              NON-LOCAL #nlocal,
              LKEYS.KEYREL #keyrel & noun-arg0-relation &
                           [ LBL #ltop,
                             PRED #pred,
-                            ARG0 #agr ] ],
+                            ARG0 #ind ] ],
     DTR [ SYNSEM n_group-or-pseudopart_synsem &
                  [ LOCAL [ CAT [ HEAD partn & 
                                       [ MOD #mod,
@@ -1383,7 +1388,7 @@ n_part-noun_dlr := partitive-lex-rule &
                                        COMPS < [ OPT + ] > ] ], 
                            CONT [ HCONS #hcons, 
                                   HOOK [ LTOP #ltop,
-                                         INDEX #agr ],
+                                         INDEX #ind ],
                                   RELS <! [ PRED #pred ] !> ] ] ] ],
     ARG-ST #spr & < [ NON-LOCAL #nlocal ] >,
     C-CONT.RELS <! #keyrel !> ].

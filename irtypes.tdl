@@ -669,7 +669,7 @@ n_sg_ilr :=  n_ilr & inflecting-lex-rule &
            [ LOCAL [ AGR #agr & [ PNG.PN 3sg ],
                      CAT.VAL.SPR #spr,
                      CONT.HOOK [ LTOP #ltop,
-                                 INDEX #index ] ],
+                                 INDEX #index & [ PNG.PN 3sg ] ] ],
              LKEYS.KEYREL [ LBL #ltop,
                             ARG0 #index ] ],
     DTR.SYNSEM #synsem & 
@@ -694,7 +694,7 @@ n_pl_ilr :=  n_ilr &
                                                       RELS #rels ],
                                                CTXT #ctxt ],
                                        NON-LOCAL #nlocal ] > ],
-                     CONT [ HOOK.INDEX #ind,
+                     CONT [ HOOK.INDEX #ind & [ PNG.PN 3pl ],
                             RELS.LIST.FIRST #keyrel & noun-relation & 
                                             [ ARG0 #ind ] ] ],
               LKEYS.KEYREL #keyrel ],
@@ -723,8 +723,8 @@ n_fem_ilr :=  n_ilr &
   [ SYNSEM #synsem & 
            [ LOCAL [ AGR #agr & [ PNG.GEN fem ],
                      CAT.VAL.SPR < [ LOCAL [ AGR #agr,
-                                             CONT.HOOK.INDEX #ind ] ] >,
-                     CONT [ HOOK.INDEX #agr,
+                                             CONT.HOOK.INDEX #ind & [ PNG.GEN fem ] ] ] >,
+                     CONT [ HOOK.INDEX #ind,
                             RELS.LIST.FIRST.ARG0 #ind ] ] ],
     DTR.SYNSEM #synsem ].
 
@@ -737,14 +737,10 @@ n_com_ilr :=  n_ilr &
                             RELS.LIST.FIRST.ARG0 #ind ] ] ],
     DTR.SYNSEM #synsem ].
 
-n_masc-sg_ilr :=  n_sg_ilr & 
-  [ SYNSEM.LOCAL.AGR.PNG.GEN masc ].
-n_masc-pl_ilr :=  n_pl_ilr & 
-  [ SYNSEM.LOCAL.AGR.PNG.GEN masc ].
-n_fem-sg_ilr :=  n_sg_ilr & 
-  [ SYNSEM.LOCAL.AGR.PNG.GEN fem ].
-n_fem-pl_ilr :=  n_pl_ilr & 
-  [ SYNSEM.LOCAL.AGR.PNG.GEN fem ].
+n_masc-sg_ilr :=  n_sg_ilr & n_masc_ilr.
+n_masc-pl_ilr :=  n_pl_ilr & n_masc_ilr.
+n_fem-sg_ilr :=  n_sg_ilr & n_fem_ilr.
+n_fem-pl_ilr :=  n_pl_ilr & n_fem_ilr.
 
 
 ; --- Verbs 
