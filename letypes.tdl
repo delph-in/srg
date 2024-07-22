@@ -4602,12 +4602,13 @@ v_cop-nsbj := v_copula &
 
 
 v_ap_ser_synsem := v_copula_synsem &
-  [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
+  [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL [ AGR #agr,
+                                       CONT.HOOK.INDEX #ind ] ] >,
                       COMPS < [ LOCAL [ CAT.HEAD adj & [ MOD < [ LOCAL [ CAT.HEAD noun, 
-                                                                         AGR #sind ] ] >,
-                                                         PRD [ COPV ser, HABER - ] ],
-                                        CONT.HOOK.XARG #sind ] ] > ],
-            CONT.HOOK.XARG #sind ] ]
+                                                                         AGR #agr,
+                                                                         CONT.HOOK.INDEX #ind ] ] >,
+                                                         PRD [ COPV ser, HABER - ] ] ] ] > ],
+            CONT.HOOK.XARG #ind ] ]
   """
   e.g. Juan es feo
   removed LOCAL [ CAT.VAL COMPS < [ LOCAL [ CAT.HEAD [ KEYS.KEY basic_adj_rel ], to cover "será complicado"

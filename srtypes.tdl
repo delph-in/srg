@@ -1167,9 +1167,11 @@ head-adj_int-cn-ap_phrase := head-adj-int-n-xp-phrase &
 """.
 
 head-adj_int-cn-pp_phrase := head-adj-int-n-xp-phrase &
-  [ SYNSEM.LOCAL.CAT.VAL.SPR #spr,
+  [ SYNSEM.LOCAL [ CAT.VAL.SPR #spr,
+                   AGR #agr ],
     HEAD-DTR.SYNSEM [ PUNCT.RPUNCT no_punct,
-                      LOCAL [ CAT [ HEAD.KEYS.KEY all_common_nom_rel,
+                      LOCAL [ AGR #agr,
+                              CAT [ HEAD.KEYS.KEY all_common_nom_rel,
                                     VAL.SPR #spr & < [ ] > ],
                               CONT.HOOK.INDEX.PRONTYPE not_pron ] ],
 ;    NON-HEAD-DTR.SYNSEM.LOCAl [ CAT.HEAD prep_or_modnp,
