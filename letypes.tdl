@@ -1216,11 +1216,11 @@ v_np-ap_sbj-cp-p-inf_sor_lex := main-verb & basic-three-arg &
 ; --- 1.3. Verbs taking nominal subject
 
 nom-subj-synsem := lex-synsem &
-  [ LOCAL [ AGR #agr, 
+  [ LOCAL [ AGR #agr & [ PNG #png ], 
             CAT [ VAL.SUBJ < [ LOCAL np_nom_local & 
                                      [ AGR #agr,
                                        CONT.HOOK.INDEX #xarg ] ] > ],
-            CONT.HOOK.XARG #xarg ] ]
+            CONT.HOOK.XARG #xarg & [ PNG #png ] ] ]
 """
 ; --- 1.3. Verbs taking nominal subject
 
@@ -1944,11 +1944,11 @@ v_pp-pp_e-e-prn-idm_lex := v_intr_two_mrkd_np_idm & norm-pronominal-verb &
 ; --- 1.3.2.7. intransitive subject to subject raising verbs
 
 v_intr_ssr_synsem := lex-synsem & 
-  [ LOCAL [ AGR #agr, 
+  [ LOCAL [ AGR #ind, 
             CAT [ MC bool,
                   HEAD [ AUX -, INV #inv ],
                   VAL [ SUBJ < [ LOCAL np_nom_local & 
-                                       [ AGR #agr ] ] >,
+                                       [ CONT.HOOK.INDEX ref-ind & #ind ] ] >,
                         COMPS < [ OPT -,
                                   LOCAL [ CAT [ MC -,
                                                 HEAD [ INV #inv, 
@@ -4602,10 +4602,9 @@ v_cop-nsbj := v_copula &
 
 
 v_ap_ser_synsem := v_copula_synsem &
-  [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL [ CONT.HOOK.INDEX #sind,
-                                       AGR #agr ] ] >,
+  [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
                       COMPS < [ LOCAL [ CAT.HEAD adj & [ MOD < [ LOCAL [ CAT.HEAD noun, 
-                                                                         AGR #agr ] ] >,
+                                                                         AGR #sind ] ] >,
                                                          PRD [ COPV ser, HABER - ] ],
                                         CONT.HOOK.XARG #sind ] ] > ],
             CONT.HOOK.XARG #sind ] ]
@@ -4624,11 +4623,10 @@ v_ap_ser_lex := v_cop-np_sbj &
 
 
 v_pp_ser_synsem := v_copula_synsem &
-  [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL [ CONT.HOOK.INDEX #sind,
-                                       AGR #agr ] ] >,
+  [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
                       COMPS < [ LOCAL [ CAT.HEAD adp & [ KEYS.ALT2KEY quant_or_deg_rel,
                                                          MOD < [ LOCAL [ CAT.HEAD noun,
-                                                                         AGR #agr ] ] >,
+                                                                         AGR #sind ] ] >,
                                                          PRD [ COPV ser, HABER - ] ],
                                         CONT.HOOK.XARG #sind ] ] > ],
             CONT.HOOK.XARG #sind ] ]
@@ -4687,11 +4685,11 @@ v_pp_e-vp-inf-ser_lex := v_cop-np_sbj &
 
 
 v_vp_ppart_ser_synsem := v_copula_synsem &
-  [ LOCAL.CAT.VAL [ SUBJ < [ LOCAL [ AGR #agr,
+  [ LOCAL.CAT.VAL [ SUBJ < [ LOCAL [ ;AGR #agr,
                                      CONT.HOOK.INDEX #arg2 ] ] >,
-                    COMPS < [ LOCAL [ CAT [ HEAD verb & [ PRD.COPV ser ],
-                                            VAL.SUBJ < [ LOCAL [ CONT.HOOK.INDEX #arg2,
-                                                                 AGR #agr ] ] > ],
+                    COMPS < [ LOCAL [ ;AGR #agr,
+                                      CAT [ HEAD verb & [ PRD.COPV ser ],
+                                            VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX #arg2 ] > ],
                                       CONT.RELS.LIST < [ ARG2 #arg2 ], ... > ] ] > ] ]
   """
   e.g. Juan fue atacado
@@ -4707,11 +4705,9 @@ v_vp_ppart-ser_lex := v_cop-np_sbj &
 
 v_vp_ppart_estar_synsem := v_copula_synsem &
   [ LOCAL.CAT [ HEAD.PRD non-prd,
-                VAL [ SUBJ < [ LOCAL [ CONT.HOOK.INDEX #arg2,
-                                       AGR #agr ] ] >,
-                      COMPS < [ LOCAL.CAT.HEAD adj & [ MOD < [ LOCAL [ AGR #agr,
-                                                                       CAT.HEAD noun,
-                                                                       CONT.HOOK.INDEX #arg2 ] ] >,
+                VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #arg2 ] >,
+                      COMPS < [ LOCAL.CAT.HEAD adj & [ MOD < [ LOCAL [ AGR #arg2,
+                                                                       CAT.HEAD noun ] ] >,
                                                        PRD.COPV estar,
                                                        KEYS.KEY v_event_rel ] ] > ] ] ]
   """
@@ -4727,10 +4723,9 @@ v_vp_ppart-estar_lex := v_cop-np_sbj &
 
 
 v_ap_estar_synsem := v_copula_synsem &
-  [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL [ CONT.HOOK.INDEX #sind,
-                                       AGR #agr ] ] >,
+  [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
                       COMPS < [ LOCAL [ CAT.HEAD adj & [ MOD < [ LOCAL [ CAT.HEAD noun,
-                                                                         AGR #agr ] ] >,
+                                                                         AGR #sind ] ] >,
                                                          PRD.COPV estar,
                                                          KEYS.KEY adj_rel ],
                                         CONT.HOOK.XARG #sind ] ] > ],
@@ -4910,9 +4905,8 @@ v_aux_haber_synsem := lex-synsem &
 
 
 v_aux_vp-part_synsem := v_aux_haber_synsem &
-  [ LOCAL [ AGR #agr, 
-            CAT.VAL [ SUBJ < [ LOCAL np_nom_local & #subject & [ AGR #agr,
-                                                                 CONT.HOOK.INDEX #sind ] ] >,
+  [ LOCAL [ AGR #sind, 
+            CAT.VAL [ SUBJ < [ LOCAL np_nom_local & #subject & [ AGR #sind ] ] >,
                       COMPS < [ LOCAL.CAT vp_cat &
                                           [ HEAD.VOICE active,
                                             VAL [ SUBJ < [ LOCAL #subject ] >,
@@ -4925,9 +4919,8 @@ e.g. "Las gatas han salido."
 """.
 
 v_aux_vp-ppart_synsem := v_aux_haber_synsem &
-  [ LOCAL [ AGR #agr, 
-            CAT.VAL [ SUBJ < [ LOCAL #subject & [ AGR #agr,
-                                                  CONT.HOOK.INDEX #sind ] ] >,
+  [ LOCAL [ AGR #sind, 
+            CAT.VAL [ SUBJ < [ LOCAL #subject & [ AGR #sind ] ] >,
                       COMPS < [ LOCAL.CAT vp_cat &
                                           [ HEAD [ INV +,
                                                    VOICE passive ],
@@ -5505,7 +5498,9 @@ n_-_pn_lex := basic-noun-lex & basic-one-arg & norm-sem-lex-item &
 ; --- 2.3. Pronouns
 
 pronominal-lex := basic-nominal-lex &
-  [ SYNSEM.LOCAL.CONT.HOOK.INDEX.PRONTYPE real_pron ].
+  [ SYNSEM.LOCAL [ AGR #agr,
+                   CONT.HOOK.INDEX #agr & 
+                                   [ PRONTYPE real_pron ] ] ].
 
 norm-pronominal-synsem := lex-synsem &
   [ LOCAL [ CAT.MC na,
@@ -5617,7 +5612,8 @@ clitic-lex := norm-zero-arg &
 
 ; clitic-synsem := lex-synsem &
 clitic-synsem := non-canonical &
-  [ LOCAL [ CAT [ MC na,
+  [ LOCAL [ AGR #index,
+            CAT [ MC na,
                   HEAD noun &
                       [ PRD non-prd,
                         MOD < >,
@@ -5890,12 +5886,13 @@ spec-partitive-pron-lex := basic-nominal-lex &
 
 
 basic-pseudo-part-pron-synsem := lex-synsem &
-  [ LOCAL [ AGR [ PNG.PN 3sg,
+  [ LOCAL [ AGR #agr & [ PNG.PN 3sg,
                          DIVISIBLE + ],
             CAT.VAL.COMPS < [ OPT +,
                               LOCAL [ CAT.HEAD.KEYS.ALT2KEY udef_q_rel,
                                       CONT.HOOK.INDEX [ PNG.PN sing,
-                                                        DIVISIBLE + ] ] ] > ],
+                                                        DIVISIBLE + ] ] ] >,
+            CONT.HOOK.INDEX #agr ],
     NON-LOCAL.QUE 0-dlist ]
   """
   --- 2.3.4.1. pseudo-partitive pronouns (i.e. un poco/algo/nada + de Mass_N)
@@ -6083,7 +6080,8 @@ n_pp_pr-part-cuantos_lex := spec-partitive-pron-lex &
 ; --- 2.3.5. Relative pronouns
 
 rel_pronominal_synsem := lex-synsem &
-  [ LOCAL [ CAT [ MC na,
+  [ LOCAL [ AGR #index,
+            CAT [ MC na,
                   HEAD noun & 
                        [ PRD non-prd,
                          KEYS.ALTKEY norm_rel ],
@@ -6113,7 +6111,8 @@ rel_pronominal_synsem := lex-synsem &
 
 
 free_rel_pro_lex := basic-nominal-lex &
-  [ SYNSEM [ LOCAL [ CAT [ HC-LIGHT -,
+  [ SYNSEM [ LOCAL [ AGR #ind,
+                     CAT [ HC-LIGHT -,
                            MC na,
                            VAL [ SUBJ < >,
                                  COMPS < > ] ],
@@ -6249,7 +6248,8 @@ n_-_pr-rel-cual_lex := pron_relat &
 
 
 basic_wh_pron_lex := pronominal-lex &
-  [ SYNSEM [ LOCAL [ CAT [ MC na,
+  [ SYNSEM [ LOCAL [ AGR #index,
+                     CAT [ MC na,
                            HC-LIGHT -,
                            HEAD.KEYS.KEY non_modable_rel,
                            VAL.SPR < > ],
@@ -6271,7 +6271,9 @@ basic_wh_pron_lex := pronominal-lex &
 
 
 pron_wh_lex := basic_wh_pron_lex &
-  [ SYNSEM.LOCAL.CAT.VAL.COMPS < >,
+  [ SYNSEM.LOCAL [ AGR #index,
+                   CAT.VAL.COMPS < >,
+                   CONT.HOOK.INDEX #index ],
     ARG-ST < > ]
   """
   
@@ -6281,8 +6283,8 @@ pron_wh_lex := basic_wh_pron_lex &
 pron_wh_part_lex := basic_wh_pron_lex &
   [ SYNSEM basic-partitive-pron-synsem & [ LOCAL [ AGR.PNG.GEN #gender,
                                                    CAT.VAL.COMPS #comps & < [ OPT +,
-                                                                              LOCAL [ CONT.HOOK.INDEX.PNG.PN plur,
-                                                                                      AGR.PNG.GEN #gender ] ] >,
+                                                                              LOCAL.CONT.HOOK.INDEX.PNG [ PN plur,
+                                                                                                          GEN #gender ] ] >,
                                                    CONT.HOOK.INDEX.SORT non-temp ] ],
     ARG-ST #comps ]
   """
@@ -7502,7 +7504,8 @@ av_-_dg-sup_lex := basic_degree_spec_lex & basic-one-arg &
 ; --- 4.4. Pronominal adverbs
 
 basic_np_adv_synsem := lex-synsem & 
-  [ LOCAL [ CAT [ HC-LIGHT -,
+  [ LOCAL [ AGR #ind,
+            CAT [ HC-LIGHT -,
                   HEAD noun & 
                        [ CASE none,
                          KEYS keys_norm & 
@@ -9497,10 +9500,12 @@ n_pp_pr-part-nu-card_lex := partitive-pron-lex &
 
 
 n_pp_pr-psd-part-nu-card_lex := basic-nominal-lex &
-  [ SYNSEM norm-basic-partitive-pron-synsem & [ LOCAL.CAT.VAL [ SPR #spr & < [ OPT + ] >,
+  [ SYNSEM norm-basic-partitive-pron-synsem & [ LOCAL [ AGR #agr,
+                                                        CAT.VAL [ SPR #spr & < [ OPT + ] >,
                                                                   COMPS #comps & < [ OPT -,
                                                                                      LOCAL [ CAT.HEAD.KEYS.ALT2KEY udef_q_rel,
-                                                                                             CONT.HOOK.INDEX.DIVISIBLE + ] ] > ] ],
+                                                                                             CONT.HOOK.INDEX.DIVISIBLE + ] ] > ],
+                                                        CONT.HOOK.INDEX #agr ] ],
     ARG-ST < #spr . #comps > ]
   """
   c)- pseudo-partitive pronouns (Zd): decena, docena, centenar, millar, millón
