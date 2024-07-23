@@ -1948,7 +1948,8 @@ v_intr_ssr_synsem := lex-synsem &
             CAT [ MC bool,
                   HEAD [ AUX -, INV #inv ],
                   VAL [ SUBJ < [ LOCAL np_nom_local & 
-                                       [ AGR #agr ] ] >,
+                                       [ AGR #agr,
+                                         CONT.HOOK.INDEX ref-ind ] ] >,
                         COMPS < [ OPT -,
                                   LOCAL [ CAT [ MC -,
                                                 HEAD [ INV #inv, 
@@ -4613,6 +4614,7 @@ v_ap_ser_synsem := v_copula_synsem &
   e.g. Juan es feo
   removed LOCAL [ CAT.VAL COMPS < [ LOCAL [ CAT.HEAD [ KEYS.KEY basic_adj_rel ], to cover "será complicado"
   OZ 2024-01-31: Added AGR #sind in MOD to rule out "Ella es bueno"
+  OZ 2024-07-23: Divorced AGR from INDEX
   """.
 
 
@@ -4624,10 +4626,11 @@ v_ap_ser_lex := v_cop-np_sbj &
 
 
 v_pp_ser_synsem := v_copula_synsem &
-  [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
+  [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL [ AGR #agr,
+                                       CONT.HOOK.INDEX #sind ] ] >,
                       COMPS < [ LOCAL [ CAT.HEAD adp & [ KEYS.ALT2KEY quant_or_deg_rel,
                                                          MOD < [ LOCAL [ CAT.HEAD noun,
-                                                                         AGR #sind ] ] >,
+                                                                         AGR #agr ] ] >,
                                                          PRD [ COPV ser, HABER - ] ],
                                         CONT.HOOK.XARG #sind ] ] > ],
             CONT.HOOK.XARG #sind ] ]
@@ -4706,9 +4709,11 @@ v_vp_ppart-ser_lex := v_cop-np_sbj &
 
 v_vp_ppart_estar_synsem := v_copula_synsem &
   [ LOCAL.CAT [ HEAD.PRD non-prd,
-                VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #arg2 ] >,
-                      COMPS < [ LOCAL.CAT.HEAD adj & [ MOD < [ LOCAL [ AGR #arg2,
-                                                                       CAT.HEAD noun ] ] >,
+                VAL [ SUBJ < [ LOCAL [ AGR #agr,
+                                       CONT.HOOK.INDEX #arg2 ] ] >,
+                      COMPS < [ LOCAL.CAT.HEAD adj & [ MOD < [ LOCAL [ AGR #agr,
+                                                                       CAT.HEAD noun,
+                                                                       CONT.HOOK.INDEX #arg2 ] ] >,
                                                        PRD.COPV estar,
                                                        KEYS.KEY v_event_rel ] ] > ] ] ]
   """
@@ -4724,9 +4729,11 @@ v_vp_ppart-estar_lex := v_cop-np_sbj &
 
 
 v_ap_estar_synsem := v_copula_synsem &
-  [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
+  [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL [ AGR #agr,
+                                       CONT.HOOK.INDEX #sind ] ] >,
                       COMPS < [ LOCAL [ CAT.HEAD adj & [ MOD < [ LOCAL [ CAT.HEAD noun,
-                                                                         AGR #sind ] ] >,
+                                                                         AGR #agr,
+                                                                         CONT.HOOK.INDEX #sind ] ] >,
                                                          PRD.COPV estar,
                                                          KEYS.KEY adj_rel ],
                                         CONT.HOOK.XARG #sind ] ] > ],
