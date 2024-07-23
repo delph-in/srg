@@ -896,7 +896,7 @@ vppart_ilr :=  inflecting-lex-rule &
                                  SUBJ < synsem &
                                         [ LOCAL np_nom_local & 
                                                 [ AGR #agr,
-                                                  CONT #objcont & [ HOOK.INDEX #agr ] ], 
+                                                  CONT #objcont ], 
                                           NON-LOCAL #ononloc & [ SLASH 0-dlist ] ] >,
                                  COMPS < [ OPT +,
                                            LOCAL mrkd_np_local &
