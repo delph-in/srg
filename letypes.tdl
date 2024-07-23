@@ -4913,8 +4913,9 @@ v_aux_haber_synsem := lex-synsem &
 
 
 v_aux_vp-part_synsem := v_aux_haber_synsem &
-  [ LOCAL [ AGR #sind, 
-            CAT.VAL [ SUBJ < [ LOCAL np_nom_local & #subject & [ AGR #sind ] ] >,
+  [ LOCAL [ AGR #agr, 
+            CAT.VAL [ SUBJ < [ LOCAL np_nom_local & #subject & [ AGR #agr,
+                                                                 CONT.HOOK.INDEX #sind ] ] >,
                       COMPS < [ LOCAL.CAT vp_cat &
                                           [ HEAD.VOICE active,
                                             VAL [ SUBJ < [ LOCAL #subject ] >,
