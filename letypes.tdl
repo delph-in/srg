@@ -4928,8 +4928,9 @@ e.g. "Las gatas han salido."
 """.
 
 v_aux_vp-ppart_synsem := v_aux_haber_synsem &
-  [ LOCAL [ AGR #sind, 
-            CAT.VAL [ SUBJ < [ LOCAL #subject & [ AGR #sind ] ] >,
+  [ LOCAL [ AGR #agr, 
+            CAT.VAL [ SUBJ < [ LOCAL #subject & [ AGR #agr,
+                                                  CONT.HOOK.INDEX #sind ] ] >,
                       COMPS < [ LOCAL.CAT vp_cat &
                                           [ HEAD [ INV +,
                                                    VOICE passive ],
