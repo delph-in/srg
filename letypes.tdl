@@ -4689,9 +4689,9 @@ v_pp_e-vp-inf-ser_lex := v_cop-np_sbj &
 
 
 v_vp_ppart_ser_synsem := v_copula_synsem &
-  [ LOCAL.CAT.VAL [ SUBJ < [ LOCAL [ ;AGR #agr,
+  [ LOCAL.CAT.VAL [ SUBJ < [ LOCAL [ AGR #agr,
                                      CONT.HOOK.INDEX #arg2 ] ] >,
-                    COMPS < [ LOCAL [ ;AGR #agr,
+                    COMPS < [ LOCAL [ AGR #agr,
                                       CAT [ HEAD verb & [ PRD.COPV ser ],
                                             VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX #arg2 ] > ],
                                       CONT.RELS.LIST < [ ARG2 #arg2 ], ... > ] ] > ] ]
