@@ -218,6 +218,8 @@ neut_ilr :=  infl-ltow-rule &
   OZ: I don't see the point of the neut GEN value for now; it blocks constructions like "Esto es cierto" etc.,
   and I don't see what it is adding.
   """.
+  
+
 
 masc_3sg_ilr :=  masc_ilr & 3sg_ilr.
 masc_3pl_ilr :=  masc_ilr & 3pl_ilr.
@@ -231,6 +233,7 @@ masc_pl_ilr := masc_ilr & pl_ilr.
 fem_pl_ilr := fem_ilr & pl_ilr.
 neut_sg_ilr := neut_ilr & sg_ilr.
 neut_pl_ilr := neut_ilr & sg_ilr.
+
 
 ; -- determiners
 
@@ -259,7 +262,9 @@ dr_ilr :=  d_ilr &
 
 da0ms0_ilr := da_ilr & masc_sg_ilr
 """definite article""".
-da0mp0_ilr := da_ilr & masc_pl_ilr
+da0mp0_ilr := da_ilr & masc_pl_ilr ;& 
+;[SYNSEM.LOCAL.CAT.VAL.SPEC < [ LOCAL [ AGR.PNG [ GEN masc, PN plur ],
+;                                       CONT.HOOK.INDEX.PNG [ GEN masc, PN plur ] ] ] >]
 """definite article""".
 da0fs0_ilr := da_ilr & fem_sg_ilr
 """definite article""".
@@ -377,12 +382,58 @@ dr0fp0_ilr :=  dr_ilr & fem_pl_ilr
 
 pr_ilr :=  infl-ltow-rule & 
   [ SYNSEM.LOCAL.CAT.HEAD noun ].
+  
+pr_sg_ilr := sg_ilr & 
+[ SYNSEM.LOCAL [ AGR.DIVISIBLE -,
+                 CONT.HOOK.INDEX.PNG.PN sing ] ].
 
-pr_sg_ilr :=  pr_ilr & 
-  [ SYNSEM.LOCAL.AGR [ DIVISIBLE -, PNG.PN sing ] ].
+pr_pl_ilr := pl_ilr & 
+[ SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG.PN plur ].
 
-pr_pl_ilr :=  pr_ilr & 
-  [ SYNSEM.LOCAL.AGR.PNG.PN plur ].
+pr_masc_ilr := pr_ilr & masc_ilr & 
+[ SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG.GEN masc ].
+
+pr_fem_ilr := pr_ilr & fem_ilr & 
+[ SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG.GEN fem ].
+
+pr_neut_ilr := pr_ilr & neut_ilr & 
+[ SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG.GEN masc ].
+
+pr_1sg_ilr := pr_ilr & 1sg_ilr & 
+[ SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG.PN 1sg ].
+
+pr_1pl_ilr := pr_ilr & 1pl_ilr & 
+[ SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG.PN 1pl ].
+
+pr_2sg_ilr := pr_ilr & 2sg_ilr & 
+[ SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG.PN 2sg ].
+
+pr_2pl_ilr := pr_ilr & 2pl_ilr & 
+[ SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG.PN 2pl ].
+
+pr_3per_ilr := pr_ilr & 3per_ilr & 
+[ SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG.PN 3per ].
+
+pr_3sg_ilr := pr_ilr & 3sg_ilr & 
+[ SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG.PN 3sg ].
+
+pr_3pl_ilr := pr_ilr & 3pl_ilr & 
+[ SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG.PN 3pl ].
+
+pr_masc_3sg_ilr :=  pr_masc_ilr & pr_3sg_ilr.
+pr_masc_3pl_ilr :=  pr_masc_ilr & pr_3pl_ilr.
+pr_fem_3sg_ilr :=  pr_fem_ilr & pr_3sg_ilr.
+pr_fem_3pl_ilr :=  pr_fem_ilr & pr_3pl_ilr.
+pr_neut_3sg_ilr :=  pr_neut_ilr & pr_3sg_ilr.
+
+pr_masc_sg_ilr := pr_masc_ilr & pr_sg_ilr.
+pr_fem_sg_ilr := pr_fem_ilr & pr_sg_ilr.
+pr_masc_pl_ilr := pr_masc_ilr & pr_pl_ilr.
+pr_fem_pl_ilr := pr_fem_ilr & pr_pl_ilr.
+pr_neut_sg_ilr := pr_neut_ilr & pr_sg_ilr.
+pr_neut_pl_ilr := pr_neut_ilr & pr_sg_ilr.
+
+
 
 pi_ilr :=  pr_ilr &
   [ SYNSEM.NON-LOCAL.REL 0-dlist ].
@@ -401,67 +452,67 @@ pd_ilr :=  pr_ilr &
 pp_ilr :=  infl-ltow-rule.
 
 ; -- indefinite pron.
-pi0ms00_ilr :=  pi_ilr & sg_ilr & masc_ilr
+pi0ms00_ilr :=  pi_ilr & pr_sg_ilr & pr_masc_ilr
 """indefinite pron""". 
-pi0mp00_ilr :=  pi_ilr & pl_ilr & masc_ilr
+pi0mp00_ilr :=  pi_ilr & pr_pl_ilr & pr_masc_ilr
 """indefinite pron""". 
-pi0fs00_ilr :=  pi_ilr & sg_ilr & fem_ilr
+pi0fs00_ilr :=  pi_ilr & pr_sg_ilr & pr_fem_ilr
 """indefinite pron""". 
-pi0fp00_ilr :=  pi_ilr & pl_ilr & fem_ilr
+pi0fp00_ilr :=  pi_ilr & pr_pl_ilr & pr_fem_ilr
 """indefinite pron""". 
-pi0cs00_ilr :=  pi_ilr & sg_ilr
+pi0cs00_ilr :=  pi_ilr & pr_sg_ilr
 """indefinite pron""".
-pi0cp00_ilr :=  pi_ilr & pl_ilr
+pi0cp00_ilr :=  pi_ilr & pr_pl_ilr
 """indefinite pron""".
 pi0cc000_ilr :=  pi_ilr
 """indefinite pron""".
 
 ; -- interrogative pron.
-pt0ms00_ilr :=  pt_ilr & sg_ilr & masc_ilr
+pt0ms00_ilr :=  pt_ilr & pr_sg_ilr & pr_masc_ilr
 """interrogative pron""". 
-pt0mp00_ilr :=  pt_ilr & pl_ilr & masc_ilr
+pt0mp00_ilr :=  pt_ilr & pr_pl_ilr & pr_masc_ilr
 """interrogative pron""". 
-pt0fs00_ilr :=  pt_ilr & sg_ilr & fem_ilr
+pt0fs00_ilr :=  pt_ilr & pr_sg_ilr & pr_fem_ilr
 """interrogative pron""". 
-pt0fp00_ilr :=  pt_ilr & pl_ilr & fem_ilr
+pt0fp00_ilr :=  pt_ilr & pr_pl_ilr & pr_fem_ilr
 """interrogative pron""". 
-pt0cs00_ilr :=  pt_ilr & sg_ilr
+pt0cs00_ilr :=  pt_ilr & pr_sg_ilr
 """interrogative pron""".
-pt0cp00_ilr :=  pt_ilr & pl_ilr
+pt0cp00_ilr :=  pt_ilr & pr_pl_ilr
 """interrogative pron""".
 pt00000_ilr :=  pt_ilr
 """interrogative pron""".
 
 ; -- exclamative pron.
-pe0ms00_ilr :=  pe_ilr & sg_ilr & masc_ilr
+pe0ms00_ilr :=  pe_ilr & pr_sg_ilr & pr_masc_ilr
 """exclamative pron""". 
-pe0mp00_ilr :=  pe_ilr & pl_ilr & masc_ilr
+pe0mp00_ilr :=  pe_ilr & pr_pl_ilr & pr_masc_ilr
 """exclamative pron""". 
-pe0fs00_ilr :=  pe_ilr & sg_ilr & fem_ilr
+pe0fs00_ilr :=  pe_ilr & pr_sg_ilr & pr_fem_ilr
 """exclamative pron""". 
-pe0fp00_ilr :=  pe_ilr & pl_ilr & fem_ilr
+pe0fp00_ilr :=  pe_ilr & pr_pl_ilr & pr_fem_ilr
 """exclamative pron""". 
-pe0cs00_ilr :=  pe_ilr & sg_ilr
+pe0cs00_ilr :=  pe_ilr & pr_sg_ilr
 """exclamative pron""".
-pe0cp00_ilr :=  pe_ilr & pl_ilr
+pe0cp00_ilr :=  pe_ilr & pr_pl_ilr
 """exclamative pron""".
 pe00000_ilr :=  pe_ilr
 """exclamative pron""".
 
 ; -- demonstrative pron.
-pd0ms00_ilr :=  pd_ilr & sg_ilr & masc_ilr
+pd0ms00_ilr :=  pd_ilr & pr_sg_ilr & pr_masc_ilr
 """demonstrative pron""". 
-pd0mp00_ilr :=  pd_ilr & pl_ilr & masc_ilr
+pd0mp00_ilr :=  pd_ilr & pr_pl_ilr & pr_masc_ilr
 """demonstrative pron""". 
-pd0fs00_ilr :=  pd_ilr & sg_ilr & fem_ilr
+pd0fs00_ilr :=  pd_ilr & pr_sg_ilr & pr_fem_ilr
 """demonstrative pron""". 
-pd0fp00_ilr :=  pd_ilr & pl_ilr & fem_ilr
+pd0fp00_ilr :=  pd_ilr & pr_pl_ilr & pr_fem_ilr
 """demonstrative pron""". 
-pd00s00_ilr :=  pd_ilr & sg_ilr & neut_ilr
+pd00s00_ilr :=  pd_ilr & pr_sg_ilr & neut_ilr
 """demonstrative pron""". 
-pd0cs00_ilr :=  pd_ilr & sg_ilr
+pd0cs00_ilr :=  pd_ilr & pr_sg_ilr
 """demonstrative pron""".
-pd0cp00_ilr :=  pd_ilr & pl_ilr
+pd0cp00_ilr :=  pd_ilr & pr_pl_ilr
 """demonstrative pron""".
 
 ; -- relative pron.
@@ -475,39 +526,39 @@ pr00000_ilr := pr_ilr
 """relative pron""".
 
 ; -- personal pron.
-pp1csn0_ilr :=  pp_ilr & 1sg_ilr
+pp1csn0_ilr :=  pp_ilr & pr_1sg_ilr
 """personal pron""".
-pp2csn0_ilr :=  pp_ilr & 2sg_ilr
+pp2csn0_ilr :=  pp_ilr & pr_2sg_ilr
 """personal pron""".
-vmm02s0_ilr :=  pp_ilr & 2sg_ilr
+vmm02s0_ilr :=  pp_ilr & pr_2sg_ilr
 """personal pron""".
-pp3fs00_ilr :=  pp_ilr & 3sg_ilr & fem_ilr
+pp3fs00_ilr :=  pp_ilr & pr_3sg_ilr & pr_fem_ilr
 """personal pron""". 
-pp3ms00_ilr :=  pp_ilr & 3sg_ilr & masc_ilr
+pp3ms00_ilr :=  pp_ilr & pr_3sg_ilr & pr_masc_ilr
 """personal pron""". 
-pp3ns000_ilr :=  pp_ilr & 3sg_ilr & neut_ilr
+pp3ns000_ilr :=  pp_ilr & pr_3sg_ilr & pr_neut_ilr
 """personal pron""". 
-pp1fp00_ilr :=  pp_ilr & 1pl_ilr & fem_ilr
+pp1fp00_ilr :=  pp_ilr & pr_1pl_ilr & pr_fem_ilr
 """personal pron""". 
-pp1mp00_ilr :=  pp_ilr & 1pl_ilr & masc_ilr
+pp1mp00_ilr :=  pp_ilr & pr_1pl_ilr & pr_masc_ilr
 """personal pron""". 
-pp2fp00_ilr :=  pp_ilr & 2pl_ilr & fem_ilr
+pp2fp00_ilr :=  pp_ilr & pr_2pl_ilr & pr_fem_ilr
 """personal pron""". 
-pp2mp00_ilr :=  pp_ilr & 2pl_ilr & masc_ilr
+pp2mp00_ilr :=  pp_ilr & pr_2pl_ilr & pr_masc_ilr
 """personal pron""". 
-pp3fp00_ilr :=  pp_ilr & 3pl_ilr & fem_ilr
+pp3fp00_ilr :=  pp_ilr & pr_3pl_ilr & pr_fem_ilr
 """personal pron""". 
-pp3mp00_ilr :=  pp_ilr & 3pl_ilr & masc_ilr
+pp3mp00_ilr :=  pp_ilr & pr_3pl_ilr & pr_masc_ilr
 """personal pron""". 
-pp2cs0p_ilr :=  pp_ilr & 3sg_ilr
+pp2cs0p_ilr :=  pp_ilr & pr_3sg_ilr
 """personal pron""". 
-pp2cp0p_ilr :=  pp_ilr & 3pl_ilr
+pp2cp0p_ilr :=  pp_ilr & pr_3pl_ilr
 """personal pron""". 
-pp1cso0_ilr :=  pp_ilr & 1sg_ilr
+pp1cso0_ilr :=  pp_ilr & pr_1sg_ilr
 """personal pron""".
-pp2cso0_ilr :=  pp_ilr & 2sg_ilr
+pp2cso0_ilr :=  pp_ilr & pr_2sg_ilr
 """personal pron""".
-pp3cno0_ilr :=  pp_ilr & 3per_ilr & 
+pp3cno0_ilr :=  pp_ilr & pr_3per_ilr & 
   [ SYNSEM.LOCAL.CAT.HEAD.MOD < > ]
   """personal pron""". 
 
@@ -552,40 +603,52 @@ affx_ilr := non_cann-lex-rule &
     ALTS #alts ].
 
 affx_1sg_ilr :=  affx_ilr & 
-[ SYNSEM.LOCAL.AGR.PNG.PN 1sg ].
+[ SYNSEM.LOCAL [ AGR.PNG.PN 1sg,
+                 CONT.HOOK.INDEX.PNG.PN 1sg ] ].
 
 affx_1pl_ilr :=  affx_ilr & 
-[ SYNSEM.LOCAL.AGR.PNG.PN 1pl ].
+[ SYNSEM.LOCAL [ AGR.PNG.PN 1pl,
+                 CONT.HOOK.INDEX.PNG.PN 1pl ] ].
 
 affx_2sg_ilr :=  affx_ilr & 
-[ SYNSEM.LOCAL.AGR.PNG.PN 2sg ].
+[ SYNSEM.LOCAL [ AGR.PNG.PN 2sg,
+                 CONT.HOOK.INDEX.PNG.PN 2sg ] ].
 
 affx_2pl_ilr :=  affx_ilr & 
-[ SYNSEM.LOCAL.AGR.PNG.PN 2pl ].
+[ SYNSEM.LOCAL [ AGR.PNG.PN 2pl,
+                 CONT.HOOK.INDEX.PNG.PN 2pl ] ].
 
 affx_3per_ilr :=  affx_ilr & 
-[ SYNSEM.LOCAL.AGR.PNG.PN 3per ].
+[ SYNSEM.LOCAL [ AGR.PNG.PN 3per,
+                 CONT.HOOK.INDEX.PNG.PN 3per ] ].
 
 affx_3sg_ilr :=  affx_ilr & 
-[ SYNSEM.LOCAL.AGR.PNG.PN 3sg ].
+[ SYNSEM.LOCAL [ AGR.PNG.PN 3sg,
+                 CONT.HOOK.INDEX.PNG.PN 3sg ] ].
 
 affx_3sg-fem_ilr :=  affx_3sg_ilr & 
-  [ SYNSEM.LOCAL.AGR.PNG.GEN fem ].
+  [ SYNSEM.LOCAL [ AGR.PNG.GEN fem,
+                   CONT.HOOK.INDEX.PNG.GEN fem ] ].
 
 affx_3sg-masc_ilr :=  affx_3sg_ilr & 
-  [ SYNSEM.LOCAL.AGR.PNG.GEN masc ].
+  [ SYNSEM.LOCAL [ AGR.PNG.GEN masc,
+                   CONT.HOOK.INDEX.PNG.GEN masc ] ].
 
 affx_3neut_ilr :=  affx_3per_ilr & 
-  [ SYNSEM.LOCAL.AGR.PNG.GEN neut ].
+  [ SYNSEM.LOCAL [ AGR.PNG.GEN neut,
+                   CONT.HOOK.INDEX.PNG.GEN neut ] ].
 
 affx_3pl_ilr :=  affx_ilr & 
-[ SYNSEM.LOCAL.AGR.PNG.PN 3pl ].
+[ SYNSEM.LOCAL [ AGR.PNG.PN 3pl,
+                 CONT.HOOK.INDEX.PNG.PN 3pl ] ].
 
 affx_3pl-fem_ilr :=  affx_3pl_ilr & 
-  [ SYNSEM.LOCAL.AGR.PNG.GEN fem ].
+  [ SYNSEM.LOCAL [ AGR.PNG.GEN fem,
+                   CONT.HOOK.INDEX.PNG.GEN fem ] ].
 
 affx_3pl-masc_ilr :=  affx_3pl_ilr & 
-  [ SYNSEM.LOCAL.AGR.PNG.GEN masc ].
+  [ SYNSEM.LOCAL [ AGR.PNG.GEN masc,
+                   CONT.HOOK.INDEX.PNG.GEN masc ] ].
 
 pp1cs00_ilr := affx_1sg_ilr.
 p01cs00_ilr := affx_1sg_ilr.
@@ -996,10 +1059,12 @@ acc_enclt_ilr :=  enclt_ilr &
   [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CAT.HEAD.CASE acc ], ... > ].
 
 pp3msa_ilr := acc_enclt_ilr & 
-  [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG [ PN 3sg, GEN masc ] ],... > ].
+  [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ AGR.PNG [GEN masc, PN 3sg ],
+                                              CONT.HOOK.INDEX.PNG [ PN 3sg, GEN masc ] ] ],... > ].
 
 pp3cna_ilr := acc_enclt_ilr & 
-  [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CONT.HOOK.INDEX.PNG [ PN 3sg, GEN masc ] ],... > ].
+  [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ AGR.PNG [GEN masc, PN 3sg ],
+                                              CONT.HOOK.INDEX.PNG [ PN 3sg, GEN masc ] ] ],... > ].
 
 dat_enclt_ilr :=  enclt_ilr & 
   [ DTR.SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CAT.HEAD.CASE dat ], ... > ].

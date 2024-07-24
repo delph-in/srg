@@ -1891,9 +1891,11 @@ basic-1st-clt-doubl-lex-rule := cliticization-lex-rule &
 
 v_acc-clt-doubl_dlr := 1st-clt-doubl-lex-rule &
   [ ALTS.PASS -,
-    SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE acc_or_dat,
+    SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ AGR #agr,
+                                          CAT.HEAD.CASE acc_or_dat,
                                           CONT.HOOK.INDEX.PNG #index ] ] >,
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local & [ CONT.HOOK.INDEX.PNG #index ] ], ... > ]
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local & [ AGR #agr,
+                                                              CONT.HOOK.INDEX.PNG #index ] ], ... > ]
   """
   -- accusative clitic doubling lexical rule
   transitive verbs when the DO is a quantifier (e.g. lo sé todo, los conozco a todos) or
@@ -1907,9 +1909,11 @@ v_acc-clt-doubl_dlr := 1st-clt-doubl-lex-rule &
 ; -- dative clitic doubling lexical rule
 
 v_dat-clt-doubl_dlr := 1st-clt-doubl-lex-rule &
-  [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE dat,
+  [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ AGR #agr,
+                                          CAT.HEAD.CASE dat,
                                           CONT.HOOK.INDEX.PNG #index ] ] >,
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local & [ CONT.HOOK.INDEX.PNG #index ] ], ... > ]
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local & [ AGR #agr,
+                                                              CONT.HOOK.INDEX.PNG #index ] ], ... > ]
   """
   -- dative clitic doubling lexical rule
   for ditrans verbs (e.g. les compró caramelos a los niños, le dijeron a Juan que viniera)
@@ -1923,29 +1927,35 @@ v_dat-clt-doubl_dlr := 1st-clt-doubl-lex-rule &
 
 
 v_dat-1st-clt-doubl_dlr := 1st-clt-doubl-lex-rule &
-  [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE dat,
+  [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ AGR #agr,
+                                          CAT.HEAD.CASE dat,
                                           CONT.HOOK.INDEX.PNG #index ] ] >,
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local & [ CONT.HOOK.INDEX.PNG #index ] ], ... > ]
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local & [ AGR #agr,
+                                                              CONT.HOOK.INDEX.PNG #index ] ], ... > ]
   """
   
   """.
 
 
 v_dat-2nd-clt-doubl_dlr := 2nd-clt-doubl-lex-rule &
-  [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE dat,
+  [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ AGR #agr,
+                                          CAT.HEAD.CASE dat,
                                           CONT.HOOK.INDEX.PNG #index ] ] >,
     DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < synsem,
-                                     [ LOCAL dative_local & [ CONT.HOOK.INDEX.PNG #index ] ] > ]
+                                     [ LOCAL dative_local & [ AGR #agr,
+                                                              CONT.HOOK.INDEX.PNG #index ] ] > ]
   """
   
   """.
 
 
 v_mult-clt-doubl_dlr := 1st-clt-doubl-lex-rule &
-  [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE acc,
+  [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ AGR #agr,
+                                          CAT.HEAD.CASE acc,
                                           CONT.HOOK.INDEX.PNG #index ] ],
                                 [ LOCAL.CAT.HEAD.CASE rflx ] >,
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local & [ CONT.HOOK.INDEX.PNG #index ] ], ... > ]
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local & [ AGR #agr,
+                                                              CONT.HOOK.INDEX.PNG #index ] ], ... > ]
   """
   -- multiple clitic doubling
   ditransitive verbs taking DO and IO (e.g. se los compró al chico) & ditransitive verbs
@@ -1954,31 +1964,37 @@ v_mult-clt-doubl_dlr := 1st-clt-doubl-lex-rule &
 
 
 v_mult-clt-doubl-prn_dlr := 1st-clt-doubl-lex-rule &
-  [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE dat,
+  [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ AGR #agr,
+                                          CAT.HEAD.CASE dat,
                                           CONT.HOOK.INDEX.PNG #index ] ],
                                 [ LOCAL.CAT.HEAD.CASE rflx ] >,
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local & [ CONT.HOOK.INDEX.PNG #index ] ], ... > ]
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local & [ AGR #agr,
+                                                              CONT.HOOK.INDEX.PNG #index ] ], ... > ]
   """
   
   """.
 
 
 v_mult-clt-doubl-imp_dlr := 1st-clt-doubl-lex-rule &
-  [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE dat,
+  [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ AGR #agr,
+                                          CAT.HEAD.CASE dat,
                                           CONT.HOOK.INDEX.PNG #index ] ],
                                 [ LOCAL.CAT.HEAD.CASE none ] >,
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local & [ CONT.HOOK.INDEX.PNG #index ] ], ... > ]
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local & [ AGR #agr,
+                                                              CONT.HOOK.INDEX.PNG #index ] ], ... > ]
   """
   
   """.
 
 
 v_2nd-mult-clt-doubl-imp_dlr := 2nd-clt-doubl-lex-rule &
-  [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ CAT.HEAD.CASE dat,
+  [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL [ AGR #agr,
+                                          CAT.HEAD.CASE dat,
                                           CONT.HOOK.INDEX.PNG #index ] ],
                                 [ LOCAL.CAT.HEAD.CASE none ] >,
     DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < synsem,
-                                     [ LOCAL dative_local & [ CONT.HOOK.INDEX.PNG #index ] ] > ]
+                                     [ LOCAL dative_local & [ AGR #agr,
+                                                              CONT.HOOK.INDEX.PNG #index ] ] > ]
   """
   
   """.
@@ -1986,9 +2002,11 @@ v_2nd-mult-clt-doubl-imp_dlr := 2nd-clt-doubl-lex-rule &
 
 v_mult-enclt-doubl_dlr := 1st-enclt-doubl-lex-rule &
   [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CAT.HEAD.CASE rflx ],
-                                [ LOCAL [ CAT.HEAD.CASE acc,
+                                [ LOCAL [ AGR #agr,
+                                          CAT.HEAD.CASE acc,
                                           CONT.HOOK.INDEX.PNG #index ] ] >,
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local & [ CONT.HOOK.INDEX.PNG #index ] ], ... > ]
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local & [ AGR #agr,
+                                                              CONT.HOOK.INDEX.PNG #index ] ], ... > ]
   """
   enclitics
   """.
@@ -1996,9 +2014,11 @@ v_mult-enclt-doubl_dlr := 1st-enclt-doubl-lex-rule &
 
 v_mult-enclt-doubl-prn_dlr := 1st-enclt-doubl-lex-rule &
   [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CAT.HEAD.CASE rflx ],
-                                [ LOCAL [ CAT.HEAD.CASE rflx,
+                                [ LOCAL [ AGR #agr,
+                                          CAT.HEAD.CASE rflx,
                                           CONT.HOOK.INDEX.PNG #index ] ] >,
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local & [ CONT.HOOK.INDEX.PNG #index ] ], ... > ]
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local & [ AGR #agr,
+                                                              CONT.HOOK.INDEX.PNG #index ] ], ... > ]
   """
   
   """.

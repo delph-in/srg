@@ -5508,9 +5508,8 @@ n_-_pn_lex := basic-noun-lex & basic-one-arg & norm-sem-lex-item &
 ; --- 2.3. Pronouns
 
 pronominal-lex := basic-nominal-lex &
-  [ SYNSEM.LOCAL [ AGR #agr,
-                   CONT.HOOK.INDEX #agr & 
-                                   [ PRONTYPE real_pron ] ] ].
+  [ SYNSEM.LOCAL [ ;AGR #agr,
+                   CONT.HOOK.INDEX.PRONTYPE real_pron ] ].
 
 norm-pronominal-synsem := lex-synsem &
   [ LOCAL [ CAT.MC na,
