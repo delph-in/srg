@@ -4778,11 +4778,14 @@ v_adv_estar_synsem := v_copula_basic_synsem &
                         COMPS < [ OPT -,
                                   LOCAL [ CAT [ HEAD adv & [ MOD < [ LOCAL.CAT [ HEAD verb,
                                                                                VAL.SUBJ.FIRST.LOCAL.CONT.HOOK [ INDEX #sind,
-                                                                                                                XARG #sind ] ] ] > ] ],
+                                                                                                                XARG #sind ] ],
+                                                                     LKEYS.KEYREL.ARG1 #sind ] > ] ],
                                           CONT.HOOK [ XARG #sind,
-                                                      INDEX #ind ] ] ] > ] ],
+                                                      INDEX #ind ] ],
+                                  LKEYS.KEYREL.ARG1 #sind ] > ] ],
             CONT [ HOOK [ INDEX #ind,
-                          XARG #sind ] ] ] ]
+                          XARG #sind ] ] ],
+            LKEYS.KEYREL.ARG1 #sind ]
   """
   e.g. está muy bien
   """.
@@ -7063,14 +7066,12 @@ spec_adverb_synsem := basic_spec_adverb_synsem &
 
 basic_int_adverb_synsem := basic_adverb_synsem & 
   [ LOCAL [ CAT [ HEAD [ KEYS.KEY adv_rel,
-                         MOD < [ LOCAL intersective-mod & 
-                                       [ CAT.VAL.SUBJ.FIRST.LOCAL.CONT.HOOK.INDEX #index ],
+                         MOD < [ LOCAL intersective-mod,
                                  NON-LOCAL.REL 0-dlist ] > ] ],
 	    CONT.HOOK [ LTOP #hand,
                         INDEX #arg0 ] ],
     LKEYS.KEYREL [ LBL #hand,
-                   ARG0 #arg0,
-                   ARG1 #index ] ].
+                   ARG0 #arg0 ] ].
 
 
 intersect_spec_adverb_synsem := basic_int_adverb_synsem & basic_spec_adverb_synsem & 
@@ -7259,8 +7260,10 @@ av_-_i-vm_lex := nonspec-adverb-lex & norm-zero-arg &
 
 av_-_i-vm-spd_lex := spec-adverb-lex & basic-one-arg &
   [ synsem intersect_vp_adverb_synsem & 
-           [ local.cat [ posthead +,
-                         VAL.COMPS < > ] ] ]
+           [ local.cat [ HEAD.MOD < [ LOCAL.CAT.VAL.SUBJ.FIRST.LOCAL.CONT.HOOK.INDEX #ind ] >,
+                         posthead +,
+                         VAL.COMPS < > ],
+              LKEYS.KEYREL.ARG1 #ind ] ]
 """
 ; --- 4.2.2. VP modifiers (any position after the verb)
 ; e.g. (muy) negativamente
