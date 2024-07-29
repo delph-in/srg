@@ -4771,12 +4771,18 @@ v_pp_estar_lex := v_cop-np_sbj &
 
 
 v_adv_estar_synsem := v_copula_basic_synsem &
-  [ LOCAL [ CAT [ HEAD.PRD non-prd,
-                  VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
+  [ LOCAL [ AGR #agr,
+            CAT [ HEAD.PRD non-prd,
+                  VAL [ SUBJ < [ LOCAL [ CONT.HOOK.INDEX #sind,
+                                         AGR #agr ] ] >,
                         COMPS < [ OPT -,
-                                  LOCAL [ CAT.HEAD adv & [ MOD < [ LOCAL.CAT.HEAD verb ] > ],
-                                          CONT.HOOK.XARG #sind ] ] > ] ],
-            CONT.HOOK.XARG #sind ] ]
+                                  LOCAL [ CAT [ HEAD adv & [ MOD < [ LOCAL.CAT [ HEAD verb,
+                                                                               VAL.SUBJ.FIRST.LOCAL.CONT.HOOK [ INDEX #sind,
+                                                                                                                XARG #sind ] ] ] > ] ],
+                                          CONT.HOOK [ XARG #sind,
+                                                      INDEX #ind ] ] ] > ] ],
+            CONT [ HOOK [ INDEX #ind,
+                          XARG #sind ] ] ] ]
   """
   e.g. está muy bien
   """.
@@ -4790,8 +4796,10 @@ v_adv_estar_lex := v_cop-np_sbj &
 
 
 v_modnp_estar_synsem := v_copula_synsem &
-  [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #sind ] >,
-                      COMPS < [ LOCAL [ CAT.HEAD modnp & [ MOD < [ LOCAL.CAT.HEAD noun ] > ],
+  [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL [ AGR #agr,
+                                       CONT.HOOK.INDEX #sind ] ] >,
+                      COMPS < [ LOCAL [ AGR #agr,
+                                        CAT.HEAD modnp & [ MOD < [ LOCAL.CAT.HEAD noun ] > ],
                                         CONT.HOOK.XARG #sind ] ] > ],
             CONT.HOOK.XARG #sind ] ]
   """
@@ -7056,13 +7064,14 @@ spec_adverb_synsem := basic_spec_adverb_synsem &
 basic_int_adverb_synsem := basic_adverb_synsem & 
   [ LOCAL [ CAT [ HEAD [ KEYS.KEY adv_rel,
                          MOD < [ LOCAL intersective-mod & 
-                                       [ CONT.HOOK.INDEX #index ],
+                                       [ CAT.VAL.SUBJ.FIRST.LOCAL.CONT.HOOK.INDEX #index ],
                                  NON-LOCAL.REL 0-dlist ] > ] ],
 	    CONT.HOOK [ LTOP #hand,
                         INDEX #arg0 ] ],
     LKEYS.KEYREL [ LBL #hand,
                    ARG0 #arg0,
                    ARG1 #index ] ].
+
 
 intersect_spec_adverb_synsem := basic_int_adverb_synsem & basic_spec_adverb_synsem & 
   [ LOCAL.CAT.HEAD.MOD < [ LOCAL.CAT.HEAD verb ] > ].
@@ -7074,7 +7083,7 @@ intersect_adverb_synsem := basic_intersect_adverb_synsem &
                                            [ KEYS.KEY degree_rel ] ] >,
             CONT [ RELS <! relation !>,
                    HCONS <! !> ] ] ].
-
+                   
 intersect_vp_adverb_synsem := intersect_adverb_synsem.
 
 nonspec_intersect_s_adverb_synsem := basic_int_adverb_synsem &
@@ -8448,9 +8457,10 @@ p_np_i-vm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
 p_np_i-pn-vm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
   [ SYNSEM p_vmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS.KEY named_rel,
                                                                    VAL.SPR < > ],
-                                                             CONT.HOOK.INDEX.PRONTYPE not_pron ],
+                                                             CONT.HOOK.INDEX #arg2 & [ PRONTYPE not_pron ] ],
                                                      NON-LOCAL.QUE 0-dlist ] >,
-                             LKEYS.KEYREL.PRED prep_mod_rel ] ]
+                             LKEYS.KEYREL [ PRED prep_mod_rel,
+                                            ARG2 #arg2 ] ] ]
   """
   --- Verbal modifying prepositions
   - taking NEs
@@ -16849,7 +16859,6 @@ av_-_s-xm-spd_le := av_-_s-xm-spd_lex
   """
   
   """.
-
 
 av_-_i-vm_native_le := av_-_i-vm_lex & native_le
   """
