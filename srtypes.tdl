@@ -343,13 +343,15 @@ interrogative-clause := clause & basic-headed-phrase &
 
 basic-head-punct-phrase := head-valence-phrase & head-compositional &
   [ SYNSEM [ SLSHD #slshd,
-             LOCAL [ COORD #coord,
+             LOCAL [ ;AGR #agr,
+                     COORD #coord,
                      COORD-STRAT #coord-strat,
                      COORD-REL #crel,
                      CAT #cat,
                      CONT #cont ] ],
     HEAD-DTR.SYNSEM [ SLSHD #slshd,
-                      LOCAL [ COORD #coord,
+                      LOCAL [ ;AGR #agr,
+                              COORD #coord,
                               COORD-STRAT #coord-strat,
                               COORD-REL #crel,
                               STR.HEADED solely,
