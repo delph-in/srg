@@ -1247,6 +1247,7 @@ basic_nom_rel := non_event_rel & instance_rel.
 nom_rel := basic_nom_rel. 
 addressee_rel := basic_nom_rel.
 nominalization_rel := all_common_nom_rel & nom_rel.
+non-nmlz_rel := all_common_nom_rel & nom_rel.
 non_temp_nom_rel := nom_rel & nontemp_rel & non_free_relative_nom_rel.
 nonpro_rel := nom_rel & non_free_relative_nom_rel.
 temp_nonpro_rel := nonpro_rel & temp_rel & modable_rel.

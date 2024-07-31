@@ -407,7 +407,8 @@ subj_vfin_vinf-lex-rule := vfin_vinf-lex-rule &
                                                   CONT.HOOK [ LTOP #larg, 
                                                               INDEX.SF prop ] ],
                                           NON-LOCAL #nloc ] >,
-                                 CLTS #clts ] ],
+                                 CLTS #clts,
+                                 COMPS #comps ] ],
                      CONT [ HCONS.LIST < [ LARG #larg, 
                                            HARG #harg ],... >,
                             HOOK [ LTOP #ltop,
@@ -420,7 +421,8 @@ subj_vfin_vinf-lex-rule := vfin_vinf-lex-rule &
           SYNSEM vfin-subj-synsem &
                  [ LOCAL [ CAT [ HEAD.LSYNSEM #lsynsem,
                                  VAL [ SUBJ < [ NON-LOCAL #nloc ] >,
-                                       CLTS #clts ] ],
+                                       CLTS #clts,
+                                       COMPS #comps ] ],
                            CONT [ HCONS.LIST < [ LARG #larg, 
                                                  HARG #harg ],... >,
                                   HOOK.LTOP #ltop,
@@ -835,6 +837,7 @@ n_pp-vp_dlr := vfin_vinf-lex-rule &
   b)- taking PPde + finite completive clause/VPinf_ctrl
   e.g. la necesidad (de la empresa) (de) que lleguen a un acuerdo/de llegar a un acuerdo
   """.
+
 
 ppart-basic-lex-rule := const-ltol-rule &
   [ ALTS.PASS -,

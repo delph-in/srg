@@ -50,7 +50,8 @@ basic-main-verb := basic-verb-lex &
 
 norm-pronominal-verb := basic-verb-lex & 
   [ ALTS.IMPERS -,
-    SYNSEM.LOCAL.CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX.PNG #ind ] >, 
+    SYNSEM.LOCAL.CAT.VAL [ SUBJ < [ LOCAL [ CONT.HOOK.INDEX.PNG #ind,
+                                            CAT.HEAD.PRD non-prd ] ] >, 
                            CLTS < clitic-synsem & 
 				  [ OPT -,
                                     LOCAL [ CAT.HEAD.CASE rflx,
@@ -65,7 +66,7 @@ impers-pronominal-verb := basic-verb-lex &
 
 main-verb := basic-main-verb & 
   [ SYNSEM.LOCAL.CAT [ HEAD verb, 
-                       VAL [ SUBJ < #subj >, 
+                       VAL [ SUBJ < #subj & [ LOCAL.CAT.HEAD.PRD non-prd ] >, 
                              COMPS #comps,
                              CLTS < > ] ],
     ARG-ST < #subj . #comps > ].
@@ -157,7 +158,8 @@ v_impers_np_ntr_synsem := trans_impers_synsem &
 v_np_npsv-nsbj_lex := v_impers & main-verb-impers & basic-one-arg & 
   [ SYNSEM v_impers_np_ntr_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_impers_np_ntr_synsem,
-                         VAL.COMPS < [ OPT - ] > ] ] ].
+                         VAL.COMPS < [ OPT -,
+                                       LOCAL.CAT.HEAD.PRD non-prd ] > ] ] ].
 
 
 ; --- 1.1.3. impersonal verbs taking finite completive clauses (parecer, resultar, semejar, poder)
@@ -498,7 +500,8 @@ v_subj_cp_prop_inf_io_synsem := vinf-subj-synsem &
   [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL vp_inf_local ] >,
                       COMPS < [ LOCAL dative_local & 
                                       [ CAT.HEAD [ CASE dat,
-                                                   KEYS.KEY #ckey ],
+                                                   KEYS.KEY #ckey,
+                                                   PRD non-prd ],
                                         CONT.HOOK.INDEX #arg2 ] ] > ],
             CONT.HCONS <! [ HARG #harg ] !> ],
     LKEYS [ KEYREL arg12-ev-relation & 
@@ -511,7 +514,8 @@ v_subj_cp_prop_fin_intr_io*_synsem := vfin-subj-synsem &
                       COMPS < expressed-synsem & 
                               [ LOCAL dative_local & 
                                       [ CAT.HEAD [ CASE dat,
-                                                   KEYS.KEY #ckey ],
+                                                   KEYS.KEY #ckey,
+                                                   PRD non-prd ],
                                         CONT.HOOK.INDEX #arg2 ] ] > ],
             CONT.HCONS <! [ HARG #harg ] !> ],
     LKEYS [ KEYREL arg12-ev-relation & 
@@ -535,7 +539,8 @@ v_ppa*_sbj-cp-p_lex := v_subj_cp_prop_fin_intr & main-verb & basic-two-arg &
   [ ALTS.VCALT -,
     SYNSEM v_subj_cp_prop_fin_io*_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_fin_io*_synsem, 
-                         VAL.COMPS < [ OPT + ] > ] ] ]
+                         VAL.COMPS < [ OPT +,
+                                       LOCAL.CAT.HEAD.PRD non-prd ] > ] ] ]
 """; e.g. ocurrir ((le) ocurre que no hizo lo que le habían pedido ((to occur) it occurs that s/he didn't do what s/he was asked))
 """.
 
@@ -556,7 +561,8 @@ v_ppa*_sbj-cp-p-sub-cv_lex := v_subj_cp_prop_fin_intr & main-verb & basic-two-ar
     SYNSEM v_subj_cp_prop_inf_or_fin_io*_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_inf_or_fin_io*_synsem, 
                          VAL [ SUBJ < [ LOCAL.CAT.HEAD.TAM.MOOD sub ] >,
-                               COMPS < [ OPT + ] > ] ] ] ]
+                               COMPS < [ OPT +,
+                                         LOCAL.CAT.HEAD.PRD non-prd ] > ] ] ] ]
 """
 ; e.g. bastar (no (me) basta que me quieras/que me quieras no (me) basta) 
 ; (to be enough (it is not enough (for me) that you love me/that you love me is not enough (for me))
@@ -566,7 +572,8 @@ v_ppa*_sbj-cp-p-cv_lex := v_subj_cp_prop_fin_intr & main-verb & basic-two-arg &
   [ ALTS.VCALT +,
     SYNSEM v_subj_cp_prop_inf_or_fin_io*_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_inf_or_fin_io*_synsem, 
-                         VAL.COMPS < [ OPT + ] > ] ] ]
+                         VAL.COMPS < [ OPT +,
+                                       LOCAL.CAT.HEAD.PRD non-prd ] > ] ] ]
 """
 ; e.g. constar ((me) consta que estuvo aquí/no consta que supiese el día de su muerte hasta ese día)
 ; (to be certain ((for me) it is certain that s/he was here/ it is not certain that s/he knew the day of 
@@ -590,7 +597,8 @@ v_ppa*_sbj-cp-p-sub_lex := v_subj_cp_prop_fin_intr & main-verb & basic-two-arg &
   [ ALTS.VCALT +,
     SYNSEM v_subj_cp_prop_fin_sub_io*_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_fin_sub_io*_synsem, 
-                         VAL.COMPS < [ OPT + ] > ] ] ]
+                         VAL.COMPS < [ OPT -,
+                                       LOCAL.CAT.HEAD.PRD non-prd ] > ] ] ]
 """; e.g. gustar (no *(me) gusta que a los toros te pongas la minifalda)
 """.
 
@@ -599,7 +607,8 @@ v_ppa*_sbj-cp-p-sub-prn_lex := v_subj_cp_prop_fin_intr & impers-pronominal-verb 
     SYNSEM v_subj_cp_prop_fin_sub_io*_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_fin_sub_io*_synsem, 
                          VAL [ SUBJ < #subj >, 
-                               COMPS < #comps & [ OPT + ] >,
+                               COMPS < #comps & [ OPT +,
+                                       LOCAL.CAT.HEAD.PRD non-prd ] >,
                                CLTS #clt ] ] ],
     ARG-ST < #subj . < #comps . #clt > > ]
 """; e.g. antojarse (to fancy)
@@ -609,7 +618,8 @@ v_ppa*_sbj-cp-p-sub-prn_lex := v_subj_cp_prop_fin_intr & impers-pronominal-verb 
 
 v_subj_cp_prop_inf_intr_mrkd_np_synsem := vinf-subj-synsem & 
   [ LOCAL [ CAT.VAL.COMPS < [ LOCAL mrkd_np_local & 
-                                    [ CAT.HEAD.KEYS.KEY #ckey,
+                                    [ CAT.HEAD [ KEYS.KEY #ckey,
+                                                 PRD non-prd ],
                                       CONT.HOOK.INDEX #ind2 ] ] >,
             CONT.HCONS <! [ HARG #harg ] !> ],
     LKEYS [ KEYREL arg12-ev-relation & 
@@ -629,7 +639,8 @@ v_subj_cp_prop_fin_intr_mrkd_np_synsem := vfin-subj-synsem &
   [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL cp_fin_local &
                                      [ CAT.HEAD.TAM.MOOD sub ] ] >,
                       COMPS < [ LOCAL mrkd_np_local & 
-                                      [ CAT.HEAD.KEYS.KEY #ckey,
+                                      [ CAT.HEAD [ KEYS.KEY #ckey,
+                                                   PRD non-prd ],
                                         CONT.HOOK.INDEX #ind2 ] ] > ],
             CONT.HCONS <! [ HARG #harg ] !> ],
     LKEYS [ KEYREL arg12-ev-relation & 
@@ -641,7 +652,8 @@ v_pp_e-sbj-cp-p-sub_lex := v_subj_cp_prop_fin_intr & main-verb & basic-two-arg &
   [ ALTS.VCALT +,
     SYNSEM v_subj_cp_prop_fin_intr_mrkd_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_fin_intr_mrkd_np_synsem, 
-                         VAL.COMPS < [ OPT - ] > ] ] ]
+                         VAL.COMPS < [ OPT -,
+                                       LOCAL.CAT.HEAD.PRD non-prd ] > ] ] ]
 """
 ; e.g. (el) que las clases sean malas repercute en los alumnos (the fact that classes are bad has 
 ; repercussions on the students)
@@ -652,15 +664,16 @@ v_pp_e-sbj-cp-p-sub-prn_lex := v_subj_cp_prop_fin_intr & impers-pronominal-verb 
     SYNSEM v_subj_cp_prop_fin_intr_mrkd_np_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_fin_intr_mrkd_np_synsem, 
                          VAL [ SUBJ < #subj >, 
-                               COMPS < #comps & [ OPT - ] >,
+                               COMPS < #comps & [ OPT -,
+                                       LOCAL.CAT.HEAD.PRD non-prd ] >,
                                CLTS #clt ] ] ],
     ARG-ST < #subj . < #comps . #clt > >  ]
 """; e.g. traducirse en (be translated into)
 """.
 
 v_subj_cp_prop_inf_intr_io*_mrkd_np_synsem := vinf-subj-synsem & 
-  [ LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local ], 
-                          [ LOCAL mrkd_np_local ] > ]
+  [ LOCAL.CAT.VAL.COMPS < [ LOCAL dative_local & [ CAT.HEAD.PRD non-prd ] ], 
+                          [ LOCAL mrkd_np_local & [ CAT.HEAD.PRD non-prd ] ] > ]
 """
 ; --- 1.2.4. Intransitive verbs taking Vfin subject, IO and marked NP
 """.
@@ -693,14 +706,15 @@ v_ppa*-pp_e-sbj-cp-p-sub_lex := v_subj_cp_prop_fin_intr & main-verb & basic-thre
 
 
 v_subj_cp_prop_inf_trans_np_synsem := trans_vinf-subj-synsem &
-  [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local  ],... > ].
+  [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local & [ CAT.HEAD.PRD non-prd ]  ],... > ].
 
 ; --- Transitive verbs taking Vfin
 
 v_subj_cp_prop_fin_trans_np_synsem := vfin-subj-synsem & transitive_verb_synsem &
   [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL cp_fin_local &
                                      [ CAT.HEAD.TAM.MOOD sub ] ] >,
-                      COMPS < [ LOCAL [ CAT.HEAD.KEYS.KEY #ckey,
+                      COMPS < [ LOCAL [ CAT.HEAD [ KEYS.KEY #ckey,
+                                                   PRD non-prd ],
                                         CONT.HOOK.INDEX ref-ind & #ind ],
                                 NON-LOCAL.REL 0-dlist & [ LIST < > ] ],... > ],
             CONT.HCONS <! [ HARG #harg ] !> ],
@@ -722,7 +736,7 @@ v_np_sbj-cp-p-sub_lex := v_subj_cp_prop_trans_np & main-verb & basic-two-arg &
   [ SYNSEM v_subj_cp_prop_fin_trans_np_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_fin_trans_np_synsem, 
                          VAL.COMPS < [ OPT -, 
-                                       LOCAL np_acc_local ] > ] ] ]
+                                       LOCAL np_acc_local & [ CAT.HEAD.PRD non-prd ] ] > ] ] ]
 """
 ; --- 1.2.4. Transitive verbs taking Vfin subject and DO
 
@@ -760,7 +774,7 @@ v_np_sbj-cp-p-sub-idm_lex := v_subj_cp_prop_trans_np & main-verb & basic-two-arg
 ; --- 1.2.5. Transitive verbs taking Vfin subject, DO and marked NP
 
 v_subj_cp_prop_fin_trans_np_mrkd_np_synsem := v_subj_cp_prop_fin_trans_np_synsem &
-[ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local ],
+[ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local & [ CAT.HEAD.PRD non-prd ] ],
                         [ LOCAL mrkd_np_local & 
                                 [ CAT.HEAD.KEYS.KEY #ockey,
                                   CONT.HOOK.INDEX #ind3 ] ] >,
@@ -780,7 +794,8 @@ v_subj_cp_prop_fin_trans_np_mrkd_np_synsem := v_subj_cp_prop_fin_trans_np_synsem
 v_np-pp_e-sbj-cp-p-sub_lex := v_subj_cp_prop_trans_np & main-verb & basic-three-arg &
   [ SYNSEM v_subj_cp_prop_fin_trans_np_mrkd_np_synsem &
            [ LOCAL.CAT [ HEAD.LSYNSEM v_subj_cp_prop_fin_trans_np_mrkd_np_synsem,
-                         VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ]
+                         VAL.COMPS < [ OPT -,
+                                       LOCAL.CAT.HEAD.PRD non-prd ], [ OPT - ] > ] ] ]
 """; e.g. (el) que su partido haya perdido las elecciones lo apartará del poder
 """.
 
@@ -927,8 +942,7 @@ v_ppart_cop_verbal_subject_synsem := v_cop_verbal_subject_synsem &
   [ LOCAL [ CAT [ HEAD.TAM #tam,
                   VAL.COMPS < [ OPT -,
                                 LOCAL [ CAT [ HEAD adj &
-                                                   [ TAM #tam,
-                                                     PRD non-prd ],
+                                                   [ TAM #tam ],
                                               VAL.SUBJ < > ],
                                         CONT.HOOK [ LTOP #larg,
                                                     INDEX #index ] ] ] > ],
@@ -1216,10 +1230,10 @@ v_np-ap_sbj-cp-p-inf_sor_lex := main-verb & basic-three-arg &
 ; --- 1.3. Verbs taking nominal subject
 
 nom-subj-synsem := lex-synsem &
-  [ LOCAL [ AGR #agr & [ PNG #png ], 
+  [ LOCAL [ AGR #agr, 
             CAT [ VAL.SUBJ < [ LOCAL np_nom_local & 
                                      [ AGR #agr,
-                                       CONT.HOOK.INDEX #xarg ] ] > ],
+                                       CONT.HOOK.INDEX #xarg & [ PNG #png ] ] ] > ],
             CONT.HOOK.XARG #xarg & [ PNG #png ] ] ]
 """
 ; --- 1.3. Verbs taking nominal subject
@@ -2176,8 +2190,17 @@ v_modnp-ppa*_idm_lex := v_intr_advp & main-verb & basic-three-arg &
 
 ; --- 1.3.3. Transitive verbs
 
+v_ser_synsem := arg1_lt & transitive_verb_synsem &
+  [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD [ KEYS.KEY #ckey ] ],... >,
+    LKEYS [ KEYREL arg12-ev-relation,
+            --COMPKEY #ckey ] ]
+"""
+; --- 1.3.3. Transitive verbs
+""".
+
+
 v_trans_synsem := arg1_lt & transitive_verb_synsem &
-  [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD.KEYS.KEY #ckey ],... >,
+  [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.HEAD [ KEYS.KEY #ckey, PRD non-prd ] ],... >,
     LKEYS [ KEYREL arg12-ev-relation,
             --COMPKEY #ckey ] ]
 """
@@ -2315,7 +2338,7 @@ v_np_npsv-id-prn_lex := v_np_ntr & main-vprn & basic-three-arg &
 """; e.g. me llamo Montserrat.
 """.
 
-v_np_npsv_id_synsem := v_trans_synsem &
+v_np_npsv_id_synsem := v_ser_synsem &
   [ LOCAL [ AGR.PNG #png,
             CAT [ HEAD.INV -, 
                   VAL [ SUBJ < [ LOCAL [ AGR.PNG #png,
@@ -3370,9 +3393,10 @@ v_trans_cp_prop-or-ques := basic-main-verb &
 
 
 v_prd_cp_prop_inf_synsem := v_trans_cp_prop-or-ques_synsem &
-  [ LOCAL [ AGR #agr,
+  [ LOCAL [ ;AGR #agr,
             CAT [ HEAD.INV -,
-                  VAL [ SUBJ < [ OPT - ] >,
+                  VAL [ SUBJ < [ OPT -,
+                                 LOCAL.CONT.HOOK.INDEX #ind ] >,
                         COMPS < [ LOCAL vp_inf_local & [ CAT [ HEAD.VFORM inf,
                                                                VAL [ SUBJ < [ NON-LOCAL [ SLASH 0-dlist,
                                                                                           REL 0-dlist,
@@ -3380,7 +3404,7 @@ v_prd_cp_prop_inf_synsem := v_trans_cp_prop-or-ques_synsem &
                                                                      COMPS < >,
                                                                      CLTS #clts ] ] ] ] >,
                         CLTS #clts ] ],
-            CONT.HOOK.XARG #agr ] ]
+            CONT.HOOK.XARG #ind ] ]
   """
   --- 1.3.3.6.1. predicative verbs taking Vfin/Vinf complement (no control)
   e.g. ser (El error fue haberlo comprado en rebajas.)
@@ -4431,7 +4455,10 @@ v_np-xp := basic-main-verb &
 v_np-np_sor-rfx_lex := v_np-xp & main-verb & basic-three-arg &
   [ ALTS.RFX -,
     SYNSEM v_np-np_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_np-np_synsem,
-                                          VAL.COMPS < [ OPT - ], [ OPT - ] > ] ] ]
+                                          VAL.COMPS < [ OPT -,
+                                                        LOCAL.CAT.HEAD.PRD non-prd ], 
+                                                      [ OPT -,
+                                                        LOCAL.CAT.HEAD.PRD non-prd ] > ] ] ]
   """
   e.g. eso se considera plagio
   """.
@@ -4440,7 +4467,8 @@ v_np-np_sor-rfx_lex := v_np-xp & main-verb & basic-three-arg &
 v_np-ap_sor_lex := v_np-xp & main-verb & basic-three-arg &
   [ ALTS.RFX -,
     SYNSEM v_np-ap_sor_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_np-ap_sor_synsem,
-                                              VAL.COMPS < [ OPT - ],
+                                              VAL.COMPS < [ OPT -,
+                                                            LOCAL.CAT.HEAD.PRD non-prd ],
                                                           [ OPT - ] > ] ] ]
   """
   e.g. dejar (lo dejaron KO)
@@ -4450,7 +4478,8 @@ v_np-ap_sor_lex := v_np-xp & main-verb & basic-three-arg &
 v_np-ap_sor-rfx_lex := v_np-xp & main-verb & basic-three-arg &
   [ ALTS.RFX +,
     SYNSEM v_np-ap_sor_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_np-ap_sor_synsem,
-                                              VAL.COMPS < [ OPT - ],
+                                              VAL.COMPS < [ OPT -,
+                                                            LOCAL.CAT.HEAD.PRD non-prd ],
                                                           [ OPT - ] > ] ] ]
   """
   e.g. declarar, proclamar (lo declararon culpable)
@@ -4460,7 +4489,8 @@ v_np-ap_sor-rfx_lex := v_np-xp & main-verb & basic-three-arg &
 v_np-pp_sor_lex := v_np-xp & main-verb & basic-three-arg &
   [ ALTS.RFX -,
     SYNSEM v_np-pp_sor_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_np-pp_sor_synsem,
-                                              VAL.COMPS < [ OPT - ],
+                                              VAL.COMPS < [ OPT -,
+                                                            LOCAL.CAT.HEAD.PRD non-prd ],
                                                           [ OPT - ] > ] ] ]
   """
   e.g. dar, calificar, tomar,... (e.g. me tomas por tonto?)
@@ -4470,7 +4500,8 @@ v_np-pp_sor_lex := v_np-xp & main-verb & basic-three-arg &
 v_np-pp_sor-rfx_lex := v_np-xp & main-verb & basic-three-arg &
   [ ALTS.RFX +,
     SYNSEM v_np-pp_sor_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_np-pp_sor_synsem,
-                                              VAL.COMPS < [ OPT - ],
+                                              VAL.COMPS < [ OPT -,
+                                                            LOCAL.CAT.HEAD.PRD non-prd ],
                                                           [ OPT - ] > ] ] ]
   """
   e.g. proclamar (lo proclamaron como...)
@@ -4480,7 +4511,8 @@ v_np-pp_sor-rfx_lex := v_np-xp & main-verb & basic-three-arg &
 v_np-pp*_oeq-rfx_lex := v_np-xp & main-verb & basic-three-arg &
   [ ALTS.RFX +,
     SYNSEM v_np-pp_oeq_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_np-pp_oeq_synsem,
-                                              VAL.COMPS < [ OPT - ],
+                                              VAL.COMPS < [ OPT -,
+                                                            LOCAL.CAT.HEAD.PRD non-prd ],
                                                           [ OPT + ] > ] ] ]
   """
   e.g. distrazar de
@@ -4490,7 +4522,8 @@ v_np-pp*_oeq-rfx_lex := v_np-xp & main-verb & basic-three-arg &
 v_np-pp_aj-oeq_lex := v_np-xp & main-verb & basic-three-arg &
   [ ALTS.RFX -,
     SYNSEM v_np-pp_aj-oeq_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_np-pp_aj-oeq_synsem,
-                                                 VAL.COMPS < [ OPT - ],
+                                                 VAL.COMPS < [ OPT -,
+                                                               LOCAL.CAT.HEAD.PRD non-prd ],
                                                              [ OPT - ] > ] ] ]
   """
   e.g. la combinación se evalúa como ineficiente.
@@ -4500,7 +4533,8 @@ v_np-pp_aj-oeq_lex := v_np-xp & main-verb & basic-three-arg &
 v_np-pp_aj-oeq-rfx_lex := v_np-xp & main-verb & basic-three-arg &
   [ ALTS.RFX +,
     SYNSEM v_np-pp_aj-oeq_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_np-pp_aj-oeq_synsem,
-                                                 VAL.COMPS < [ OPT - ],
+                                                 VAL.COMPS < [ OPT -,
+                                                               LOCAL.CAT.HEAD.PRD non-prd ],
                                                              [ OPT - ] > ] ] ]
   """
   e.g. un libro que no vaciló en calificar de importante
@@ -4515,7 +4549,7 @@ v_copula_basic_synsem := lex-synsem &
                                         AUX -,
                                         KEYS.KEY _be_v_prd_rel ],
                           VAL.COMPS < synsem & [ LOCAL [ COORD -,
-                                                         CAT [ HEAD.KEYS.KEY #ckey,
+                                                         CAT [ HEAD [ KEYS.KEY #ckey ],
                                                                VAL.COMPS < > ] ],
                                                  NON-LOCAL.REL 0-dlist ] > ] ],
     LKEYS [ KEYREL.PRED _be_v_prd_rel,
@@ -4578,7 +4612,7 @@ v_cop := v_copula &
 v_cop-np_sbj := v_cop &
   [ SYNSEM.LOCAL [ AGR.PNG #png,
                    CAT.VAL [ SUBJ < [ LOCAL np_nom_local & [ AGR.PNG #png ] ] >,
-                             COMPS < [ LOCAL.CONT.HOOK.LTOP #ltop ] > ],
+                             COMPS < [ LOCAL [ CONT.HOOK.LTOP #ltop ] ] > ],
                    CONT [ HOOK.LTOP #ltop,
                           RELS <! !>,
                           HCONS <! !> ] ] ]
@@ -5027,7 +5061,7 @@ nonpronominal-lex := basic-nominal-lex &
 
 basic-noun-lex := nonpronominal-lex & 
   [ SYNSEM [ LOCAL [ AGR #agr,
-                     CAT [ HEAD noun,
+                     CAT [ HEAD noun & [ PRD non-prd ],
                            VAL.SPR < synsem &
                                      [ LOCAL local-min &
                                              [ AGR #agr,
@@ -5038,7 +5072,8 @@ basic-noun-lex := nonpronominal-lex &
                      CONT.HOOK [ LTOP #ltop,
                                  INDEX [ PNG.PN 3per,
                                          PRONTYPE not_pron ] ] ],
-             LKEYS.KEYREL.LBL #ltop ] ]. 
+             LKEYS.KEYREL.LBL #ltop,
+             NON-LOCAL.QUE <! !> ] ]. 
 
 basic-common-noun-synsem := lex-synsem & 
   [ LOCAL.CAT.HEAD noun ].
@@ -5098,7 +5133,7 @@ n_group-or-pseudopart_synsem := lex-synsem &
 
 n_intrans := basic-noun-lex & basic-one-arg & norm-hook-lex &
   [ SYNSEM.LOCAL [ CAT [ HEAD.KEYS.KEY non_temp_nonpro_rel & non_elliptical_n_rel,
-                         VAL [ SPR < [ OPT -] >,
+                         VAL [ SPR < [ OPT - ] >,
                                COMPS < > ] ],
                    CONT [ RELS <! noun-arg0-relation !>,
                           HCONS <! !> ] ] ]
@@ -5674,7 +5709,7 @@ clitic-lex := norm-zero-arg &
 
 ; clitic-synsem := lex-synsem &
 clitic-synsem := non-canonical &
-  [ LOCAL [ AGR #index,
+  [ LOCAL [ ;AGR #agr,
             CAT [ MC na,
                   HEAD noun &
                       [ PRD non-prd,
@@ -5948,13 +5983,14 @@ spec-partitive-pron-lex := basic-nominal-lex &
 
 
 basic-pseudo-part-pron-synsem := lex-synsem &
-  [ LOCAL [ AGR #agr & [ PNG.PN 3sg,
-                         DIVISIBLE + ],
+  [ LOCAL [ AGR [ PNG.PN 3sg,
+                  DIVISIBLE + ],
             CAT.VAL.COMPS < [ OPT +,
                               LOCAL [ CAT.HEAD.KEYS.ALT2KEY udef_q_rel,
                                       CONT.HOOK.INDEX [ PNG.PN sing,
                                                         DIVISIBLE + ] ] ] >,
-            CONT.HOOK.INDEX #agr ],
+            CONT.HOOK.INDEX [ PNG.PN 3sg,
+                              DIVISIBLE + ] ],
     NON-LOCAL.QUE 0-dlist ]
   """
   --- 2.3.4.1. pseudo-partitive pronouns (i.e. un poco/algo/nada + de Mass_N)
@@ -6142,7 +6178,7 @@ n_pp_pr-part-cuantos_lex := spec-partitive-pron-lex &
 ; --- 2.3.5. Relative pronouns
 
 rel_pronominal_synsem := lex-synsem &
-  [ LOCAL [ AGR #index,
+  [ LOCAL [ ;AGR #index,
             CAT [ MC na,
                   HEAD noun & 
                        [ PRD non-prd,
@@ -6173,7 +6209,7 @@ rel_pronominal_synsem := lex-synsem &
 
 
 free_rel_pro_lex := basic-nominal-lex &
-  [ SYNSEM [ LOCAL [ AGR #ind,
+  [ SYNSEM [ LOCAL [ ;AGR #ind,
                      CAT [ HC-LIGHT -,
                            MC na,
                            VAL [ SUBJ < >,
@@ -6310,7 +6346,7 @@ n_-_pr-rel-cual_lex := pron_relat &
 
 
 basic_wh_pron_lex := pronominal-lex &
-  [ SYNSEM [ LOCAL [ AGR #index,
+  [ SYNSEM [ LOCAL [ ;AGR #index,
                      CAT [ MC na,
                            HC-LIGHT -,
                            HEAD.KEYS.KEY non_modable_rel,
@@ -7567,7 +7603,7 @@ av_-_dg-sup_lex := basic_degree_spec_lex & basic-one-arg &
 ; --- 4.4. Pronominal adverbs
 
 basic_np_adv_synsem := lex-synsem & 
-  [ LOCAL [ AGR #ind,
+  [ LOCAL [ ;AGR #ind,
             CAT [ HC-LIGHT -,
                   HEAD noun & 
                        [ CASE none,
@@ -7726,7 +7762,7 @@ av_-_deic-place_lex := pronominal-lex & norm-zero-arg &
   [ SYNSEM pron_adverb_synsem &
            [ LOCAL [ CAT [ HEAD.KEYS.KEY place_n_rel,
                            VAL.SPR < > ],
-                     CONT.HOOK.INDEX.SORT loc-mod ] ] ]
+                     CONT.HOOK.INDEX.SORT abs_cnc_loc_tmp ] ] ]
 """
 ; --- 4.4.2. Deictic adverbs 
 ; a)- place (aquí, allí, ahí, acá, allá, acullá, aquende, allende)
@@ -7990,7 +8026,8 @@ basic_nomod-adp_synsem := basic_adposition_synsem &
   [ LOCAL.CAT [ HEAD.MOD < >,
                 VAL.COMPS < synsem & 
                             [ OPT -,
-                              LOCAL.CAT.HEAD.KEYS.KEY #ckey ] > ], 
+                              LOCAL.CAT.HEAD [ KEYS.KEY #ckey,
+                                               PRD non-prd ] ] > ], 
     LKEYS [ KEYREL arg12-relation & [ PRED prep_rel ],
             --COMPKEY #ckey ] ].
 
@@ -8009,7 +8046,8 @@ basic_mark-adp_synsem := basic_nomod-adp_synsem &
                               ALTKEY #ckey ], 
                   VAL [ COMPS < [ OPT -,
                                   LOCAL [ COORD -,
-                                          CAT [ HEAD.KEYS.KEY #ckey,
+                                          CAT [ HEAD [ KEYS.KEY #ckey,
+                                                       PRD non-prd ],
                                                 VAL.CLTS #clts ] ] ] >,
                         CLTS #clts ] ],
             CONT [ RELS <! !> ,
@@ -8022,7 +8060,7 @@ basic_mod-adp_synsem := basic_nomark-adp_synsem & specfd_adposition_synsem &
                                 LOCAL.CAT.HEAD.KEYS.KEY degree_rel ] >,
                         COMPS < [ OPT -,
                                   LOCAL [ COORD -,
-                                          CAT [ HEAD.KEYS.KEY #ckey,
+                                          CAT [ HEAD [ KEYS.KEY #ckey ],
                                                 VAL.CLTS < > ] ] ],... > ] ],
             CONT [ HOOK.LTOP #ltop,
                    RELS.LIST < prep-relation, ... > ] ],
@@ -8044,7 +8082,8 @@ p_nmark_synsem := basic_mark-adp_synsem &
   [ LOCAL [ CAT [ MC na,
                   HEAD.KEYS.ALT2KEY #alt2key,
                   VAL [ COMPS < [ LOCAL [ CAT.HEAD noun & 
-                                                   [ KEYS [ KEY nom_rel,
+                                                   [ PRD non-prd,
+                                                     KEYS [ KEY nom_rel,
                                                             ALTKEY #alt2key ] ],
                                           CONT.HOOK #hook ] ] >,
                         CLTS < > ] ],
@@ -8069,7 +8108,7 @@ p_nmod_synsem := basic_mod-adp_synsem &
   [ LOCAL.CAT [ POSTHEAD +, 
                 HEAD [ PRD prd,
                        MOD < [ LOCAL.CAT [ LASTNMOD -,
-                                           HEAD noun ],
+                                           HEAD noun & [ PRD non-prd ] ],
                                NON-LOCAL.SLASH 0-dlist ] > ] ] ]
 """
 OZ: Not sure whether this comment belongs here or was free-standing:
@@ -8080,7 +8119,7 @@ OZ: Not sure whether this comment belongs here or was free-standing:
 p_amod_synsem := basic_mod-adp_synsem &
   [ LOCAL.CAT [ POSTHEAD +, 
                 HEAD [ PRD non-prd,
-                       MOD < [ LOCAL.CAT. HEAD adj,
+                       MOD < [ LOCAL.CAT.HEAD adj,
                                NON-LOCAL.SLASH 0-dlist ] > ] ] ].
 
 p_numod_synsem := basic_mod-adp_synsem &
@@ -8103,7 +8142,7 @@ pp_nmod_synsem := basic_nomark-adp_synsem &
   [ LOCAL [ CAT [ POSTHEAD +, 
                   HEAD [ PRD prd,
                          MOD < [ LOCAL.CAT [ LASTNMOD -,
-                                             HEAD noun,
+                                             HEAD noun & [ PRD non-prd ],
                                              VAL.SPR < > ],
                                  NON-LOCAL.SLASH 0-dlist & [ LIST < > ] ] > ] ],
             CONT.RELS.LIST < pp-relation, ... > ] ]. 
@@ -8121,7 +8160,8 @@ pp_vmod_synsem := basic_nomark-adp_synsem &
 p_np := basic-one-arg & 
   [ SYNSEM.LOCAL [ CAT [ HEAD.KEYS.ALT2KEY #alt2key,
                          VAL.COMPS < [ LOCAL [ CAT [ MC na,
-                                                     HEAD noun & [ KEYS.ALTKEY #alt2key ],
+                                                     HEAD noun & [ KEYS.ALTKEY #alt2key,
+                                                                   PRD non-prd ],
                                                      VAL [ SUBJ < >,
                                                            COMPS < > ] ],
                                                CONT.HOOK.INDEX.SORT #sort ] ] > ],
@@ -8201,7 +8241,8 @@ p_adv := basic-one-arg &
 p_modnp := basic-one-arg &
   [ SYNSEM.LOCAL.CAT [ MC na,
                        HEAD.KEYS.ALTKEY prep_mod_rel,
-                       VAL [ COMPS < [ LOCAL.CAT [ HEAD modnp & [ MOD < [ LOCAL.CAT.HEAD verb ] > ],
+                       VAL [ COMPS < [ LOCAL.CAT [ HEAD modnp & [ PRD non-prd,
+                                                                  MOD < [ LOCAL.CAT.HEAD verb ] > ],
                                                    VAL.COMPS < > ] ] >,
                              CLTS < > ] ] ]
   """
@@ -8232,7 +8273,8 @@ p_pp := basic-one-arg &
 p_mrkd_np := basic-one-arg &
   [ SYNSEM [ LOCAL [ CAT [ HEAD.KEYS.ALT2KEY non_free_relative_q_rel,
                            VAL [ COMPS < [ OPT -,
-                                           LOCAL mrkd_np_local & [ CAT [ HEAD.KEYS.KEY #ckey,
+                                           LOCAL mrkd_np_local & [ CAT [ HEAD [ KEYS.KEY #ckey,
+                                                                                PRD non-prd ],
                                                                          VAL.SPR < > ],
                                                                    CONT.HOOK.INDEX #arg2 ] ] >,
                                  CLTS < > ] ],
@@ -8249,12 +8291,13 @@ p_ditrans := basic-two-arg &
   [ SYNSEM [ LOCAL.CAT [ HEAD.KEYS.ALT2KEY non_free_relative_q_rel,
                          VAL.COMPS < [ OPT -,
                                        LOCAL.CAT [ MC na,
-                                                   HEAD noun,
+                                                   HEAD noun & [ PRD non-prd ],
                                                    VAL [ SUBJ < >,
                                                          COMPS < >,
                                                          SPR < > ] ] ],
                                      [ OPT -,
-                                       LOCAL mrkd_np_local & [ CAT.HEAD.KEYS.KEY #ockey,
+                                       LOCAL mrkd_np_local & [ CAT.HEAD [ KEYS.KEY #ockey,
+                                                                          PRD non-prd ],
                                                                CONT.HOOK.INDEX #arg3 ] ] > ],
              LKEYS [ KEYREL.ARG3 #arg3,
                      --OCOMPKEY #ockey & _de_p_sel_rel ] ] ]
@@ -8269,7 +8312,8 @@ p_ditrans := basic-two-arg &
 
 
 p_np_ptcl_lex := mark-adp-lex & p_np &
-  [ SYNSEM p_nmark_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.VAL.SPR < > ] > ] ]
+  [ SYNSEM p_nmark_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT [ VAL.SPR < >,
+                                                                  HEAD.PRD non-prd ] ] > ] ]
   """
   - marking NPs (a, como, con, contra, de, en, para, por)
   e.g. sucumbió a la tentación, hay tantos niños como niñas, tan largo como eso, cumple con su deber,
@@ -8278,9 +8322,10 @@ p_np_ptcl_lex := mark-adp-lex & p_np &
 
 
 p_nb_ptcl_lex := mark-adp-lex & p_np &
-  [ SYNSEM p_nmark_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT.VAL.SPR < [ LOCAL.CONT.RELS <! relation !>,
+  [ SYNSEM p_nmark_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CAT [ VAL.SPR < [ LOCAL.CONT.RELS <! relation !>,
                                                                             NON-LOCAL [ QUE 0-dlist,
-                                                                                        REL 0-dlist ] ] > ] > ] ]
+                                                                                        REL 0-dlist ] ] >,
+                                                                  HEAD.PRD non-prd ] ] > ] ]
   """
   
   """.
@@ -8289,7 +8334,8 @@ p_nb_ptcl_lex := mark-adp-lex & p_np &
 p_np_ptcl-spd_lex := mark-adp-lex & p_np &
   [ SYNSEM p_nmark_synsem & [ LOCAL.CAT.VAL [ SPR < [ OPT -,
                                                       LOCAL.CAT.HEAD adv & [ KEYS.KEY comp_degree_rel ] ] >,
-                                              COMPS < [ LOCAL.CAT.VAL.SPR < > ] > ] ] ]
+                                              COMPS < [ LOCAL.CAT [ VAL.SPR < >,
+                                                                    HEAD.PRD non-prd ] ] > ] ] ]
   """
   
   """.
@@ -8347,8 +8393,9 @@ p_ap_ptcl_lex := mark-adp-lex & p_ap &
 ; --- Nominal modifying prepositions
 
 p_np_i-nm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
-  [ SYNSEM p_nmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS [ KEY non_free_relative_nom_rel,
-                                                                               ALTKEY explicit_q_rel ],
+  [ SYNSEM p_nmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD [ PRD non-prd,
+                                                                          KEYS [ KEY non_free_relative_nom_rel,
+                                                                               ALTKEY explicit_q_rel ] ],
                                                                    VAL.SPR < > ],
                                                              CONT.HOOK.INDEX #arg2 & [ SORT non-temp ] ] ] >,
                              LKEYS.KEYREL.ARG2 #arg2 ] ]
@@ -8359,8 +8406,9 @@ p_np_i-nm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
 
 
 p_nb_i-nm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
-  [ SYNSEM p_nmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS [ KEY non_free_relative_nom_rel,
-                                                                               ALTKEY explicit_q_rel ],
+  [ SYNSEM p_nmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD [ PRD non-prd,
+                                                                          KEYS [ KEY non_free_relative_nom_rel,
+                                                                               ALTKEY explicit_q_rel ] ],
                                                                    VAL.SPR < [ LOCAL.CONT.RELS <! relation !>,
                                                                                NON-LOCAL [ SLASH 0-dlist,
                                                                                            QUE 0-dlist,
@@ -8374,7 +8422,8 @@ p_nb_i-nm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
 
 
 p_np_i-pn-nm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
-  [ SYNSEM p_nmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS.KEY named_rel,
+  [ SYNSEM p_nmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD [ PRD non-prd,
+                                                                          KEYS.KEY named_rel ],
                                                                    VAL.SPR < > ],
                                                              CONT.HOOK.INDEX #arg2 & [ PRONTYPE not_pron ] ] ] >,
                              LKEYS.KEYREL.ARG2 #arg2 ] ]
@@ -8386,8 +8435,9 @@ p_np_i-pn-nm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
 
 p_np_i-tmp-nm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
   [ SYNSEM p_nmod_synsem & [ LOCAL.CAT [ HEAD.MOD < [ LOCAL.CAT.HEAD.KEYS.KEY non_modable_rel ] >,
-                                         VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS [ KEY non_free_relative_nom_rel,
-                                                                                 ALTKEY explicit_q_rel ],
+                                         VAL.COMPS < [ LOCAL [ CAT [ HEAD [ PRD non-prd,
+                                                                            KEYS [ KEY non_free_relative_nom_rel,
+                                                                                 ALTKEY explicit_q_rel ] ],
                                                                      VAL.SPR < > ],
                                                                CONT.HOOK.INDEX #arg2 & [ SORT tmp ] ] ] > ],
                              LKEYS.KEYREL.ARG2 #arg2 ] ]
@@ -8474,8 +8524,9 @@ p_ap_i-nm_lex := mod-adp-lex & p_ap & norm-sem-lex-item &
   
 
 p_nb_i-vm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
-  [ SYNSEM p_vmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS [ KEY common_nom_rel,
-                                                                               ALTKEY explicit_q_rel ],
+  [ SYNSEM p_vmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD [ PRD non-prd,
+                                                                          KEYS [ KEY common_nom_rel,
+                                                                               ALTKEY explicit_q_rel ] ],
                                                                    VAL.SPR < [ LOCAL.CONT.RELS <! relation !>,
                                                                                NON-LOCAL [ QUE 0-dlist,
                                                                                            REL 0-dlist ] ] > ],
@@ -8488,8 +8539,9 @@ p_nb_i-vm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
 
 
 p_np_i-vm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
-  [ SYNSEM p_vmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS [ KEY non_named_non_modable_rel,
-                                                                               ALTKEY explicit_q_rel ],
+  [ SYNSEM p_vmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD [ PRD non-prd,
+                                                                          KEYS [ KEY non_named_non_modable_rel,
+                                                                               ALTKEY explicit_q_rel ] ],
                                                                    VAL.SPR < > ],
                                                              CONT.HOOK.INDEX.SORT non-temp ] ] >,
                              LKEYS.KEYREL.PRED prep_mod_rel ] ]
@@ -8500,7 +8552,8 @@ p_np_i-vm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
 
 
 p_np_i-pn-vm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
-  [ SYNSEM p_vmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS.KEY named_rel,
+  [ SYNSEM p_vmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD [ KEYS.KEY named_rel,
+                                                                          PRD non-prd ],
                                                                    VAL.SPR < > ],
                                                              CONT.HOOK.INDEX #arg2 & [ PRONTYPE not_pron ] ],
                                                      NON-LOCAL.QUE 0-dlist ] >,
@@ -8513,7 +8566,8 @@ p_np_i-pn-vm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
 
 
 p_np_i-tmp-vm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
-  [ SYNSEM p_vmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT.VAL.SPR < >,
+  [ SYNSEM p_vmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.PRD non-prd,
+                                                                   VAL.SPR < > ],
                                                              CONT.HOOK.INDEX.SORT tmp ] ] >,
                              LKEYS.KEYREL.PRED temp_loc_rel ] ]
   """
@@ -8536,7 +8590,8 @@ p_np_i-tmp-durante-vm_lex := mod-adp-lex & p_np & norm-sem-lex-item &
 
 
 p_np-pp_i-vm_lex := mod-adp-lex & p_ditrans & norm-sem-lex-item &
-  [ SYNSEM p_vmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS.ALTKEY non_free_relative_q_rel,
+  [ SYNSEM p_vmod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD [ PRD non-prd,
+                                                                          KEYS.ALTKEY non_free_relative_q_rel ],
                                                                    VAL.SPR < > ],
                                                              CONT.HOOK.INDEX.SORT mea ] ],
                                                    [ LOCAL.CONT.HOOK.INDEX.SORT loc ] >,
@@ -8616,7 +8671,8 @@ pp_-_i-vm_lex := mod-pp-lex & norm-sem-lex-item &
 ; --- Adjectival modifying prepositions (degree)
 
 p_np_i-am_lex := mod-adp-lex & p_np & norm-sem-lex-item &
-  [ SYNSEM p_amod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT.VAL.SPR < >,
+  [ SYNSEM p_amod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ VAL.SPR < >,
+                                                                   HEAD.PRD non-prd ],
                                                              CONT.HOOK.INDEX #arg2 & [ SORT non-loc ] ] ] >,
                              LKEYS.KEYREL.ARG2 #arg2 ] ]
   """
@@ -8627,7 +8683,8 @@ p_np_i-am_lex := mod-adp-lex & p_np & norm-sem-lex-item &
 
 
 p_np_i-tmp-am_lex := mod-adp-lex & p_np & norm-sem-lex-item &
-  [ SYNSEM p_amod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT.VAL.SPR < >,
+  [ SYNSEM p_amod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.PRD non-prd,
+                                                                   VAL.SPR < > ],
                                                              CONT.HOOK.INDEX.SORT tmp ] ] >,
                              LKEYS.KEYREL.PRED temp_loc_rel ] ]
   """
@@ -8638,8 +8695,9 @@ p_np_i-tmp-am_lex := mod-adp-lex & p_np & norm-sem-lex-item &
 
 
 p_nb_i-am_lex := mod-adp-lex & p_np & norm-sem-lex-item &
-  [ SYNSEM p_amod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS [ KEY non_free_relative_nom_rel,
-                                                                               ALTKEY explicit_q_rel ],
+  [ SYNSEM p_amod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD [ PRD non-prd,
+                                                                          KEYS [ KEY non_free_relative_nom_rel,
+                                                                               ALTKEY explicit_q_rel ] ],
                                                                    VAL.SPR < [ LOCAL.CONT.RELS <! relation !>,
                                                                                NON-LOCAL [ SLASH 0-dlist,
                                                                                            QUE 0-dlist,
@@ -8653,7 +8711,8 @@ p_nb_i-am_lex := mod-adp-lex & p_np & norm-sem-lex-item &
 
 
 p_np_i-pn-am_lex := mod-adp-lex & p_np & norm-sem-lex-item &
-  [ SYNSEM p_amod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD.KEYS.KEY named_rel,
+  [ SYNSEM p_amod_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT [ HEAD [ PRD non-prd,
+                                                                          KEYS.KEY named_rel ],
                                                                    VAL.SPR < > ],
                                                              CONT.HOOK.INDEX #arg2 & [ PRONTYPE not_pron ] ] ] >,
                              LKEYS.KEYREL.ARG2 #arg2 ] ]
@@ -9564,12 +9623,11 @@ n_pp_pr-part-nu-card_lex := partitive-pron-lex &
 
 
 n_pp_pr-psd-part-nu-card_lex := basic-nominal-lex &
-  [ SYNSEM norm-basic-partitive-pron-synsem & [ LOCAL [ AGR #agr,
+  [ SYNSEM norm-basic-partitive-pron-synsem & [ LOCAL [ ;AGR #agr,
                                                         CAT.VAL [ SPR #spr & < [ OPT + ] >,
                                                                   COMPS #comps & < [ OPT -,
                                                                                      LOCAL [ CAT.HEAD.KEYS.ALT2KEY udef_q_rel,
-                                                                                             CONT.HOOK.INDEX.DIVISIBLE + ] ] > ],
-                                                        CONT.HOOK.INDEX #agr ] ],
+                                                                                             CONT.HOOK.INDEX.DIVISIBLE + ] ] > ] ] ],
     ARG-ST < #spr . #comps > ]
   """
   c)- pseudo-partitive pronouns (Zd): decena, docena, centenar, millar, millón

@@ -17,10 +17,8 @@ basic-headed-phrase := phrase &
                                     COORD-STRAT #coord-strat ] ].
 
 headed-phrase := basic-headed-phrase & 
-  [ SYNSEM.LOCAL [ AGR #agr,
-                   CAT.HEAD #head ],
-    HEAD-DTR.SYNSEM.LOCAL [ CAT.HEAD #head,
-                            CONT.HOOK.INDEX #agr ] ].
+  [ SYNSEM.LOCAL [ CAT.HEAD #head ],
+    HEAD-DTR.SYNSEM.LOCAL [ CAT.HEAD #head ] ].
 
 non-headed-phrase := phrase.
 
@@ -343,15 +341,13 @@ interrogative-clause := clause & basic-headed-phrase &
 
 basic-head-punct-phrase := head-valence-phrase & head-compositional &
   [ SYNSEM [ SLSHD #slshd,
-             LOCAL [ ;AGR #agr,
-                     COORD #coord,
+             LOCAL [ COORD #coord,
                      COORD-STRAT #coord-strat,
                      COORD-REL #crel,
                      CAT #cat,
                      CONT #cont ] ],
     HEAD-DTR.SYNSEM [ SLSHD #slshd,
-                      LOCAL [ ;AGR #agr,
-                              COORD #coord,
+                      LOCAL [ COORD #coord,
                               COORD-STRAT #coord-strat,
                               COORD-REL #crel,
                               STR.HEADED solely,
@@ -417,7 +413,26 @@ head-punct_phrase := basic-head-punct-phrase & basic-binary-phrase &
                  [ SYNSEM punct_synsem & 
                           [ LOCAL.CAT.HEAD.PUNCT-MK #rpunct & rpunct ] ],
     ARGS < #head, #non-head > ].
+    
+head-punct_ind_phrase := head-punct_phrase & 
+[ SYNSEM.LOCAL.AGR #agr,
+  HEAD-DTR.SYNSEM.LOCAL [ AGR #agr,
+                          CONT.HOOK.INDEX ref-ind ] ].
 
+punct-head_ind_phrase := punct-head_phrase & 
+[ SYNSEM.LOCAL.AGR #agr,
+  HEAD-DTR.SYNSEM.LOCAL [ AGR #agr,
+                          CONT.HOOK.INDEX ref-ind ] ].
+
+head-punct_ev_phrase := head-punct_phrase & 
+[ SYNSEM.LOCAL.AGR #agr,
+  HEAD-DTR.SYNSEM.LOCAL [ AGR #agr,
+                          CONT.HOOK.INDEX event ] ].
+
+punct-head_ev_phrase := punct-head_phrase & 
+[ SYNSEM.LOCAL.AGR #agr,
+  HEAD-DTR.SYNSEM.LOCAL [ AGR #agr,
+                          CONT.HOOK.INDEX event ] ].
 
 ; --- head-subj-phrase types
 
@@ -437,7 +452,8 @@ basic-head-subj-phrase := head-valence-phrase & head-compositional & binary-head
                                         SPEC #spec,
                                         CLTS #clit & < > ] ] ] ],
     NON-HEAD-DTR.SYNSEM canonical-synsem &
-                        [ NON-LOCAL.REL 0-dlist ],
+                        [ LOCAL.CAT.HEAD.PRD non-prd,
+                          NON-LOCAL.REL 0-dlist ],
     C-CONT [ RELS <! !>,
              HCONS <! !> ] ].
 
@@ -568,7 +584,8 @@ basic-head-comp-or-marker-phrase := head-valence-phrase & head-compositional & b
 head-marker_phrase := basic-head-comp-or-marker-phrase & head-initial &
   [ SYNSEM [ SLSHD #slshd,
              LOCAL [ STR.HEADING no,
-                     CAT [ HC-LIGHT #hclight,
+                     CAT [ HEAD.PRD #prd,
+                     HC-LIGHT #hclight,
                            VAL.COMPS #comps & < > ] ], 
 	     NON-LOCAL #nonlocal,
 	     LIGHT - ],
@@ -577,7 +594,8 @@ head-marker_phrase := basic-head-comp-or-marker-phrase & head-initial &
                       LOCAL.CAT [ HEAD adp & [ KEYS.KEY selected_rel ],
                                   VAL.COMPS < #synsem . #comps > ] ],
     NON-HEAD-DTR.SYNSEM canonical-synsem & #synsem & 
-                        [ LOCAL.CAT.HC-LIGHT #hclight,
+                        [ LOCAL.CAT [ HC-LIGHT #hclight,
+                                      HEAD.PRD #prd ],
                           NON-LOCAL #nonlocal ],
 ;                          LIGHT #light ],
     C-CONT [ RELS <! !>,
@@ -1379,7 +1397,8 @@ basic-appos-phrase := head-nexus-phrase & head-compositional & basic-binary-phra
           [ INFLECTED +,
             SYNSEM canonical-synsem &
   	     [ LOCAL [ COORD -,
-                       CAT [ MC na,
+                       CAT [ HEAD.PRD non-prd,
+                             MC na,
                              VAL [ SUBJ < >,
                                    COMPS < > ] ],
                        CONT.HOOK.INDEX #modind ],
@@ -1932,6 +1951,43 @@ nbar-rel_phrase := unary-phrase &
                       NON-LOCAL #nonloc & [ REL 1-dlist ] ] ] > ].
 
 
+npred_phrase := unary-phrase & 
+  [ INFLECTED +,
+    SYNSEM [ PUNCT #punct,
+             SLSHD #slshd,
+             LOCAL [ CAT [ HEAD noun & [ KEYS.KEY #key,
+                                         MOD #mod,
+                                         PRD prd & [ COPV ser ],
+                                         CASE #case ],
+                           VAL [ SPR < >,
+                                 COMPS #comps ] ],
+                     CONT #cont,
+                     CTXT #ctxt,
+                     COORD #coord,
+                     COORD-STRAT #coord-strat,
+                     COORD-REL #coord-rel ],
+             NON-LOCAL #nonloc ],
+    ARGS < [ INFLECTED +,
+             SYNSEM [ PUNCT #punct & [ RPUNCT no_punct ],
+                      SLSHD #slshd,
+                      LOCAL [ CAT [ HEAD noun & [ PRD non-prd,
+                                               KEYS.KEY #key & non_elliptical_n_rel,
+                                               CASE #case,
+                                               MOD #mod ],
+                                    VAL [ SPR < [ OPT - ] >,
+                                          COMPS #comps ] ],
+                              CONT #cont,
+                              CTXT #ctxt,
+                              COORD #coord,
+                              COORD-STRAT #coord-strat,
+                              COORD-REL #coord-rel ],
+                      NON-LOCAL #nonloc ] ] > ]
+ 
+"""
+For allowing common nouns serve as predicates/complements to ser: "Es profesor." - but not to drop the specifier in other contexts.
+""". 
+
+
 ; --- unary phrase types for adverbial-NP modifiers
 
 
@@ -1942,11 +1998,12 @@ basic-npadv-phrase := basic-unary-phrase & phrasal &
              LOCAL [ COORD #coord,
                      COORD-STRAT #coord-strat,
                      COORD-REL #crel,
-                     AGR #ind,
+                     ;AGR #agr,
                      CAT [ POSTHEAD +, 
                            HEAD modnp &
 				[ MOD < [ LOCAL intersective-mod &
-				 	        [ COORD -,
+				 	        [  ;AGR #agr,
+				 	           COORD -,
                                                   CAT.MC #mc,
                                                   CONT.HOOK [ INDEX #ind,
                                                               LTOP #ltop ] ],
@@ -1965,7 +2022,8 @@ basic-npadv-phrase := basic-unary-phrase & phrasal &
     ARGS < [ INFLECTED +,
              SYNSEM [ PUNCT #punct,
                       SLSHD #slshd,
-                      LOCAL [ COORD #coord & -,
+                      LOCAL [ AGR.SORT mod,
+                              COORD #coord & -,
                               COORD-STRAT #coord-strat & zero,
                               COORD-REL #crel,
                               CAT [ HEAD.PRD #prd,
@@ -2048,7 +2106,8 @@ vocative_np_phrase := basic-unary-phrase & phrasal &
                               COORD-STRAT zero & #coord-strat,
                               COORD-REL #crel,
                               CAT [ HEAD noun & 
-                                        [ KEYS.KEY named_rel & #argkey,
+                                        [ PRD non-prd,
+                                          KEYS.KEY named_rel & #argkey,
                                           CASE #case ],
                                     VAL [ SPR < >,
                                           COMPS < > ] ],
@@ -2609,7 +2668,7 @@ filler-head-phrase-nonfin := binary-phrase & phrasal &
 ; --- filler-head phrase types for wh
 
 filler-head-wh-phrase := filler-head-phrase & basic-headed-phrase &
-  [ ARGS < [ ],
+  [ ARGS < [ SYNSEM.NON-LOCAL.QUE <! [ ] !> ],
            [ SYNSEM.LOCAL.CAT.HEAD [ KEYS [ ALTKEY ques,
                                             ALT2KEY ques ],
                                      MOD < > ] ] >,
@@ -5232,6 +5291,7 @@ extad_n_constr := extadj-n_phrase & rule.
 nbar_constr := nbar_phrase & rule.
 nbar-crd_constr := nbar-coord_phrase & rule.
 nbar-rel_constr := nbar-rel_phrase & rule.
+npred_constr := npred_phrase & rule.
 
 adjpart_constr := adjpart_phrase & rule.
 prdp_constr := prdp_phrase & rule.
@@ -5375,8 +5435,10 @@ ct-hd_cl_constr := clit-head_phrase_cl & binary-rule-left-to-right. ; ***
 interj_constr := interj-phrase & rule. 
 interj_improp_constr := interj-impropias-phrase & rule. 
 
-hd-pt_constr := head-punct_phrase & binary-rule-right-to-left.
-pt-hd_constr := punct-head_phrase & binary-rule-left-to-right.
+hd-pt_ind_constr := head-punct_ind_phrase & binary-rule-right-to-left.
+pt-hd_ev_constr := punct-head_ev_phrase & binary-rule-left-to-right.
+pt-hd_ind_constr := punct-head_ind_phrase & binary-rule-left-to-right.
+hd-pt_ev_constr := head-punct_ev_phrase & binary-rule-left-to-right.
 pt-hd_clt_constr := punct-head_clt_phrase & binary-rule-left-to-right.
 
 ; *** crd mono-bot/omni-bot/omni-left changed from right-to-left to left-to-right
