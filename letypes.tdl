@@ -4727,7 +4727,7 @@ v_vp_ppart_ser_synsem := v_copula_synsem &
   [ LOCAL.CAT.VAL [ SUBJ < [ LOCAL [ AGR #agr,
                                      CONT.HOOK.INDEX #arg2 ] ] >,
                     COMPS < [ LOCAL [ AGR #agr,
-                                      CAT [ HEAD verb & [ PRD.COPV ser ],
+                                      CAT [ HEAD verb & [ PRD prd & [ COPV ser ] ],
                                             VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX #arg2 ] > ],
                                       CONT.RELS.LIST < [ ARG2 #arg2 ], ... > ] ] > ] ]
   """
@@ -8039,7 +8039,8 @@ basic_nomark-adp_synsem := adposition_synsem &
                          MOD < [ LOCAL intersective-mod & 
                                        [ CONT.HOOK.INDEX #arg1 ] ] > ],
                   VAL.CLTS < > ],
-            CONT.HOOK.XARG #arg1 ],
+            CONT.HOOK [ XARG #arg1,
+                        INDEX event ] ],
     LKEYS.KEYREL.ARG1 #arg1 ].
 
 basic_mark-adp_synsem := basic_nomod-adp_synsem & 

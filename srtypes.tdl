@@ -1971,7 +1971,8 @@ npred_phrase := unary-phrase &
     ARGS < [ INFLECTED +,
              SYNSEM [ PUNCT #punct & [ RPUNCT no_punct ],
                       SLSHD #slshd,
-                      LOCAL [ CAT [ HEAD noun & [ PRD non-prd,
+                      LOCAL [ AGR.DIVISIBLE -,
+                              CAT [ HEAD noun & [ PRD non-prd,
                                                KEYS.KEY #key & non_elliptical_n_rel,
                                                CASE #case,
                                                MOD #mod ],
@@ -2254,18 +2255,19 @@ vger_phrase := unary-phrase &
 adjpart_phrase := unary-phrase & 
   [ SYNSEM [ LIGHT -,
              SLSHD #slshd,
-             LOCAL [ AGR #ind,
+             LOCAL [ AGR #agr,
                      COORD #coord & -,
                      COORD-STRAT #coord-strat & zero,
                      CAT [ HEAD adj &
                                [ PRD.HABER #haber & -,
                                  MOD < synsem &
                                        [ LOCAL intersective-mod &
-                                               [ AGR #ind,
+                                               [ AGR #agr,
                                                  CAT [ LASTNMOD -,
                                                        HEAD noun & [ KEYS.KEY nom_rel ],
                                                        VAL [ SUBJ < >,
-                                                             SPEC < > ] ] ] ] >,
+                                                             SPEC < > ] ],
+                                                 CONT.HOOK.INDEX #ind ] ] >,
                                  KEYS.KEY v_event_rel ],
                            VAL [ SPR < >,
                                  SUBJ < >,
