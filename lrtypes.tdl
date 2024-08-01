@@ -1619,11 +1619,12 @@ v_recip_dlr := comp-clt-lex-rule &
            RFX -,
            PASS - ],
     SYNSEM.LOCAL [ AGR.PNG #agr & [ PN plur ],
-                   CAT.VAL [ SUBJ < [ LOCAL.AGR.PNG #agr ] >,
+                   CAT.VAL [ SUBJ < [ LOCAL [ AGR.PNG #agr,
+                                              CONT.HOOK.INDEX #ind ] ] >,
                              CLTS < [ LOCAL [ CAT.HEAD.CASE rcp,
-                                              CONT.HOOK.INDEX #ind2 & [ PNG #agr,
+                                              CONT.HOOK.INDEX #ind & [ PNG #agr,
                                                                         PRONTYPE std_or_recip_or_refl_pron ] ] ] > ],
-                   CONT.RELS.LIST.FIRST.ARG2 #ind2 ],
+                   CONT.RELS.LIST.FIRST.ARG2 #ind ],
     DTR [ ALTS.RCP +,
           SYNSEM transitive_verb_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local ], ... > ] ] ]
   """
@@ -1636,11 +1637,12 @@ v_reflex_dlr := comp-clt-lex-rule &
            RFX -,
            PASS - ],
     SYNSEM.LOCAL [ AGR.PNG #agr,
-                   CAT.VAL [ SUBJ < [ LOCAL.AGR.PNG #agr ] >,
+                   CAT.VAL [ SUBJ < [ LOCAL [ AGR.PNG #agr,
+                                              CONT.HOOK.INDEX #ind ] ] >,
                              CLTS < [ LOCAL [ CAT.HEAD.CASE rflx,
-                                              CONT.HOOK.INDEX #ind2 & [ PNG #agr,
+                                              CONT.HOOK.INDEX #ind & [ PNG #agr,
                                                                         PRONTYPE std_or_recip_or_refl_pron ] ] ] > ],
-                   CONT.RELS.LIST.FIRST.ARG2 #ind2 ],
+                   CONT.RELS.LIST.FIRST.ARG2 #ind ],
     DTR [ ALTS.RFX +,
           SYNSEM transitive_verb_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local ], ... > ] ] ]
   """

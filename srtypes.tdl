@@ -932,7 +932,8 @@ basic-head-mod-phrase-simple := head-mod-phrase & binary-headed-phrase &
     NON-HEAD-DTR.SYNSEM 
            [ LOCAL [ COORD -,
                      CAT [ HEAD.MOD < #synsem >,
-                           VAL.COMPS < > ] ],
+                           VAL [ COMPS < >,
+                                 CLTS < > ] ] ],
              NON-LOCAL [ SLASH [ LIST #first,
                                  LAST #middle ],
                          QUE 0-dlist & [ LIST null ] ] ],
