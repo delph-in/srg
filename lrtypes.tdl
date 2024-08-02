@@ -837,9 +837,9 @@ n_pp-vp_dlr := vfin_vinf-lex-rule &
   b)- taking PPde + finite completive clause/VPinf_ctrl
   e.g. la necesidad (de la empresa) (de) que lleguen a un acuerdo/de llegar a un acuerdo
   """.
-
-
-ppart-basic-lex-rule := const-ltol-rule &
+  
+#|  
+pred-adj-lex-rule := const-ltol-rule &
   [ ALTS.PASS -,
     KEY-ARG #keyarg,
     INFLECTED +,
@@ -873,6 +873,74 @@ ppart-basic-lex-rule := const-ltol-rule &
     DTR [ INFLECTED +,
           KEY-ARG #keyarg,
           ALTS.PASS +,
+          SYNSEM intersective_adjective_synsem & 
+                 [ PUNCT #punct & [ RPUNCT no_punct ],
+                   SLSHD #slshd,
+                   OPT #opt,
+                   CLTCZD #cltszd,
+                   DEF-OPT #def-opt,
+                   LOCAL [ AGR #agr,
+                           STR #str,
+                           CAT [ MC #mc,
+                                 POSTHEAD #posthead,
+                                 LASTNMOD #lastnmod,
+                                 HEAD adj & [ PRD prd,
+                                               VFORM part,
+                                               VOICE active,
+                                               TAM #tam,
+                                               LSYNSEM #lsynsem,
+                                               KEYS.KEY #key & adj-rel ],
+                                 VAL.SPR < > ],
+                           CONT [ HOOK [ LTOP #hand ],
+                                  HCONS #hcons,
+                                  RELS #rels ],
+                           CTXT #ctxt,
+                           COORD #coord,
+                           COORD-STRAT #coord-strat,
+                           COORD-REL #coord-rel ],
+                   LKEYS #lkeys,
+                   NON-LOCAL #nonloc ] ] ]
+  """
+  --- LR types for participles
+  -- LR type building pastparts for passive constructions
+  """.
+|#
+
+
+ppart-basic-lex-rule := lex-rule &
+  [ ALTS.PASS -,
+    KEY-ARG #keyarg,
+    INFLECTED #infl & +,
+    SYNSEM [ PUNCT #punct,
+             SLSHD #slshd,
+             LOCAL [ CAT [ HEAD verb & [ AUX -,
+                                         VFORM part,
+                                         VOICE passive,
+                                         TAM #tam,
+                                         KEYS.KEY #key,
+                                         MOD < >,
+                                         LSYNSEM #lsynsem,
+                                         PRD.HABER - ],
+                           VAL.SPR < [ OPT +,
+                                       LOCAL [ CAT [ HEAD.KEYS.KEY degree_rel,
+                                                     MC na ],
+                                               CONT.HOOK [ LTOP #hand,
+                                                           XARG #index ] ],
+                                       NON-LOCAL [ SLASH 0-dlist,
+                                                   QUE 0-dlist ] ] > ],
+                     CONT [ HOOK [ INDEX #index,
+                                   LTOP #hand ],
+                            HCONS #hcons,
+                            RELS #rels ],
+                     CTXT #ctxt,
+                     COORD #coord,
+                     COORD-STRAT #coord-strat,
+                     COORD-REL #coord-rel ],
+             LKEYS #lkeys,
+             NON-LOCAL #nonloc ],
+    DTR [ INFLECTED #infl,
+          KEY-ARG #keyarg,
+          ALTS.PASS +,
           SYNSEM [ PUNCT #punct & [ RPUNCT no_punct ],
                    SLSHD #slshd,
                    LOCAL [ CAT [ HEAD verb & [ PRD non-prd & [ HABER - ],
@@ -882,7 +950,8 @@ ppart-basic-lex-rule := const-ltol-rule &
                                                LSYNSEM #lsynsem,
                                                KEYS.KEY #key ],
                                  VAL.SPR < > ],
-                           CONT [ HOOK [ LTOP #hand ],
+                           CONT [ HOOK [ LTOP #hand,
+                                         INDEX #index ],
                                   HCONS #hcons,
                                   RELS #rels ],
                            CTXT #ctxt,
@@ -902,7 +971,7 @@ ppart-lex-rule :=  ppart-basic-lex-rule &
                      CAT [ VAL [ SUBJ < synsem &
                                         [ LOCAL np_nom_local & 
                                                 [ AGR #agr,
-                                                  CONT #objcont & [ HOOK.INDEX #agr ] ], 
+                                                  CONT #objcont ], 
                                           NON-LOCAL #ononloc & [ SLASH 0-dlist ] ] >,
                                  COMPS < [ OPT +,
                                            LOCAL mrkd_np_local &
@@ -913,18 +982,19 @@ ppart-lex-rule :=  ppart-basic-lex-rule &
     DTR [ SYNSEM [ LOCAL [ CAT [ VAL [ SUBJ < [ LOCAL np_nom_local & 
                                                       [ CONT.HOOK.INDEX #subjind ],
                                                 NON-LOCAL #snonloc ] >,
-                                       COMPS [ FIRST [ LOCAL [ CONT #objcont ],
+                                       COMPS [ FIRST [ LOCAL [ AGR #agr,
+                                                               CONT #objcont ],
                                                        NON-LOCAL #ononloc ], 
                                                REST #comps ],
                                        CLTS #clts ] ] ] ] ] ].
 
 
 ppart-intran-lex-rule := ppart-basic-lex-rule &
-  [ SYNSEM [ LOCAL [ CAT.MC #mc,
+  [ SYNSEM [ LOCAL [ ;CAT.MC #mc,
                      CONT [ HOOK [ XARG #xarg,
                                    INDEX #index ],
                             RELS.LIST < [ ARG0 #index ], ... > ] ] ],
-    DTR.SYNSEM.LOCAL [ CAT.MC #mc,
+    DTR.SYNSEM.LOCAL [ ;CAT.MC #mc,
                        CONT.HOOK.XARG #xarg ] ]
   """
   --- LR types for participles
@@ -934,35 +1004,44 @@ ppart-intran-lex-rule := ppart-basic-lex-rule &
 v_pastpart-trans_dlr := ppart-lex-rule &
   [ SYNSEM.LOCAL [ CAT [ HEAD [ INV -,
                                 PRD prd & [ COPV ser ] ],
-                         VAL [ SUBJ < unexpressed & [ OPT + ] > ] ],
+                         VAL [ SUBJ < unexpressed & [ OPT + ] >,
+                               CLTS #clts ] ],
                    CONT.RELS.LIST < [ ARG1 #subjind,
                                       ARG2 #arg2 ], ... > ],
     DTR [ INFLECTED +,
           SYNSEM.LOCAL [ AGR #arg2,
                          CAT.VAL [ SUBJ < [ LOCAL np_nom_local & [ CONT.HOOK.INDEX #subjind ] ] >,
                                  COMPS.FIRST [ LOCAL np_acc_local & [ CONT.HOOK.INDEX #arg2,
-                                                                      AGR #arg2 ] ] ] ] ] ]
+                                                                      AGR #arg2 ] ],
+                                   CLTS #clts ] ] ] ]
   """
   -- with transitive verbs
   """.
 
 v_pastpart-unacc_dlr := ppart-intran-lex-rule &
-  [ SYNSEM.LOCAL [ AGR #agr,
-                   CAT [ HEAD [ INV +,
+  [ SYNSEM.LOCAL [ AGR #sagr,
+                   CAT [ MC na,
+                         HEAD [ INV +,
                                 PRD non-prd ],
                          VAL [ SUBJ < [ OPT +,
-                                        LOCAL #slocal & np_nom_local & [ AGR #agr & [ PRONTYPE not_pron ] ],
+                                        LOCAL #slocal & np_nom_local & [ AGR #sagr & [ PRONTYPE not_pron ] ],
                                         NON-LOCAL #snonloc & [ SLASH 0-dlist ] ] >,
                                COMPS #comps,
                                CLTS #clts ] ] ],
     DTR [ INFLECTED +,
-          SYNSEM unacc_lt & [ LOCAL.CAT.VAL [ SUBJ < [ LOCAL #slocal,
-                                                       NON-LOCAL #snonloc ] >,
-                                              COMPS #comps,
-                                              CLTS #clts ] ] ] ]
+          SYNSEM [ LOCAL [ AGR #agr,
+                           CAT.VAL [ SUBJ < [ LOCAL #slocal & [ AGR #agr,
+                                                                CONT.HOOK [ INDEX #arg2,
+                                                                            XARG #xarg ] ],
+                                            NON-LOCAL #snonloc ] >,
+                                   COMPS #comps,
+                                   CLTS #clts ],
+                           CONT.HOOK.XARG #xarg ],
+                   LKEYS.KEYREL arg2-ev-relation & [ ARG2 #arg2 ] ] ] ]
   """
   For "construcciones de participio absoluto". Verb (transitive/unaccusative) passive participle + non-pronominal NP (subject)
   e.g. acabada *ella/la reunión, todos se pusieron a trabajar.
+  e.g. "Ella fue remilgada."
   """.
 
 

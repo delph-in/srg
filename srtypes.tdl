@@ -1182,7 +1182,7 @@ head-adj_int-cn-ap_phrase := head-adj-int-n-xp-phrase &
                               CAT [ HEAD.KEYS.KEY all_common_nom_rel,
                                     VAL.SPR #spr & < [ ] > ],
                               CONT.HOOK.INDEX.PRONTYPE not_pron ] ],
-    NON-HEAD-DTR.SYNSEM.LOCAl.CAT.HEAD adj ]
+    NON-HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD adj ]
 """
 ; common nouns
 """.
@@ -2259,7 +2259,7 @@ adjpart_phrase := unary-phrase &
                      COORD #coord & -,
                      COORD-STRAT #coord-strat & zero,
                      CAT [ HEAD adj &
-                               [ PRD.HABER #haber & -,
+                               [ PRD  [ HABER #haber & - ],
                                  MOD < synsem &
                                        [ LOCAL intersective-mod &
                                                [ AGR #agr,
@@ -2290,7 +2290,7 @@ adjpart_phrase := unary-phrase &
                                            KEYS.KEY v_event_rel ],
 			   	    VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #ind ] >,
                                           COMPS #comps & < >,
-                                          CLTS #clts & < > ] ],
+                                          CLTS #clts ] ],
                               CONT #cont & [ HOOK #hook ],
                               CTXT #ctxt ],
                       NON-LOCAL #non-local ] ] >,
@@ -2333,7 +2333,8 @@ prdp_phrase := unary-phrase &
                               COORD-REL #crel,
                               CAT [ MC na,
                                     HEAD adj & 
-                                         [ KEYS #keys,
+                                         [ ;PRD non-prd,
+                                           KEYS #keys,
                                            MOD < [ LOCAL intersective-mod & 
                                                          [ AGR #agr,
                                                            CAT.HEAD noun ] ] > ],
@@ -3623,8 +3624,10 @@ filler-head_free-rel-inf-pp-adj_phrase := filler-head-free-rel-pp-adj-phrase & f
 
 basic-extracted-arg-phrase := head-valence-phrase & head-only &
   [ SYNSEM [ LIGHT -,
-             LOCAL.CAT.MC #mc ],
-     HEAD-DTR.SYNSEM.LOCAL.CAT.MC #mc ].
+             LOCAL.CAT.MC #mc,
+             NON-LOCAL.SLASH #slash ],
+     HEAD-DTR.SYNSEM [ LOCAL.CAT.MC #mc,
+                       NON-LOCAL.SLASH #slash ] ].
 
 basic-extracted-subj-phrase := basic-extracted-arg-phrase & 
   [ SYNSEM [ SLSHD #slshd, 
@@ -3663,13 +3666,14 @@ basic-extracted-comp-phrase := basic-extracted-arg-phrase & head-compositional &
                                  CLTS #clts ],
                            MC #mc ],
                      CONT #cont ] ],
-    HEAD-DTR.SYNSEM.LOCAL [ CAT [ VAL [ SUBJ #subj,
+    HEAD-DTR.SYNSEM [ LOCAL [ CAT [ VAL [ SUBJ #subj,
                                         SPR #spr,
-                                        COMPS < gap 
+                                        COMPS < gap & [ NON-LOCAL.SLASH #slash ] 
                                                 . #comps >,
                                         CLTS #clts ],
                                   MC #mc ],
                             CONT #cont ],
+                      NON-LOCAL.SLASH #slash ],
     C-CONT [ RELS <! !>,
 	     HCONS <! !> ] ].
 
