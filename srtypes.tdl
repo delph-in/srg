@@ -1269,12 +1269,14 @@ head-adj_int-pr-xp_phrase := head-adj-int-n-xp-phrase &
 """.
 
 head-adj-int-n-rc-phrase := head-adj-phrase & isect-mod-phrase &
-  [ SYNSEM.LOCAL.CAT [ POSTHEAD #ph,
-                       LASTNMOD + ],
+  [ SYNSEM.LOCAL [ AGR #agr,
+                   CAT [ POSTHEAD #ph,
+                       LASTNMOD + ] ],
     HEAD-DTR.SYNSEM [ MODIFIED notmod-or-rmod,
-                      LOCAL.CAT [ POSTHEAD #ph,
+                      LOCAL [ AGR #agr,
+                              CAT [ POSTHEAD #ph,
                                   HEAD noun,
-                                  VAL.COMPS < > ],
+                                  VAL.COMPS < > ] ],
                       NON-LOCAL [ SLASH 0-dlist,
                                   REL 0-dlist & [ LIST < > ] ] ],
     NON-HEAD-DTR.SYNSEM [ LOCAL.CAT [ POSTHEAD +, 
