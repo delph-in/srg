@@ -5435,7 +5435,7 @@ n_pp-pp_de-mc_lex := n_ppde_pp &
 
 n_pp-pp_de-de-mc_lex := n_ppde_pp & 
   [ SYNSEM basic-common-noun-synsem &
-           [ LOCAL [ AGR.DIVISIBLE -,
+           [ LOCAL [ AGR.DIVISIBLE +,
                      CAT [ VAL.COMPS < synsem, 
                                      [ LOCAL.CAT.HEAD.KEYS.KEY de_or_por_p_sel_rel ] > ],
                      CONT.HOOK.INDEX.SORT abs ] ] ].
