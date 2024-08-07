@@ -3393,10 +3393,11 @@ v_trans_cp_prop-or-ques := basic-main-verb &
 
 
 v_prd_cp_prop_inf_synsem := v_trans_cp_prop-or-ques_synsem &
-  [ LOCAL [ ;AGR #agr,
+  [ LOCAL [ AGR #agr,
             CAT [ HEAD.INV -,
                   VAL [ SUBJ < [ OPT -,
-                                 LOCAL.CONT.HOOK.INDEX #ind ] >,
+                                 LOCAL [ AGR #agr,
+                                         CONT.HOOK.INDEX #ind ] ] >,
                         COMPS < [ LOCAL vp_inf_local & [ CAT [ HEAD.VFORM inf,
                                                                VAL [ SUBJ < [ NON-LOCAL [ SLASH 0-dlist,
                                                                                           REL 0-dlist,
