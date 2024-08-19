@@ -4731,7 +4731,8 @@ v_vp_ppart_ser_synsem := v_copula_synsem &
                                      CONT.HOOK.INDEX #arg2 ] ] >,
                     COMPS < [ LOCAL [ AGR #agr,
                                       CAT [ HEAD verb & [ PRD prd & [ COPV ser ] ],
-                                            VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX #arg2 ] > ],
+                                            VAL.SUBJ < [ LOCAL [ ;AGR #agr,
+                                                                 CONT.HOOK.INDEX #arg2 ] ] > ],
                                       CONT.RELS.LIST < [ ARG2 #arg2 ], ... > ] ] > ] ]
   """
   e.g. Juan fue atacado
@@ -4815,8 +4816,9 @@ v_adv_estar_synsem := v_copula_basic_synsem &
                                          AGR #agr ] ] >,
                         COMPS < [ OPT -,
                                   LOCAL [ CAT [ HEAD adv & [ MOD < [ LOCAL.CAT [ HEAD verb,
-                                                                               VAL.SUBJ.FIRST.LOCAL.CONT.HOOK [ INDEX #sind,
-                                                                                                                XARG #sind ] ],
+                                                                               VAL.SUBJ.FIRST.LOCAL [ AGR #agr,
+                                                                                                      CONT.HOOK [ INDEX #sind,
+                                                                                                                  XARG #sind ] ] ],
                                                                      LKEYS.KEYREL.ARG1 #sind ] > ] ],
                                           CONT.HOOK [ XARG #sind,
                                                       INDEX #ind ] ],
