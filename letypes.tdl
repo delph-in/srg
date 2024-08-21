@@ -6381,9 +6381,8 @@ basic_wh_pron_lex := pronominal-lex &
 
 
 pron_wh_lex := basic_wh_pron_lex &
-  [ SYNSEM.LOCAL [ AGR #index,
-                   CAT.VAL.COMPS < >,
-                   CONT.HOOK.INDEX #index ],
+  [ SYNSEM.LOCAL [ ;AGR #index,
+                   CAT.VAL.COMPS < > ],
     ARG-ST < > ]
   """
   
@@ -6393,9 +6392,11 @@ pron_wh_lex := basic_wh_pron_lex &
 pron_wh_part_lex := basic_wh_pron_lex &
   [ SYNSEM basic-partitive-pron-synsem & [ LOCAL [ AGR.PNG.GEN #gender,
                                                    CAT.VAL.COMPS #comps & < [ OPT +,
-                                                                              LOCAL.CONT.HOOK.INDEX.PNG [ PN plur,
-                                                                                                          GEN #gender ] ] >,
-                                                   CONT.HOOK.INDEX.SORT non-temp ] ],
+                                                                              LOCAL [ AGR.PNG.GEN #gender,
+                                                                                      CONT.HOOK.INDEX.PNG [ PN plur,
+                                                                                                            GEN #hgen ] ] ] >,
+                                                   CONT.HOOK.INDEX [ SORT non-temp,
+                                                                     PNG [ GEN #hgen ] ] ] ],
     ARG-ST #comps ]
   """
   

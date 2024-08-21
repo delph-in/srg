@@ -896,9 +896,10 @@ spec-head_specdeg_phrase := norm_spec-head-phrase & head-final & head-compositio
                        VAL.SPR #spr ],
     HEAD-DTR.SYNSEM.LOCAL [ COORD -,
                             CAT.HEAD.KEYS #keys ],
-    NON-HEAD-DTR.SYNSEM.LOCAL.CAT [ HEAD.KEYS.KEY degree_rel,
+    NON-HEAD-DTR.SYNSEM [ LOCAL.CAT [ HEAD.KEYS.KEY degree_rel,
                                     VAL [ SPEC < [ LOCAL.CAT.HEAD #head ] >,
-                                          SPR #spr ] ] ]
+                                          SPR #spr ] ],
+                          NON-LOCAL.QUE <! !>  ] ]
 """
 ; for degree specifiers
 """.
