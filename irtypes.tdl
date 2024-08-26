@@ -264,7 +264,7 @@ da0ms0_ilr := da_ilr & masc_sg_ilr
 """definite article""".
 da0mp0_ilr := da_ilr & masc_pl_ilr ;& 
 ;[SYNSEM.LOCAL.CAT.VAL.SPEC < [ LOCAL [ AGR.PNG [ GEN masc, PN plur ],
-;                                       CONT.HOOK.INDEX.PNG [ GEN masc, PN plur ] ] ] >]
+;                                       CONT.HOOK.INDEX.PNG [ GEN masc, PN plur ] ] ] > ]
 """definite article""".
 da0fs0_ilr := da_ilr & fem_sg_ilr
 """definite article""".
