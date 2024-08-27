@@ -623,13 +623,15 @@ v_trans_cp_prop-or-ques_dlr := vcomp_vfin_vinf-lex-rule &
 v_trans_cp_prop-or-ques_dlr := vcomp_vfin_vinf-lex-rule & 
   [ SYNSEM v_trans_cp_prop-or-ques_inf_synsem &
            [ LOCAL [ AGR #agr,
-                     CAT.VAL [ COMPS < [ OPT -,
+                     CAT.VAL [ SUBJ < [ LOCAL [ AGR #agr,
+                                                CONT.HOOK.INDEX #ind ] ] >,
+                               COMPS < [ OPT -,
                                          LOCAL [ CAT [ HEAD.KEYS #keys, 
                                                        VAL [ CLTS #clts ] ],
                                                  CONT.HOOK.INDEX.SF #sf ],
                                          NON-LOCAL #nloc ] >,
                                CLTS #clts ],
-                     CONT.HOOK.XARG #agr ] ],
+                     CONT.HOOK.XARG #ind ] ],
     DTR [ SYNSEM v_trans_cp_prop-or-ques_fin_synsem &
                  [ LOCAL.CAT.VAL [ COMPS < [ LOCAL [ CAT.HEAD.KEYS #keys,
                                                  CONT.HOOK.INDEX.SF #sf ],
