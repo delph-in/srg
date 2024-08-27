@@ -564,11 +564,12 @@ vcomp_vfin_vinf-lex-rule := vfin_vinf-lex-rule &
 vintr_mrkd_cp_prop-or-ques_lex-rule := vcomp_vfin_vinf-lex-rule &
   [ SYNSEM v_intr_mrkd_cp_prop-or-ques_inf_synsem & [ LOCAL [ AGR #agr,
                                                               CAT.VAL.COMPS < [ OPT -,
-                                                                                LOCAL [ CAT.HEAD.KEYS #keys,
+                                                                                LOCAL [ AGR #agr,
+                                                                                        CAT.HEAD.KEYS #keys,
                                                                                         CONT.HOOK [ INDEX.SF #sf,
-                                                                                                    XARG #agr ] ],
+                                                                                                    XARG #ind ] ],
                                                                                 NON-LOCAL #nloc ] >,
-                                                              CONT.HOOK.XARG #agr ] ],
+                                                              CONT.HOOK.XARG #ind ] ],
     DTR.SYNSEM v_intr_mrkd_cp_prop-or-ques_fin_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT.HEAD.KEYS #keys,
                                                                                           CONT.HOOK.INDEX.SF #sf ],
                                                                                   NON-LOCAL #nloc ] > ] ]
