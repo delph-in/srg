@@ -574,6 +574,7 @@ active := voice.
 passive := voice.
 
 partn := noun.
+non-partn := noun.
 
 case := sort.
   ethic_dat := case. 

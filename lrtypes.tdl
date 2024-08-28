@@ -1448,7 +1448,7 @@ partitive-lex-rule := tmt-lex-rule & phrase-or-lexrule &
 
 n_part-noun_dlr := partitive-lex-rule &
   [ SYNSEM [ LOCAL [ AGR #agr,
-                     CAT [ HEAD noun & 
+                     CAT [ HEAD partn & 
                                       [ MOD #mod,
                                         PRD #prd,
                                         TAM #tam, 
@@ -1461,18 +1461,20 @@ n_part-noun_dlr := partitive-lex-rule &
                                                       [ AGR #agr,
                                                         CAT [ HEAD det & 
                                                                    [ KEYS.KEY quant_or_wh_rel ], 
-                                                              VAL.SUBJ < > ] ] ] > ] ],
+                                                              VAL.SUBJ < > ],
+                                                        CONT.HOOK.INDEX #ind ] ] > ] ],
                      CONT [ HCONS #hcons, 
                             HOOK [ LTOP #ltop,
-                                   INDEX #agr ],
+                                   INDEX #ind ],
 			    RELS.LIST.FIRST #keyrel ] ],
              NON-LOCAL #nlocal,
              LKEYS.KEYREL #keyrel & noun-arg0-relation &
                           [ LBL #ltop,
                             PRED #pred,
-                            ARG0 #agr ] ],
+                            ARG0 #ind ] ],
     DTR [ SYNSEM n_group-or-pseudopart_synsem &
-                 [ LOCAL [ CAT [ HEAD partn & 
+                 [ LOCAL [ AGR #agr,
+                           CAT [ HEAD partn & 
                                       [ MOD #mod,
                                         PRD #prd,
                                         TAM #tam, 
@@ -1484,7 +1486,7 @@ n_part-noun_dlr := partitive-lex-rule &
                                        COMPS < [ OPT + ] > ] ], 
                            CONT [ HCONS #hcons, 
                                   HOOK [ LTOP #ltop,
-                                         INDEX #agr ],
+                                         INDEX #ind ],
                                   RELS <! [ PRED #pred ] !> ] ] ] ],
     ARG-ST #spr & < [ NON-LOCAL #nlocal ] >,
     C-CONT.RELS <! #keyrel !> ].

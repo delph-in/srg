@@ -1962,7 +1962,7 @@ npred_phrase := unary-phrase &
   [ INFLECTED +,
     SYNSEM [ PUNCT #punct,
              SLSHD #slshd,
-             LOCAL [ CAT [ HEAD noun & [ KEYS.KEY #key,
+             LOCAL [ CAT [ HEAD non-partn & [ KEYS.KEY #key,
                                          MOD #mod,
                                          PRD prd & [ COPV ser ],
                                          CASE #case ],
@@ -1978,7 +1978,7 @@ npred_phrase := unary-phrase &
              SYNSEM [ PUNCT #punct & [ RPUNCT no_punct ],
                       SLSHD #slshd,
                       LOCAL [ AGR.DIVISIBLE -,
-                              CAT [ HEAD noun & [ PRD non-prd,
+                              CAT [ HEAD non-partn & [ PRD non-prd,
                                                KEYS.KEY #key & non_elliptical_n_rel,
                                                CASE #case,
                                                MOD #mod ],
@@ -3052,7 +3052,8 @@ filler-head_rel-fin-np-mpn_phrase := filler-head-restr-rel-pname-phrase & filler
 filler-head-rel-np-mn-phrase := filler-head-restr-rel-phrase & 
   [ SYNSEM.LOCAL.CAT.HEAD.MOD < [ LOCAL [ CAT [ VAL.SPR < [ ] > ],
                                           CONT.HOOK.INDEX #ind ] ] >,
-    ARGS < [ SYNSEM [ LOCAL.CAT [ HEAD noun & [ KEYS.ALTKEY proper_q_rel ],
+    ARGS < [ SYNSEM [ LOCAL.CAT [ HEAD noun & [ PRD non-prd,
+                                                KEYS.ALTKEY proper_q_rel ],
                                   VAL.SPR < > ],
                       NON-LOCAL.REL 1-dlist & [ LIST < [ INDEX #ind ] > ] ] ],
            [ INFLECTED + ] > ]
