@@ -1355,18 +1355,19 @@ det_postn_lex-rule := quant-or-det_postn_lex-rule &
                      CAT [ MC na,
                            HEAD adj & [ TAM #tam,
                                         KEYS.KEY #pred,
-                                        MOD < [ LOCAL intersective-mod & [ CAT [ HEAD noun,
+                                        MOD < [ LOCAL intersective-mod & [ AGR #agr,
+                                                                           CAT [ HEAD noun,
                                                                                  VAL [ SUBJ < >,
                                                                                        SPEC < > ] ],
-                                                                           CONT.HOOK.INDEX #agr ] ] > ] ],
+                                                                           CONT.HOOK.INDEX #ind ] ] > ] ],
                      CONT [ HOOK [ INDEX #arg0,
                                    LTOP #ltop,
-                                   XARG #agr ],
+                                   XARG #ind ],
                             RELS <! #key & adj-arg1-relation & [ ARG0.E #tam ] !> ] ],
              LKEYS.KEYREL #key & [ PRED #pred,
                                    ARG0 #arg0,
                                    LBL #ltop,
-                                   ARG1 #agr ] ],
+                                   ARG1 #ind ] ],
     DTR.SYNSEM.LOCAL.AGR #agr ]
   """
   
