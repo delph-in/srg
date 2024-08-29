@@ -2341,8 +2341,8 @@ v_np_npsv-id-prn_lex := v_np_ntr & main-vprn & basic-three-arg &
 v_np_npsv_id_synsem := v_ser_synsem &
   [ LOCAL [ AGR.PNG #png,
             CAT [ HEAD.INV -, 
-                  VAL [ SUBJ < [ LOCAL [ AGR.PNG #png,
-                                         CONT.HOOK.INDEX.PNG #png ],
+                  VAL [ SUBJ < [ LOCAL [ CAT.HEAD noun,
+                                         AGR.PNG #png ],
                                  NON-LOCAL [ QUE 0-dlist & [ LIST < > ],
                                              REL 0-dlist ] ] >,
                         COMPS < [ OPT -,
@@ -4939,7 +4939,7 @@ v_vp_ger-nsbj-estar_lex := v_cop-nsbj &
 v_aux_haber_synsem := lex-synsem &
   [ LOCAL [ CAT [ MC bool,
                   HEAD [ INV #inv,
-                         PRD non-prd,
+                         PRD non-prd & [ HABER + ],
                          MOD < >,
                          KEYS.ALTKEY #altkey ],
                   VAL.COMPS < [ OPT -,
@@ -5901,7 +5901,8 @@ n_-_pr-idf-nadie_lex := spec-indefinite-pron-lex &
 
 
 n_-_pr-idf-todo_lex := spec-indefinite-pron-lex &
-  [ SYNSEM spec_norm_indefinite_pron_synsem & [ LOCAL [ CAT.VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY _casi_x_deg_rel ] >,
+  [ SYNSEM spec_norm_indefinite_pron_synsem & [ LOCAL [ CAT [ HEAD.KEYS.KEY person_rel,
+                                                              VAL.SPR < [ LOCAL.CAT.HEAD.KEYS.KEY _casi_x_deg_rel ] > ],
                                                         CONT.RELS <! [ PRED generic_entity_rel ],
                                                                      relation !> ],
                                                 LKEYS.ALTKEYREL.PRED undef_quant_q_rel & _todo_q_rel ] ]
@@ -7616,7 +7617,7 @@ av_-_dg-sup_lex := basic_degree_spec_lex & basic-one-arg &
 ; --- 4.4. Pronominal adverbs
 
 basic_np_adv_synsem := lex-synsem & 
-  [ LOCAL [ ;AGR #ind,
+  [ LOCAL [ AGR.DIVISIBLE +,
             CAT [ HC-LIGHT -,
                   HEAD noun & 
                        [ CASE none,

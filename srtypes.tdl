@@ -452,7 +452,7 @@ basic-head-subj-phrase := head-valence-phrase & head-compositional & binary-head
                                         SPEC #spec,
                                         CLTS #clit & < > ] ] ] ],
     NON-HEAD-DTR.SYNSEM canonical-synsem &
-                        [ LOCAL.CAT.HEAD.PRD non-prd,
+                        [ LOCAL.CAT.HEAD [ PRD non-prd ],
                           NON-LOCAL.REL 0-dlist ],
     C-CONT [ RELS <! !>,
              HCONS <! !> ] ].
@@ -661,7 +661,8 @@ head-comp_v-cl-slash_phrase := head-comp-phrase &
   [ SYNSEM.SLSHD +, 
     HEAD-DTR.SYNSEM.LOCAL.CAT [ MC bool,
                                 HEAD +vpc & 
-                                     [ INV - ] ],
+                                     [ PRD.HABER -,
+                                       INV - ] ],
     NON-HEAD-DTR.SYNSEM [ LOCAL [ CAT [ MC bool,
                                         HEAD +vpc & [ VOICE active ] ],
                                   CONT.HOOK.INDEX event &
@@ -1979,7 +1980,7 @@ npred_phrase := unary-phrase &
                       SLSHD #slshd,
                       LOCAL [ AGR.DIVISIBLE -,
                               CAT [ HEAD non-partn & [ PRD non-prd,
-                                               KEYS.KEY #key & non_elliptical_n_rel,
+                                               KEYS.KEY #key & predicative_n_rel,
                                                CASE #case,
                                                MOD #mod ],
                                     VAL [ SPR < [ OPT - ] >,
@@ -2050,14 +2051,15 @@ basic-npadv-phrase := basic-unary-phrase & phrasal &
 	     HCONS <! !> ] ].
 
 npadv_phrase := basic-npadv-phrase &
-  [ SYNSEM.LOCAL [ AGR #ind,
-                   CAT.HEAD [ MOD < [ LOCAL [ CAT.HEAD +nv,
-                                              CONT.HOOK.INDEX #ind ] ] >,
+  [ SYNSEM.LOCAL [ AGR #agr,
+                   CAT.HEAD [ MOD < [ LOCAL [ AGR #agr,
+                                              CAT.HEAD +nv ] ] >,
                               CASE #case,
                               KEYS.ALTKEY #argkey ],
-                   CONT.HOOK.INDEX.SORT #sort ],
-    ARGS < [ SYNSEM.LOCAL [ CAT [ HEAD noun & 
-                                       [ KEYS.KEY modable_rel & #argkey,
+                   CONT.HOOK.INDEX [ SORT #sort ] ],
+    ARGS < [ SYNSEM.LOCAL [ AGR [ DIVISIBLE + ],
+                            CAT [ HEAD noun & 
+                                       [ KEYS.KEY adv_n_rel & #argkey,
                                          CASE #case ] ],
 		            CONT.HOOK.INDEX #index & [ SORT #sort & mod ] ] ] >,
     C-CONT.RELS <! prep-relation &
@@ -2788,10 +2790,12 @@ filler-head-non_wh-phrase := filler-head-phrase & mc-fillhead-phrase & non-rel-c
   [ SYNSEM.LOCAL [ COORD #coord,
                    COORD-STRAT #coord-strat,
                    CAT [ MC #mc,
-                         HEAD #head ],
+                         HEAD #head,
+                         VAL #val ],
                    CONT.HOOK.INDEX.SF #sf ],
     ARGS < [ SYNSEM canonical-synsem &
-                    [ LOCAL [ CAT.HEAD +nvrp,
+                    [ LOCAL [ CAT [ HEAD +nvrp,
+                                    VAL.SPR < > ],
                               CONT [ HOOK.INDEX #nhind, 
                                      RELS.LIST < relation, ... > ] ],
                       NON-LOCAL [ SLASH 0-dlist,
@@ -2800,7 +2804,8 @@ filler-head-non_wh-phrase := filler-head-phrase & mc-fillhead-phrase & non-rel-c
            [ SYNSEM [ LOCAL [ COORD #coord & -,
                               COORD-STRAT #coord-strat,
                               CAT [ MC #mc,
-                                    HEAD #head & verb ],
+                                    HEAD #head & verb,
+                                    VAL #val ],
                               CONT.HOOK.INDEX #vind & [ SF #sf ] ],
                       NON-LOCAL [ SLASH <! [ CONT.HOOK.INDEX #nhind ] !>,
                                   QUE 0-dlist ] ] ] >,
@@ -3674,7 +3679,8 @@ basic-extracted-comp-phrase := basic-extracted-arg-phrase & head-compositional &
                                  CLTS #clts ],
                            MC #mc ],
                      CONT #cont ] ],
-    HEAD-DTR.SYNSEM [ LOCAL [ CAT [ VAL [ SUBJ #subj,
+    HEAD-DTR.SYNSEM [ LOCAL [ CAT [ HEAD.PRD.HABER -,
+                                    VAL [ SUBJ #subj,
                                         SPR #spr,
                                         COMPS < gap & [ NON-LOCAL.SLASH #slash ] 
                                                 . #comps >,

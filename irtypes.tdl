@@ -885,7 +885,7 @@ vger_ilr :=  verb_ilr &
 ;                     VAL.SUBJ < unexpressed & [ OPT - ] > ] ].
 
 
-vpart-haber_ilr :=  verb_ilr & 
+vpart-haber_ilr :=  vpart_ilr & 
 [ SYNSEM.LOCAL.CAT.HEAD [ TAM.MOOD ind_or_sub_mood,
                           VFORM part,
                           VOICE active,

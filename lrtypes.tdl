@@ -310,8 +310,8 @@ v_trans-passive-lex-rule := passive-lex-rule &
 
 
 v_np_passive-se_dlr := v_trans-passive-lex-rule &
-  [ SYNSEM.LOCAL [ AGR #ind,
-                   CAT.VAL [ SUBJ < [ LOCAL np_nom_local & [ AGR #ind,
+  [ SYNSEM.LOCAL [ AGR #agr,
+                   CAT.VAL [ SUBJ < [ LOCAL np_nom_local & [ AGR #agr,
                                                              CAT.HEAD.KEYS.KEY nom_rel,
                                                              CONT.HOOK.INDEX ref-ind ] ] >,
                              COMPS #comps ] ],
@@ -1737,10 +1737,11 @@ v_reflex_dlr := comp-clt-lex-rule &
            RFX -,
            PASS - ],
     SYNSEM.LOCAL [ AGR.PNG #agr,
-                   CAT.VAL [ SUBJ < [ LOCAL [ AGR.PNG #agr ] ] >,
-                             CLTS < [ LOCAL [ CAT.HEAD.CASE rflx,
-                                              CONT.HOOK.INDEX #ind & [ PNG #agr,
-                                                                       PRONTYPE std_or_recip_or_refl_pron ] ] ] > ],
+                   CAT.VAL [ SUBJ < [ LOCAL [ AGR.PNG #agr,
+                                              CONT.HOOK.INDEX #ind ] ] >,
+                             CLTS < [ LOCAL [ AGR.PNG #agr,
+                                              CAT.HEAD.CASE rflx,
+                                              CONT.HOOK.INDEX #ind & [ PRONTYPE std_or_recip_or_refl_pron ] ] ] > ],
                    CONT.RELS.LIST.FIRST.ARG2 #ind ],
     DTR [ ALTS.RFX +,
           SYNSEM transitive_verb_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local ], ... > ] ] ]
@@ -1754,13 +1755,15 @@ v_reflex-vprd_dlr := comp-clt-lex-rule &
            RFX -,
            PASS - ],
     SYNSEM.LOCAL [ AGR.PNG #agr,
-                   CAT.VAL [ SUBJ < [ LOCAL.AGR.PNG #agr ] >,
-                             CLTS < [ LOCAL [ CAT.HEAD.CASE rflx,
-                                              CONT.HOOK.INDEX #ind2 & [ PNG #agr,
-                                                                        PRONTYPE std_or_recip_or_refl_pron ] ] ] > ] ],
+                   CAT.VAL [ SUBJ < [ LOCAL [ AGR.PNG #agr,
+                                              CONT.HOOK.INDEX #ind ] ] >,
+                             CLTS < [ LOCAL [ AGR.PNG #agr,
+                                              CAT.HEAD.CASE rflx,
+                                              CONT.HOOK.INDEX #ind & [ PRONTYPE std_or_recip_or_refl_pron ] ] ] > ] ],
     DTR [ ALTS.RFX +,
           SYNSEM v_np-xp_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local ],
-                                                          [ LOCAL.CONT.HOOK.XARG #ind2 ] > ] ] ]
+                                                          [ LOCAL [ AGR.PNG #agr,
+                                                                    CONT.HOOK.XARG #ind ] ] > ] ] ]
   """
   reflexive verbs with predicative complements, e.g. se considero muy capaz
   """.
