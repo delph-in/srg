@@ -885,13 +885,13 @@ vger_ilr :=  verb_ilr &
 ;                     VAL.SUBJ < unexpressed & [ OPT - ] > ] ].
 
 
-vpart-haber_ilr :=  vpart_ilr & 
+vpart-haber_ilr :=  vpart-basic_ilr & 
 [ SYNSEM.LOCAL.CAT.HEAD [ TAM.MOOD ind_or_sub_mood,
                           VFORM part,
                           VOICE active,
                           PRD non-prd & [ HABER + ] ] ].
                           
-vpart_ilr :=  inflecting-lex-rule & 
+vpart-basic_ilr :=  inflecting-lex-rule & 
   [ INFLECTED +,
     ;KEY-ARG #keyarg,
     SYNSEM [ LOCAL [ ;AGR #agr,
@@ -903,8 +903,6 @@ vpart_ilr :=  inflecting-lex-rule &
                                          TAM.MOOD ind_or_sub_mood & #mood,
                                          KEYS.KEY #key ], 
                            VAL [ SPR #spr,
-                                 SUBJ < synsem &
-                                        [ NON-LOCAL.SLASH 0-dlist ] >,
                                  CLTS #clt,
                                  COMPS #comps,
                                  SPEC #spec ] ],
@@ -916,7 +914,9 @@ vpart_ilr :=  inflecting-lex-rule &
                      COORD #coord,
                      COORD-STRAT #coord-strat ],
             LKEYS #lkeys,
-            NON-LOCAL #nonloc ],
+            NON-LOCAL #nonloc & [ SLASH #slash,
+                                  QUE #que,
+                                  REL #rel ] ],
     DTR [ INFLECTED -,
           ;KEY-ARG #keyarg,
           SYNSEM [ LOCAL [ CAT [ MC #mc,
@@ -926,7 +926,6 @@ vpart_ilr :=  inflecting-lex-rule &
                                         KEYS.KEY #key,
                                         PRD.HABER #haber ],
                                  VAL [ SPR #spr,
-                                       SUBJ < [ LOCAL np_nom_local ] >,
                                        COMPS #comps,
                                        CLTS #clt,
                                        SPEC #spec ] ],
@@ -938,9 +937,15 @@ vpart_ilr :=  inflecting-lex-rule &
                            COORD #coord,
                            COORD-STRAT #coord-strat ],
                    LKEYS #lkeys,
-                   NON-LOCAL #nonloc ] ],
+                   NON-LOCAL #nonloc & [ SLASH #slash & 0-1-dlist,
+                                         QUE #que & 0-dlist,
+                                         REL #rel & 0-dlist ] ] ],
     C-CONT.RELS <! !>  ].
 
+vpart_ilr :=  vpart-basic_ilr & 
+  [ SYNSEM.LOCAL.CAT.VAL.SUBJ < synsem &
+                                        [ NON-LOCAL.SLASH 0-dlist ] >,
+    DTR.SYNSEM.LOCAL.CAT.VAL.SUBJ < [ LOCAL np_nom_local ] > ].
 
 vppart_ilr :=  inflecting-lex-rule & 
   [ INFLECTED +,
@@ -972,7 +977,9 @@ vppart_ilr :=  inflecting-lex-rule &
                             HCONS #hcons ],
                      CTXT #ctxt ],
             LKEYS #lkeys,
-            NON-LOCAL #nonloc ],
+            NON-LOCAL #nonloc & [ SLASH #slash & 0-1-dlist,
+                                  QUE #que & 0-dlist,
+                                  REL #rel & 0-dlist ] ],
     DTR [ INFLECTED -,
           SYNSEM [ LOCAL [ CAT [ HEAD verb &
                                       [ VFORM part,
@@ -994,7 +1001,9 @@ vppart_ilr :=  inflecting-lex-rule &
                                   HCONS #hcons ],
                            CTXT #ctxt ],
                    LKEYS #lkeys,
-                   NON-LOCAL #nonloc ] ] ].
+                   NON-LOCAL #nonloc & [ SLASH #slash,
+                                         QUE #que,
+                                         REL #rel ] ] ] ].
 
 
 ; --- enclitics (with infinitives, imperatives and gerunds)

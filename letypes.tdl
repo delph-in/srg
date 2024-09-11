@@ -4949,11 +4949,13 @@ v_aux_haber_synsem := lex-synsem &
                                                    KEYS [ KEY #ckey,
                                                           ALTKEY #altkey ] ],
                                         CONT.HOOK [ LTOP #hand,
-                                                    INDEX #index ] ] ] > ],
+                                                    INDEX #index ] ],
+                                NON-LOCAL.SLASH #slash ] > ],
 	    CONT [ HOOK [ LTOP #hand,
                           INDEX #index ],
 	       	   RELS <! !>,
 		   HCONS <! !> ] ],
+    NON-LOCAL.SLASH #slash & 0-1-dlist,
     LKEYS.--COMPKEY #ckey ]
 """
 ; --- Auxiliary verbs

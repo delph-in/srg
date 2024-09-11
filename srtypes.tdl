@@ -647,22 +647,20 @@ head-comp_x-cl_phrase := head-comp-phrase &
                                                 [ SF prop-or-ques ] ] ].
 
 head-comp_v-cl_phrase := head-comp-phrase & 
-  [ SYNSEM.SLSHD #slshd,
-    HEAD-DTR.SYNSEM [ SLSHD #slshd,
-                      LOCAL.CAT [ MC bool,
+  [ SYNSEM.NON-LOCAL #nonloc,
+    HEAD-DTR.SYNSEM [ LOCAL.CAT [ MC bool,
                                   HEAD +vpc ] ],
     NON-HEAD-DTR.SYNSEM [ LOCAL [ CAT [ MC bool,
                                         HEAD +vpc ],
                                   CONT.HOOK.INDEX event & 
                                                   [ SF prop-or-ques ] ],
-                          NON-LOCAL.SLASH 0-dlist ] ].
+                          NON-LOCAL #nonloc ] ].
 
 head-comp_v-cl-slash_phrase := head-comp-phrase & 
   [ SYNSEM.SLSHD +, 
     HEAD-DTR.SYNSEM.LOCAL.CAT [ MC bool,
                                 HEAD +vpc & 
-                                     [ PRD.HABER -,
-                                       INV - ] ],
+                                     [ INV - ] ],
     NON-HEAD-DTR.SYNSEM [ LOCAL [ CAT [ MC bool,
                                         HEAD +vpc & [ VOICE active ] ],
                                   CONT.HOOK.INDEX event &
@@ -3679,8 +3677,7 @@ basic-extracted-comp-phrase := basic-extracted-arg-phrase & head-compositional &
                                  CLTS #clts ],
                            MC #mc ],
                      CONT #cont ] ],
-    HEAD-DTR.SYNSEM [ LOCAL [ CAT [ HEAD.PRD.HABER -,
-                                    VAL [ SUBJ #subj,
+    HEAD-DTR.SYNSEM [ LOCAL [ CAT [ VAL [ SUBJ #subj,
                                         SPR #spr,
                                         COMPS < gap & [ NON-LOCAL.SLASH #slash ] 
                                                 . #comps >,
@@ -4783,7 +4780,7 @@ cl-coord-phrase := event-coord-phrase &
                                            MOD #mod,
                                            PRD #prd ],
                          VAL.SUBJ < > ],
-             NON-LOCAL #nlocal ],
+             NON-LOCAL #nlocal & [ SLASH 0-dlist ] ],
     LCOORD-DTR.SYNSEM [ LOCAL.CAT [ MC #mc,
                                     LASTNMOD #lastnmod,
                                     HEAD +vc & 
