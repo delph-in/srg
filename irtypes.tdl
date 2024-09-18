@@ -891,6 +891,17 @@ vpart-haber_ilr :=  vpart-basic_ilr &
                           VOICE active,
                           PRD non-prd & [ HABER + ] ] ].
                           
+vpart-haber-nsbj_ilr :=  vpart-haber_ilr & 
+[ SYNSEM.LOCAL.CAT.VAL.SUBJ < >,
+  DTR.SYNSEM.LOCAL.CAT.VAL.SUBJ < > ].
+
+vpart-haber-sbj_ilr :=  vpart-haber_ilr & 
+[ SYNSEM.LOCAL.CAT.VAL.SUBJ < synsem &
+                                        [ NON-LOCAL.SLASH 0-dlist ] >,
+  DTR.SYNSEM.LOCAL.CAT.VAL.SUBJ < synsem &
+                                        [ NON-LOCAL.SLASH 0-dlist ] > ].
+
+
 vpart-basic_ilr :=  inflecting-lex-rule & 
   [ INFLECTED +,
     ;KEY-ARG #keyarg,
@@ -945,7 +956,8 @@ vpart-basic_ilr :=  inflecting-lex-rule &
 vpart_ilr :=  vpart-basic_ilr & 
   [ SYNSEM.LOCAL.CAT.VAL.SUBJ < synsem &
                                         [ NON-LOCAL.SLASH 0-dlist ] >,
-    DTR.SYNSEM.LOCAL.CAT.VAL.SUBJ < [ LOCAL np_nom_local ] > ].
+    DTR.SYNSEM.LOCAL.CAT.VAL.SUBJ < [ LOCAL np_nom_local,
+                                      NON-LOCAL.SLASH 0-dlist ] > ].
 
 vppart_ilr :=  inflecting-lex-rule & 
   [ INFLECTED +,

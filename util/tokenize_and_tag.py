@@ -5,7 +5,7 @@ import sys, os
 
 from override_freeling import ADD_TAGS
 
-PATH_TO_SPPP_DAT = '/home/olga/delphin/SRG/grammar/srg/util/freeling_api/srg-freeling.dat'
+PATH_TO_SPPP_DAT = '/home/olga/delphin/SRG/grammar/srg-agr-divorce/util/freeling_api/srg-freeling.dat'
 
 class Freeling_tok_tagger:
     '''

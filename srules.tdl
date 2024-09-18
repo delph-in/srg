@@ -65,7 +65,7 @@ hd-cmp_c := hd-cmp_x-xp_constr & [ RNAME "hdcmp" ].
 hd-cmp_mrk_c := hd-mrk_constr & [ RNAME "hdmrk" ].
 hd-cmp_x-cp_c := hd-cmp_x-cl_constr & [ RNAME "hdcmp" ].
 hd-cmp_v-cp_c := hd-cmp_v-cl_constr & [ RNAME "hdcmp" ].
-;hd-cmp_v-cp-sld_c := hd-cmp_v-cl-slash_constr & [ RNAME "hdcmp" ].
+hd-cmp_v-cp-sld_c := hd-cmp_v-cl-slash_constr & [ RNAME "hdcmp" ].
 ;hd-cmp_aux-vp_c := hd-cmp_aux-vp_constr & [ RNAME "hdcmp" ].
 ;cmp-hd_c := cmp-hd_constr & [ RNAME "cmphd" ].
 

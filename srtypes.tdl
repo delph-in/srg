@@ -647,14 +647,15 @@ head-comp_x-cl_phrase := head-comp-phrase &
                                                 [ SF prop-or-ques ] ] ].
 
 head-comp_v-cl_phrase := head-comp-phrase & 
-  [ SYNSEM.NON-LOCAL #nonloc,
-    HEAD-DTR.SYNSEM [ LOCAL.CAT [ MC bool,
+  [ SYNSEM.SLSHD #slshd,
+    HEAD-DTR.SYNSEM [ SLSHD #slshd,
+                      LOCAL.CAT [ MC bool,
                                   HEAD +vpc ] ],
     NON-HEAD-DTR.SYNSEM [ LOCAL [ CAT [ MC bool,
                                         HEAD +vpc ],
                                   CONT.HOOK.INDEX event & 
                                                   [ SF prop-or-ques ] ],
-                          NON-LOCAL #nonloc ] ].
+                          NON-LOCAL.SLASH 0-dlist ] ].
 
 head-comp_v-cl-slash_phrase := head-comp-phrase & 
   [ SYNSEM.SLSHD +, 

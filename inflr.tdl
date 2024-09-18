@@ -1758,10 +1758,21 @@ vpart_ilr &
 Not sure why the agreement features are specified on this one.
 """.
 
+vmp00sm-app := 
+%suffix (vmpsm-app vmpsm-app)
+vpart-haber-sbj_ilr & 
+  [ SYNSEM.LOCAL.CAT.HEAD.AUX - ]
+  """
+  For the auxiliary haber and participles that go with it.
+  """.
+
 vmp00sm-pp := 
 %suffix (vmpsm-pp vmpsm-pp)
-vpart-haber_ilr & 
-  [ SYNSEM.LOCAL [ CAT.HEAD [ AUX -, PRD.HABER + ] ] ].
+vpart-haber-nsbj_ilr & 
+  [ SYNSEM.LOCAL.CAT.HEAD.AUX - ]
+  """
+  For the haber that does has no subject: "ha habido libros"
+  """.
 
 
 vmp00sm := 
