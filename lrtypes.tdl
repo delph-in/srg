@@ -1494,7 +1494,7 @@ n_part-noun_dlr := partitive-lex-rule &
 
 part_pron-lex-rule := partitive-lex-rule &
   [ SYNSEM [ LOCAL [ AGR #agr,
-                     CAT [ HEAD noun & [ MOD #mod,
+                     CAT [ HEAD partn & [ MOD #mod,
                                   PRD #prd,
                                   TAM #tam, 
                                   CASE #case,
@@ -1773,10 +1773,9 @@ v_reflex-vnpseq_dlr := comp-clt-lex-rule &
            RFX -,
            PASS - ],
     SYNSEM.LOCAL [ ;AGR.PNG #agr,
-                   CAT.VAL [ ;SUBJ < [ LOCAL.AGR.PNG #agr ] >,
+                   CAT.VAL [ ;SUBJ < [ LOCAL [ AGR.PNG #agr ] ] >,
                              CLTS < [ LOCAL [ CAT.HEAD.CASE rflx,
-                                              CONT.HOOK.INDEX #ind2 & [ ;PNG #agr,
-                                                                        PRONTYPE std_or_recip_or_refl_pron ] ] ] > ] ],
+                                              CONT.HOOK.INDEX #ind2 & [ PRONTYPE std_or_recip_or_refl_pron ] ] ] > ] ],
     DTR [ ALTS.RFX +,
           SYNSEM v_np_seq_synsem & [ LOCAL.CAT.VAL.COMPS < [ LOCAL.CONT.HOOK.XARG #ind2 ] > ] ] ]
   """
