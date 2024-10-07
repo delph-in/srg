@@ -779,16 +779,9 @@ norm_spec-head-phrase := norm-basic-head-spec-phrase &
     HEAD-DTR #head-dtr & [ SYNSEM.LOCAL.STR.HEADING right ],
     ARGS < #non-head-dtr, #head-dtr > ].
 
-norm_spec-head-agr-phrase := norm-basic-head-spec-phrase & 
-[ SYNSEM.LOCAL.AGR #agr,
-  HEAD-DTR.SYNSEM.LOCAL.AGR #agr ]
-"""
-We will constrain agreement for most situations but the specdeg (for degree specifiers, muy malo)
-cannot have this constraint because its semantics is event semantics, not referent.
-""".
 
 ; for specifiers following nouns
-head-spec_phrase := norm_spec-head-agr-phrase & binary-headed-phrase & 
+head-spec_phrase := norm-basic-head-spec-phrase & binary-headed-phrase & 
   [ SYNSEM.LOCAL [ STR [ HEADING right_or_no,
                          HEADED left ],
                    CAT [ HEAD #head & [ KEYS #keys ],
@@ -811,7 +804,7 @@ head-spec_phrase := norm_spec-head-agr-phrase & binary-headed-phrase &
 ; for specifiers following nouns
 """.
 
-spec-head_phrase := norm_spec-head-phrase & norm_spec-head-agr-phrase & binary-headed-phrase & 
+spec-head_phrase := norm_spec-head-phrase & binary-headed-phrase & 
   [ SYNSEM.LOCAL [ CAT [ HEAD #head & 
                               [ CASE #case, 
                                 KEYS #keys ],
@@ -832,7 +825,7 @@ spec-head_phrase := norm_spec-head-phrase & norm_spec-head-agr-phrase & binary-h
 """.
 
 
-spec-head_hdrel_phrase := norm_spec-head-phrase & norm_spec-head-agr-phrase & explt-binary-phrase & 
+spec-head_hdrel_phrase := norm_spec-head-phrase & explt-binary-phrase & 
   [ INFLECTED +,
     SYNSEM [ PUNCT [ LPUNCT #lpunct,
                      RPUNCT #rpunct ],
@@ -858,7 +851,7 @@ spec-head_hdrel_phrase := norm_spec-head-phrase & norm_spec-head-agr-phrase & ex
 ; for specifiers of relative pronouns
 """.
 
-spec-head_hddet_phrase := norm_spec-head-phrase & norm_spec-head-agr-phrase & head-final & head-compositional & 
+spec-head_hddet_phrase := norm_spec-head-phrase & head-final & head-compositional & 
   [ SYNSEM.LOCAL [ STR.HEADING right_or_no,
                    CAT [ HEAD #head & [ KEYS #keys ],
                          VAL.SPR #spr ] ],
@@ -873,7 +866,7 @@ spec-head_hddet_phrase := norm_spec-head-phrase & norm_spec-head-agr-phrase & he
 ; for specifiers of determiners (e.g. todos los, casi todos los, sólo los,...) 
 """.
 
-spec-head_specrel_phrase := norm_spec-head-phrase & norm_spec-head-agr-phrase & binary-headed-phrase & 
+spec-head_specrel_phrase := norm_spec-head-phrase & binary-headed-phrase & 
   [ SYNSEM.LOCAL [ STR.HEADING right_or_no,
                    CAT [ HEAD [ CASE #case, 
                                 KEYS [ KEY #key, 
