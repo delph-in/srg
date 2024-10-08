@@ -997,8 +997,11 @@ adj-head_scop_phrase := adj-head-phrase & scopal-mod-phrase &
                                     
 adj-head_int-xp-xp_phrase :=  adj-head-phrase & isect-mod-phrase &
   [ SYNSEM.LOCAL.CAT.HEAD [ PRD #prd,
-                            MOD < [ LOCAL.AGR #agr ] > ],
-    HEAD-DTR.SYNSEM [ LOCAL [ CAT [ HEAD +jrp,
+                            MOD < [ LOCAL [ AGR #agr,
+                                            CONT.HOOK.INDEX #ind ] ] > ],
+    HEAD-DTR.SYNSEM [ LOCAL [ AGR #agr,
+                              CONT.HOOK.INDEX #ind,
+                              CAT [ HEAD +jrp,
                                     VAL.COMPS < > ] ],
                       NON-LOCAL.REL 0-dlist ],
     NON-HEAD-DTR.SYNSEM.LOCAL [ AGR #agr,
