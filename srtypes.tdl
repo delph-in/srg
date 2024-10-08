@@ -2011,11 +2011,11 @@ basic-npadv-phrase := basic-unary-phrase & phrasal &
              LOCAL [ COORD #coord,
                      COORD-STRAT #coord-strat,
                      COORD-REL #crel,
-                     AGR #agr,
+                     ;AGR #agr,
                      CAT [ POSTHEAD +, 
                            HEAD modnp &
 				[ MOD < [ LOCAL intersective-mod &
-				 	        [  AGR #agr,
+				 	        [  ;AGR #agr,
 				 	           COORD -,
                                                   CAT.MC #mc,
                                                   CONT.HOOK [ INDEX #ind,
@@ -2070,14 +2070,16 @@ npadv_phrase := basic-npadv-phrase &
                    [ ARG2 #index ] !> ].
 
 npadv_modn_phrase := basic-npadv-phrase &
-  [ SYNSEM.LOCAL [ AGR #ind,
-                   CAT.HEAD [ MOD < [ LOCAL [ CAT [ HEAD noun,
+  [ SYNSEM.LOCAL [ AGR #agr,
+                   CAT.HEAD [ MOD < [ LOCAL [ AGR #agr,
+                                              CAT [ HEAD noun,
                                                     POSTHEAD + ],
                                               CONT.HOOK.INDEX #ind ] ] >,
                               CASE #case,
                               KEYS.ALTKEY #argkey ],
                    CONT.HOOK.INDEX.SORT #sort ],
-    ARGS < [ SYNSEM.LOCAL [ CAT [ HEAD noun & 
+    ARGS < [ SYNSEM.LOCAL [ AGR #agr,
+                            CAT [ HEAD noun & 
                                        [ KEYS.KEY modable_rel & #argkey,
                                          CASE #case ] ],
 		            CONT.HOOK.INDEX #index & [ SORT #sort & mod ] ] ] >,
