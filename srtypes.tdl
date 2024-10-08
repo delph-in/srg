@@ -1176,12 +1176,13 @@ head-adj-int-n-xp-phrase := head-adj-phrase & isect-mod-phrase &
 
 head-adj_int-cn-ap_phrase := head-adj-int-n-xp-phrase &
   [ SYNSEM.LOCAL [ CAT.VAL.SPR #spr,
-                   AGR #agr ],
+                   AGR #agr,
+                   CONT.HOOK.INDEX #ind ],
     HEAD-DTR.SYNSEM [ PUNCT.RPUNCT no_punct,
                       LOCAL [ AGR #agr,
                               CAT [ HEAD.KEYS.KEY all_common_nom_rel,
                                     VAL.SPR #spr & < [ ] > ],
-                              CONT.HOOK.INDEX.PRONTYPE not_pron ] ],
+                              CONT.HOOK.INDEX #ind & [ PRONTYPE not_pron ] ] ],
     NON-HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD adj ]
 """
 ; common nouns
