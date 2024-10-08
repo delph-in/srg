@@ -1190,12 +1190,13 @@ head-adj_int-cn-ap_phrase := head-adj-int-n-xp-phrase &
 
 head-adj_int-cn-pp_phrase := head-adj-int-n-xp-phrase &
   [ SYNSEM.LOCAL [ CAT.VAL.SPR #spr,
-                   AGR #agr ],
+                   AGR #agr,
+                   CONT.HOOK.INDEX #ind ],
     HEAD-DTR.SYNSEM [ PUNCT.RPUNCT no_punct,
                       LOCAL [ AGR #agr,
                               CAT [ HEAD.KEYS.KEY all_common_nom_rel,
                                     VAL.SPR #spr & < [ ] > ],
-                              CONT.HOOK.INDEX.PRONTYPE not_pron ] ],
+                              CONT.HOOK.INDEX #ind & [ PRONTYPE not_pron ] ] ],
 ;    NON-HEAD-DTR.SYNSEM.LOCAl [ CAT.HEAD prep_or_modnp,
     NON-HEAD-DTR.SYNSEM.LOCAl [ CAT.HEAD adp,
                                 CONT.RELS.LIST < prep-relation, ... > ] ].
@@ -1272,12 +1273,14 @@ head-adj_int-pr-xp_phrase := head-adj-int-n-xp-phrase &
 head-adj-int-n-rc-phrase := head-adj-phrase & isect-mod-phrase &
   [ SYNSEM.LOCAL [ AGR #agr,
                    CAT [ POSTHEAD #ph,
-                       LASTNMOD + ] ],
+                       LASTNMOD + ],
+                   CONT.HOOK.INDEX #ind ],
     HEAD-DTR.SYNSEM [ MODIFIED notmod-or-rmod,
                       LOCAL [ AGR #agr,
                               CAT [ POSTHEAD #ph,
                                   HEAD noun,
-                                  VAL.COMPS < > ] ],
+                                  VAL.COMPS < > ],
+                              CONT.HOOK.INDEX #ind ],
                       NON-LOCAL [ SLASH 0-dlist,
                                   REL 0-dlist & [ LIST < > ] ] ],
     NON-HEAD-DTR.SYNSEM [ LOCAL.CAT [ POSTHEAD +, 
@@ -1682,12 +1685,14 @@ optcomp-phrase := head-valence-phrase & head-only & head-compositional &
 
 optcomp-v_phrase := optcomp-phrase &
   [ SYNSEM.LOCAL.CAT [ POSTHEAD #ph,
-                       VAL [ SUBJ.FIRST.LOCAL.AGR #agr,
+                       VAL [ SUBJ.FIRST.LOCAL [ AGR #agr,
+                                                CONT.HOOK.INDEX #ind ],
                              COMPS #comps ] ],
     HEAD-DTR.SYNSEM.LOCAL [ STR.HEADED solely,
                             CAT [ POSTHEAD #ph, 
                                   HEAD verb & [ KEYS.KEY v_event_rel ],
-                                  VAL [ SUBJ < [ LOCAL.AGR #agr ] >,
+                                  VAL [ SUBJ < [ LOCAL [ AGR #agr,
+                                                         CONT.HOOK.INDEX #ind ] ] >,
                                         COMPS < [ NON-LOCAL.SLASH 0-dlist ]. #comps > ] ] ] ]
 """; si diem que el subjecte no s'ha cancel·lat, no podem analitzar
 ; "volvió el hindú su rostro"
@@ -1696,7 +1701,7 @@ optcomp-v_phrase := optcomp-phrase &
 optcomp-n_phrase := optcomp-phrase &
   [ SYNSEM.LOCAL [ AGR #agr,
                    CAT [ POSTHEAD #ph,
-                   VAL.COMPS #comps ],
+                         VAL.COMPS #comps ],
 		   CONT.HOOK.INDEX.SORT non-mod ],
     HEAD-DTR.SYNSEM [ MODIFIED notmod,
                       LOCAL [ AGR #agr,
@@ -1731,7 +1736,8 @@ optspec_phrase := head-valence-phrase & non-clause & head-only & head-compositio
                            VAL [ SPR < >,
                                  SUBJ #subj,
                                  COMPS #comps,
-                                 SPEC #spec ] ] ] ],
+                                 SPEC #spec ] ],
+                     CONT.HOOK.INDEX #ind ] ],
     HEAD-DTR [ INFLECTED #infl & +,
                SYNSEM [ MODIFIED #mod,
                         SLSHD #slshd,
@@ -1747,7 +1753,8 @@ optspec_phrase := head-valence-phrase & non-clause & head-only & head-compositio
                                                                 QUE 0-dlist ] ] >,
                                             SUBJ #subj,
                                             COMPS #comps & < >,
-                                            SPEC #spec ] ] ] ] ],
+                                            SPEC #spec ] ],
+                                 CONT.HOOK.INDEX #ind ] ] ],
     C-CONT [ RELS <! !>,
              HCONS <! !> ] ]
 """
@@ -1912,7 +1919,7 @@ nbar-rel_phrase := unary-phrase &
              LOCAL [ COORD #coord,
                      COORD-STRAT #coord-strat,
                      COORD-REL #crel,
-                     AGR  #agr & ref-ind & [ PNG #png ],
+                     AGR  #agr & ref-ind,
                      CAT [ MC na,
                            HEAD noun & 
                                 [ KEYS [ KEY que_pron_rel,
@@ -1923,7 +1930,8 @@ nbar-rel_phrase := unary-phrase &
                                   MOD #mod ],       
                            VAL [ SUBJ < >,
                                  COMPS #comps,
-                                 SPR < > ] ] ],
+                                 SPR < > ] ],
+                      CONT.HOOK.INDEX #ind ],
              NON-LOCAL #nonloc ],
     C-CONT [ HOOK #hook,
              RELS  <! !>,
@@ -1935,7 +1943,7 @@ nbar-rel_phrase := unary-phrase &
                       LOCAL [ COORD #coord & -,
                               COORD-STRAT #coord-strat & zero,
                               COORD-REL #crel,
-                              AGR #agr & [ PNG #png ], 
+                              AGR #agr, 
                               CAT [ MC na,
                                     HEAD noun & 
                                          [ KEYS [ KEY que_pron_rel,
@@ -1951,7 +1959,7 @@ nbar-rel_phrase := unary-phrase &
                                                   NON-LOCAL [ SLASH 0-dlist,
                                                               REL 0-dlist,
                                                               QUE 0-dlist ] ] > ]],
-                              CONT.HOOK #hook ],
+                              CONT.HOOK #hook & [ INDEX #ind ] ],
                       NON-LOCAL #nonloc & [ REL 1-dlist ] ] ] > ].
 
 
@@ -2003,11 +2011,11 @@ basic-npadv-phrase := basic-unary-phrase & phrasal &
              LOCAL [ COORD #coord,
                      COORD-STRAT #coord-strat,
                      COORD-REL #crel,
-                     ;AGR #agr,
+                     AGR #agr,
                      CAT [ POSTHEAD +, 
                            HEAD modnp &
 				[ MOD < [ LOCAL intersective-mod &
-				 	        [  ;AGR #agr,
+				 	        [  AGR #agr,
 				 	           COORD -,
                                                   CAT.MC #mc,
                                                   CONT.HOOK [ INDEX #ind,
