@@ -3509,10 +3509,12 @@ filler-head-free-rel-phrase := binary-phrase & phrasal &
 
 filler-head-free-rel-np-arg-phrase := filler-head-free-rel-phrase &
   [ SYNSEM.LOCAL [ AGR #agr,
-                   CAT.HEAD #head ],
+                   CAT.HEAD #head,
+                   CONT.HOOK.INDEX #ind ],
     ARGS < [ SYNSEM [ LOCAL [ AGR #agr,
                               CAT.HEAD #head & [ KEYS.ALTKEY #altkey ],
-                              CONT.RELS.LIST.FIRST.PRED free_relative_q_rel ],
+                              CONT [ HOOK.INDEX #ind,
+                                     RELS.LIST.FIRST.PRED free_relative_q_rel ] ],
                       NON-LOCAL.SLASH <! #loc !> ] ], 
            [ SYNSEM.NON-LOCAL.SLASH 1-dlist &
                                     <! #loc & 
