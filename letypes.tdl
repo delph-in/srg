@@ -67,10 +67,12 @@ impers-pronominal-verb := basic-verb-lex &
                                           AGR.PRONTYPE impers ] ] > ].
 
 main-verb := basic-main-verb & 
-  [ SYNSEM.LOCAL.CAT [ HEAD verb, 
-                       VAL [ SUBJ < #subj & [ LOCAL.CAT.HEAD.PRD non-prd ] >, 
-                             COMPS #comps,
-                             CLTS < > ] ],
+  [ SYNSEM.LOCAL [ AGR #agr,
+                   CAT [ HEAD verb, 
+                         VAL [ SUBJ < #subj & [ LOCAL [ AGR #agr,
+                                                        CAT.HEAD.PRD non-prd ] ] >, 
+                               COMPS #comps,
+                               CLTS < > ] ] ],
     ARG-ST < #subj . #comps > ].
 
 main-vprn := basic-main-verb & norm-pronominal-verb &
