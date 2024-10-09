@@ -5215,9 +5215,11 @@ adjprep-middle-coord-phrase := adjprep-coord-phrase &
 
 adj_prep-coord-phrase := advprep-coord-phrase &
   [ SYNSEM.LOCAL [ AGR #agr,
-                   CAT.HEAD adj ],
+                   CAT.HEAD adj,
+                   CONT.HOOK.INDEX #ind ],
     LCOORD-DTR.SYNSEM.LOCAL [ AGR #agr,
-                              CAT.HEAD adj ],
+                              CAT.HEAD adj,
+                              CONT.HOOK.INDEX #ind ],
     RCOORD-DTR.SYNSEM.LOCAL.CAT.HEAD adp ].
 
 prep_adj-coord-phrase := advprep-coord-phrase &
