@@ -2094,10 +2094,11 @@ vocative_np_phrase := basic-unary-phrase & phrasal &
              LOCAL [ COORD #coord,
                      COORD-STRAT #coord-strat,
                      COORD-REL #crel,
-                     AGR #ind,
+                     AGR #agr,
                      CAT [ HEAD modnp &
 				[ MOD < [ LOCAL scopal-mod &
-                                                [ COORD -,
+                                                [ AGR #agr,
+                                                  COORD -,
                                                   CAT [ MC #mc,
                                                         HEAD verb,
                                                         VAL.SUBJ < > ],
@@ -2112,7 +2113,7 @@ vocative_np_phrase := basic-unary-phrase & phrasal &
                                  COMPS < > ],
 			   MC #mc ],
 		     CONT.HOOK [ LTOP #ltop,
-                                 XARG #ind ],
+                                 XARG #arg2 ],
                      CTXT #ctxt ],
               NON-LOCAL #nonloc ],
     ARGS < [ INFLECTED +,
@@ -2332,7 +2333,8 @@ prdp_phrase := unary-phrase &
                                   MOD < [ LOCAL intersective-mod &
                                                 [ COORD -,
                                                   CAT [ HEAD verb,
-                                                        VAL.SUBJ < [ LOCAL.AGR #agr ] > ],
+                                                        VAL.SUBJ < [ LOCAL [ AGR #agr,
+                                                                             CONT.HOOK.INDEX #ind ] ] > ],
                                                   CONT.HOOK.LTOP #modltop ] ] > ],
                            VAL [ SUBJ < >,
                                  COMPS < >,
@@ -2352,7 +2354,8 @@ prdp_phrase := unary-phrase &
                                            KEYS #keys,
                                            MOD < [ LOCAL intersective-mod & 
                                                          [ AGR #agr,
-                                                           CAT.HEAD noun ] ] > ],
+                                                           CAT.HEAD noun,
+                                                           CONT.HOOK.INDEX #ind ] ] > ],
                                     VAL [ SUBJ < >,
                                           COMPS < >,
                                           SPEC < >,
