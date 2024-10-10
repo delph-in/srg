@@ -1981,7 +1981,7 @@ v_intr_ssr_synsem := lex-synsem &
                              LBL #hand ] !>, 
                    HCONS <! qeq & [ HARG #harg,
                                     LARG #larg ] !> ] ],
-    LKEYS [ KEYREL #keyrel & arg1-ev-relation &  [ ARG1 #harg ] ,
+    LKEYS [ KEYREL #keyrel & arg1-ev-relation &  [ ARG1 #harg  ] ,
             --COMPKEY #ckey ] ]
 """
 ; --- 1.3.2.7. intransitive subject to subject raising verbs
@@ -2014,9 +2014,11 @@ vprn_intr_ssr := norm-pronominal-verb &
 v_vp_inf-ssr_lex := v_intr_ssr & cc-two-arg & 
   [ SYNSEM v_intr_ssr_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_ssr_synsem, 
-                         VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind ] >,
+                         VAL [ SUBJ < [ LOCAL [ AGR #agr,
+                                                CONT.HOOK.INDEX ref-ind & #ind ] ] >,
                                COMPS < [ LOCAL vp_inf_local & 
-                                               [ CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX #ind ] > ] ] > ] ] ] ]
+                                               [ CAT.VAL.SUBJ < [ LOCAL [ AGR #agr,
+                                                                          CONT.HOOK.INDEX #ind ] ] > ] ] > ] ] ] ]
 """; a)- taking VPinf
 ; e.g. poder, soler, deber (deberían hacerlo (ellos), puede terminar ardiendo Troya)
 """. 
