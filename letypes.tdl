@@ -2061,9 +2061,11 @@ v_vp_ger-ssr_lex := v_intr_ssr & cc-two-arg &
 v_vp_ger-ssr-prn_lex := vprn_intr_ssr & cc-three-arg & 
   [ SYNSEM v_intr_ssr_synsem & 
            [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_ssr_synsem, 
-                         VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind ] >,
+                         VAL [ SUBJ < [ LOCAL [ AGR #agr, 
+                                                CONT.HOOK.INDEX ref-ind & #ind ] ] >,
                                COMPS < [ LOCAL vp_ger_local & 
-                                               [ CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX #ind ] > ] ] > ] ] ] ]
+                                               [ CAT.VAL.SUBJ < [ LOCAL [ AGR #agr,
+                                                                          CONT.HOOK.INDEX #ind ] ] > ] ] > ] ] ] ]
 """; e.g. quedarse (se quedó llorando)
 """. 
 
