@@ -3379,15 +3379,17 @@ v_trans_cp_prop-or-ques_fin_synsem := v_trans_cp_prop-or-ques_synsem &
 
 
 v_trans_cp_prop-or-ques_inf_synsem := v_trans_cp_prop-or-ques_synsem &
-  [ LOCAL.CAT [ HEAD.INV -,
-                VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind ] >,
+  [ LOCAL [ AGR #agr,
+            CAT [ HEAD.INV -,
+                VAL [ SUBJ < [ LOCAL [ AGR #agr,
+                                       CONT.HOOK.INDEX ref-ind & #ind ] ] >,
                       COMPS < [ OPT -,
                                 LOCAL [ CAT [ HEAD.VFORM inf,
                                               VAL [ SUBJ < [ NON-LOCAL [ SLASH 0-dlist,
                                                                          REL 0-dlist,
                                                                          QUE 0-dlist ] ] >,
                                                     COMPS < > ] ],
-                                        CONT.HOOK.XARG #ind ] ] > ] ] ]
+                                        CONT.HOOK.XARG #ind ] ] > ] ] ] ]
   """
   
   """.
@@ -3497,10 +3499,12 @@ v_vp_inf-sc_lex := v_trans_cp_prop_inf & cc-two-arg &
 
 
 v_vp_inf-oc-prn_lex := v_trans_cp_prop_inf & main-vprn & cc-two-arg &
-  [ SYNSEM v_trans_cp_prop_inf_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_trans_cp_prop_inf_synsem,
-                                                      VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX #ind2 ] >,
-                                                            COMPS < [ OPT -,
-                                                                      LOCAL.CONT.RELS.LIST < [ ARG2 #ind2 ], ... > ] > ] ] ] ]
+  [ SYNSEM v_trans_cp_prop_inf_synsem & [ LOCAL [ AGR #agr,
+                                                  CAT [ HEAD.LSYNSEM v_trans_cp_prop_inf_synsem,
+                                                        VAL [ SUBJ < [ LOCAL [ AGR #agr,
+                                                                               CONT.HOOK.INDEX #ind2 ] ] >,
+                                                              COMPS < [ OPT -,
+                                                                        LOCAL.CONT.RELS.LIST < [ ARG2 #ind2 ], ... > ] > ] ] ] ] ]
   """
   e.g. se dejó querer
   """.
@@ -3776,8 +3780,10 @@ v_ditrans_cp_prop_inf := v_ditrans_cp_prop-or-ques_fin &
 ; e.g. prometer ((le) prometí hacerlo (yo))
 v_ppa-vp_inf-sc_lex := v_ditrans_cp_prop_inf & main-verb & basic-three-arg & 
   [ SYNSEM v_ditrans_cp_prop_inf_synsem &
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_ditrans_cp_prop_inf_synsem, 
-                         VAL [ SUBJ  < [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind1 ] >,
+           [ LOCAL.CAT [ AGR #agr,
+                         HEAD.LSYNSEM v_ditrans_cp_prop_inf_synsem, 
+                         VAL [ SUBJ  < [ LOCAL [ AGR #agr,
+                                                 CONT.HOOK.INDEX ref-ind & #ind1 ] ] >,
                                COMPS < synsem,
                                        [ LOCAL.CONT.HOOK.XARG #ind1 ] > ] ] ] ].
 
@@ -4651,7 +4657,8 @@ v_cop-nsbj := v_copula &
 
 
 v_ap_ser_synsem := v_copula_synsem &
-  [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL [ AGR #agr,
+  [ LOCAL [ AGR #agr,
+            CAT.VAL [ SUBJ < [ LOCAL [ AGR #agr,
                                        CONT.HOOK.INDEX #ind ] ] >,
                       COMPS < [ LOCAL [ CAT.HEAD adj & [ MOD < [ LOCAL [ CAT.HEAD noun, 
                                                                          AGR #agr,
@@ -4674,11 +4681,13 @@ v_ap_ser_lex := v_cop-np_sbj &
 
 
 v_pp_ser_synsem := v_copula_synsem &
-  [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL [ AGR #agr,
+  [ LOCAL [ AGR #agr,
+            CAT.VAL [ SUBJ < [ LOCAL [ AGR #agr,
                                        CONT.HOOK.INDEX #sind ] ] >,
                       COMPS < [ LOCAL [ CAT.HEAD adp & [ KEYS.ALT2KEY quant_or_deg_rel,
                                                          MOD < [ LOCAL [ CAT.HEAD noun,
-                                                                         AGR #agr ] ] >,
+                                                                         AGR #agr,
+                                                                         CONT.HOOK.INDEX #sind ] ] >,
                                                          PRD [ COPV ser, HABER - ] ],
                                         CONT.HOOK.XARG #sind ] ] > ],
             CONT.HOOK.XARG #sind ] ]
@@ -6165,8 +6174,10 @@ n_pp_pr-part-otro_lex := spec-partitive-pron-lex &
 
 
 n_pp_pr-part-ninguno_lex := spec-partitive-pron-lex &
-  [ SYNSEM basic_partitive_synsem & [ LOCAL [ CAT.VAL.SPR < [ OPT +,
-                                                              LOCAL [ CAT.HEAD.KEYS.KEY _casi_x_deg_rel,
+  [ SYNSEM basic_partitive_synsem & [ LOCAL [ AGR #agr,
+                                              CAT.VAL.SPR < [ OPT +,
+                                                              LOCAL [ AGR #agr,
+                                                                      CAT.HEAD.KEYS.KEY _casi_x_deg_rel,
                                                                       CONT.HOOK [ LTOP #alt2hand,
                                                                                   XARG #index ] ],
                                                               NON-LOCAL [ QUE 0-dlist,
@@ -6290,7 +6301,8 @@ n_-_pr-rel-que_lex := pron_relat &
 
 
 n_-_pr-free-rel-que_lex := free_rel_pro_lex &
-  [ SYNSEM [ LOCAL [ CAT [ HEAD noun & [ MOD < >,
+  [ SYNSEM [ LOCAL [ AGR #agr,
+                     CAT [ HEAD noun & [ MOD < >,
                                          PRD non-prd,
                                          KEYS [ KEY #pred,
                                                 ALTKEY semi-free_relative_q_rel ] ],
@@ -6298,7 +6310,7 @@ n_-_pr-free-rel-que_lex := free_rel_pro_lex &
                                        LOCAL.CAT.HEAD det & [ KEYS.KEY art_def_q_rel ] ] > ],
                      CONT [ HOOK.INDEX #ind,
                             RELS <! #altkey, #key !> ] ],
-             NON-LOCAL.SLASH 1-dlist & <! [ AGR ref-ind,
+             NON-LOCAL.SLASH 1-dlist & <! [ AGR #agr & ref-ind,
                                             CAT.HEAD [ MOD < >,
                                                        PRD non-prd ],
                                             CONT.HOOK.INDEX #ind ] !>,
@@ -6329,14 +6341,15 @@ n_-_pr-rel-quien_lex := pron_relat &
 
 
 n_-_pr-free-rel-quien_lex := free_rel_pro_lex &
-  [ SYNSEM [ LOCAL [ CAT [ HEAD noun & [ MOD < >,
+  [ SYNSEM [ LOCAL [ AGR #agr,
+                     CAT [ HEAD noun & [ MOD < >,
                                          PRD non-prd,
                                          KEYS [ KEY nom_rel & #pred,
                                                 ALTKEY free_relative_q_rel ] ],
                            VAL.SPR < > ],
                      CONT [ HOOK.INDEX #ind & [ SORT hum ],
                             RELS <! #altkey, #key !> ] ],
-             NON-LOCAL.SLASH 1-dlist & <! [ AGR ref-ind,
+             NON-LOCAL.SLASH 1-dlist & <! [ AGR #agr & ref-ind,
                                             CAT.HEAD [ MOD < >,
                                                        PRD non-prd ],
                                             CONT.HOOK.INDEX #ind ] !>,
@@ -9918,7 +9931,9 @@ basic_subconj_synsem := lex-synsem &
                                         LARG #modltop ], ... > ] ] ].
 
 subconj_lex_synsem := basic_subconj_synsem &
-  [ LOCAL [ CAT [ HEAD.MOD < [ LOCAL.CONT.HOOK.INDEX.SF #sf ] >,
+  [ LOCAL [ AGR #agr,
+            CAT [ HEAD.MOD < [ LOCAL [ AGR #agr,
+                                       CONT.HOOK.INDEX.SF #sf ] ] >,
                   VAL.SPR < > ],
             CONT [ HOOK [ LTOP #ltop,
                           INDEX #ind & [ SF #sf & prop-or-ques ] ],

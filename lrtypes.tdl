@@ -36,7 +36,8 @@ basic-sym_pred-lex-rule := basic-valence-alt-lex-rule &
   [ ALTS [ RCP #rcp,
            RFX #rfx ],
     SYNSEM [ SLSHD #slshd,
-             LOCAL [ CAT [ MC #mc,
+             LOCAL [ AGR #agr,
+                     CAT [ MC #mc,
                            HEAD [ VFORM non-inf,
                                   LSYNSEM #lsynsem ],
                            VAL.CLTS #clts ],
@@ -52,7 +53,8 @@ basic-sym_pred-lex-rule := basic-valence-alt-lex-rule &
           ALTS [ RCP #rcp,
                  RFX #rfx ],
           SYNSEM [ SLSHD #slshd,
-                   LOCAL [ CAT [ MC #mc,
+                   LOCAL [ AGR #agr,
+                           CAT [ MC #mc,
                                  HEAD verb & [ VFORM non-inf,
                                                LSYNSEM #lsynsem,
                                                CLIT none ],
@@ -407,10 +409,12 @@ subj_vfin_vinf-lex-rule := vfin_vinf-lex-rule &
   [ ALTS [ RFX -,
            RCP - ],
     SYNSEM vinf-subj-synsem &
-           [ LOCAL [ CAT [ HEAD.LSYNSEM #lsynsem,
+           [ LOCAL [ AGR #agr,
+                     CAT [ HEAD.LSYNSEM #lsynsem,
                            VAL [ SUBJ < [ OPT -,
                                           LOCAL vp_inf_local &
-                                                [ CAT.VAL [ SUBJ < [ NON-LOCAL [ SLASH 0-dlist,
+                                                [ AGR #agr,
+                                                  CAT.VAL [ SUBJ < [ NON-LOCAL [ SLASH 0-dlist,
                                                                                  REL 0-dlist,
                                                                                  QUE 0-dlist ] ] >,
                                                             CLTS < > ],
@@ -678,9 +682,11 @@ v_ditrans_cp_prop-or-ques_lex-rule := vcomp_vfin_vinf-lex-rule &
 
 
 v_ditrans_cp_prop-or-ques_sc_dlr := v_ditrans_cp_prop-or-ques_lex-rule &
-  [ SYNSEM.LOCAL.CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind1 ] >,
+  [ SYNSEM.LOCAL [ AGR #agr,
+                   CAT.VAL [ SUBJ < [ LOCAL [ AGR #agr,
+                                            CONT.HOOK.INDEX ref-ind & #ind1 ] ] >,
                            COMPS < [ OPT #opt ],
-                                   [ LOCAL.CONT.HOOK.XARG #ind1 ] > ],
+                                   [ LOCAL.CONT.HOOK.XARG #ind1 ] > ] ],
     DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ OPT #opt ],
                                      [ LOCAL.CAT.HEAD.TAM.MOOD ind ] > ]
   """
