@@ -717,12 +717,15 @@ v_trans_np_mrkd_cp_prop_lex-rule := vcomp_vfin_vinf-lex-rule &
 
 
 v_trans_np_mrkd_cp_prop_sc_dlr := v_trans_np_mrkd_cp_prop_lex-rule &
-  [ SYNSEM.LOCAL.CAT.VAL [ SUBJ < [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind1 ] >,
+  [ SYNSEM.LOCAL [ AGR #agr,
+                   CAT.VAL [ SUBJ < [ LOCAL [ AGR #agr,
+                                              CONT.HOOK.INDEX ref-ind & #ind1 ] ] >,
                            COMPS < [ OPT + ],
                                    [ LOCAL [ CAT.VAL.CLTS < >,
                                              CONT.HOOK.XARG #ind1 ] ] >,
-                           CLTS #clts ],
-    DTR [ SYNSEM.LOCAL.CAT.VAL.CLTS #clts & < >,
+                           CLTS #clts ] ],
+    DTR [ SYNSEM.LOCAL [ AGR #agr,
+                         CAT.VAL.CLTS #clts & < > ],
           ARG-ST #arg-st ],
     ARG-ST #arg-st ]
   """
@@ -936,7 +939,8 @@ ppart-basic-lex-rule := lex-rule &
     INFLECTED #infl & +,
     SYNSEM [ PUNCT #punct,
              SLSHD #slshd,
-             LOCAL [ CAT [ HEAD verb & [ AUX -,
+             LOCAL [ AGR #agr,
+                     CAT [ HEAD verb & [ AUX -,
                                          VFORM part,
                                          VOICE passive,
                                          TAM #tam,
@@ -945,7 +949,8 @@ ppart-basic-lex-rule := lex-rule &
                                          LSYNSEM #lsynsem,
                                          PRD.HABER - ],
                            VAL.SPR < [ OPT +,
-                                       LOCAL [ CAT [ HEAD.KEYS.KEY degree_rel,
+                                       LOCAL [ AGR #agr,
+                                               CAT [ HEAD.KEYS.KEY degree_rel,
                                                      MC na ],
                                                CONT.HOOK [ LTOP #hand,
                                                            XARG #index ] ],
@@ -966,7 +971,8 @@ ppart-basic-lex-rule := lex-rule &
           ALTS.PASS +,
           SYNSEM [ PUNCT #punct & [ RPUNCT no_punct ],
                    SLSHD #slshd,
-                   LOCAL [ CAT [ HEAD verb & [ PRD non-prd & [ HABER - ],
+                   LOCAL [ AGR #agr,
+                           CAT [ HEAD verb & [ PRD non-prd & [ HABER - ],
                                                VFORM part,
                                                VOICE active,
                                                TAM #tam,
@@ -1013,11 +1019,13 @@ ppart-lex-rule :=  ppart-basic-lex-rule &
 
 
 ppart-intran-lex-rule := ppart-basic-lex-rule &
-  [ SYNSEM [ LOCAL [ ;CAT.MC #mc,
+  [ SYNSEM [ LOCAL [ AGR #agr,
+                     ;CAT.MC #mc,
                      CONT [ HOOK [ XARG #xarg,
                                    INDEX #index ],
                             RELS.LIST < [ ARG0 #index ], ... > ] ] ],
-    DTR.SYNSEM.LOCAL [ ;CAT.MC #mc,
+    DTR.SYNSEM.LOCAL [ AGR #agr,
+                       ;CAT.MC #mc,
                        CONT.HOOK.XARG #xarg ] ]
   """
   --- LR types for participles
@@ -1161,7 +1169,7 @@ v_pastpart-attr_dlr := const-ltol-rule  &
 v_pastpart-attr-intr_dlr := const-ltol-rule  &
   [ SYNSEM [ PUNCT #punct,
              SLSHD #slshd, 
-             LOCAL [ AGR #ind,
+             LOCAL [ AGR #agr,
                      CAT [ MC #mc,
                            HEAD verb &
                                 [ AUX -,
@@ -1174,7 +1182,8 @@ v_pastpart-attr-intr_dlr := const-ltol-rule  &
                                   MOD < >,
                                   LSYNSEM #lsynsem ], 
                           VAL [ SUBJ < [ OPT -, 
-                                         LOCAL #subj & [ CONT.HOOK.INDEX #ind ] ] >,
+                                         LOCAL #subj & [ AGR #agr,
+                                                         CONT.HOOK.INDEX #ind ] ] >,
                                 SPR < [ OPT +,
                                         LOCAL [ CAT [ HEAD.KEYS.KEY degree_rel,
                                                        VAL.COMPS < >,
@@ -1195,7 +1204,7 @@ v_pastpart-attr-intr_dlr := const-ltol-rule  &
     DTR [ INFLECTED +,
           SYNSEM [ PUNCT #punct & [ RPUNCT no_punct ],
                    SLSHD #slshd, 
-                   LOCAL [ AGR #ind,
+                   LOCAL [ AGR #agr,
                            CAT [ MC #mc,
                                  HEAD verb &
                                       [ AUX -,
