@@ -2633,12 +2633,14 @@ np_ell-sfrel_phrase := basic-ellipis-phrase &
 
 basic-filler-phrase := binary-phrase & phrasal &
   [ SYNSEM [ SLSHD #slshd,
-             LOCAL.CAT [ VAL [ COMPS < >,
-                               SPR < >,
-                               CLTS #clit ] ],
+             LOCAL [ AGR #agr,
+                     CAT [ VAL [ COMPS < >,
+                                 SPR < >,
+                                 CLTS #clit ] ]] ,
 	     NON-LOCAL.SLASH 0-dlist ],
     ARGS < [ SYNSEM [ LOCAL #slash & local &
-                             [ CAT.VAL [ SUBJ olist,
+                             [ AGR #agr,
+                               CAT.VAL [ SUBJ olist,
                                          COMPS olist,
                                          CLTS < > ],
                                CTXT.ACTIVATED + ],
@@ -2945,10 +2947,10 @@ filler-head-rel-phrase := filler-head-phrase & relative-clause &
                                                  [ AGR #agr,
                                                    CONT.HOOK.LTOP #rhand ] ] > ] ] ],
              NON-LOCAL.REL 1-dlist ],
-    ARGS < [ SYNSEM.NON-LOCAL [ QUE 0-dlist,
+    ARGS < [ SYNSEM [ NON-LOCAL [ QUE 0-dlist,
                                 REL 1-dlist & 
                                     [ LIST < [ LTOP #rhand,
-                                               XARG #rhand ] > ] ] ],
+                                               XARG #rhand ] > ] ] ] ],
            [ SYNSEM [ LOCAL [ STR.HEADING right,
                               CAT [ MC -,
                                     HEAD [ VFORM #vform,
@@ -3226,7 +3228,8 @@ filler-head_rel-fin-pp-mr_phrase := filler-head-rel-pp-mr-phrase.
 filler-head-nonrestr-rel-phrase := binary-phrase & relative-clause &
   [ SYNSEM phr-synsem & 
            [ SLSHD #slshd,
-             LOCAL [ STR [ HEADED right,
+             LOCAL [ AGR #agr,
+                     STR [ HEADED right,
                            HEADING no ],
                      CAT [ POSTHEAD +,
                            MC na,
@@ -3241,11 +3244,11 @@ filler-head-nonrestr-rel-phrase := binary-phrase & relative-clause &
                                          ALTKEY appos-able_rel ],
                                   MOD < [ PUNCT.RPUNCT comma_punct, 
                                           LOCAL intersective-mod &
-                                                [ AGR #ind,
+                                                [ AGR #agr,
                                                   CAT.VAL [ SUBJ < >,
                                                             COMPS < > ],
                                                   CONT.HOOK [ LTOP #rhand,
-                                                              INDEX #ind  ] ] ] > ],
+                                                              INDEX #ind ] ] ] > ],
                            VAL [ SUBJ #subj,
                                  SPR < >,
                                  COMPS #comps,
@@ -3254,14 +3257,16 @@ filler-head-nonrestr-rel-phrase := binary-phrase & relative-clause &
                          REL 1-dlist,
                          QUE 0-dlist ] ],
     ARGS < [ SYNSEM [ LOCAL #slash & local &
-                             [ CAT.VAL [ SUBJ olist,
+                             [ AGR #agr,
+                               CAT.VAL [ SUBJ olist,
                                          COMPS olist,
                                          CLTS < > ],
                                CTXT.ACTIVATED + ],
                       NON-LOCAL [ SLASH 0-dlist,
                                   QUE 0-dlist,
                                   REL 1-dlist & 
-                                      [ LIST < [ LTOP #rhand ] > ] ] ] ],
+                                      [ LIST < [ LTOP #rhand,
+                                                 INDEX #ind ] > ] ] ] ],
            [ SYNSEM [ PUNCT.LPUNCT comma_or_clause_or_no_punct, 
                       SLSHD #slshd,
                       LOCAL [ CAT [ HEAD verb & 
