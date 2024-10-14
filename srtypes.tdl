@@ -1639,7 +1639,8 @@ optcomp-phrase := head-valence-phrase & head-only & head-compositional &
            [ MODIFIED #mod,
              SLSHD #slshd,
              LIGHT -,
-             LOCAL [ COORD #coord,
+             LOCAL [ AGR #agr,
+                     COORD #coord,
                      COORD-STRAT #cstrat,
                      CAT [ MC #mc,
                            VAL [ SUBJ #subj,
@@ -1651,7 +1652,8 @@ optcomp-phrase := head-valence-phrase & head-only & head-compositional &
     HEAD-DTR [ INFLECTED #infl & +,
                SYNSEM [ MODIFIED #mod, 
                         SLSHD #slshd,
-                        LOCAL [ COORD #coord & -,
+                        LOCAL [ AGR #agr,
+                                COORD #coord & -,
                                 COORD-STRAT #cstrat & zero,
                                 CAT [ MC #mc,
                                       VAL [ SUBJ #subj,
@@ -1677,10 +1679,11 @@ optcomp-phrase := head-valence-phrase & head-only & head-compositional &
 """. 
 
 optcomp-v_phrase := optcomp-phrase &
-  [ SYNSEM.LOCAL.CAT [ POSTHEAD #ph,
+  [ SYNSEM.LOCAL [ AGR #agr,
+                   CAT [ POSTHEAD #ph,
                        VAL [ SUBJ.FIRST.LOCAL [ AGR #agr,
                                                 CONT.HOOK.INDEX #ind ],
-                             COMPS #comps ] ],
+                             COMPS #comps ] ] ],
     HEAD-DTR.SYNSEM.LOCAL [ STR.HEADED solely,
                             CAT [ POSTHEAD #ph, 
                                   HEAD verb & [ KEYS.KEY v_event_rel ],
@@ -1692,13 +1695,11 @@ optcomp-v_phrase := optcomp-phrase &
 """. 
 
 optcomp-n_phrase := optcomp-phrase &
-  [ SYNSEM.LOCAL [ AGR #agr,
-                   CAT [ POSTHEAD #ph,
+  [ SYNSEM.LOCAL [ CAT [ POSTHEAD #ph,
                          VAL.COMPS #comps ],
 		   CONT.HOOK.INDEX.SORT non-mod ],
     HEAD-DTR.SYNSEM [ MODIFIED notmod,
-                      LOCAL [ AGR #agr,
-                              STR.HEADED solely,
+                      LOCAL [ STR.HEADED solely,
                               CAT [ POSTHEAD #ph, 
                                     HEAD noun,
                                     VAL.COMPS < [ NON-LOCAL.SLASH 0-dlist ]. #comps > ] ] ] ]. 
