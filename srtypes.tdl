@@ -2378,7 +2378,7 @@ prdp_phrase := unary-phrase &
 cpa_phrase := unary-phrase & phrasal &
   [ SYNSEM [ PUNCT.RPUNCT comma_punct,
              SLSHD #slshd,
-             LOCAL [ AGR #ind,
+             LOCAL [ AGR #agr,
                      COORD #coord,
                      COORD-STRAT #coord-strat,
                      CAT [ MC -,
@@ -2392,7 +2392,8 @@ cpa_phrase := unary-phrase & phrasal &
                                  LSYNSEM #lsynsem,
                                  MOD < synsem &
                                        [ LOCAL scopal-mod &
-                                               [ CAT [ HEAD verb & [ VFORM fin ],
+                                               [ AGR #agr,
+                                                 CAT [ HEAD verb & [ VFORM fin ],
                                                        VAL [ SPR < >,
                                                              SUBJ < >,
                                                              COMPS < >,
@@ -2404,7 +2405,7 @@ cpa_phrase := unary-phrase & phrasal &
 	    NON-LOCAL #non-local ],
    ARGS < [ INFLECTED +,
             SYNSEM [ SLSHD #slshd,
-                     LOCAL [ AGR #ind,
+                     LOCAL [ AGR #agr,
                              COORD #coord,
                              COORD-STRAT #coord-strat,
                              CAT [ HEAD verb &
@@ -2482,7 +2483,8 @@ vp-nom_phrase := unary-phrase & phrasal &
                                   KEYS.KEY nominalization_rel ],
                            VAL [ SUBJ < >,
                                  SPR < [ OPT -,
-                                         LOCAL.CAT.HEAD.KEYS.KEY art_def_q_rel ] >,
+                                         LOCAL [ AGR.PNG.PN 3sg,
+                                                 CAT.HEAD.KEYS.KEY art_def_q_rel ] ] >,
                                  COMPS < >,
                                  SPEC < >,
                                  CLTS < > ] ] ],
@@ -2927,7 +2929,8 @@ filler-head_nonwh-nfin_phrase := filler-head-non_wh_focus-phrase & filler-head-p
 
 filler-head-rel-phrase := filler-head-phrase & relative-clause &
   [ INFLECTED +,
-    SYNSEM [ LOCAL [ STR [ HEADED right,
+    SYNSEM [ LOCAL [ AGR #agr,
+                     STR [ HEADED right,
                            HEADING no ],
                      CAT [  MC na,
                             HEAD verb & 
@@ -2939,9 +2942,8 @@ filler-head-rel-phrase := filler-head-phrase & relative-clause &
                                    KEYS.KEY #key,
                                    LSYNSEM #lsynsem,
                                    MOD < [ LOCAL intersective-mod &
-                                                 [ AGR #ind,
-                                                   CONT.HOOK [ LTOP #rhand,
-                                                               INDEX #ind ] ] ] > ] ] ],
+                                                 [ AGR #agr,
+                                                   CONT.HOOK.LTOP #rhand ] ] > ] ] ],
              NON-LOCAL.REL 1-dlist ],
     ARGS < [ SYNSEM.NON-LOCAL [ QUE 0-dlist,
                                 REL 1-dlist & 
