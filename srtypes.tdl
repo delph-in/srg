@@ -1181,10 +1181,10 @@ head-adj_int-cn-ap_phrase := head-adj-int-n-xp-phrase &
 
 head-adj_int-cn-pp_phrase := head-adj-int-n-xp-phrase &
   [ SYNSEM.LOCAL [ CAT.VAL.SPR #spr,
-                   ;AGR #agr,
+                   AGR.PNG #agr,
                    CONT.HOOK.INDEX #ind ],
     HEAD-DTR.SYNSEM [ PUNCT.RPUNCT no_punct,
-                      LOCAL [ ;AGR #agr,
+                      LOCAL [ AGR.PNG #agr,
                               CAT [ HEAD.KEYS.KEY all_common_nom_rel,
                                     VAL.SPR #spr & < [ ] > ],
                               CONT.HOOK.INDEX #ind & [ PRONTYPE not_pron ] ] ],
