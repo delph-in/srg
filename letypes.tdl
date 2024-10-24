@@ -2229,6 +2229,13 @@ v_trans_np_synsem := v_trans_synsem &
 ; --- 1.3.3.1. Transitive verbs taking NP
 """.
 
+v_trans_np-prd_synsem := v_ser_synsem & 
+  [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local & 
+                                  [ CONT.HOOK.INDEX #ind2 ],
+                            NON-LOCAL.REL 0-dlist & [ LIST < > ] ],... >,
+    LKEYS.KEYREL.ARG2 #ind2 ].
+
+
 v_trans_np-noagr_synsem := v_trans_synsem & 
   [ LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local & 
                                   [ CONT.HOOK.INDEX #ind2 ],
@@ -3239,8 +3246,22 @@ v_np-np_id_lex := v_trans_np_np & main-verb & basic-three-arg &
   e.g. titular (lo tituló...)
   """.
 
-
 v_ditrans_synsem := v_trans_np_synsem &
+  [ LOCAL [ CAT [ HEAD.INV -,
+                  VAL.COMPS < [ LOCAL np_acc_unmrkd_local & [ CAT.HEAD.KEYS.KEY non_modable_rel ] ],
+                              [ LOCAL dative_local & [ CAT.HEAD.KEYS.KEY #ockey,
+                                                       CONT.HOOK.INDEX ref-ind & #ind3 ],
+                                NON-LOCAL.REL 0-dlist & [ LIST < > ] ], ... > ],
+            CONT [ RELS <! arg123-ev-relation !>,
+                   HCONS <! !> ] ],
+    LKEYS [ KEYREL.ARG3 #ind3,
+            --OCOMPKEY #ockey ] ]
+  """
+  --- 1.3.3.5. ditransitive verbs taking DO and IO
+  """.
+
+
+v_ditrans-prd_synsem := v_trans_np-prd_synsem &
   [ LOCAL [ CAT [ HEAD.INV -,
                   VAL.COMPS < [ LOCAL np_acc_unmrkd_local & [ CAT.HEAD.KEYS.KEY non_modable_rel ] ],
                               [ LOCAL dative_local & [ CAT.HEAD.KEYS.KEY #ockey,
@@ -3291,6 +3312,18 @@ v_np-ppa*_lex := v_ditrans & main-verb & basic-three-arg &
            RCP -,
            RFX - ],
     SYNSEM v_ditrans_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_ditrans_synsem,
+                                            VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ]
+  """
+  e.g. agradecer ((me) agradeció la propuesta)
+  """.
+
+
+v_np-prd_ppa*_lex := v_ditrans & main-verb & basic-three-arg &
+  [ ALTS [ IMPERS +,
+           PASS +,
+           RCP -,
+           RFX - ],
+    SYNSEM v_ditrans-prd_synsem & [ LOCAL.CAT [ HEAD.LSYNSEM v_ditrans-prd_synsem,
                                             VAL.COMPS < [ OPT - ], [ OPT + ] > ] ] ]
   """
   e.g. agradecer ((me) agradeció la propuesta)
@@ -5098,8 +5131,7 @@ basic-noun-lex := nonpronominal-lex &
                      CONT.HOOK [ LTOP #ltop,
                                  INDEX [ PNG.PN 3per,
                                          PRONTYPE not_pron ] ] ],
-             LKEYS.KEYREL.LBL #ltop,
-             NON-LOCAL.QUE <! !> ] ]. 
+             LKEYS.KEYREL.LBL #ltop ] ]. 
 
 basic-common-noun-synsem := lex-synsem & 
   [ LOCAL.CAT.HEAD noun ].
@@ -14313,6 +14345,18 @@ v_np-ppa_le := v_np-ppa_lex
   """
   
   """.
+
+v_np-prd_ppa*_native_le := v_np-prd_ppa*_lex & native_le
+  """
+  This is a native lexical entry type, for words that are in the lexicon.
+  
+  <type val="v_np-ppa*_le">
+  <description>Verb, predicative NP and PPa (opt)
+  <ex>hacer campeón (al alguien)
+  <todo>
+  </type>
+  """.
+
 
 
 v_np-ppa*_native_le := v_np-ppa*_lex & native_le

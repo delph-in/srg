@@ -1181,10 +1181,10 @@ head-adj_int-cn-ap_phrase := head-adj-int-n-xp-phrase &
 
 head-adj_int-cn-pp_phrase := head-adj-int-n-xp-phrase &
   [ SYNSEM.LOCAL [ CAT.VAL.SPR #spr,
-                   AGR #agr,
+                   ;AGR #agr,
                    CONT.HOOK.INDEX #ind ],
     HEAD-DTR.SYNSEM [ PUNCT.RPUNCT no_punct,
-                      LOCAL [ AGR #agr,
+                      LOCAL [ ;AGR #agr,
                               CAT [ HEAD.KEYS.KEY all_common_nom_rel,
                                     VAL.SPR #spr & < [ ] > ],
                               CONT.HOOK.INDEX #ind & [ PRONTYPE not_pron ] ] ],
@@ -1731,7 +1731,7 @@ optspec_phrase := head-valence-phrase & non-clause & head-only & head-compositio
                                  SUBJ #subj,
                                  COMPS #comps,
                                  SPEC #spec ] ],
-                     CONT.HOOK.INDEX #ind ] ],
+                     CONT #cont ] ],
     HEAD-DTR [ INFLECTED #infl & +,
                SYNSEM [ MODIFIED #mod,
                         SLSHD #slshd,
@@ -1748,7 +1748,7 @@ optspec_phrase := head-valence-phrase & non-clause & head-only & head-compositio
                                             SUBJ #subj,
                                             COMPS #comps & < >,
                                             SPEC #spec ] ],
-                                 CONT.HOOK.INDEX #ind ] ] ],
+                                 CONT #cont ] ] ],
     C-CONT [ RELS <! !>,
              HCONS <! !> ] ]
 """
@@ -2633,13 +2633,13 @@ np_ell-sfrel_phrase := basic-ellipis-phrase &
 
 basic-filler-phrase := binary-phrase & phrasal &
   [ SYNSEM [ SLSHD #slshd,
-             LOCAL [ AGR #agr,
+             LOCAL [ AGR.PNG #agr,
                      CAT [ VAL [ COMPS < >,
                                  SPR < >,
                                  CLTS #clit ] ]] ,
 	     NON-LOCAL.SLASH 0-dlist ],
     ARGS < [ SYNSEM [ LOCAL #slash & local &
-                             [ AGR #agr,
+                             [ AGR.PNG #agr,
                                CAT.VAL [ SUBJ olist,
                                          COMPS olist,
                                          CLTS < > ],
@@ -2803,8 +2803,7 @@ filler-head-non_wh-phrase := filler-head-phrase & mc-fillhead-phrase & non-rel-c
                          VAL #val ],
                    CONT.HOOK.INDEX.SF #sf ],
     ARGS < [ SYNSEM canonical-synsem &
-                    [ LOCAL [ CAT [ HEAD +nvrp,
-                                    VAL.SPR < > ],
+                    [ LOCAL [ CAT [ HEAD +nvrp ],
                               CONT [ HOOK.INDEX #nhind, 
                                      RELS.LIST < relation, ... > ] ],
                       NON-LOCAL [ SLASH 0-dlist,
@@ -4514,11 +4513,11 @@ n-middle-coord-phrase := nom-coord-phrase &
 
 n-bottom-coord-phrase := bottom-coord-phrase &
   [ SYNSEM.LOCAL [ COORD-REL.R-INDEX #ind,
-                   AGR #agr,
+                   ;AGR #agr,
                    CAT [ HEAD noun & [ KEYS.KEY non_named_non_modable_rel ],
                          VAL.SPR < [ LOCAL.CONT.RELS.LIST < relation > ] > ] ],
     NONCONJ-DTR.SYNSEM canonical-synsem & 
-                       [ LOCAL [ AGR #agr,
+                       [ LOCAL [ ;AGR #agr,
                                  CAT.HEAD noun & [ KEYS.KEY non_named_non_modable_rel ],
                                  CONT.HOOK.INDEX #ind ] ] ].
 
@@ -4631,12 +4630,12 @@ np-middle-coord-phrase := nom-coord-phrase &
 ;    RCOORD-DTR.SYNSEM.LOCAL.AGR.PNG.PN 3per ].
 
 np-bottom-coord-phrase := bottom-coord-phrase &
-  [ SYNSEM.LOCAL [ AGR #agr,
+  [ SYNSEM.LOCAL [ ;AGR #agr,
                    CAT [ HEAD noun,
                          VAL.SPR < > ],
                    COORD-REL.R-INDEX #index ],
     NONCONJ-DTR.SYNSEM canonical-synsem & 
-                       [ LOCAL [ AGR #agr,
+                       [ LOCAL [ ;AGR #agr,
                                  CAT.HEAD noun,
                                  CONT.HOOK.INDEX #index ] ] ].
 
@@ -4703,14 +4702,14 @@ adj-middle-coord-phrase := adj-coord-phrase &
 	     HCONS <! !> ] ].
 
 adj-bottom-coord-phrase := bottom-coord-phrase &
-  [ SYNSEM.LOCAL [ AGR #agr,
+  [ SYNSEM.LOCAL [ ;AGR #agr,
                    COORD-REL.R-INDEX #ind,
                    CAT [ MC na,
                          POSTHEAD #ph,
                          HEAD adj,
                          VAL.COMPS < > ],
                    CONT.HOOK.XARG #xarg ],
-    NONCONJ-DTR.SYNSEM.LOCAL [ AGR #agr,
+    NONCONJ-DTR.SYNSEM.LOCAL [ ;AGR #agr,
                                CAT [ MC na,
                                      POSTHEAD #ph,
                                      HEAD adj ],
@@ -4833,12 +4832,10 @@ cl-middle-coord-phrase := cl-coord-phrase &
 	     HCONS <! !> ] ].
 
 cl-bottom-coord-phrase := bottom-coord-phrase & 
-  [ SYNSEM.LOCAL [ AGR #agr,
-                   COORD-REL.R-INDEX #ind,
+  [ SYNSEM.LOCAL [ COORD-REL.R-INDEX #ind,
                    CAT [ HEAD +vc  & [ VFORM fin ],
                          VAL.SUBJ < > ] ],
-    NONCONJ-DTR.SYNSEM.LOCAL [ AGR #agr,
-                               CAT.HEAD +vc,
+    NONCONJ-DTR.SYNSEM.LOCAL [ CAT.HEAD +vc,
                                CONT.HOOK.INDEX #ind ] ].
 
 
@@ -4904,12 +4901,12 @@ vp-middle-coord-phrase := vp-coord-phrase &
 	     HCONS <! !> ] ].
 
 vp-bottom-coord-phrase := bottom-coord-phrase & 
-  [ SYNSEM.LOCAL [ AGR #agr,
+  [ SYNSEM.LOCAL [ ;AGR #agr,
                    COORD-REL.R-INDEX #ind,
                    CAT [ HEAD #head,
                          VAL [ SUBJ < [ ] >,
                                COMPS < > ] ] ],
-    NONCONJ-DTR.SYNSEM.LOCAL [ AGR #agr,
+    NONCONJ-DTR.SYNSEM.LOCAL [ ;AGR #agr,
                                CAT.HEAD #head & verb,
                                CONT.HOOK.INDEX #ind ] ].
 
@@ -5225,11 +5222,9 @@ adjprep-middle-coord-phrase := adjprep-coord-phrase &
 	     HCONS <! !> ] ].
 
 adj_prep-coord-phrase := advprep-coord-phrase &
-  [ SYNSEM.LOCAL [ ;AGR #agr,
-                   CAT.HEAD adj,
+  [ SYNSEM.LOCAL [ CAT.HEAD adj,
                    CONT.HOOK.INDEX #ind ],
-    LCOORD-DTR.SYNSEM.LOCAL [ ;AGR #agr,
-                              CAT.HEAD adj,
+    LCOORD-DTR.SYNSEM.LOCAL [ CAT.HEAD adj,
                               CONT.HOOK.INDEX #ind ],
     RCOORD-DTR.SYNSEM.LOCAL.CAT.HEAD adp ].
 
