@@ -5205,32 +5205,6 @@ n_trans := basic-noun-lex &
                                COMPS < [ LOCAL.CAT.HEAD.KEYS.KEY #ckey ],... > ] ],
              LKEYS.--COMPKEY #ckey ] ]. 
 
-n_trans_optsp := basic-noun-lex & basic-two-arg & norm-hook-lex &
-  [ SYNSEM [ LOCAL [ CAT [ HEAD.KEYS.KEY non_temp_nonpro_rel & non_elliptical_n_rel,
-                         VAL [ SPR < [ OPT + ] >,
-                               COMPS < [ LOCAL.CAT [ HEAD.KEYS.KEY #ckey & _de_p_sel_rel,
-                                                     VAL [ COMPS < >,
-                                                           SPR < > ] ] ],... > ] ],
-                     CONT [ RELS <! noun-arg0-relation !>,
-                            HCONS <! !> ] ],
-             LKEYS.--COMPKEY #ckey ] ]. 
-
-
-n_prof := n_trans_optsp & 
-[ SYNSEM.LOCAL [ CAT.VAL.COMPS.FIRST.OPT +,
-                 CONT.HOOK.INDEX.SORT hum ] ]
-"""
-Es profesor (de universidad/universitario).
-""".
-
-
-n_optsp_nonprof := n_trans_optsp & 
-[ SYNSEM.LOCAL [ CAT.VAL.COMPS.FIRST [ OPT - ],
-                 CONT.HOOK.INDEX.SORT abs_cnc ] ]
-"""
-Es obra de (alguien) .
-""".
-
 
 n_ppcomp := n_trans & basic-two-arg & 
   [ SYNSEM.LOCAL [ CAT.VAL.COMPS < [ LOCAL mrkd_np_local & 
@@ -5430,21 +5404,6 @@ n_-_c-qnt_lex := pronominal-lex & norm-zero-arg &
   """
   
   """.
-
-n_-_prof_lex := n_prof &
-  [ SYNSEM.LOCAL.AGR.DIVISIBLE - ]
-  """
-  --- 2.1.1. Common nouns denoting professions etc.
-  e.g. Es profesor (de universidad/universitario...)
-  """.
-
-n_-_abstract_lex := n_optsp_nonprof &
-  [ SYNSEM.LOCAL.AGR.DIVISIBLE - ]
-  """
-  --- 2.1.1. Common nouns denoting professions etc.
-  e.g. Es profesor (de universidad/universitario...)
-  """.
-
 
 ; --- appositional nouns (see ERG's tittle nouns)
 ; e.g. propuesta número 1234
@@ -15709,29 +15668,6 @@ n_-_nc_native_le := n_-_nc_lex & native_le
 
 
 n_-_nc_le := n_-_nc_lex
-  """
-  
-  """.
-
-
-n_-_prof_native_le := n_-_prof_lex & native_le
-"""
-Nouns that are not mass but have optional specifier, such as nouns denoting professions:
-Es profesor (de universidad).
-""".
-
-n_-_prof_le := n_-_prof_lex
-  """
-  
-  """.
-
-n_-_abstract_native_le := n_-_abstract_lex & native_le
-"""
-Nouns that are not mass but have optional specifier, such as nouns denoting professions:
-Es profesor (de universidad).
-""".
-
-n_-_abstract_le := n_-_abstract_lex
   """
   
   """.
