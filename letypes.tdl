@@ -50,14 +50,15 @@ basic-main-verb := basic-verb-lex &
 
 norm-pronominal-verb := basic-verb-lex & 
   [ ALTS.IMPERS -,
-    SYNSEM.LOCAL.CAT.VAL [ SUBJ < [ LOCAL [ AGR.PNG #agr,
+    SYNSEM.LOCAL [ AGR.PNG #agr,
+                   CAT.VAL [ SUBJ < [ LOCAL [ AGR.PNG #agr,
                                             CONT.HOOK.INDEX.PNG #ind,
                                             CAT.HEAD.PRD non-prd ] ] >, 
                            CLTS < clitic-synsem & 
 				  [ OPT -,
                                     LOCAL [ AGR.PNG #agr,
                                             CAT.HEAD.CASE rflx,
-                                            CONT.HOOK.INDEX.PNG #ind ] ] > ] ].
+                                            CONT.HOOK.INDEX.PNG #ind ] ] > ] ] ].
 
 impers-pronominal-verb := basic-verb-lex & 
   [ ALTS.IMPERS -,
