@@ -2014,12 +2014,13 @@ vprn_intr_ssr := norm-pronominal-verb &
 
 v_vp_inf-ssr_lex := v_intr_ssr & cc-two-arg & 
   [ SYNSEM v_intr_ssr_synsem & 
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_ssr_synsem, 
+           [ LOCAL [ AGR #agr,
+                     CAT [ HEAD.LSYNSEM v_intr_ssr_synsem, 
                          VAL [ SUBJ < [ LOCAL [ AGR #agr,
                                                 CONT.HOOK.INDEX ref-ind & #ind ] ] >,
                                COMPS < [ LOCAL vp_inf_local & 
                                                [ CAT.VAL.SUBJ < [ LOCAL [ AGR #agr,
-                                                                          CONT.HOOK.INDEX #ind ] ] > ] ] > ] ] ] ]
+                                                                          CONT.HOOK.INDEX #ind ] ] > ] ] > ] ] ] ] ]
 """; a)- taking VPinf
 ; e.g. poder, soler, deber (deberían hacerlo (ellos), puede terminar ardiendo Troya)
 """. 
@@ -2048,12 +2049,13 @@ v_pp_e-vp-inf-ssr-prn_lex := vprn_intr_ssr & cc-three-arg &
 
 v_vp_ger-ssr_lex := v_intr_ssr & cc-two-arg & 
   [ SYNSEM v_intr_ssr_synsem & 
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_ssr_synsem, 
+           [ LOCAL [ AGR #agr,
+                     CAT [ HEAD.LSYNSEM v_intr_ssr_synsem, 
                          VAL [ SUBJ < [ LOCAL [ AGR #agr,
                                                 CONT.HOOK.INDEX ref-ind & #ind ] ] >,
                                COMPS < [ LOCAL vp_ger_local & 
                                                [ CAT.VAL.SUBJ < [ LOCAL [ AGR #agr,
-                                                                          CONT.HOOK.INDEX #ind ] ] > ] ] > ] ] ] ]
+                                                                          CONT.HOOK.INDEX #ind ] ] > ] ] > ] ] ] ] ]
 """
 ; c)- taking VPger
 ; e.g. andar (anda cantando)
@@ -2061,12 +2063,13 @@ v_vp_ger-ssr_lex := v_intr_ssr & cc-two-arg &
 
 v_vp_ger-ssr-prn_lex := vprn_intr_ssr & cc-three-arg & 
   [ SYNSEM v_intr_ssr_synsem & 
-           [ LOCAL.CAT [ HEAD.LSYNSEM v_intr_ssr_synsem, 
-                         VAL [ SUBJ < [ LOCAL [ AGR #agr, 
+           [ LOCAL [ AGR #agr,
+                     CAT [ HEAD.LSYNSEM v_intr_ssr_synsem, 
+                           VAL [ SUBJ < [ LOCAL [ AGR #agr, 
                                                 CONT.HOOK.INDEX ref-ind & #ind ] ] >,
                                COMPS < [ LOCAL vp_ger_local & 
                                                [ CAT.VAL.SUBJ < [ LOCAL [ AGR #agr,
-                                                                          CONT.HOOK.INDEX #ind ] ] > ] ] > ] ] ] ]
+                                                                          CONT.HOOK.INDEX #ind ] ] > ] ] > ] ] ] ] ]
 """; e.g. quedarse (se quedó llorando)
 """. 
 
@@ -3538,7 +3541,8 @@ v_vp_inf-oc-prn_lex := v_trans_cp_prop_inf & main-vprn & cc-two-arg &
                                                         VAL [ SUBJ < [ LOCAL [ AGR #agr,
                                                                                CONT.HOOK.INDEX #ind2 ] ] >,
                                                               COMPS < [ OPT -,
-                                                                        LOCAL.CONT.RELS.LIST < [ ARG2 #ind2 ], ... > ] > ] ] ] ] ]
+                                                                        LOCAL [ AGR #agr,
+                                                                                CONT.RELS.LIST < [ ARG2 #ind2 ], ... > ] ] > ] ] ] ] ]
   """
   e.g. se dejó querer
   """.
@@ -4665,7 +4669,7 @@ v_cop := v_copula &
 v_cop-np_sbj := v_cop &
   [ SYNSEM.LOCAL [ AGR.PNG #png,
                    CAT.VAL [ SUBJ < [ LOCAL np_nom_local & [ AGR.PNG #png ] ] >,
-                             COMPS < [ LOCAL [ CONT.HOOK.LTOP #ltop ] ] > ],
+                             COMPS < [ LOCAL.CONT.HOOK.LTOP #ltop ] > ],
                    CONT [ HOOK.LTOP #ltop,
                           RELS <! !>,
                           HCONS <! !> ] ] ]
@@ -4780,13 +4784,14 @@ v_pp_e-vp-inf-ser_lex := v_cop-np_sbj &
 
 
 v_vp_ppart_ser_synsem := v_copula_synsem &
-  [ LOCAL.CAT.VAL [ SUBJ < [ LOCAL [ AGR #agr,
+  [ LOCAL [ AGR #agr,
+            CAT.VAL [ SUBJ < [ LOCAL [ AGR #agr,
                                      CONT.HOOK.INDEX #arg2 ] ] >,
                     COMPS < [ LOCAL [ AGR #agr,
                                       CAT [ HEAD verb & [ PRD prd & [ COPV ser ] ],
                                             VAL.SUBJ < [ LOCAL [ ;AGR #agr,
                                                                  CONT.HOOK.INDEX #arg2 ] ] > ],
-                                      CONT.RELS.LIST < [ ARG2 #arg2 ], ... > ] ] > ] ]
+                                      CONT.RELS.LIST < [ ARG2 #arg2 ], ... > ] ] > ] ] ]
   """
   e.g. Juan fue atacado
   """.
@@ -4800,14 +4805,15 @@ v_vp_ppart-ser_lex := v_cop-np_sbj &
 
 
 v_vp_ppart_estar_synsem := v_copula_synsem &
-  [ LOCAL.CAT [ HEAD.PRD non-prd,
+  [ LOCAL [ AGR #agr,
+            CAT [ HEAD.PRD non-prd,
                 VAL [ SUBJ < [ LOCAL [ AGR #agr,
                                        CONT.HOOK.INDEX #arg2 ] ] >,
                       COMPS < [ LOCAL.CAT.HEAD adj & [ MOD < [ LOCAL [ AGR #agr,
                                                                        CAT.HEAD noun,
                                                                        CONT.HOOK.INDEX #arg2 ] ] >,
                                                        PRD.COPV estar,
-                                                       KEYS.KEY v_event_rel ] ] > ] ] ]
+                                                       KEYS.KEY v_event_rel ] ] > ] ] ] ]
   """
   e.g. Juan está muerto
   """.
@@ -4821,7 +4827,8 @@ v_vp_ppart-estar_lex := v_cop-np_sbj &
 
 
 v_ap_estar_synsem := v_copula_synsem &
-  [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL [ AGR #agr,
+  [ LOCAL [ AGR #agr,
+            CAT.VAL [ SUBJ < [ LOCAL [ AGR #agr,
                                        CONT.HOOK.INDEX #sind ] ] >,
                       COMPS < [ LOCAL [ CAT.HEAD adj & [ MOD < [ LOCAL [ CAT.HEAD noun,
                                                                          AGR #agr,
@@ -4892,7 +4899,8 @@ v_adv_estar_lex := v_cop-np_sbj &
 
 
 v_modnp_estar_synsem := v_copula_synsem &
-  [ LOCAL [ CAT.VAL [ SUBJ < [ LOCAL [ AGR #agr,
+  [ LOCAL [ AGR #agr,
+            CAT.VAL [ SUBJ < [ LOCAL [ AGR #agr,
                                        CONT.HOOK.INDEX #sind ] ] >,
                       COMPS < [ LOCAL [ AGR #agr,
                                         CAT.HEAD modnp & [ MOD < [ LOCAL.CAT.HEAD noun ] > ],
@@ -5586,8 +5594,7 @@ n_pp_c-tmp_lex := n_ppcomp &
 ; --- 2.2. Proper names
 
 n_-_pn_lex := basic-noun-lex & basic-one-arg & norm-sem-lex-item &
-  [ SYNSEM [ LOCAL [ ;AGR.PNG.GEN #gen,
-                     AGR #agr,
+  [ SYNSEM [ LOCAL [ AGR #agr,
                      CAT [ POSTHEAD +,
                            HEAD.KEYS [ KEY named_rel,
                                        ALTKEY non_free_relative_q_rel ],
@@ -5621,7 +5628,7 @@ n_-_pn_lex := basic-noun-lex & basic-one-arg & norm-sem-lex-item &
 ; --- 2.3. Pronouns
 
 pronominal-lex := basic-nominal-lex &
-  [ SYNSEM.LOCAL [ ;AGR #agr,
+  [ SYNSEM.LOCAL [ AGR #agr,
                    CONT.HOOK.INDEX.PRONTYPE real_pron ] ].
 
 norm-pronominal-synsem := lex-synsem &
