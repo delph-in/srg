@@ -6244,7 +6244,7 @@ rel_pronominal_synsem := lex-synsem &
 
 
 free_rel_pro_lex := basic-nominal-lex &
-  [ SYNSEM [ LOCAL [ ;AGR #ind,
+  [ SYNSEM [ LOCAL [ ;AGR #agr,
                      CAT [ HC-LIGHT -,
                            MC na,
                            VAL [ SUBJ < >,
@@ -6383,7 +6383,7 @@ n_-_pr-rel-cual_lex := pron_relat &
 
 
 basic_wh_pron_lex := pronominal-lex &
-  [ SYNSEM [ LOCAL [ ;AGR #index,
+  [ SYNSEM [ LOCAL [ ;AGR #agr,
                      CAT [ MC na,
                            HC-LIGHT -,
                            HEAD.KEYS.KEY non_modable_rel,
