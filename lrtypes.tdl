@@ -863,74 +863,6 @@ n_pp-vp_dlr := vfin_vinf-lex-rule &
   b)- taking PPde + finite completive clause/VPinf_ctrl
   e.g. la necesidad (de la empresa) (de) que lleguen a un acuerdo/de llegar a un acuerdo
   """.
-  
-#|  
-pred-adj-lex-rule := const-ltol-rule &
-  [ ALTS.PASS -,
-    KEY-ARG #keyarg,
-    INFLECTED +,
-    SYNSEM [ PUNCT #punct,
-             SLSHD #slshd,
-             LOCAL [ CAT [ HEAD verb & [ AUX -,
-                                         VFORM part,
-                                         VOICE passive,
-                                         TAM #tam,
-                                         KEYS.KEY #key,
-                                         MOD < >,
-                                         LSYNSEM #lsynsem,
-                                         PRD.HABER - ],
-                           VAL.SPR < [ OPT +,
-                                       LOCAL [ CAT [ HEAD.KEYS.KEY degree_rel,
-                                                     MC na ],
-                                               CONT.HOOK [ LTOP #hand,
-                                                           XARG #index ] ],
-                                       NON-LOCAL [ SLASH 0-dlist,
-                                                   QUE 0-dlist ] ] > ],
-                     CONT [ HOOK [ INDEX #index,
-                                   LTOP #hand ],
-                            HCONS #hcons,
-                            RELS #rels ],
-                     CTXT #ctxt,
-                     COORD #coord,
-                     COORD-STRAT #coord-strat,
-                     COORD-REL #coord-rel ],
-             LKEYS #lkeys,
-             NON-LOCAL #nonloc ],
-    DTR [ INFLECTED +,
-          KEY-ARG #keyarg,
-          ALTS.PASS +,
-          SYNSEM intersective_adjective_synsem & 
-                 [ PUNCT #punct & [ RPUNCT no_punct ],
-                   SLSHD #slshd,
-                   OPT #opt,
-                   CLTCZD #cltszd,
-                   DEF-OPT #def-opt,
-                   LOCAL [ AGR #agr,
-                           STR #str,
-                           CAT [ MC #mc,
-                                 POSTHEAD #posthead,
-                                 LASTNMOD #lastnmod,
-                                 HEAD adj & [ PRD prd,
-                                               VFORM part,
-                                               VOICE active,
-                                               TAM #tam,
-                                               LSYNSEM #lsynsem,
-                                               KEYS.KEY #key & adj-rel ],
-                                 VAL.SPR < > ],
-                           CONT [ HOOK [ LTOP #hand ],
-                                  HCONS #hcons,
-                                  RELS #rels ],
-                           CTXT #ctxt,
-                           COORD #coord,
-                           COORD-STRAT #coord-strat,
-                           COORD-REL #coord-rel ],
-                   LKEYS #lkeys,
-                   NON-LOCAL #nonloc ] ] ]
-  """
-  --- LR types for participles
-  -- LR type building pastparts for passive constructions
-  """.
-|#
 
 
 ppart-basic-lex-rule := lex-rule &
@@ -2123,10 +2055,10 @@ v_2nd-mult-clt-doubl-imp_dlr := 2nd-clt-doubl-lex-rule &
 
 v_mult-enclt-doubl_dlr := 1st-enclt-doubl-lex-rule &
   [ SYNSEM.LOCAL.CAT.VAL.CLTS < [ LOCAL.CAT.HEAD.CASE rflx ],
-                                [ LOCAL [ AGR #agr,
+                                [ LOCAL [ AGR.PNG #agr,
                                           CAT.HEAD.CASE acc,
                                           CONT.HOOK.INDEX.PNG #index ] ] >,
-    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local & [ AGR #agr,
+    DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL np_acc_local & [ AGR.PNG #agr,
                                                               CONT.HOOK.INDEX.PNG #index ] ], ... > ]
   """
   enclitics
