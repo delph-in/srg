@@ -17,8 +17,10 @@ basic-headed-phrase := phrase &
                                     COORD-STRAT #coord-strat ] ].
 
 headed-phrase := basic-headed-phrase & 
-  [ SYNSEM.LOCAL [ CAT.HEAD #head ],
-    HEAD-DTR.SYNSEM.LOCAL [ CAT.HEAD #head ] ].
+  [ SYNSEM.LOCAL [ ;AGR #agr,
+                   CAT.HEAD #head ],
+    HEAD-DTR.SYNSEM.LOCAL [ ;AGR #agr,
+                            CAT.HEAD #head ] ].
 
 non-headed-phrase := phrase.
 
