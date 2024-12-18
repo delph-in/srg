@@ -17,9 +17,9 @@ basic-headed-phrase := phrase &
                                     COORD-STRAT #coord-strat ] ].
 
 headed-phrase := basic-headed-phrase & 
-  [ SYNSEM.LOCAL [ ;AGR #agr,
+  [ SYNSEM.LOCAL [ AGR #agr,
                    CAT.HEAD #head ],
-    HEAD-DTR.SYNSEM.LOCAL [ ;AGR #agr,
+    HEAD-DTR.SYNSEM.LOCAL [ AGR #agr,
                             CAT.HEAD #head ] ].
 
 non-headed-phrase := phrase.
@@ -818,7 +818,7 @@ spec-head_phrase := norm_spec-head-phrase & binary-headed-phrase &
 """.
 
 
-spec-head_hdrel_phrase := norm_spec-head-phrase & explt-binary-phrase & 
+spec-head_hdrel_phrase := norm_spec-head-phrase & explt-binary-phrase &
   [ INFLECTED +,
     SYNSEM [ PUNCT [ LPUNCT #lpunct,
                      RPUNCT #rpunct ],
@@ -4705,15 +4705,13 @@ adj-middle-coord-phrase := adj-coord-phrase &
 	     HCONS <! !> ] ].
 
 adj-bottom-coord-phrase := bottom-coord-phrase &
-  [ SYNSEM.LOCAL [ ;AGR #agr,
-                   COORD-REL.R-INDEX #ind,
+  [ SYNSEM.LOCAL [ COORD-REL.R-INDEX #ind,
                    CAT [ MC na,
                          POSTHEAD #ph,
                          HEAD adj,
                          VAL.COMPS < > ],
                    CONT.HOOK.XARG #xarg ],
-    NONCONJ-DTR.SYNSEM.LOCAL [ ;AGR #agr,
-                               CAT [ MC na,
+    NONCONJ-DTR.SYNSEM.LOCAL [ CAT [ MC na,
                                      POSTHEAD #ph,
                                      HEAD adj ],
                                CONT.HOOK [ INDEX #ind,
@@ -4904,13 +4902,11 @@ vp-middle-coord-phrase := vp-coord-phrase &
 	     HCONS <! !> ] ].
 
 vp-bottom-coord-phrase := bottom-coord-phrase & 
-  [ SYNSEM.LOCAL [ ;AGR #agr,
-                   COORD-REL.R-INDEX #ind,
+  [ SYNSEM.LOCAL [ COORD-REL.R-INDEX #ind,
                    CAT [ HEAD #head,
                          VAL [ SUBJ < [ ] >,
                                COMPS < > ] ] ],
-    NONCONJ-DTR.SYNSEM.LOCAL [ ;AGR #agr,
-                               CAT.HEAD #head & verb,
+    NONCONJ-DTR.SYNSEM.LOCAL [ CAT.HEAD #head & verb,
                                CONT.HOOK.INDEX #ind ] ].
 
 
