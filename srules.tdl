@@ -15,6 +15,7 @@ hd_optsp_c := optsp_constr & [ RNAME "optsp" ].
 hd_nbar_c := nbar_constr & [ RNAME "nbar" ].
 hd_nbar-crd_c := nbar-crd_constr & [ RNAME "nbar" ].
 hd_nbar-rel_c := nbar-rel_constr & [ RNAME "nbar" ].
+hd_npred_c := npred_constr & [ RNAME "npred" ].
 
 hd_xsb_c := extsbj_constr & [ RNAME "xsb" ].
 hd_xcmp-a_c := extcmp_a_constr & [ RNAME "xcmp" ].
@@ -38,8 +39,10 @@ hd_vpnom_c := vpnom_constr & [ RNAME "vpnom" ].
 hd_interj_c := interj_constr & [ RNAME "interj" ].
 hd_interj-imp_c := interj_improp_constr & [ RNAME "interj" ].
  
-hd-pt_c := hd-pt_constr & [ RNAME "hdpt" ].
-pt-hd_c := pt-hd_constr & [ RNAME "pthd" ].
+hd-pt_ind_c := hd-pt_ind_constr & [ RNAME "hdpt" ].
+pt-hd_ind_c := pt-hd_ind_constr & [ RNAME "pthd" ].
+hd-pt_ev_c := hd-pt_ev_constr & [ RNAME "hdpt" ].
+pt-hd_ev_c := pt-hd_ev_constr & [ RNAME "pthd" ].
 pt-hd_clt_c := pt-hd_clt_constr & [ RNAME "pthd" ].
 
 ct-hd_c := ct-hd_constr & [ RNAME "cthd" ].

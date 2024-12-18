@@ -134,7 +134,14 @@ cerca cerca RG cercar VMIP3S0
 mar. marzo NCMS000 mar NCMS000
 favorito favorito AQ0MS00 favorito NCMS000
 favoritos favorito AQ0MP00 favorito NCMP000
-
+flojo flojo AQ0MS00 flojo RG
+alto alto AQ0MS00 alto RG
+bajo bajo AQ0MS00 bajo RG
+fuerte fuerte AQ0MS00 fuerte RG
+grave grave AQ0MS00 grave RG
+suave suave AQ0MS00 suave RG
+rápido rápido AQ0MS00 rápido RG
+lento lento AQ0MS00 lento RG
 </ReplaceAll>
 
 ## List of tag fusions to perform. 

@@ -59,23 +59,29 @@ root_pname := phrase-or-lexrule &
 root_np := phrase-or-lexrule &
  [ SYNSEM [ LOCAL [ COORD-REL.PRED non_implicit_coord_rel,
                     AGR.DIVISIBLE +,
-                    CAT [ HEAD noun & [ KEYS.KEY nom_rel ], 
+                    CAT [ HEAD noun & [ PRD non-prd,
+                                        KEYS.KEY nom_rel ], 
                           VAL [ SPR < >,
                                 SUBJ < >,
                                 COMPS < >,
                                 CLTS < > ] ] ],
             NON-LOCAL [ REL 0-dlist,
-                        SLASH 0-dlist ] ] ].
+                        SLASH 0-dlist,
+                        QUE 0-dlist ] ] ].
+
 
 root_nbar := phrase-or-lexrule &
  [ SYNSEM [ LOCAL [ COORD-REL.PRED non_implicit_coord_rel,
                     AGR.DIVISIBLE -,
-                    CAT [ HEAD noun & [ KEYS.KEY nom_rel ], 
+                    CAT [ HEAD noun & [ PRD non-prd,
+                                        KEYS.KEY nom_rel ], 
                           VAL [ SUBJ < >,
                                 COMPS < >,
                                 CLTS < > ] ] ],
             NON-LOCAL [ REL 0-dlist,
-                        SLASH 0-dlist ] ] ].
+                        SLASH 0-dlist,
+                        QUE 0-dlist ] ] ].
+
 
 root_pp := phrase &
  [ SYNSEM [ LOCAL [ COORD-REL.PRED non_implicit_coord_rel,
