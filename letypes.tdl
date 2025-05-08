@@ -6568,9 +6568,7 @@ ordinal_number_synsem := basic_adjective_synsem &
                         XARG #ind ] ],
     LKEYS.KEYREL [ LBL #ltop,
                    ARG0 #arg0,
-                   ARG1 #ind ] ]
-"""
-""".
+                   ARG1 #ind ] ].
 
 non-modfied-adj-lex := basic-adjective-lex & 
   [ SYNSEM.LOCAL.CAT.VAL [ SPR < >, 
